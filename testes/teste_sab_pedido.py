@@ -71,6 +71,30 @@ confere(recusa('v=1;res=D;tipo=P;pol=40.1 -52.7,-26.1 -52.6,-26.2 -52.6,-26.2 -5
 confere(recusa('v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-01-31;var=', 'x') is False,
         'var vazio = todas (aceito)')
 
+print('[Brasil inteiro e pontos]')
+p = sp.validar(sp.ler_codigo('v=1;res=M;tipo=BR;ini=2015-01-01;fim=2024-12-31;var=pr'), HOJE)
+confere(p['tipo'] == 'BR' and len(p['estados']) == 27 and sp.texto_local(p).startswith('Brasil'), 'Brasil: os 27 estados')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=C;pts=-26.2285 -52.6712 Fazenda São João|-25.4 -49.27;'
+                             'ini=2024-01-01;fim=2024-12-31'), HOJE)
+confere([x['nome'] for x in p['pontos']] == ['Fazenda São João', 'Ponto 2'] and p['pontos'][0]['lat'] == -26.2285,
+        'pontos com e sem nome')
+confere(recusa('v=1;res=D;tipo=C;pts=-26.2 abc;ini=2024-01-01;fim=2024-12-31', 'inválido'), 'ponto ilegível')
+confere(recusa('v=1;res=D;tipo=C;pts=10.0 -52.0;ini=2024-01-01;fim=2024-12-31', 'fora do Brasil'), 'ponto fora do Brasil')
+confere(recusa('v=1;res=D;tipo=C;pts=' + '|'.join('-26.2 -52.6' for _ in range(201)) + ';ini=2024-01-01;fim=2024-12-31',
+               'máximo'), 'mais de 200 pontos')
+lat, lon = sp.centro_do_pixel(-26.30, -52.66)
+confere(f'{lat:.5f}' == '-26.34952' and abs(lon - (-52.65033)) < 1e-4, 'centro do pixel igual ao da grade do painel (-26.34952)')
+confere(sp.centro_do_pixel(*sp.centro_do_pixel(-26.30, -52.66)) == sp.centro_do_pixel(-26.30, -52.66), 'centro do centro é ele mesmo')
+ach, falt = sp.casar_municipios(['clevelandia', 'PATO BRANCO', 'sao joao d oeste', 'Patoo Branco'],
+                                ['Clevelândia', 'Pato Branco', "São João d'Oeste"])
+confere(ach == ['Clevelândia', 'Pato Branco', "São João d'Oeste"], 'municípios sem acento, maiúsculas e apóstrofo')
+confere(falt == ['Patoo Branco (talvez: Pato Branco)'], 'município errado com sugestão')
+
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná,Santa Catarina;sep=1;ini=2025-01-01;fim=2025-12-31'), HOJE)
+confere(p['separar'] and 'um arquivo por estado' in sp.texto_local(p), 'estados separados (formulário)')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná,Santa Catarina;ini=2025-01-01;fim=2025-12-31'), HOJE)
+confere(not p['separar'], 'estados sem sep = Grupo_Estados, como o painel')
+
 print('[colunas, como o painel 2026.10.4]')
 PAINEL_BASE = ['Tipo_Dado', 'Versao_Algoritmo', 'Data_Completa', 'Ano', 'Mes', 'Dia', 'N_Ponto', 'Latitude',
                'Longitude', 'Estado', 'Municipio', 'Precipitacao_mm', 'Chuva_Efetiva_mm', 'Runoff_Superficial_mm',
@@ -132,8 +156,8 @@ muitos = sp.planejar('D', [('Paraná', 1889)], [date(2000 + i // 365, 1, 1) + ti
 confere(limite(1889, [('Paraná', 1889)], muitos) == '', '8 anos do Paraná (5,5 milhões): aceito')
 muitos = sp.planejar('D', [('Paraná', 1889)], [date(2000, 1, 1) + timedelta(days=i) for i in range(365 * 16)])
 confere('10.000.000' in limite(1889, [('Paraná', 1889)], muitos), '16 anos do Paraná (11 milhões): recusado')
-mil = [{'nome': f'f{i}', 'linhas': 1} for i in range(201)]
-confere('201 arquivos' in limite(10, [('X', 10)], mil), 'arquivos demais')
+mil = [{'nome': f'f{i}', 'linhas': 1} for i in range(401)]
+confere('401 arquivos' in limite(10, [('X', 10)], mil), 'arquivos demais')
 
 print('[manifesto e nomes das tarefas]')
 p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;var=pr'), HOJE)
