@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.10.29a <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.10.30b <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido feito no painel SAB (formulário -> Apps Script -> GitHub) e manda o Earth Engine
@@ -24,21 +24,29 @@
 #   v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31;var=todas
 #   v=1;res=M;tipo=M;uf=Paraná;mun=Pato Branco,Clevelândia;ini=1991-01-01;fim=2020-12-31;var=pr,tmax,tmin
 #   v=1;res=D;tipo=P;pol=-26.1 -52.7,-26.1 -52.6,-26.2 -52.6,-26.2 -52.7;ini=2025-01-01;fim=2025-03-31;var=todas
-#     res: D diária, M mensal | tipo: E estados, M municípios, P polígonos ("lat lon", vértices separados
-#     por "," e polígonos por "|") | var: "todas" ou os códigos de VARIAVEIS abaixo.
+#   v=1;res=M;tipo=BR;ini=2015-01-01;fim=2024-12-31;var=pr,tmax,tmin
+#   v=1;res=D;tipo=C;pts=-26.2285 -52.6712 Fazenda A|-25.4 -49.27 Curitiba;ini=2024-01-01;fim=2024-12-31;var=todas
+#     res: D diária, M mensal | tipo: BR Brasil inteiro (um arquivo por estado), E estados, M municípios,
+#     P polígonos ("lat lon", vértices separados por "," e polígonos por "|"), C pontos ("lat lon nome", separados
+#     por "|"; cada ponto vira o pixel de 0,1° que o contém) | var: "todas" ou os códigos de VARIAVEIS abaixo.
+#   Estados com sep=1 (pedidos feitos no formulário): uma grade e um arquivo por estado, como no Brasil inteiro
+#   (sem sep, vários estados formam uma grade só, Grupo_Estados, como no painel).
+#   Municípios: o nome é procurado no GAUL sem ligar para acento, maiúscula ou hífen ("clevelandia" acha
+#   "Clevelândia"); se não achar, a recusa sugere nomes parecidos.
 #
 # EXECUÇÃO: pelo GitHub Actions (.github/workflows/pedido_sab.yml), com as variáveis de ambiente
 #   PEDIDO_ID, CODIGO e SIMULAR (1 = só confere e mostra o plano, sem exportar nada).
 #   No computador ou no Colab: PEDIDO_ID=TESTE01 CODIGO='v=1;...' SIMULAR=1 python sab_pedido.py
 # NÃO GRAVA NADA NO EARTH ENGINE: só CSV no Drive. Não toca no SAB_V1 nem em asset algum.
 # =========================================================================================
+import difflib
 import os
 import re
 import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.10.29a'
+VERSAO_ROTINA = '2026.10.30b'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -54,7 +62,8 @@ TRANSFORM = [0.09999847412109375, 0, -73.9000015258789, 0, -0.09999847412109375,
 DATA_MINIMA = date(1961, 1, 1)
 LIMITE_LINHAS_ARQUIVO = 1_000_000    # o Excel abre até 1.048.576 linhas
 LIMITE_LINHAS_PEDIDO = 10_000_000    # ~2,3 GB de CSV com todas as variáveis (protege o Drive de 15 GB)
-LIMITE_ARQUIVOS = 200
+LIMITE_ARQUIVOS = 400                # Brasil inteiro mensal: 27 arquivos por ano
+LIMITE_PONTOS = 200
 LIMITE_MUNICIPIOS = 30
 LIMITE_POLIGONOS = 10
 LIMITE_VERTICES = 150
@@ -289,6 +298,58 @@ def _estado_canonico(nome):
     raise PedidoInvalido(f'Estado não reconhecido: "{nome}".')
 
 
+def ler_pontos(txt):
+    """'lat lon nome|lat lon nome' -> [{'lat', 'lon', 'nome'}]. Coordenadas decimais com ponto."""
+    pontos = []
+    for i, bloco in enumerate(x.strip() for x in str(txt).split('|') if x.strip()):
+        partes = bloco.split(None, 2)
+        try:
+            lat, lon = float(partes[0]), float(partes[1])
+        except (IndexError, ValueError):
+            raise PedidoInvalido(f'Ponto {i + 1} inválido: "{bloco[:40]}" (esperado: latitude longitude nome).')
+        if not (-34.0 <= lat <= 6.0 and -74.0 <= lon <= -34.0):
+            raise PedidoInvalido(f'Ponto {i + 1} fora do Brasil: {lat}, {lon}.')
+        nome = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿ0-9 ._()\-]', ' ', partes[2] if len(partes) > 2 else f'Ponto {i + 1}')
+        pontos.append({'lat': lat, 'lon': lon, 'nome': re.sub(r'\s+', ' ', nome).strip()[:40] or f'Ponto {i + 1}'})
+    if not pontos:
+        raise PedidoInvalido('Nenhum ponto no pedido.')
+    if len(pontos) > LIMITE_PONTOS:
+        raise PedidoInvalido(f'No máximo {LIMITE_PONTOS} pontos por pedido.')
+    return pontos
+
+
+def centro_do_pixel(lat, lon):
+    """Centro do pixel de 0,1° da grade do SAB (TRANSFORM) que contém o ponto: o mesmo que a grade do painel usa."""
+    dx, x0, dy, y0 = TRANSFORM[0], TRANSFORM[2], TRANSFORM[4], TRANSFORM[5]
+    col = int((lon - x0) // dx)
+    lin = int((lat - y0) // dy)
+    return y0 + (lin + 0.5) * dy, x0 + (col + 0.5) * dx
+
+
+def normalizar_nome(t):
+    return re.sub(r'\s+', ' ', remover_acentos(str(t)).lower().replace('-', ' ').replace("'", ' ')).strip()
+
+
+def casar_municipios(pedidos, nomes_gaul):
+    """Acha cada município pedido entre os nomes do GAUL, sem ligar para acento, maiúscula, hífen ou apóstrofo.
+    Devolve (nomes do GAUL achados, mensagens dos que faltam, com sugestões)."""
+    por_norma = {}
+    for n in nomes_gaul or []:
+        por_norma.setdefault(normalizar_nome(n), [])
+        if n not in por_norma[normalizar_nome(n)]:
+            por_norma[normalizar_nome(n)].append(n)
+    achados, faltam = [], []
+    for p in pedidos:
+        iguais = por_norma.get(normalizar_nome(p))
+        if iguais:
+            achados.extend(x for x in iguais if x not in achados)
+        else:
+            perto = difflib.get_close_matches(normalizar_nome(p), list(por_norma), n=3, cutoff=0.75)
+            dica = ' (talvez: ' + ', '.join(por_norma[x][0] for x in perto) + ')' if perto else ''
+            faltam.append(p + dica)
+    return achados, faltam
+
+
 _RE_MUN = re.compile(r"^[A-Za-zÀ-ÖØ-öø-ÿ0-9' .\-()]{2,60}$")
 
 
@@ -300,8 +361,8 @@ def validar(campos, hoje):
     if res not in ('D', 'M'):
         raise PedidoInvalido('Resolução inválida (res=D diária ou res=M mensal).')
     tipo = campos.get('tipo', '').upper()
-    if tipo not in ('E', 'M', 'P'):
-        raise PedidoInvalido('Tipo de local inválido (tipo=E estados, M municípios ou P polígonos).')
+    if tipo not in ('E', 'M', 'P', 'BR', 'C'):
+        raise PedidoInvalido('Tipo de local inválido (tipo=BR Brasil, E estados, M municípios, P polígonos ou C pontos).')
     ini, fim = _data(campos.get('ini'), 'inicial'), _data(campos.get('fim'), 'final')
     if ini < DATA_MINIMA:
         raise PedidoInvalido('O banco SAB começa em 01/01/1961.')
@@ -309,7 +370,13 @@ def validar(campos, hoje):
         raise PedidoInvalido('A data final é anterior à inicial.')
     if fim > hoje + timedelta(days=20):
         raise PedidoInvalido('A data final passa do fim da previsão do banco.')
-    ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': []}
+    ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': [],
+           'pontos': []}
+    if tipo == 'BR':
+        ped['estados'] = list(LISTA_ESTADOS)
+    if tipo == 'C':
+        ped['pontos'] = ler_pontos(campos.get('pts', ''))
+    ped['separar'] = tipo == 'BR' or campos.get('sep') == '1'   # um grade e um arquivo por estado
 
     if tipo in ('E', 'M'):
         ufs = [u for u in (x.strip() for x in campos.get('uf', '').split(',')) if u]
@@ -373,6 +440,10 @@ def validar(campos, hoje):
 
 def nome_local_unico(ped):
     """nome_local do painel (só para o texto do manifesto)."""
+    if ped['tipo'] == 'BR':
+        return 'Brasil'
+    if ped['tipo'] == 'C':
+        return 'Pontos'
     if ped['tipo'] == 'E':
         return ped['estados'][0] if len(ped['estados']) == 1 else 'Grupo_Estados'
     if ped['tipo'] == 'M':
@@ -480,8 +551,13 @@ def texto_periodo(ped):
 
 
 def texto_local(ped):
+    if ped['tipo'] == 'BR':
+        return 'Brasil inteiro (um arquivo por estado)'
+    if ped['tipo'] == 'C':
+        return f"{len(ped['pontos'])} ponto(s): " + ', '.join(p['nome'] for p in ped['pontos'][:10]) + \
+            ('...' if len(ped['pontos']) > 10 else '')
     if ped['tipo'] == 'E':
-        return 'Estado(s): ' + ', '.join(ped['estados'])
+        return 'Estado(s): ' + ', '.join(ped['estados']) + (' (um arquivo por estado)' if ped.get('separar') else '')
     if ped['tipo'] == 'M':
         return 'Município(s): ' + ', '.join(ped['municipios']) + ' (' + ', '.join(ped['estados']) + ')'
     return f"{len(ped['poligonos'])} polígono(s) desenhado(s)"
@@ -759,6 +835,87 @@ def avaliar(ped):
     return poligonos, grade, geom, int(info['pares']), locais, sem_pontos, dias
 
 
+def _datas_do_periodo(ee, geom, ped):
+    fim = ped['fim'] + timedelta(days=1)
+    return ee.ImageCollection(SAB).filterBounds(geom.bounds()).filterDate(str(ped['ini']), str(fim)) \
+        .aggregate_array('system:time_start')
+
+
+def _dias(lista_ms):
+    return sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t in lista_ms)
+
+
+def resolver_municipios(ped):
+    """[E-MAIL] Troca os nomes digitados pelos nomes do GAUL (sem ligar para acento, maiúscula ou hífen). Pedidos do
+    painel já vêm com o nome do GAUL e ficam iguais."""
+    ee = _ee()
+    nomes = ee.FeatureCollection('FAO/GAUL/2015/level2').filter(ee.Filter.eq('ADM0_NAME', 'Brazil')) \
+        .filter(ee.Filter.inList('ADM1_NAME', variacoes_busca(ped['estados']))).aggregate_array('ADM2_NAME').getInfo()
+    achados, faltam = casar_municipios(ped['municipios'], nomes)
+    if faltam:
+        raise PedidoInvalido('Município não encontrado nos estados pedidos: ' + '; '.join(faltam) + '.')
+    ped['municipios'] = achados
+    return ped
+
+
+def avaliar_pedido(ped):
+    """Contexto do pedido: locais (nome, pontos), grade e área de cada local, escala, pares, dias e avisos.
+    Estados, municípios e polígonos usam avaliar() (o caminho conferido pela K16); Brasil e pontos são do e-mail."""
+    ee = _ee()
+    if ped['tipo'] in ('E', 'M', 'P') and not ped.get('separar'):
+        if ped['tipo'] == 'M':
+            resolver_municipios(ped)
+        _, grade, geom, n_pares, locais, sem_pontos, dias = avaliar(ped)
+        return {'locais': locais, 'por_local': {n: (grade, geom) for n, _ in locais}, 'n_pares': n_pares,
+                'dias': dias, 'avisos': ('Sem pontos da grade (nenhum arquivo): ' + ', '.join(sem_pontos) + '.')
+                if sem_pontos else '', 'escala': ESCALA_PONTO if ped['tipo'] == 'P' else ESCALA_AREA}
+
+    if ped['tipo'] in ('BR', 'E'):
+        # um grade por estado (o Brasil inteiro passa do limite de 25 mil pares de uma grade só); um arquivo por estado
+        grades = {}
+        for e in ped['estados']:
+            pol = poligonos_do_pedido({'tipo': 'E', 'estados': [e]})
+            grade, pares = montar_grade(pol)
+            grades[e] = (grade, pol.geometry(), pares)
+        area = ee.FeatureCollection('FAO/GAUL/2015/level0').filter(ee.Filter.eq('ADM0_NAME', 'Brazil')).geometry() \
+            if ped['tipo'] == 'BR' else poligonos_do_pedido({'tipo': 'E', 'estados': ped['estados']}).geometry()
+        info = ee.Dictionary({'n': ee.Dictionary({e: g[0].size() for e, g in grades.items()}),
+                              'pares': ee.Dictionary({e: g[2] for e, g in grades.items()}),
+                              'datas': _datas_do_periodo(ee, area, ped)}).getInfo()
+        locais = [(e, int(info['n'][e])) for e in ped['estados'] if int(info['n'][e]) > 0]
+        return {'locais': locais, 'por_local': {e: (grades[e][0], grades[e][1]) for e, _ in locais},
+                'n_pares': max(int(v) for v in info['pares'].values()), 'dias': _dias(info['datas']), 'avisos': '',
+                'escala': ESCALA_AREA}
+
+    # pontos: o pixel de 0,1° que contém cada ponto, com a classe da máscara de qualidade
+    centros = [centro_do_pixel(p['lat'], p['lon']) for p in ped['pontos']]
+    pts = ee.FeatureCollection([ee.Feature(ee.Geometry.Point([lon, lat]), {'i': i}) for i, (lat, lon) in enumerate(centros)])
+    classes = ee.Image(MASCARA).select('classe').unmask(0, False).reduceRegions(
+        collection=pts, reducer=ee.Reducer.first(), crs=CRS, crsTransform=TRANSFORM)
+    geom = pts.geometry()
+    info = ee.Dictionary({'classes': classes.aggregate_array('first'), 'idx': classes.aggregate_array('i'),
+                          'datas': _datas_do_periodo(ee, geom, ped)}).getInfo()
+    classe = dict(zip(info['idx'], info['classes']))
+    letra = {1: 'A', 2: 'B', 3: 'C'}
+    feats, fora, n = [], [], 0
+    for i, (p, (lat, lon)) in enumerate(zip(ped['pontos'], centros)):
+        c = int(classe.get(i) or 0)
+        if c == 4:     # como na grade do painel: pixel sem BR-DWGD com centro fora do Brasil fica de fora
+            fora.append(p['nome'])
+            continue
+        n += 1
+        feats.append(ee.Feature(ee.Geometry.Point([lon, lat]), {
+            'Nome_Local_Export': 'Pontos', 'Estado': 'Coordenada',
+            'Municipio': f"{p['nome']} ({p['lat']:.5f}, {p['lon']:.5f})", 'ID_Ponto': f'Ponto_{n:05d}',
+            'Latitude': lat, 'Longitude': lon, 'Qualidade_Pixel': letra.get(c, '')}))
+    if not feats:
+        raise PedidoInvalido('Todos os pontos caem em pixels de borda, fora da grade do banco.')
+    grade = ee.FeatureCollection(feats)
+    return {'locais': [('Pontos', n)], 'por_local': {'Pontos': (grade, geom)}, 'n_pares': n, 'dias': _dias(info['datas']),
+            'avisos': ('Pontos fora da grade (pixel de borda, sem arquivo): ' + ', '.join(fora) + '.') if fora else '',
+            'escala': ESCALA_PONTO}
+
+
 def tarefas_existentes(prefixo):
     """Descrições das tarefas deste pedido já enviadas e não falhas (para não enviar duas vezes)."""
     ee = _ee()
@@ -787,6 +944,25 @@ def exportar(fc, descricao, pasta, nome, colunas, ja_enviadas):
     return t.id
 
 
+def esperar_tarefa(id_tarefa, limite_s=300, intervalo_s=5):
+    """Espera a tarefa terminar (até limite_s). Duas exportações que começam juntas para uma pasta que ainda não
+    existe podem criar DUAS pastas com o mesmo nome no Drive; com o manifesto pronto antes, as outras usam a dele."""
+    ee = _ee()
+    t0 = time.time()
+    while time.time() - t0 < limite_s:
+        try:
+            estado = ee.data.getTaskStatus([id_tarefa])[0].get('state', '')
+        except Exception as e:
+            print(f'   ⚠️ não consegui ler o estado do manifesto ({str(e)[:100]}); sigo.')
+            return None
+        if estado in ('COMPLETED', 'SUCCEEDED', 'FAILED', 'CANCELLED'):
+            print(f'   manifesto: {estado} em {time.time() - t0:.0f} s')
+            return estado
+        time.sleep(intervalo_s)
+    print(f'   ⚠️ manifesto ainda na fila depois de {limite_s} s; sigo (o Apps Script junta pastas repetidas).')
+    return None
+
+
 def recusar(pedido_id, status, motivo, ped, simular):
     """Grava só o manifesto, com status 'recusado' (pedido fora das regras) ou 'falha' (erro do servidor)."""
     print(f'❌ PEDIDO {status.upper()}: {motivo}')
@@ -813,19 +989,20 @@ def atender(pedido_id, codigo, simular, hoje=None):
         ped = validar(ler_codigo(codigo), hoje)
         print(f"   pedido: {texto_local(ped)} | {texto_periodo(ped)} | "
               f"{'diária' if ped['res'] == 'D' else 'mensal'} | variáveis: {', '.join(ped['variaveis'])}")
-        poligonos, grade, geom, n_pares, locais, sem_pontos, dias = avaliar(ped)
-        print(f'   grade: {n_pares} pares | ' + ' | '.join(f'{n}: {k} pontos' for n, k in locais) +
-              (f' | sem pontos: {", ".join(sem_pontos)}' if sem_pontos else '') +
+        ctx = avaliar_pedido(ped)
+        locais, dias = ctx['locais'], ctx['dias']
+        print(f"   grade: {ctx['n_pares']} pares | " + ' | '.join(f'{n}: {k} pontos' for n, k in locais) +
+              (f" | {ctx['avisos']}" if ctx['avisos'] else '') +
               f' | {len(dias)} imagens' + (f' ({dias[0]} a {dias[-1]})' if dias else ''))
         arquivos = planejar(ped['res'], locais, dias)
-        total = conferir_limites(n_pares, locais, arquivos)
+        total = conferir_limites(ctx['n_pares'], locais, arquivos)
     except PedidoInvalido as e:
         recusar(pedido_id, 'recusado', str(e), ped, simular)
         return 0
     except Exception as e:                      # erro do servidor: avisa pelo manifesto e marca a execução
         recusar(pedido_id, 'falha', 'Erro no servidor do Earth Engine: ' + str(e)[:300], ped, simular)
         raise
-    nota = ('Sem pontos da grade (nenhum arquivo): ' + ', '.join(sem_pontos) + '.') if sem_pontos else ''
+    nota = ctx['avisos']
     print(f'   plano: {len(arquivos)} arquivo(s) de dados, {milhar(total)} linhas')
     for a in arquivos:
         print(f"      {a['nome']}.csv  {milhar(a['linhas'])} linhas")
@@ -835,14 +1012,17 @@ def atender(pedido_id, codigo, simular, hoje=None):
 
     pasta = pasta_do_pedido(pedido_id)
     ja = tarefas_existentes(f'SABPED_{pedido_id}_')
-    escala = ESCALA_PONTO if ped['tipo'] == 'P' else ESCALA_AREA
+    escala = ctx['escala']
     colunas = colunas_do_pedido(ped['res'], ped['variaveis'])
     print(f'\n   Exportando para a pasta {pasta} do Drive (manifesto, dicionário e {len(arquivos)} arquivo(s)):')
-    exportar(tabela_ee(linhas_manifesto(pedido_id, 'aceito', nota, ped, arquivos), COLUNAS_MANIFESTO),
-             descricao_tarefa(pedido_id, 0), pasta, f'00_Pedido_{pedido_id}', COLUNAS_MANIFESTO, ja)
+    id_man = exportar(tabela_ee(linhas_manifesto(pedido_id, 'aceito', nota, ped, arquivos), COLUNAS_MANIFESTO),
+                      descricao_tarefa(pedido_id, 0), pasta, f'00_Pedido_{pedido_id}', COLUNAS_MANIFESTO, ja)
+    if id_man:
+        esperar_tarefa(id_man)   # a pasta passa a existir antes das outras exportações (evita pasta repetida)
     exportar(dicionario_ee(), descricao_tarefa(pedido_id, 1), pasta, '00_Dicionario_Variaveis_SAB',
              ['Variavel', 'Descricao', 'Unidade'], ja)
     for k, a in enumerate(arquivos, start=2):
+        grade, geom = ctx['por_local'][a['local']]
         exportar(fc_do_arquivo(ped, a, grade, geom, escala), descricao_tarefa(pedido_id, k), pasta, a['nome'],
                  colunas, ja)
     print(f'\n✅ {len(arquivos) + 2} exportação(ões) na fila do Earth Engine em {time.time() - t0:.0f} s. '
