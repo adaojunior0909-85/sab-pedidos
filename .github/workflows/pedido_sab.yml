@@ -1,0 +1,65 @@
+# SAB: atende um pedido de dados por e-mail (versão 2026.10.29a)
+# Disparado pelo Apps Script (repository_dispatch, tipo pedido_sab) ou à mão, na aba Actions
+# ("Run workflow"), para testes. Só ENVIA as exportações ao Earth Engine e termina em 1 a 3 minutos.
+name: Pedido SAB
+
+on:
+  repository_dispatch:
+    types: [pedido_sab]
+  workflow_dispatch:
+    inputs:
+      pedido_id:
+        description: 'ID do pedido (letras, números, _ e -)'
+        required: true
+        default: 'TESTE01'
+      codigo:
+        description: 'Código do pedido (o mesmo que o painel gera)'
+        required: true
+        default: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;var=todas'
+      simular:
+        description: 'Só simular (confere e mostra o plano, sem exportar)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pedido-${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
+  cancel-in-progress: false
+
+jobs:
+  atender:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar a biblioteca do Earth Engine
+        run: pip install -r requirements.txt
+
+      - name: Testes da rotina (sem Earth Engine)
+        run: python testes/teste_sab_pedido.py
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL (passo 4 do guia)"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Atender o pedido
+        env:
+          PEDIDO_ID: ${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
+          CODIGO: ${{ github.event.client_payload.codigo || inputs.codigo }}
+          SIMULAR: ${{ ((github.event_name == 'workflow_dispatch' && inputs.simular) || github.event.client_payload.simular == '1') && '1' || '0' }}
+        run: python sab_pedido.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
