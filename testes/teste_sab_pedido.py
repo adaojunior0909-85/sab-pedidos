@@ -95,6 +95,29 @@ confere(p['separar'] and 'um arquivo por estado' in sp.texto_local(p), 'estados 
 p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná,Santa Catarina;ini=2025-01-01;fim=2025-12-31'), HOJE)
 confere(not p['separar'], 'estados sem sep = Grupo_Estados, como o painel')
 
+print('[ENSO, como o painel]')
+serie = [{'ano': 2000, 'mes': m, 'RONI': r, 'Trimestre': sp.TRIMESTRES[m - 1]}
+         for m, r in zip(range(1, 13), [0.1, 0.6, 0.7, 0.9, 1.2, 0.8, 0.2, 0.0, -0.6, -0.7, -0.5, -0.8])]
+c = sp.classificar_enso(serie)
+confere([x['FaseENSO'] for x in c] == ['Neutro'] + ['El Nino'] * 5 + ['Neutro'] * 2 + ['Indefinida'] * 4,
+        '5 estações acima de +0,5 = El Niño; sinal que continua até o fim sem fechar 5 = Indefinida')
+c2 = sp.classificar_enso(serie + [{'ano': 2001, 'mes': 1, 'RONI': -0.9, 'Trimestre': 'DJF'}])
+confere([x['FaseENSO'] for x in c2[8:]] == ['La Nina'] * 5, 'com a 5ª estação, a La Niña se confirma')
+confere(sp.no_cenario({'FaseENSO': 'El Nino', 'RONI': 1.2}, 'El Niño Moderado (1.0 a 1.4°C)') and
+        not sp.no_cenario({'FaseENSO': 'El Nino', 'RONI': 1.5}, 'El Niño Moderado (1.0 a 1.4°C)') and
+        sp.no_cenario({'FaseENSO': 'El Nino', 'RONI': 1.5}, 'El Niño Forte (1.5 a 1.9°C)') and
+        sp.no_cenario({'FaseENSO': 'La Nina', 'RONI': -2.0}, 'Super La Niña (≤ -2.0°C)') and
+        sp.no_cenario({'FaseENSO': 'Neutro', 'RONI': 0.6}, 'Anos Neutros') and
+        not sp.no_cenario({'FaseENSO': 'Indefinida', 'RONI': 0.6}, 'El Niño Fraco (0.5 a 0.9°C)'),
+        'limites dos cenários iguais ao filtroCenario do painel')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná;ini=2015-01-01;fim=2016-12-31;enso=El_Nino_Muito_Forte'), HOJE)
+confere(p['enso']['valor'] == 'Super El Niño (≥ 2.0°C)' and 'filtro ENSO' in sp.texto_periodo(p), 'código com enso')
+confere(recusa('v=1;res=D;tipo=E;uf=Paraná;ini=2015-01-01;fim=2016-12-31;enso=Chuvoso', 'ENSO'), 'cenário desconhecido')
+a = sp.planejar('D', [('Pato Branco', 14)], [date(2015, 10, 1), date(2016, 1, 1)], sufixo='_El_Nino_Muito_Forte')
+confere([x['nome'] for x in a] == ['Diaria_Pato_Branco_2015_El_Nino_Muito_Forte', 'Diaria_Pato_Branco_2016_El_Nino_Muito_Forte'],
+        'nomes com o sufixo do painel')
+confere(sp.colunas_do_pedido('D', sp.CODIGOS, enso=True)[-5:] == sp.COLUNAS_ENSO, 'colunas ENSO no fim')
+
 print('[colunas, como o painel 2026.10.4]')
 PAINEL_BASE = ['Tipo_Dado', 'Versao_Algoritmo', 'Data_Completa', 'Ano', 'Mes', 'Dia', 'N_Ponto', 'Latitude',
                'Longitude', 'Estado', 'Municipio', 'Precipitacao_mm', 'Chuva_Efetiva_mm', 'Runoff_Superficial_mm',
