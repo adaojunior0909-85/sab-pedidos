@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.10.30b <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.10.30c <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido feito no painel SAB (formulário -> Apps Script -> GitHub) e manda o Earth Engine
@@ -17,7 +17,8 @@
 #     - escolha das variáveis: só as bandas pedidas entram no cálculo e no CSV (as colunas de
 #       identificação e de qualidade vão sempre);
 #     - um ano com mais de 1.000.000 de linhas (limite do Excel) é dividido em blocos de meses.
-#   O filtro ENSO não é atendido por e-mail (só pelo link do painel).
+#   Filtro ENSO (enso=<cenário>): a mesma série do painel (RONI oficial do CPC + estimativa OISST depois da última
+#     estação oficial), a mesma regra de episódio (5 estações) e as mesmas 5 colunas no fim do CSV.
 #   Toda mudança no cálculo do painel exige mudar este arquivo e repetir a K16 (identidade).
 #
 # CÓDIGO DO PEDIDO (gerado pelo painel; campos separados por ";")
@@ -46,7 +47,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.10.30b'
+VERSAO_ROTINA = '2026.10.30c'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -115,6 +116,21 @@ BANDAS_SOMA = ['pr_mm', 'chuva_efetiva', 'runoff_sup_mm', 'runoff_sub_mm', 'et_p
                'transpiracao_mm', 'deficit_diario']
 BANDAS_MEDIA = ['tmax_C', 'tmin_C', 'RH', 'rs', 'u2', 'tsolo_C', 'tfolha_C', 'vpd', 'soil_moisture_0_5cm_m3_m3',
                 'soil_moisture_0_100cm_m3_m3', 'amplitude_diaria']
+# [ENSO] Os mesmos cenários do painel (CENARIOS_ENSO): valor interno, texto da coluna Filtro_ENSO, sufixo do arquivo
+ENSO_CENARIOS = [
+    ('Super El Niño (≥ 2.0°C)', 'El Nino muito forte (Super)', 'El_Nino_Muito_Forte'),
+    ('El Niño Forte (1.5 a 1.9°C)', 'El Nino forte', 'El_Nino_Forte'),
+    ('El Niño Moderado (1.0 a 1.4°C)', 'El Nino moderado', 'El_Nino_Moderado'),
+    ('El Niño Fraco (0.5 a 0.9°C)', 'El Nino fraco', 'El_Nino_Fraco'),
+    ('Anos Neutros', 'Neutro', 'Neutro'),
+    ('La Niña Fraca (-0.5 a -0.9°C)', 'La Nina fraca', 'La_Nina_Fraca'),
+    ('La Niña Moderada (-1.0 a -1.4°C)', 'La Nina moderada', 'La_Nina_Moderada'),
+    ('La Niña Forte (-1.5 a -1.9°C)', 'La Nina forte', 'La_Nina_Forte'),
+    ('Super La Niña (≤ -2.0°C)', 'La Nina muito forte (Super)', 'La_Nina_Muito_Forte')]
+COLUNAS_ENSO = ['Filtro_ENSO', 'Fase_ENSO', 'Intensidade_ENSO', 'RONI_Trimestre_C', 'Trimestre_CPC']
+TRIMESTRES = ['DJF', 'JFM', 'FMA', 'MAM', 'AMJ', 'MJJ', 'JJA', 'JAS', 'ASO', 'SON', 'OND', 'NDJ']
+VERSOES_PREVISAO = ['provisoria_gfs', 'provisoria_gfs_incompleta', 'falha_latencia_gfs']
+RONI_ASSET = f'projects/{PROJETO}/assets/RONI_CPC_v6'
 COLUNAS_MANIFESTO = ['Pedido', 'Status', 'Motivo', 'Arquivo', 'Linhas_Esperadas', 'Local', 'Periodo', 'Resolucao',
                      'Variaveis', 'Gerado_em', 'Versao_Rotina', 'Versao_Painel']
 
@@ -298,6 +314,52 @@ def _estado_canonico(nome):
     raise PedidoInvalido(f'Estado não reconhecido: "{nome}".')
 
 
+def sinal_enso(roni):
+    return 1 if roni >= 0.5 else (-1 if roni <= -0.5 else 0)
+
+
+def classificar_enso(serie):
+    """[ENSO] indiceONI_FC do painel: serie = [{'ano', 'mes', 'RONI', 'Trimestre'}] em ordem e contínua.
+    Fase por episódio: El Niño/La Niña quando o limiar de ±0,5 se mantém por 5 estações seguidas (janelas de 5
+    que contêm o mês); no fim da série, sinal não nulo que se repete até a última estação sem completar 5 vira
+    'Indefinida'; o resto é 'Neutro'. Devolve a mesma lista com 'FaseENSO'."""
+    sinais = [sinal_enso(x['RONI']) for x in serie]
+    n = len(sinais)
+    saida = []
+    for i, x in enumerate(serie):
+        janelas = []
+        for off in (-4, -3, -2, -1, 0):
+            ini, fim = i + off, i + off + 4
+            janelas.append(sum(sinais[ini:fim + 1]) if ini >= 0 and fim < n else 0)
+        ate_fim = n - i
+        indefinida = abs(sinais[i]) == 1 and ate_fim <= 4 and sum(sinais[i:]) == sinais[i] * ate_fim
+        fase = 'El Nino' if 5 in janelas else ('La Nina' if -5 in janelas else ('Indefinida' if indefinida else 'Neutro'))
+        saida.append(dict(x, FaseENSO=fase))
+    return saida
+
+
+def no_cenario(item, valor):
+    """[ENSO] filtroCenario do painel para um mês classificado."""
+    f, r = item['FaseENSO'], item['RONI']
+    if f not in ('El Nino', 'La Nina', 'Neutro'):
+        return False
+    regras = {
+        'Super El Niño (≥ 2.0°C)': f == 'El Nino' and r >= 2.0,
+        'El Niño Forte (1.5 a 1.9°C)': f == 'El Nino' and 1.5 <= r < 2.0,
+        'El Niño Moderado (1.0 a 1.4°C)': f == 'El Nino' and 1.0 <= r < 1.5,
+        'El Niño Fraco (0.5 a 0.9°C)': f == 'El Nino' and 0.5 <= r < 1.0,
+        'Anos Neutros': f == 'Neutro',
+        'La Niña Fraca (-0.5 a -0.9°C)': f == 'La Nina' and -1.0 < r <= -0.5,
+        'La Niña Moderada (-1.0 a -1.4°C)': f == 'La Nina' and -1.5 < r <= -1.0,
+        'La Niña Forte (-1.5 a -1.9°C)': f == 'La Nina' and -2.0 < r <= -1.5,
+        'Super La Niña (≤ -2.0°C)': f == 'La Nina' and r <= -2.0}
+    return bool(regras.get(valor))
+
+
+def chave_mes(d):
+    return f'{d.year:04d}_{d.month:02d}'
+
+
 def ler_pontos(txt):
     """'lat lon nome|lat lon nome' -> [{'lat', 'lon', 'nome'}]. Coordenadas decimais com ponto."""
     pontos = []
@@ -377,6 +439,13 @@ def validar(campos, hoje):
     if tipo == 'C':
         ped['pontos'] = ler_pontos(campos.get('pts', ''))
     ped['separar'] = tipo == 'BR' or campos.get('sep') == '1'   # um grade e um arquivo por estado
+    ped['enso'] = None
+    chave_enso = campos.get('enso', '').strip()
+    if chave_enso:
+        achado = [c for c in ENSO_CENARIOS if c[2].lower() == chave_enso.lower()]
+        if not achado:
+            raise PedidoInvalido(f'Filtro ENSO não reconhecido: "{chave_enso}".')
+        ped['enso'] = {'valor': achado[0][0], 'ascii': achado[0][1], 'arquivo': achado[0][2]}
 
     if tipo in ('E', 'M'):
         ufs = [u for u in (x.strip() for x in campos.get('uf', '').split(',')) if u]
@@ -451,10 +520,11 @@ def nome_local_unico(ped):
     return 'Poligono_Usuario' if len(ped['poligonos']) == 1 else 'Multiplos_Poligonos'
 
 
-def colunas_do_pedido(res, cods):
-    """Selectors do CSV: identificação + variáveis pedidas (ordem do painel) + colunas de qualidade."""
+def colunas_do_pedido(res, cods, enso=False):
+    """Selectors do CSV: identificação + variáveis pedidas (ordem do painel) + colunas de qualidade
+    (+ as 5 colunas ENSO no fim, com o filtro, como o painel)."""
     numericas = [col for c, col, _, _, _ in VARIAVEIS if c in cods]
-    return COLUNAS_ID + numericas + (EXTRAS_DIARIA if res == 'D' else EXTRAS_MENSAL)
+    return COLUNAS_ID + numericas + (EXTRAS_DIARIA if res == 'D' else EXTRAS_MENSAL) + (COLUNAS_ENSO if enso else [])
 
 
 def bandas_do_pedido(cods):
@@ -471,7 +541,7 @@ def _blocos_de_meses(dias_por_mes, n_pontos, limite):
     return [(m, m) for m in range(1, 13)]
 
 
-def planejar(res, locais, datas, limite=LIMITE_LINHAS_ARQUIVO):
+def planejar(res, locais, datas, limite=LIMITE_LINHAS_ARQUIVO, sufixo=''):
     """locais: lista de (Nome_Local_Export, n_pontos), na ordem do painel; datas: datas (date) das imagens
     do período. Devolve a lista de arquivos: nome, local, ini e fim (fim exclusivo) e linhas esperadas.
     Um arquivo por local e por ano com dados (como o painel); um ano diário acima do limite vira blocos."""
@@ -485,7 +555,7 @@ def planejar(res, locais, datas, limite=LIMITE_LINHAS_ARQUIVO):
         for ano in sorted(por_ano):
             meses = por_ano[ano]
             if res == 'M':
-                arquivos.append({'nome': f'Mensal_{base}_{ano}', 'local': nome, 'ano': ano,
+                arquivos.append({'nome': f'Mensal_{base}_{ano}{sufixo}', 'local': nome, 'ano': ano,
                                  'ini': date(ano, 1, 1), 'fim': date(ano + 1, 1, 1), 'linhas': n * len(meses)})
                 continue
             blocos = _blocos_de_meses(meses, n, limite)
@@ -493,9 +563,9 @@ def planejar(res, locais, datas, limite=LIMITE_LINHAS_ARQUIVO):
                 linhas = n * sum(meses.get(m, 0) for m in range(a, b + 1))
                 if not linhas:
                     continue
-                sufixo = '' if len(blocos) == 1 else f'_parte{i + 1}de{len(blocos)}'
+                parte = '' if len(blocos) == 1 else f'_parte{i + 1}de{len(blocos)}'
                 fim = date(ano + 1, 1, 1) if b == 12 else date(ano, b + 1, 1)
-                arquivos.append({'nome': f'Diaria_{base}_{ano}{sufixo}', 'local': nome, 'ano': ano,
+                arquivos.append({'nome': f'Diaria_{base}_{ano}{sufixo}{parte}', 'local': nome, 'ano': ano,
                                  'ini': date(ano, a, 1), 'fim': fim, 'linhas': linhas})
     return arquivos
 
@@ -547,7 +617,8 @@ def descricao_tarefa(pedido_id, k):
 
 
 def texto_periodo(ped):
-    return f"{ped['ini']:%d/%m/%Y} a {ped['fim']:%d/%m/%Y}"
+    return f"{ped['ini']:%d/%m/%Y} a {ped['fim']:%d/%m/%Y}" + \
+        (f" | filtro ENSO: {ped['enso']['ascii']} (a previsão entra sempre)" if ped.get('enso') else '')
 
 
 def texto_local(ped):
@@ -707,8 +778,43 @@ def colecao(geom, ini, fim):
     return col.map(preparar).sort('system:time_start')
 
 
-def linhas_diarias(ic, grade, bandas, escala):
-    """exportarSerieDiaria do painel. [E-MAIL] só as bandas pedidas entram no reduceRegions."""
+def props_enso(img, enso):
+    """[ENSO] propsEnsoDaImagem do painel: as 5 colunas ENSO de um dia (ou do 1º dia do mês, no mensal).
+    Dia de previsão (ou imagem sem marcação): 'Previsao (sem classificacao)', '-' e o trimestre pela data."""
+    ee = _ee()
+    prev = ee.Number(ee.Algorithms.If(img.propertyNames().contains('prev_enso'), img.get('prev_enso'), 1)).eq(1)
+    info = ee.List(ee.Dictionary(enso['dic']).get(img.date().format('YYYY_MM'), ['Sem_Dado', -99, 'N/A']))
+    fase = ee.String(ee.Algorithms.If(prev, 'Previsao (sem classificacao)', info.get(0)))
+    roni = ee.Number(ee.Algorithms.If(prev, 0, info.get(1)))
+    tri_data = ee.List(TRIMESTRES).get(img.date().get('month').subtract(1))
+    nino, nina = fase.equals('El Nino'), fase.equals('La Nina')
+    intens = ee.Algorithms.If(nino,
+        ee.Algorithms.If(roni.gte(2.0), 'Muito forte (Super)', ee.Algorithms.If(roni.gte(1.5), 'Forte',
+            ee.Algorithms.If(roni.gte(1.0), 'Moderado', 'Fraco'))),
+        ee.Algorithms.If(nina,
+            ee.Algorithms.If(roni.lte(-2.0), 'Muito forte (Super)', ee.Algorithms.If(roni.lte(-1.5), 'Forte',
+                ee.Algorithms.If(roni.lte(-1.0), 'Moderada', 'Fraca'))),
+            '-'))
+    return {'Filtro_ENSO': enso['ascii'], 'Fase_ENSO': fase, 'Intensidade_ENSO': intens,
+            'RONI_Trimestre_C': ee.Algorithms.If(prev, '-', roni.format('%.1f')),
+            'Trimestre_CPC': ee.Algorithms.If(prev, tri_data, info.get(2))}
+
+
+def filtrar_enso(ic, enso):
+    """[ENSO] Recorte do painel: passado só nos meses do cenário; dias de previsão entram todos."""
+    ee = _ee()
+
+    def marcar(img):
+        versao = ee.String(ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'), 'definitiva'))
+        return img.set({'prev_enso': ee.Number(ee.Algorithms.If(ee.List(VERSOES_PREVISAO).contains(versao), 1, 0)),
+                        'chave_enso': img.date().format('YYYY_MM')})
+    return ic.map(marcar).filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
+                                              ee.Filter.inList('chave_enso', ee.List(enso['meses_ok'])))) \
+        .sort('system:time_start')
+
+
+def linhas_diarias(ic, grade, bandas, escala, enso=None):
+    """exportarSerieDiaria do painel. [E-MAIL] só as bandas pedidas entram no reduceRegions. [ENSO] colunas ENSO."""
     ee = _ee()
 
     def por_dia(img):
@@ -720,14 +826,15 @@ def linhas_diarias(ic, grade, bandas, escala):
         janela = ee.Algorithms.If(versao.equals('definitiva'), '12-12 UTC (D-1 a D)', '00-24 UTC')
         conf = ee.Algorithms.If(img.propertyNames().contains('Confianca_Prazo'), img.get('Confianca_Prazo'), '')
         data = ee.Date(img.get('system:time_start')).format('YYYY-MM-dd')
+        extra = props_enso(img, enso) if enso else {}
         return img.select(bandas).reduceRegions(collection=grade, reducer=ee.Reducer.mean(), scale=escala).map(
             lambda f: f.set({'Data': data, 'Tipo_Dado': tipo, 'Versao_Algoritmo': alg,
-                             'Janela_Chuva_UTC': janela, 'Confianca_Prazo': conf}))
+                             'Janela_Chuva_UTC': janela, 'Confianca_Prazo': conf}).set(extra))
     return ic.map(por_dia).flatten()
 
 
-def linhas_mensais(ic, grade, ano, bandas, escala):
-    """exportarSerieMensal do painel, um ano. [E-MAIL] só as bandas pedidas."""
+def linhas_mensais(ic, grade, ano, bandas, escala, enso=None):
+    """exportarSerieMensal do painel, um ano. [E-MAIL] só as bandas pedidas. [ENSO] colunas do 1º dia do mês."""
     ee = _ee()
     inicio = ee.Date.fromYMD(ano, 1, 1)
     soma = [b for b in BANDAS_SOMA if b in bandas]
@@ -743,6 +850,10 @@ def linhas_mensais(ic, grade, ano, bandas, escala):
             im.propertyNames().contains('versao_algoritmo'), im.get('versao_algoritmo'), 'V1.0'))
         ).aggregate_array('alg_tmp').distinct().sort()
         dias_mes = d1.advance(-1, 'day').get('day')
+        if enso:
+            primeira = ee.Image(ee.Algorithms.If(icm.size().gt(0), icm.first(),
+                                                 ee.Image(0).set('system:time_start', d0.millis())))
+            img = img.set(props_enso(primeira, enso))
         return img.set('Data', d0.format('YYYY-MM-dd'), 'n_imgs', icm.size(),
                        'Versao_Algoritmo', ee.List(versoes).join('+'), 'Dias_no_Mes', dias_mes,
                        'Mes_Completo', ee.Algorithms.If(icm.size().eq(dias_mes), 'sim', 'nao'))
@@ -750,10 +861,11 @@ def linhas_mensais(ic, grade, ano, bandas, escala):
     icm = ee.ImageCollection.fromImages(ee.List.sequence(0, 11).map(mes)).filter(ee.Filter.gt('n_imgs', 0))
 
     def reduzir(img):
+        extra = {c: img.get(c) for c in COLUNAS_ENSO} if enso else {}
         return img.reduceRegions(collection=grade, reducer=ee.Reducer.mean(), scale=escala).map(
             lambda f: f.set({'Data': img.get('Data'), 'Tipo_Dado': 'Agregado_Mensal',
                              'Versao_Algoritmo': img.get('Versao_Algoritmo'), 'N_Dias': img.get('n_imgs'),
-                             'Dias_no_Mes': img.get('Dias_no_Mes'), 'Mes_Completo': img.get('Mes_Completo')}))
+                             'Dias_no_Mes': img.get('Dias_no_Mes'), 'Mes_Completo': img.get('Mes_Completo')}).set(extra))
     return icm.map(reduzir).flatten()
 
 
@@ -794,18 +906,21 @@ def dicionario_ee():
                                  for v, d, u in DICIONARIO])
 
 
-def fc_do_arquivo(ped, arq, grade, geom, escala):
+def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
     """O CSV de um arquivo do plano: o mesmo pedido que o painel faz para aquele local e ano."""
     ee = _ee()
     pontos = grade.filter(ee.Filter.eq('Nome_Local_Export', arq['local']))
     ini_ped, fim_ped = ped['ini'], ped['fim'] + timedelta(days=1)
     ic = colecao(geom, str(ped['ini']), str(fim_ped))
     a, b = max(arq['ini'], ini_ped), min(arq['fim'], fim_ped)
+    if enso:
+        ic = filtrar_enso(ic, enso)
     ic = ic.filterDate(str(a), str(b))
     bandas = bandas_do_pedido(ped['variaveis'])
+    extra = COLUNAS_ENSO if enso else []
     if ped['res'] == 'D':
-        return formatar(linhas_diarias(ic, pontos, bandas, escala), ped['variaveis'], EXTRAS_DIARIA)
-    return formatar(linhas_mensais(ic, pontos, arq['ano'], bandas, escala), ped['variaveis'], EXTRAS_MENSAL)
+        return formatar(linhas_diarias(ic, pontos, bandas, escala, enso), ped['variaveis'], EXTRAS_DIARIA + extra)
+    return formatar(linhas_mensais(ic, pontos, arq['ano'], bandas, escala, enso), ped['variaveis'], EXTRAS_MENSAL + extra)
 
 
 def avaliar(ped):
@@ -859,6 +974,131 @@ def resolver_municipios(ped):
 
 
 def avaliar_pedido(ped):
+    """Contexto do pedido (com o filtro ENSO aplicado aos dias, se houver)."""
+    ctx = _avaliar_locais(ped)
+    ctx['enso'] = None
+    if ped.get('enso'):
+        ctx = aplicar_enso(ctx, ped)
+    return ctx
+
+
+def _roni_oisst(ee):
+    """[ENSO] indiceRONI_Sat do painel: RONI estimado pelo OISST (climatologia e fator de variância de 1991-2020,
+    média móvel de 3 meses centrada, arredondado em 0,1). Só os meses depois da última estação oficial são usados."""
+    col = ee.ImageCollection('NOAA/CDR/OISST/V2_1')
+    proj = col.first().projection()
+    area_px = ee.Image.pixelArea()
+    sst = col.select('sst').map(lambda img: img.multiply(0.01).copyProperties(img, ['system:time_start', 'status']))
+    hoje = ee.Date(int(time.time() * 1000))
+    limite = ee.Date.fromYMD(hoje.get('year'), hoje.get('month'), 1)
+    inicio = ee.Date('1991-01-01')
+    total = limite.difference(inicio, 'month').round()
+
+    def mes(off):
+        d0 = inicio.advance(off, 'month')
+        d1 = d0.advance(1, 'month')
+        cm = sst.filterDate(d0, d1)
+        n = cm.aggregate_array('system:time_start').distinct().size()
+        completo = n.eq(d1.difference(d0, 'day').round())
+        im = ee.Image(ee.Algorithms.If(completo, cm.mean(), ee.Image.constant(-999).toFloat().rename('sst')))
+        nome = ee.String('Y').cat(d0.get('year').format('%04d')).cat('M').cat(d0.get('month').format('%02d'))
+        return im.rename([nome]).set('system:time_start', d0.millis())
+    pilha = ee.ImageCollection(ee.List.sequence(0, total.subtract(1)).map(mes)).toBands()
+
+    def media(geom):
+        def somar(img):
+            return img.reduceRegion(reducer=ee.Reducer.sum(), geometry=geom, crs=proj, maxPixels=1e10, tileScale=4)
+        num = somar(pilha.multiply(area_px))
+        den = somar(pilha.mask().multiply(area_px))
+        nomes = pilha.bandNames()
+        return ee.Dictionary.fromLists(nomes, nomes.map(lambda b: ee.Number(num.get(b)).divide(ee.Number(den.get(b)))))
+    nino34 = media(ee.Geometry.Rectangle([-170, -5, -120, 5], None, False))
+    trop = media(ee.Geometry.Rectangle([-180, -20, 180, 20], None, False))
+
+    def linha(nome):
+        st = ee.String(nome)
+        i = st.rindex('Y')
+        ano = ee.Number.parse(st.slice(i.add(1), i.add(5)))
+        m = ee.Number.parse(st.slice(i.add(6), i.add(8)))
+        return ee.Feature(None, {'ano': ano, 'mes': m, 'sst_nino34': nino34.get(nome), 'sst_tropical': trop.get(nome),
+                                 'system:time_start': ee.Date.fromYMD(ano, m, 1).millis()})
+    mensal = ee.FeatureCollection(pilha.bandNames().map(linha)).filter(ee.Filter.gt('sst_nino34', -900))
+    clima = ee.FeatureCollection(ee.List.sequence(1, 12).map(lambda m: ee.Feature(None, {
+        'mes': m,
+        'clima_nino34': mensal.filter(ee.Filter.eq('mes', m)).filter(ee.Filter.gte('ano', 1991))
+                              .filter(ee.Filter.lte('ano', 2020)).aggregate_mean('sst_nino34'),
+        'clima_tropical': mensal.filter(ee.Filter.eq('mes', m)).filter(ee.Filter.gte('ano', 1991))
+                                .filter(ee.Filter.lte('ano', 2020)).aggregate_mean('sst_tropical')})))
+    com_clima = ee.FeatureCollection(ee.Join.saveFirst('climatologia').apply(
+        mensal, clima, ee.Filter.equals(leftField='mes', rightField='mes')))
+
+    def anomalia(f):
+        c = ee.Feature(f.get('climatologia'))
+        a_n = ee.Number(f.get('sst_nino34')).subtract(ee.Number(c.get('clima_nino34')))
+        a_t = ee.Number(f.get('sst_tropical')).subtract(ee.Number(c.get('clima_tropical')))
+        return f.set({'anom_nino34': a_n, 'anom_tropical': a_t, 'anom_relativa': a_n.subtract(a_t)})
+    anom = com_clima.map(anomalia)
+    base = anom.filter(ee.Filter.And(ee.Filter.gte('ano', 1991), ee.Filter.lte('ano', 2020)))
+    fator = ee.Number(base.reduceColumns(ee.Reducer.stdDev(), ['anom_nino34']).get('stdDev')).divide(
+        ee.Number(base.reduceColumns(ee.Reducer.stdDev(), ['anom_relativa']).get('stdDev')))
+    ajust = anom.map(lambda f: f.set('anom_ajustada', ee.Number(f.get('anom_relativa')).multiply(fator))) \
+        .sort('system:time_start')
+    janela = ee.Filter.maxDifference(difference=1000 * 60 * 60 * 24 * 40, leftField='system:time_start',
+                                     rightField='system:time_start')
+    brutos = ee.Join.saveAll('trimestre').apply(ajust, ajust, janela)
+
+    def roni(f):
+        valores = ee.List(f.get('trimestre')).map(lambda x: ee.Feature(x).get('anom_ajustada'))
+        r = ee.Number(valores.reduce(ee.Reducer.mean()))
+        return ee.Feature(None, {'ano': f.get('ano'), 'mes': f.get('mes'), 'RONI': r.multiply(10).round().divide(10),
+                                 'n_meses': valores.size()})
+    return ee.FeatureCollection(brutos).map(roni).filter(ee.Filter.eq('n_meses', 3))
+
+
+def serie_roni():
+    """[ENSO] colecaoCompleta do painel: a série oficial do CPC (asset RONI_CPC_v6) + a estimativa OISST só depois
+    da última estação oficial, em ordem de ano e mês. Devolve [{'ano', 'mes', 'RONI', 'Trimestre', 'Fonte'}]."""
+    ee = _ee()
+    oficial = ee.FeatureCollection(RONI_ASSET).map(lambda f: ee.Feature(None, {
+        'ano': f.get('ano'), 'mes': f.get('mes'), 'RONI': f.get('RONI'),
+        'Trimestre': ee.Algorithms.If(f.propertyNames().contains('Trimestre'), f.get('Trimestre'), '')}))
+    info = ee.Dictionary({'of': oficial.toList(5000).map(lambda f: ee.Feature(f).toDictionary()),
+                          'est': _roni_oisst(ee).toList(5000).map(lambda f: ee.Feature(f).toDictionary())}).getInfo()
+    of = sorted(({'ano': int(x['ano']), 'mes': int(x['mes']), 'RONI': float(x['RONI']),
+                  'Trimestre': x.get('Trimestre', ''), 'Fonte': 'CPC'} for x in info['of']),
+                key=lambda x: (x['ano'], x['mes']))
+    ultima = (of[-1]['ano'], of[-1]['mes']) if of else (0, 0)
+    est = sorted(({'ano': int(x['ano']), 'mes': int(x['mes']), 'RONI': float(x['RONI']),
+                   'Trimestre': TRIMESTRES[int(x['mes']) - 1], 'Fonte': 'Estimativa_OISST'}
+                  for x in info['est'] if (int(x['ano']), int(x['mes'])) > ultima),
+                 key=lambda x: (x['ano'], x['mes']))
+    return of + est
+
+
+def aplicar_enso(ctx, ped):
+    """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
+    ee = _ee()
+    classif = classificar_enso(serie_roni())
+    meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
+    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
+    fim = ped['fim'] + timedelta(days=1)
+    col = ee.ImageCollection(SAB).filterBounds(ctx['area'].bounds()).filterDate(str(ped['ini']), str(fim)).map(
+        lambda img: img.set('v_enso', ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'),
+                                                         'definitiva')))
+    info = ee.Dictionary({'t': col.aggregate_array('system:time_start'), 'v': col.aggregate_array('v_enso')}).getInfo()
+    dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t, v in zip(info['t'], info['v'])
+                  if v in VERSOES_PREVISAO or chave_mes(datetime.fromtimestamp(t / 1000, timezone.utc)) in meses_ok)
+    if not dias:
+        raise PedidoInvalido(f"Nenhum mês do período teve o fenômeno \"{ped['enso']['ascii']}\". "
+                             'Amplie o período ou escolha outro fenômeno.')
+    ctx = dict(ctx, dias=dias, enso={'ascii': ped['enso']['ascii'], 'meses_ok': meses_ok, 'dic': dic})
+    no_periodo = [m for m in meses_ok if str(ped['ini'])[:7].replace('-', '_') <= m <= str(ped['fim'])[:7].replace('-', '_')]
+    ctx['avisos'] = (ctx['avisos'] + ' ' if ctx['avisos'] else '') + \
+        f"Filtro ENSO {ped['enso']['ascii']}: {len(no_periodo)} mês(es) do passado no período (a previsão entra sempre)."
+    return ctx
+
+
+def _avaliar_locais(ped):
     """Contexto do pedido: locais (nome, pontos), grade e área de cada local, escala, pares, dias e avisos.
     Estados, municípios e polígonos usam avaliar() (o caminho conferido pela K16); Brasil e pontos são do e-mail."""
     ee = _ee()
@@ -868,7 +1108,7 @@ def avaliar_pedido(ped):
         _, grade, geom, n_pares, locais, sem_pontos, dias = avaliar(ped)
         return {'locais': locais, 'por_local': {n: (grade, geom) for n, _ in locais}, 'n_pares': n_pares,
                 'dias': dias, 'avisos': ('Sem pontos da grade (nenhum arquivo): ' + ', '.join(sem_pontos) + '.')
-                if sem_pontos else '', 'escala': ESCALA_PONTO if ped['tipo'] == 'P' else ESCALA_AREA}
+                if sem_pontos else '', 'escala': ESCALA_PONTO if ped['tipo'] == 'P' else ESCALA_AREA, 'area': geom}
 
     if ped['tipo'] in ('BR', 'E'):
         # um grade por estado (o Brasil inteiro passa do limite de 25 mil pares de uma grade só); um arquivo por estado
@@ -885,7 +1125,7 @@ def avaliar_pedido(ped):
         locais = [(e, int(info['n'][e])) for e in ped['estados'] if int(info['n'][e]) > 0]
         return {'locais': locais, 'por_local': {e: (grades[e][0], grades[e][1]) for e, _ in locais},
                 'n_pares': max(int(v) for v in info['pares'].values()), 'dias': _dias(info['datas']), 'avisos': '',
-                'escala': ESCALA_AREA}
+                'escala': ESCALA_AREA, 'area': area}
 
     # pontos: o pixel de 0,1° que contém cada ponto, com a classe da máscara de qualidade
     centros = [centro_do_pixel(p['lat'], p['lon']) for p in ped['pontos']]
@@ -913,7 +1153,7 @@ def avaliar_pedido(ped):
     grade = ee.FeatureCollection(feats)
     return {'locais': [('Pontos', n)], 'por_local': {'Pontos': (grade, geom)}, 'n_pares': n, 'dias': _dias(info['datas']),
             'avisos': ('Pontos fora da grade (pixel de borda, sem arquivo): ' + ', '.join(fora) + '.') if fora else '',
-            'escala': ESCALA_PONTO}
+            'escala': ESCALA_PONTO, 'area': geom}
 
 
 def tarefas_existentes(prefixo):
@@ -994,7 +1234,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
         print(f"   grade: {ctx['n_pares']} pares | " + ' | '.join(f'{n}: {k} pontos' for n, k in locais) +
               (f" | {ctx['avisos']}" if ctx['avisos'] else '') +
               f' | {len(dias)} imagens' + (f' ({dias[0]} a {dias[-1]})' if dias else ''))
-        arquivos = planejar(ped['res'], locais, dias)
+        arquivos = planejar(ped['res'], locais, dias, sufixo=('_' + ped['enso']['arquivo']) if ped.get('enso') else '')
         total = conferir_limites(ctx['n_pares'], locais, arquivos)
     except PedidoInvalido as e:
         recusar(pedido_id, 'recusado', str(e), ped, simular)
@@ -1013,7 +1253,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
     pasta = pasta_do_pedido(pedido_id)
     ja = tarefas_existentes(f'SABPED_{pedido_id}_')
     escala = ctx['escala']
-    colunas = colunas_do_pedido(ped['res'], ped['variaveis'])
+    colunas = colunas_do_pedido(ped['res'], ped['variaveis'], enso=bool(ctx['enso']))
     print(f'\n   Exportando para a pasta {pasta} do Drive (manifesto, dicionário e {len(arquivos)} arquivo(s)):')
     id_man = exportar(tabela_ee(linhas_manifesto(pedido_id, 'aceito', nota, ped, arquivos), COLUNAS_MANIFESTO),
                       descricao_tarefa(pedido_id, 0), pasta, f'00_Pedido_{pedido_id}', COLUNAS_MANIFESTO, ja)
@@ -1023,7 +1263,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
              ['Variavel', 'Descricao', 'Unidade'], ja)
     for k, a in enumerate(arquivos, start=2):
         grade, geom = ctx['por_local'][a['local']]
-        exportar(fc_do_arquivo(ped, a, grade, geom, escala), descricao_tarefa(pedido_id, k), pasta, a['nome'],
+        exportar(fc_do_arquivo(ped, a, grade, geom, escala, ctx['enso']), descricao_tarefa(pedido_id, k), pasta, a['nome'],
                  colunas, ja)
     print(f'\n✅ {len(arquivos) + 2} exportação(ões) na fila do Earth Engine em {time.time() - t0:.0f} s. '
           'O Apps Script entrega o link quando todas terminarem.')
