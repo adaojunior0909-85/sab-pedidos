@@ -47,7 +47,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.10.30c'
+VERSAO_ROTINA = '2026.10.31_Oficial'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -149,16 +149,16 @@ DICIONARIO = [
      'So com o filtro ENSO do item B ligado. Fenomeno escolhido no filtro: o arquivo traz so os meses do passado em que ele ocorreu (os dias de previsao continuam todos e ficam com as colunas ENSO vazias).',
      '-'),
     ('Fase_ENSO',
-     'So com o filtro ENSO. Fase do trimestre do CPC centrado no mes do dia: El Nino, La Nina ou Neutro (episodio = 5 trimestres seguidos acima de +0,5 ou abaixo de -0,5 C). Nos dias de previsao: Previsao (sem classificacao), com - na intensidade e no RONI.',
+     'Fase do trimestre do CPC centrado no mes do dia: El Nino, La Nina ou Neutro (episodio = 5 trimestres seguidos acima de +0,5 ou abaixo de -0,5 C). Nos dias de previsao: Previsao (sem classificacao), com - na intensidade e no RONI.',
      '-'),
     ('Intensidade_ENSO',
-     'So com o filtro ENSO. Intensidade pelo RONI do trimestre: Fraco (0,5 a 0,9), Moderado (1,0 a 1,4), Forte (1,5 a 1,9) ou Muito forte/Super (2,0 ou mais), em modulo; - no Neutro.',
+     'Intensidade pelo RONI do trimestre: Fraco (0,5 a 0,9), Moderado (1,0 a 1,4), Forte (1,5 a 1,9) ou Muito forte/Super (2,0 ou mais), em modulo; - no Neutro.',
      '-'),
     ('RONI_Trimestre_C',
-     'So com o filtro ENSO. Indice RONI do CPC/NOAA do trimestre centrado no mes (anomalia relativa da temperatura do mar no Nino 3.4).',
+     'Indice RONI do CPC/NOAA do trimestre centrado no mes (anomalia relativa da temperatura do mar no Nino 3.4).',
      'C'),
     ('Trimestre_CPC',
-     'So com o filtro ENSO. Sigla do trimestre do CPC centrado no mes (ex.: OND = outubro a dezembro, usado nos dias de novembro).',
+     'Sigla do trimestre do CPC centrado no mes (ex.: OND = outubro a dezembro, usado nos dias de novembro).',
      '-'),
     ('Confianca_Prazo',
      'CSV diario. Confianca da previsao GFS pelo prazo, gravada pelo motor a partir da V1.5: alta (prazo de 1 a 5 dias), media (6 a 10), baixa (11 em diante). Vazia nos demais dias e nos dias gravados pelas versoes V1.3 e V1.4.',
@@ -423,8 +423,12 @@ def validar(campos, hoje):
     if res not in ('D', 'M'):
         raise PedidoInvalido('Resolução inválida (res=D diária ou res=M mensal).')
     tipo = campos.get('tipo', '').upper()
-    if tipo not in ('E', 'M', 'P', 'BR', 'C'):
-        raise PedidoInvalido('Tipo de local inválido (tipo=BR Brasil, E estados, M municípios, P polígonos ou C pontos).')
+    
+    if tipo == 'BR':
+        raise PedidoInvalido('A extração do Brasil inteiro foi desativada por exceder o limite de memória. Peça separadamente por estado.')
+    if tipo not in ('E', 'M', 'P', 'C'):
+        raise PedidoInvalido('Tipo de local inválido (tipo=E estados, M municípios, P polígonos ou C pontos).')
+        
     ini, fim = _data(campos.get('ini'), 'inicial'), _data(campos.get('fim'), 'final')
     if ini < DATA_MINIMA:
         raise PedidoInvalido('O banco SAB começa em 01/01/1961.')
@@ -432,20 +436,22 @@ def validar(campos, hoje):
         raise PedidoInvalido('A data final é anterior à inicial.')
     if fim > hoje + timedelta(days=20):
         raise PedidoInvalido('A data final passa do fim da previsão do banco.')
+        
     ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': [],
            'pontos': []}
-    if tipo == 'BR':
-        ped['estados'] = list(LISTA_ESTADOS)
+           
     if tipo == 'C':
         ped['pontos'] = ler_pontos(campos.get('pts', ''))
-    ped['separar'] = tipo == 'BR' or campos.get('sep') == '1'   # um grade e um arquivo por estado
-    ped['enso'] = None
+    ped['separar'] = campos.get('sep') == '1'
+    
     chave_enso = campos.get('enso', '').strip()
-    if chave_enso:
+    if chave_enso and chave_enso.lower() not in ('sem filtro', 'todos', 'nenhum'):
         achado = [c for c in ENSO_CENARIOS if c[2].lower() == chave_enso.lower()]
         if not achado:
             raise PedidoInvalido(f'Filtro ENSO não reconhecido: "{chave_enso}".')
         ped['enso'] = {'valor': achado[0][0], 'ascii': achado[0][1], 'arquivo': achado[0][2]}
+    else:
+        ped['enso'] = {'valor': 'Todos', 'ascii': 'Sem filtro', 'arquivo': ''}
 
     if tipo in ('E', 'M'):
         ufs = [u for u in (x.strip() for x in campos.get('uf', '').split(',')) if u]
@@ -509,8 +515,6 @@ def validar(campos, hoje):
 
 def nome_local_unico(ped):
     """nome_local do painel (só para o texto do manifesto)."""
-    if ped['tipo'] == 'BR':
-        return 'Brasil'
     if ped['tipo'] == 'C':
         return 'Pontos'
     if ped['tipo'] == 'E':
@@ -520,11 +524,11 @@ def nome_local_unico(ped):
     return 'Poligono_Usuario' if len(ped['poligonos']) == 1 else 'Multiplos_Poligonos'
 
 
-def colunas_do_pedido(res, cods, enso=False):
+def colunas_do_pedido(res, cods, enso=True):
     """Selectors do CSV: identificação + variáveis pedidas (ordem do painel) + colunas de qualidade
-    (+ as 5 colunas ENSO no fim, com o filtro, como o painel)."""
+    (+ as 5 colunas ENSO no fim, que agora são fixas)."""
     numericas = [col for c, col, _, _, _ in VARIAVEIS if c in cods]
-    return COLUNAS_ID + numericas + (EXTRAS_DIARIA if res == 'D' else EXTRAS_MENSAL) + (COLUNAS_ENSO if enso else [])
+    return COLUNAS_ID + numericas + (EXTRAS_DIARIA if res == 'D' else EXTRAS_MENSAL) + COLUNAS_ENSO
 
 
 def bandas_do_pedido(cods):
@@ -618,12 +622,10 @@ def descricao_tarefa(pedido_id, k):
 
 def texto_periodo(ped):
     return f"{ped['ini']:%d/%m/%Y} a {ped['fim']:%d/%m/%Y}" + \
-        (f" | filtro ENSO: {ped['enso']['ascii']} (a previsão entra sempre)" if ped.get('enso') else '')
+        (f" | filtro ENSO: {ped['enso']['ascii']} (a previsão entra sempre)" if ped['enso']['valor'] != 'Todos' else '')
 
 
 def texto_local(ped):
-    if ped['tipo'] == 'BR':
-        return 'Brasil inteiro (um arquivo por estado)'
     if ped['tipo'] == 'C':
         return f"{len(ped['pontos'])} ponto(s): " + ', '.join(p['nome'] for p in ped['pontos'][:10]) + \
             ('...' if len(ped['pontos']) > 10 else '')
@@ -663,7 +665,7 @@ def poligonos_do_pedido(ped):
     municipios = ee.FeatureCollection('FAO/GAUL/2015/level2').filter(ee.Filter.eq('ADM0_NAME', 'Brazil'))
     if ped['tipo'] == 'P':
         feats = [ee.Feature(ee.Geometry.Polygon([v]), {'Nome_Local_Export': f'Poligono_{i + 1}', 'Estado': 'Customizado',
-                                                      'Municipio': 'Area_Desenhada'})
+                                                       'Municipio': 'Area_Desenhada'})
                  for i, v in enumerate(ped['poligonos'])]
         return ee.FeatureCollection(feats)
     var_uf = variacoes_busca(ped['estados'])
@@ -808,8 +810,13 @@ def filtrar_enso(ic, enso):
         versao = ee.String(ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'), 'definitiva'))
         return img.set({'prev_enso': ee.Number(ee.Algorithms.If(ee.List(VERSOES_PREVISAO).contains(versao), 1, 0)),
                         'chave_enso': img.date().format('YYYY_MM')})
-    return ic.map(marcar).filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
-                                              ee.Filter.inList('chave_enso', ee.List(enso['meses_ok'])))) \
+    
+    preparada = ic.map(marcar)
+    if enso['valor'] == 'Todos':
+        return preparada.sort('system:time_start')
+        
+    return preparada.filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
+                                         ee.Filter.inList('chave_enso', ee.List(enso['meses_ok'])))) \
         .sort('system:time_start')
 
 
@@ -1079,28 +1086,33 @@ def aplicar_enso(ctx, ped):
     """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
     ee = _ee()
     classif = classificar_enso(serie_roni())
-    meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
     dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
     fim = ped['fim'] + timedelta(days=1)
     col = ee.ImageCollection(SAB).filterBounds(ctx['area'].bounds()).filterDate(str(ped['ini']), str(fim)).map(
         lambda img: img.set('v_enso', ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'),
                                                          'definitiva')))
     info = ee.Dictionary({'t': col.aggregate_array('system:time_start'), 'v': col.aggregate_array('v_enso')}).getInfo()
-    dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t, v in zip(info['t'], info['v'])
-                  if v in VERSOES_PREVISAO or chave_mes(datetime.fromtimestamp(t / 1000, timezone.utc)) in meses_ok)
-    if not dias:
-        raise PedidoInvalido(f"Nenhum mês do período teve o fenômeno \"{ped['enso']['ascii']}\". "
-                             'Amplie o período ou escolha outro fenômeno.')
+    
+    if ped['enso']['valor'] != 'Todos':
+        meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
+        dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t, v in zip(info['t'], info['v'])
+                      if v in VERSOES_PREVISAO or chave_mes(datetime.fromtimestamp(t / 1000, timezone.utc)) in meses_ok)
+        if not dias:
+            raise PedidoInvalido(f"Nenhum mês do período teve o fenômeno \"{ped['enso']['ascii']}\". "
+                                 'Amplie o período ou escolha outro fenômeno.')
+        no_periodo = [m for m in meses_ok if str(ped['ini'])[:7].replace('-', '_') <= m <= str(ped['fim'])[:7].replace('-', '_')]
+        ctx['avisos'] = (ctx['avisos'] + ' ' if ctx['avisos'] else '') + \
+            f"Filtro ENSO {ped['enso']['ascii']}: {len(no_periodo)} mês(es) do passado no período (a previsão entra sempre)."
+    else:
+        meses_ok = sorted(dic.keys())
+        dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t in info['t'])
+        
     ctx = dict(ctx, dias=dias, enso={'ascii': ped['enso']['ascii'], 'meses_ok': meses_ok, 'dic': dic})
-    no_periodo = [m for m in meses_ok if str(ped['ini'])[:7].replace('-', '_') <= m <= str(ped['fim'])[:7].replace('-', '_')]
-    ctx['avisos'] = (ctx['avisos'] + ' ' if ctx['avisos'] else '') + \
-        f"Filtro ENSO {ped['enso']['ascii']}: {len(no_periodo)} mês(es) do passado no período (a previsão entra sempre)."
     return ctx
 
 
 def _avaliar_locais(ped):
-    """Contexto do pedido: locais (nome, pontos), grade e área de cada local, escala, pares, dias e avisos.
-    Estados, municípios e polígonos usam avaliar() (o caminho conferido pela K16); Brasil e pontos são do e-mail."""
+    """Contexto do pedido: locais (nome, pontos), grade e área de cada local, escala, pares, dias e avisos."""
     ee = _ee()
     if ped['tipo'] in ('E', 'M', 'P') and not ped.get('separar'):
         if ped['tipo'] == 'M':
@@ -1110,15 +1122,13 @@ def _avaliar_locais(ped):
                 'dias': dias, 'avisos': ('Sem pontos da grade (nenhum arquivo): ' + ', '.join(sem_pontos) + '.')
                 if sem_pontos else '', 'escala': ESCALA_PONTO if ped['tipo'] == 'P' else ESCALA_AREA, 'area': geom}
 
-    if ped['tipo'] in ('BR', 'E'):
-        # um grade por estado (o Brasil inteiro passa do limite de 25 mil pares de uma grade só); um arquivo por estado
+    if ped['tipo'] == 'E':
         grades = {}
         for e in ped['estados']:
             pol = poligonos_do_pedido({'tipo': 'E', 'estados': [e]})
             grade, pares = montar_grade(pol)
             grades[e] = (grade, pol.geometry(), pares)
-        area = ee.FeatureCollection('FAO/GAUL/2015/level0').filter(ee.Filter.eq('ADM0_NAME', 'Brazil')).geometry() \
-            if ped['tipo'] == 'BR' else poligonos_do_pedido({'tipo': 'E', 'estados': ped['estados']}).geometry()
+        area = poligonos_do_pedido({'tipo': 'E', 'estados': ped['estados']}).geometry()
         info = ee.Dictionary({'n': ee.Dictionary({e: g[0].size() for e, g in grades.items()}),
                               'pares': ee.Dictionary({e: g[2] for e, g in grades.items()}),
                               'datas': _datas_do_periodo(ee, area, ped)}).getInfo()
@@ -1234,7 +1244,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
         print(f"   grade: {ctx['n_pares']} pares | " + ' | '.join(f'{n}: {k} pontos' for n, k in locais) +
               (f" | {ctx['avisos']}" if ctx['avisos'] else '') +
               f' | {len(dias)} imagens' + (f' ({dias[0]} a {dias[-1]})' if dias else ''))
-        arquivos = planejar(ped['res'], locais, dias, sufixo=('_' + ped['enso']['arquivo']) if ped.get('enso') else '')
+        arquivos = planejar(ped['res'], locais, dias, sufixo=('_' + ped['enso']['arquivo']) if ped['enso']['arquivo'] else '')
         total = conferir_limites(ctx['n_pares'], locais, arquivos)
     except PedidoInvalido as e:
         recusar(pedido_id, 'recusado', str(e), ped, simular)
@@ -1253,7 +1263,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
     pasta = pasta_do_pedido(pedido_id)
     ja = tarefas_existentes(f'SABPED_{pedido_id}_')
     escala = ctx['escala']
-    colunas = colunas_do_pedido(ped['res'], ped['variaveis'], enso=bool(ctx['enso']))
+    colunas = colunas_do_pedido(ped['res'], ped['variaveis'], enso=True)
     print(f'\n   Exportando para a pasta {pasta} do Drive (manifesto, dicionário e {len(arquivos)} arquivo(s)):')
     id_man = exportar(tabela_ee(linhas_manifesto(pedido_id, 'aceito', nota, ped, arquivos), COLUNAS_MANIFESTO),
                       descricao_tarefa(pedido_id, 0), pasta, f'00_Pedido_{pedido_id}', COLUNAS_MANIFESTO, ja)
