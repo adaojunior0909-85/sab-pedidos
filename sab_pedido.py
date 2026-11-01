@@ -116,7 +116,7 @@ BANDAS_SOMA = ['pr_mm', 'chuva_efetiva', 'runoff_sup_mm', 'runoff_sub_mm', 'et_p
                'transpiracao_mm', 'deficit_diario']
 BANDAS_MEDIA = ['tmax_C', 'tmin_C', 'RH', 'rs', 'u2', 'tsolo_C', 'tfolha_C', 'vpd', 'soil_moisture_0_5cm_m3_m3',
                 'soil_moisture_0_100cm_m3_m3', 'amplitude_diaria']
-# [ENSO] Os mesmos cenários do painel (CENARIOS_ENSO): valor interno, texto da coluna Filtro_ENSO, sufixo do arquivo
+
 ENSO_CENARIOS = [
     ('Super El Niño (≥ 2.0°C)', 'El Nino muito forte (Super)', 'El_Nino_Muito_Forte'),
     ('El Niño Forte (1.5 a 1.9°C)', 'El Nino forte', 'El_Nino_Forte'),
@@ -134,7 +134,6 @@ RONI_ASSET = f'projects/{PROJETO}/assets/RONI_CPC_v6'
 COLUNAS_MANIFESTO = ['Pedido', 'Status', 'Motivo', 'Arquivo', 'Linhas_Esperadas', 'Local', 'Periodo', 'Resolucao',
                      'Variaveis', 'Gerado_em', 'Versao_Rotina', 'Versao_Painel']
 
-# Dicionário de variáveis: as 35 linhas de exportarDicionarioAutomatizado do painel, sem mudança
 DICIONARIO = [
     ('Tipo_Dado',
      'Origem do dia: Historico_Observado (BR-DWGD), Provisorio_ERA5 (reanalise calibrada), Previsao_GFS (previsao calibrada), Previsao_GFS_Parcial (dia com rodada GFS incompleta: chuva, radiacao solar, ETo e as colunas que dependem delas ficam vazias), Sem_Dado, Desconhecido (valor de versao que o painel nao reconhece).',
@@ -319,10 +318,6 @@ def sinal_enso(roni):
 
 
 def classificar_enso(serie):
-    """[ENSO] indiceONI_FC do painel: serie = [{'ano', 'mes', 'RONI', 'Trimestre'}] em ordem e contínua.
-    Fase por episódio: El Niño/La Niña quando o limiar de ±0,5 se mantém por 5 estações seguidas (janelas de 5
-    que contêm o mês); no fim da série, sinal não nulo que se repete até a última estação sem completar 5 vira
-    'Indefinida'; o resto é 'Neutro'. Devolve a mesma lista com 'FaseENSO'."""
     sinais = [sinal_enso(x['RONI']) for x in serie]
     n = len(sinais)
     saida = []
@@ -339,7 +334,6 @@ def classificar_enso(serie):
 
 
 def no_cenario(item, valor):
-    """[ENSO] filtroCenario do painel para um mês classificado."""
     f, r = item['FaseENSO'], item['RONI']
     if f not in ('El Nino', 'La Nina', 'Neutro'):
         return False
@@ -361,7 +355,6 @@ def chave_mes(d):
 
 
 def ler_pontos(txt):
-    """'lat lon nome|lat lon nome' -> [{'lat', 'lon', 'nome'}]. Coordenadas decimais com ponto."""
     pontos = []
     for i, bloco in enumerate(x.strip() for x in str(txt).split('|') if x.strip()):
         partes = bloco.split(None, 2)
@@ -381,7 +374,6 @@ def ler_pontos(txt):
 
 
 def centro_do_pixel(lat, lon):
-    """Centro do pixel de 0,1° da grade do SAB (TRANSFORM) que contém o ponto: o mesmo que a grade do painel usa."""
     dx, x0, dy, y0 = TRANSFORM[0], TRANSFORM[2], TRANSFORM[4], TRANSFORM[5]
     col = int((lon - x0) // dx)
     lin = int((lat - y0) // dy)
@@ -393,8 +385,6 @@ def normalizar_nome(t):
 
 
 def casar_municipios(pedidos, nomes_gaul):
-    """Acha cada município pedido entre os nomes do GAUL, sem ligar para acento, maiúscula, hífen ou apóstrofo.
-    Devolve (nomes do GAUL achados, mensagens dos que faltam, com sugestões)."""
     por_norma = {}
     for n in nomes_gaul or []:
         por_norma.setdefault(normalizar_nome(n), [])
@@ -416,7 +406,6 @@ _RE_MUN = re.compile(r"^[A-Za-zÀ-ÖØ-öø-ÿ0-9' .\-()]{2,60}$")
 
 
 def validar(campos, hoje):
-    """Confere o pedido e devolve a forma normalizada. hoje: date (para o limite da data final)."""
     if campos.get('v') != '1':
         raise PedidoInvalido('Versão do código do pedido não reconhecida (esperado v=1).')
     res = campos.get('res', '').upper()
@@ -487,7 +476,7 @@ def validar(campos, hoje):
                     raise PedidoInvalido(f'Vértice inválido no polígono {i + 1}: "{par.strip()[:30]}".')
                 if not (-34.0 <= lat <= 6.0 and -74.0 <= lon <= -34.0):
                     raise PedidoInvalido(f'Vértice fora do Brasil no polígono {i + 1}: {lat}, {lon}.')
-                verts.append([lon, lat])     # [lon, lat], como o painel monta o ee.Geometry.Polygon
+                verts.append([lon, lat])
             if len(verts) < 4:
                 raise PedidoInvalido(f'O polígono {i + 1} tem menos de 4 vértices.')
             total += len(verts)
@@ -506,7 +495,7 @@ def validar(campos, hoje):
         desconhecidos = [c for c in pedidos if c not in CODIGOS]
         if desconhecidos:
             raise PedidoInvalido(f'Variável não reconhecida: {", ".join(desconhecidos)}.')
-        cods = [c for c in CODIGOS if c in pedidos]     # ordem do painel
+        cods = [c for c in CODIGOS if c in pedidos]
     if not cods:
         raise PedidoInvalido('Escolha pelo menos uma variável.')
     ped['variaveis'] = cods
@@ -514,7 +503,6 @@ def validar(campos, hoje):
 
 
 def nome_local_unico(ped):
-    """nome_local do painel (só para o texto do manifesto)."""
     if ped['tipo'] == 'C':
         return 'Pontos'
     if ped['tipo'] == 'E':
@@ -525,8 +513,6 @@ def nome_local_unico(ped):
 
 
 def colunas_do_pedido(res, cods, enso=True):
-    """Selectors do CSV: identificação + variáveis pedidas (ordem do painel) + colunas de qualidade
-    (+ as 5 colunas ENSO no fim, que agora são fixas)."""
     numericas = [col for c, col, _, _, _ in VARIAVEIS if c in cods]
     return COLUNAS_ID + numericas + (EXTRAS_DIARIA if res == 'D' else EXTRAS_MENSAL) + COLUNAS_ENSO
 
@@ -536,7 +522,6 @@ def bandas_do_pedido(cods):
 
 
 def _blocos_de_meses(dias_por_mes, n_pontos, limite):
-    """Menor divisão do ano (1, 2, 3, 4, 6 ou 12 blocos de meses) em que nenhum bloco passa do limite."""
     for k in (1, 2, 3, 4, 6, 12):
         tam = 12 // k
         blocos = [(i * tam + 1, (i + 1) * tam) for i in range(k)]
@@ -546,9 +531,6 @@ def _blocos_de_meses(dias_por_mes, n_pontos, limite):
 
 
 def planejar(res, locais, datas, limite=LIMITE_LINHAS_ARQUIVO, sufixo=''):
-    """locais: lista de (Nome_Local_Export, n_pontos), na ordem do painel; datas: datas (date) das imagens
-    do período. Devolve a lista de arquivos: nome, local, ini e fim (fim exclusivo) e linhas esperadas.
-    Um arquivo por local e por ano com dados (como o painel); um ano diário acima do limite vira blocos."""
     por_ano = {}
     for d in datas:
         por_ano.setdefault(d.year, {}).setdefault(d.month, 0)
@@ -579,7 +561,6 @@ def milhar(n):
 
 
 def conferir_limites(n_pares, locais, arquivos):
-    """Os mesmos limites do painel (pares) e os do envio por e-mail (linhas e arquivos)."""
     if n_pares > LIMITE_PONTOS_GRADE:
         raise PedidoInvalido(f'Área grande demais: {milhar(n_pares)} pares pixel x polígono (limite '
                              f'{milhar(LIMITE_PONTOS_GRADE)}, o mesmo do painel). Reduza a área.')
@@ -590,8 +571,7 @@ def conferir_limites(n_pares, locais, arquivos):
     total = sum(a['linhas'] for a in arquivos)
     if total > LIMITE_LINHAS_PEDIDO:
         raise PedidoInvalido(f'O pedido tem {milhar(total)} linhas, acima do limite de {milhar(LIMITE_LINHAS_PEDIDO)} '
-                             'por pedido. Divida em pedidos menores, com menos anos ou menos área (menos variáveis '
-                             'deixam o arquivo menor, mas não diminuem as linhas).')
+                             'por pedido. Divida em pedidos menores, com menos anos ou menos área.')
     if len(arquivos) > LIMITE_ARQUIVOS:
         raise PedidoInvalido(f'O pedido geraria {len(arquivos)} arquivos (limite {LIMITE_ARQUIVOS}). '
                              'Divida em pedidos menores.')
@@ -599,7 +579,6 @@ def conferir_limites(n_pares, locais, arquivos):
 
 
 def contar_pontos(nomes_dos_pontos):
-    """[(Nome_Local_Export, n_pontos)] na ordem de aparição (a do distinct do painel)."""
     contagem = {}
     for nome in nomes_dos_pontos:
         contagem[nome] = contagem.get(nome, 0) + 1
@@ -607,7 +586,6 @@ def contar_pontos(nomes_dos_pontos):
 
 
 def faltando(pedidos, encontrados):
-    """Nomes pedidos que nenhuma variação de busca (acentos, maiúsculas) encontrou no GAUL."""
     achados = set(encontrados or [])
     return [p for p in pedidos if not any(v in achados for v in variacoes_busca([p]))]
 
@@ -651,7 +629,7 @@ def linhas_manifesto(pedido_id, status, motivo, ped=None, arquivos=None, agora=N
 
 
 # =========================================================================================
-# EARTH ENGINE: o mesmo cálculo do painel (copiado da K14; mudanças marcadas com [E-MAIL])
+# EARTH ENGINE
 # =========================================================================================
 def _ee():
     import ee
@@ -659,7 +637,6 @@ def _ee():
 
 
 def poligonos_do_pedido(ped):
-    """construirRegiaoSelecionada do painel: polígonos com Nome_Local_Export, Estado e Municipio."""
     ee = _ee()
     estados = ee.FeatureCollection('FAO/GAUL/2015/level1').filter(ee.Filter.eq('ADM0_NAME', 'Brazil'))
     municipios = ee.FeatureCollection('FAO/GAUL/2015/level2').filter(ee.Filter.eq('ADM0_NAME', 'Brazil'))
@@ -681,7 +658,6 @@ def poligonos_do_pedido(ped):
 
 
 def montar_grade(poligonos):
-    """Grade do painel (K14). [E-MAIL] devolve também o número de pares antes do limite (n_pares)."""
     ee = _ee()
     proj = ee.Projection(CRS, TRANSFORM)
     classe = ee.Image(MASCARA).select('classe').unmask(0, False).rename('classe_q')
@@ -731,7 +707,6 @@ def _expandir(img):
 
 
 def _correcao_mes(mes):
-    """montarCorrecaoMes do painel (correção de leitura do solo e do escoamento dos dias V1.0)."""
     ee = _ee()
     solo = ee.Image(f'{SOLO}/Matriz_Solo_{mes:02d}')
 
@@ -749,7 +724,6 @@ def _correcao_mes(mes):
 
 
 def colecao(geom, ini, fim):
-    """getSABCollection + corrigirSoloEscoamentoV10 + grampo termodinâmico do painel (K14). fim exclusivo."""
     ee = _ee()
     corr_mes = ee.List([_correcao_mes(m) for m in range(1, 13)])
     col = ee.ImageCollection(SAB).filterBounds(geom.bounds()).filterDate(ini, fim)
@@ -781,8 +755,6 @@ def colecao(geom, ini, fim):
 
 
 def props_enso(img, enso):
-    """[ENSO] propsEnsoDaImagem do painel: as 5 colunas ENSO de um dia (ou do 1º dia do mês, no mensal).
-    Dia de previsão (ou imagem sem marcação): 'Previsao (sem classificacao)', '-' e o trimestre pela data."""
     ee = _ee()
     prev = ee.Number(ee.Algorithms.If(img.propertyNames().contains('prev_enso'), img.get('prev_enso'), 1)).eq(1)
     info = ee.List(ee.Dictionary(enso['dic']).get(img.date().format('YYYY_MM'), ['Sem_Dado', -99, 'N/A']))
@@ -797,13 +769,12 @@ def props_enso(img, enso):
             ee.Algorithms.If(roni.lte(-2.0), 'Muito forte (Super)', ee.Algorithms.If(roni.lte(-1.5), 'Forte',
                 ee.Algorithms.If(roni.lte(-1.0), 'Moderada', 'Fraca'))),
             '-'))
-    return {'Filtro_ENSO': enso['ascii'], 'Fase_ENSO': fase, 'Intensidade_ENSO': intens,
+    return {'Filtro_ENSO': enso.get('ascii', 'Sem filtro'), 'Fase_ENSO': fase, 'Intensidade_ENSO': intens,
             'RONI_Trimestre_C': ee.Algorithms.If(prev, '-', roni.format('%.1f')),
             'Trimestre_CPC': ee.Algorithms.If(prev, tri_data, info.get(2))}
 
 
 def filtrar_enso(ic, enso):
-    """[ENSO] Recorte do painel: passado só nos meses do cenário; dias de previsão entram todos."""
     ee = _ee()
 
     def marcar(img):
@@ -812,7 +783,7 @@ def filtrar_enso(ic, enso):
                         'chave_enso': img.date().format('YYYY_MM')})
     
     preparada = ic.map(marcar)
-    if enso['valor'] == 'Todos':
+    if enso.get('valor') == 'Todos':
         return preparada.sort('system:time_start')
         
     return preparada.filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
@@ -821,7 +792,6 @@ def filtrar_enso(ic, enso):
 
 
 def linhas_diarias(ic, grade, bandas, escala, enso=None):
-    """exportarSerieDiaria do painel. [E-MAIL] só as bandas pedidas entram no reduceRegions. [ENSO] colunas ENSO."""
     ee = _ee()
 
     def por_dia(img):
@@ -841,7 +811,6 @@ def linhas_diarias(ic, grade, bandas, escala, enso=None):
 
 
 def linhas_mensais(ic, grade, ano, bandas, escala, enso=None):
-    """exportarSerieMensal do painel, um ano. [E-MAIL] só as bandas pedidas. [ENSO] colunas do 1º dia do mês."""
     ee = _ee()
     inicio = ee.Date.fromYMD(ano, 1, 1)
     soma = [b for b in BANDAS_SOMA if b in bandas]
@@ -877,7 +846,6 @@ def linhas_mensais(ic, grade, ano, bandas, escala, enso=None):
 
 
 def formatar(fc, cods, extras):
-    """formatarExportacaoClima do painel (números com ponto, "18.40"). [E-MAIL] só as colunas pedidas."""
     ee = _ee()
     numericas = [('Latitude', 'Latitude', 5), ('Longitude', 'Longitude', 5)] + \
                 [(col, banda, casas) for c, col, banda, casas, _ in VARIAVEIS if c in cods]
@@ -914,7 +882,6 @@ def dicionario_ee():
 
 
 def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
-    """O CSV de um arquivo do plano: o mesmo pedido que o painel faz para aquele local e ano."""
     ee = _ee()
     pontos = grade.filter(ee.Filter.eq('Nome_Local_Export', arq['local']))
     ini_ped, fim_ped = ped['ini'], ped['fim'] + timedelta(days=1)
@@ -931,7 +898,6 @@ def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
 
 
 def avaliar(ped):
-    """Uma ida ao servidor: pontos por local, pares, nomes encontrados e datas das imagens do período."""
     ee = _ee()
     poligonos = poligonos_do_pedido(ped)
     grade, n_pares = montar_grade(poligonos)
@@ -952,7 +918,6 @@ def avaliar(ped):
             raise PedidoInvalido('Estado não encontrado no mapa de limites (GAUL): ' + ', '.join(faltam) + '.')
     locais = contar_pontos(info['pontos'])
     sem_pontos = [n for n in dict.fromkeys(info['nomes']) if n not in dict(locais)]
-    # uma data por imagem (com repetições, se houver): o CSV tem uma linha por ponto e por imagem
     dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t in info['datas'])
     return poligonos, grade, geom, int(info['pares']), locais, sem_pontos, dias
 
@@ -968,8 +933,6 @@ def _dias(lista_ms):
 
 
 def resolver_municipios(ped):
-    """[E-MAIL] Troca os nomes digitados pelos nomes do GAUL (sem ligar para acento, maiúscula ou hífen). Pedidos do
-    painel já vêm com o nome do GAUL e ficam iguais."""
     ee = _ee()
     nomes = ee.FeatureCollection('FAO/GAUL/2015/level2').filter(ee.Filter.eq('ADM0_NAME', 'Brazil')) \
         .filter(ee.Filter.inList('ADM1_NAME', variacoes_busca(ped['estados']))).aggregate_array('ADM2_NAME').getInfo()
@@ -981,7 +944,6 @@ def resolver_municipios(ped):
 
 
 def avaliar_pedido(ped):
-    """Contexto do pedido (com o filtro ENSO aplicado aos dias, se houver)."""
     ctx = _avaliar_locais(ped)
     ctx['enso'] = None
     if ped.get('enso'):
@@ -990,8 +952,6 @@ def avaliar_pedido(ped):
 
 
 def _roni_oisst(ee):
-    """[ENSO] indiceRONI_Sat do painel: RONI estimado pelo OISST (climatologia e fator de variância de 1991-2020,
-    média móvel de 3 meses centrada, arredondado em 0,1). Só os meses depois da última estação oficial são usados."""
     col = ee.ImageCollection('NOAA/CDR/OISST/V2_1')
     proj = col.first().projection()
     area_px = ee.Image.pixelArea()
@@ -1063,8 +1023,6 @@ def _roni_oisst(ee):
 
 
 def serie_roni():
-    """[ENSO] colecaoCompleta do painel: a série oficial do CPC (asset RONI_CPC_v6) + a estimativa OISST só depois
-    da última estação oficial, em ordem de ano e mês. Devolve [{'ano', 'mes', 'RONI', 'Trimestre', 'Fonte'}]."""
     ee = _ee()
     oficial = ee.FeatureCollection(RONI_ASSET).map(lambda f: ee.Feature(None, {
         'ano': f.get('ano'), 'mes': f.get('mes'), 'RONI': f.get('RONI'),
@@ -1083,7 +1041,6 @@ def serie_roni():
 
 
 def aplicar_enso(ctx, ped):
-    """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
     ee = _ee()
     classif = classificar_enso(serie_roni())
     dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
@@ -1107,12 +1064,11 @@ def aplicar_enso(ctx, ped):
         meses_ok = sorted(dic.keys())
         dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t in info['t'])
         
-    ctx = dict(ctx, dias=dias, enso={'ascii': ped['enso']['ascii'], 'meses_ok': meses_ok, 'dic': dic})
+    ctx = dict(ctx, dias=dias, enso={'valor': ped['enso']['valor'], 'ascii': ped['enso']['ascii'], 'meses_ok': meses_ok, 'dic': dic})
     return ctx
 
 
 def _avaliar_locais(ped):
-    """Contexto do pedido: locais (nome, pontos), grade e área de cada local, escala, pares, dias e avisos."""
     ee = _ee()
     if ped['tipo'] in ('E', 'M', 'P') and not ped.get('separar'):
         if ped['tipo'] == 'M':
@@ -1137,7 +1093,6 @@ def _avaliar_locais(ped):
                 'n_pares': max(int(v) for v in info['pares'].values()), 'dias': _dias(info['datas']), 'avisos': '',
                 'escala': ESCALA_AREA, 'area': area}
 
-    # pontos: o pixel de 0,1° que contém cada ponto, com a classe da máscara de qualidade
     centros = [centro_do_pixel(p['lat'], p['lon']) for p in ped['pontos']]
     pts = ee.FeatureCollection([ee.Feature(ee.Geometry.Point([lon, lat]), {'i': i}) for i, (lat, lon) in enumerate(centros)])
     classes = ee.Image(MASCARA).select('classe').unmask(0, False).reduceRegions(
@@ -1150,7 +1105,7 @@ def _avaliar_locais(ped):
     feats, fora, n = [], [], 0
     for i, (p, (lat, lon)) in enumerate(zip(ped['pontos'], centros)):
         c = int(classe.get(i) or 0)
-        if c == 4:     # como na grade do painel: pixel sem BR-DWGD com centro fora do Brasil fica de fora
+        if c == 4:
             fora.append(p['nome'])
             continue
         n += 1
@@ -1167,7 +1122,6 @@ def _avaliar_locais(ped):
 
 
 def tarefas_existentes(prefixo):
-    """Descrições das tarefas deste pedido já enviadas e não falhas (para não enviar duas vezes)."""
     ee = _ee()
     try:
         ops = ee.data.listOperations()
@@ -1195,8 +1149,6 @@ def exportar(fc, descricao, pasta, nome, colunas, ja_enviadas):
 
 
 def esperar_tarefa(id_tarefa, limite_s=300, intervalo_s=5):
-    """Espera a tarefa terminar (até limite_s). Duas exportações que começam juntas para uma pasta que ainda não
-    existe podem criar DUAS pastas com o mesmo nome no Drive; com o manifesto pronto antes, as outras usam a dele."""
     ee = _ee()
     t0 = time.time()
     while time.time() - t0 < limite_s:
@@ -1214,7 +1166,6 @@ def esperar_tarefa(id_tarefa, limite_s=300, intervalo_s=5):
 
 
 def recusar(pedido_id, status, motivo, ped, simular):
-    """Grava só o manifesto, com status 'recusado' (pedido fora das regras) ou 'falha' (erro do servidor)."""
     print(f'❌ PEDIDO {status.upper()}: {motivo}')
     if simular:
         return
@@ -1249,7 +1200,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
     except PedidoInvalido as e:
         recusar(pedido_id, 'recusado', str(e), ped, simular)
         return 0
-    except Exception as e:                      # erro do servidor: avisa pelo manifesto e marca a execução
+    except Exception as e:
         recusar(pedido_id, 'falha', 'Erro no servidor do Earth Engine: ' + str(e)[:300], ped, simular)
         raise
     nota = ctx['avisos']
@@ -1268,7 +1219,7 @@ def atender(pedido_id, codigo, simular, hoje=None):
     id_man = exportar(tabela_ee(linhas_manifesto(pedido_id, 'aceito', nota, ped, arquivos), COLUNAS_MANIFESTO),
                       descricao_tarefa(pedido_id, 0), pasta, f'00_Pedido_{pedido_id}', COLUNAS_MANIFESTO, ja)
     if id_man:
-        esperar_tarefa(id_man)   # a pasta passa a existir antes das outras exportações (evita pasta repetida)
+        esperar_tarefa(id_man)
     exportar(dicionario_ee(), descricao_tarefa(pedido_id, 1), pasta, '00_Dicionario_Variaveis_SAB',
              ['Variavel', 'Descricao', 'Unidade'], ja)
     for k, a in enumerate(arquivos, start=2):
