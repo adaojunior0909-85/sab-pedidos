@@ -423,7 +423,7 @@ def validar(campos, hoje):
     if res not in ('D', 'M'):
         raise PedidoInvalido('Resolução inválida (res=D diária ou res=M mensal).')
     tipo = campos.get('tipo', '').upper()
-    if tipo not in ('E', 'M', 'P', 'C'):
+    if tipo not in ('E', 'M', 'P', 'BR', 'C'):
         raise PedidoInvalido('Tipo de local inválido (tipo=BR Brasil, E estados, M municípios, P polígonos ou C pontos).')
     ini, fim = _data(campos.get('ini'), 'inicial'), _data(campos.get('fim'), 'final')
     if ini < DATA_MINIMA:
@@ -435,7 +435,7 @@ def validar(campos, hoje):
     ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': [],
            'pontos': []}
     if tipo == 'BR':
-        raise PedidoInvalido('A extração para o Brasil todo foi desativada preventivamente devido a limites de memória do servidor. Selecione um Estado ou Município.')
+        ped['estados'] = list(LISTA_ESTADOS)
     if tipo == 'C':
         ped['pontos'] = ler_pontos(campos.get('pts', ''))
     ped['separar'] = tipo == 'BR' or campos.get('sep') == '1'   # um grade e um arquivo por estado
@@ -808,13 +808,9 @@ def filtrar_enso(ic, enso):
         versao = ee.String(ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'), 'definitiva'))
         return img.set({'prev_enso': ee.Number(ee.Algorithms.If(ee.List(VERSOES_PREVISAO).contains(versao), 1, 0)),
                         'chave_enso': img.date().format('YYYY_MM')})
-    
-    ic_marcada = ic.map(marcar)
-    if enso.get('meses_ok') is not None:
-        return ic_marcada.filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
+    return ic.map(marcar).filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
                                               ee.Filter.inList('chave_enso', ee.List(enso['meses_ok'])))) \
-            .sort('system:time_start')
-    return ic_marcada.sort('system:time_start')
+        .sort('system:time_start')
 
 
 def linhas_diarias(ic, grade, bandas, escala, enso=None):
@@ -980,12 +976,9 @@ def resolver_municipios(ped):
 def avaliar_pedido(ped):
     """Contexto do pedido (com o filtro ENSO aplicado aos dias, se houver)."""
     ctx = _avaliar_locais(ped)
-    classif = classificar_enso(serie_roni())
-    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
+    ctx['enso'] = None
     if ped.get('enso'):
-        ctx = aplicar_enso(ctx, ped, classif, dic)
-    else:
-        ctx['enso'] = {'dic': dic, 'ascii': 'Sem filtro (todos os meses)', 'meses_ok': None}
+        ctx = aplicar_enso(ctx, ped)
     return ctx
 
 
@@ -1082,10 +1075,12 @@ def serie_roni():
     return of + est
 
 
-def aplicar_enso(ctx, ped, classif, dic):
+def aplicar_enso(ctx, ped):
     """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
     ee = _ee()
+    classif = classificar_enso(serie_roni())
     meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
+    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
     fim = ped['fim'] + timedelta(days=1)
     col = ee.ImageCollection(SAB).filterBounds(ctx['area'].bounds()).filterDate(str(ped['ini']), str(fim)).map(
         lambda img: img.set('v_enso', ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'),
