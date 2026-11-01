@@ -1,4 +1,4 @@
-# SAB: atende um pedido de dados por e-mail (versão 2026.10.29a)
+# SAB: atende um pedido de dados por e-mail (versão 2026.10.31_Automatizada)
 # Disparado pelo Apps Script (repository_dispatch, tipo pedido_sab) ou à mão, na aba Actions
 # ("Run workflow"), para testes. Só ENVIA as exportações ao Earth Engine e termina em 1 a 3 minutos.
 name: Pedido SAB
@@ -8,15 +8,15 @@ on:
     types: [pedido_sab]
   workflow_dispatch:
     inputs:
-      pedido_id:
+      PEDIDO_ID:
         description: 'ID do pedido (letras, números, _ e -)'
         required: true
         default: 'TESTE01'
-      codigo:
+      CODIGO:
         description: 'Código do pedido (o mesmo que o painel gera)'
         required: true
-        default: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;var=todas'
-      simular:
+        default: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2026-01-01;fim=2026-02-01;var=todas'
+      SIMULAR:
         description: 'Só simular (confere e mostra o plano, sem exportar)'
         type: boolean
         default: true
@@ -25,7 +25,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pedido-${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
+  group: pedido-${{ github.event.client_payload.PEDIDO_ID || inputs.PEDIDO_ID }}
   cancel-in-progress: false
 
 jobs:
@@ -55,9 +55,9 @@ jobs:
 
       - name: Atender o pedido
         env:
-          PEDIDO_ID: ${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
-          CODIGO: ${{ github.event.client_payload.codigo || inputs.codigo }}
-          SIMULAR: ${{ ((github.event_name == 'workflow_dispatch' && inputs.simular) || github.event.client_payload.simular == '1') && '1' || '0' }}
+          PEDIDO_ID: ${{ github.event.client_payload.PEDIDO_ID || inputs.PEDIDO_ID }}
+          CODIGO: ${{ github.event.client_payload.CODIGO || inputs.CODIGO }}
+          SIMULAR: ${{ ((github.event_name == 'workflow_dispatch' && inputs.SIMULAR) || github.event.client_payload.SIMULAR == '1') && '1' || '0' }}
         run: python sab_pedido.py
 
       - name: Apagar a credencial da máquina
