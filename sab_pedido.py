@@ -808,9 +808,13 @@ def filtrar_enso(ic, enso):
         versao = ee.String(ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'), 'definitiva'))
         return img.set({'prev_enso': ee.Number(ee.Algorithms.If(ee.List(VERSOES_PREVISAO).contains(versao), 1, 0)),
                         'chave_enso': img.date().format('YYYY_MM')})
-    return ic.map(marcar).filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
+    
+    ic_marcada = ic.map(marcar)
+    if enso.get('meses_ok') is not None:
+        return ic_marcada.filter(ee.Filter.Or(ee.Filter.eq('prev_enso', 1),
                                               ee.Filter.inList('chave_enso', ee.List(enso['meses_ok'])))) \
-        .sort('system:time_start')
+            .sort('system:time_start')
+    return ic_marcada.sort('system:time_start')
 
 
 def linhas_diarias(ic, grade, bandas, escala, enso=None):
@@ -913,7 +917,7 @@ def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
     ini_ped, fim_ped = ped['ini'], ped['fim'] + timedelta(days=1)
     ic = colecao(geom, str(ped['ini']), str(fim_ped))
     a, b = max(arq['ini'], ini_ped), min(arq['fim'], fim_ped)
-    if enso and enso.get('meses_ok'):
+    if enso:
         ic = filtrar_enso(ic, enso)
     ic = ic.filterDate(str(a), str(b))
     bandas = bandas_do_pedido(ped['variaveis'])
