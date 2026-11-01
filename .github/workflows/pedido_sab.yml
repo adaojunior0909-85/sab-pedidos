@@ -1,4 +1,7 @@
-# SAB: atende um pedido de dados por e-mail (versão 2026.10.31_Automatizada)
+# SAB: atende um pedido de dados por e-mail (versão 2026.11.01)
+# Disparado pelo Apps Script (repository_dispatch, tipo pedido_sab) ou à mão, na aba Actions
+# ("Run workflow"), para testes. Só ENVIA as exportações ao Earth Engine e termina em 1 a 3 minutos.
+# Os testes rodam antes de tudo: se algum falhar, nada é exportado.
 name: Pedido SAB
 
 on:
@@ -13,7 +16,7 @@ on:
       codigo:
         description: 'Código do pedido (o mesmo que o painel gera)'
         required: true
-        default: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2026-01-01;fim=2026-02-01;var=todas'
+        default: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;var=todas'
       simular:
         description: 'Só simular (confere e mostra o plano, sem exportar)'
         type: boolean
@@ -37,12 +40,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Instalar a biblioteca do Earth Engine
+      - name: Instalar as bibliotecas
         run: pip install -r requirements.txt
 
-      # - name: Testes da rotina (sem Earth Engine)
-      #   run: python testes/teste_sab_pedido.py
-      # (TESTE DESATIVADO POIS PROCURA A OPÇÃO BRASIL QUE FOI REMOVIDA)
+      - name: Testes da rotina (sem Earth Engine)
+        run: python testes/teste_sab_pedido.py
 
       - name: Credencial do Earth Engine
         env:
