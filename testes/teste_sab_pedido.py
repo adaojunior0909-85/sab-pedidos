@@ -71,9 +71,13 @@ confere(recusa('v=1;res=D;tipo=P;pol=40.1 -52.7,-26.1 -52.6,-26.2 -52.6,-26.2 -5
 confere(recusa('v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-01-31;var=', 'x') is False,
         'var vazio = todas (aceito)')
 
-print('[Brasil inteiro e pontos]')
-p = sp.validar(sp.ler_codigo('v=1;res=M;tipo=BR;ini=2015-01-01;fim=2024-12-31;var=pr'), HOJE)
-confere(p['tipo'] == 'BR' and len(p['estados']) == 27 and sp.texto_local(p).startswith('Brasil'), 'Brasil: os 27 estados')
+print('[Brasil inteiro desativado, estados e pontos]')
+confere(recusa('v=1;res=M;tipo=BR;ini=2015-01-01;fim=2024-12-31;var=pr', 'Brasil inteiro foi desativado'),
+        'tipo=BR recusado com explicação (estouro de memória de 31/10)')
+confere(recusa('v=1;res=D;tipo=E;uf=' + ','.join(sp.LISTA_ESTADOS[:7]) + ';sep=1;ini=2025-01-01;fim=2025-01-31',
+               'No máximo 6 estados'), 'sete estados: recusado (todos os estados = Brasil inteiro)')
+confere(not recusa('v=1;res=D;tipo=E;uf=' + ','.join(sp.LISTA_ESTADOS[:6]) + ';sep=1;ini=2025-01-01;fim=2025-01-31',
+                   'x'), 'seis estados: aceito')
 p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=C;pts=-26.2285 -52.6712 Fazenda São João|-25.4 -49.27;'
                              'ini=2024-01-01;fim=2024-12-31'), HOJE)
 confere([x['nome'] for x in p['pontos']] == ['Fazenda São João', 'Ponto 2'] and p['pontos'][0]['lat'] == -26.2285,
@@ -116,7 +120,61 @@ confere(recusa('v=1;res=D;tipo=E;uf=Paraná;ini=2015-01-01;fim=2016-12-31;enso=C
 a = sp.planejar('D', [('Pato Branco', 14)], [date(2015, 10, 1), date(2016, 1, 1)], sufixo='_El_Nino_Muito_Forte')
 confere([x['nome'] for x in a] == ['Diaria_Pato_Branco_2015_El_Nino_Muito_Forte', 'Diaria_Pato_Branco_2016_El_Nino_Muito_Forte'],
         'nomes com o sufixo do painel')
-confere(sp.colunas_do_pedido('D', sp.CODIGOS, enso=True)[-5:] == sp.COLUNAS_ENSO, 'colunas ENSO no fim')
+confere(sp.colunas_do_pedido('D', sp.CODIGOS)[-6:] == sp.COLUNAS_ENSO and sp.COLUNAS_ENSO[:5] == sp.COLUNAS_ENSO_PAINEL
+        and sp.COLUNAS_ENSO[5] == 'Fonte_ENSO', 'e-mail: 6 colunas ENSO no fim, sempre (5 do painel + Fonte_ENSO)')
+for chave in ('', ';enso=sem filtro', ';enso=Todos'):
+    p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná;ini=2015-01-01;fim=2016-12-31' + chave), HOJE)
+    confere(p['enso'] is None and 'ENSO' not in sp.texto_periodo(p), f'sem filtro ENSO ({chave or "sem enso"})')
+
+print('[ENSO: série do painel + extensão até a previsão]')
+of = [{'ano': 2026, 'mes': m, 'RONI': r, 'Trimestre': sp.TRIMESTRES[m - 1], 'Fonte': 'CPC'}
+      for m, r in zip(range(1, 8), [-0.6, -0.5, -0.3, 0.0, 0.2, 0.4, 0.5])]
+est = [{'ano': 2026, 'mes': 6, 'RONI': 0.4, 'n_meses': 3}, {'ano': 2026, 'mes': 8, 'RONI': 0.6, 'n_meses': 3},
+       {'ano': 2026, 'mes': 9, 'RONI': 0.8, 'n_meses': 2}, {'ano': 1991, 'mes': 1, 'RONI': 0.1, 'n_meses': 2}]
+serie, parc = sp.juntar_roni(of, est)
+confere([(x['mes'], x['Fonte']) for x in serie[-2:]] == [(7, 'CPC'), (8, 'Estimativa_OISST')] and len(serie) == 8,
+        'série do painel: CPC + OISST completo só depois da última estação oficial')
+confere([(x['mes'], x['Fonte'], x['Trimestre']) for x in parc] == [(9, 'Estimativa_OISST_parcial', 'ASO')],
+        'parcial: só o trimestre de 2 meses depois do fim da série')
+ext = sp.estender_enso(sp.classificar_enso(serie), parc, date(2026, 11, 20))
+confere([(x['mes'], x['Fonte']) for x in ext[-3:]] == [(9, 'Estimativa_OISST_parcial'), (10, 'Persistencia'),
+                                                       (11, 'Persistencia')], 'extensão: parcial e depois persistência')
+confere(ext[-1]['RONI'] == 0.8 and ext[-1]['Trimestre'] == 'ASO' and ext[-1]['FaseENSO'] == 'Indefinida',
+        'persistência copia o último valor e o trimestre; sinal de El Niño sem 5 trimestres = Indefinida')
+dic = sp.dicionario_enso(ext)
+confere(dic['2026_11'] == ['Indefinida', 0.8, 'ASO', 'Persistencia'] and dic['2026_01'][3] == 'CPC', 'dicionário AAAA_MM')
+c3 = sp.classificar_enso([{'ano': 2015, 'mes': m, 'RONI': 1.6, 'Trimestre': sp.TRIMESTRES[m - 1], 'Fonte': 'CPC'}
+                          for m in range(1, 13)])
+e3 = sp.estender_enso(c3, [], date(2016, 2, 1))
+confere([x['FaseENSO'] for x in e3[-2:]] == ['El Nino', 'El Nino'], 'persistência mantém um El Niño confirmado')
+confere(sp.estender_enso([], [], date(2026, 1, 1)) == [], 'série vazia não quebra')
+confere(not sp.no_cenario({'FaseENSO': 'Indefinida', 'RONI': 0.8}, 'El Niño Fraco (0.5 a 0.9°C)'),
+        'meses estendidos (Indefinida) fora dos filtros')
+
+print('[formato e estimativa de tamanho antes do Earth Engine]')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;fmt=xlsx'), HOJE)
+confere(p['formato'] == 'xlsx' and 'Excel' in sp.texto_periodo(p), 'fmt=xlsx')
+confere(sp.validar(sp.ler_codigo('v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31'),
+                   HOJE)['formato'] == 'csv', 'sem fmt = csv')
+confere(recusa('v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;fmt=pdf', 'Formato'),
+        'formato desconhecido')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31'), HOJE)
+lin, px = sp.estimar_linhas(p)
+confere(1700 <= px <= 2100 and abs(lin / 365 - px) < 1, f'Paraná: ~{px} pixels estimados (grade real 1.889)')
+confere(sp.conferir_estimativa(p) == lin, 'Paraná 2025: estimativa aceita')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=E;uf=Paraná;ini=1961-01-01;fim=2026-11-15'), HOJE)
+try:
+    sp.conferir_estimativa(p)
+    confere(False, 'Paraná 1961-2026 diário deveria ser recusado na hora')
+except sp.PedidoInvalido as e:
+    confere('Divida' in str(e), 'Paraná 1961-2026 diário (~45 milhões): recusado sem Earth Engine')
+p = sp.validar(sp.ler_codigo('v=1;res=M;tipo=E;uf=Paraná;ini=1961-01-01;fim=2026-10-31'), HOJE)
+confere(sp.conferir_estimativa(p) > 0, 'Paraná 1961-2026 mensal (~1,5 milhão): aceito')
+p = sp.validar(sp.ler_codigo('v=1;res=D;tipo=P;pol=-26.2 -52.7,-26.2 -52.6,-26.3 -52.6,-26.3 -52.7;'
+                             'ini=2025-01-01;fim=2025-03-31'), HOJE)
+confere(sp.estimar_linhas(p)[1] <= 12, 'polígono de 0,1° x 0,1°: poucos pixels')
+confere(sp.e_pedido_grande(RuntimeError('User memory limit exceeded.')) and
+        not sp.e_pedido_grande(RuntimeError('Too many concurrent aggregations')), 'erro de memória vira recusa explicada')
 
 print('[colunas, como o painel 2026.10.4]')
 PAINEL_BASE = ['Tipo_Dado', 'Versao_Algoritmo', 'Data_Completa', 'Ano', 'Mes', 'Dia', 'N_Ponto', 'Latitude',
@@ -126,16 +184,21 @@ PAINEL_BASE = ['Tipo_Dado', 'Versao_Algoritmo', 'Data_Completa', 'Ano', 'Mes', '
                'Radiacao_Solar_MJ_m2', 'Evapotranspiracao_Potencial_mm', 'Evapotranspiracao_Real_mm',
                'Transpiracao_Planta_mm', 'Deficit_Hidrico_mm', 'Deficit_Pressao_Vapor_kPa',
                'Umidade_Volumetrica_Solo_0_5cm_m3_m3', 'Umidade_Volumetrica_Solo_0_100cm_m3_m3']
-confere(sp.colunas_do_pedido('D', sp.CODIGOS) == PAINEL_BASE + ['Qualidade_Pixel', 'Janela_Chuva_UTC', 'Confianca_Prazo'],
+confere(sp.colunas_do_pedido('D', sp.CODIGOS, enso=False) == PAINEL_BASE + ['Qualidade_Pixel', 'Janela_Chuva_UTC', 'Confianca_Prazo'],
         'diária com todas = 33 colunas do painel, na ordem')
-confere(sp.colunas_do_pedido('M', sp.CODIGOS) == PAINEL_BASE + ['N_Dias', 'Dias_no_Mes', 'Mes_Completo'],
+confere(sp.colunas_do_pedido('M', sp.CODIGOS, enso=False) == PAINEL_BASE + ['N_Dias', 'Dias_no_Mes', 'Mes_Completo'],
         'mensal com todas = colunas do painel')
-confere(sp.colunas_do_pedido('D', ['pr', 'tmax']) == PAINEL_BASE[:11] + ['Precipitacao_mm', 'Temperatura_Maxima_C',
+confere(sp.colunas_do_pedido('M', sp.CODIGOS) == PAINEL_BASE + ['N_Dias', 'Dias_no_Mes', 'Mes_Completo'] + sp.COLUNAS_ENSO,
+        'e-mail: colunas do painel + 6 ENSO')
+confere(sp.colunas_do_pedido('D', ['pr', 'tmax'], enso=False) == PAINEL_BASE[:11] + ['Precipitacao_mm', 'Temperatura_Maxima_C',
                                                                           'Qualidade_Pixel', 'Janela_Chuva_UTC',
                                                                           'Confianca_Prazo'], 'subconjunto')
 confere(sp.bandas_do_pedido(['amp', 'def']) == ['amplitude_diaria', 'deficit_diario'], 'bandas derivadas')
 confere(set(sp.BANDAS_SOMA) | set(sp.BANDAS_MEDIA) == {v[2] for v in sp.VARIAVEIS}, 'soma + média = 19 bandas')
-confere(len(sp.DICIONARIO) == 35 and sp.DICIONARIO[0][0] == 'Tipo_Dado', 'dicionário do painel (35 linhas)')
+confere(len(sp.DICIONARIO) == 36 and sp.DICIONARIO[0][0] == 'Tipo_Dado' and
+        any(v == 'Fonte_ENSO' for v, _, _ in sp.DICIONARIO), 'dicionário: 35 do painel + Fonte_ENSO')
+confere(all(',' not in u for _, _, u in sp.DICIONARIO) and 'UTF-8' in dict((v, d) for v, d, _ in sp.DICIONARIO)[
+    '(formato dos numeros)'], 'dicionário explica a importação no Excel (UTF-8, não detectar tipos)')
 
 print('[plano de arquivos]')
 ano = [date(2025, 1, 1) + timedelta(days=i) for i in range(365)]
@@ -189,11 +252,12 @@ m = sp.linhas_manifesto('P1', 'aceito', '', p, arqs)
 confere(len(m) == 3 and m[0]['Arquivo'] == '' and m[1]['Arquivo'] == 'Diaria_Pato_Branco_2025.csv' and
         m[2]['Arquivo'] == '00_Dicionario_Variaveis_SAB.csv' and m[0]['Linhas_Esperadas'] == str(14 * 365),
         'manifesto: resumo + arquivos + dicionário')
-confere(all(set(l) == set(sp.COLUNAS_MANIFESTO) for l in m), 'manifesto com as colunas fixas')
+confere(all(set(l) == set(sp.COLUNAS_MANIFESTO) for l in m) and m[0]['Formato'] == 'csv', 'manifesto com as colunas fixas')
 r = sp.linhas_manifesto('P1', 'recusado', 'motivo', None)
 confere(len(r) == 1 and r[0]['Status'] == 'recusado' and r[0]['Local'] == '', 'manifesto de recusa (pedido ilegível)')
 confere(sp.descricao_tarefa('P20261029', 7) == 'SABPED_P20261029_007' and sp.pasta_do_pedido('P1') == 'SAB_pedido_P1',
         'nomes de tarefa e de pasta')
+confere(sp.descricao_tarefa('SAB2026-00001', 0) == 'SABPED_SAB2026-00001_000', 'ID sequencial do Apps Script')
 
 print('\n' + (f'{falhas} FALHA(S)' if falhas else 'TODOS OS TESTES PASSARAM'))
 sys.exit(1 if falhas else 0)
