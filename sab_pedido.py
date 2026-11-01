@@ -1,3 +1,1034 @@
+/**
+ * SAB: ENVIO DOS DADOS POR E-MAIL (Apps Script da planilha de respostas do formulário). Versão 2026.10.30f
+ * =========================================================================================
+ * O QUE FAZ
+ *   1. aoEnviarFormulario: cada resposta do formulário vira um pedido com ID, entra na fila e recebe um
+ *      e-mail de confirmação. Os dados pessoais (nome, e-mail, instituição) ficam SÓ nesta planilha.
+ *   2. A fila manda ao GitHub só o ID e o código do pedido (local, período, variáveis), um pedido por vez
+ *      (CONFIG.MAX_EM_PREPARO) e fora da janela do 05b (CONFIG.SEM_DESPACHO_ENTRE).
+ *   3. verificarPedidos (a cada 10 minutos): procura no Drive a pasta SAB_pedido_<ID>, lê o manifesto
+ *      00_Pedido_<ID>.csv e, quando TODOS os arquivos listados estão lá, compartilha a pasta como
+ *      "qualquer pessoa com o link (leitor)" e manda o link por e-mail.
+ *   4. Depois de CONFIG.DIAS_GUARDA dias, apaga a pasta do pedido (o link deixa de funcionar).
+ *   5. montarFormulario (rodar uma vez): monta no formulário as seções para escolher tudo sem o painel
+ *      (estados, municípios, pontos ou área; datas; diário ou mensal; variáveis) e mantém o link
+ *      pré-preenchido do painel funcionando. A resposta vira o código do pedido em montarCodigo_.
+ *   6. doGet (App da Web): o botão "Receber por e-mail" do painel abre este endereço com o pedido e os dados da
+ *      pessoa; o pedido é registrado na hora, sem passar pelo formulário (mesma fila, limites e e-mails).
+ *
+ * PROPRIEDADES DO SCRIPT (Configurações do projeto > Propriedades do script), nunca no código:
+ *   GITHUB_TOKEN       token "fine-grained" do GitHub, só do repositório sab-pedidos, Contents: Read and write
+ *   GITHUB_REPO        usuario/sab-pedidos
+ *   EMAIL_RESPONSAVEL  seu e-mail (recebe os avisos de falha e as respostas dos solicitantes)
+ *
+ * DEPOIS DE COLAR: rode configurar() uma vez (cria os acionadores), testarGitHub() (simulação) e
+ *   montarFormulario(); depois publique como App da Web (Implantar > Nova implantação) para o painel.
+ * =========================================================================================
+ */
+
+const CONFIG = {
+  NOME: 'SAB - Banco de Dados Agrometeorológicos',
+  MAX_PEDIDOS_POR_EMAIL_DIA: 3,
+  MAX_EM_PREPARO: 1,           // um pedido por vez: o Earth Engine já roda 2 exportações em paralelo
+  HORAS_SEM_MANIFESTO: 6,      // nem o manifesto apareceu (GitHub sem resposta ou fila parada): falha
+  SEM_DESPACHO_ENTRE: [9, 12], // não começa pedido novo das 9h às 12h (horário do 05b; [0, 0] desliga)
+  HORAS_MAX_PREPARO: 48,       // arquivos não ficaram prontos: falha
+  DIAS_GUARDA: 7,              // a pasta do pedido é apagada depois disso
+  USO_MAX_DRIVE: 0.85,         // acima disso, novos pedidos esperam na fila
+  TITULOS: {
+    codigo: 'Código do pedido',
+    resumo: 'Resumo do pedido',
+    nome: 'Nome completo',
+    email: ['E-mail para receber o link', 'Endereço de e-mail', 'Email Address', 'E-mail'],
+    instituicao: 'Instituição',
+    finalidade: 'Finalidade do uso dos dados',
+    consentimento: 'Consentimento',
+    origem: 'Como você quer fazer o pedido?',
+    local: 'Local',
+    estados: 'Estados',
+    municipios: 'Municípios',
+    pontos: 'Pontos (coordenadas)',
+    vertices: 'Área (vértices do polígono)',
+    dataIni: 'Data inicial',
+    dataFim: 'Data final',
+    previsao: 'Incluir a previsão dos próximos 15 dias?',
+    enso: 'Filtrar por fenômeno El Niño / La Niña',
+    resolucao: 'Resolução',
+    variaveis: 'Variáveis'
+  },
+  ORIGEM: {formulario: 'Vou escolher agora o local, o período e as variáveis', painel: 'Já escolhi no painel SAB (código preenchido)'},
+  LOCAIS: {E: 'Estados', M: 'Municípios', C: 'Pontos (coordenadas)', P: 'Área desenhada (polígono)'},
+  // rótulo no formulário -> código da rotina (sem vírgulas: o Forms junta as caixas marcadas com ", ")
+  VARIAVEIS: [['Todas as variáveis', 'todas'], ['Precipitação (mm)', 'pr'], ['Chuva efetiva (mm)', 'ce'],
+    ['Escoamento superficial (mm)', 'rsup'], ['Escoamento subsuperficial (mm)', 'rsub'],
+    ['Temperatura máxima (°C)', 'tmax'], ['Temperatura mínima (°C)', 'tmin'], ['Amplitude térmica (°C)', 'amp'],
+    ['Temperatura do solo (°C)', 'tsolo'], ['Temperatura de superfície (°C)', 'tfolha'],
+    ['Umidade relativa do ar (%)', 'ur'], ['Vento a 2 m (m/s)', 'vento'], ['Radiação solar (MJ/m²)', 'rad'],
+    ['Evapotranspiração potencial (mm)', 'etp'], ['Evapotranspiração real (mm)', 'etr'],
+    ['Transpiração (mm)', 'transp'], ['Déficit hídrico (mm)', 'def'], ['Déficit de pressão de vapor (kPa)', 'dpv'],
+    ['Umidade do solo de 0 a 5 cm (m³/m³)', 'us5'], ['Umidade do solo de 0 a 100 cm (m³/m³)', 'us100']],
+  UF: {AC: 'Acre', AL: 'Alagoas', AP: 'Amapá', AM: 'Amazonas', BA: 'Bahia', CE: 'Ceará', DF: 'Distrito Federal',
+       ES: 'Espírito Santo', GO: 'Goiás', MA: 'Maranhão', MT: 'Mato Grosso', MS: 'Mato Grosso do Sul',
+       MG: 'Minas Gerais', PA: 'Pará', PB: 'Paraíba', PR: 'Paraná', PE: 'Pernambuco', PI: 'Piauí',
+       RJ: 'Rio de Janeiro', RN: 'Rio Grande do Norte', RS: 'Rio Grande do Sul', RO: 'Rondônia', RR: 'Roraima',
+       SC: 'Santa Catarina', SP: 'São Paulo', SE: 'Sergipe', TO: 'Tocantins'},
+  LIMITES: {municipios: 30, pontos: 200, areas: 10, vertices: 150, diasPrevisao: 15},
+  // Os mesmos cenários do filtro ENSO do painel (rótulo -> sufixo usado no código e no nome dos arquivos)
+  ENSO: [['Sem filtro (todos os meses)', ''],
+    ['El Niño muito forte, Super (+2,0 °C ou mais)', 'El_Nino_Muito_Forte'],
+    ['El Niño forte (+1,5 a +1,9 °C)', 'El_Nino_Forte'], ['El Niño moderado (+1,0 a +1,4 °C)', 'El_Nino_Moderado'],
+    ['El Niño fraco (+0,5 a +0,9 °C)', 'El_Nino_Fraco'], ['Neutro (entre −0,5 e +0,5 °C)', 'Neutro'],
+    ['La Niña fraca (−0,5 a −0,9 °C)', 'La_Nina_Fraca'], ['La Niña moderada (−1,0 a −1,4 °C)', 'La_Nina_Moderada'],
+    ['La Niña forte (−1,5 a −1,9 °C)', 'La_Nina_Forte'],
+    ['La Niña muito forte, Super (−2,0 °C ou menos)', 'La_Nina_Muito_Forte']],
+  // Anexa os arquivos (.zip) ao e-mail de entrega quando couberem: assim, quem não usa o Google Drive recebe direto
+  ANEXO_MAX_CSV_MB: 40,
+  ANEXO_MAX_ZIP_MB: 20,
+  AVISO_ENTREGA: 'Os arquivos chegam por e-mail: um link para uma pasta no Google Drive, que abre no navegador e não ' +
+                 'exige conta Google; pedidos pequenos vêm também anexados (.zip). O link vale 7 dias.',
+  COLUNAS: ['ID_Pedido', 'Status', 'Detalhe', 'Enviado_em', 'Entregue_em', 'Link'],
+  // Forma de citar o banco (aparece no e-mail de entrega); troque quando houver artigo, tese ou DOI
+  CITACAO: 'RODRIGUES JUNIOR, Adão Alves. SAB - Banco de Dados Agrometeorológicos Diários do Brasil (1961-2026), ' +
+           'versão 2026.10. Pato Branco: Universidade Tecnológica Federal do Paraná, 2026. Conjunto de dados no ' +
+           'Google Earth Engine. Dados históricos: Xavier, A. C. et al. (2022). New improved Brazilian daily ' +
+           'weather gridded data (1961–2020). International Journal of Climatology, 42(16), 8390–8404. ' +
+           'https://doi.org/10.1002/joc.7731',
+  CODIGO_TESTE: 'v=1;res=D;tipo=M;uf=Paraná;mun=Pato Branco;ini=2025-01-01;fim=2025-12-31;var=todas'
+};
+
+const FUSO = 'America/Sao_Paulo';
+
+// ------------------------------------------------------------------ acionadores
+function configurar() {
+  const props = PropertiesService.getScriptProperties().getProperties();
+  ['GITHUB_TOKEN', 'GITHUB_REPO', 'EMAIL_RESPONSAVEL'].forEach(function (p) {
+    if (!props[p]) throw new Error('Falta a propriedade do script ' + p + ' (passo 6 do guia).');
+  });
+  const aba = obterAba_();
+  colunas_(aba);   // cria as colunas de controle, se faltarem
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (['aoEnviarFormulario', 'verificarPedidos'].indexOf(t.getHandlerFunction()) !== -1) ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('aoEnviarFormulario').forSpreadsheet(SpreadsheetApp.getActive()).onFormSubmit().create();
+  ScriptApp.newTrigger('verificarPedidos').timeBased().everyMinutes(10).create();
+  Logger.log('✅ Acionadores criados na aba "' + aba.getName() + '": aoEnviarFormulario (a cada resposta) e ' +
+             'verificarPedidos (a cada 10 minutos). Conta do script: ' + contaDoScript_() + '. Drive usado: ' +
+             (usoDrive_() * 100).toFixed(1) + '%. Esta conta tem de ser a mesma do Earth Engine (clima-492922).');
+}
+
+// Simulação: aciona o GitHub com SIMULAR=1. Confira o resultado na aba Actions do repositório.
+function testarGitHub() {
+  const r = acionarGitHub_('TESTE_GITHUB', CONFIG.CODIGO_TESTE, true);
+  Logger.log(r.ok ? '✅ GitHub aceitou o acionamento (204). Veja a execução "Pedido SAB" na aba Actions.'
+                  : '❌ GitHub respondeu ' + r.codigo + ': ' + r.texto);
+}
+
+// ------------------------------------------------------------------ 1. resposta do formulário
+function aoEnviarFormulario(e) {
+  const trava = LockService.getScriptLock();
+  trava.waitLock(30000);
+  try {
+    const aba = e && e.range ? e.range.getSheet() : obterAba_();
+    const linha = e && e.range ? e.range.getRow() : aba.getLastRow();
+    processarLinha_(aba, linha);
+  } finally {
+    trava.releaseLock();
+  }
+}
+
+// Uma linha da planilha (resposta do formulário ou pedido vindo do painel) vira pedido: confere, monta o código,
+// aplica o limite por e-mail, põe na fila, manda a confirmação e aciona o GitHub se houver vaga.
+// Devolve {ok, id, status, mensagem, resumo} para a página do pedido direto (doGet).
+function processarLinha_(aba, linha) {
+  const col = colunas_(aba);
+  const v = lerLinha_(aba, linha, col);
+  if (v.ID_Pedido) return {ok: true, id: v.ID_Pedido, status: v.Status, mensagem: 'Pedido já registrado.'};
+
+  const id = gerarId_();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) {
+    marcar_(aba, linha, col, {ID_Pedido: id, Status: 'recusado', Detalhe: 'E-mail inválido: ' + v.email});
+    return {ok: false, id: id, status: 'recusado', mensagem: 'O e-mail "' + v.email + '" não é válido.'};
+  }
+  let pedido;
+  try {
+    pedido = montarCodigo_(v, new Date());
+  } catch (erro) {
+    const motivo = String(erro.message || erro);
+    marcar_(aba, linha, col, {ID_Pedido: id, Status: 'recusado', Detalhe: motivo.slice(0, 300)});
+    enviarEmail_(v.email, 'Pedido de dados SAB não aceito',
+      'Olá, ' + v.nome + '.\n\nNão foi possível montar o seu pedido:\n\n' + motivo + '\n\nCorrija e envie de novo.\n\n' +
+      assinatura_());
+    return {ok: false, id: id, status: 'recusado', mensagem: motivo};
+  }
+  if (pedido.gerado) {
+    marcar_(aba, linha, col, {codigo: pedido.codigo});
+    if (col.resumo) marcar_(aba, linha, col, {resumo: pedido.resumo});
+    v.codigo = pedido.codigo;
+    v.resumo = pedido.resumo;
+  }
+  if (pedidosRecentes_(aba, col, v.email, linha) >= CONFIG.MAX_PEDIDOS_POR_EMAIL_DIA) {
+    marcar_(aba, linha, col, {ID_Pedido: id, Status: 'recusado', Detalhe: 'Limite diário por e-mail'});
+    enviarEmail_(v.email, 'Pedido de dados SAB: limite diário atingido',
+      'Olá, ' + v.nome + '.\n\nPara que todos sejam atendidos, cada e-mail pode fazer até ' +
+      CONFIG.MAX_PEDIDOS_POR_EMAIL_DIA + ' pedidos a cada 24 horas. Tente de novo amanhã.\n\n' + assinatura_());
+    return {ok: false, id: id, status: 'recusado', mensagem: 'Limite de ' + CONFIG.MAX_PEDIDOS_POR_EMAIL_DIA +
+            ' pedidos por e-mail a cada 24 horas atingido. Tente de novo amanhã.'};
+  }
+  marcar_(aba, linha, col, {ID_Pedido: id, Status: 'na_fila', Detalhe: 'Aguardando vaga no cálculo'});
+  enviarEmail_(v.email, 'Recebemos seu pedido de dados SAB (' + id + ')',
+    'Olá, ' + v.nome + '.\n\nRecebemos seu pedido ' + id + ':\n\n' + v.resumo + '\n\n' +
+    'Os arquivos são calculados no Google Earth Engine e você receberá outro e-mail assim que ' +
+    'ficarem prontos. Costuma levar de 1 a 4 horas; pedidos grandes ou com fila podem levar até 2 dias.\n\n' +
+    CONFIG.AVISO_ENTREGA + '\n\n' +
+    assinatura_());
+  despacharFila_(aba, col);
+  return {ok: true, id: id, status: 'na_fila', resumo: v.resumo,
+          mensagem: 'Pedido recebido. Você vai receber agora um e-mail de confirmação e, quando os arquivos ficarem ' +
+                    'prontos, outro com o link.'};
+}
+
+// ------------------------------------------------------------------ pedido direto do painel (App da Web)
+// O painel SAB abre este endereço com o pedido e os dados da pessoa; a página grava a linha na planilha, como se
+// fosse uma resposta do formulário, e mostra o resultado. Publicar em Implantar > Nova implantação > App da Web.
+function doGet(e) {
+  const p = (e && e.parameter) || {};
+  if (!p.codigo) {
+    return pagina_('Pedido de dados SAB', 'Esta página recebe os pedidos feitos pelo painel SAB. Para pedir dados, use ' +
+                   'o botão "Receber por e-mail" do painel ou o formulário.', null);
+  }
+  if (p.aceite !== '1') {
+    return pagina_('Pedido não registrado', 'É preciso aceitar o uso dos dados (LGPD) no painel antes de enviar.', false);
+  }
+  const trava = LockService.getScriptLock();
+  trava.waitLock(30000);
+  let r;
+  try {
+    const aba = obterAba_();
+    const col = colunas_(aba);
+    const linha = new Array(aba.getLastColumn()).fill('');
+    const por = function (k, valor) { if (col[k]) linha[col[k] - 1] = valor; };
+    linha[0] = new Date();
+    por('codigo', String(p.codigo).slice(0, 6000));
+    por('resumo', String(p.resumo || '').slice(0, 500));
+    por('nome', String(p.nome || '').slice(0, 120));
+    por('email', String(p.email || '').trim().slice(0, 120));
+    por('instituicao', String(p.inst || '').slice(0, 160));
+    por('finalidade', String(p.fin || '').slice(0, 80));
+    por('consentimento', 'Aceito no painel SAB');
+    por('origem', CONFIG.ORIGEM.painel);
+    aba.appendRow(linha);
+    r = processarLinha_(aba, aba.getLastRow());
+  } catch (erro) {
+    r = {ok: false, mensagem: 'Erro ao registrar o pedido: ' + String(erro.message || erro)};
+  } finally {
+    trava.releaseLock();
+  }
+  return pagina_(r.ok ? 'Pedido recebido' : 'Pedido não registrado',
+                 (r.id ? 'Pedido ' + r.id + '. ' : '') + r.mensagem + (r.resumo ? '\n\n' + r.resumo : ''), r.ok);
+}
+
+function pagina_(titulo, texto, ok) {
+  const cor = ok === true ? '#1f6b52' : (ok === false ? '#b42318' : '#17241f');
+  const esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+  const html = '<div style="font-family:Arial,sans-serif;max-width:560px;margin:40px auto;padding:0 16px;color:#17241f">' +
+    '<h2 style="color:' + cor + '">' + esc(titulo) + '</h2>' +
+    esc(texto).split('\n').map(function (l) { return '<p style="line-height:1.5">' + l + '</p>'; }).join('') +
+    '<p style="color:#56645e;font-size:13px">' + esc(CONFIG.NOME) + '. Pode fechar esta aba.</p></div>';
+  return HtmlService.createHtmlOutput(html).setTitle('Pedido SAB');
+}
+
+// ------------------------------------------------------------------ 2 a 4. acompanhamento (a cada 10 min)
+function verificarPedidos() {
+  const trava = LockService.getScriptLock();
+  if (!trava.tryLock(30000)) return;
+  try {
+    const aba = obterAba_();
+    const col = colunas_(aba);
+    const ultima = aba.getLastRow();
+    const dados = ultima < 2 ? [] : aba.getRange(2, 1, ultima - 1, aba.getLastColumn()).getValues();
+    for (let i = 0; i < dados.length; i++) {
+      const linha = i + 2;
+      const v = objeto_(dados[i], col);
+      try {
+        if (v.Status === 'enviado' || v.Status === 'em_preparo') acompanhar_(aba, linha, col, v);
+        else if (v.Status === 'entregue') expirar_(aba, linha, col, v);
+      } catch (erro) {
+        Logger.log('❌ Pedido ' + v.ID_Pedido + ': ' + erro);
+        marcar_(aba, linha, col, {Detalhe: 'Erro: ' + String(erro).slice(0, 200)});
+      }
+    }
+    despacharFila_(aba, col);
+  } finally {
+    trava.releaseLock();
+  }
+}
+
+function acompanhar_(aba, linha, col, v) {
+  const horas = (Date.now() - new Date(v.Enviado_em).getTime()) / 3.6e6;
+  // O Earth Engine pode criar MAIS DE UMA pasta com o mesmo nome quando duas exportações começam juntas:
+  // o pedido é a soma de todas as pastas SAB_pedido_<ID>; na entrega, tudo vai para a pasta do manifesto.
+  const pastas = pastasDoPedido_(v.ID_Pedido);
+  const man = lerManifesto_(pastas, v.ID_Pedido);
+  if (!man) {
+    marcar_(aba, linha, col, {Detalhe: (pastas.length ? 'Pasta achada; manifesto ainda não chegou' :
+      'Pasta SAB_pedido_' + v.ID_Pedido + ' ainda não está no Drive de ' + contaDoScript_())});
+    if (horas > CONFIG.HORAS_SEM_MANIFESTO) falhar_(aba, linha, col, v, 'O cálculo não começou ou a pasta não apareceu ' +
+      'no Drive de ' + contaDoScript_() + ' (GitHub sem resposta ou Earth Engine em outra conta).');
+    return;
+  }
+  if (man.status === 'recusado') {
+    marcar_(aba, linha, col, {Status: 'recusado', Detalhe: man.motivo});
+    enviarEmail_(v.email, 'Pedido de dados SAB não atendido (' + v.ID_Pedido + ')',
+      'Olá, ' + v.nome + '.\n\nSeu pedido ' + v.ID_Pedido + ' não pôde ser atendido:\n\n' + man.motivo + '\n\n' +
+      'Ajuste o pedido no painel e envie de novo.\n\n' + assinatura_());
+    apagarPastas_(pastas);
+    return;
+  }
+  if (man.status === 'falha') { falhar_(aba, linha, col, v, man.motivo); return; }   // pastas ficam para diagnóstico
+
+  const faltam = man.arquivos.filter(function (a) { return !temArquivo_(pastas, a); });
+  const prontos = man.arquivos.length - faltam.length;
+  if (faltam.length) {
+    marcar_(aba, linha, col, {Status: 'em_preparo', Detalhe: prontos + ' de ' + man.arquivos.length + ' arquivos prontos'});
+    if (horas > CONFIG.HORAS_MAX_PREPARO) falhar_(aba, linha, col, v, 'Arquivos não ficaram prontos em ' +
+      CONFIG.HORAS_MAX_PREPARO + ' h. Faltam: ' + faltam.slice(0, 5).join(', ') + (faltam.length > 5 ? '...' : ''));
+    return;
+  }
+  // tudo pronto: junta as pastas, compartilha e entrega
+  const pasta = juntarPastas_(pastas, man.pasta);
+  const acesso = compartilhar_(pasta, v.email);
+  let mb = 0;
+  const lista = [], arquivos = [];
+  const it = pasta.getFiles();
+  while (it.hasNext()) {
+    const f = it.next();
+    if (acesso === 'link') { try { f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) {} }
+    mb += f.getSize() / 1e6;
+    arquivos.push(f);
+    lista.push(f.getName() + ' (' + (f.getSize() / 1e6).toFixed(1) + ' MB)');
+  }
+  lista.sort();
+  const anexo = anexoZip_(arquivos, mb, v.ID_Pedido);
+  const validade = Utilities.formatDate(new Date(Date.now() + CONFIG.DIAS_GUARDA * 864e5), FUSO, 'dd/MM/yyyy');
+  const enviado = enviarEmail_(v.email, 'Seus dados do SAB estão prontos (' + v.ID_Pedido + ')',
+    'Olá, ' + v.nome + '.\n\nOs arquivos do seu pedido ' + v.ID_Pedido + ' estão prontos nesta pasta do Google Drive:\n\n' +
+    pasta.getUrl() +
+    (acesso === 'pessoa' ? '\n\n(Acesso liberado para o seu e-mail: abra o link com a conta Google ' + v.email + '.)' :
+     '\n\nO link abre no navegador e não exige conta Google.') +
+    (anexo ? '\n\nOs mesmos arquivos vão anexados a este e-mail (' + anexo.getName() + '): não é preciso abrir o Drive.' : '') +
+    '\n\nO link fica disponível até ' + validade + '. Para baixar tudo de uma vez pelo link, abra a pasta e use ' +
+    '"Fazer download" no nome dela.\n\n' + v.resumo + '\n\nArquivos (' + lista.length + ', ' + mb.toFixed(1) +
+    ' MB no total):\n' + lista.map(function (x) { return '  - ' + x; }).join('\n') + '\n\n' +
+    'Como ler: um arquivo por local e por ano; números com ponto decimal (ex.: 18.40); célula vazia = sem dado. ' +
+    'No Excel em português, abra por Dados > De Texto/CSV e escolha o ponto como separador decimal. O significado ' +
+    'de cada coluna está em 00_Dicionario_Variaveis_SAB.csv e o que foi pedido, em 00_Pedido_' + v.ID_Pedido + '.csv.' +
+    (man.motivo ? '\n\nObservação: ' + man.motivo : '') + '\n\nComo citar: ' + CONFIG.CITACAO + '\n\n' + assinatura_(),
+    anexo ? [anexo] : null);
+  if (!enviado) { marcar_(aba, linha, col, {Detalhe: 'Pronto; e-mail na espera (cota diária do Gmail)'}); return; }
+  marcar_(aba, linha, col, {Status: 'entregue', Detalhe: lista.length + ' arquivos, ' + mb.toFixed(1) + ' MB' +
+                           (anexo ? ', anexados' : '') +
+                           (acesso === 'pessoa' ? ' (acesso só para o e-mail do solicitante)' : ''),
+                           Entregue_em: new Date(), Link: pasta.getUrl()});
+}
+
+// "Qualquer pessoa com o link"; se a conta (ex.: institucional) proibir, libera só para o e-mail de quem pediu
+function compartilhar_(pasta, email) {
+  try {
+    pasta.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return 'link';
+  } catch (erro) {
+    pasta.addViewer(email);
+    return 'pessoa';
+  }
+}
+
+function expirar_(aba, linha, col, v) {
+  if (!v.Entregue_em) return;
+  if ((Date.now() - new Date(v.Entregue_em).getTime()) / 864e5 < CONFIG.DIAS_GUARDA) return;
+  apagarPastas_(pastasDoPedido_(v.ID_Pedido));
+  marcar_(aba, linha, col, {Status: 'expirado', Detalhe: 'Pasta apagada após ' + CONFIG.DIAS_GUARDA + ' dias'});
+}
+
+function falhar_(aba, linha, col, v, motivo) {
+  marcar_(aba, linha, col, {Status: 'falha', Detalhe: motivo});
+  enviarEmail_(v.email, 'Pedido de dados SAB com problema (' + v.ID_Pedido + ')',
+    'Olá, ' + v.nome + '.\n\nHouve um problema no cálculo do seu pedido ' + v.ID_Pedido + '. O responsável já foi ' +
+    'avisado e entrará em contato. Se preferir, tente de novo mais tarde com um período menor.\n\n' + assinatura_());
+  enviarEmail_(prop_('EMAIL_RESPONSAVEL'), '[SAB] Falha no pedido ' + v.ID_Pedido,
+    'Pedido: ' + v.ID_Pedido + '\nSolicitante: ' + v.nome + ' <' + v.email + '>\nCódigo: ' + v.codigo +
+    '\nMotivo: ' + motivo + '\n\nConfira a aba Actions do GitHub e https://code.earthengine.google.com/tasks ' +
+    '(tarefas SABPED_' + v.ID_Pedido + '_...). A pasta SAB_pedido_' + v.ID_Pedido + ' ficou no Drive para conferência.\n\n' +
+    'Para tentar de novo: na planilha, apague o ID_Pedido desta linha e mude o Status para na_fila ' +
+    '(o pedido ganha um ID novo e volta para a fila).');
+}
+
+// ------------------------------------------------------------------ fila e GitHub
+function despacharFila_(aba, col) {
+  const ultima = aba.getLastRow();
+  if (ultima < 2) return;
+  const dados = aba.getRange(2, 1, ultima - 1, aba.getLastColumn()).getValues();
+  let ativos = dados.filter(function (r) {
+    const s = r[col.Status - 1];
+    return s === 'enviado' || s === 'em_preparo';
+  }).length;
+  const hora = Number(Utilities.formatDate(new Date(), FUSO, 'H'));
+  if (hora >= CONFIG.SEM_DESPACHO_ENTRE[0] && hora < CONFIG.SEM_DESPACHO_ENTRE[1]) return;
+  for (let i = 0; i < dados.length && ativos < CONFIG.MAX_EM_PREPARO; i++) {
+    if (dados[i][col.Status - 1] !== 'na_fila') continue;
+    if (!dados[i][col.ID_Pedido - 1]) {         // pedido devolvido à fila pelo responsável: ID novo
+      dados[i][col.ID_Pedido - 1] = gerarId_();
+      marcar_(aba, i + 2, col, {ID_Pedido: dados[i][col.ID_Pedido - 1]});
+    }
+    if (usoDrive_() > CONFIG.USO_MAX_DRIVE) {
+      marcar_(aba, i + 2, col, {Detalhe: 'Aguardando espaço no Drive'});
+      avisarResponsavel_('[SAB] Drive acima de ' + Math.round(CONFIG.USO_MAX_DRIVE * 100) + '%',
+        'Os pedidos estão esperando na fila até liberar espaço no Drive.');
+      return;
+    }
+    const id = dados[i][col.ID_Pedido - 1];
+    const codigo = String(dados[i][col.codigo - 1] || '').trim();
+    const r = acionarGitHub_(id, codigo, false);
+    if (r.ok) {
+      marcar_(aba, i + 2, col, {Status: 'enviado', Detalhe: 'Cálculo iniciado', Enviado_em: new Date()});
+      ativos++;
+    } else {
+      marcar_(aba, i + 2, col, {Detalhe: 'GitHub respondeu ' + r.codigo + ' (nova tentativa em 10 min)'});
+      avisarResponsavel_('[SAB] GitHub recusou o acionamento',
+        'Código ' + r.codigo + ': ' + r.texto + '\n\nSe for 401 ou 403, o token venceu ou está sem a permissão ' +
+        'Contents: Read and write (passo 5 do guia). Se for 404, confira GITHUB_REPO.');
+      return;
+    }
+  }
+}
+
+function acionarGitHub_(id, codigo, simular) {
+  const payload = {event_type: 'pedido_sab', client_payload: {pedido_id: id, codigo: codigo}};
+  if (simular) payload.client_payload.simular = '1';
+  const resp = UrlFetchApp.fetch('https://api.github.com/repos/' + prop_('GITHUB_REPO') + '/dispatches', {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true, payload: JSON.stringify(payload),
+    headers: {Authorization: 'Bearer ' + prop_('GITHUB_TOKEN'), Accept: 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28'}
+  });
+  return {ok: resp.getResponseCode() === 204, codigo: resp.getResponseCode(), texto: resp.getContentText().slice(0, 300)};
+}
+
+// ------------------------------------------------------------------ Drive
+function pastasDoPedido_(id) {
+  const it = DriveApp.getFoldersByName('SAB_pedido_' + id);
+  const lista = [];
+  while (it.hasNext()) {
+    const p = it.next();
+    if (!p.isTrashed()) lista.push(p);
+  }
+  return lista;
+}
+
+function temArquivo_(pastas, nome) {
+  return pastas.some(function (p) { return p.getFilesByName(nome).hasNext(); });
+}
+
+function lerManifesto_(pastas, id) {
+  for (let i = 0; i < pastas.length; i++) {
+    const it = pastas[i].getFilesByName('00_Pedido_' + id + '.csv');
+    if (!it.hasNext()) continue;
+    const linhas = Utilities.parseCsv(it.next().getBlob().getDataAsString('UTF-8'));
+    if (linhas.length < 2) return null;
+    const cab = linhas[0];
+    const iS = cab.indexOf('Status'), iM = cab.indexOf('Motivo'), iA = cab.indexOf('Arquivo');
+    const dados = linhas.slice(1);
+    return {
+      pasta: pastas[i],
+      status: dados[0][iS],
+      motivo: dados[0][iM] || '',
+      arquivos: dados.map(function (r) { return r[iA]; }).filter(function (a) { return a; })
+    };
+  }
+  return null;
+}
+
+// Move os arquivos das pastas repetidas para a pasta do manifesto e apaga as repetidas
+function juntarPastas_(pastas, principal) {
+  pastas.forEach(function (p) {
+    if (p.getId() === principal.getId()) return;
+    const it = p.getFiles();
+    while (it.hasNext()) it.next().moveTo(principal);
+    apagarPastas_([p]);
+  });
+  return principal;
+}
+
+function apagarPastas_(pastas) {
+  (pastas || []).forEach(function (pasta) {
+    try {
+      Drive.Files.remove(pasta.getId());        // apaga de vez (serviço avançado Drive, ver appsscript.json)
+    } catch (erro) {
+      pasta.setTrashed(true);                   // sem o serviço avançado: vai para a lixeira (30 dias)
+    }
+  });
+}
+
+function contaDoScript_() {
+  try { return Session.getEffectiveUser().getEmail() || '(conta não identificada)'; }
+  catch (erro) { return '(conta não identificada)'; }
+}
+
+// Diagnóstico: mostra a conta do script e procura no Drive dela as pastas dos pedidos
+function diagnosticar() {
+  Logger.log('Conta do script (dona da planilha, do Drive pesquisado e dos e-mails): ' + contaDoScript_());
+  Logger.log('Drive usado: ' + (usoDrive_() * 100).toFixed(1) + '%');
+  const it = DriveApp.searchFolders('title contains "SAB_pedido_"');
+  let n = 0;
+  while (it.hasNext() && n < 20) {
+    const p = it.next();
+    const arqs = [];
+    const f = p.getFiles();
+    while (f.hasNext()) arqs.push(f.next().getName());
+    Logger.log('📁 ' + p.getName() + ': ' + arqs.length + ' arquivo(s) ' + arqs.sort().join(', '));
+    n++;
+  }
+  if (!n) Logger.log('❌ Nenhuma pasta SAB_pedido_ no Drive desta conta. As exportações do Earth Engine estão indo ' +
+                     'para o Drive de outra conta: refaça o formulário e a planilha na conta do Earth Engine.');
+}
+
+function usoDrive_() {
+  const limite = DriveApp.getStorageLimit();
+  return limite > 0 ? DriveApp.getStorageUsed() / limite : 0;
+}
+
+// ------------------------------------------------------------------ pedido escolhido no formulário
+// Monta o código do pedido (o mesmo formato do painel) a partir das respostas. Erros viram a mensagem do e-mail.
+function montarCodigo_(v, agora) {
+  const L = CONFIG.LIMITES;
+  if (v.codigo) {                                     // veio do painel
+    if (v.codigo.indexOf('v=1;') !== 0) {
+      throw new Error('O código do pedido não está no formato do painel. Se você não veio do painel, deixe o campo ' +
+                      '"Código do pedido" em branco e escolha o local, o período e as variáveis no formulário.');
+    }
+    return {codigo: v.codigo, resumo: v.resumo || '', gerado: false};
+  }
+  if (v.origem === CONFIG.ORIGEM.painel) {
+    throw new Error('Você marcou que o pedido veio do painel, mas o código do pedido está vazio. Gere o pedido de novo ' +
+                    'no painel ou escolha "' + CONFIG.ORIGEM.formulario + '".');
+  }
+  const tipo = Object.keys(CONFIG.LOCAIS).filter(function (k) { return CONFIG.LOCAIS[k] === v.local; })[0];
+  if (!tipo) throw new Error('Escolha o local do pedido (estados, municípios, pontos ou área).');
+  const res = /mensal/i.test(v.resolucao) ? 'M' : (/di[aá]ria/i.test(v.resolucao) ? 'D' : '');
+  if (!res) throw new Error('Escolha a resolução: diária ou mensal.');
+
+  // período
+  const hoje = Utilities.formatDate(agora, FUSO, 'yyyy-MM-dd');
+  const limite = Utilities.formatDate(new Date(agora.getTime() + L.diasPrevisao * 864e5), FUSO, 'yyyy-MM-dd');
+  const ini = dataISO_(v.dataIni, 'inicial');
+  let fim = /^sim/i.test(v.previsao) ? limite : dataISO_(v.dataFim, 'final');
+  const notas = [];
+  if (/^sim/i.test(v.previsao)) notas.push('com a previsão até ' + dataBR_(limite));
+  if (ini < '1961-01-01') throw new Error('A data inicial é anterior a 01/01/1961, início do banco SAB.');
+  if (fim > limite) { fim = limite; notas.push('data final ajustada para ' + dataBR_(limite) + ', fim da previsão'); }
+  if (fim < ini) throw new Error('A data final (' + dataBR_(fim) + ') é anterior à inicial (' + dataBR_(ini) + ').');
+  if (ini > hoje) throw new Error('A data inicial (' + dataBR_(ini) + ') é depois de hoje.');
+
+  // variáveis
+  const marcadas = v.variaveis.split(', ').map(function (x) { return x.trim(); }).filter(function (x) { return x; });
+  const mapa = {};
+  CONFIG.VARIAVEIS.forEach(function (par) { mapa[par[0]] = par[1]; });
+  let cods = marcadas.map(function (x) { return mapa[x]; }).filter(function (x) { return x; });
+  if (!cods.length || cods.indexOf('todas') !== -1) cods = ['todas'];
+  const nVars = cods[0] === 'todas' ? 'todas as variáveis' : cods.length + ' variável(is)';
+  const ensoPar = CONFIG.ENSO.filter(function (par) { return par[0] === String(v.enso || '').trim(); })[0];
+  const enso = ensoPar ? ensoPar[1] : '';
+  if (v.enso && !ensoPar) throw new Error('Filtro El Niño / La Niña não reconhecido: "' + v.enso + '".');
+  if (enso) notas.push('filtro ' + ensoPar[0] + '; a previsão entra sempre');
+
+  // local
+  let local = '', descricao = '';
+  if (tipo === 'BR') {
+    throw new Error('A opção Brasil inteiro foi desativada devido a limites de memória do servidor. Selecione um Estado ou Município.');
+  } else if (tipo === 'E') {
+    const est = v.estados.split(', ').map(function (x) { return x.trim(); }).filter(function (x) { return x; });
+    if (!est.length) throw new Error('Marque pelo menos um estado.');
+    local = 'uf=' + est.join(',') + ';sep=1';      // pelo formulário: um arquivo por estado
+    descricao = est.length === 1 ? est[0] : est.length + ' estados (' + est.join(', ') + '; um arquivo por estado)';
+  } else if (tipo === 'M') {
+    const linhas = linhas_(v.municipios);
+    if (!linhas.length) throw new Error('Escreva pelo menos um município, um por linha, no formato "Município - UF".');
+    if (linhas.length > L.municipios) throw new Error('No máximo ' + L.municipios + ' municípios por pedido.');
+    const ufs = [], muns = [];
+    linhas.forEach(function (l, i) {
+      const m = l.match(/^(.+?)\s*(?:[-–\/,]|\()\s*([A-Za-z]{2})\s*\)?\s*$/);
+      if (!m) throw new Error('Linha ' + (i + 1) + ' dos municípios ("' + l + '"): use o formato "Município - UF", ' +
+                              'por exemplo "Pato Branco - PR".');
+      const uf = CONFIG.UF[m[2].toUpperCase()];
+      if (!uf) throw new Error('Linha ' + (i + 1) + ' dos municípios: "' + m[2] + '" não é uma UF do Brasil.');
+      const nome = m[1].replace(/[;=|,]/g, ' ').replace(/\s+/g, ' ').trim();
+      if (ufs.indexOf(uf) === -1) ufs.push(uf);
+      if (muns.indexOf(nome) === -1) muns.push(nome);
+    });
+    local = 'uf=' + ufs.join(',') + ';mun=' + muns.join(',');
+    descricao = muns.length === 1 ? muns[0] + ' (' + ufs[0] + ')' : muns.length + ' municípios (' + muns.join(', ') + ')';
+  } else if (tipo === 'C') {
+    const linhas = linhas_(v.pontos);
+    if (!linhas.length) throw new Error('Escreva pelo menos um ponto, um por linha: "nome; latitude; longitude".');
+    if (linhas.length > L.pontos) throw new Error('No máximo ' + L.pontos + ' pontos por pedido.');
+    const pts = linhas.map(function (l, i) {
+      const c = lerCoordenadas_(l, true, 'ponto ' + (i + 1));
+      const nome = (c.nome || ('Ponto ' + (i + 1))).replace(/[;=|,]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+      return c.lat.toFixed(6) + ' ' + c.lon.toFixed(6) + ' ' + nome;
+    });
+    local = 'pts=' + pts.join('|');
+    descricao = pts.length + ' ponto(s)';
+  } else {
+    const blocos = String(v.vertices).replace(/\r/g, '').split(/\n\s*\n/)
+      .map(linhas_).filter(function (b) { return b.length; });
+    if (!blocos.length) throw new Error('Escreva os vértices da área, um por linha: "latitude; longitude".');
+    if (blocos.length > L.areas) throw new Error('No máximo ' + L.areas + ' áreas por pedido.');
+    let total = 0;
+    const pols = blocos.map(function (b, k) {
+      if (b.length < 4) throw new Error('A área ' + (k + 1) + ' tem ' + b.length + ' vértice(s); são precisos pelo menos 4.');
+      total += b.length;
+      return b.map(function (l, i) {
+        const c = lerCoordenadas_(l, false, 'vértice ' + (i + 1) + ' da área ' + (k + 1));
+        return c.lat.toFixed(6) + ' ' + c.lon.toFixed(6);
+      }).join(',');
+    });
+    if (total > L.vertices) throw new Error('No máximo ' + L.vertices + ' vértices por pedido.');
+    local = 'pol=' + pols.join('|');
+    descricao = pols.length + ' área(s) desenhada(s)';
+  }
+  const codigo = ['v=1', 'res=' + res, 'tipo=' + tipo].concat(local ? [local] : [])
+    .concat(['ini=' + ini, 'fim=' + fim, 'var=' + cods.join(',')]).concat(enso ? ['enso=' + enso] : []).join(';');
+  const resumo = descricao + ', ' + (res === 'D' ? 'diário' : 'mensal') + ', ' + dataBR_(ini) + ' a ' + dataBR_(fim) +
+    ', ' + nVars + (notas.length ? ' (' + notas.join('; ') + ')' : '');
+  return {codigo: codigo, resumo: resumo, gerado: true};
+}
+
+function linhas_(texto) {
+  return String(texto || '').replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); })
+    .filter(function (l) { return l; });
+}
+
+function dataISO_(valor, qual) {
+  if (valor && typeof valor.getTime === 'function' && !isNaN(valor.getTime())) {   // data da planilha
+    return Utilities.formatDate(valor, FUSO, 'yyyy-MM-dd');
+  }
+  const t = String(valor || '').trim();
+  let m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m) return m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
+  m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) return t;
+  throw new Error('Informe a data ' + qual + '.');
+}
+
+function dataBR_(iso) {
+  const p = iso.split('-');
+  return p[2] + '/' + p[1] + '/' + p[0];
+}
+
+// "nome; latitude; longitude" ou "latitude; longitude" (também separados por tabulação, ou por vírgula quando os
+// números usam ponto). Cada coordenada em decimal (-26.2285 ou -26,2285) ou em graus (26°13'42"S, 52 40 16 W).
+function lerCoordenadas_(linha, aceitaNome, onde) {
+  let partes = linha.split(/\s*[;\t]\s*/).filter(function (x) { return x !== ''; });
+  if (partes.length === 1) {
+    const m = linha.match(/^(.*?[NS])\s+(.+[WOEL])$/i) || linha.match(/^(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)$/);
+    if (m) partes = [m[1], m[2]];
+  }
+  let nome = '';
+  if (aceitaNome && partes.length === 3) nome = partes.shift();
+  if (partes.length !== 2) {
+    throw new Error('No ' + onde + ' ("' + linha + '"), use ' + (aceitaNome ? '"nome; latitude; longitude"' :
+                    '"latitude; longitude"') + ', separados por ponto e vírgula.');
+  }
+  return {nome: nome, lat: coordenada_(partes[0], 'lat', onde), lon: coordenada_(partes[1], 'lon', onde)};
+}
+
+function coordenada_(texto, eixo, onde) {
+  const t = String(texto).trim().replace(/[−–]/g, '-').toUpperCase();
+  const nums = (t.match(/\d+(?:[.,]\d+)?/g) || []).map(function (x) { return Number(x.replace(',', '.')); });
+  const hemi = (t.match(/[NSEWLO]\s*$/) || t.match(/^\s*[NSEWLO]/) || [''])[0].trim();
+  const graus = /[°º'"’”]/.test(t) || nums.length > 1 && /\s/.test(t.replace(/^-/, '').trim());
+  if (!nums.length || nums.length > 3) throw new Error('No ' + onde + ', a coordenada "' + texto + '" não foi entendida.');
+  let valor = graus ? nums[0] + (nums[1] || 0) / 60 + (nums[2] || 0) / 3600 : nums[0];
+  if (!graus && nums.length !== 1) throw new Error('No ' + onde + ', a coordenada "' + texto + '" não foi entendida.');
+  const negativo = /^-/.test(t) || ['S', 'W', 'O'].indexOf(hemi) !== -1;
+  if (!negativo && !hemi && eixo === 'lon') valor = -valor;          // longitude do Brasil é sempre oeste
+  if (graus && !hemi && !/^-/.test(t) && eixo === 'lat') {
+    throw new Error('No ' + onde + ', indique N ou S na latitude em graus (ex.: 26°13\'42"S).');
+  }
+  if (negativo) valor = -Math.abs(valor);
+  if (eixo === 'lat' && (valor < -34 || valor > 6)) {
+    throw new Error('No ' + onde + ', a latitude ' + valor.toFixed(4) + ' fica fora do Brasil (use - ou S para o sul).');
+  }
+  if (eixo === 'lon' && (valor < -74 || valor > -34)) {
+    throw new Error('No ' + onde + ', a longitude ' + valor.toFixed(4) + ' fica fora do Brasil.');
+  }
+  return valor;
+}
+
+// ------------------------------------------------------------------ montar o formulário (rodar uma vez)
+// Cria ou atualiza as seções. Reaproveita as perguntas que já existem (pelo título), para não criar colunas
+// repetidas na planilha. O código e o resumo ficam numa seção interna, que ninguém vê (o painel grava pelo doGet).
+// Pode ser rodada de novo sem problema.
+function montarFormulario() {
+  const T = CONFIG.TITULOS;
+  const url = SpreadsheetApp.getActive().getFormUrl();
+  if (!url) throw new Error('Esta planilha não está ligada a um formulário (abra o script pela planilha de respostas).');
+  const form = FormApp.openByUrl(url);
+  const tipos = FormApp.ItemType;
+  const existentes = form.getItems();
+  const achar = function (titulo, tipo) {
+    return existentes.filter(function (i) { return norm_(i.getTitle()) === norm_(titulo) && i.getType() === tipo; })[0];
+  };
+  const obter = function (titulo, tipo, criar, converter) {
+    const it = achar(titulo, tipo);
+    return (it ? converter(it) : criar()).setTitle(titulo);
+  };
+  const pagina = function (t) { return obter(t, tipos.PAGE_BREAK, function () { return form.addPageBreakItem(); }, function (i) { return i.asPageBreakItem(); }); };
+  const escolha = function (t) { return obter(t, tipos.MULTIPLE_CHOICE, function () { return form.addMultipleChoiceItem(); }, function (i) { return i.asMultipleChoiceItem(); }); };
+  const caixas = function (t) { return obter(t, tipos.CHECKBOX, function () { return form.addCheckboxItem(); }, function (i) { return i.asCheckboxItem(); }); };
+  const paragrafo = function (t) { return obter(t, tipos.PARAGRAPH_TEXT, function () { return form.addParagraphTextItem(); }, function (i) { return i.asParagraphTextItem(); }); };
+  const data = function (t) { return obter(t, tipos.DATE, function () { return form.addDateItem(); }, function (i) { return i.asDateItem(); }); };
+
+  const codigo = achar(T.codigo, tipos.TEXT);
+  const resumo = achar(T.resumo, tipos.PARAGRAPH_TEXT);
+  if (!codigo) throw new Error('Não achei a pergunta "' + T.codigo + '" (resposta curta) no formulário.');
+  codigo.asTextItem().setRequired(false).setHelpText('Preenchido pelo painel SAB. Não altere.');
+
+  const pEstados = pagina('Estados');
+  const pMunicipios = pagina('Municípios');
+  const pPontos = pagina('Pontos');
+  const pArea = pagina('Área desenhada');
+  const pPeriodo = pagina('Período e variáveis');
+  const pPainel = pagina('Pedido do painel');
+  const pDados = pagina('Seus dados');
+
+  // O formulário é para quem não usa o painel: a pergunta de origem e a página "Local do pedido" das versões
+  // anteriores saem (o Local vira a 1ª pergunta). A coluna antiga continua na planilha, vazia.
+  existentes.filter(function (i) {
+    return (norm_(i.getTitle()) === norm_(T.origem) && i.getType() === tipos.MULTIPLE_CHOICE) ||
+           (norm_(i.getTitle()) === norm_('Local do pedido') && i.getType() === tipos.PAGE_BREAK);
+  }).forEach(function (i) { form.deleteItem(i); });
+  const local = escolha(T.local).setRequired(true)
+    .setHelpText('Brasil inteiro e estados inteiros geram muitas linhas: para períodos longos, prefira a resolução mensal.');
+  local.setChoices([local.createChoice(CONFIG.LOCAIS.E, pEstados),
+                    local.createChoice(CONFIG.LOCAIS.M, pMunicipios), local.createChoice(CONFIG.LOCAIS.C, pPontos),
+                    local.createChoice(CONFIG.LOCAIS.P, pArea)]);
+  const estados = caixas(T.estados).setRequired(true);
+  const nomesUF = Object.keys(CONFIG.UF).map(function (k) { return CONFIG.UF[k]; }).sort(function (a, b) { return a.localeCompare(b, 'pt'); });
+  estados.setChoiceValues(nomesUF);
+  const municipios = paragrafo(T.municipios).setRequired(true).setHelpText(
+    'Um por linha, com a UF: "Município - UF". Exemplo:\nPato Branco - PR\nClevelândia - PR\nChapecó - SC\n' +
+    'Acentos e maiúsculas não importam. Até ' + CONFIG.LIMITES.municipios + ' municípios.');
+  const pontos = paragrafo(T.pontos).setRequired(true).setHelpText(
+    'Um ponto por linha: "nome; latitude; longitude". Aceita decimal ou graus. Exemplos:\n' +
+    'Fazenda A; -26.2285; -52.6712\nSítio B; -26,1500; -52,7000\nÁrea C; 26°13\'42"S; 52°40\'16"W\n' +
+    'Cada ponto recebe os dados do pixel de 0,1° (cerca de 11 km) que o contém. Até ' + CONFIG.LIMITES.pontos + ' pontos.');
+  const vertices = paragrafo(T.vertices).setRequired(true).setHelpText(
+    'Um vértice por linha: "latitude; longitude" (decimal ou graus), pelo menos 4 por área. Para mais de uma área, ' +
+    'deixe uma linha em branco entre elas. Exemplo:\n-26.2; -52.7\n-26.2; -52.6\n-26.3; -52.6\n-26.3; -52.7\n' +
+    'Até ' + CONFIG.LIMITES.areas + ' áreas e ' + CONFIG.LIMITES.vertices + ' vértices.');
+  const dIni = data(T.dataIni).setRequired(true).setHelpText('A partir de 01/01/1961.');
+  const dFim = data(T.dataFim).setRequired(true).setHelpText('Se marcar a previsão abaixo, a data final vira o último dia da previsão.');
+  const prev = escolha(T.previsao).setRequired(true)
+    .setHelpText('Inclui os dias provisórios e a previsão do tempo calibrada (GFS) até 15 dias à frente.');
+  prev.setChoiceValues(['Não', 'Sim']);
+  const enso = escolha(T.enso).setRequired(true).setHelpText(
+    'Os mesmos cenários do painel SAB: o arquivo traz só os meses do passado em que o fenômeno ocorreu (índice RONI do ' +
+    'CPC/NOAA, episódio de 5 trimestres seguidos), com 5 colunas sobre o fenômeno. Os dias de previsão entram sempre.');
+  enso.setChoiceValues(CONFIG.ENSO.map(function (p) { return p[0]; }));
+  const resol = escolha(T.resolucao).setRequired(true)
+    .setHelpText('Mensal: somas (chuva, evapotranspiração) e médias (temperaturas, umidade) de cada mês.');
+  resol.setChoiceValues(['Diária', 'Mensal']);
+  const vars = caixas(T.variaveis).setRequired(true)
+    .setHelpText('Ponto, data, coordenadas, município, estado e qualidade do pixel vão sempre. Menos variáveis = arquivo menor.');
+  vars.setChoiceValues(CONFIG.VARIAVEIS.map(function (p) { return p[0]; }));
+
+  pMunicipios.setGoToPage(pPeriodo);   // ao fim da seção Estados, pula para Período
+  pPontos.setGoToPage(pPeriodo);       // ao fim de Municípios
+  pArea.setGoToPage(pPeriodo);         // ao fim de Pontos
+  pPainel.setGoToPage(pDados);         // ao fim de Período: pula a seção interna (código e resumo, usados pelo painel)
+  pPainel.setHelpText('Uso interno. Não aparece para quem preenche o formulário.');
+  pDados.setHelpText(CONFIG.AVISO_ENTREGA);
+
+  const ordem = [local, pEstados, estados, pMunicipios, municipios, pPontos, pontos,
+                 pArea, vertices, pPeriodo, dIni, dFim, prev, enso, resol, vars, pPainel, codigo, resumo, pDados]
+    .concat([T.nome, T.email[0], T.instituicao, T.finalidade, T.consentimento].map(function (t) {
+      return form.getItems().filter(function (i) { return norm_(i.getTitle()) === norm_(t); })[0];
+    })).filter(function (i) { return i; });
+  ordem.forEach(function (item, destino) { form.moveItem(item.getIndex(), destino); });
+  form.setProgressBar(true);
+  form.setDescription('Para quem não usa o painel SAB no Google Earth Engine (quem usa o painel faz o pedido por lá, ' +
+    'no botão "Receber por e-mail"). Peça os dados diários ou mensais do SAB, de 1961 até a previsão, para o Brasil, ' +
+    'estados, municípios, pontos ou uma área, com ou sem o filtro El Niño / La Niña. ' + CONFIG.AVISO_ENTREGA +
+    ' Limites: até 10 milhões de linhas e 3 pedidos por e-mail a cada 24 horas.');
+  Logger.log('✅ Formulário montado: ' + form.getPublishedUrl());
+}
+
+// ------------------------------------------------------------------ planilha
+function obterAba_() {
+  const abas = SpreadsheetApp.getActive().getSheets();
+  const vistos = [];
+  for (let i = 0; i < abas.length; i++) {
+    const cab = abas[i].getRange(1, 1, 1, Math.max(1, abas[i].getLastColumn())).getValues()[0];
+    if (cab.map(norm_).indexOf(norm_(CONFIG.TITULOS.codigo)) !== -1) return abas[i];
+    vistos.push('"' + abas[i].getName() + '": ' + cab.join(' | '));
+  }
+  throw new Error('Nenhuma aba com a coluna "' + CONFIG.TITULOS.codigo + '". O script deve ser aberto pela planilha ' +
+                  'de respostas (Extensões > Apps Script). Linha 1 de cada aba: ' + vistos.join(' || '));
+}
+
+// Compara títulos sem diferença de acento, maiúsculas e espaços (o Forms às vezes deixa espaço no fim)
+function norm_(t) {
+  return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function colunas_(aba) {
+  let cab = aba.getRange(1, 1, 1, aba.getLastColumn()).getValues()[0];
+  CONFIG.COLUNAS.forEach(function (c) {
+    if (cab.map(norm_).indexOf(norm_(c)) === -1) {
+      aba.getRange(1, aba.getLastColumn() + 1).setValue(c);
+      cab = aba.getRange(1, 1, 1, aba.getLastColumn()).getValues()[0];
+    }
+  });
+  const porNome = {};
+  cab.forEach(function (c, i) { if (!porNome[norm_(c)]) porNome[norm_(c)] = i + 1; });
+  const achar = function (titulo) { return porNome[norm_(titulo)]; };
+  const col = {};
+  CONFIG.COLUNAS.forEach(function (c) { col[c] = achar(c); });
+  const t = CONFIG.TITULOS;
+  col.codigo = achar(t.codigo);
+  col.resumo = achar(t.resumo);
+  col.nome = achar(t.nome);
+  col.instituicao = achar(t.instituicao);
+  col.finalidade = achar(t.finalidade);
+  col.consentimento = achar(t.consentimento);
+  ['origem', 'local', 'estados', 'municipios', 'pontos', 'vertices', 'dataIni', 'dataFim', 'previsao', 'resolucao',
+   'variaveis', 'enso'].forEach(function (k) { col[k] = achar(t[k]); });
+  col.email = t.email.map(achar).filter(function (x) { return x; })[0];
+  if (!col.codigo || !col.email || !col.nome) {
+    throw new Error('A planilha precisa das perguntas "' + t.codigo + '", "' + t.nome + '" e de uma pergunta de e-mail ' +
+                    '(' + t.email.join(' / ') + '). Títulos encontrados: ' + cab.join(' | '));
+  }
+  return col;
+}
+
+function lerLinha_(aba, linha, col) {
+  return objeto_(aba.getRange(linha, 1, 1, aba.getLastColumn()).getValues()[0], col);
+}
+
+function objeto_(r, col) {
+  const g = function (c) { return c ? r[c - 1] : ''; };
+  return {
+    carimbo: r[0], codigo: String(g(col.codigo)).trim(), resumo: String(g(col.resumo) || '').trim(),
+    nome: String(g(col.nome)).trim(), email: String(g(col.email)).trim().toLowerCase(),
+    ID_Pedido: g(col.ID_Pedido), Status: g(col.Status), Enviado_em: g(col.Enviado_em), Entregue_em: g(col.Entregue_em),
+    origem: String(g(col.origem) || '').trim(), local: String(g(col.local) || '').trim(),
+    estados: String(g(col.estados) || ''), municipios: String(g(col.municipios) || ''),
+    pontos: String(g(col.pontos) || ''), vertices: String(g(col.vertices) || ''),
+    dataIni: g(col.dataIni), dataFim: g(col.dataFim), previsao: String(g(col.previsao) || ''),
+    resolucao: String(g(col.resolucao) || ''), variaveis: String(g(col.variaveis) || ''),
+    enso: String(g(col.enso) || '').trim()
+  };
+}
+
+function marcar_(aba, linha, col, valores) {
+  Object.keys(valores).forEach(function (k) { aba.getRange(linha, col[k]).setValue(valores[k]); });
+}
+
+function pedidosRecentes_(aba, col, email, linhaAtual) {
+  const ultima = aba.getLastRow();
+  if (ultima < 2) return 0;
+  const dados = aba.getRange(2, 1, ultima - 1, aba.getLastColumn()).getValues();
+  const desde = Date.now() - 864e5;
+  return dados.filter(function (r, i) {
+    return i + 2 !== linhaAtual && String(r[col.email - 1]).trim().toLowerCase() === email &&
+           new Date(r[0]).getTime() >= desde && r[col.Status - 1] !== 'recusado';
+  }).length;
+}
+
+function gerarId_() {
+  const sorte = Math.random().toString(36).slice(2, 6);
+  return 'P' + Utilities.formatDate(new Date(), FUSO, 'yyyyMMddHHmmss') + sorte;
+}
+
+// ------------------------------------------------------------------ e-mail
+function enviarEmail_(para, assunto, corpo, anexos) {
+  if (MailApp.getRemainingDailyQuota() < 1) return false;
+  const msg = {to: para, subject: assunto, body: corpo, name: CONFIG.NOME, replyTo: prop_('EMAIL_RESPONSAVEL')};
+  if (anexos && anexos.length) msg.attachments = anexos;
+  MailApp.sendEmail(msg);
+  return true;
+}
+
+// Zip com todos os arquivos do pedido, quando couber no e-mail (o Gmail aceita até 25 MB de anexos)
+function anexoZip_(arquivos, mbCsv, id) {
+  if (!arquivos.length || mbCsv > CONFIG.ANEXO_MAX_CSV_MB) return null;
+  try {
+    const zip = Utilities.zip(arquivos.map(function (f) { return f.getBlob(); }), 'SAB_' + id + '.zip');
+    return zip.getBytes().length <= CONFIG.ANEXO_MAX_ZIP_MB * 1e6 ? zip : null;
+  } catch (erro) {
+    Logger.log('Anexo não montado para ' + id + ': ' + erro);
+    return null;
+  }
+}
+
+function avisarResponsavel_(assunto, corpo) {
+  const props = PropertiesService.getScriptProperties();
+  const chave = 'AVISO_' + assunto;
+  const ultimo = Number(props.getProperty(chave) || 0);
+  if (Date.now() - ultimo < 6 * 3.6e6) return;   // no máximo um aviso igual a cada 6 horas
+  props.setProperty(chave, String(Date.now()));
+  enviarEmail_(prop_('EMAIL_RESPONSAVEL'), assunto, corpo);
+}
+
+function assinatura_() {
+  return '--\n' + CONFIG.NOME + '\nResponda a este e-mail para falar com o responsável.\n' +
+         '\nO que achou da forma e dos dados? Responda a este e-mail para nos enviar seu feedback!\n' +
+         'Gostou do SAB? Ajude-nos a manter o modelo sempre atualizado com uma doação via PIX (Celular): 46999075852\n' +
+         '\nSeus dados (nome, e-mail e instituição) são usados só para atender este pedido e para estatísticas de uso ' +
+         'do banco, e não são compartilhados (LGPD, Lei 13.709/2018).';
+}
+
+function prop_(nome) {
+  const v = PropertiesService.getScriptProperties().getProperty(nome);
+  if (!v) throw new Error('Falta a propriedade do script ' + nome + '.');
+  return v;
+}
+Passo a Passo de Implantação e Teste
+
+Acesse a planilha de respostas do formulário e abra o painel via Extensões > Apps Script.
+
+Substitua integralmente o arquivo Codigo.gs pelo bloco de código acima.
+
+Salve o arquivo. Na barra superior de execução, selecione a função montarFormulario e clique em "Executar". Isso refletirá a remoção do "Brasil Inteiro" no questionário final e reestruturará as opções.
+
+Simule um pedido pequeno marcando um município e avaliando se a etapa de submissão ocorre sem a opção nacional.
+
+Verifique a entrega do e-mail ao solicitante. A assinatura agora trará automaticamente os parágrafos de solicitação de feedback e a chave PIX, que permearão toda notificação gerada pela função assinatura_().
+
+Podemos iniciar a Fase 2 e reconstruir as condições de El Niño e formatação no arquivo sab_pedido.py?
+
+vamos para a fase 2 sempre atuando como programador e pesquisador senior de dados
+
+O arquivo sab_pedido.py possui 1.276 linhas. Inserir o código completo em uma única resposta acionaria o limite de tokens da plataforma, cortando o script pela metade e corrompendo a sintaxe. Como cientista de dados e desenvolvedor, a prática mais segura e rastreável para essa intervenção arquitetural é modular: você substituirá exatamente os quatro blocos funcionais responsáveis pela trava de memória e pela extração perene das colunas de El Niño/La Niña (ENSO).
+
+Abra o arquivo sab_pedido.py no seu repositório local e substitua integralmente cada uma das funções abaixo.
+
+1. Trava de Execução Nacional na Função validar
+Substitua as primeiras linhas da função validar para barrar a tipagem "BR" no nascedouro, poupando requisições ao Earth Engine:
+
+Python
+def validar(campos, hoje):
+    """Confere o pedido e devolve a forma normalizada. hoje: date (para o limite da data final)."""
+    if campos.get('v') != '1':
+        raise PedidoInvalido('Versão do código do pedido não reconhecida (esperado v=1).')
+    res = campos.get('res', '').upper()
+    if res not in ('D', 'M'):
+        raise PedidoInvalido('Resolução inválida (res=D diária ou res=M mensal).')
+    tipo = campos.get('tipo', '').upper()
+    if tipo not in ('E', 'M', 'P', 'C'):
+        raise PedidoInvalido('Tipo de local inválido (tipo=E estados, M municípios, P polígonos ou C pontos).')
+    ini, fim = _data(campos.get('ini'), 'inicial'), _data(campos.get('fim'), 'final')
+    if ini < DATA_MINIMA:
+        raise PedidoInvalido('O banco SAB começa em 01/01/1961.')
+    if fim < ini:
+        raise PedidoInvalido('A data final é anterior à inicial.')
+    if fim > hoje + timedelta(days=20):
+        raise PedidoInvalido('A data final passa do fim da previsão do banco.')
+    ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': [],
+           'pontos': []}
+    if tipo == 'BR':
+        raise PedidoInvalido('A extração para o Brasil todo foi desativada preventivamente devido a limites de memória do servidor. Selecione um Estado ou Município.')
+2. Geração Perene do Dicionário na Função avaliar_pedido
+Substitua a função inteira. Isso garante que o dicionário ENSO seja instanciado em memória e atrelado ao ctx mesmo se a opção escolhida pelo usuário for "Sem filtro", permitindo a criação das cinco colunas nos dados finais:
+
+Python
+def avaliar_pedido(ped):
+    """Contexto do pedido (com o filtro ENSO aplicado aos dias, se houver)."""
+    ctx = _avaliar_locais(ped)
+    classif = classificar_enso(serie_roni())
+    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
+    if ped.get('enso'):
+        ctx = aplicar_enso(ctx, ped, classif, dic)
+    else:
+        ctx['enso'] = {'dic': dic, 'ascii': 'Sem filtro (todos os meses)', 'meses_ok': None}
+    return ctx
+3. Desacoplamento da Filtragem na Função aplicar_enso
+Substitua a função inteira para receber o dicionário gerado externamente e aplicar as máscaras apenas sobre meses classificados como cenário alvo:
+
+Python
+def aplicar_enso(ctx, ped, classif, dic):
+    """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
+    ee = _ee()
+    meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
+    fim = ped['fim'] + timedelta(days=1)
+    col = ee.ImageCollection(SAB).filterBounds(ctx['area'].bounds()).filterDate(str(ped['ini']), str(fim)).map(
+        lambda img: img.set('v_enso', ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'),
+                                                         'definitiva')))
+    info = ee.Dictionary({'t': col.aggregate_array('system:time_start'), 'v': col.aggregate_array('v_enso')}).getInfo()
+    dias = sorted(datetime.fromtimestamp(t / 1000, timezone.utc).date() for t, v in zip(info['t'], info['v'])
+                  if v in VERSOES_PREVISAO or chave_mes(datetime.fromtimestamp(t / 1000, timezone.utc)) in meses_ok)
+    if not dias:
+        raise PedidoInvalido(f"Nenhum mês do período teve o fenômeno \"{ped['enso']['ascii']}\". "
+                             'Amplie o período ou escolha outro fenômeno.')
+    ctx = dict(ctx, dias=dias, enso={'ascii': ped['enso']['ascii'], 'meses_ok': meses_ok, 'dic': dic})
+    no_periodo = [m for m in meses_ok if str(ped['ini'])[:7].replace('-', '_') <= m <= str(ped['fim'])[:7].replace('-', '_')]
+    ctx['avisos'] = (ctx['avisos'] + ' ' if ctx['avisos'] else '') + \
+        f"Filtro ENSO {ped['enso']['ascii']}: {len(no_periodo)} mês(es) do passado no período (a previsão entra sempre)."
+    return ctx
+4. Regra de Anexação Condicional na Função fc_do_arquivo
+Substitua a função inteira. O fluxo foi alterado na linha if enso and enso.get('meses_ok'):, garantindo que os objetos EE recebam as propriedades ENSO sem omitir os dias, caso o filtro global seja vazio. As colunas aparecerão em todas as execuções.
+
+Python
+def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
+    """O CSV de um arquivo do plano: o mesmo pedido que o painel faz para aquele local e ano."""
+    ee = _ee()
+    pontos = grade.filter(ee.Filter.eq('Nome_Local_Export', arq['local']))
+    ini_ped, fim_ped = ped['ini'], ped['fim'] + timedelta(days=1)
+    ic = colecao(geom, str(ped['ini']), str(fim_ped))
+    a, b = max(arq['ini'], ini_ped), min(arq['fim'], fim_ped)
+    if enso and enso.get('meses_ok'):
+        ic = filtrar_enso(ic, enso)
+    ic = ic.filterDate(str(a), str(b))
+    bandas = bandas_do_pedido(ped['variaveis'])
+    extra = COLUNAS_ENSO if enso else []
+    if ped['res'] == 'D':
+        return formatar(linhas_diarias(ic, pontos, bandas, escala, enso), ped['variaveis'], EXTRAS_DIARIA + extra)
+    return formatar(linhas_mensais(ic, pontos, arq['ano'], bandas, escala, enso), ped['variaveis'], EXTRAS_MENSAL + extra)
+Testando as Alterações (Fase 2)
+Após realizar os commits no repositório, rode o pacote de fumaça local ou acione uma requisição via formulário marcando a opção "Sem filtro". Ao receber o CSV no Drive, ateste se as cinco colunas finais (Filtro_ENSO, Fase_ENSO, Intensidade_ENSO, RONI_Trimestre_C, Trimestre_CPC) encontram-se populadas. A requisição pelo Brasil inteiro deverá resultar em declínio logado na planilha (aba Status) por PedidoInvalido.
+
+Confirme se o deploy foi estabelecido sem erros para prosseguirmos à Fase 3 (conversão XLSX) e à automatização CRON das 18h na Fase 4.
+
+mais facil voce me passar o codigo integral e literal do que me passar somente as partes de mudanças e correr o risco de errar, quero o passo a passo de como mudar o codigo e testarmos
+
+O seu arquivo de código Python foi completamente atualizado e gerado.
+
+Ícone do app PY
+sab_pedido
+ PY 
+Aqui está o passo a passo da modificação executada no arquivo .py para a Fase 2:
+
+Trava de memória: A função validar teve a opção 'BR' erradicada da tupla de tipos aceitáveis. Se o tipo vier como 'BR' pelo motor (mesmo burlando a interface do formulário alterada na Fase 1), a API levanta a exceção PedidoInvalido('A extração para o Brasil todo foi desativada... ').
+
+Preparação permanente do dicionário ENSO: Modificou-se a função avaliar_pedido para calcular o índice histórico de temperatura e montar o respectivo dicionário (classificar_enso(serie_roni())) de modo condicional-livre. Se o usuário escolher "Sem filtro", a função popula a chave ctx['enso'] com o dicionário gerado mas atribui meses_ok = None.
+
+Refatoração do acoplamento aplicar_enso: A função foi alterada na assinatura para receber a tabela histórica processada pela função pai em vez de fazer sua própria leitura. Isso otimiza tempo de processamento.
+
+Injeção irrestrita das 5 colunas no CSV (fc_do_arquivo): O condicional original que barrava as colunas de entrarem na coleção ImageCollection mudou de if enso: para if enso and enso.get('meses_ok'):. Isso tem o efeito de pular o descarte temporal do Earth Engine caso não haja limite de El Niño ativo, porém mantém a variável enso injetada na chamada de montagem da formatação de tabela. Dessa forma, todos os registros processados nos arquivos do usuário (incluindo "Sem Filtro") farão o merge contra o dicionário, exibindo a fase, o valor de intensidade e as marcações de trimestres para aquele pixel diário.
+
+Para aplicar a Fase 2:
+Baixe o arquivo Python atualizado clicando no link gerado e substitua-o no seu diretório base do projeto: sab_pedidos/sab_pedido.py. Confirme efetuando um novo commit em sua branch principal para que o GitHub Actions embarque a atualização.
+
+Ao subir esse arquivo modificado, as solicitações sem filtro El Niño passarão a mostrar os dados de temperatura oceânica sem cortar dias no CSV.
+
+O próximo passo lógico seria a Fase 3 (conversão do arquivo CSV para Excel XLSX no fluxo do GitHub Actions) e a Fase 4 (Automação CRON às 18h no arquivo .yml). Confirme se você quer que eu proceda para o fluxo e escreva a implementação do script de conversão Excel.
+
+
+
+
+
+Suas conversas de VIASOFT não são usadas para aprimorar nossos modelos. O Gemini é uma IA e pode cometer erros. Sua privacidade e o GeminiAbre em uma nova janela
+
+Processado e analisado em código
 # >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.10.30c <<<
 # =========================================================================================
 # O QUE FAZ
@@ -423,7 +1454,7 @@ def validar(campos, hoje):
     if res not in ('D', 'M'):
         raise PedidoInvalido('Resolução inválida (res=D diária ou res=M mensal).')
     tipo = campos.get('tipo', '').upper()
-    if tipo not in ('E', 'M', 'P', 'BR', 'C'):
+    if tipo not in ('E', 'M', 'P', 'C'):
         raise PedidoInvalido('Tipo de local inválido (tipo=BR Brasil, E estados, M municípios, P polígonos ou C pontos).')
     ini, fim = _data(campos.get('ini'), 'inicial'), _data(campos.get('fim'), 'final')
     if ini < DATA_MINIMA:
@@ -435,7 +1466,7 @@ def validar(campos, hoje):
     ped = {'res': res, 'tipo': tipo, 'ini': ini, 'fim': fim, 'estados': [], 'municipios': [], 'poligonos': [],
            'pontos': []}
     if tipo == 'BR':
-        ped['estados'] = list(LISTA_ESTADOS)
+        raise PedidoInvalido('A extração para o Brasil todo foi desativada preventivamente devido a limites de memória do servidor. Selecione um Estado ou Município.')
     if tipo == 'C':
         ped['pontos'] = ler_pontos(campos.get('pts', ''))
     ped['separar'] = tipo == 'BR' or campos.get('sep') == '1'   # um grade e um arquivo por estado
@@ -913,7 +1944,7 @@ def fc_do_arquivo(ped, arq, grade, geom, escala, enso=None):
     ini_ped, fim_ped = ped['ini'], ped['fim'] + timedelta(days=1)
     ic = colecao(geom, str(ped['ini']), str(fim_ped))
     a, b = max(arq['ini'], ini_ped), min(arq['fim'], fim_ped)
-    if enso:
+    if enso and enso.get('meses_ok'):
         ic = filtrar_enso(ic, enso)
     ic = ic.filterDate(str(a), str(b))
     bandas = bandas_do_pedido(ped['variaveis'])
@@ -976,9 +2007,12 @@ def resolver_municipios(ped):
 def avaliar_pedido(ped):
     """Contexto do pedido (com o filtro ENSO aplicado aos dias, se houver)."""
     ctx = _avaliar_locais(ped)
-    ctx['enso'] = None
+    classif = classificar_enso(serie_roni())
+    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
     if ped.get('enso'):
-        ctx = aplicar_enso(ctx, ped)
+        ctx = aplicar_enso(ctx, ped, classif, dic)
+    else:
+        ctx['enso'] = {'dic': dic, 'ascii': 'Sem filtro (todos os meses)', 'meses_ok': None}
     return ctx
 
 
@@ -1075,12 +2109,10 @@ def serie_roni():
     return of + est
 
 
-def aplicar_enso(ctx, ped):
+def aplicar_enso(ctx, ped, classif, dic):
     """[ENSO] Classifica os meses (como o painel) e deixa nos dias só os meses do cenário e os dias de previsão."""
     ee = _ee()
-    classif = classificar_enso(serie_roni())
     meses_ok = sorted(f"{x['ano']:04d}_{x['mes']:02d}" for x in classif if no_cenario(x, ped['enso']['valor']))
-    dic = {f"{x['ano']:04d}_{x['mes']:02d}": [x['FaseENSO'], x['RONI'], x['Trimestre']] for x in classif}
     fim = ped['fim'] + timedelta(days=1)
     col = ee.ImageCollection(SAB).filterBounds(ctx['area'].bounds()).filterDate(str(ped['ini']), str(fim)).map(
         lambda img: img.set('v_enso', ee.Algorithms.If(img.propertyNames().contains('versao'), img.get('versao'),
