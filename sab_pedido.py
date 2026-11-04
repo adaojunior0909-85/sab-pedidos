@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.01 <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.03 <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido (painel SAB ou formulário -> Apps Script -> GitHub) e manda o Earth Engine exportar os
@@ -10,6 +10,9 @@
 #   Apps Script entrega o link quando todos os arquivos do manifesto estiverem na pasta. Quem pediu Excel
 #   recebe também os .xlsx, feitos depois pela rotina sab_xlsx.py.
 #
+# [2026.11.03] MESMO CÁLCULO DO PAINEL 2026.11.1: correção de leitura dos pixels B (núcleo do BR-DWGD) e da radiação dos
+#   pixels C (limitada à de céu claro, FAO-56), só nos dias de 1961 a 2025 e só quando a área tem pixel B ou C
+#   (função corrigir_pixels_b). K16 com o caso A6 (Lagoa dos Patos). O banco não muda.
 # MESMO CÁLCULO DO PAINEL 2026.10.4 (revisão 18h30 de 22/10)
 #   Grade, coleção, correções V1.0, grampo termodinâmico, linhas e formatação são os da K14, que saiu
 #   idêntica ao link do painel (caso C0). As colunas do painel saem iguais (K16); as diferenças de propósito são:
@@ -52,7 +55,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.11.01'
+VERSAO_ROTINA = '2026.11.03'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -60,6 +63,10 @@ PROJETO = 'clima-492922'
 SAB = f'projects/{PROJETO}/assets/SAB_V1'
 MASCARA = f'projects/{PROJETO}/assets/SAB_MASCARA_QUALIDADE'
 SOLO = f'projects/{PROJETO}/assets/SICSB_SOLO_2015_2025'
+BRDWGD = 'projects/ee-alexandrexavier/assets/BR-DWGD'           # [2026.11.03] CORR_B do painel 2026.11.1
+ELEVACAO = 'USGS/SRTMGL1_003'
+FIM_HISTORICO_CORRECAO = '2026-01-01'                           # exclusivo: só os dias até 31/12/2025
+NUCLEO_B = ['pr_mm', 'tmax_C', 'tmin_C', 'RH', 'et_potencial', 'rs', 'u2', 'vpd']
 ESCALA_AREA = 11132          # CFG.escalaArea do painel (Estados / Municípios e grade)
 ESCALA_PONTO = 1000          # CFG.escalaPonto do painel (Coordenadas)
 LIMITE_PONTOS_GRADE = 25000  # CFG.limitePontosGrade do painel (pares pixel x polígono)
@@ -207,7 +214,7 @@ DICIONARIO = [
      'Longitude do centro do pixel da grade de 0,1 grau (nao e a sede do municipio).',
      'graus'),
     ('Qualidade_Pixel',
-     'CSV diario. Classe do pixel na mascara de qualidade: A = SAB igual ao BR-DWGD; B = BR-DWGD existe mas foi descartado (ERA5-Land mascarado; lagoas e estuarios); C = sem BR-DWGD, preenchido com ERA5, centro do pixel no Brasil. Com a mascara, os pixels sem BR-DWGD com centro fora do Brasil (borda) ficam fora do CSV. Vazia se o pixel nao tem classe ou se a mascara ainda nao existe.',
+     'CSV diario. Classe do pixel na mascara de qualidade: A = SAB igual ao BR-DWGD; B = lagoas e estuarios onde o motor V1.0 descartou o BR-DWGD (desde o painel 2026.11.1 os dias de 1961 a 2025 saem com o BR-DWGD em chuva, temperaturas, UR, VPD, ETo, radiacao e vento, corrigidos na leitura); C = sem BR-DWGD, preenchido com ERA5, centro do pixel no Brasil (desde 2026.11.1 a radiacao dos dias de 1961 a 2025 e limitada a de ceu claro, FAO-56). Com a mascara, os pixels sem BR-DWGD com centro fora do Brasil (borda) ficam fora do CSV. Vazia se o pixel nao tem classe ou se a mascara ainda nao existe.',
      '-'),
     ('Precipitacao_mm',
      'Volume total de chuva no periodo. A janela de acumulo de cada dia esta na coluna Janela_Chuva_UTC.',
@@ -879,13 +886,76 @@ def _correcao_mes(mes):
                          teto('ssur').rename('teto_ssur'), teto('swat').rename('teto_swat')])
 
 
+def _brdwgd_do_dia(data):
+    """brdwgdDoDia do painel 2026.11.1: o BR-DWGD do dia decodificado como na V1.0, nas 8 bandas do núcleo."""
+    ee = _ee()
+    vazio = ee.Image.constant([-32768] * 7).rename(['pr', 'Tmax', 'Tmin', 'RH', 'u2', 'Rs', 'ET'])
+    br = ee.Image(ee.ImageCollection(BRDWGD).filterDate(data, data.advance(1, 'day'))
+                  .merge(ee.ImageCollection([vazio])).first())
+    ok = br.select('pr').gt(-32768)
+
+    def dec(b, e, a):
+        return br.select(b).updateMask(ok).multiply(e).add(a)
+
+    def es(t):
+        return t.expression('0.6108 * exp(17.625 * T / (T + 243.04))', {'T': t})
+    tmax, tmin = dec('Tmax', 0.00106815, 15.0), dec('Tmin', 0.00106815, 15.0)
+    rh = dec('RH', 0.39370079, -0.393701).clamp(0, 100)
+    e = es(tmax).add(es(tmin)).divide(2)
+    vpd = e.subtract(e.multiply(rh).divide(100)).max(0)
+    return ee.Image.cat([
+        dec('pr', 0.00686666, 225.0).max(0).rename('pr_mm'), tmax.rename('tmax_C'), tmin.rename('tmin_C'),
+        rh.rename('RH'), dec('ET', 0.05118110, -0.0511811).rename('et_potencial'),
+        dec('Rs', 0.15708661, -0.057087).rename('rs'), dec('u2', 0.05905512, -0.059055).rename('u2'),
+        vpd.rename('vpd')]).toFloat()
+
+
+def _radiacao_ceu_claro(data):
+    """radiacaoCeuClaro do painel: Rso = (0,75 + 2e-5 z) Ra (FAO-56, eq. 21 e 37)."""
+    ee = _ee()
+    J = ee.Number(data.getRelative('day', 'year')).add(1)
+    lat = ee.Image.pixelLonLat().select('latitude').multiply(math.pi / 180)
+    dr = J.multiply(2 * math.pi / 365).cos().multiply(0.033).add(1)
+    dec = J.multiply(2 * math.pi / 365).subtract(1.39).sin().multiply(0.409)
+    ws = lat.tan().multiply(dec.tan()).multiply(-1).clamp(-1, 1).acos()
+    ra = (ws.multiply(lat.sin()).multiply(dec.sin()).add(lat.cos().multiply(dec.cos()).multiply(ws.sin()))
+          .multiply(dr).multiply(24 * 60 / math.pi * 0.0820))
+    return ra.multiply(ee.Image(ELEVACAO).unmask(0).multiply(2e-5).add(0.75)).rename('rso')
+
+
+def corrigir_pixels_b(img):
+    """[2026.11.03] corrigirPixelsB do painel 2026.11.1: pixels B com o núcleo do BR-DWGD e radiação dos pixels C
+    limitada à de céu claro, só nos dias de 1961 a 2025 (o banco não muda)."""
+    ee = _ee()
+    data = img.date()
+    classe = ee.Image(MASCARA).select('classe').unmask(0, False)
+    br = _brdwgd_do_dia(data)
+    usar_b = classe.eq(2).And(br.select('pr_mm').mask().unmask(0))
+    nucleo = [img.select(b).where(usar_b, br.select(b)).rename(b) for b in NUCLEO_B]
+    rso = _radiacao_ceu_claro(data)
+    rs = ee.Image(nucleo[5])
+    nucleo[5] = rs.where(classe.eq(3).And(rs.gt(rso)), rso).rename('rs')
+    corrigida = img.addBands(ee.Image.cat(nucleo).toFloat(), None, True)
+    return ee.Image(ee.Algorithms.If(data.millis().lt(ee.Date(FIM_HISTORICO_CORRECAO).millis()), corrigida, img))
+
+
+def area_tem_pixels_bc(geom):
+    """areaTemPixelsBC do painel: 1 se a área (retângulo envolvente) tem algum pixel B ou C."""
+    ee = _ee()
+    classe = ee.Image(MASCARA).select('classe').unmask(0, False)
+    r = classe.eq(2).Or(classe.eq(3)).selfMask().reduceRegion(
+        reducer=ee.Reducer.anyNonZero(), geometry=geom.bounds(), crs=CRS, crsTransform=TRANSFORM, maxPixels=1e10)
+    return ee.Number(ee.Algorithms.If(r.get('classe'), 1, 0))
+
+
 def colecao(geom, ini, fim):
-    """getSABCollection + corrigirSoloEscoamentoV10 + grampo termodinâmico do painel (K14). fim exclusivo."""
+    """getSABCollectionCorrigida + corrigirSoloEscoamentoV10 + [2026.11.03] corrigirPixelsB + grampo termodinâmico
+    do painel (K14). fim exclusivo."""
     ee = _ee()
     corr_mes = ee.List([_correcao_mes(m) for m in range(1, 13)])
     col = ee.ImageCollection(SAB).filterBounds(geom.bounds()).filterDate(ini, fim)
 
-    def preparar(img):
+    def preparar(img, com_b):
         im = ee.Image(ee.Algorithms.If(img.bandNames().contains('precipitation_mm'),
                                        img.select(BANDAS_ANTIGAS, BANDAS_SAB), img.select(BANDAS_SAB)))
         alg = ee.String(ee.Algorithms.If(img.propertyNames().contains('versao_algoritmo'),
@@ -899,6 +969,8 @@ def colecao(geom, ini, fim):
             im.select('soil_moisture_0_100cm_m3_m3').multiply(c.select('c_swat')).min(c.select('teto_swat'))
               .rename('soil_moisture_0_100cm_m3_m3')]).toFloat()
         im = ee.Image(ee.Algorithms.If(alg.equals('V1.0'), im.addBands(corrigidas, None, True), im))
+        if com_b:                                           # [2026.11.03] antes do grampo, como no painel
+            im = corrigir_pixels_b(im)
         etp = im.select('et_potencial')
         etr = im.select('et_real').min(etp).rename('et_real')
         tr = im.select('transpiracao_mm').min(etr).rename('transpiracao_mm')
@@ -908,7 +980,8 @@ def colecao(geom, ini, fim):
         ce = im.select('pr_mm').subtract(im.select('runoff_sup_mm')).max(0).rename('chuva_efetiva').toFloat()
         return im.addBands(ee.Image.cat([amp, dfc, ce]))
 
-    return col.map(preparar).sort('system:time_start')
+    com, sem = col.map(lambda i: preparar(i, True)), col.map(lambda i: preparar(i, False))
+    return ee.ImageCollection(ee.Algorithms.If(area_tem_pixels_bc(geom), com, sem)).sort('system:time_start')
 
 
 def props_enso(img, enso):
