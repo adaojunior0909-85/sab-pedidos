@@ -1,0 +1,60 @@
+# PESQUISA (previsão estendida de chuva e temperatura), fase 1: extrai do Earth Engine os dados do estudo e os sobe
+# para a própria branch, em pesquisa/dados/. Só LÊ o Earth Engine; não exporta, não grava asset, não mexe nos pedidos.
+# Roda quando o extrator muda na branch pesquisa-previsao-estendida, ou à mão (aba Actions). Pode ser rodado de novo:
+# os anos já extraídos são pulados.
+name: Pesquisa - extrair dados
+
+on:
+  push:
+    branches: [pesquisa-previsao-estendida]
+    paths: [pesquisa/extrair_dados.py, .github/workflows/pesquisa_extrair.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir pesquisa/dados/ para a branch da pesquisa
+
+concurrency:
+  group: pesquisa-extrair
+  cancel-in-progress: false
+
+jobs:
+  extrair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Extrair (BR-DWGD por quinzena, OISST mensal, RONI)
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python pesquisa/extrair_dados.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os dados para a branch (também o que foi extraído antes de uma falha)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pesquisa/dados
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Pesquisa: dados extraídos do Earth Engine"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
