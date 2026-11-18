@@ -2,6 +2,7 @@
 # o dado chega (pesquisa/piloto.py). Só LÊ o Earth Engine; grava pesquisa/piloto/ (e o OISST novo) na branch em que
 # roda. O agendamento só vale na branch padrão (main); fora dela, roda à mão ou quando o piloto muda.
 # 08h17 de Brasília: longe do motor (23h07) e com o mês anterior do OISST já completo no dia 3.
+# O "Run workflow" (à mão) só aparece depois que este arquivo estiver na main.
 name: Piloto - previsao estendida de temperatura
 
 on:
