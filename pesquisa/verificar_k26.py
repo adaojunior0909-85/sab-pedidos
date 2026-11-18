@@ -40,13 +40,11 @@ def contar(img, classe, geom, rotulo):
     for b in sp.BANDAS_SAB:
         um[f'cob_{b}'] = img.select(b).mask().gt(0)
     pilha = ee.Image.cat([ee.Image(v).unmask(0).rename(k) for k, v in um.items()])
-    out = {}
-    for grupo, m in (('entregue', classe.gte(1).And(classe.lte(3))), ('borda', classe.eq(4))):
-        r = pilha.updateMask(m).reduceRegion(reducer=ee.Reducer.sum(), geometry=geom, crs=sp.CRS,
-                                             crsTransform=sp.TRANSFORM, maxPixels=1e10, tileScale=4)
-        out[grupo] = r
-    return ee.Feature(None, {'data': data.format('YYYY-MM-dd'), 'leitura': rotulo,
-                             'entregue': out['entregue'], 'borda': out['borda']})
+    grupos = (('entregue', classe.gte(1).And(classe.lte(3))), ('borda', classe.eq(4)))
+    # uma só soma por dia (os dois grupos como bandas): o Earth Engine recusa muitas agregações ao mesmo tempo
+    tudo = ee.Image.cat([pilha.multiply(m).rename([f'{g}__{k}' for k in um]) for g, m in grupos])
+    return tudo.reduceRegion(reducer=ee.Reducer.sum(), geometry=geom, crs=sp.CRS, crsTransform=sp.TRANSFORM,
+                             maxPixels=1e10, tileScale=4)
 
 
 def main():
@@ -56,19 +54,18 @@ def main():
     classe = ee.Image(sp.MASCARA).select('classe').unmask(0, False)
     linhas = []
     for ano in range(1981, 1991):
-        dias = [f'{ano}-{m:02d}-15' for m in range(1, 13)]
-        col_b = ee.ImageCollection(sp.SAB).filter(ee.Filter.inList('system:index', [sp_id(d) for d in dias]))
-        col_e = sp.colecao(geom, f'{ano}-01-01', f'{ano + 1}-01-01').filter(
-            ee.Filter.inList('system:index', [sp_id(d) for d in dias]))
-        fc = ee.FeatureCollection(col_b.map(lambda i: contar(bruto(i), classe, geom, 'bruto'))).merge(
-            ee.FeatureCollection(col_e.map(lambda i: contar(i, classe, geom, 'entregue'))))
-        info = fc.getInfo()['features']
-        for f in info:
-            p = f['properties']
-            for grupo in ('entregue', 'borda'):
-                linhas.append({'data': p['data'], 'leitura': p['leitura'], 'pixels': grupo,
-                               **{k: int(round(v or 0)) for k, v in p[grupo].items()}})
-        print(f'   {ano}: {len(info)} dia-leituras')
+        col_e = sp.colecao(geom, f'{ano}-01-01', f'{ano + 1}-01-01')
+        for m in range(1, 13):
+            d = f'{ano}-{m:02d}-15'
+            img_b = bruto(ee.Image(f'{sp.SAB}/{sp_id(d)}'))
+            img_e = ee.Image(col_e.filter(ee.Filter.eq('system:index', sp_id(d))).first())
+            for rotulo, img in (('bruto', img_b), ('entregue', img_e)):
+                r = com_retentativa(lambda: contar(img, classe, geom, rotulo).getInfo())
+                for grupo in ('entregue', 'borda'):
+                    linhas.append({'data': d, 'leitura': rotulo, 'pixels': grupo,
+                                   **{k.split('__')[1]: int(round(v or 0)) for k, v in r.items()
+                                      if k.startswith(grupo + '__')}})
+        print(f'   {ano}: 12 dias x 2 leituras')
     cols = ['data', 'leitura', 'pixels'] + list(CONTAGENS) + [f'cob_{b}' for b in sp.BANDAS_SAB]
     with open(os.path.join(SAIDA, 'verificacao_k26.csv'), 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=cols)
@@ -88,6 +85,18 @@ def main():
         mx = max(cob.values())
         print(f'  leitura {leitura:<8} cobertura nos pixels entregues (pixels a menos que a banda mais completa, '
               f'soma dos 120 dias): ' + ', '.join(f'{b} {mx - c:,}' for b, c in cob.items() if mx - c))
+
+
+def com_retentativa(func, tentativas=5):
+    import time
+    for i in range(tentativas):
+        try:
+            return func()
+        except Exception as e:  # noqa: BLE001
+            if i == tentativas - 1:
+                raise
+            print(f'   ⚠️ {str(e)[:120]} | nova tentativa em {15 * (i + 1)} s')
+            time.sleep(15 * (i + 1))
 
 
 def sp_id(d):
