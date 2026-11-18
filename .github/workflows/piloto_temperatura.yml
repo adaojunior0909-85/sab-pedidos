@@ -1,0 +1,73 @@
+# PILOTO: previsão estendida de Tmax e Tmin (16 a 90 dias), emitida nos dias 3 e 17 de cada mês e conferida quando
+# o dado chega (pesquisa/piloto.py). Só LÊ o Earth Engine; grava pesquisa/piloto/ (e o OISST novo) na branch em que
+# roda. O agendamento só vale na branch padrão (main); fora dela, roda à mão ou quando o piloto muda.
+# 08h17 de Brasília: longe do motor (23h07) e com o mês anterior do OISST já completo no dia 3.
+name: Piloto - previsao estendida de temperatura
+
+on:
+  schedule:
+    - cron: '17 11 3,17 * *'
+  push:
+    branches: [pesquisa-previsao-estendida]
+    paths: [pesquisa/piloto.py, .github/workflows/piloto_temperatura.yml]
+  workflow_dispatch:
+    inputs:
+      data:
+        description: 'Data da emissão (AAAA-MM-DD); vazio = hoje'
+        required: false
+        default: ''
+
+permissions:
+  contents: write     # só para subir pesquisa/piloto/ e o OISST novo
+
+concurrency:
+  group: piloto-temperatura
+  cancel-in-progress: false
+
+jobs:
+  piloto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Emitir a previsão da quinzena
+        env:
+          PYTHONUNBUFFERED: '1'
+          DATA: ${{ inputs.data }}
+        run: python -W ignore pesquisa/piloto.py emitir ${DATA:+--data "$DATA"}
+
+      - name: Conferir as previsões já vencidas
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python -W ignore pesquisa/piloto.py conferir
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir as previsões e a conferência
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pesquisa/piloto pesquisa/dados/sst_mensal.csv
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Piloto: previsão e conferência ($(date -u +%Y-%m-%d))"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
