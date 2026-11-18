@@ -24,8 +24,10 @@ NOME_VAR = {'pr': 'Chuva (mm)', 'tx': 'Tmax (°C)', 'tn': 'Tmin (°C)'}
 NOME_ALVO = {'Q1': 'Q1 (dias ~16-31)', 'M2': 'M2 (dias ~31-60)', 'M3': 'M3 (dias ~61-90)'}
 ESTACOES = {'DJF': (12, 1, 2), 'MAM': (3, 4, 5), 'JJA': (6, 7, 8), 'SON': (9, 10, 11)}
 SST_PRED = ('nino34_rel', 'nino12', 'tna', 'tsa', 'atsw', 'iod')
-LAMBDAS_R1 = (0.3, 1.0, 3.0, 10.0, 30.0, 100.0)
-LAMBDAS_R2 = (1.0, 10.0, 100.0, 1000.0)
+# [Rodada 2] grades ampliadas: na rodada 1 a escolha bateu no limite (R1 100, R2 1000)
+LAMBDAS_R1 = (0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0)
+LAMBDAS_R2 = (10.0, 100.0, 1000.0, 10000.0, 100000.0)
+LIMITE_Z_PERS = 3.0          # [Rodada 2] anomalias de persistência limitadas a ±3 desvios
 LAMBDA_FIXO = 1.0            # P1, E1 e E2 (preditores padronizados)
 REGIOES = {
     'Norte': ['Acre', 'Amapá', 'Amazonas', 'Pará', 'Rondônia', 'Roraima', 'Tocantins'],
@@ -105,11 +107,12 @@ def montar(serie, anos, sst, v, alvo):
     """Arrays de uma variável e alvo para as 24 quinzenas de emissão: Y [Q,P,NY] (alvo), S [Q,NY,6] (preditores do
     mar, padronizados no treino), PERS [Q,P,NY,2] (persistência), ENSO [Q,NY] (Niño 3.4 relativo bruto)."""
     S_ = serie[v]
+    Sz = np.sqrt(np.clip(S_, 0, None)) if v == 'pr' else S_     # [Rodada 2] persistência da chuva na raiz
     P, T = S_.shape
     iy = np.arange(ANO_INI, anos[-1] + 1)
     NY = len(iy)
     treino_anos = (anos >= ANO_INI) & (anos <= TREINO_FIM)
-    porq = S_.reshape(P, len(anos), 24)
+    porq = Sz.reshape(P, len(anos), 24)
     clima_q = np.nanmean(porq[:, treino_anos, :], axis=1)
     dp_q = np.nanstd(porq[:, treino_anos, :], axis=1)
     dp_q[dp_q == 0] = np.nan
@@ -126,8 +129,8 @@ def montar(serie, anos, sst, v, alvo):
             col[:, ok] = S_[:, t[ok] + off]
             partes.append(col)
         Y[q] = np.sum(partes, axis=0) if v == 'pr' else np.mean(partes, axis=0)
-        z1 = (S_[:, t - 1] - clima_q[:, (t - 1) % 24]) / dp_q[:, (t - 1) % 24]
-        z2 = (S_[:, t - 2] - clima_q[:, (t - 2) % 24]) / dp_q[:, (t - 2) % 24]
+        z1 = np.clip((Sz[:, t - 1] - clima_q[:, (t - 1) % 24]) / dp_q[:, (t - 1) % 24], -LIMITE_Z_PERS, LIMITE_Z_PERS)
+        z2 = np.clip((Sz[:, t - 2] - clima_q[:, (t - 2) % 24]) / dp_q[:, (t - 2) % 24], -LIMITE_Z_PERS, LIMITE_Z_PERS)
         PERS[q, :, :, 0] = z1
         PERS[q, :, :, 1] = (z1 + z2) / 2
         mi = (iy - ANO_BASE) * 12 + (q // 2) - 1          # mês anterior ao da emissão
@@ -395,9 +398,10 @@ def escolher(df):
     2. o método, dentro da família escolhida, pelo menor erro "ano de fora" em 1982-2010 (29 anos, mais estável)."""
     df = df.copy()
     df['familia_tendencia'] = df['metodo'].map(tem_tendencia)
-    soma = df[df['metodo'].isin(['C0', 'C1'])].pivot_table(index=['variavel', 'regiao'], columns='metodo',
-                                                           values='EQM_validacao', aggfunc='sum')
-    usar = (soma['C1'] < soma['C0']).to_dict()
+    # [Rodada 2] a decisão compara ENSt x ENS (tendência junto com os outros preditores), não C1 x C0
+    soma = df[df['metodo'].isin(['ENS', 'ENSt'])].pivot_table(index=['variavel', 'regiao'], columns='metodo',
+                                                             values='EQM_validacao', aggfunc='sum')
+    usar = (soma['ENSt'] < soma['ENS']).to_dict()
     df['usa_tendencia'] = [usar.get((v, r), False) for v, r in zip(df['variavel'], df['regiao'])]
     cand = df[(df['familia_tendencia'] == df['usa_tendencia']) | (df['metodo'] == 'C0')]
     cand = cand[(cand['metodo'] != 'C0') | ~cand['usa_tendencia']]

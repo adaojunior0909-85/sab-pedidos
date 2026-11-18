@@ -97,3 +97,28 @@ Todas feitas ANTES de rodar o hindcast nos dados reais, por causa do teste com d
 Resultado do teste artificial depois das mudanças (3 sementes): o sinal de ENSO na Tmax do Sul foi achado e
 aprovado (E2, MSESS +0,11 a +0,31), a tendência da Tmin foi achada (C1, +0,56 a +0,60) e 0 de 48 células só com
 ruído foram aprovadas.
+
+## Rodada 2 (escrita depois de ver a rodada 1 e ANTES de rodar a rodada 2)
+
+A rodada 1 é a única pré-registrada antes de qualquer resultado. Como o teste 2011-2025 já foi visto, a rodada 2 é
+**exploratória**: os números dela no teste tendem a parecer melhores do que são. Por isso:
+
+- **Critério para aceitar a rodada 2 no lugar da 1: só os anos de treino.** A rodada 2 só substitui a 1 se, somando
+  todas as células (5 regiões x 4 estações x 3 alvos), o erro dos métodos escolhidos cair nas duas medidas de
+  treino: erro "ano de fora" 1982-2010 e erro da validação para frente 2000-2010, em cada variável. O teste
+  2011-2025 é mostrado, mas não decide nada.
+- **A prova definitiva é para frente** (piloto): previsões guardadas a partir de agora e conferidas depois.
+
+Mudanças da rodada 2 (cada uma corrige um defeito visto na rodada 1, não é ajuste ao teste):
+
+1. **Grade do lambda ampliada**, porque a escolha bateu no limite em quase todos os casos (R1 em 100 e R2 em 1000,
+   os máximos): R1 = 0,3 a 1000; R2 = 10 a 100.000. A escolha continua pelo erro "ano de fora" no treino.
+2. **Persistência da chuva na raiz e anomalias limitadas a ±3 desvios.** Uma quinzena seca com uma chuva isolada
+   virava anomalia enorme (o P1 na raiz teve MSESS -1,35 no Brasil). Agora a anomalia da chuva é calculada na raiz
+   da chuva, e toda anomalia de persistência (chuva, Tmax, Tmin) é limitada a ±3.
+3. **Decisão "usar tendência" com os outros preditores junto.** Na rodada 1 ela comparava C1 x C0 (só a tendência),
+   mas as anomalias recentes já carregam parte do aquecimento: no Paraná a família com tendência foi escolhida e o
+   R2 sem tendência foi melhor. Agora a decisão (por variável e região, juntando estações e alvos, na validação
+   para frente 2000-2010) compara ENSt x ENS.
+
+Antes de rodar com os dados reais, o teste artificial (`teste_sintetico.py`, 3 sementes) precisa continuar passando.
