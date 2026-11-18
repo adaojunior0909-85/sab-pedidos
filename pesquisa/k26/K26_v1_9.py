@@ -8,6 +8,10 @@
 #                     'V1.0 (sem propriedade)' em vez de vazio. LEITURA = 'gravado' volta a valer no modo
 #                     rápido (a condição tinha ido parar dentro de um comentário). C anota a causa do
 #                     escoamento > chuva nos dias definitivos (chuva observada x escoamento do modelo).
+#                     H conta 'tem valor' (máscara > 0): a v1.8 somava a máscara FRACIONÁRIA dos pixels de costa
+#                     e acusava 'pixels a menos' onde o valor existe (conferido em 4 dias de 1985: os 70.982
+#                     pixels entregues têm valor nas bandas). Grava K26_H_mascara_v19.csv (não mistura com
+#                     as contagens antigas).
 #   v1.8 17/11 14h15  só configuração: RODADA = 7 (1981-1990); código igual à v1.6 (a rodada 6 levou 96 min)
 #   v1.7 17/11 06h15  só configuração: RODADA = 6 (1971-1980); código igual à v1.6 (a rodada 5 levou 73 min)
 #   v1.6 17/11 04h30  MODO RÁPIDO no histórico (rodadas 5 a 11): o servidor agrega o período inteiro;
@@ -2332,7 +2336,7 @@ def principal():
     if 'H' in PARTES:
         try:
             log('\n[H] máscara banda a banda e balanço hídrico')
-            feito = ler_acumulado('K26_H_mascara.csv')
+            feito = ler_acumulado('K26_H_mascara_v19.csv')
             pendentes = meses_a_fazer(todos_meses, feito['mes'].unique() if len(feito) else [])
             novos = []
             if MODO_RAPIDO:
@@ -2341,7 +2345,7 @@ def principal():
 
                 def tem_valor(img):
                     img = ee.Image(img)
-                    return ee.Image.cat([ee.Image.constant(1).updateMask(img.select(bb).mask()).rename(bb)
+                    return ee.Image.cat([img.select(bb).mask().gt(0).rename(bb)
                                          for bb in BANDAS]).unmask(0).toFloat()
                 for m in pendentes:
                     soma = colecao(f'{m}-01', fim_do_mes(m)).map(tem_valor).sum().rename(BANDAS).addBands(CLASSE)
@@ -2355,7 +2359,7 @@ def principal():
                     rota_m = dias_rota.get(f'{m}-01')
                     linhas_m = [{'mes': m, 'data': m, 'rota': rota_m, 'classe': cl, 'nome_classe': CLASSES.get(cl, f'?{cl}'),
                                  **{bb: int(round(v.get(bb) or 0)) for bb in BANDAS}} for cl, v in g.items()]
-                    acrescentar(pd.DataFrame(linhas_m), 'K26_H_mascara.csv')     # checkpoint por mês
+                    acrescentar(pd.DataFrame(linhas_m), 'K26_H_mascara_v19.csv')     # checkpoint por mês
                     log(f'   H: {m} lido')
             for m in ([] if MODO_RAPIDO else pendentes):
                 dd = dias_do_mes(m)
@@ -2364,7 +2368,7 @@ def principal():
                         saida = []
                         for d in lote:
                             img = dia(d)
-                            saida += [ee.Image.constant(1).updateMask(img.select(bb).mask()).rename(bb)
+                            saida += [img.select(bb).mask().gt(0).rename(bb)
                                       for bb in BANDAS]
                         return ee.Image.cat([s.unmask(0) for s in saida]).addBands(CLASSE)
                     try:
@@ -2383,9 +2387,9 @@ def principal():
                             novos.append(linha)
                     log(f'   H: {lote[0]} a {lote[-1]} lidos')
                 if novos:
-                    acrescentar(pd.DataFrame(novos), 'K26_H_mascara.csv')
+                    acrescentar(pd.DataFrame(novos), 'K26_H_mascara_v19.csv')
                     novos = []
-            H = ler_acumulado('K26_H_mascara.csv')
+            H = ler_acumulado('K26_H_mascara_v19.csv')
             if len(H):
                 def faltas(Hs):
                     if not len(Hs):
