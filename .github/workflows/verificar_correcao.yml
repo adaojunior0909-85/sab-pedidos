@@ -1,0 +1,46 @@
+# SAB: verifica COM Earth Engine a correção 2026.11.18 (pedido de uma variável só saía com a coluna vazia).
+# Só lê o SAB_V1 (getInfo) num pixel de Cascavel-PR; não exporta nada nem grava no Drive.
+# Roda sozinho quando a branch correcao-pedido-uma-variavel é enviada ao GitHub, ou à mão (aba Actions).
+name: Verificar correcao uma variavel
+
+on:
+  push:
+    branches: [correcao-pedido-uma-variavel]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Testes da rotina (sem Earth Engine)
+        run: python testes/teste_sab_pedido.py
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Verificar a correção no Earth Engine (19 variáveis, uma por vez)
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python testes/verificar_uma_variavel_ee.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials

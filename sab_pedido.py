@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.03 <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.18 <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido (painel SAB ou formulário -> Apps Script -> GitHub) e manda o Earth Engine exportar os
@@ -10,6 +10,10 @@
 #   Apps Script entrega o link quando todos os arquivos do manifesto estiverem na pasta. Quem pediu Excel
 #   recebe também os .xlsx, feitos depois pela rotina sab_xlsx.py.
 #
+# [2026.11.18] PEDIDO DE UMA VARIÁVEL SÓ SAÍA COM A COLUNA VAZIA. Com uma banda só, o reduceRegions do Earth Engine
+#   grava a média na propriedade 'mean' (nome do redutor), e não 'pr_mm' (nome da banda); o formatar() procurava
+#   'pr_mm', não achava e deixava a célula vazia em todas as linhas (diário e mensal; qualquer variável sozinha).
+#   Agora o redutor recebe o nome da banda (_redutor_media). Pedidos de 2 ou mais variáveis não mudam (K16 igual).
 # [2026.11.03] MESMO CÁLCULO DO PAINEL 2026.11.1: correção de leitura dos pixels B (núcleo do BR-DWGD) e da radiação dos
 #   pixels C (limitada à de céu claro, FAO-56), só nos dias de 1961 a 2025 e só quando a área tem pixel B ou C
 #   (função corrigir_pixels_b). K16 com o caso A6 (Lagoa dos Patos). O banco não muda.
@@ -55,7 +59,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.11.03'
+VERSAO_ROTINA = '2026.11.18'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -1020,6 +1024,15 @@ def filtrar_enso(ic, enso):
         .sort('system:time_start')
 
 
+def _redutor_media(bandas):
+    """[2026.11.18] Redutor da média do reduceRegions. Com 2 ou mais bandas o Earth Engine já grava cada média com o
+    nome da banda; com UMA banda só, grava na propriedade 'mean' (nome do redutor) e o formatar(), que procura o nome
+    da banda, deixava a coluna inteira vazia. setOutputs dá à saída o nome da banda nesse caso."""
+    ee = _ee()
+    bandas = list(bandas)
+    return ee.Reducer.mean().setOutputs(bandas) if len(bandas) == 1 else ee.Reducer.mean()
+
+
 def linhas_diarias(ic, grade, bandas, escala, enso=None):
     """exportarSerieDiaria do painel. [E-MAIL] só as bandas pedidas entram no reduceRegions. [ENSO] colunas ENSO."""
     ee = _ee()
@@ -1034,7 +1047,7 @@ def linhas_diarias(ic, grade, bandas, escala, enso=None):
         conf = ee.Algorithms.If(img.propertyNames().contains('Confianca_Prazo'), img.get('Confianca_Prazo'), '')
         data = ee.Date(img.get('system:time_start')).format('YYYY-MM-dd')
         extra = props_enso(img, enso) if enso else {}
-        return img.select(bandas).reduceRegions(collection=grade, reducer=ee.Reducer.mean(), scale=escala).map(
+        return img.select(bandas).reduceRegions(collection=grade, reducer=_redutor_media(bandas), scale=escala).map(
             lambda f: f.set({'Data': data, 'Tipo_Dado': tipo, 'Versao_Algoritmo': alg,
                              'Janela_Chuva_UTC': janela, 'Confianca_Prazo': conf}).set(extra))
     return ic.map(por_dia).flatten()
@@ -1069,7 +1082,7 @@ def linhas_mensais(ic, grade, ano, bandas, escala, enso=None):
 
     def reduzir(img):
         extra = {c: img.get(c) for c in COLUNAS_ENSO} if enso else {}
-        return img.reduceRegions(collection=grade, reducer=ee.Reducer.mean(), scale=escala).map(
+        return img.reduceRegions(collection=grade, reducer=_redutor_media(soma + media), scale=escala).map(
             lambda f: f.set({'Data': img.get('Data'), 'Tipo_Dado': 'Agregado_Mensal',
                              'Versao_Algoritmo': img.get('Versao_Algoritmo'), 'N_Dias': img.get('n_imgs'),
                              'Dias_no_Mes': img.get('Dias_no_Mes'), 'Mes_Completo': img.get('Mes_Completo')}).set(extra))

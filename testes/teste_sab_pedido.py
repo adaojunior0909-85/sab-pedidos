@@ -259,5 +259,30 @@ confere(sp.descricao_tarefa('P20261029', 7) == 'SABPED_P20261029_007' and sp.pas
         'nomes de tarefa e de pasta')
 confere(sp.descricao_tarefa('SAB2026-00001', 0) == 'SABPED_SAB2026-00001_000', 'ID sequencial do Apps Script')
 
+print('[2026.11.18: pedido de uma variável só (coluna vazia)]')
+
+
+class _RedutorFalso:
+    """Imita ee.Reducer.mean(): guarda o nome da saída que o Earth Engine daria à média."""
+    def __init__(self, saidas=None):
+        self.saidas = saidas
+
+    def setOutputs(self, saidas):
+        return _RedutorFalso(list(saidas))
+
+
+_ee_original = sp._ee
+sp._ee = lambda: type('EEFalso', (), {'Reducer': type('R', (), {'mean': staticmethod(_RedutorFalso)})})
+try:
+    for cod in sp.CODIGOS:                      # cada uma das 19 variáveis pedida sozinha
+        bandas = sp.bandas_do_pedido([cod])
+        r = sp._redutor_media(bandas)
+        confere(len(bandas) == 1 and r.saidas == bandas, f'só {cod}: a média sai com o nome da banda {bandas}')
+    confere(sp._redutor_media(sp.bandas_do_pedido(['pr', 'tmax'])).saidas is None,
+            '2 variáveis: redutor sem mudança (nomes das bandas pelo próprio Earth Engine, K16 igual)')
+    confere(sp._redutor_media(sp.bandas_do_pedido(sp.CODIGOS)).saidas is None, 'todas: redutor sem mudança')
+finally:
+    sp._ee = _ee_original
+
 print('\n' + (f'{falhas} FALHA(S)' if falhas else 'TODOS OS TESTES PASSARAM'))
 sys.exit(1 if falhas else 0)
