@@ -1,0 +1,58 @@
+# Confere os achados da K26 (1981-1990) no que o usuário recebe (banco bruto x leitura corrigida do painel/pedidos).
+# Só LÊ o Earth Engine; grava pesquisa/resultados_k26/ na branch da pesquisa.
+name: Pesquisa - verificar K26
+
+on:
+  push:
+    branches: [pesquisa-previsao-estendida]
+    paths: [pesquisa/verificar_k26.py, .github/workflows/pesquisa_k26.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir pesquisa/resultados_k26/ para a branch da pesquisa
+
+concurrency:
+  group: pesquisa-k26
+  cancel-in-progress: false
+
+jobs:
+  extrair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Verificar a K26 no que o usuário recebe
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python pesquisa/verificar_k26.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os dados para a branch (também o que foi extraído antes de uma falha)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pesquisa/resultados_k26
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Pesquisa: verificação da K26"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
