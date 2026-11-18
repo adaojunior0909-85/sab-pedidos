@@ -82,3 +82,19 @@ escoamento corrigido nunca passa da chuva observada do dia.
 
 Mesmo aprovada, a correção só entra no que se entrega por decisão do dono do projeto e junto no painel e nos pedidos
 (com a K16), porque muda os valores de 1961-2025 de duas variáveis.
+
+### Resultado do teste 2 (18/11/2026)
+
+| | 1981-1990 | 2001-2010 | Regra |
+|---|---|---|---|
+| Chuva efetiva 0 com chuva >= 5 mm | 1,096% -> 0,150% (-86%) | 1,233% -> 0,172% (-86%) | cai >= 50%: SIM |
+| Escoamento > chuva + 10 mm | 0,655% -> 0% | 0,661% -> 0% | cai >= 90%: SIM |
+| Escoamento total | -14,5% | -15,5% | ±20%: SIM |
+| Meses além de ±30% | maio -32%, set -31% | maio -31%, jun -33% | ±30%: **NÃO** |
+
+**Correção NÃO recomendada pela regra.** Ela resolve o que o usuário vê (a chuva efetiva zerada cai 86% e o
+escoamento nunca passa da chuva), mas tira mais de 30% do escoamento em meses secos: justamente o escoamento que o
+ERA5 gerava sem chuva observada. Como o fator do SMAP foi calibrado sobre o escoamento atual, adotar a correção pede
+recalibrar o fator sobre o escoamento corrigido (um projeto próprio, com teste contra o SMAP como a parte R da K26),
+não só trocar a conta. Até lá ficam o aviso no dicionário dos pedidos (PR #3) e a recomendação de usar escoamento e
+chuva efetiva em somas mensais.
