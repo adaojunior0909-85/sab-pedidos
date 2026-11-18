@@ -57,3 +57,28 @@ choveu e o observado não, sai escoamento sem chuva. Em 2026, com chuva e escoam
 chuva observada: escoamento = chuva BR-DWGD x min(escoamento ERA5 / chuva ERA5, 1), com as janelas alinhadas. Por
 construção o escoamento nunca passa da chuva; o teste precisa medir quanto muda o total por mês e região. Como mexe
 no banco histórico (travado), a decisão é do dono do projeto. Até lá, o dicionário dos pedidos avisa o usuário.
+
+## Teste 2: coeficiente de escoamento do ERA5 aplicado à chuva observada
+
+Escrito ANTES de rodar (`testar_escoamento2.py`).
+
+**Correção testada** (só nos dias definitivos, na leitura; o banco não muda):
+
+    k(D) = min(1, soma do escoamento SAB de D-2 a D+2 / máx(soma da chuva ERA5-Land de D-2 a D+2, 0,1 mm))
+    escoamento corrigido(D) = k(D) x chuva BR-DWGD(D)
+
+O escoamento SAB já tem o fator do SMAP (o coeficiente k herda essa calibração). A janela de 5 dias torna o
+coeficiente estável e faz desaparecer a diferença de 12 h entre as janelas (12-12 x 00-24 UTC). Por construção, o
+escoamento corrigido nunca passa da chuva observada do dia.
+
+**Amostra:** dia 15 de cada mês de 1981-1990 (a mesma da K26 e do teste 1) e de 2001-2010, pixels entregues.
+
+**Regra de aceite (fixada antes):** a correção é recomendada se, em relação ao atual, nas duas décadas:
+
+1. chuva efetiva zerada em dia com chuva >= 5 mm cair pelo menos 50%;
+2. escoamento acima da chuva + 10 mm cair pelo menos 90%;
+3. o escoamento total mudar no máximo ±20%, e em cada mês do ano no máximo ±30% (o fator do SMAP foi calibrado no
+   escoamento do ERA5; mudanças maiores pediriam nova calibração, não esta correção).
+
+Mesmo aprovada, a correção só entra no que se entrega por decisão do dono do projeto e junto no painel e nos pedidos
+(com a K16), porque muda os valores de 1961-2025 de duas variáveis.

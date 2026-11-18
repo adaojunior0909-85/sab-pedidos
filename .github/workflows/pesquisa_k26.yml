@@ -4,8 +4,8 @@ name: Pesquisa - verificar K26
 
 on:
   push:
-    branches: [pesquisa-previsao-estendida]
-    paths: [pesquisa/verificar_k26.py, pesquisa/testar_escoamento.py, .github/workflows/pesquisa_k26.yml]
+    branches: [pesquisa-previsao-estendida, pesquisa-escoamento]
+    paths: [pesquisa/verificar_k26.py, pesquisa/testar_escoamento.py, pesquisa/testar_escoamento2.py, .github/workflows/pesquisa_k26.yml]
   workflow_dispatch:
 
 permissions:
@@ -37,10 +37,10 @@ jobs:
           mkdir -p ~/.config/earthengine
           printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
 
-      - name: 'K26 - teste do escoamento (alinhamento das janelas)'
+      - name: 'K26 - teste 2 do escoamento (coeficiente do ERA5 na chuva observada)'
         env:
           PYTHONUNBUFFERED: '1'
-        run: python pesquisa/${SCRIPT_K26:-testar_escoamento.py}
+        run: python pesquisa/${SCRIPT_K26:-testar_escoamento2.py}
 
       - name: Apagar a credencial da máquina
         if: always()
