@@ -35,3 +35,25 @@ O alinhamento é adotado se, em relação ao `atual`:
 O teto (`alinhado_teto`) só é adotado junto se, depois do alinhamento, retirar menos de 2% da soma do escoamento.
 Se o alinhamento não passar, a hipótese está errada e nada é mudado no que se entrega; a decisão volta para a
 mesa (opções de tirar os índices ou documentar).
+
+## Resultado (testar_escoamento.py, 18/11/2026)
+
+| Leitura | Escoamento > chuva | > chuva + 10 mm | > 200 mm | Chuva efetiva 0 com chuva >= 5 mm | Escoamento total |
+|---|---|---|---|---|---|
+| 1981-1990 atual | 28,99% | 0,656% | 0,0033% | 1,096% | 8.585.115 |
+| 1981-1990 alinhado | 32,32% | 0,378% | 0,0011% | 0,810% | 8.437.525 (-1,72%) |
+| 1981-1990 alinhado com teto | 0% | 0% | 0% | 0,810% | 6.319.711 (-25%) |
+| 2026 atual (mesma fonte e janela) | **0,47%** | 0,120% | 0,0094% | 0,465% | |
+
+**Regra: alinhamento NÃO adotado** (chuva efetiva zerada caiu 26% e escoamento > chuva + 10 caiu 42%; o mínimo era
+50%). O teto tiraria 25% da água: também não. Nada muda no que se entrega por causa deste teste.
+
+**Causa mais provável (não a janela):** nos dias definitivos, a chuva é a OBSERVADA (BR-DWGD) e o escoamento é do
+ERA5-Land, gerado pela chuva DO MODELO. No total o escoamento é 21% da chuva (plausível), mas dia a dia, onde o ERA5
+choveu e o observado não, sai escoamento sem chuva. Em 2026, com chuva e escoamento da mesma fonte, o problema cai de
+29% para 0,47% dos pixel-dias.
+
+**Correção proposta (próximo teste, com regra própria antes):** levar o coeficiente de escoamento do ERA5 para a
+chuva observada: escoamento = chuva BR-DWGD x min(escoamento ERA5 / chuva ERA5, 1), com as janelas alinhadas. Por
+construção o escoamento nunca passa da chuva; o teste precisa medir quanto muda o total por mês e região. Como mexe
+no banco histórico (travado), a decisão é do dono do projeto. Até lá, o dicionário dos pedidos avisa o usuário.
