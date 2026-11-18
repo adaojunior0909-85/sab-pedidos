@@ -1,36 +1,49 @@
-# K26 (rodada 7, 1981-1990): o que os achados significam e o que mudar
+# K26 (rodada 7, 1981-1990): o que os achados significam e o que mudou na v1.9
 
-Base: o pacote K26_20261118_173417 e duas verificações só de leitura nesta branch:
-`verificar_k26.py` (o que chega ao usuário) e `testar_escoamento.py` (hipótese das janelas, ESCOAMENTO.md).
+Base: o pacote K26_20261118_173417, o código da K26 v1.8 (`pesquisa/k26/K26_v1_8.py`) e três verificações só de
+leitura: `verificar_k26.py`, `testar_escoamento.py` e `testar_escoamento2.py` (ESCOAMENTO.md) e `testar_mascara_h.py`.
+
+**Correção de uma afirmação anterior:** este arquivo dizia que a K26 lia o banco bruto. Não lê: desde a v1.6 ela
+mede o valor ENTREGUE (`LEITURA = 'entregue'`), com as mesmas correções de leitura do painel e dos pedidos. As
+contagens da K26 e as das verificações batem; a diferença (16,5% x 29% no escoamento > chuva) vem da tolerância de
+0,01 mm da K26 e da amostra (todos os dias x dia 15 de cada mês).
 
 ## O que cada achado significa
 
-| Item | K26 (banco bruto) | No que o usuário recebe | Situação |
+| Item | K26 v1.8 | Conferido | Situação |
 |---|---|---|---|
 | A1 | 3.652 dias, sem buraco nem repetição | — | OK |
-| A2 | "versões: =3652", método vazio | — | Os dias V1.0 não têm a propriedade `versao_algoritmo`; o painel e os pedidos já tratam a falta como V1.0 |
-| A3 | 1.247 células com classe e sem valor no dia | — | Diferença de contagem (máscara estática x dia). Artigo: usar a máscara (72.046) e dizer qual é |
-| B | escoamento até 1.763 mm/dia; Rs até 59,7 MJ/m²; ETo até 25,7 mm na C_borda | escoamento > 200 mm em 0,003% dos pixel-dias; Rs e ETo da C_borda não vão às planilhas | Só o escoamento chega (ver C) |
-| C | escoamento > chuva em 16,5% (todos os pixels); Rs > céu claro; Rs e ETo zerados | escoamento > chuva em **29%** dos pixel-dias entregues; chuva efetiva 0 em **1,1%** dos dias com chuva >= 5 mm; Rs > céu claro em 0,002% | **Só o escoamento é problema real** (causa: chuva observada x escoamento do modelo; ESCOAMENTO.md) |
-| H | até 0,41% menos pixels nas bandas só do ERA5-Land | **nenhuma diferença** nos pixels entregues | Está fora das classes entregues (borda) |
+| A2 | "versões: =3652", método vazio | o inventário grava '' quando a propriedade falta; o `fillna` não pega '' | Defeito de relatório; corrigido na v1.9 |
+| A3 | 1.247 células com classe e sem valor no dia | — | Diferença de contagem (máscara estática x dia). Artigo: usar a máscara (72.046) |
+| B | escoamento até 1.191 mm/dia na classe A; Rs e ETo fora da faixa só na C_borda | o escoamento extremo chega às planilhas (> 200 mm em 0,003% dos pixel-dias entregues) | Só o escoamento é problema real (ver C) |
+| C | FALHA: escoamento > chuva em 16,5%; Rs e ETo anômalos | escoamento > chuva em 29% (sem tolerância) e chuva efetiva 0 em 1,1% dos dias com chuva >= 5 mm, nos pixels entregues; Rs > céu claro em 0,002% | **Problema real só no escoamento**: chuva observada x escoamento do modelo (ESCOAMENTO.md). Rs e ETo anômalos ficam quase todos na C_borda |
+| H | até 8.856 pixel-dias a menos por mês na ET real e outras bandas do ERA5-Land, inclusive nos pixels entregues | nos 4 dias de 1985 conferidos, **os 70.982 pixels entregues têm valor em todas as bandas**; 1.205 (BR-DWGD) a 1.673 (ERA5-Land) deles têm máscara fracionária | **Não é vazamento**: a v1.8 somava a máscara fracionária dos pixels de costa |
 
-## O que mudar no script da K26 (para as próximas rodadas)
+## O que mudou na v1.9 (`pesquisa/k26/K26_v1_9.py`)
 
-1. **Medir também o que o usuário recebe**, não só o banco bruto: aplicar as correções de leitura do painel
-   (escoamento e solo V1.0 com o fator do SMAP limitado a 5, pixels B com o BR-DWGD, Rs dos C_interior limitada) e
-   separar os pixels entregues (A, B, C_interior) da C_borda em todas as partes. Hoje uma violação só na borda faz o
-   item C sair FALHA sem chegar a ninguém.
-2. **Item C em dois níveis:** FALHA só para o que chega ao usuário; o que fica na borda vira INFO.
-3. **Escoamento x chuva com a janela e a fonte certas:** nos dias definitivos, a chuva é 12-12 UTC (BR-DWGD) e o
-   escoamento é 00-24 UTC (ERA5-Land, chuva do modelo). Comparar dia a dia mede a diferença de fonte, não um erro de
-   cálculo. Sugestão: reportar também a razão escoamento/chuva por mês e região (no total ela é ~21%, plausível).
-4. **A2:** escrever "V1.0 (sem propriedade)" quando `versao_algoritmo` não existe, em vez de vazio.
-5. **H:** contar a falta de pixels só dentro das classes entregues.
-6. **Cobrir os outros períodos**, em especial 2026 (rotas ERA5 provisória e GFS, outro código), onde a K26 ainda
-   não rodou.
+1. `RODADA = 8` (1991-2000), a próxima da sequência.
+2. **Veredito de B, C e H só nos pixels ENTREGUES** (A, B, C_interior). O que acontece só na C_borda (fora das
+   planilhas) vira INFO (`B_borda`, `C_borda`, `H_borda`).
+3. **C anota a causa do escoamento > chuva** nos dias definitivos e aponta ESCOAMENTO.md. Continua FALHA, porque
+   chega ao usuário.
+4. **H conta "tem valor"** (máscara > 0) em vez de somar a máscara fracionária, e grava `K26_H_mascara_v19.csv`
+   (as contagens antigas não se misturam).
+5. **A2** escreve "V1.0 (sem propriedade)" em vez de vazio.
+6. **`LEITURA = 'gravado'` volta a valer no modo rápido**: na v1.8 a condição tinha ido parar dentro de um
+   comentário, e o modo rápido aplicava sempre a leitura corrigida.
 
-## O que já foi feito
+Os vereditos novos de B, C e H foram refeitos fora do Earth Engine com os CSV da rodada 7: C nos entregues continua
+FALHA (escoamento) e a C_borda vira INFO; B nos entregues fica só com o escoamento.
 
-- Dicionário dos pedidos com o aviso sobre escoamento e chuva efetiva: PR #3 (só texto, nenhum valor muda).
-- Correção proposta do escoamento histórico (coeficiente do ERA5 aplicado à chuva observada): precisa de teste
-  próprio com regra fixada antes e de decisão do dono, porque mexe no histórico travado.
+## Como rodar a rodada 8
+
+Igual às outras: reiniciar a sessão, colar o arquivo inteiro e rodar. Os CSV das rodadas anteriores continuam
+valendo em `/content/K26_acumulado/`, menos o `K26_H_mascara.csv` (a v1.9 usa outro arquivo e refaz o H da década).
+Para o H das décadas já rodadas (1961-1990) com a contagem nova, rode as rodadas 5, 6 e 7 de novo só se quiser o
+número exato para o artigo: o resultado esperado é "sem falta nos pixels entregues".
+
+## O que continua em aberto
+
+- **Escoamento dos dias de 1961-2025:** a correção pelo coeficiente do ERA5 foi testada e NÃO passou na regra (tira
+  mais de 30% do escoamento em meses secos). Corrigir de verdade pede recalibrar o fator do SMAP sobre o escoamento
+  corrigido: um projeto próprio. Enquanto isso, o dicionário dos pedidos avisa o usuário.
