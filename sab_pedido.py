@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.18 <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.19 <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido (painel SAB ou formulário -> Apps Script -> GitHub) e manda o Earth Engine exportar os
@@ -10,6 +10,8 @@
 #   Apps Script entrega o link quando todos os arquivos do manifesto estiverem na pasta. Quem pediu Excel
 #   recebe também os .xlsx, feitos depois pela rotina sab_xlsx.py.
 #
+# [2026.11.19] Dicionário: aviso de que escoamento superficial e chuva efetiva dos dias de 1961-2025 não batem dia a dia
+#   com a chuva (auditoria K26 e pesquisa/ESCOAMENTO.md). Só o texto do dicionário muda; nenhum valor muda.
 # [2026.11.18] PEDIDO DE UMA VARIÁVEL SÓ SAÍA COM A COLUNA VAZIA. Com uma banda só, o reduceRegions do Earth Engine
 #   grava a média na propriedade 'mean' (nome do redutor), e não 'pr_mm' (nome da banda); o formatar() procurava
 #   'pr_mm', não achava e deixava a célula vazia em todas as linhas (diário e mensal; qualquer variável sozinha).
@@ -59,7 +61,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.11.18'
+VERSAO_ROTINA = '2026.11.19'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -227,10 +229,10 @@ DICIONARIO = [
      'CSV em UTF-8, separado por virgula, com PONTO decimal (ex.: 18.40); celula vazia = sem dado. No Excel em portugues, NAO abra com duplo clique: Dados > Obter Dados > De Texto/CSV; Origem do arquivo 65001: Unicode (UTF-8); Delimitador Virgula; Deteccao de tipo de dados: Nao detectar tipos de dados; Transformar Dados; selecione as colunas numericas > botao direito > Alterar Tipo > Usando a Localidade > Numero Decimal, Ingles (Estados Unidos); Fechar e Carregar. Ou peca o formato Excel (.xlsx), que ja vem com os numeros prontos.',
      '-'),
     ('Chuva_Efetiva_mm',
-     'INDICE NAO VALIDADO: chuva menos o escoamento superficial (minimo zero). Herda a incerteza do escoamento (auditoria E3: fator do SMAP acima de 5 em ate 60% dos pixels na seca). Nao e medida da chuva que infiltrou.',
+     'INDICE NAO VALIDADO: chuva menos o escoamento superficial (minimo zero). Herda a incerteza do escoamento (auditoria E3: fator do SMAP acima de 5 em ate 60% dos pixels na seca). Nao e medida da chuva que infiltrou. ATENCAO nos dias de 1961 a 2025: a chuva e a observada (BR-DWGD) e o escoamento e do modelo ERA5-Land, que responde a chuva do proprio modelo; por isso, dia a dia, o escoamento pode passar da chuva e a chuva efetiva sair 0 mesmo em dia chuvoso (auditoria K26: 1,1% dos dias com chuva de 5 mm ou mais, em 1981-1990). Use em somas mensais ou maiores, nao dia a dia.',
      'mm'),
     ('Runoff_Superficial_mm',
-     'INDICE NAO VALIDADO de escoamento superficial (enxurrada). Auditoria E3: fator do SMAP acima de 5 em ate 60% dos pixels na seca.',
+     'INDICE NAO VALIDADO de escoamento superficial (enxurrada). Auditoria E3: fator do SMAP acima de 5 em ate 60% dos pixels na seca. ATENCAO nos dias de 1961 a 2025: o escoamento vem do modelo ERA5-Land (que responde a chuva do proprio modelo) e a chuva e a observada (BR-DWGD); dia a dia eles nao batem: o escoamento passa da chuva do dia em cerca de 29% dos pixel-dias (auditoria K26, 1981-1990), mas no total e cerca de 21% da chuva. Use em somas mensais ou maiores, nao dia a dia. De 2026 em diante, chuva e escoamento vem da mesma fonte (0,5% dos pixel-dias).',
      'mm'),
     ('Runoff_Subsuperficial_mm',
      'INDICE NAO VALIDADO de escoamento por dentro do solo (fluxo subsuperficial). Mesma ressalva do escoamento superficial (auditoria E3).',
