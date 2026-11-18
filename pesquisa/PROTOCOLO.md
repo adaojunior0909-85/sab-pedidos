@@ -49,8 +49,8 @@ raiz e devolvida em mm.
 - **Esquema A (principal, fora da amostra no tempo):** treino 1982-2010, teste 2011-2025. Tudo que é ajustado
   (climatologia, tendência, coeficientes, parâmetro do ridge, escolha do método) usa só 1982-2010.
 - **Esquema B (estabilidade):** deixar um ano de fora, 1982-2025.
-- **Escolha do método por célula** (região x estação x alvo x variável): pelo menor erro no esquema B **dentro de
-  1982-2010**; o teste 2011-2025 só mede o método escolhido. Escolher pelo teste seria trapaça (viés de seleção).
+- **Escolha do método por célula** (região x estação x alvo x variável): só com 1982-2010 (registro 2 abaixo); o
+  teste 2011-2025 só mede o método escolhido. Escolher pelo teste seria trapaça (viés de seleção).
 
 ## Métricas
 
@@ -78,4 +78,22 @@ Earth Engine (GEFS estendido, C3S); aprendizado de máquina não linear (só dep
 
 ## Registro de mudanças
 
-(nenhuma)
+Todas feitas ANTES de rodar o hindcast nos dados reais, por causa do teste com dados artificiais
+(`teste_sintetico.py`: sinais plantados de ENSO e de tendência e regiões só com ruído, 3 sementes aleatórias).
+
+1. **Tendência separada dos outros preditores.** Com a tendência como termo fixo em todos os modelos, uma oscilação
+   longa (como as do ENSO) virava tendência falsa em 29 anos e era estendida para 2011-2025: no teste artificial, só
+   a tendência dobrou o erro e contaminou os outros métodos. Agora cada método tem a versão sem tendência e a com
+   tendência (sufixo `t`; C0 com tendência = C1), e a tendência é UMA por pixel, estimada com todas as quinzenas de
+   emissão juntas (a de cada quinzena saía tão ruidosa quanto a própria tendência). Os métodos da tabela continuam,
+   em duas versões; o ENS virou ENS = média de E2, P1, R2 e ENSt = média de C1, E2t, P1t, R2t.
+2. **Escolha em duas decisões**, porque com 14 métodos a escolha pelo menor erro numa janela só de 11 anos virou
+   sorte (pegou uma versão com tendência ruim enquanto o modelo certo tinha MSESS +0,31):
+   a. usar tendência ou não, por variável e região, juntando estações e alvos: C1 x C0 numa validação PARA FRENTE
+      dentro do treino (ajuste 1982-1999, validação 2000-2010), porque é a única decisão que depende de extrapolar;
+   b. o método, dentro da família escolhida, pelo menor erro "deixando um ano de fora" em 1982-2010 (29 anos).
+   A regra de aprovação não mudou.
+
+Resultado do teste artificial depois das mudanças (3 sementes): o sinal de ENSO na Tmax do Sul foi achado e
+aprovado (E2, MSESS +0,11 a +0,31), a tendência da Tmin foi achada (C1, +0,56 a +0,60) e 0 de 48 células só com
+ruído foram aprovadas.
