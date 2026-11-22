@@ -64,16 +64,18 @@ for dia in ('2026-03-10', '2026-10-01', '2026-11-16', '2025-06-15', '1965-01-15'
     velha, nova = leitura(BRASIL, dia, False), leitura(BRASIL, dia, True)
     ra = sp._radiacao_topo(ee.Date(dia))
     rs_v, rs_n = velha.select('rs'), nova.select('rs')
-    abaixo = rs_v.lt(ra.multiply(0.03)).And(rs_v.mask().gt(0))
-    sumiu = rs_v.mask().gt(0).And(rs_n.mask().eq(0))
-    mudou_rs = rs_n.mask().gt(0).And(rs_n.neq(rs_v))
+    # contagens em PIXELS inteiros: o unmask tira a máscara fracionária da borda, que pesaria a soma
+    tem_v, tem_n = rs_v.mask().gt(0), rs_n.mask().gt(0)
+    abaixo = rs_v.unmask(9999).lt(ra.multiply(0.03)).And(tem_v)
+    sumiu = tem_v.And(tem_n.Not())
+    mudou_rs = tem_n.And(rs_n.unmask(0).neq(rs_v.unmask(0)))
     outras_dif = ee.Image.cat([velha.select(b).unmask(-9999).neq(nova.select(b).unmask(-9999)).rename(b)
                                for b in OUTRAS + ['amplitude_diaria', 'deficit_diario', 'chuva_efetiva']])
-    sobra = rs_n.lt(ra.multiply(0.03)).And(rs_n.mask().gt(0))
+    sobra = rs_n.unmask(9999).lt(ra.multiply(0.03)).And(tem_n)
     pilha = ee.Image.cat([abaixo.rename('abaixo'), sumiu.rename('sumiu'), abaixo.neq(sumiu).rename('fora_da_regra'),
-                          mudou_rs.unmask(0).rename('rs_mudou_valor'), sobra.unmask(0).rename('sobra'),
+                          mudou_rs.rename('rs_mudou_valor'), sobra.rename('sobra'),
                           outras_dif.reduce(ee.Reducer.max()).rename('outras_mudaram'),
-                          rs_v.mask().gt(0).rename('com_rs')]).unmask(0)
+                          tem_v.rename('com_rs')]).unmask(0).updateMask(ee.Image(1))
     r = pilha.reduceRegion(ee.Reducer.sum(), BRASIL, crs=sp.CRS, crsTransform=sp.TRANSFORM, maxPixels=1e10,
                            tileScale=4).getInfo()
     r = {k: int(round(x or 0)) for k, x in r.items()}
