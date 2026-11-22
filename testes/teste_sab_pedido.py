@@ -284,5 +284,62 @@ try:
 finally:
     sp._ee = _ee_original
 
+print('[2026.11.22: radiação abaixo de 3% de Ra sai vazia]')
+
+
+class _ImgFalsa:
+    """Imagem de UM pixel: valor e máscara por banda; só as operações que vazio_rs_impossivel usa."""
+    def __init__(self, bandas, ra=30.0):
+        self.b, self.ra = bandas, ra
+
+    def select(self, nome):
+        return _ImgFalsa({nome: self.b[nome]}, self.ra)
+
+    def date(self):
+        return None
+
+    def gte(self, outra):
+        (v, m), = self.b.values()
+        return _ImgFalsa({'ok': (v >= outra.valor, 1)})
+
+    def updateMask(self, ok):
+        (n, (v, m)), = self.b.items()
+        return _ImgFalsa({n: (v, m * ok.b['ok'][0])}, self.ra)
+
+    def rename(self, nome):
+        (v, m), = self.b.values()
+        return _ImgFalsa({nome: (v, m)}, self.ra)
+
+    def addBands(self, outra, nomes, sobrescrever):
+        assert nomes is None and sobrescrever is True
+        return _ImgFalsa({**self.b, **outra.b}, self.ra)
+
+
+class _Ra:
+    def __init__(self, v):
+        self.valor = v
+
+    def multiply(self, k):
+        return _Ra(self.valor * k)
+
+
+_ra_original = sp._radiacao_topo
+sp._ee = lambda: None
+sp._radiacao_topo = lambda data: _Ra(30.0)                  # Ra = 30 MJ/m²: o limite é 0,9 MJ/m²
+try:
+    for rs, vazio in ((0.0, True), (0.89, True), (0.9, False), (18.4, False)):
+        img = _ImgFalsa({'rs': (rs, 1), 'et_potencial': (3.1, 1), 'pr_mm': (0.0, 1)})
+        s = sp.vazio_rs_impossivel(img).b
+        confere(s['rs'] == (rs, 0 if vazio else 1) and s['et_potencial'] == (3.1, 1) and s['pr_mm'] == (0.0, 1),
+                f'Rs {rs} com Ra 30: {"vazio" if vazio else "fica"}; ETo e chuva iguais')
+finally:
+    sp._ee, sp._radiacao_topo = _ee_original, _ra_original
+fonte = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sab_pedido.py'), encoding='utf-8').read()
+corpo = fonte[fonte.index('def colecao('):fonte.index('def props_enso(')]
+confere(corpo.index('corrigir_pixels_b(im)') < corpo.index('vazio_rs_impossivel(im)') < corpo.index("im.select('et_potencial')"),
+        'colecao: a regra vem depois da correção dos pixels B e antes do grampo, nos dois caminhos (com e sem B)')
+desc = {v: d for v, d, u in sp.DICIONARIO}['Radiacao_Solar_MJ_m2']
+confere('3% da radiacao no topo da atmosfera' in desc and 'K26' in desc, 'dicionário explica a célula vazia da radiação')
+
 print('\n' + (f'{falhas} FALHA(S)' if falhas else 'TODOS OS TESTES PASSARAM'))
 sys.exit(1 if falhas else 0)

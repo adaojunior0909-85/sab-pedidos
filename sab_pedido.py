@@ -1,4 +1,4 @@
-# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.19 <<<
+# >>> SAB: ATENDIMENTO AUTOMÁTICO DOS PEDIDOS POR E-MAIL (rotina do GitHub Actions). Versão 2026.11.22 <<<
 # =========================================================================================
 # O QUE FAZ
 #   Recebe UM pedido (painel SAB ou formulário -> Apps Script -> GitHub) e manda o Earth Engine exportar os
@@ -10,6 +10,13 @@
 #   Apps Script entrega o link quando todos os arquivos do manifesto estiverem na pasta. Quem pediu Excel
 #   recebe também os .xlsx, feitos depois pela rotina sab_xlsx.py.
 #
+# [2026.11.22] RADIAÇÃO IMPOSSÍVEL SAI VAZIA (o mesmo do painel 2026.11.5). A auditoria K26 (1961-2026) achou Rs = 0 nos
+#   pixels C_interior em todas as décadas (1.698 pixel-dias até 2025), em 13 pixels B do litoral em 04-20/03 e
+#   23/09-08/10/2026 e em pixels A nos dias da previsão GFS. De dia, a radiação nunca fica abaixo de 3% da radiação no
+#   topo da atmosfera (Ra, FAO-56 eq. 21; o mesmo limite de Xavier et al. 2022 que a K26 usa). Agora, em qualquer dia e
+#   pixel, Rs abaixo de 0,03 x Ra sai como célula VAZIA em vez de 0 (vazio_rs_impossivel). Só a coluna da radiação muda:
+#   a ETo e o resto do dia ficam como estão (no litoral de 2026 a ETo gravada está certa; o errado é o Rs). Na média
+#   mensal, esse dia sai da média da radiação. O banco não muda.
 # [2026.11.19] Dicionário: aviso de que escoamento superficial e chuva efetiva dos dias de 1961-2025 não batem dia a dia
 #   com a chuva (auditoria K26 e pesquisa/ESCOAMENTO.md). Só o texto do dicionário muda; nenhum valor muda.
 # [2026.11.18] PEDIDO DE UMA VARIÁVEL SÓ SAÍA COM A COLUNA VAZIA. Com uma banda só, o reduceRegions do Earth Engine
@@ -61,7 +68,7 @@ import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 
-VERSAO_ROTINA = '2026.11.19'
+VERSAO_ROTINA = '2026.11.22'
 VERSAO_PAINEL = '2026.10.4 (revisao 18h30 de 22/10/2026)'
 
 # ------------------------------------------------------------------ parâmetros
@@ -259,7 +266,7 @@ DICIONARIO = [
      'Velocidade media do vento a 2 metros de altura (convertida de 10 m pelo fator FAO-56).',
      'm/s'),
     ('Radiacao_Solar_MJ_m2',
-     'Radiacao solar global incidente na superficie.',
+     'Radiacao solar global incidente na superficie. Vazia nos dias em que o valor gravado fica abaixo de 3% da radiacao no topo da atmosfera, o que nao acontece de dia (ex.: 0): auditoria K26, cerca de 0,0001% dos pixel-dias de 1961 a 2025 e alguns pixels do litoral e dias da previsao em 2026.',
      'MJ/m2'),
     ('Evapotranspiracao_Potencial_mm',
      'Evapotranspiracao de Referencia FAO-56 Penman-Monteith (demanda da atmosfera). No historico vem do BR-DWGD; nos dias provisorios e na previsao e calculada com a meteorologia calibrada.',
@@ -954,9 +961,30 @@ def area_tem_pixels_bc(geom):
     return ee.Number(ee.Algorithms.If(r.get('classe'), 1, 0))
 
 
+def _radiacao_topo(data):
+    """[2026.11.22] radiacaoTopo do painel 2026.11.5: radiação no topo da atmosfera Ra (FAO-56, eq. 21), MJ/m²/dia."""
+    ee = _ee()
+    J = ee.Number(data.getRelative('day', 'year')).add(1)
+    lat = ee.Image.pixelLonLat().select('latitude').multiply(math.pi / 180)
+    dr = J.multiply(2 * math.pi / 365).cos().multiply(0.033).add(1)
+    dec = J.multiply(2 * math.pi / 365).subtract(1.39).sin().multiply(0.409)
+    ws = lat.tan().multiply(dec.tan()).multiply(-1).clamp(-1, 1).acos()
+    return (ws.multiply(lat.sin()).multiply(dec.sin()).add(lat.cos().multiply(dec.cos()).multiply(ws.sin()))
+            .multiply(dr).multiply(24 * 60 / math.pi * 0.0820)).rename('ra')
+
+
+def vazio_rs_impossivel(img):
+    """[2026.11.22] vazioRsImpossivel do painel 2026.11.5: Rs abaixo de 3% de Ra (impossível de dia; ex.: 0) vira célula
+    vazia, em qualquer dia e pixel. Só a banda rs muda."""
+    ee = _ee()
+    rs = img.select('rs')
+    ok = rs.gte(_radiacao_topo(img.date()).multiply(0.03))
+    return img.addBands(rs.updateMask(ok).rename('rs'), None, True)
+
+
 def colecao(geom, ini, fim):
-    """getSABCollectionCorrigida + corrigirSoloEscoamentoV10 + [2026.11.03] corrigirPixelsB + grampo termodinâmico
-    do painel (K14). fim exclusivo."""
+    """getSABCollectionCorrigida + corrigirSoloEscoamentoV10 + [2026.11.03] corrigirPixelsB + [2026.11.22]
+    vazioRsImpossivel + grampo termodinâmico do painel (K14). fim exclusivo."""
     ee = _ee()
     corr_mes = ee.List([_correcao_mes(m) for m in range(1, 13)])
     col = ee.ImageCollection(SAB).filterBounds(geom.bounds()).filterDate(ini, fim)
@@ -977,6 +1005,7 @@ def colecao(geom, ini, fim):
         im = ee.Image(ee.Algorithms.If(alg.equals('V1.0'), im.addBands(corrigidas, None, True), im))
         if com_b:                                           # [2026.11.03] antes do grampo, como no painel
             im = corrigir_pixels_b(im)
+        im = vazio_rs_impossivel(im)                        # [2026.11.22] depois da correção B, como no painel
         etp = im.select('et_potencial')
         etr = im.select('et_real').min(etp).rename('et_real')
         tr = im.select('transpiracao_mm').min(etr).rename('transpiracao_mm')

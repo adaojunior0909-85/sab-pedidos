@@ -1,0 +1,46 @@
+# SAB: verifica COM Earth Engine a regra 2026.11.22 (radiação abaixo de 3% de Ra sai vazia).
+# Só lê o SAB_V1 (getInfo); não exporta nada nem grava no Drive.
+# Roda sozinho quando a branch leitura-rs-impossivel é enviada ao GitHub, ou à mão (aba Actions).
+name: Verificar radiacao impossivel
+
+on:
+  push:
+    branches: [leitura-rs-impossivel]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Testes da rotina (sem Earth Engine)
+        run: python testes/teste_sab_pedido.py
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Verificar a regra no Earth Engine (pixel do litoral e Brasil inteiro)
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python testes/verificar_rs_impossivel_ee.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
