@@ -284,5 +284,62 @@ try:
 finally:
     sp._ee = _ee_original
 
+print('[2026.11.22: radiação abaixo de 3% de Ra sai vazia, com a ETo e o déficit do dia]')
+
+
+class _ImgFalsa:
+    """Imagem de UM pixel: {banda: (valor, máscara)}; só as operações que vazio_rs_impossivel usa."""
+    def __init__(self, bandas):
+        self.b = bandas
+
+    def select(self, nomes):
+        return _ImgFalsa({n: self.b[n] for n in ([nomes] if isinstance(nomes, str) else nomes)})
+
+    def date(self):
+        return None
+
+    def gte(self, ra):
+        (v, m), = self.b.values()
+        return _ImgFalsa({'ok': (1 if v >= ra.valor else 0, 1)})
+
+    def updateMask(self, ok):
+        return _ImgFalsa({n: (v, m * ok.b['ok'][0]) for n, (v, m) in self.b.items()})
+
+    def addBands(self, outra, nomes, sobrescrever):
+        assert nomes is None and sobrescrever is True
+        return _ImgFalsa({**self.b, **outra.b})
+
+
+class _Ra:
+    def __init__(self, v):
+        self.valor = v
+
+    def multiply(self, k):
+        return _Ra(self.valor * k)
+
+
+_ra_original = sp._radiacao_topo
+sp._radiacao_topo = lambda data: _Ra(30.0)                  # Ra = 30 MJ/m²: o limite é 0,9 MJ/m²
+try:
+    for rs, vazio in ((0.0, True), (0.89, True), (0.9, False), (18.4, False)):
+        img = _ImgFalsa({'rs': (rs, 1), 'et_potencial': (2.3, 1), 'deficit_diario': (1.0, 1), 'et_real': (1.3, 1),
+                         'pr_mm': (0.0, 1), 'tmax_C': (29.0, 1)})
+        s_ = sp.vazio_rs_impossivel(img).b
+        m = 0 if vazio else 1
+        confere(s_['rs'] == (rs, m) and s_['et_potencial'] == (2.3, m) and s_['deficit_diario'] == (1.0, m) and
+                s_['et_real'] == (1.3, 1) and s_['pr_mm'] == (0.0, 1) and s_['tmax_C'] == (29.0, 1),
+                f'Rs {rs} com Ra 30: Rs, ETo e déficit {"vazios" if vazio else "ficam"}; ET real, chuva e Tmax iguais')
+finally:
+    sp._radiacao_topo = _ra_original
+confere(sp.BANDAS_RS_IMPOSSIVEL == ['rs', 'et_potencial', 'deficit_diario'], 'as 3 bandas que a regra esvazia')
+fonte = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sab_pedido.py'), encoding='utf-8').read()
+corpo = fonte[fonte.index('def colecao('):fonte.index('def props_enso(')]
+confere(corpo.index('corrigir_pixels_b(im)') < corpo.index("im.select('et_real').min(etp)") <
+        corpo.index('return vazio_rs_impossivel(im.addBands('),
+        'colecao: a regra vem depois da correção B e do grampo (a ET real não muda), nos dois caminhos')
+desc = {v: d for v, d, u in sp.DICIONARIO}['Radiacao_Solar_MJ_m2']
+confere('3% da radiacao no topo da atmosfera' in desc and 'Evapotranspiracao_Potencial_mm' in desc and 'K26' in desc,
+        'dicionário explica a célula vazia da radiação, da ETo e do déficit')
+
 print('\n' + (f'{falhas} FALHA(S)' if falhas else 'TODOS OS TESTES PASSARAM'))
 sys.exit(1 if falhas else 0)

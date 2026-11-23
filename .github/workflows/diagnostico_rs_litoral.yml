@@ -1,0 +1,44 @@
+# SAB: diagnóstico (só leitura) do Rs gravado = 0 nos pixels do litoral em 2026 (K26).
+# Só lê o SAB_V1 (getInfo); não exporta nada nem grava no Drive.
+# Roda sozinho quando a branch leitura-rs-impossivel é enviada ao GitHub, ou à mão (aba Actions).
+name: Diagnostico Rs litoral
+
+on:
+  push:
+    branches: [leitura-rs-impossivel]
+    paths: [pesquisa/diagnostico_rs_litoral.py]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Diagnóstico no Earth Engine (assets e conta do Rs, passo a passo)
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python pesquisa/diagnostico_rs_litoral.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
