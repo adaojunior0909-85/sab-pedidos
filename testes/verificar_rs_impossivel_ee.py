@@ -20,6 +20,8 @@ NOVA = sp.vazio_rs_impossivel
 BANDAS = list(sp.BANDAS_SAB)
 OUTRAS = [b for b in BANDAS if b != 'rs']
 BRASIL = ee.Geometry.Rectangle([-74.0, -34.0, -34.0, 5.5], None, False)
+CLASSE = ee.Image(sp.MASCARA).select('classe').unmask(0, False)
+NOMES_CLASSE = {1: 'A', 2: 'B', 3: 'C_interior', 4: 'C_borda', 0: 'sem_classe'}
 falhas = 0
 
 
@@ -75,13 +77,16 @@ for dia in ('2026-03-10', '2026-10-01', '2026-11-16', '2025-06-15', '1965-01-15'
     pilha = ee.Image.cat([abaixo.rename('abaixo'), sumiu.rename('sumiu'), abaixo.neq(sumiu).rename('fora_da_regra'),
                           mudou_rs.rename('rs_mudou_valor'), sobra.rename('sobra'),
                           outras_dif.reduce(ee.Reducer.max()).rename('outras_mudaram'),
-                          tem_v.rename('com_rs')]).unmask(0).updateMask(ee.Image(1))
+                          tem_v.rename('com_rs')] +
+                         [sumiu.And(CLASSE.eq(k)).rename(f'vazio_{n}') for k, n in NOMES_CLASSE.items()]
+                         ).unmask(0).updateMask(ee.Image(1))
     r = pilha.reduceRegion(ee.Reducer.sum(), BRASIL, crs=sp.CRS, crsTransform=sp.TRANSFORM, maxPixels=1e10,
                            tileScale=4).getInfo()
     r = {k: int(round(x or 0)) for k, x in r.items()}
     print(f"   {dia}: pixels com Rs {r['com_rs']:,} | abaixo de 3% de Ra (antiga) {r['abaixo']} | vazios na nova "
           f"{r['sumiu']} | fora da regra {r['fora_da_regra']} | Rs com valor mudado {r['rs_mudou_valor']} | "
           f"abaixo do limite na nova {r['sobra']} | outras bandas mudaram {r['outras_mudaram']}")
+    print('      vazios por classe (pixels inteiros): ' + ', '.join(f"{n} {r[f'vazio_{n}']}" for n in NOMES_CLASSE.values()))
     confere(r['fora_da_regra'] == 0 and r['abaixo'] == r['sumiu'] and r['rs_mudou_valor'] == 0 and r['sobra'] == 0
             and r['outras_mudaram'] == 0 and r['com_rs'] > 60000,
             f'{dia}: só os {r["abaixo"]} pixel(s) abaixo do limite ficam vazios, e só no Rs')
