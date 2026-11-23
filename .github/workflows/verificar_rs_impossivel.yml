@@ -6,6 +6,7 @@ name: Verificar radiacao impossivel
 on:
   push:
     branches: [leitura-rs-impossivel]
+    paths-ignore: [pesquisa/**, .github/workflows/diagnostico_rs_litoral.yml]
   workflow_dispatch:
 
 permissions:
