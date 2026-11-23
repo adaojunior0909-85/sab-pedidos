@@ -14,9 +14,12 @@
 #   pixels C_interior em todas as décadas (1.698 pixel-dias até 2025), em 13 pixels B do litoral em 04-20/03 e
 #   23/09-08/10/2026 e em pixels A nos dias da previsão GFS. De dia, a radiação nunca fica abaixo de 3% da radiação no
 #   topo da atmosfera (Ra, FAO-56 eq. 21; o mesmo limite de Xavier et al. 2022 que a K26 usa). Agora, em qualquer dia e
-#   pixel, Rs abaixo de 0,03 x Ra sai como célula VAZIA em vez de 0 (vazio_rs_impossivel). Só a coluna da radiação muda:
-#   a ETo e o resto do dia ficam como estão (no litoral de 2026 a ETo gravada está certa; o errado é o Rs). Na média
-#   mensal, esse dia sai da média da radiação. O banco não muda.
+#   pixel, Rs abaixo de 0,03 x Ra sai como célula VAZIA em vez de 0 (vazio_rs_impossivel), e com ele a ETo e o déficit
+#   hídrico do dia, que foram calculados com essa radiação (no litoral de 2026 a ETo cai de ~5 para 1-2,7 mm nesses dias).
+#   Causa no litoral (pesquisa/diagnostico_rs_litoral.py): o ERA5-Land do Earth Engine traz esses pontos de mar e lagoa
+#   com radiação 0 em vez de vazios, só nessas duas janelas; o motor toma o 0 por valor e não completa pela vizinhança.
+#   A regra entra depois do grampo ET real <= ETo (a ET real fica como está). Na média e na soma mensais, esses dias ficam
+#   de fora da radiação, da ETo e do déficit. O banco não muda.
 # [2026.11.19] Dicionário: aviso de que escoamento superficial e chuva efetiva dos dias de 1961-2025 não batem dia a dia
 #   com a chuva (auditoria K26 e pesquisa/ESCOAMENTO.md). Só o texto do dicionário muda; nenhum valor muda.
 # [2026.11.18] PEDIDO DE UMA VARIÁVEL SÓ SAÍA COM A COLUNA VAZIA. Com uma banda só, o reduceRegions do Earth Engine
@@ -266,7 +269,7 @@ DICIONARIO = [
      'Velocidade media do vento a 2 metros de altura (convertida de 10 m pelo fator FAO-56).',
      'm/s'),
     ('Radiacao_Solar_MJ_m2',
-     'Radiacao solar global incidente na superficie. Vazia nos dias em que o valor gravado fica abaixo de 3% da radiacao no topo da atmosfera, o que nao acontece de dia (ex.: 0): auditoria K26, cerca de 0,0001% dos pixel-dias de 1961 a 2025 e alguns pixels do litoral e dias da previsao em 2026.',
+     'Radiacao solar global incidente na superficie. Vazia nos dias em que o valor gravado fica abaixo de 3% da radiacao no topo da atmosfera, o que nao acontece de dia (ex.: 0); nesses dias a Evapotranspiracao_Potencial_mm e o Deficit_Hidrico_mm, calculados com essa radiacao, tambem saem vazios. Auditoria K26: cerca de 0,0001% dos pixel-dias de 1961 a 2025; em 2026, pixels do litoral em 04-20/03 e 23/09-08/10 (o ERA5-Land traz radiacao 0 nesses pontos) e alguns dias da previsao.',
      'MJ/m2'),
     ('Evapotranspiracao_Potencial_mm',
      'Evapotranspiracao de Referencia FAO-56 Penman-Monteith (demanda da atmosfera). No historico vem do BR-DWGD; nos dias provisorios e na previsao e calculada com a meteorologia calibrada.',
@@ -973,13 +976,14 @@ def _radiacao_topo(data):
             .multiply(dr).multiply(24 * 60 / math.pi * 0.0820)).rename('ra')
 
 
+BANDAS_RS_IMPOSSIVEL = ['rs', 'et_potencial', 'deficit_diario']
+
+
 def vazio_rs_impossivel(img):
-    """[2026.11.22] vazioRsImpossivel do painel 2026.11.5: Rs abaixo de 3% de Ra (impossível de dia; ex.: 0) vira célula
-    vazia, em qualquer dia e pixel. Só a banda rs muda."""
-    ee = _ee()
-    rs = img.select('rs')
-    ok = rs.gte(_radiacao_topo(img.date()).multiply(0.03))
-    return img.addBands(rs.updateMask(ok).rename('rs'), None, True)
+    """[2026.11.22] vazioRsImpossivel do painel 2026.11.5: onde Rs fica abaixo de 3% de Ra (impossível de dia; ex.: 0),
+    Rs, ETo e déficit do dia (calculados com ele) viram célula vazia, em qualquer dia e pixel. Entra depois do grampo."""
+    ok = img.select('rs').gte(_radiacao_topo(img.date()).multiply(0.03))
+    return img.addBands(img.select(BANDAS_RS_IMPOSSIVEL).updateMask(ok), None, True)
 
 
 def colecao(geom, ini, fim):
@@ -1005,7 +1009,6 @@ def colecao(geom, ini, fim):
         im = ee.Image(ee.Algorithms.If(alg.equals('V1.0'), im.addBands(corrigidas, None, True), im))
         if com_b:                                           # [2026.11.03] antes do grampo, como no painel
             im = corrigir_pixels_b(im)
-        im = vazio_rs_impossivel(im)                        # [2026.11.22] depois da correção B, como no painel
         etp = im.select('et_potencial')
         etr = im.select('et_real').min(etp).rename('et_real')
         tr = im.select('transpiracao_mm').min(etr).rename('transpiracao_mm')
@@ -1013,7 +1016,7 @@ def colecao(geom, ini, fim):
         amp = im.select('tmax_C').subtract(im.select('tmin_C')).rename('amplitude_diaria').toFloat()
         dfc = etp.subtract(etr).max(0).rename('deficit_diario').toFloat()
         ce = im.select('pr_mm').subtract(im.select('runoff_sup_mm')).max(0).rename('chuva_efetiva').toFloat()
-        return im.addBands(ee.Image.cat([amp, dfc, ce]))
+        return vazio_rs_impossivel(im.addBands(ee.Image.cat([amp, dfc, ce])))   # [2026.11.22] depois do grampo
 
     com, sem = col.map(lambda i: preparar(i, True)), col.map(lambda i: preparar(i, False))
     return ee.ImageCollection(ee.Algorithms.If(area_tem_pixels_bc(geom), com, sem)).sort('system:time_start')
