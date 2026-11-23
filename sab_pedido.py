@@ -11,8 +11,8 @@
 #   recebe também os .xlsx, feitos depois pela rotina sab_xlsx.py.
 #
 # [2026.11.22] RADIAÇÃO IMPOSSÍVEL SAI VAZIA (o mesmo do painel 2026.11.5). A auditoria K26 (1961-2026) achou Rs = 0 nos
-#   pixels C_interior em todas as décadas (1.698 pixel-dias até 2025), em 13 pixels B do litoral em 04-20/03 e
-#   23/09-08/10/2026 e em pixels A nos dias da previsão GFS. De dia, a radiação nunca fica abaixo de 3% da radiação no
+#   pixels C_interior em todas as décadas (1.698 pixel-dias até 2025), em pixels do litoral em 04-20/03 e 23/09-08/10/2026
+#   (em 10/03: 27 B, 1 A e 1 C_interior entregues, em pixels inteiros) e em pixels A nos dias da previsão GFS. De dia, a radiação nunca fica abaixo de 3% da radiação no
 #   topo da atmosfera (Ra, FAO-56 eq. 21; o mesmo limite de Xavier et al. 2022 que a K26 usa). Agora, em qualquer dia e
 #   pixel, Rs abaixo de 0,03 x Ra sai como célula VAZIA em vez de 0 (vazio_rs_impossivel), e com ele a ETo e o déficit
 #   hídrico do dia, que foram calculados com essa radiação (no litoral de 2026 a ETo cai de ~5 para 1-2,7 mm nesses dias).
