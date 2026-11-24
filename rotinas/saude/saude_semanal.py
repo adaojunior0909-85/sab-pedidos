@@ -2,7 +2,8 @@
 #   - dias seguidos, sem buraco e sem repetição, de 01/01/2026 até o fim da previsão;
 #   - a previsão (GFS) chega a pelo menos hoje + 10 dias e o último dia ERA5 tem no máximo 10 dias de atraso;
 #   - a hora em que o dia de hoje foi gravado: o motor roda toda noite (23h07), então ele não pode ter mais de 30 h;
-#   - todos os dias de 2026 na versão do algoritmo em uso (V1.6) e o histórico (até 31/12/2025) sem versão nova.
+#   - todos os dias de 2026 numa versão do algoritmo aceita (V1.6 ou V1.7: na troca, o motor refaz os dias aos poucos) e
+#     o histórico (até 31/12/2025) sem versão nova.
 #     python rotinas/saude/saude_semanal.py
 import os
 import sys
@@ -15,7 +16,7 @@ import ee  # noqa: E402
 import estado  # noqa: E402
 import sab_pedido as sp  # noqa: E402
 
-VERSAO_MOTOR = 'V1.6'
+VERSOES_ACEITAS = ('V1.6', 'V1.7')     # [24/11] a V1.7 refaz os dias de 2026 aos poucos depois da etapa B
 MAX_HORAS_SEM_GRAVAR = 30
 MIN_DIAS_PREVISAO = 10
 MAX_ATRASO_ERA5 = 10
@@ -43,7 +44,8 @@ def main():
         problemas.append(f'a previsão vai só até {ult} (esperado: pelo menos {hoje + timedelta(days=MIN_DIAS_PREVISAO)})')
     if ult_era5 is None or (hoje - ult_era5).days > MAX_ATRASO_ERA5:
         problemas.append(f'último dia ERA5 = {ult_era5} (mais de {MAX_ATRASO_ERA5} dias de atraso)')
-    fora = sorted({a for a in algs.values() if a != VERSAO_MOTOR})
+    fora = sorted({a for a in algs.values() if a not in VERSOES_ACEITAS})
+    por_versao = {v: sum(1 for a in algs.values() if a == v) for v in sorted(set(algs.values()))}
     if fora:
         problemas.append(f'dias de 2026 com outra versão do algoritmo: {fora}')
     alvo = hoje if hoje in versoes else ult
@@ -53,11 +55,11 @@ def main():
     if horas > MAX_HORAS_SEM_GRAVAR:
         problemas.append(f'o dia {alvo} foi gravado há {horas:.0f} h: o motor pode não ter rodado nas últimas noites')
     hist = ee.ImageCollection(sp.SAB).filterDate('1961-01-01', '2026-01-01').filter(
-        ee.Filter.eq('versao_algoritmo', VERSAO_MOTOR)).size().getInfo()
+        ee.Filter.inList('versao_algoritmo', list(VERSOES_ACEITAS))).size().getInfo()
     if hist:
-        problemas.append(f'{hist} dia(s) do histórico (até 2025) com a versão {VERSAO_MOTOR}: o histórico deveria estar travado')
+        problemas.append(f'{hist} dia(s) do histórico (até 2025) com a versão do motor de 2026: o histórico deveria estar travado')
     resumo.append(f"{len(dias)} dias de 2026 ({len(era5)} ERA5 até {ult_era5}, {len(gfs)} GFS até {ult}); "
-                  f"dia {alvo} gravado há {horas:.0f} h" + ('' if hist else '; histórico intocado'))
+                  f"dia {alvo} gravado há {horas:.0f} h; versões {por_versao}" + ('' if hist else '; histórico intocado'))
     if problemas:
         estado.registrar('saude', 'falhou', problemas + resumo)
         print('\n'.join(problemas))
