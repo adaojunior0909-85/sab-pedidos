@@ -1,10 +1,10 @@
 # Painel de controle das rotinas automáticas do SAB
 
-Atualizado em 24/11/2026 20:19 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
+Atualizado em 24/11/2026 20:21 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
 
 | Rotina | Quando roda | Última execução | Situação | Resumo |
 |---|---|---|---|---|
-| Saúde do banco (motor gravou?) | toda segunda-feira, 09h29 | ainda não rodou | ⏳ | |
+| Saúde do banco (motor gravou?) | toda segunda-feira, 09h29 | 24/11/2026 20:21 | ✅ | 343 dias de 2026 (319 ERA5 até 2026-11-15, 24 GFS até 2026-12-09); dia 2026-11-24 gravado há 11 h; histórico intocado |
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | ainda não rodou | ⏳ | |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 09h41 | 22/11/2026 15:47 | 👀 | 341 dias de 2026 (até 2026-12-07); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
@@ -13,7 +13,9 @@ Atualizado em 24/11/2026 20:19 (Brasília). Cada rotina roda sozinha no GitHub A
 
 ### Saúde do banco (motor gravou?)
 
-Ainda não rodou.
+✅ 24/11/2026 20:21 (Brasília)
+
+- 343 dias de 2026 (319 ERA5 até 2026-11-15, 24 GFS até 2026-12-09); dia 2026-11-24 gravado há 11 h; histórico intocado
 
 ### RONI do mês (02_auditoria_roni_cpc.py)
 
