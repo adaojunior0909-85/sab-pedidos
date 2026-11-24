@@ -1,0 +1,44 @@
+# SAB: verificação prévia (só leitura) da mudança do motor V1.7 (radiação 0 do ERA5-Land vira vazia).
+# Só lê o SAB_V1 (getInfo); não exporta nada nem grava no Drive.
+# Roda sozinho quando a branch leitura-rs-impossivel é enviada ao GitHub, ou à mão (aba Actions).
+name: Verificar motor V1.7 (Rs)
+
+on:
+  push:
+    branches: [rotinas-automaticas]
+    paths: [pesquisa/verificar_v17_rs.py, .github/workflows/verificar_v17_rs.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Verificação da V1.7 no Earth Engine (conta do Rs, Brasil inteiro)
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python pesquisa/verificar_v17_rs.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
