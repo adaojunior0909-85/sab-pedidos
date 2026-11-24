@@ -3,8 +3,11 @@
 # V1.7, no Brasil inteiro, e confere:
 #   1. a conta da V1.6 aqui reproduz o Rs GRAVADO (prova de que a réplica está certa);
 #   2. nos dias normais, a V1.7 dá exatamente o mesmo Rs da V1.6;
-#   3. nos dias das janelas (04-20/03 e 23/09-08/10/2026), só mudam os pixels que tinham Rs abaixo de 3% de Ra, e na
-#      V1.7 nenhum pixel fica abaixo desse limite.
+#   3. nos dias das janelas (04-20/03 e 23/09-08/10/2026), os pixels com Rs ~0 ganham valor normal e nenhum fica
+#      abaixo de 3% de Ra nem vazio;
+#   4. [24/11, depois da 1ª execução] os OUTROS pixels que mudam nas janelas (~1.230, no litoral) eram contaminados
+#      pelo 0 do mar na interpolação bilinear: na V1.6 o Rs deles fica abaixo do dos dias normais vizinhos (antes e
+#      depois da janela) e na V1.7 volta para perto deles.
 # A simulação completa do motor (05a da V1.7, com a prévia de todas as bandas) roda depois, no sab-motor.
 #     python pesquisa/verificar_v17_rs.py
 import os
@@ -26,6 +29,9 @@ CLASSE = ee.Image(sp.MASCARA).select('classe').unmask(0, False)
 FATOR_MAX = 5.0
 DIAS = [('2026-03-10', 'janela'), ('2026-03-15', 'janela'), ('2026-10-01', 'janela'), ('2026-06-15', 'normal'),
         ('2026-11-10', 'normal')]
+# dias normais logo antes e logo depois de cada janela: a referência do Rs "de verdade" daqueles pixels
+VIZINHOS = {'03': ('2026-03-01', '2026-03-02', '2026-03-03', '2026-03-21', '2026-03-22', '2026-03-23'),
+            '10': ('2026-09-20', '2026-09-21', '2026-09-22', '2026-10-09', '2026-10-10', '2026-10-11')}
 falhas = 0
 
 
@@ -86,8 +92,26 @@ for dia, tipo in DIAS:
     else:
         confere(r['gravado_abaixo'] > 0 and r['v17_abaixo'] == 0 and r['v17_vazio'] == 0,
                 f'{dia}: os {r["gravado_abaixo"]} pixel(s) com Rs ~0 ganham valor normal na V1.7, nenhum fica vazio')
-        confere(r['muda_fora_da_regra'] <= max(3, r['gravado_abaixo'] // 5),
-                f'{dia}: fora deles, quase nada muda ({r["muda_fora_da_regra"]} vizinho(s) do preenchimento)')
+        muda = tem.And(v17.unmask(-1).subtract(v16.unmask(-1)).abs().gt(0.01)).And(grav.unmask(99).gte(lim))
+        ref = ee.ImageCollection([ee.Image(f"{sp.SAB}/SAB_{d.replace('-', '_')}").select('rs')
+                                  for d in VIZINHOS[dia[5:7]]]).mean()
+        # o Rs de um dia varia com as nuvens: compara a razão com a dos pixels que NÃO mudam (o tempo do dia)
+        estat = ee.Image.cat([v16.rename('v16'), v17.rename('v17'), ref.rename('ref'),
+                              v17.gt(v16).rename('sobe'), muda.And(entregue).rename('entregues')]).updateMask(muda)
+        e = estat.reduceRegion(ee.Reducer.mean().combine(ee.Reducer.sum(), outputPrefix='', sharedInputs=True),
+                               BRASIL, crs=CRS, crsTransform=TRANSFORM, maxPixels=1e10, tileScale=4).getInfo()
+        cont = ee.Image.cat([v16.rename('v16'), ref.rename('ref')]).updateMask(tem.And(muda.Not()).And(
+            v16.mask())).reduceRegion(ee.Reducer.mean(), BRASIL, crs=CRS, crsTransform=TRANSFORM, maxPixels=1e10,
+                                      tileScale=4).getInfo()
+        dia_rel = (cont['v16'] or 0) / max(cont['ref'] or 1e-6, 1e-6)
+        r16, r17 = (e['v16_mean'] or 0) / max(e['ref_mean'] or 1e-6, 1e-6), (e['v17_mean'] or 0) / max(e['ref_mean'] or 1e-6, 1e-6)
+        print(f"   os outros {r['muda_fora_da_regra']} pixels que mudam ({int(e['entregues_sum'] or 0)} entregues): Rs médio "
+              f"V1.6 {e['v16_mean'] or 0:.2f} -> V1.7 {e['v17_mean'] or 0:.2f} MJ/m²; dias normais vizinhos "
+              f"{e['ref_mean'] or 0:.2f}; sobe em {100 * (e['sobe_mean'] or 0):.0f}% deles | razão dia/vizinhos: "
+              f"V1.6 {r16:.2f}, V1.7 {r17:.2f}, resto do Brasil {dia_rel:.2f}")
+        confere((e['sobe_mean'] or 0) >= 0.8 and abs(r17 - dia_rel) < abs(r16 - dia_rel),
+                f'{dia}: nos outros pixels que mudam, a V1.6 estava rebaixada pelo 0 do mar e a V1.7 volta para perto '
+                f'do esperado')
 
 print('\n' + (f'{falhas} FALHA(S)' if falhas else 'VERIFICAÇÃO DA V1.7 OK'))
 sys.exit(1 if falhas else 0)
