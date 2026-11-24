@@ -19,10 +19,10 @@ on:
         default: ''
 
 permissions:
-  contents: write     # só para subir pesquisa/piloto/ e o OISST novo
+  contents: write     # só para subir pesquisa/piloto/, o OISST novo e o painel de controle (rotinas/)
 
 concurrency:
-  group: piloto-temperatura
+  group: rotinas-sab  # [24/11] o mesmo grupo das outras rotinas: todas escrevem no rotinas/PAINEL.md
   cancel-in-progress: false
 
 jobs:
@@ -58,6 +58,10 @@ jobs:
           PYTHONUNBUFFERED: '1'
         run: python -W ignore pesquisa/piloto.py conferir
 
+      - name: Atualizar o painel de controle (rotinas/PAINEL.md)
+        if: always()
+        run: python rotinas/estado.py piloto
+
       - name: Apagar a credencial da máquina
         if: always()
         run: rm -f ~/.config/earthengine/credentials
@@ -67,7 +71,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pesquisa/piloto pesquisa/dados/sst_mensal.csv
+          git add pesquisa/piloto pesquisa/dados/sst_mensal.csv rotinas
           if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
           git commit -m "Piloto: previsão e conferência ($(date -u +%Y-%m-%d))"
           git pull --rebase origin "$GITHUB_REF_NAME"

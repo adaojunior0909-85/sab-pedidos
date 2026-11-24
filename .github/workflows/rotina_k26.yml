@@ -1,0 +1,61 @@
+# ROTINA MENSAL DA K26: todo dia 15, às 09h41 de Brasília, roda a K26 (sem mudança) só na rodada 1: 2026 inteiro, ~35
+# min, SÓ LEITURA (a K26 trava a escrita no Earth Engine antes de começar). Guarda os CSV e o LOG em
+# rotinas/resultados/k26_rodada1/<data>/ e escreve no rotinas/PAINEL.md os números, ao lado dos da execução anterior.
+name: Rotina - K26 rodada 1 (2026)
+
+on:
+  schedule:
+    - cron: '41 12 15 * *'      # 09h41 de Brasília, dia 15 (longe da janela do motor, 22h50-01h00)
+  push:
+    branches: [rotinas-automaticas]
+    paths: [rotinas/k26/**, .github/workflows/rotina_k26.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir rotinas/ (resultados e painel de controle)
+
+concurrency:
+  group: rotinas-sab  # uma rotina de cada vez: todas escrevem no rotinas/PAINEL.md
+  cancel-in-progress: false
+
+jobs:
+  rotina:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: K26, rodada 1
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python -W ignore rotinas/k26/rodar_rodada1.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os resultados e o painel de controle
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rotinas
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Rotina: K26 rodada 1 ($(date -u +%Y-%m-%d))"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

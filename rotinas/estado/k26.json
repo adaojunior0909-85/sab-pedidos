@@ -1,0 +1,22 @@
+{
+ "rotina": "k26",
+ "quando": "22/11/2026 15:47",
+ "situacao": "conferir",
+ "resumo": [
+  "341 dias de 2026 (até 2026-12-07); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK",
+  "Rs = 0 (pixels entregues, pixel-dias pesados pela máscara): 1176",
+  "Rs abaixo de 3% de Ra: 1021 · Rs acima do céu claro: 19",
+  "ETo gravada diferente da recalculada (G): 693",
+  "escoamento > chuva: 116419 · escoamento > 200 mm: 3823",
+  "execução de referência (22/11, K26 v1.12 no Colab), antes da rotina automática"
+ ],
+ "pasta": "rotinas/resultados/k26_rodada1/2026-11-22",
+ "detalhes": {
+  "rs_zero": 1176,
+  "rs_lt_003ra": 1021,
+  "rs_gt_rso_motor": 19,
+  "runoff_sup_gt_pr": 116419,
+  "runoff_sup_gt_200": 3823,
+  "eto_difere": 693
+ }
+}
