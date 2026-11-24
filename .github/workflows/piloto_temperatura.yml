@@ -22,7 +22,7 @@ permissions:
   contents: write     # só para subir pesquisa/piloto/, o OISST novo e o painel de controle (rotinas/)
 
 concurrency:
-  group: rotinas-sab  # [24/11] o mesmo grupo das outras rotinas: todas escrevem no rotinas/PAINEL.md
+  group: piloto-temperatura
   cancel-in-progress: false
 
 jobs:
@@ -74,5 +74,9 @@ jobs:
           git add pesquisa/piloto pesquisa/dados/sst_mensal.csv rotinas
           if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
           git commit -m "Piloto: previsão e conferência ($(date -u +%Y-%m-%d))"
-          git pull --rebase origin "$GITHUB_REF_NAME"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+          # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
+          python rotinas/estado.py > /dev/null
+          git add rotinas/PAINEL.md
+          git diff --cached --quiet || git commit -q --amend --no-edit
+          for i in 1 2 3 4; do git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep $((5 * i)); git pull --rebase -X theirs origin "$GITHUB_REF_NAME"; done
