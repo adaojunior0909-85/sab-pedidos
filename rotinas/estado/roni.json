@@ -1,0 +1,11 @@
+{
+ "rotina": "roni",
+ "quando": "24/11/2026 20:22",
+ "situacao": "ok",
+ "resumo": [
+  "teste (só auditoria; GRAVAR_ASSET = False): rodou sem erro; nada foi gravado",
+  "Estações acrescentadas do arquivo do CPC: [[2026, 'ASO', 1.97, 2.0]]"
+ ],
+ "pasta": "rotinas/resultados/roni/2026-11-24",
+ "detalhes": {}
+}
