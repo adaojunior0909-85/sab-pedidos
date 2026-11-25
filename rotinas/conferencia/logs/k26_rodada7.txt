@@ -1,0 +1,385 @@
+
+===== 25/11/2026 17:06 (Brasília), tentativa 1 =====
+========================================================================================================
+K26 v1.12 (22/11/2026 10h00): SEQUÊNCIA DE RODADAS [7] | 2026-11-25 17:06 (BRT) | estimativa 90 min
+   rodada 7: 1981-1990 ('A', 'B', 'C', 'H', 'Z') (~90 min)
+========================================================================================================
+========================================================================================================
+K26 v1.12 (22/11/2026 10h00): AUDITORIA FINAL (somente leitura) | 2026-11-25 17:06 (BRT)
+   rodada 7 | anos 1981-1990 | partes ('A', 'B', 'C', 'H', 'Z') | leitura entregue | alfa = 0.05
+========================================================================================================
+🔒 Trava de somente leitura ativa.
+
+[A] inventário, proveniência e contagem por classe
+✅ A1 OK: dias gravados, sem buraco e sem repetição
+   3652 dias de 1981-01-01 a 1990-12-31; esperados 3652; buracos 0; datas repetidas 0
+ℹ️ A2 INFO: proveniência e versão do algoritmo
+   BR-DWGD 3652 || versões: V1.0 (sem propriedade)=3652 || métodos: nenhum
+ classe       nome  celulas
+      1          A    70633
+      2          B      301
+      3 C_interior       48
+      4    C_borda     1064
+      0      TOTAL    72046
+   1981-01-01: 70,799 com valor; 70,799 também com classe; 0 com valor e sem classe; 1,247 com classe e sem valor
+   1986-01-01: 70,799 com valor; 70,799 também com classe; 0 com valor e sem classe; 1,247 com classe e sem valor
+   1990-12-31: 70,799 com valor; 70,799 também com classe; 0 com valor e sem classe; 1,247 com classe e sem valor
+
+confronto das contagens:
+      data    rota  com_valor_total     A   B  C_interior  C_borda  com_valor_e_classe  com_valor_sem_classe  classe_sem_valor
+1981-01-01 BR-DWGD            70799 70364 204          24      207               70799                     0              1247
+1986-01-01 BR-DWGD            70799 70364 204          24      207               70799                     0              1247
+1990-12-31 BR-DWGD            70799 70364 204          24      207               70799                     0              1247
+⚠️ A3 ATENCAO: contagem por classe e confronto com a máscara do dia
+   MÁSCARA DE QUALIDADE (é esta que vai ao artigo): A 70,633 | B 301 | C_interior 48 | C_borda 1,064 || total 72,046. DISCORDÂNCIA: em 1981-01-01..1990-12-31 há até 1,247 células classificadas sem valor no dia (e até 0 com valor e sem classe). As duas contagens medem coisas diferentes: a máscara é estática e o dia é um dia. Para o artigo use a máscara (72,046); cite o número do dia só se disser qual dia.
+
+[B] perfil das 16 variáveis: momentos por classe e percentis exatos por histograma
+   meses a fazer: 120 de 120
+   modo rápido: anos a fazer 10 de 10 (sem histograma por mês)
+   B: 1981 pronto
+   B: 1982 pronto
+   B: 1983 pronto
+   B: 1984 pronto
+   B: 1985 pronto
+   B: 1986 pronto
+   B: 1987 pronto
+   B: 1988 pronto
+   B: 1989 pronto
+   B: 1990 pronto
+
+extremos absolutos fora da faixa declarada (pior mês de cada variável):
+ mes nome_classe      variavel  minimo_absoluto  maximo_absoluto  lo    hi  excesso
+1985           B runoff_sup_mm              0.0         1763.062   0 500.0 1263.062
+1981     C_borda            rs              0.0           59.703   0  45.0   14.703
+1986     C_borda  et_potencial              0.0           25.711   0  15.0   10.711
+⚠️ B ATENCAO: perfil das variáveis nos pixels entregues (A, B, C_interior)
+   16 variáveis x 10 meses; fora da faixa declarada: runoff_sup_mm (0 variável-mês pelo histograma, 15 mês-classe pelos extremos absolutos; detalhe em K26_B_extremos_fora_da_faixa.csv)
+ℹ️ B_borda INFO: perfil: fora da faixa só na C_borda (não vai às planilhas)
+   et_potencial, rs, runoff_sup_mm (25 mês-classe)
+
+[C+D] invariantes físicas e limites de Xavier et al. (2022), todos os dias, por classe
+   modo rápido: meses a fazer 120 de 120 (contagem por mês)
+   CD: 1981-01 lido
+   CD: 1981-02 lido
+   CD: 1981-03 lido
+   CD: 1981-04 lido
+   CD: 1981-05 lido
+   CD: 1981-06 lido
+   CD: 1981-07 lido
+   CD: 1981-08 lido
+   CD: 1981-09 lido
+   CD: 1981-10 lido
+   CD: 1981-11 lido
+   CD: 1981-12 lido
+   CD: 1982-01 lido
+   CD: 1982-02 lido
+   CD: 1982-03 lido
+   CD: 1982-04 lido
+   CD: 1982-05 lido
+   CD: 1982-06 lido
+   CD: 1982-07 lido
+   CD: 1982-08 lido
+   CD: 1982-09 lido
+   CD: 1982-10 lido
+   CD: 1982-11 lido
+   CD: 1982-12 lido
+   CD: 1983-01 lido
+   CD: 1983-02 lido
+   CD: 1983-03 lido
+   CD: 1983-04 lido
+   CD: 1983-05 lido
+   CD: 1983-06 lido
+   CD: 1983-07 lido
+   CD: 1983-08 lido
+   CD: 1983-09 lido
+   CD: 1983-10 lido
+   CD: 1983-11 lido
+   CD: 1983-12 lido
+   CD: 1984-01 lido
+   CD: 1984-02 lido
+   CD: 1984-03 lido
+   CD: 1984-04 lido
+   CD: 1984-05 lido
+   CD: 1984-06 lido
+   CD: 1984-07 lido
+   CD: 1984-08 lido
+   CD: 1984-09 lido
+   CD: 1984-10 lido
+   CD: 1984-11 lido
+   CD: 1984-12 lido
+   CD: 1985-01 lido
+   CD: 1985-02 lido
+   CD: 1985-03 lido
+   CD: 1985-04 lido
+   CD: 1985-05 lido
+   CD: 1985-06 lido
+   CD: 1985-07 lido
+   CD: 1985-08 lido
+   CD: 1985-09 lido
+   CD: 1985-10 lido
+   CD: 1985-11 lido
+   CD: 1985-12 lido
+   CD: 1986-01 lido
+   CD: 1986-02 lido
+   CD: 1986-03 lido
+   CD: 1986-04 lido
+   CD: 1986-05 lido
+   CD: 1986-06 lido
+   CD: 1986-07 lido
+   CD: 1986-08 lido
+   CD: 1986-09 lido
+   CD: 1986-10 lido
+   CD: 1986-11 lido
+   CD: 1986-12 lido
+   CD: 1987-01 lido
+   CD: 1987-02 lido
+   CD: 1987-03 lido
+   CD: 1987-04 lido
+   CD: 1987-05 lido
+   CD: 1987-06 lido
+   CD: 1987-07 lido
+   CD: 1987-08 lido
+   CD: 1987-09 lido
+   CD: 1987-10 lido
+   CD: 1987-11 lido
+   CD: 1987-12 lido
+   CD: 1988-01 lido
+   CD: 1988-02 lido
+   CD: 1988-03 lido
+   CD: 1988-04 lido
+   CD: 1988-05 lido
+   CD: 1988-06 lido
+   CD: 1988-07 lido
+   CD: 1988-08 lido
+   CD: 1988-09 lido
+   CD: 1988-10 lido
+   CD: 1988-11 lido
+   CD: 1988-12 lido
+   CD: 1989-01 lido
+   CD: 1989-02 lido
+   CD: 1989-03 lido
+   CD: 1989-04 lido
+   CD: 1989-05 lido
+   CD: 1989-06 lido
+   CD: 1989-07 lido
+   CD: 1989-08 lido
+   CD: 1989-09 lido
+   CD: 1989-10 lido
+   CD: 1989-11 lido
+   CD: 1989-12 lido
+   CD: 1990-01 lido
+   CD: 1990-02 lido
+   CD: 1990-03 lido
+   CD: 1990-04 lido
+   CD: 1990-05 lido
+   CD: 1990-06 lido
+   CD: 1990-07 lido
+   CD: 1990-08 lido
+   CD: 1990-09 lido
+   CD: 1990-10 lido
+   CD: 1990-11 lido
+   CD: 1990-12 lido
+❌ C FALHA: invariantes físicas e limites absolutos nos pixels entregues (A, B, C_interior)
+   258,153,008 pixel-dias; violações: eto_zero_com_rs 59, rs_gt_rso_audit 3,934, rs_gt_rso_motor 9,136, rs_lt_003ra 18, rs_zero 241, runoff_sup_gt_200 10,585, runoff_sup_gt_pr 42,825,013, runoff_sup_gt_pr_10 1,668,050, runoff_sup_gt_pr_50 113,583; informativos, não são violação: i_runoff_total_gt_pr 72,489,957 || Nos dias definitivos (até 2025) a chuva é a OBSERVADA (BR-DWGD, 12-12 UTC) e o escoamento é do ERA5-Land (00-24 UTC), que responde à chuva do próprio modelo: dia a dia eles não batem, embora no total o escoamento seja ~21% da chuva. Teste do alinhamento das janelas rejeitado; correção proposta (coeficiente do ERA5 x chuva observada) em pesquisa/ESCOAMENTO.md do sab-pedidos.
+ℹ️ C_borda INFO: invariantes na C_borda (fora das planilhas; só informação)
+   FALHA: 755,844 pixel-dias; violações: eto_zero_com_rs 699, rs_ge_ra 1,344, rs_gt_rso_audit 11,784, rs_gt_rso_motor 13,987, rs_lt_003ra 46, rs_zero 2,410, runoff_sup_gt_200 59, runoff_sup_gt_pr 3,948, runoff_sup_gt_pr_10 808, runoff_sup_gt_pr_50 131; informativos, não são violação: i_runoff_total_gt_pr 70,658
+
+violações por classe:
+                 n_pix  rs_gt_rso_motor  rs_gt_rso_audit  runoff_sup_gt_pr  i_runoff_total_gt_pr  eto_zero_com_rs  rs_ge_ra  rs_lt_003ra  runoff_sup_gt_pr_10  runoff_sup_gt_pr_50  runoff_sup_gt_200  rs_zero
+nome_classe                                                                                                                                                                                                   
+A            256967778             7495             3000          42695853              72268623                0         0            0              1662720               112924              10470        0
+B              1099252             1641              934            128875                214194                0         0            0                 5283                  649                108        0
+C_borda         755844            13987            11784              3948                 70658              699      1344           46                  808                  131                 59     2410
+C_interior       85978                0                0               285                  7140               59         0           18                   47                   10                  7      241
+
+violações por rota:
+             n_pix  rs_gt_rso_motor  rs_gt_rso_audit  runoff_sup_gt_pr  i_runoff_total_gt_pr  eto_zero_com_rs  rs_ge_ra  rs_lt_003ra  runoff_sup_gt_pr_10  runoff_sup_gt_pr_50  runoff_sup_gt_200  rs_zero
+rota                                                                                                                                                                                                      
+BR-DWGD  258908852            23123            15718          42828961              72560615              758      1344           64              1668858               113714              10644     2651
+
+   modo rápido: 120 mês(es) com violação; os pixels não são localizados aqui (a contagem é por mês). Para localizar, rode o mês com ANO_FIM >= 2026 ou peça uma parte nova.
+
+[H] máscara banda a banda e balanço hídrico
+   modo rápido: meses a fazer 120 de 120 (pixel-dias por mês)
+   H: 1981-01 lido
+   H: 1981-02 lido
+   H: 1981-03 lido
+   H: 1981-04 lido
+   H: 1981-05 lido
+   H: 1981-06 lido
+   H: 1981-07 lido
+   H: 1981-08 lido
+   H: 1981-09 lido
+   H: 1981-10 lido
+   H: 1981-11 lido
+   H: 1981-12 lido
+   H: 1982-01 lido
+   H: 1982-02 lido
+   H: 1982-03 lido
+   H: 1982-04 lido
+   H: 1982-05 lido
+   H: 1982-06 lido
+   H: 1982-07 lido
+   H: 1982-08 lido
+   H: 1982-09 lido
+   H: 1982-10 lido
+   H: 1982-11 lido
+   H: 1982-12 lido
+   H: 1983-01 lido
+   H: 1983-02 lido
+   H: 1983-03 lido
+   H: 1983-04 lido
+   H: 1983-05 lido
+   H: 1983-06 lido
+   H: 1983-07 lido
+   H: 1983-08 lido
+   H: 1983-09 lido
+   H: 1983-10 lido
+   H: 1983-11 lido
+   H: 1983-12 lido
+   H: 1984-01 lido
+   H: 1984-02 lido
+   H: 1984-03 lido
+   H: 1984-04 lido
+   H: 1984-05 lido
+   H: 1984-06 lido
+   H: 1984-07 lido
+   H: 1984-08 lido
+   H: 1984-09 lido
+   H: 1984-10 lido
+   H: 1984-11 lido
+   H: 1984-12 lido
+   H: 1985-01 lido
+   H: 1985-02 lido
+   H: 1985-03 lido
+   H: 1985-04 lido
+   H: 1985-05 lido
+   H: 1985-06 lido
+   H: 1985-07 lido
+   H: 1985-08 lido
+   H: 1985-09 lido
+   H: 1985-10 lido
+   H: 1985-11 lido
+   H: 1985-12 lido
+   H: 1986-01 lido
+   H: 1986-02 lido
+   H: 1986-03 lido
+   H: 1986-04 lido
+   H: 1986-05 lido
+   H: 1986-06 lido
+   H: 1986-07 lido
+   H: 1986-08 lido
+   H: 1986-09 lido
+   H: 1986-10 lido
+   H: 1986-11 lido
+   H: 1986-12 lido
+   H: 1987-01 lido
+   H: 1987-02 lido
+   H: 1987-03 lido
+   H: 1987-04 lido
+   H: 1987-05 lido
+   H: 1987-06 lido
+   H: 1987-07 lido
+   H: 1987-08 lido
+   H: 1987-09 lido
+   H: 1987-10 lido
+   H: 1987-11 lido
+   H: 1987-12 lido
+   H: 1988-01 lido
+   H: 1988-02 lido
+   H: 1988-03 lido
+   H: 1988-04 lido
+   H: 1988-05 lido
+   H: 1988-06 lido
+   H: 1988-07 lido
+   H: 1988-08 lido
+   H: 1988-09 lido
+   H: 1988-10 lido
+   H: 1988-11 lido
+   H: 1988-12 lido
+   H: 1989-01 lido
+   H: 1989-02 lido
+   H: 1989-03 lido
+   H: 1989-04 lido
+   H: 1989-05 lido
+   H: 1989-06 lido
+   H: 1989-07 lido
+   H: 1989-08 lido
+   H: 1989-09 lido
+   H: 1989-10 lido
+   H: 1989-11 lido
+   H: 1989-12 lido
+   H: 1990-01 lido
+   H: 1990-02 lido
+   H: 1990-03 lido
+   H: 1990-04 lido
+   H: 1990-05 lido
+   H: 1990-06 lido
+   H: 1990-07 lido
+   H: 1990-08 lido
+   H: 1990-09 lido
+   H: 1990-10 lido
+   H: 1990-11 lido
+   H: 1990-12 lido
+✅ H OK: máscara igual nas 16 bandas nos pixels entregues (A, B, C_interior)
+   as 16 bandas têm o mesmo número de pixels em todos os dias varridos
+
+[Z] estatística: descritivo, outliers, bootstrap de blocos e teste de permutação
+   nível de significância declarado: alfa = 0.05; 1000 réplicas de bootstrap, 10000 permutações; unidade de reamostragem: bloco de 5 dias consecutivos
+
+tabela                  metrica             variavel classe   grupo  n_dias   media  mediana  desvio  ic95_inf  ic95_sup  outliers_15iqr  outliers_30iqr  limite_inf_tukey  limite_sup_tukey
+    CD      pct_rs_gt_rso_motor      rs_gt_rso_motor  todas BR-DWGD     120  0.0089   0.0001  0.0213    0.0056    0.0140               2               2           -0.0256            0.0426
+    CD      pct_rs_gt_rso_audit      rs_gt_rso_audit  todas BR-DWGD     120  0.0060   0.0000  0.0123    0.0043    0.0085               1               1           -0.0188            0.0313
+    CD     pct_runoff_sup_gt_pr     runoff_sup_gt_pr  todas BR-DWGD     120 16.5396  16.2929  2.4831   15.9451   17.1354               1               0            9.8458           22.9056
+    CD pct_i_runoff_total_gt_pr i_runoff_total_gt_pr  todas BR-DWGD     120 28.0067  24.9726  7.2953   26.2038   30.2499               0               0            4.8103           50.6503
+    CD      pct_eto_zero_com_rs      eto_zero_com_rs  todas BR-DWGD     120  0.0003   0.0002  0.0002    0.0003    0.0003               4               0           -0.0001            0.0007
+    CD             pct_rs_ge_ra             rs_ge_ra  todas BR-DWGD     120  0.0005   0.0000  0.0017    0.0003    0.0007              30              28           -0.0000            0.0000
+    CD          pct_rs_lt_003ra          rs_lt_003ra  todas BR-DWGD     120  0.0000   0.0000  0.0001    0.0000    0.0000              18              18            0.0000            0.0000
+    CD  pct_runoff_sup_gt_pr_10  runoff_sup_gt_pr_10  todas BR-DWGD     120  0.6446   0.5871  0.2868    0.5695    0.7300               1               0           -0.2229            1.4730
+    CD  pct_runoff_sup_gt_pr_50  runoff_sup_gt_pr_50  todas BR-DWGD     120  0.0439   0.0316  0.0364    0.0366    0.0516               4               1           -0.0456            0.1227
+    CD    pct_runoff_sup_gt_200    runoff_sup_gt_200  todas BR-DWGD     120  0.0041   0.0018  0.0057    0.0031    0.0052              12               4           -0.0068            0.0125
+    CD              pct_rs_zero              rs_zero  todas BR-DWGD     120  0.0010   0.0000  0.0019    0.0008    0.0012              30              22           -0.0010            0.0016
+
+========================================================================================================
+RESULTADO K26
+========================================================================================================
+   A1   OK       dias gravados, sem buraco e sem repetição
+   A2   INFO     proveniência e versão do algoritmo
+   A3   ATENCAO  contagem por classe e confronto com a máscara do dia
+   B    ATENCAO  perfil das variáveis nos pixels entregues (A, B, C_interior)
+   B_borda INFO     perfil: fora da faixa só na C_borda (não vai às planilhas)
+   C    FALHA    invariantes físicas e limites absolutos nos pixels entregues (A, B, C_interior)
+   C_borda INFO     invariantes na C_borda (fora das planilhas; só informação)
+   H    OK       máscara igual nas 16 bandas nos pixels entregues (A, B, C_interior)
+
+   ❌ 1 falha(s) e 2 ponto(s) de atenção. Me envie o zip.
+
+Tempo: 79 min. Nada foi gravado no Earth Engine (trava de somente leitura).
+📦 /tmp/k26_6w3nw_4s/K26_rodada7_20261125_170629.zip  <- me envie este zip
+   Para continuar esta rodada: suba os CSV deste zip para /tmp/k26_6w3nw_4s/K26_acumulado_rodada7/ antes de rodar de novo.
+   rodada 7: terminou | zip: /tmp/k26_6w3nw_4s/K26_rodada7_20261125_170629.zip | 18:25
+
+========================================================================================================
+SEQUÊNCIA: 79 min
+   rodada 7: terminou
+📦 /tmp/k26_6w3nw_4s/K26_SEQUENCIA_20261125_170629.zip  <- me envie ESTE zip (tem os 1 zips das rodadas e este log)
+{
+ "pixel_dias": 258153008,
+ "rs_zero": 241,
+ "rs_lt_003ra": 18,
+ "rs_gt_rso_motor": 9136,
+ "runoff_sup_gt_pr": 42825013,
+ "runoff_sup_gt_200": 10585,
+ "dias": 3652,
+ "ultimo_dia": "1990-12-31",
+ "status": {
+  "A1": "OK",
+  "A2": "INFO",
+  "A3": "ATENCAO",
+  "B": "ATENCAO",
+  "B_borda": "INFO",
+  "C": "FALHA",
+  "C_borda": "INFO",
+  "H": "OK"
+ }
+}

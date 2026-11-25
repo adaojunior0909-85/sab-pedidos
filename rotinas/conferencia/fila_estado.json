@@ -49,7 +49,10 @@
  },
  "k26_rodada7": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 17:06"
+  "situacao": "ok",
+  "inicio": "25/11 17:06",
+  "fim": "25/11 18:25",
+  "minutos": 79,
+  "codigo": 0
  }
 }

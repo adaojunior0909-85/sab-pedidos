@@ -1,6 +1,6 @@
 # Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 06:47 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 25/11/2026 18:25 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
@@ -10,7 +10,7 @@ Atualizado em 25/11/2026 06:47 (Brasília) pela fila automática (`rotinas/confe
 | Escoamento x CAMELS-BR: métricas e decisão do protocolo | ✅ pronta | 1 | 25/11 03:36 | pesquisa/resultados_escoamento/RESULTADOS.md |
 | As 16 variáveis: o método de 2026 aplicado a 2021-2025 (contra o BR-DWGD) | ✅ pronta | 1 | 25/11 04:43 | pesquisa/resultados_metodo_2026/RESULTADOS_A.md |
 | As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024 | ✅ pronta | 1 | 25/11 06:47 | pesquisa/resultados_metodo_2026/RESULTADOS_B.md |
-| K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
+| K26 rodada 7 (1981-1990) | ✅ pronta | 1 | 25/11 18:25 | pasta rotinas/resultados/k26_rodada7/2026-11-25/; itens: A1 OK, A2 INFO, A3 ATENCAO, B ATENCAO, B_borda INFO, C FALHA, C_borda INFO, H OK |
 | K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada1/ |
 | K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
 | K26 rodada 3 (2026: vento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada3/ |
