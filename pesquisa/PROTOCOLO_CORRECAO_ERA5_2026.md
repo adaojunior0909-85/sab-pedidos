@@ -1,9 +1,6 @@
 # Protocolo: correção da chuva, da radiação e da ETo nos dias ERA5 (2026 e adiante)
 
-**RASCUNHO para aprovação do responsável (25/11/2026).** Quando for aprovado, este arquivo é congelado num commit
-**antes** de qualquer resultado. Depois de rodar, nada nele muda. Nada no Earth Engine é gravado por este protocolo:
-o teste é só leitura. Uma mudança no motor só acontece depois, pelo caminho de sempre: 05a (simulação), K16,
-aprovação e 05b. O histórico de 1961–2025 nunca é regravado.
+**APROVADO pelo responsável em 25/11/2026 e congelado neste commit, ANTES de qualquer resultado.** Depois de rodar, nada nele muda. Nada no Earth Engine é gravado por este protocolo: o teste é só leitura. Uma mudança no motor só acontece depois, pelo caminho de sempre: 05a (simulação), K16, aprovação e 05b. O histórico de 1961–2025 nunca é regravado.
 
 ## Por quê
 A Parte A (`pesquisa/resultados_metodo_2026/RESULTADOS_A.md`) aplicou a rota ERA5 do motor V1.7 a 2021–2025 e comparou
@@ -64,6 +61,8 @@ simples, nesta ordem: C1, C2, C3.
 
 **Radiação e ETo** (avaliadas juntas): um método substitui o C0 se o |viés| da radiação no Brasil cair pelo menos
 **0,2 MJ/m²/dia**, o da ETo cair pelo menos **1 p.p.**, e nenhuma região piorar mais de 0,1 MJ ou 0,5 p.p.
+
+**Só relatado (fora da regra, aprovado junto):** o método que vencer (ou o C0, se nenhum passar) é aplicado a **2026** e a chuva de 2026 é comparada com o **CHIRPS** por região, nos mesmos meses e com a mesma régua de `validar_2026_independente.py` (2024, quando o SAB é o BR-DWGD). Se a chuva corrigida de 2026 no Centro-Oeste e no Nordeste chegar perto do CHIRPS como em 2024, é uma confirmação independente. Esse resultado não muda a decisão.
 
 Se nenhum método passar, o motor continua como está e o aviso da chuva de 2026 vai para o dicionário. O texto do aviso
 usa os números da Parte A.
