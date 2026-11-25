@@ -51,6 +51,31 @@ fica em `rotinas/conferencia/logs/<tarefa>.txt`, com o commit do código e a ver
 - **Bacias (escoamento):** os contornos do CAMELS-BR v1.1 (`14_CAMELS_BR_catchment_boundaries`), simplificados com
   tolerância 0,01° (1/10 do pixel), mesma média ponderada pela fração do pixel.
 
+## 3b. Resoluções diferentes (o tamanho do pixel de cada fonte)
+
+| Fonte | Pixel nativo | Como entra na grade do SAB (0,1°) |
+|---|---|---|
+| SAB | 0,1° (~11 km) | — |
+| CHIRPS | 0,05° (~5,5 km) | mais fino: o Earth Engine usa a pirâmide de médias da imagem (o nível mais próximo do pedido) e entrega a média de ~2 × 2 pixels |
+| TerraClimate | 1/24° (~4,6 km) | mais fino: idem (média de ~2 × 2 a 3 × 3 pixels) |
+| MODIS LST / MOD16 | 1 km / 500 m | mais fino: idem (média de ~100 pixels) |
+| SMAP L3 enhanced | 9 km (EASE-2) | parecido: reamostrado por vizinho mais próximo |
+| GLDAS-2.1 | 0,25° (~28 km) | mais grosso: cada pixel de 0,25° é repetido nos ~6 pixels de 0,1° que caem nele (vizinho mais próximo) |
+| CAMELS-BR | a bacia (500 a 50.000 km²) | o SAB é que é agregado: média dos pixels na bacia, pesados pela fração dentro dela |
+
+**Por que a diferença de pixel pesa pouco nestes números:**
+1. **Nenhuma comparação é pixel contra pixel.** Todas são a média de uma região (milhares de pixels) ou de uma bacia,
+   no total ou na média do mês, e nas mesmas áreas (a mesma máscara e os mesmos polígonos para as duas fontes). A média
+   de uma área grande quase não depende do tamanho do pixel: o que a resolução muda é o detalhe dentro da área
+   (extremos locais, encostas, litoral), não o total.
+2. **A régua cancela o efeito que sobra.** Nas comparações de 2026 (CHIRPS, MODIS, GLDAS), o que se julga é a
+   diferença SAB − referência em 2026 contra a MESMA diferença, com a mesma fonte e a mesma resolução, nos anos em que o
+   SAB é observado (2022–2024). O efeito do pixel é igual nos dois e se cancela. No histórico, o que se procura é o
+   degrau de uma década para outra, com a mesma lógica.
+3. **Onde a resolução pesa, isso é dito:** a correlação espacial pixel a pixel (só em `validar_2026_independente.py`,
+   com CHIRPS e MODIS, mais finos e agregados para 0,1°), as médias perto do litoral (pixels de borda da referência
+   grossa, como o GLDAS, podem cair no mar) e as bacias pequenas (500 km² são ~4 pixels do SAB).
+
 ## 4. Agregação no tempo e unidades
 
 - **Mês:** soma dos dias para chuva, ETo, ET real, transpiração e escoamento (mm/mês); média dos dias para o resto.
