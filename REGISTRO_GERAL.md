@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 19:17, Brasília)
+# Apêndice automático (refeito em 25/11/2026 19:20, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -471,6 +471,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 22:17 | Registro: a vigia dispara as rotinas por relógio do sab-pedidos (o agendamento do GitHub não dispara) |
 | 25/11/2026 22:14 | Registro: K26 rodada 7 pronta |
 | 25/11/2026 21:03 | Correção ERA5: relato 2026 x CHIRPS (o C3 aproxima NE e CO; passa do ponto no Sul); teste completo |
 | 25/11/2026 20:35 | Registro: prévia da V1.8 passou (1 dia); refazer depois do motor da noite |
