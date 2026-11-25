@@ -77,6 +77,9 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 - **Changelogs:** `07_Base_de_desenvolvimento_e_testes/CHANGELOG_*.md` e `automacao_email/CHANGELOG_EMAIL.md`.
 - **Resultados das auditorias K:** `07_…/validacoes/resultados/` (um diretório por execução).
 - **Rotinas automáticas:** `rotinas/PAINEL.md` (situação de cada uma) e `rotinas/resultados/`.
+- **Replicação e auditoria das validações:** `pesquisa/METODOS_REPLICACAO.md` (fontes, agregação, unidades, fórmulas,
+  regras) + `pesquisa/METRICAS_COMPLETAS.csv.gz` (todas as métricas, região × período × mês) +
+  `pesquisa/DADOS_PAREADOS.csv.gz` (os valores mensais de que saíram).
 - **Pesquisas e validações novas:** `pesquisa/` (protocolos `PROTOCOLO*.md`, códigos e `resultados_*`).
 - **Conferência final:** `rotinas/conferencia/CONFERENCIA_FINAL.md` (e os LOG em `rotinas/conferencia/logs/`).
 - **Motor:** GitHub `sab-motor` (`05a`/`05b` de cada versão, `SHA256_MOTOR.txt`, `rodar_motor.py`).
@@ -92,7 +95,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 03:48, Brasília)
+# Apêndice automático (refeito em 25/11/2026 04:01, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -102,7 +105,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | 24/11/2026 21:14 | ✅ | asset RONI_CPC_v6 regravado e conferido (921 estações) |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 15h41 | 24/11/2026 20:56 | 👀 | 343 dias de 2026 (até 2026-12-09); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
 | Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 24/11/2026 22:16 | ✅ | fotografia de 2026-11-24: 24 dias GFS (2026-11-16 a 2026-12-09) e a persistência (2026-11-15) |
-| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 03:36 | ⏳ | 4 de 15 tarefas prontas |
+| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 03:57 | ⚠️ | 0 de 1 tarefas prontas; quebraram: historico; TERMINOU: leia o CONFERENCIA_FINAL.md |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
 
 ## B. Resultado de cada validação
@@ -115,25 +118,11 @@ Arquivo: `rotinas/conferencia/CONFERENCIA_FINAL.md`
 
 #### Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 03:36 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 25/11/2026 03:57 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). **Todas as tarefas terminaram.**
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
-| 2026 (ERA5 calibrado) contra CHIRPS (chuva) e MODIS (calor) | ✅ pronta | 1 | 25/11 03:28 | pesquisa/resultados_2026/RESULTADOS.md |
-| Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ✅ pronta | 1 | 25/11 03:33 | pesquisa/resultados_solo_folha/RESULTADOS.md |
-| Escoamento x vazão do CAMELS-BR: extração 1981-2018 (512 bacias) | ✅ pronta | 1 | 25/11 03:36 |  |
-| Escoamento x CAMELS-BR: métricas e decisão do protocolo | ✅ pronta | 1 | 25/11 03:36 | pesquisa/resultados_escoamento/RESULTADOS.md |
-| K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
-| K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada1/ |
-| K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
-| K26 rodada 3 (2026: vento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada3/ |
-| K26 rodada 4 (2026: umidade do solo) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada4/ |
-| K26 rodada 5 (1961-1970) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada5/ |
-| K26 rodada 6 (1971-1980) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada6/ |
-| K26 rodada 8 (1991-2000) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada8/ |
-| K26 rodada 9 (2001-2010) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada9/ |
-| K26 rodada 10 (2011-2020) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada10/ |
-| K26 rodada 11 (2021-2025) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada11/ |
+| O histórico 1961-2025, década por década, contra TerraClimate e CHIRPS | ❌ quebrou 3 vezes | 3 | 25/11 03:57 | pesquisa/resultados_historico/RESULTADOS.md |
 
 O LOG de cada tarefa fica em `rotinas/conferencia/logs/<tarefa>.txt`. ❌ = me mande esse LOG.
 
@@ -469,6 +458,14 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 06:57 | Validar histórico: a chuva do TerraClimate é a banda pr (não ppt); a tarefa volta para a fila |
+| 25/11/2026 06:57 | Conferência: historico (falhou)  |
+| 25/11/2026 06:53 | Conferência: começou historico  |
+| 25/11/2026 06:53 | Conferência: historico (pendente)  |
+| 25/11/2026 06:50 | Conferência: começou historico  |
+| 25/11/2026 06:50 | Conferência: historico (pendente)  |
+| 25/11/2026 06:48 | Registro geral do SAB: do início do código às últimas atualizações (refeito sozinho pela fila) |
+| 25/11/2026 06:46 | Conferência: começou historico  |
 | 25/11/2026 06:46 | Validação do histórico 1961-2025 por década (TerraClimate e CHIRPS) e resumo por mês do ano |
 | 25/11/2026 03:39 | Merge pull request #10 from adaojunior0909-85/teste-metodo-2026 |
 | 25/11/2026 06:39 | Teste das 16 variáveis de 2026: o método do motor em 2021-2025 e 2026 contra o GLDAS-2.1 (na fila) |

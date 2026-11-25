@@ -61,6 +61,9 @@ TAREFAS = [
     {'id': 'por_mes', 'nome': 'Todas as validações abertas por mês do ano (estação chuvosa x seca)',
      'cmd': PY + ['pesquisa/resumo_por_mes.py'], 'min': 5, 'depois_de': ['metodo_2026_B', 'historico'],
      'resultado': 'pesquisa/RESULTADOS_POR_MES.md'},
+    {'id': 'metricas', 'nome': 'Todas as métricas, região por região, período e mês (para replicação)',
+     'cmd': PY + ['pesquisa/metricas_completas.py'], 'min': 5, 'depois_de': ['metodo_2026_B', 'historico'],
+     'resultado': 'pesquisa/METODOS_REPLICACAO.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte
@@ -166,7 +169,14 @@ def rodar(t, st, sobra_min):
     os.makedirs(LOGS, exist_ok=True)
     t0 = time.time()
     with open(os.path.join(LOGS, f"{t['id']}.txt"), 'a', encoding='utf-8') as log:
-        log.write(f"\n===== {estado.agora():%d/%m/%Y %H:%M} (Brasília), tentativa {e['tentativas']} =====\n")
+        commit = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=RAIZ, capture_output=True, text=True).stdout.strip()
+        try:
+            from importlib.metadata import version
+            vee = version('earthengine-api')
+        except Exception:  # noqa: BLE001
+            vee = '?'
+        log.write(f"\n===== {estado.agora():%d/%m/%Y %H:%M} (Brasília), tentativa {e['tentativas']} =====\n"
+                  f"código: commit {commit} | earthengine-api {vee} | Python {sys.version.split()[0]}\n")
         log.flush()
         p = subprocess.run(t['cmd'], cwd=RAIZ, env=env, stdout=log, stderr=subprocess.STDOUT,
                            timeout=60 * max(sobra_min - 5, 10))
