@@ -71,6 +71,11 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   C com a FALHA já conhecida (escoamento do ERA5 > chuva observada em 42,8 milhões de 258 milhões de pixel-dias; Rs
   acima do céu claro em 9.136). Comparar com a rodada 7 anterior (v1.8, 18/11) nas conclusões:
   `rotinas/resultados/k26_rodada7/2026-11-25/` (na `main`).
+- ✅ **V1.8 APROVADA pelo responsável (25/11, ~19h20: "Junte e aprove o V1.8").** Etapa B pronta no PR
+  adaojunior0909-85/sab-motor#4 (`ARQUIVOS['gravar']` = 05b v1_8; head `0b13fda`). Combinado: o merge vem DEPOIS da
+  prévia com 2026 inteiro (26/11, 10h30, tarefa agendada "Refazer a prévia da V1.8 com 2026 inteiro"): se passar (≥ 8
+  dias, todos os critérios), a tarefa junta o PR sozinha e a V1.8 grava a partir da noite de 26/11; se falhar, não junta
+  e avisa. Juntar antes impediria a prévia (o motor apagaria os dias da V1.7 que ela compara).
 - ⏳ **Depois da prévia:** K16 da V1.8 (o painel e o `sab_pedido.py` não mudam: a correção é na gravação, mas a K16
   confere que leitura e e-mail continuam iguais) e, só com aprovação do responsável, a etapa B (gravar com a V1.8: o
   motor refaz os dias de 2026; o histórico não muda). **Conclusões só quando todos os resultados saírem** (pedido do
