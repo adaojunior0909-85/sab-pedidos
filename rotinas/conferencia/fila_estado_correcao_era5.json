@@ -56,13 +56,5 @@
   "fim": "25/11 06:47",
   "minutos": 123,
   "codigo": 0
- },
- "correcao_era5": {
-  "tentativas": 3,
-  "situacao": "falhou",
-  "inicio": "25/11 14:35",
-  "fim": "25/11 14:35",
-  "minutos": 0,
-  "codigo": 1
  }
 }
