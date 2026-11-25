@@ -90,3 +90,27 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    chirps 1992 pronto em 1356 s
    chirps 1993 pronto em 1650 s
 Tempo desta vez acabou; a próxima retoma daqui.
+
+===== 25/11/2026 09:38 (Brasília), tentativa 1 =====
+código: commit ed98d22cfa7e2fc53fa75e62f5526533affc7e8f | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chirps 1994 pronto em 1614 s
+   chirps 1995 pronto em 1518 s
+   chirps 1996 pronto em 1482 s
+   chirps 1997 pronto em 1632 s
+   chirps 1998 pronto em 1692 s
+   chirps 1999 pronto em 1562 s
+   chirps 2000 pronto em 1382 s
+   chirps 2001 pronto em 1409 s
+   chirps 2002 pronto em 1522 s
+   chirps 2003 pronto em 1378 s
+   chirps 2004 pronto em 1410 s
+   chirps 2005 pronto em 1259 s
