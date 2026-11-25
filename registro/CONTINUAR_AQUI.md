@@ -52,10 +52,16 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   `pesquisa/resultados_correcao_era5/RESULTADOS.md`. Falta só o relato 2026 × CHIRPS (precisa de ~30 min de GitHub;
   o erro de tipo do mês já foi corrigido no commit `c4f63f5`; zerar a entrada `correcao_era5` do
   `fila_estado_correcao_era5.json` e disparar de novo a cadeia no branch de trabalho).
-- ⏳ **Próximo, com aprovação do responsável:** o motor V1.8 em simulação (05a no `sab-motor`) com a chuva dos dias ERA5
-  pelo C3. O C3 NÃO precisa de climatologia nova no Earth Engine: usa a `SICSB_1986_2025` de sempre × 60 razões (12
-  meses × 5 regiões) tiradas de 2021–2025 (as da Parte A). Depois: prévia de 2026, K16, aprovação e 05b (regrava só
-  2026; o histórico não muda).
+- ✅ **Responsável (25/11, ~17h): "pode fazer tudo e vamos aguardar todos os resultados para tirarmos as nossas
+  conclusões".** Feito: (a) a fila da `main` disparada à mão (K26 rodada 7); (b) **motor V1.8, etapa A**, no branch
+  `claude/tender-maxwell-6ka6dt` do `sab-motor` (commit `5739ed0`): chuva dos dias ERA5 = V1.7 × `RAZAO_CHUVA_C3`
+  (60 razões BR-DWGD/V1.7 de 2021–2025, da Parte A); radiação e ETo iguais à V1.7; sem climatologia nova; a gravação
+  da noite CONTINUA na V1.7. Simulação disparada (Actions do `sab-motor` → Motor SAB, modo simular, nesse branch);
+  a prévia `previa_v18.csv` exige que só a chuva mude e que a razão observada por região e dia seja a esperada (2%).
+- ⏳ **Depois da prévia:** K16 da V1.8 (o painel e o `sab_pedido.py` não mudam: a correção é na gravação, mas a K16
+  confere que leitura e e-mail continuam iguais) e, só com aprovação do responsável, a etapa B (gravar com a V1.8: o
+  motor refaz os dias de 2026; o histórico não muda). **Conclusões só quando todos os resultados saírem** (pedido do
+  responsável): correção (+ 2026 × CHIRPS), `historico`, `resolucao`, K26 e a prévia da V1.8.
 - ✅ **Minutos do GitHub Actions:** esgotados em 25/11 (~15h) com o `sab-pedidos` privado; **o responsável tornou o
   `sab-pedidos` público (25/11, ~17h)**: repositório público não gasta minutos. Antes, conferido: nenhuma credencial
   no histórico (só os nomes, em código e guias; as de verdade ficam nos segredos), nenhum e-mail de solicitante; o
