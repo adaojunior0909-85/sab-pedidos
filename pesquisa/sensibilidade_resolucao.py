@@ -46,9 +46,13 @@ def duas_escalas(img, nativa, regs):
     m = img.updateMask(v.ENTREGUE)
     g = m.reduceRegions(collection=regs, reducer=ee.Reducer.mean(), crs=sp.CRS, crsTransform=sp.TRANSFORM, tileScale=16)
     n = m.reduceRegions(collection=regs, reducer=ee.Reducer.mean(), crs=nativa, tileScale=16)
-    r = ee.Dictionary({'g': g, 'n': n}).getInfo()
-    return ({f['properties']['regiao']: f['properties'] for f in r['g']['features']},
-            {f['properties']['regiao']: f['properties'] for f in r['n']['features']})
+    r = (g.map(lambda f: f.set('escala_', 'g')).merge(n.map(lambda f: f.set('escala_', 'n')))
+         .map(lambda f: f.setGeometry(None)).getInfo())
+    por = {'g': {}, 'n': {}}
+    for f in r['features']:
+        p = dict(f['properties'])
+        por[p.pop('escala_')][p['regiao']] = p
+    return por['g'], por['n']
 
 
 def mes_fim(ano, mes):

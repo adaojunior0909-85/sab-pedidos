@@ -1,9 +1,15 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~04h30 de Brasília)
+# Para continuar numa conversa nova (estado em 25/11/2026, ~04h40 de Brasília)
 
 ## Cole isto na conversa nova
-> Continue o trabalho do SAB. Leia, no repositório adaojunior0909-85/sab-pedidos, branch `validacoes-2`, os arquivos
-> `registro/CONTINUAR_AQUI.md`, `REGISTRO_GERAL.md` e `pesquisa/METODOS_REPLICACAO.md`, e confira a fila
-> (`rotinas/conferencia/fila_estado*.json`, `rotinas/conferencia/logs/`). Responda sempre em português.
+> Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
+> adaojunior0909-85/sab-pedidos, busque o branch validacoes-2 (git fetch origin validacoes-2) e leia
+> registro/CONTINUAR_AQUI.md, REGISTRO_GERAL.md e pesquisa/METODOS_REPLICACAO.md desse branch. Depois confira a fila:
+> os arquivos rotinas/conferencia/fila_estado*.json da main e do validacoes-2, os LOG em rotinas/conferencia/logs/ e
+> as últimas execuções do workflow "Rotina - Conferência final (fila)". Me mostre, em português, um resumo do que
+> terminou, do que está rodando, do que quebrou e qual é o próximo passo, e só então siga os próximos passos do
+> CONTINUAR_AQUI.md. Responda sempre em português.
+
+Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UTC−3).
 
 ## Regras que a conversa nova precisa seguir
 - Responder só em português; passo a passo clique a clique quando o responsável tiver de fazer algo.
@@ -28,16 +34,35 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 `gh api -X POST repos/adaojunior0909-85/sab-pedidos/actions/workflows/rotina_conferencia.yml/dispatches -f ref=validacoes-2 -f 'inputs[so]=historico'`
 
 ## Próximos passos
-1. Quando `historico` e `resolucao` terminarem: rodar `python pesquisa/metricas_completas.py` e
-   `python registro/gerar_registro.py`, subir, e abrir o PR `validacoes-2` → `main` (o responsável junta). Cuidado no
-   PR: `rotinas/conferencia/fila_estado.json` muda nos dois lados; manter o da `main` e os `fila_estado_*.json` do branch.
-2. Depois do merge: a fila da `main` roda `por_mes` e `metricas` sozinha (dependem de `metodo_2026_B` e `historico`).
-3. Ler os resultados e escrever as conclusões no `registro/REGISTRO_MANUAL.md` (seção 4), principalmente:
+1. **Se uma tarefa quebrou** (`falhou` no json ou erro no LOG): corrigir o script, apagar a entrada da tarefa no
+   `fila_estado_<cadeia>.json` do `validacoes-2` (ou no `fila_estado.json` da `main`), subir e disparar de novo a
+   cadeia (comando acima). Na `main`, a fila volta sozinha no próximo horário (de 2 em 2 h, 10h17–20h17).
+2. **Quando `historico` e `resolucao` terminarem (ok)** no `validacoes-2`: abrir o PR `validacoes-2` → `main` (o
+   responsável junta). Cuidado no PR: `rotinas/conferencia/fila_estado.json` muda nos dois lados; manter o da `main`
+   e os `fila_estado_*.json` do branch.
+3. **Depois do merge**, a fila da `main` roda sozinha `por_mes` e `metricas` (precisam da Parte A e da Parte B do
+   `metodo_2026`, que rodam na `main`, e do `historico`). Não rodar `metricas_completas.py` antes disso: sairia
+   incompleto.
+4. Ler os resultados e escrever as conclusões em `registro/REGISTRO_MANUAL.md` (seção 4), principalmente:
    - a chuva de 2026 no Centro-Oeste (−21%) e no Nordeste (−16%) × CHIRPS: a Parte A diz se é o método (se o método
      também erra assim em 2021–2025, propor correção com protocolo fixado antes; o banco não muda sem simulação);
+   - o resultado da sensibilidade à resolução (`pesquisa/resultados_resolucao/RESULTADOS.md`);
    - avisos no dicionário: ET real como índice (Norte r = 0,06 × MOD16); escoamento abaixo da vazão dos rios (−35%).
-4. Atualizar a pasta de entrega (o último zip é `SAB_entrega_final_2026-11-24.zip`; o GitHub já tem tudo o que veio
-   depois).
+5. **Atualizar a pasta de entrega:** a base que monta o zip NÃO está no GitHub. Peça ao responsável para enviar na
+   conversa o último zip (`SAB_entrega_final_2026-11-25.zip`). Extraia; a base é a pasta
+   `07_Base_de_desenvolvimento_e_testes`. Atualize nela `automacao_email/sab_pedidos/` com o conteúdo do GitHub
+   `sab-pedidos` (main + validacoes-2) e `automacao_motor/sab-motor/` com o `sab-motor`; acrescente uma seção datada
+   no topo do `LEIA_PRIMEIRO_modelo.md`; rode `python3 rodar_todos_os_testes.py` (58 testes; precisa de Node) e
+   `python3 montar_entrega.py <pasta de saída>`; copie da entrega anterior o que o montador não gera (pasta
+   `09_Versoes_anteriores/` e os arquivos soltos da raiz: K22, K24, K25, K26, simular_K25/K26, o guia); copie o
+   `REGISTRO_GERAL.md` para a raiz; refaça o `SHA256SUMS.txt` e o zip.
+6. O repositório `sab-motor` não vem junto numa conversa nova: se precisar (ex.: conferir se o motor V1.7 regravou
+   2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (saúde do banco)
+   mostra quantos dias estão em cada versão do motor.
+
+## Avisos conhecidos
+- `FAO/GAUL/2015/level1` aparece como obsoleto nos LOG (o Earth Engine recomenda o GAUL 2025). Ainda funciona; trocar
+  muda os nomes dos municípios, então exige K16 nova (está na lista "Para depois" do `00_LEIA_PRIMEIRO.md`).
 
 ## Onde está o quê
 - Registro de tudo, do início até hoje: `REGISTRO_GERAL.md` (parte à mão: `registro/REGISTRO_MANUAL.md`).

@@ -30,13 +30,5 @@
   "fim": "25/11 03:36",
   "minutos": 0,
   "codigo": 0
- },
- "resolucao": {
-  "tentativas": 3,
-  "situacao": "falhou",
-  "inicio": "25/11 04:26",
-  "fim": "25/11 04:32",
-  "minutos": 5,
-  "codigo": 1
  }
 }

@@ -97,7 +97,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 04:20, Brasília)
+# Apêndice automático (refeito em 25/11/2026 04:32, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -466,6 +466,14 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 07:32 | Conferência: resolucao (falhou)  |
+| 25/11/2026 07:26 | Conferência: começou resolucao  |
+| 25/11/2026 07:26 | Conferência: resolucao (pendente)  |
+| 25/11/2026 07:22 | Conferência: começou resolucao  |
+| 25/11/2026 07:22 | Conferência: resolucao (pendente)  |
+| 25/11/2026 07:20 | Registro: ponto de continuação para uma conversa nova e o registro geral em dia |
+| 25/11/2026 07:15 | Conferência: começou resolucao  |
+| 25/11/2026 07:15 | Conferência: começou historico  |
 | 25/11/2026 07:14 | Mais pontos e o peso deles: 27 estados, intervalo de confiança e sensibilidade à resolução na fila |
 | 25/11/2026 07:05 | Métodos: resolução de cada fonte, como entra na grade do SAB e por que pesa pouco nas médias regionais |
 | 25/11/2026 07:04 | Conferência: começou historico  |

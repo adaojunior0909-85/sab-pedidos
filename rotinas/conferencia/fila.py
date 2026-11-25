@@ -168,6 +168,8 @@ def motor_v17_pronto():
 
 def rodar(t, st, sobra_min):
     e = st.setdefault(t['id'], {'tentativas': 0})
+    for k in ('fim', 'minutos', 'codigo'):          # campos da tentativa anterior não se misturam com esta
+        e.pop(k, None)
     e.update(tentativas=e.get('tentativas', 0) + 1, situacao='rodando', inicio=estado.agora().strftime('%d/%m %H:%M'))
     gravar(st)
     subir(f"Conferência: começou {t['id']} [skip ci]")
