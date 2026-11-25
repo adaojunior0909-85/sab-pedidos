@@ -1,11 +1,13 @@
-# ROTINA SEMANAL: toda segunda-feira, às 09h29 de Brasília, confere no SAB_V1 (só leitura) se o motor gravou nas
+# ROTINA SEMANAL: toda segunda-feira, às 14h29 de Brasília, confere no SAB_V1 (só leitura) se o motor gravou nas
 # últimas noites: dias de 2026 sem buraco, previsão até hoje + 10 dias, ERA5 com até 10 dias de atraso, o dia de hoje
 # gravado há menos de 30 h, tudo na V1.6 e o histórico intocado. Resultado no rotinas/PAINEL.md.
+# [24/11] O motor agendado para 23h07 tem começado de manhã (06h40-09h20 de Brasília: o GitHub atrasa o agendamento);
+# esta rotina roda à tarde, depois dele.
 name: Rotina - saude do banco
 
 on:
   schedule:
-    - cron: '29 12 * * 1'       # 09h29 de Brasília, toda segunda-feira
+    - cron: '29 17 * * 1'       # 14h29 de Brasília, toda segunda-feira (depois do motor)
   push:
     branches: [rotinas-automaticas]
     paths: [rotinas/saude/**, rotinas/estado.py, .github/workflows/rotina_saude.yml]

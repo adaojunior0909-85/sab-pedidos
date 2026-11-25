@@ -1,11 +1,13 @@
-# ROTINA MENSAL DA K26: todo dia 15, às 09h41 de Brasília, roda a K26 (sem mudança) só na rodada 1: 2026 inteiro, ~35
+# ROTINA MENSAL DA K26: todo dia 15, às 15h41 de Brasília, roda a K26 (sem mudança) só na rodada 1: 2026 inteiro, ~35
 # min, SÓ LEITURA (a K26 trava a escrita no Earth Engine antes de começar). Guarda os CSV e o LOG em
 # rotinas/resultados/k26_rodada1/<data>/ e escreve no rotinas/PAINEL.md os números, ao lado dos da execução anterior.
+# [24/11] O motor agendado para 23h07 tem começado de manhã (06h40-09h20 de Brasília: o GitHub atrasa o agendamento);
+# esta rotina roda à tarde, depois dele.
 name: Rotina - K26 rodada 1 (2026)
 
 on:
   schedule:
-    - cron: '41 12 15 * *'      # 09h41 de Brasília, dia 15 (longe da janela do motor, 22h50-01h00)
+    - cron: '41 18 15 * *'      # 15h41 de Brasília, dia 15 (depois do motor, que tem rodado de manhã)
   push:
     branches: [rotinas-automaticas]
     paths: [rotinas/k26/**, .github/workflows/rotina_k26.yml]
