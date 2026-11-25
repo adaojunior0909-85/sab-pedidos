@@ -1,4 +1,4 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~07h de Brasília; revisto às ~07h)
+# Para continuar numa conversa nova (estado em 25/11/2026, ~13h de Brasília)
 
 ## Cole isto na conversa nova
 > Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
@@ -31,43 +31,39 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   - `claude/gifted-brahmagupta-4wyvci` (25/11, 06h47): rascunho do protocolo da correção da chuva, da radiação e da
     ETo dos dias ERA5 (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`). **Já copiado** para o branch abaixo; pode ser
     ignorado.
-  - `claude/tender-maxwell-6ka6dt` (25/11, ~07h): o `validacoes-2` + a `main` (juntadas, com os arquivos de situação da
-    `main`) + o protocolo aprovado. Branch de trabalho atual (script do teste da correção). O registro e o protocolo
-    também estão no `validacoes-2`: uma versão só.
+  - `claude/tender-maxwell-6ka6dt` (25/11): branch de trabalho atual = `validacoes-2` + `main` de 25/11 (antes do
+    PR #11) + o teste da correção, **que roda NESSE branch** (resultados sobem nele). O registro, o protocolo, o
+    script e o teste também estão no `validacoes-2`: uma versão só. Os resultados da correção vêm para o
+    `validacoes-2` quando o teste acabar.
+  - `renomear-conferencia-gravacao`: o PR #11 (juntado na `main` em 25/11, 12h45); pode ser apagado.
 - **Uma conversa por vez.** Duas conversas mexendo no repositório ao mesmo tempo se atropelam: a antiga para quando a
   nova começa.
 
-## Decisões esperando o responsável
-0. ✅ **Protocolo da correção APROVADO (25/11, ~07h)**, incluindo 2026 × CHIRPS só como relato (fora da regra).
-   Congelado no commit `1de7696` do `validacoes-2` (`161324a` no branch de trabalho) ANTES de rodar.
-1. **Teste da correção DISPARADO (25/11, ~08h), rodando sozinho** na fila do branch `claude/tender-maxwell-6ka6dt`
-   (cadeia `so=correcao_era5`; os resultados sobem nesse branch em `pesquisa/resultados_correcao_era5/`, o LOG em
-   `rotinas/conferencia/logs/correcao_era5.txt` e o estado em `rotinas/conferencia/fila_estado_correcao_era5.json`).
-   **Emenda 1 do protocolo** (pedida pelo responsável, antes de rodar; commit `91cd9b3`): a condição 4 passou a usar
-   TODOS os pixels entregues (dias de chuva e Rx1day, em cada região) e o p99 em 1.500 pixels (300 por região) no
-   lugar dos 150 da K21. Script `pesquisa/validar_correcao_era5.py`; testes sem Earth Engine
-   `pesquisa/teste_correcao_era5.py` (23 conferências ok). Ordem: conferência da receita (para se não bater com o
-   `SICSB_1986_2025`), pixels (30 anos de somas + 10 anos de dias), 120 meses regionais, 2026 × CHIRPS, resumo.
-   Tempo estimado: várias horas, em mais de uma execução da fila. Se quebrar: ler o LOG, corrigir, apagar a entrada
-   `correcao_era5` do `fila_estado_correcao_era5.json` e disparar de novo:
-   `gh api -X POST repos/adaojunior0909-85/sab-pedidos/actions/workflows/rotina_conferencia.yml/dispatches -f ref=claude/tender-maxwell-6ka6dt -f 'inputs[so]=correcao_era5'`
-   Quando terminar: ler `RESULTADOS.md`, levar ao responsável e trazer script e resultados para o `validacoes-2`.
-2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
-   método passar. O asset atual e o histórico não mudam.
-3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
-   - Ritmo (25/11, 10h30): `historico` com 1961–1981 prontos (~15 min/ano; faltam ~11 h); `resolucao` com o CHIRPS de
-     1981–1993 pronto (~25 min/ano; faltam ~40 h: o resto do CHIRPS e os 65 anos do TerraClimate). **Decisão do
-     responsável (25/11): a `resolucao` roda completa, sem amostra de anos**, mesmo levando ~2 dias.
+## Decisões (o que já foi decidido e o que espera o responsável)
+- ✅ **Protocolo da correção APROVADO** (25/11, ~07h), com 2026 × CHIRPS só como relato; congelado antes de rodar
+  (commit `1de7696` do `validacoes-2`). ✅ **Emenda 1** (25/11, ~08h, pedida pelo responsável, antes de rodar; commit
+  `91cd9b3`): a condição 4 usa TODOS os pixels entregues (dias de chuva e Rx1day, em cada uma das 5 regiões) e o p99
+  em 1.500 pixels (300 por região) no lugar dos 150 da K21.
+- ✅ **`resolucao` roda completa**, sem amostra de anos, mesmo levando ~2 dias (decisão de 25/11).
+- ✅ **"Saúde do banco" virou "Conferência da gravação"** (PR #11, juntado em 25/11): `rotina_gravacao.yml`,
+  `rotinas/gravacao/conferencia_gravacao.py`, `rotinas/estado/gravacao.json`.
+- ⏳ **Depois do teste da correção:** se algum método passar, aprovar (a) a climatologia nova no Earth Engine (ex.:
+  `SICSB_2016_2025`; é ESCRITA, aprovação separada), (b) o motor V1.8 em simulação (05a) e (c) a K16. Se nenhum
+  passar: aprovar o aviso da chuva de 2026 no dicionário (com os números da Parte A).
+- ⏳ **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem (eu abro, o responsável junta).
+- ⏳ **Agendamentos do `sab-pedidos`:** se até a noite de 25/11 a previsão das 16h13 não tiver rodado sozinha, propor ao
+  responsável o conserto (ver "O que falta auditar e corrigir", item 1).
 
 ## O que está rodando sozinho (GitHub Actions, workflow "Rotina - Conferência final (fila)")
-| Onde | Tarefa | Situação |
+| Onde | Tarefa | Situação (25/11, ~13h) |
 |---|---|---|
-| `main` (fila de 2 em 2 h, 10h17–20h17) | `metodo_2026_A`: a rota ERA5 do motor V1.7 aplicada a 2021–2025 × o banco (16 variáveis) | **pronta** (04h43 de 25/11) |
-| `main` | `metodo_2026_B`: 2026 × GLDAS-2.1, régua 2022–2024 | **pronta** (06h47 de 25/11) |
-| `main` | K26 rodada 7 (25/11 à tarde); rodadas 1–4 (2026 e previsão) a partir de 26/11, depois que o motor V1.7 regravar 2026; rodadas 5, 6, 8–11 a partir de 01/12 | agendado |
-| `validacoes-2` (cadeia `so=historico`) | histórico 1961–2025 × TerraClimate e CHIRPS, 5 regiões + Brasil + 27 estados | rodando (recomeçou 04h15) |
-| `validacoes-2` (cadeia `so=resolucao`) | sensibilidade à resolução: cada referência na grade do SAB × nativa, todas as variáveis e meses | rodando (recomeçou 04h33, depois da correção do erro 'features') |
-| `main` | rotinas fixas: previsão 16h13 diária, conferência da gravação (seg 14h29; antes "saúde do banco", renomeada no PR #11, esperando o merge), RONI (dia 11), K26 (dia 15), piloto (dias 3 e 17) | ligadas, mas **nenhuma rodou por horário até 25/11** (o GitHub atrasa os agendamentos: o motor, marcado para 23h07, começa entre 06h40 e 09h20); conferir se a previsão das 16h13 rodou sozinha |
+| `claude/tender-maxwell-6ka6dt` (cadeia `so=correcao_era5`) | **teste da correção dos dias ERA5** (C0 a C3, fora da amostra 2016–2025; script `pesquisa/validar_correcao_era5.py`) | rodando desde 08h10 (3ª tentativa; as 2 primeiras quebraram por falta de memória e pelo tipo da banda do sorteio, corrigidos). **Receita conferida**: a média recalculada bate com o `SICSB_1986_2025` (maior diferença 1,55%, radiação do ERA5; limite 2%). Etapas: pixels (40 anos de somas + 10 de dias) → 120 meses regionais → 2026 × CHIRPS → `RESULTADOS.md`. Várias execuções de ~5 h |
+| `validacoes-2` (cadeia `so=historico`) | histórico 1961–2025 × TerraClimate e CHIRPS, 5 regiões + Brasil + 27 estados | 1961–1981 prontos (~15 min/ano); faltam ~44 anos, ~11 h |
+| `validacoes-2` (cadeia `so=resolucao`) | sensibilidade à resolução, cada referência na grade do SAB × nativa | CHIRPS 1981–1993 pronto (~25 min/ano); faltam ~40 h (resto do CHIRPS, 65 anos do TerraClimate, MODIS, SMAP, GLDAS) |
+| `main` | `metodo_2026_A` e `metodo_2026_B` | **prontas** |
+| `main` (fila de 2 em 2 h, 10h17–20h17) | K26 rodada 7; rodadas 1–4 (2026 e previsão) a partir de 26/11, depois que 2026 estiver todo na V1.7; rodadas 5, 6, 8–11 a partir de 01/12; depois do PR do `validacoes-2`: `por_mes` e `metricas` | esperando: **a fila da `main` não rodou por horário em 25/11** (ver auditoria, item 1) |
+| `sab-motor` | motor da noite (23h07; o GitHub tem começado entre 06h40 e 09h20) | ok em 25/11 (08h09–09h00): **1ª rodada na V1.7**, mandou ao Earth Engine 319 dias ERA5 de 2026 e 25 dias GFS (até 10/12); histórico travado |
+| `main` | rotinas fixas: previsão 16h13, conferência da gravação (seg 14h29), RONI (dia 11), K26 (dia 15), piloto (dias 3 e 17) | **nenhuma rodou por horário até 25/11, 13h** (todas as execuções foram à mão) |
 
 As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tarefa quebrar 3 vezes, fica `falhou` no
 `fila_estado_<cadeia>.json` e o erro no LOG: corrigir o script, apagar a entrada da tarefa no json e disparar de novo:
@@ -105,6 +101,32 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 6. O repositório `sab-motor` não vem junto numa conversa nova: se precisar (ex.: conferir se o motor V1.7 regravou
    2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (conferência da gravação)
    mostra quantos dias estão em cada versão do motor.
+
+## O que falta auditar e corrigir (lista viva; riscar quando fechar)
+1. **Agendamentos do `sab-pedidos` não disparam:** nenhuma execução por horário (cron) no repositório, em nenhuma
+   rotina, até 25/11 13h (a fila da `main` deveria ter rodado às 10h17 e 12h17). O `sab-motor` dispara, com 7–10 h de
+   atraso. Conferir se a previsão das 16h13 de 25/11 roda sozinha. Se não: causa provável é o GitHub não ter
+   registrado os horários dos workflows que entraram por PR; o conserto costuma ser um commit qualquer nos arquivos
+   dos workflows na `main` (por PR) ou desligar e religar cada workflow no Actions. Até lá, disparar à mão o que for
+   preciso (K26 rodada 7 e a previsão diária).
+2. **Motor V1.7 regravando 2026:** conferir se as tarefas do Earth Engine de 25/11 terminaram (2026 todo na V1.7). A
+   fila confere sozinha antes das rodadas 1–4 da K26; a conferência da gravação de segunda (30/11) também mostra.
+   Depois, a K26 rodada 1 deve ver o Rs = 0 do litoral sumir (itens C/G: hoje 1.150 pixel-dias com Rs = 0).
+3. **Achados da Parte B a investigar** (2026 × GLDAS fora da régua): escoamento superficial (Norte, Sudeste, Sul) e
+   subsuperficial (Norte, Sul); temperatura do solo e da folha (Norte e Centro-Oeste, abaixo). Variáveis do ERA5-Land;
+   no histórico entram com a correção de leitura dos dias V1.0. Fazer um protocolo (regra antes) se for mexer.
+4. **Chuva de 2026 baixa no Nordeste e no Centro-Oeste** (Parte A, Parte B e CHIRPS concordam): o teste da correção
+   decide se há conserto; se não, aviso no dicionário.
+5. **Avisos do dicionário a escrever:** ET real como índice (Norte r = 0,06 × MOD16); escoamento abaixo da vazão dos
+   rios (−35%); e, conforme o teste, a chuva de 2026.
+6. **`FAO/GAUL/2015` obsoleto** (o Earth Engine recomenda o GAUL 2025): ainda funciona; trocar muda os nomes dos
+   municípios e exige K16 nova.
+7. **K26 rodada 1 (24/11):** itens C (escoamento > chuva) e G (ETo gravada ≠ recalculada; Rs = 0 do litoral) com FALHA
+   esperada; acompanhar a tendência depois da V1.7.
+8. **Receita da correção:** a radiação do ERA5 recalculada pelo produto mensal difere até 1,55% do asset (dentro do
+   limite; igual para os 4 métodos). Registrar no resultado.
+9. **Conclusões e entrega:** escrever as conclusões no `REGISTRO_MANUAL.md` (seção 4) quando cada resultado sair e
+   remontar o zip (passo 5 abaixo).
 
 ## Avisos conhecidos
 - `FAO/GAUL/2015/level1` aparece como obsoleto nos LOG (o Earth Engine recomenda o GAUL 2025). Ainda funciona; trocar

@@ -44,6 +44,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | 24/11 | Causa do Rs = 0 no litoral (ERA5-Land com 0 no mar em 04–20/03 e 23/09–08/10/2026); **motor V1.7** (Rs 0 vira vazio; PR #3 do `sab-motor`); **rotinas automáticas** (PR #8: saúde do banco, RONI, K26 mensal, piloto, painel `rotinas/PAINEL.md`); RONI de novembro (ASO = +2,0 °C); **K22 v2** e **K24 v1** registradas | `00_LEIA`, seções de 24/11 |
 | 24–25/11 | **Validações extras e conferência final automática** (PRs #9 e #10): acerto da previsão GFS por prazo (rotina diária); 2026 × CHIRPS e MODIS; solo, folha e ET real × SMAP e MODIS; escoamento × vazão dos rios (CAMELS-BR); teste das 16 variáveis (método de 2026 em 2021–2025; 2026 × GLDAS-2.1); histórico por década × TerraClimate e CHIRPS; tudo também por mês do ano. A fila `rotinas/conferencia/fila.py` roda sozinha e refaz a K26 de 1961 até a previsão | `rotinas/conferencia/CONFERENCIA_FINAL.md` e a seção 4 abaixo |
 | 25/11, manhã | **Parte A pronta:** o método de 2026 subestima a chuva em todos os anos de 2021–2025 (Brasil −9,6%; Nordeste e Centro-Oeste −12%; na seca do Norte e do Centro-Oeste até −35% a −47%) e superestima ETo (+3,5%) e radiação; piora em 2023–2024 (viés não estacionário). **Parte B pronta (06h47):** 2026 × GLDAS-2.1 confirma a chuva baixa no Nordeste e no Centro-Oeste (fora da régua 2022–2024). **Protocolo da correção** dos dias ERA5 (C0 a C3, teste fora da amostra com origem móvel, regra de 4 condições; 2026 × CHIRPS só relatado) **aprovado e congelado antes de rodar**: `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Pasta de entrega remontável só pelo repositório (`entrega/`) | `registro/CONTINUAR_AQUI.md` |
+| 25/11, tarde | **Protocolo da correção aprovado**, com a **emenda 1** (extremos em todos os pixels entregues e p99 em 1.500 pixels), congelado antes de rodar; **teste da correção disparado** (fila do branch de trabalho; a receita confere com o `SICSB_1986_2025` a 1,55%). **Motor V1.7** na 1ª rodada da noite (regravando 2026; histórico travado). "Saúde do banco" renomeada para **"Conferência da gravação"** (PR #11). Achado: os agendamentos do `sab-pedidos` não dispararam (o do motor dispara com 7–10 h de atraso) | `registro/CONTINUAR_AQUI.md` |
 
 ## 3. Regras que valem sempre
 
@@ -70,6 +71,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | Escoamento total | vazão observada de 512 bacias (CAMELS-BR, ANA) | 1981–2018 | KGE mediano 0,31, viés −35% (o SAB fica abaixo do rio); nenhum dos 3 métodos alternativos passou nas 4 condições → **o atual fica, com aviso por região** |
 | As 16 (parte A) | o próprio método de 2026 (rota ERA5 do motor V1.7) aplicado a 2021–2025 × o banco (BR-DWGD no núcleo) | 2021–2025 | **o método SUBESTIMA a chuva em todos os anos e regiões: Brasil −9,6% (pior ano −13%), Nordeste −12%, Centro-Oeste −12% (pior ano −16%), Norte −9%, Sul −8%, Sudeste −7%**. ETo +3,5%, radiação +0,6 MJ/m²/dia, ET real +3%, UR −0,9 p.p., Tmax +0,2 °C; Tmin, vento e as variáveis do ERA5 sem desvio relevante. Explica a maior parte da chuva baixa de 2026 × CHIRPS (Centro-Oeste −21%, Nordeste −16%); o que sobra em 2026 está perto do pior ano. Hipótese: viés não estacionário (a calibração é a média de 1986–2025; nos anos recentes o ERA5-Land fica mais seco que o BR-DWGD). **Proposta: correção da chuva (e da radiação/ETo) dos dias ERA5, com protocolo fixado antes, simulação 05a e K16; o banco não muda antes disso** |
 | As 16 (parte B) | GLDAS-2.1 (NASA) com régua 2022–2024 | 2026 (meses 1–10) | **pronta (25/11, 06h47).** Chuva de 2026 FORA da régua no **Nordeste** (SAB − GLDAS = −10,8%; régua +11,6 a +18,6) e no **Centro-Oeste** (−7,3%; régua +3,9 a +14,2): a terceira fonte independente (depois da Parte A e do CHIRPS) que aponta o método de 2026, não o clima. Radiação do Nordeste acima da régua (+0,2 contra −2,4 a −1,2 MJ), coerente com a Parte A. Tmax, Tmin, UR, VPD, ETo, ET real e umidade do solo dentro da régua em quase tudo. Fora da régua também: escoamento superficial (Norte, Sudeste, Sul, Brasil, acima) e subsuperficial (Norte, Sul), temperatura do solo e da folha (Norte e Centro-Oeste, abaixo), a investigar depois (variáveis do ERA5-Land; no histórico entram com a correção de leitura dos dias V1.0). `pesquisa/resultados_metodo_2026/RESULTADOS_B.md` (na `main`) |
+| Chuva, radiação e ETo (correção dos dias ERA5) | o BR-DWGD, fora da amostra (cada ano calibrado só com os anteriores) | 2016–2025 (+ 2026 × CHIRPS, só relato) | **rodando** (protocolo `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`; resultado em `pesquisa/resultados_correcao_era5/RESULTADOS.md`) |
 | 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | na fila (resultado no apêndice) |
 | Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
 | Previsão GFS 1–15 dias | ERA5 do dia, com a persistência como base | diária desde 24/11 | primeira medida por prazo depois de ~1 semana de fotografias |
@@ -100,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 06:56, Brasília)
+# Apêndice automático (refeito em 25/11/2026 12:55, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -110,7 +112,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | 24/11/2026 21:14 | ✅ | asset RONI_CPC_v6 regravado e conferido (921 estações) |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 15h41 | 24/11/2026 20:56 | 👀 | 343 dias de 2026 (até 2026-12-09); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
 | Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 24/11/2026 22:16 | ✅ | fotografia de 2026-11-24: 24 dias GFS (2026-11-16 a 2026-12-09) e a persistência (2026-11-15) |
-| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 04:02 | ⏳ | 0 de 1 tarefas prontas |
+| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 06:47 | ⏳ | 6 de 17 tarefas prontas |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
 
 ## B. Resultado de cada validação
@@ -123,11 +125,27 @@ Arquivo: `rotinas/conferencia/CONFERENCIA_FINAL.md`
 
 #### Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 04:02 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 25/11/2026 06:47 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
-| O histórico 1961-2025, década por década, contra TerraClimate e CHIRPS | ⏳ na fila | 1 | 25/11 04:02 | pesquisa/resultados_historico/RESULTADOS.md |
+| 2026 (ERA5 calibrado) contra CHIRPS (chuva) e MODIS (calor) | ✅ pronta | 1 | 25/11 03:28 | pesquisa/resultados_2026/RESULTADOS.md |
+| Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ✅ pronta | 1 | 25/11 03:33 | pesquisa/resultados_solo_folha/RESULTADOS.md |
+| Escoamento x vazão do CAMELS-BR: extração 1981-2018 (512 bacias) | ✅ pronta | 1 | 25/11 03:36 |  |
+| Escoamento x CAMELS-BR: métricas e decisão do protocolo | ✅ pronta | 1 | 25/11 03:36 | pesquisa/resultados_escoamento/RESULTADOS.md |
+| As 16 variáveis: o método de 2026 aplicado a 2021-2025 (contra o BR-DWGD) | ✅ pronta | 1 | 25/11 04:43 | pesquisa/resultados_metodo_2026/RESULTADOS_A.md |
+| As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024 | ✅ pronta | 1 | 25/11 06:47 | pesquisa/resultados_metodo_2026/RESULTADOS_B.md |
+| K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
+| K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada1/ |
+| K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
+| K26 rodada 3 (2026: vento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada3/ |
+| K26 rodada 4 (2026: umidade do solo) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada4/ |
+| K26 rodada 5 (1961-1970) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada5/ |
+| K26 rodada 6 (1971-1980) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada6/ |
+| K26 rodada 8 (1991-2000) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada8/ |
+| K26 rodada 9 (2001-2010) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada9/ |
+| K26 rodada 10 (2011-2020) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada10/ |
+| K26 rodada 11 (2021-2025) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada11/ |
 
 O LOG de cada tarefa fica em `rotinas/conferencia/logs/<tarefa>.txt`. ❌ = me mande esse LOG.
 
@@ -262,13 +280,57 @@ Nenhum candidato passou nas quatro condições: **o M0 fica**. O dicionário gan
 
 Arquivo: `pesquisa/resultados_metodo_2026/RESULTADOS_A.md`
 
-(ainda não rodou)
+#### Parte A: o método de 2026 aplicado a 2021–2025 (anos com BR-DWGD)
+
+Erro do método = rota ERA5 do motor V1.7 menos o que o banco entrega no mesmo mês (somas: % do total; médias: diferença na unidade). Em cada célula: o erro dos 5 anos juntos e, entre colchetes, o menor e o maior erro de um ano só. **Nas 8 primeiras linhas a referência é a observação (BR-DWGD)**; nas outras, o próprio ERA5 do histórico (mede só a emenda).
+
+| Variável | Unid. | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|---|
+| Chuva | % | -9.18 [-15.2 a -5.6] | -12.40 [-16.9 a -9.2] | -11.90 [-16.1 a -7.8] | -6.75 [-12.8 a -3.0] | -7.53 [-12.1 a +0.2] | -9.64 [-13.3 a -7.2] |
+| Tmax | °C | +0.41 [+0.2 a +0.7] | -0.10 [-0.2 a +0.0] | +0.24 [+0.1 a +0.3] | +0.17 [+0.1 a +0.2] | +0.13 [-0.1 a +0.3] | +0.24 [+0.1 a +0.4] |
+| Tmin | °C | -0.05 [-0.3 a +0.2] | -0.08 [-0.1 a -0.0] | -0.13 [-0.2 a -0.1] | -0.05 [-0.1 a -0.0] | -0.02 [-0.1 a +0.0] | -0.07 [-0.2 a +0.1] |
+| Umidade relativa | p.p. | -0.32 [-0.9 a +0.6] | -2.13 [-2.9 a -1.6] | -0.41 [-0.9 a -0.0] | -1.28 [-1.4 a -1.1] | -1.80 [-2.0 a -1.5] | -0.88 [-1.2 a -0.5] |
+| Déficit de pressão de vapor | kPa | +0.03 [-0.0 a +0.1] | +0.08 [+0.1 a +0.1] | +0.02 [+0.0 a +0.0] | +0.05 [+0.0 a +0.1] | +0.04 [+0.0 a +0.0] | +0.04 [+0.0 a +0.1] |
+| ETo | % | +5.34 [+3.3 a +7.9] | +3.93 [+3.2 a +5.0] | +2.04 [+0.7 a +3.1] | +0.53 [+0.1 a +1.5] | +0.13 [-1.0 a +1.1] | +3.53 [+2.3 a +4.7] |
+| Radiação solar | MJ/m²/dia | +0.80 [+0.6 a +1.2] | +0.64 [+0.4 a +0.9] | +0.44 [+0.2 a +0.6] | +0.19 [+0.0 a +0.5] | +0.35 [+0.2 a +0.6] | +0.60 [+0.5 a +0.8] |
+| Vento | m/s | +0.12 [+0.0 a +0.2] | +0.23 [+0.2 a +0.2] | +0.01 [-0.0 a +0.0] | +0.01 [-0.0 a +0.0] | -0.07 [-0.2 a +0.0] | +0.09 [+0.0 a +0.1] |
+| ET real | % | +4.82 [+4.0 a +5.2] | +1.71 [+1.3 a +2.0] | +2.08 [+1.9 a +2.3] | +1.09 [+0.9 a +1.3] | +2.01 [+1.2 a +2.9] | +3.31 [+2.7 a +3.5] |
+| Transpiração | % | +2.03 [+1.7 a +2.4] | +0.04 [+0.0 a +0.1] | +0.33 [+0.2 a +0.5] | +0.09 [+0.1 a +0.1] | +0.59 [+0.4 a +0.8] | +1.17 [+1.0 a +1.4] |
+| Escoamento superficial | % | -0.08 [-0.1 a -0.1] | -0.09 [-0.1 a -0.0] | -0.00 [-0.0 a +0.0] | -0.00 [-0.0 a +0.0] | -0.05 [-0.1 a -0.0] | -0.06 [-0.1 a -0.0] |
+| Escoamento subsuperficial | % | -0.01 [-0.0 a -0.0] | -0.02 [-0.1 a +0.1] | -0.01 [-0.0 a +0.0] | -0.00 [-0.0 a +0.0] | +0.00 [-0.0 a +0.0] | -0.01 [-0.0 a -0.0] |
+| Temperatura do solo | °C | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Temperatura da folha | °C | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Umidade do solo 0-5 cm | m³/m³ | +0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | -0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Umidade do solo 0-100 cm | m³/m³ | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
 
 ### 2026 × GLDAS-2.1
 
 Arquivo: `pesquisa/resultados_metodo_2026/RESULTADOS_B.md`
 
-(ainda não rodou)
+#### Parte B: 2026 contra o GLDAS-2.1 (NASA), com 2022–2024 como régua
+
+Meses 1 a 10 de cada ano (GLDAS até 2026-11-16; SAB ERA5 até 2026-11-15). Em cada célula: a diferença SAB − GLDAS em 2026 e, entre colchetes, a faixa da mesma diferença em 2022–2024 (quando o SAB é o BR-DWGD). ⚠️ = 2026 fora da faixa por mais que a tolerância (regra fixada antes de rodar).
+
+| Variável | Unid. | Tol. | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|---|---|
+| Chuva | % | 5.0 | +11.90 [+9.7 a +15.9] | ⚠️ -10.83 [+11.6 a +18.6] | ⚠️ -7.31 [+3.9 a +14.2] | +0.35 [-7.4 a +5.2] | +4.62 [+0.8 a +4.0] | +4.62 [+8.0 a +12.4] |
+| Tmax | °C | 0.5 | +0.66 [+0.1 a +1.0] | +0.30 [+0.2 a +0.5] | +0.56 [+0.4 a +0.8] | +1.38 [+1.1 a +1.3] | +0.88 [+0.7 a +0.9] | +0.67 [+0.4 a +0.9] |
+| Tmin | °C | 0.5 | +0.71 [+0.6 a +0.8] | +0.52 [+0.3 a +0.5] | -0.47 [-0.2 a -0.1] | -0.18 [+0.0 a +0.1] | +0.51 [+0.4 a +0.5] | +0.34 [+0.3 a +0.4] |
+| Umidade relativa | p.p. | 3.0 | +5.74 [+2.8 a +6.3] | +2.55 [+4.5 a +5.2] | +8.01 [+5.3 a +7.2] | +1.50 [+0.9 a +2.6] | +0.24 [-0.6 a +1.4] | +4.72 [+3.2 a +5.4] |
+| Déficit de pressão de vapor | kPa | 0.1 | -0.30 [-0.3 a -0.2] | -0.13 [-0.2 a -0.2] | -0.36 [-0.3 a -0.2] | -0.05 [-0.1 a -0.0] | -0.05 [-0.1 a -0.0] | -0.24 [-0.3 a -0.2] |
+| ETo | % | 5.0 | -47.52 [-51.6 a -45.0] | -50.71 [-54.6 a -53.4] | -51.21 [-53.9 a -49.8] | -49.40 [-51.8 a -47.8] | -49.65 [-48.5 a -45.2] | -49.27 [-52.6 a -48.6] |
+| Radiação solar | MJ/m²/dia | 0.5 | -1.08 [-3.3 a -0.6] | ⚠️ +0.19 [-2.4 a -1.2] | -0.67 [-2.7 a -0.7] | -1.12 [-2.0 a -0.4] | -0.96 [-1.9 a -0.2] | -0.77 [-2.8 a -0.7] |
+| Vento | m/s | 0.2 | +0.01 [-0.2 a -0.1] | ⚠️ -0.33 [-0.6 a -0.6] | -0.27 [-0.3 a -0.2] | -0.40 [-0.4 a -0.4] | -0.26 [-0.2 a -0.1] | -0.17 [-0.3 a -0.3] |
+| ET real | % | 5.0 | -19.28 [-24.3 a -20.3] | -13.01 [-9.9 a -6.3] | -16.98 [-16.4 a -12.0] | -7.52 [-9.1 a -5.8] | -8.07 [-14.6 a -5.8] | -16.27 [-18.1 a -15.6] |
+| Transpiração | % | 5.0 | -12.00 [-11.9 a -2.3] | ⚠️ -22.03 [-15.1 a -12.8] | -8.48 [-6.2 a -1.5] | +1.77 [-3.2 a +3.1] | +7.23 [+4.2 a +14.6] | -10.01 [-8.3 a -3.4] |
+| Escoamento superficial | % | 5.0 | ⚠️ +351.70 [+223.6 a +322.6] | +407.25 [+330.8 a +402.3] | +86.32 [+49.0 a +231.7] | ⚠️ +194.20 [+73.2 a +131.5] | ⚠️ +146.37 [+39.2 a +65.4] | ⚠️ +271.38 [+176.3 a +235.3] |
+| Escoamento subsuperficial | % | 5.0 | ⚠️ -75.69 [-82.8 a -81.0] | -92.89 [-91.6 a -89.9] | -90.30 [-89.0 a -81.6] | -82.19 [-86.1 a -70.5] | ⚠️ -60.41 [-79.4 a -77.3] | -77.45 [-83.1 a -82.2] |
+| Temperatura do solo | °C | 0.5 | ⚠️ +0.60 [+1.5 a +1.7] | +1.59 [+1.6 a +1.8] | ⚠️ +1.24 [+1.9 a +2.2] | +1.21 [+1.6 a +1.9] | +1.14 [+1.5 a +1.6] | ⚠️ +1.01 [+1.7 a +1.8] |
+| Temperatura da folha | °C | 0.5 | ⚠️ +0.03 [+1.0 a +1.1] | +1.05 [+1.1 a +1.3] | ⚠️ +0.73 [+1.4 a +1.6] | +0.75 [+1.2 a +1.4] | +0.62 [+1.0 a +1.1] | ⚠️ +0.47 [+1.2 a +1.2] |
+| Umidade do solo 0-5 cm | m³/m³ | 0.02 | +0.02 [-0.0 a +0.0] | -0.05 [-0.1 a -0.0] | -0.05 [-0.0 a -0.0] | -0.05 [-0.1 a -0.0] | +0.00 [-0.0 a -0.0] | -0.02 [-0.0 a -0.0] |
+| Umidade do solo 0-100 cm | m³/m³ | 0.02 | +0.03 [+0.0 a +0.0] | -0.01 [-0.0 a -0.0] | -0.02 [-0.0 a +0.0] | -0.02 [-0.0 a -0.0] | +0.03 [+0.0 a +0.0] | +0.01 [-0.0 a +0.0] |
+
+**Suspeitas em 2026:** Chuva no Nordeste; Chuva no Centro-Oeste; Radiação solar no Nordeste; Vento no Nordeste; Transpiração no Nordeste; Escoamento superficial no Norte; Escoamento superficial no Sudeste; Escoamento superficial no Sul; Escoamento superficial no Brasil; Escoamento subsuperficial no Norte; Escoamento subsuperficial no Sul; Temperatura do solo no Norte; Temperatura do solo no Centro-Oeste; Temperatura do solo no Brasil; Temperatura da folha no Norte; Temperatura da folha no Centro-Oeste; Temperatura da folha no Brasil
 
 ### Histórico por década × TerraClimate e CHIRPS
 
@@ -469,11 +531,36 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 15:43 | Registro: rotina de saúde renomeada (PR #11); agendamentos atrasados |
+| 25/11/2026 15:34 | Registro: resolucao roda completa (decisão do responsável); ritmo das cadeias |
+| 25/11/2026 11:10 | Conferência: começou correcao_era5  |
+| 25/11/2026 11:09 | Correção ERA5: a banda do sorteio dos pixels em inteiro (stratifiedSample); receita conferida (maior diferença 1,55%) |
+| 25/11/2026 11:08 | Conferência: começou correcao_era5  |
+| 25/11/2026 11:08 | Conferência: correcao_era5 (pendente)  |
+| 25/11/2026 11:00 | Conferência: começou correcao_era5  |
+| 25/11/2026 10:59 | Correção ERA5: climatologia do ERA5 pelo produto mensal e pedidos região por região (a 1ª tentativa estourou a memória); tarefa volta para a fila |
+| 25/11/2026 10:57 | Conferência: começou correcao_era5  |
+| 25/11/2026 10:57 | Conferência: correcao_era5 (pendente)  |
+| 25/11/2026 10:48 | Conferência: começou correcao_era5  |
+| 25/11/2026 10:48 | Registro: teste da correção disparado (emenda 1: extremos em todos os pixels) |
+| 25/11/2026 10:47 | Protocolo da correção, emenda 1 (antes de rodar): extremos em todos os pixels entregues (dias de chuva e Rx1day por região) e p99 em 1.500 pixels |
+| 25/11/2026 10:04 | Registro: script do teste da correção pronto, esperando autorização do disparo |
+| 25/11/2026 10:04 | Teste da correção dos dias ERA5 (só leitura): script, testes sem Earth Engine e tarefa na fila (não disparada) |
+| 25/11/2026 09:56 | Merge remote-tracking branch 'origin/validacoes-2' into claude/tender-maxwell-6ka6dt |
+| 25/11/2026 09:56 | Registro: Parte B pronta (2026 x GLDAS confirma a chuva baixa no Nordeste e no Centro-Oeste); protocolo da correção aprovado e congelado |
 | 25/11/2026 09:56 | Protocolo da correção dos dias ERA5: APROVADO e congelado antes de rodar (2026 x CHIRPS só como relato) |
+| 25/11/2026 09:55 | Registro: protocolo da correção aprovado e congelado; próximo passo é o script do teste |
+| 25/11/2026 09:55 | Protocolo da correção dos dias ERA5: APROVADO e congelado antes de rodar (2026 x CHIRPS só como relato) |
+| 25/11/2026 09:53 | Merge remote-tracking branch 'origin/claude/tender-maxwell-6ka6dt' into claude/tender-maxwell-6ka6dt |
+| 25/11/2026 09:53 | Registro: Parte B pronta (2026 x GLDAS confirma a chuva baixa no Nordeste e no Centro-Oeste); rascunho do protocolo trazido para o branch de trabalho |
+| 25/11/2026 09:47 | Rascunho do protocolo: correção da chuva, radiação e ETo dos dias ERA5 (para aprovação; nada gravado) |
 | 25/11/2026 09:50 | Registro: linha de 25/11 dentro da tabela da linha do tempo |
 | 25/11/2026 09:50 | Registro: branches das conversas (claude/*), decisões esperando o responsável, protocolo da correção em rascunho e comando de retomada que busca todos os branches |
+| 25/11/2026 09:47 | Conferência: metodo_2026_B (ok)  |
 | 25/11/2026 09:33 | Entrega: a base de montagem (pasta 07), os extras e um script que remonta o zip só com o repositório |
 | 25/11/2026 08:33 | Registro: resultado da Parte A (o método de 2026 subestima a chuva ~10% em 2021-2025) e o próximo trabalho |
+| 25/11/2026 07:43 | Conferência: começou metodo_2026_B  |
+| 25/11/2026 07:43 | Conferência: metodo_2026_A (ok)  |
 | 25/11/2026 07:33 | Conferência: começou resolucao  |
 | 25/11/2026 07:32 | Resolução: as duas médias voltam numa coleção só (o dicionário não trazia as features); fila limpa os campos da tentativa anterior; ponto de continuação revisto depois do teste de retomada |
 | 25/11/2026 07:32 | Conferência: resolucao (falhou)  |
@@ -501,6 +588,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 | 25/11/2026 06:48 | Registro geral do SAB: do início do código às últimas atualizações (refeito sozinho pela fila) |
 | 25/11/2026 06:46 | Conferência: começou historico  |
 | 25/11/2026 06:46 | Validação do histórico 1961-2025 por década (TerraClimate e CHIRPS) e resumo por mês do ano |
+| 25/11/2026 06:41 | Conferência: começou metodo_2026_A  |
 | 25/11/2026 03:39 | Merge pull request #10 from adaojunior0909-85/teste-metodo-2026 |
 | 25/11/2026 06:39 | Teste das 16 variáveis de 2026: o método do motor em 2021-2025 e 2026 contra o GLDAS-2.1 (na fila) |
 | 25/11/2026 06:36 | Conferência: escoamento_metricas (ok)  |
