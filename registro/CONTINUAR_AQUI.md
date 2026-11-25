@@ -1,13 +1,14 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~04h40 de Brasília)
+# Para continuar numa conversa nova (estado em 25/11/2026, ~07h de Brasília)
 
 ## Cole isto na conversa nova
 > Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
-> adaojunior0909-85/sab-pedidos, busque o branch validacoes-2 (git fetch origin validacoes-2) e leia
-> registro/CONTINUAR_AQUI.md, REGISTRO_GERAL.md e pesquisa/METODOS_REPLICACAO.md desse branch. Depois confira a fila:
-> os arquivos rotinas/conferencia/fila_estado*.json da main e do validacoes-2, os LOG em rotinas/conferencia/logs/ e
-> as últimas execuções do workflow "Rotina - Conferência final (fila)". Me mostre, em português, um resumo do que
-> terminou, do que está rodando, do que quebrou e qual é o próximo passo, e só então siga os próximos passos do
-> CONTINUAR_AQUI.md. Responda sempre em português.
+> adaojunior0909-85/sab-pedidos, busque todos os branches (git fetch origin) e leia registro/CONTINUAR_AQUI.md,
+> REGISTRO_GERAL.md e pesquisa/METODOS_REPLICACAO.md do branch validacoes-2; veja também os branches claude/* (git
+> branch -r), que guardam rascunhos de conversas anteriores. Depois confira a fila: os arquivos
+> rotinas/conferencia/fila_estado*.json da main e do validacoes-2, os LOG em rotinas/conferencia/logs/ e as últimas
+> execuções do workflow "Rotina - Conferência final (fila)". Me mostre, em português, um resumo do que terminou, do
+> que está rodando, do que quebrou, das decisões que estão esperando por mim e qual é o próximo passo, e só então siga
+> os próximos passos do CONTINUAR_AQUI.md. Responda sempre em português.
 
 Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UTC−3).
 
@@ -19,14 +20,41 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - Toda regra de decisão é fixada ANTES de rodar (está no cabeçalho de cada script).
 - Não tentar contornar sites que bloqueiam acesso (INMET).
 
+## Onde fica cada trabalho (branches)
+- **`main`:** o que está no ar (rotinas, fila da conferência, resultados que a fila sobe).
+- **`validacoes-2`:** as validações novas, o registro, a entrega (`entrega/`) e este arquivo. É o branch de referência
+  até o PR dele ser juntado na `main`.
+- **`claude/<nome>`:** cada conversa nova trabalha num branch próprio, com nome automático. **Ao começar, liste-os**
+  (`git branch -r | grep claude/`) e leia o último commit de cada um: podem ter rascunhos esperando aprovação. Antes
+  de encerrar uma conversa, traga o que importa para o `validacoes-2` (ou abra PR) e atualize este arquivo, para nada
+  ficar perdido num branch esquecido.
+  - `claude/gifted-brahmagupta-4wyvci` (25/11, 06h47): **rascunho do protocolo da correção da chuva, da radiação e da
+    ETo dos dias ERA5**, `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Esperando a aprovação do responsável.
+- **Uma conversa por vez.** Duas conversas mexendo no repositório ao mesmo tempo se atropelam: a antiga para quando a
+  nova começa.
+
+## Decisões esperando o responsável
+1. **Aprovar o protocolo da correção** (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no branch acima). Resumo: teste fora
+   da amostra com origem móvel (cada ano de 2016 a 2025 calibrado só com os anos anteriores); métodos C0 (atual), C1
+   (janela de 10 anos), C2 (15 anos) e C3 (atual + ajuste regional dos últimos 5 anos); a chuva só troca se cumprir as
+   4 condições (mediana do |viés| −3 p.p.; melhora em ≥ 7 de 10 anos; `r_anomalias` não cai mais de 0,02; dias de
+   chuva e percentil 99 não pioram). Depois de aprovado: congelar num commit ANTES de rodar e escrever o script de
+   teste (só leitura).
+   - **Sugestão a levar ao responsável (ele decide):** conferir também o método aprovado em **2026 contra o CHIRPS**:
+     se a chuva corrigida de 2026 no Centro-Oeste e no Nordeste chegar perto do CHIRPS (como na régua de 2024), é uma
+     confirmação independente. Só relatado; não entra na regra.
+2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
+   método passar. O asset atual e o histórico não mudam.
+3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
+
 ## O que está rodando sozinho (GitHub Actions, workflow "Rotina - Conferência final (fila)")
 | Onde | Tarefa | Situação |
 |---|---|---|
-| `main` (fila de 2 em 2 h, 10h17–20h17) | `metodo_2026_A`: a rota ERA5 do motor V1.7 aplicada a 2021–2025 × o banco (16 variáveis) | rodando desde 03h41 de 25/11 |
-| `main` | `metodo_2026_B`: 2026 × GLDAS-2.1, régua 2022–2024 | depois da A |
+| `main` (fila de 2 em 2 h, 10h17–20h17) | `metodo_2026_A`: a rota ERA5 do motor V1.7 aplicada a 2021–2025 × o banco (16 variáveis) | **pronta** (04h43 de 25/11) |
+| `main` | `metodo_2026_B`: 2026 × GLDAS-2.1, régua 2022–2024 | rodando desde 04h43 de 25/11 |
 | `main` | K26 rodada 7 (25/11 à tarde); rodadas 1–4 (2026 e previsão) a partir de 26/11, depois que o motor V1.7 regravar 2026; rodadas 5, 6, 8–11 a partir de 01/12 | agendado |
 | `validacoes-2` (cadeia `so=historico`) | histórico 1961–2025 × TerraClimate e CHIRPS, 5 regiões + Brasil + 27 estados | rodando (recomeçou 04h15) |
-| `validacoes-2` (cadeia `so=resolucao`) | sensibilidade à resolução: cada referência na grade do SAB × nativa, todas as variáveis e meses | rodando |
+| `validacoes-2` (cadeia `so=resolucao`) | sensibilidade à resolução: cada referência na grade do SAB × nativa, todas as variáveis e meses | rodando (recomeçou 04h33, depois da correção do erro 'features') |
 | `main` | rotinas fixas: previsão 16h13 diária, saúde (seg 14h29), RONI (dia 11), K26 (dia 15), piloto (dias 3 e 17) | ligadas |
 
 As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tarefa quebrar 3 vezes, fica `falhou` no
@@ -44,7 +72,7 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
    `metodo_2026`, que rodam na `main`, e do `historico`). Não rodar `metricas_completas.py` antes disso: sairia
    incompleto.
 4. Ler os resultados e escrever as conclusões em `registro/REGISTRO_MANUAL.md` (seção 4), principalmente:
-   - **Parte A PRONTA (25/11, 05h30):** o método de 2026 subestima a chuva em TODOS os anos de 2021–2025 e regiões
+   - **Parte A PRONTA (25/11, 04h43):** o método de 2026 subestima a chuva em TODOS os anos de 2021–2025 e regiões
      (Brasil −9,6%; Nordeste e Centro-Oeste −12%, pior ano −16%) e superestima ETo (+3,5%) e radiação (+0,6 MJ). Isso
      explica a maior parte da chuva baixa de 2026 × CHIRPS. PRÓXIMO TRABALHO PRINCIPAL: propor ao responsável a
      correção dos dias ERA5 (ex.: calibração pelos anos recentes, 2016–2025, ou fator por década), com protocolo e
