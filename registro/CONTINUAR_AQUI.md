@@ -151,6 +151,14 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 | M6 | previsão GFS | ⏳ ~24/12 (30 dias de fotografias) |
 Qualquer método que passar vai ao responsável; **nada é gravado sem autorização**.
 
+**Várias referências (emenda 1 da fase 2, 25/11 ~20h20, pedido do responsável: "o máximo de comparações e tudo
+registrado"):** `pesquisa/validar_multifonte.py` compara o banco, mês a mês, nas 5 regiões, no Brasil e nos 27 estados,
+com: ERA5-Land bruto (1961–2025), GLDAS-2.0 (1961–2014), GLDAS-2.1 (2000–2025), PERSIANN-CDR (1983–) e IMERG (2000–) na
+chuva e MOD16 (2001–) na ET real; o resumo junta o TerraClimate e o CHIRPS do `historico`. Um degrau só é
+**confirmado** se aparecer em ≥ 2 referências independentes. 5 cadeias no `validacoes-2` (`multifonte_*`), disparadas
+em 25/11 ~20h30; resultado em `pesquisa/resultados_multifonte/RESULTADOS.md` e `TODAS_AS_COMPARACOES.csv` (tudo,
+inclusive os estados). Tempo estimado: o GLDAS-2.0 é o mais longo (~1,5 dia).
+
 ## Vigia automática (desde 25/11, ~17h)
 Tarefa agendada **"SAB – vigiar os testes"** (a cada 2 h, minuto 13; dispara NA conversa do branch
 `claude/tender-maxwell-6ka6dt`, que tem o GitHub ligado). Confere as cadeias, a simulação da V1.8, o motor da noite e se
