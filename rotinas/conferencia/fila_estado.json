@@ -41,7 +41,10 @@
  },
  "metodo_2026_B": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 04:43"
+  "situacao": "ok",
+  "inicio": "25/11 04:43",
+  "fim": "25/11 06:47",
+  "minutos": 123,
+  "codigo": 0
  }
 }
