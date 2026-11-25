@@ -64,3 +64,29 @@ Traceback (most recent call last):
   File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/sensibilidade_resolucao.py", line 139, in main
     raise RuntimeError(f'{nome} {ano}-{mes:02d}: não deu depois de 4 tentativas')
 RuntimeError: chirps 1981-01: não deu depois de 4 tentativas
+
+===== 25/11/2026 04:33 (Brasília), tentativa 1 =====
+código: commit edc4a103d0807c926b71ed29ae766748f14eb1ee | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chirps 1981 pronto em 1263 s
+   chirps 1982 pronto em 1232 s
+   chirps 1983 pronto em 1245 s
+   chirps 1984 pronto em 1302 s
+   chirps 1985 pronto em 1450 s
+   chirps 1986 pronto em 1379 s
+   chirps 1987 pronto em 1263 s
+   chirps 1988 pronto em 1368 s
+   chirps 1989 pronto em 1383 s
+   chirps 1990 pronto em 1776 s
+   chirps 1991 pronto em 1596 s
+   chirps 1992 pronto em 1356 s
+   chirps 1993 pronto em 1650 s
+Tempo desta vez acabou; a próxima retoma daqui.
