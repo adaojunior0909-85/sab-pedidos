@@ -56,10 +56,10 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   pelo C3. O C3 NÃO precisa de climatologia nova no Earth Engine: usa a `SICSB_1986_2025` de sempre × 60 razões (12
   meses × 5 regiões) tiradas de 2021–2025 (as da Parte A). Depois: prévia de 2026, K16, aprovação e 05b (regrava só
   2026; o histórico não muda).
-- ⛔ **Minutos do GitHub Actions do `sab-pedidos` (privado) esgotados em 25/11, ~15h** (2.000 do plano gratuito). Param
-  os pedidos por e-mail, a fila (`historico`, `resolucao`, CHIRPS da correção) e as rotinas do `sab-pedidos`. O motor
-  (`sab-motor`, público) NÃO é afetado. Decisão do responsável: tornar o `sab-pedidos` público (minutos ilimitados; o
-  repositório não guarda e-mails de solicitantes), pagar o excedente (~US$ 20–30 para o que falta) ou esperar o ciclo.
+- ✅ **Minutos do GitHub Actions:** esgotados em 25/11 (~15h) com o `sab-pedidos` privado; **o responsável tornou o
+  `sab-pedidos` público (25/11, ~17h)**: repositório público não gasta minutos. Antes, conferido: nenhuma credencial
+  no histórico (só os nomes, em código e guias; as de verdade ficam nos segredos), nenhum e-mail de solicitante; o
+  e-mail do responsável só como autor de commits, que já era público no `sab-motor`.
 - ⏳ **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem (eu abro, o responsável junta).
 - ⏳ **Agendamentos do `sab-pedidos`:** se até a noite de 25/11 a previsão das 16h13 não tiver rodado sozinha, propor ao
   responsável o conserto (ver "O que falta auditar e corrigir", item 1).
