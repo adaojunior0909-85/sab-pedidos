@@ -14,5 +14,10 @@
   "fim": "25/11 03:33",
   "minutos": 5,
   "codigo": 0
+ },
+ "escoamento_extrair": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 03:33"
  }
 }
