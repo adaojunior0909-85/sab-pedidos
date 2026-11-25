@@ -77,3 +77,21 @@ usa os números da Parte A.
 - Script (a escrever depois da aprovação): `pesquisa/validar_correcao_era5.py`, só leitura, com esta regra no
   cabeçalho.
 - Saída: `pesquisa/resultados_correcao_era5/` (CSV brutos por ano-alvo e `RESULTADOS.md`).
+
+## Emenda 1 (25/11/2026, ANTES de rodar; pedida e aprovada pelo responsável)
+Motivo: 150 pixels são poucos para os extremos (o p99 de cada pixel tem ~36 dias acima dele em 10 anos, e o Sul e o
+Sudeste ficavam com poucas dezenas de pixels). Nada mais muda: métodos, anos, condições 1 a 3, radiação e ETo e o
+relato com o CHIRPS ficam como acima.
+
+A **condição 4** da chuva passa a ter três itens, e os três precisam passar:
+- **4a.** Em **todos os pixels entregues**, em cada uma das 5 regiões, a fração de dias com chuva (≥ 1 mm) não se afasta
+  do BR-DWGD mais **2 p.p.** do que o C0 já se afasta.
+- **4b.** Em **todos os pixels entregues**, em cada uma das 5 regiões, o erro da maior chuva diária do mês (Rx1day,
+  |método − BR-DWGD| pixel a pixel, sobre o Rx1day do BR-DWGD) não cresce mais de **5%** em relação ao do C0.
+- **4c.** Em **1.500 pixels A** (300 por região, sorteio fixo, semente 21) no lugar dos 150 da K21, o erro do
+  percentil 99 diário (média nos pixels de |p99 do método / p99 do BR-DWGD − 1|) não cresce mais de **5%** em relação
+  ao do C0.
+
+"Não cresce mais de 5%" = erro do método ≤ 1,05 × erro do C0. O C3 da chuva passa a ser calculado pixel a pixel e dia
+a dia no Earth Engine (C0 × a razão da região do pixel), o que torna exata a média do Brasil. As outras contas que o
+protocolo não detalhava estão fixadas no cabeçalho de `pesquisa/validar_correcao_era5.py`.

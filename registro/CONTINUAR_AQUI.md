@@ -40,16 +40,18 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 ## Decisões esperando o responsável
 0. ✅ **Protocolo da correção APROVADO (25/11, ~07h)**, incluindo 2026 × CHIRPS só como relato (fora da regra).
    Congelado no commit `1de7696` do `validacoes-2` (`161324a` no branch de trabalho) ANTES de rodar.
-1. **Script do teste PRONTO, esperando o responsável autorizar o disparo** (branch `claude/tender-maxwell-6ka6dt`,
-   commit `167ffa9`): `pesquisa/validar_correcao_era5.py` (só leitura; tarefa `correcao_era5` na fila desse branch) e
-   `pesquisa/teste_correcao_era5.py` (20 conferências sem Earth Engine, todas ok). Antes de tudo, o script confere se
-   a média recalculada para 1986–2025 bate com o asset `SICSB_1986_2025` (2%); se não bater, para sem rodar o resto.
-   Pontos que o protocolo não detalhava, fixados no cabeçalho ANTES de rodar (o responsável pode pedir mudança antes do
-   disparo): erro do p99 "não cresce mais de 5%" = relativo (≤ 1,05 × o do C0); r_anomalias nas 5 regiões; C3 no
-   pixel = C0 × razão da região; empate na radiação: < 0,05 MJ → o mais simples. Disparo (depois do OK):
+1. **Teste da correção DISPARADO (25/11, ~08h), rodando sozinho** na fila do branch `claude/tender-maxwell-6ka6dt`
+   (cadeia `so=correcao_era5`; os resultados sobem nesse branch em `pesquisa/resultados_correcao_era5/`, o LOG em
+   `rotinas/conferencia/logs/correcao_era5.txt` e o estado em `rotinas/conferencia/fila_estado_correcao_era5.json`).
+   **Emenda 1 do protocolo** (pedida pelo responsável, antes de rodar; commit `91cd9b3`): a condição 4 passou a usar
+   TODOS os pixels entregues (dias de chuva e Rx1day, em cada região) e o p99 em 1.500 pixels (300 por região) no
+   lugar dos 150 da K21. Script `pesquisa/validar_correcao_era5.py`; testes sem Earth Engine
+   `pesquisa/teste_correcao_era5.py` (23 conferências ok). Ordem: conferência da receita (para se não bater com o
+   `SICSB_1986_2025`), pixels (30 anos de somas + 10 anos de dias), 120 meses regionais, 2026 × CHIRPS, resumo.
+   Tempo estimado: várias horas, em mais de uma execução da fila. Se quebrar: ler o LOG, corrigir, apagar a entrada
+   `correcao_era5` do `fila_estado_correcao_era5.json` e disparar de novo:
    `gh api -X POST repos/adaojunior0909-85/sab-pedidos/actions/workflows/rotina_conferencia.yml/dispatches -f ref=claude/tender-maxwell-6ka6dt -f 'inputs[so]=correcao_era5'`
-   (os resultados sobem nesse branch; a cadeia se chama de novo até acabar; tempo estimado de várias horas: 240
-   pedidos regionais pesados, 960 dos pixels e 9 do CHIRPS).
+   Quando terminar: ler `RESULTADOS.md`, levar ao responsável e trazer script e resultados para o `validacoes-2`.
 2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
    método passar. O asset atual e o histórico não mudam.
 3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
