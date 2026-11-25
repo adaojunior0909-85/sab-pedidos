@@ -1,0 +1,2476 @@
+fonte,variavel,regiao,decada,vies,r_anom,degrau
+chirps,pr_mm,Brasil,1981-1990,-0.537,0.974,False
+chirps,pr_mm,Brasil,1991-2000,-1.039,0.973,False
+chirps,pr_mm,Brasil,2001-2010,-2.285,0.971,False
+chirps,pr_mm,Brasil,2011-2020,-4.273,0.875,False
+chirps,pr_mm,Brasil,2021-2025,0.02,0.935,False
+chirps,pr_mm,Centro-Oeste,1981-1990,-1.126,0.98,False
+chirps,pr_mm,Centro-Oeste,1991-2000,-0.737,0.979,False
+chirps,pr_mm,Centro-Oeste,2001-2010,-2.086,0.985,False
+chirps,pr_mm,Centro-Oeste,2011-2020,-7.359,0.904,True
+chirps,pr_mm,Centro-Oeste,2021-2025,-5.312,0.905,False
+chirps,pr_mm,Nordeste,1981-1990,-0.511,0.996,False
+chirps,pr_mm,Nordeste,1991-2000,-0.889,0.992,False
+chirps,pr_mm,Nordeste,2001-2010,-2.455,0.992,False
+chirps,pr_mm,Nordeste,2011-2020,-5.688,0.96,False
+chirps,pr_mm,Nordeste,2021-2025,3.852,0.978,False
+chirps,pr_mm,Norte,1981-1990,-0.97,0.964,False
+chirps,pr_mm,Norte,1991-2000,-1.777,0.967,False
+chirps,pr_mm,Norte,2001-2010,-3.04,0.959,False
+chirps,pr_mm,Norte,2011-2020,-3.628,0.889,False
+chirps,pr_mm,Norte,2021-2025,0.243,0.926,False
+chirps,pr_mm,Sudeste,1981-1990,1.427,0.985,False
+chirps,pr_mm,Sudeste,1991-2000,0.404,0.989,False
+chirps,pr_mm,Sudeste,2001-2010,0.741,0.992,False
+chirps,pr_mm,Sudeste,2011-2020,-3.19,0.95,False
+chirps,pr_mm,Sudeste,2021-2025,1.316,0.968,False
+chirps,pr_mm,Sul,1981-1990,2.187,0.991,False
+chirps,pr_mm,Sul,1991-2000,2.216,0.99,False
+chirps,pr_mm,Sul,2001-2010,0.164,0.985,False
+chirps,pr_mm,Sul,2011-2020,-1.088,0.955,False
+chirps,pr_mm,Sul,2021-2025,4.072,0.99,False
+chirps,pr_mm,UF acre,1981-1990,0.91,0.909,False
+chirps,pr_mm,UF acre,1991-2000,-0.954,0.883,False
+chirps,pr_mm,UF acre,2001-2010,-0.513,0.876,False
+chirps,pr_mm,UF acre,2011-2020,-6.868,0.512,True
+chirps,pr_mm,UF acre,2021-2025,-4.096,0.761,False
+chirps,pr_mm,UF alagoas,1981-1990,7.253,0.97,False
+chirps,pr_mm,UF alagoas,1991-2000,10.16,0.972,False
+chirps,pr_mm,UF alagoas,2001-2010,8.796,0.951,False
+chirps,pr_mm,UF alagoas,2011-2020,12.312,0.711,False
+chirps,pr_mm,UF alagoas,2021-2025,11.714,0.959,False
+chirps,pr_mm,UF amapa,1981-1990,2.805,0.902,False
+chirps,pr_mm,UF amapa,1991-2000,6.094,0.919,False
+chirps,pr_mm,UF amapa,2001-2010,2.47,0.928,False
+chirps,pr_mm,UF amapa,2011-2020,11.683,0.779,True
+chirps,pr_mm,UF amapa,2021-2025,18.764,0.758,True
+chirps,pr_mm,UF amazonas,1981-1990,-0.907,0.948,False
+chirps,pr_mm,UF amazonas,1991-2000,-2.519,0.958,False
+chirps,pr_mm,UF amazonas,2001-2010,-3.676,0.959,False
+chirps,pr_mm,UF amazonas,2011-2020,-2.28,0.833,False
+chirps,pr_mm,UF amazonas,2021-2025,-0.253,0.883,False
+chirps,pr_mm,UF bahia,1981-1990,0.066,0.995,False
+chirps,pr_mm,UF bahia,1991-2000,0.404,0.993,False
+chirps,pr_mm,UF bahia,2001-2010,-3.185,0.991,False
+chirps,pr_mm,UF bahia,2011-2020,-1.972,0.969,False
+chirps,pr_mm,UF bahia,2021-2025,4.63,0.985,False
+chirps,pr_mm,UF ceara,1981-1990,1.333,0.993,False
+chirps,pr_mm,UF ceara,1991-2000,-0.0,0.978,False
+chirps,pr_mm,UF ceara,2001-2010,-2.893,0.991,False
+chirps,pr_mm,UF ceara,2011-2020,-12.969,0.891,True
+chirps,pr_mm,UF ceara,2021-2025,5.706,0.928,True
+chirps,pr_mm,UF distrito federal,1981-1990,0.478,0.98,False
+chirps,pr_mm,UF distrito federal,1991-2000,-0.748,0.985,False
+chirps,pr_mm,UF distrito federal,2001-2010,-2.427,0.978,False
+chirps,pr_mm,UF distrito federal,2011-2020,1.561,0.885,False
+chirps,pr_mm,UF distrito federal,2021-2025,4.56,0.955,False
+chirps,pr_mm,UF espirito santo,1981-1990,1.454,0.981,False
+chirps,pr_mm,UF espirito santo,1991-2000,3.367,0.978,False
+chirps,pr_mm,UF espirito santo,2001-2010,3.829,0.986,False
+chirps,pr_mm,UF espirito santo,2011-2020,0.14,0.921,False
+chirps,pr_mm,UF espirito santo,2021-2025,4.184,0.986,False
+chirps,pr_mm,UF goias,1981-1990,0.752,0.99,False
+chirps,pr_mm,UF goias,1991-2000,0.136,0.987,False
+chirps,pr_mm,UF goias,2001-2010,-1.742,0.991,False
+chirps,pr_mm,UF goias,2011-2020,-7.727,0.948,True
+chirps,pr_mm,UF goias,2021-2025,-5.981,0.952,False
+chirps,pr_mm,UF maranhao,1981-1990,-0.865,0.992,False
+chirps,pr_mm,UF maranhao,1991-2000,-2.169,0.987,False
+chirps,pr_mm,UF maranhao,2001-2010,-3.395,0.989,False
+chirps,pr_mm,UF maranhao,2011-2020,-5.627,0.888,False
+chirps,pr_mm,UF maranhao,2021-2025,1.165,0.942,False
+chirps,pr_mm,UF mato grosso,1981-1990,-2.782,0.97,False
+chirps,pr_mm,UF mato grosso,1991-2000,-1.432,0.965,False
+chirps,pr_mm,UF mato grosso,2001-2010,-2.91,0.976,False
+chirps,pr_mm,UF mato grosso,2011-2020,-8.481,0.87,True
+chirps,pr_mm,UF mato grosso,2021-2025,-6.39,0.878,False
+chirps,pr_mm,UF mato grosso do sul,1981-1990,2.33,0.96,False
+chirps,pr_mm,UF mato grosso do sul,1991-2000,0.594,0.983,False
+chirps,pr_mm,UF mato grosso do sul,2001-2010,0.288,0.991,False
+chirps,pr_mm,UF mato grosso do sul,2011-2020,-3.48,0.879,False
+chirps,pr_mm,UF mato grosso do sul,2021-2025,-1.0,0.955,False
+chirps,pr_mm,UF minas gerais,1981-1990,0.325,0.988,False
+chirps,pr_mm,UF minas gerais,1991-2000,-1.229,0.991,False
+chirps,pr_mm,UF minas gerais,2001-2010,-1.013,0.993,False
+chirps,pr_mm,UF minas gerais,2011-2020,-5.907,0.967,False
+chirps,pr_mm,UF minas gerais,2021-2025,-3.171,0.98,False
+chirps,pr_mm,UF para,1981-1990,-1.555,0.968,False
+chirps,pr_mm,UF para,1991-2000,-2.174,0.959,False
+chirps,pr_mm,UF para,2001-2010,-3.844,0.974,False
+chirps,pr_mm,UF para,2011-2020,-8.308,0.828,True
+chirps,pr_mm,UF para,2021-2025,0.007,0.901,False
+chirps,pr_mm,UF paraiba,1981-1990,1.668,0.991,False
+chirps,pr_mm,UF paraiba,1991-2000,0.087,0.973,False
+chirps,pr_mm,UF paraiba,2001-2010,-1.373,0.981,False
+chirps,pr_mm,UF paraiba,2011-2020,-9.019,0.896,True
+chirps,pr_mm,UF paraiba,2021-2025,6.194,0.91,True
+chirps,pr_mm,UF parana,1981-1990,3.166,0.993,False
+chirps,pr_mm,UF parana,1991-2000,3.623,0.991,False
+chirps,pr_mm,UF parana,2001-2010,1.838,0.991,False
+chirps,pr_mm,UF parana,2011-2020,3.072,0.939,False
+chirps,pr_mm,UF parana,2021-2025,3.743,0.988,False
+chirps,pr_mm,UF pernambuco,1981-1990,-1.241,0.991,False
+chirps,pr_mm,UF pernambuco,1991-2000,-1.132,0.971,False
+chirps,pr_mm,UF pernambuco,2001-2010,0.662,0.987,False
+chirps,pr_mm,UF pernambuco,2011-2020,-6.823,0.883,True
+chirps,pr_mm,UF pernambuco,2021-2025,11.336,0.905,True
+chirps,pr_mm,UF piaui,1981-1990,-3.399,0.994,False
+chirps,pr_mm,UF piaui,1991-2000,-4.009,0.989,False
+chirps,pr_mm,UF piaui,2001-2010,-2.561,0.982,False
+chirps,pr_mm,UF piaui,2011-2020,-11.351,0.926,True
+chirps,pr_mm,UF piaui,2021-2025,3.093,0.946,True
+chirps,pr_mm,UF rio de janeiro,1981-1990,1.229,0.981,False
+chirps,pr_mm,UF rio de janeiro,1991-2000,1.781,0.978,False
+chirps,pr_mm,UF rio de janeiro,2001-2010,5.796,0.967,False
+chirps,pr_mm,UF rio de janeiro,2011-2020,1.295,0.891,False
+chirps,pr_mm,UF rio de janeiro,2021-2025,11.04,0.943,True
+chirps,pr_mm,UF rio grande do norte,1981-1990,0.146,0.993,False
+chirps,pr_mm,UF rio grande do norte,1991-2000,5.685,0.96,True
+chirps,pr_mm,UF rio grande do norte,2001-2010,-0.236,0.978,False
+chirps,pr_mm,UF rio grande do norte,2011-2020,-4.728,0.908,False
+chirps,pr_mm,UF rio grande do norte,2021-2025,5.261,0.96,True
+chirps,pr_mm,UF rio grande do sul,1981-1990,1.531,0.991,False
+chirps,pr_mm,UF rio grande do sul,1991-2000,1.135,0.99,False
+chirps,pr_mm,UF rio grande do sul,2001-2010,-1.433,0.984,False
+chirps,pr_mm,UF rio grande do sul,2011-2020,-3.983,0.963,True
+chirps,pr_mm,UF rio grande do sul,2021-2025,2.12,0.99,False
+chirps,pr_mm,UF rondonia,1981-1990,0.279,0.933,False
+chirps,pr_mm,UF rondonia,1991-2000,-0.503,0.928,False
+chirps,pr_mm,UF rondonia,2001-2010,-0.173,0.911,False
+chirps,pr_mm,UF rondonia,2011-2020,3.252,0.685,False
+chirps,pr_mm,UF rondonia,2021-2025,3.286,0.768,False
+chirps,pr_mm,UF roraima,1981-1990,-2.54,0.961,False
+chirps,pr_mm,UF roraima,1991-2000,-0.361,0.971,False
+chirps,pr_mm,UF roraima,2001-2010,-2.681,0.98,False
+chirps,pr_mm,UF roraima,2011-2020,2.714,0.864,True
+chirps,pr_mm,UF roraima,2021-2025,-6.461,0.778,False
+chirps,pr_mm,UF santa catarina,1981-1990,2.087,0.988,False
+chirps,pr_mm,UF santa catarina,1991-2000,2.327,0.989,False
+chirps,pr_mm,UF santa catarina,2001-2010,1.492,0.973,False
+chirps,pr_mm,UF santa catarina,2011-2020,-0.683,0.912,False
+chirps,pr_mm,UF santa catarina,2021-2025,10.162,0.981,True
+chirps,pr_mm,UF sao paulo,1981-1990,3.693,0.982,False
+chirps,pr_mm,UF sao paulo,1991-2000,3.116,0.986,False
+chirps,pr_mm,UF sao paulo,2001-2010,3.071,0.975,False
+chirps,pr_mm,UF sao paulo,2011-2020,0.909,0.858,False
+chirps,pr_mm,UF sao paulo,2021-2025,9.406,0.924,True
+chirps,pr_mm,UF sergipe,1981-1990,4.165,0.971,False
+chirps,pr_mm,UF sergipe,1991-2000,4.854,0.973,False
+chirps,pr_mm,UF sergipe,2001-2010,7.411,0.952,False
+chirps,pr_mm,UF sergipe,2011-2020,11.581,0.742,True
+chirps,pr_mm,UF sergipe,2021-2025,4.119,0.861,False
+chirps,pr_mm,UF tocantins,1981-1990,-2.201,0.988,False
+chirps,pr_mm,UF tocantins,1991-2000,-2.461,0.987,False
+chirps,pr_mm,UF tocantins,2001-2010,-2.246,0.99,False
+chirps,pr_mm,UF tocantins,2011-2020,-8.889,0.907,True
+chirps,pr_mm,UF tocantins,2021-2025,0.681,0.946,False
+terraclimate,et_potencial,Brasil,1961-1970,12.191,0.64,False
+terraclimate,et_potencial,Brasil,1971-1980,9.697,0.473,True
+terraclimate,et_potencial,Brasil,1981-1990,8.089,0.803,False
+terraclimate,et_potencial,Brasil,1991-2000,8.803,0.806,False
+terraclimate,et_potencial,Brasil,2001-2010,12.194,0.854,False
+terraclimate,et_potencial,Brasil,2011-2020,10.8,0.871,False
+terraclimate,et_potencial,Brasil,2021-2025,5.317,0.88,False
+terraclimate,et_potencial,Centro-Oeste,1961-1970,10.609,0.469,True
+terraclimate,et_potencial,Centro-Oeste,1971-1980,5.902,0.555,False
+terraclimate,et_potencial,Centro-Oeste,1981-1990,5.024,0.697,False
+terraclimate,et_potencial,Centro-Oeste,1991-2000,4.994,0.791,False
+terraclimate,et_potencial,Centro-Oeste,2001-2010,8.486,0.736,False
+terraclimate,et_potencial,Centro-Oeste,2011-2020,8.079,0.873,False
+terraclimate,et_potencial,Centro-Oeste,2021-2025,3.621,0.879,False
+terraclimate,et_potencial,Nordeste,1961-1970,16.325,0.633,False
+terraclimate,et_potencial,Nordeste,1971-1980,19.574,0.329,True
+terraclimate,et_potencial,Nordeste,1981-1990,16.44,0.869,False
+terraclimate,et_potencial,Nordeste,1991-2000,17.101,0.818,False
+terraclimate,et_potencial,Nordeste,2001-2010,15.265,0.9,False
+terraclimate,et_potencial,Nordeste,2011-2020,15.768,0.928,False
+terraclimate,et_potencial,Nordeste,2021-2025,10.4,0.892,True
+terraclimate,et_potencial,Norte,1961-1970,12.47,0.298,False
+terraclimate,et_potencial,Norte,1971-1980,7.651,0.342,False
+terraclimate,et_potencial,Norte,1981-1990,6.166,0.64,False
+terraclimate,et_potencial,Norte,1991-2000,7.349,0.667,False
+terraclimate,et_potencial,Norte,2001-2010,13.999,0.721,True
+terraclimate,et_potencial,Norte,2011-2020,10.43,0.746,False
+terraclimate,et_potencial,Norte,2021-2025,3.283,0.793,False
+terraclimate,et_potencial,Sudeste,1961-1970,13.423,0.602,False
+terraclimate,et_potencial,Sudeste,1971-1980,11.356,0.54,False
+terraclimate,et_potencial,Sudeste,1981-1990,10.367,0.925,False
+terraclimate,et_potencial,Sudeste,1991-2000,9.461,0.899,False
+terraclimate,et_potencial,Sudeste,2001-2010,11.612,0.931,False
+terraclimate,et_potencial,Sudeste,2011-2020,12.249,0.923,False
+terraclimate,et_potencial,Sudeste,2021-2025,9.542,0.9,False
+terraclimate,et_potencial,Sul,1961-1970,0.928,0.718,False
+terraclimate,et_potencial,Sul,1971-1980,2.646,0.689,False
+terraclimate,et_potencial,Sul,1981-1990,0.28,0.793,False
+terraclimate,et_potencial,Sul,1991-2000,2.827,0.884,False
+terraclimate,et_potencial,Sul,2001-2010,3.258,0.841,False
+terraclimate,et_potencial,Sul,2011-2020,3.401,0.914,False
+terraclimate,et_potencial,Sul,2021-2025,1.603,0.898,False
+terraclimate,et_potencial,UF acre,1961-1970,14.68,0.063,True
+terraclimate,et_potencial,UF acre,1971-1980,5.082,0.309,False
+terraclimate,et_potencial,UF acre,1981-1990,2.211,0.312,False
+terraclimate,et_potencial,UF acre,1991-2000,6.27,0.171,False
+terraclimate,et_potencial,UF acre,2001-2010,14.608,0.534,True
+terraclimate,et_potencial,UF acre,2011-2020,17.944,0.564,True
+terraclimate,et_potencial,UF acre,2021-2025,6.76,0.458,False
+terraclimate,et_potencial,UF alagoas,1961-1970,15.821,0.438,True
+terraclimate,et_potencial,UF alagoas,1971-1980,16.689,0.134,True
+terraclimate,et_potencial,UF alagoas,1981-1990,18.029,0.859,False
+terraclimate,et_potencial,UF alagoas,1991-2000,21.535,0.871,False
+terraclimate,et_potencial,UF alagoas,2001-2010,20.36,0.879,False
+terraclimate,et_potencial,UF alagoas,2011-2020,17.144,0.761,False
+terraclimate,et_potencial,UF alagoas,2021-2025,12.226,0.78,False
+terraclimate,et_potencial,UF amapa,1961-1970,8.374,0.482,False
+terraclimate,et_potencial,UF amapa,1971-1980,1.16,0.258,False
+terraclimate,et_potencial,UF amapa,1981-1990,2.244,0.636,False
+terraclimate,et_potencial,UF amapa,1991-2000,4.656,0.408,False
+terraclimate,et_potencial,UF amapa,2001-2010,9.325,0.697,False
+terraclimate,et_potencial,UF amapa,2011-2020,3.847,0.69,False
+terraclimate,et_potencial,UF amapa,2021-2025,4.524,0.634,False
+terraclimate,et_potencial,UF amazonas,1961-1970,13.136,0.255,False
+terraclimate,et_potencial,UF amazonas,1971-1980,8.272,0.312,False
+terraclimate,et_potencial,UF amazonas,1981-1990,6.464,0.515,False
+terraclimate,et_potencial,UF amazonas,1991-2000,8.803,0.664,False
+terraclimate,et_potencial,UF amazonas,2001-2010,16.975,0.606,True
+terraclimate,et_potencial,UF amazonas,2011-2020,13.066,0.548,False
+terraclimate,et_potencial,UF amazonas,2021-2025,2.749,0.68,True
+terraclimate,et_potencial,UF bahia,1961-1970,10.489,0.656,False
+terraclimate,et_potencial,UF bahia,1971-1980,15.018,0.488,True
+terraclimate,et_potencial,UF bahia,1981-1990,12.731,0.887,False
+terraclimate,et_potencial,UF bahia,1991-2000,13.602,0.886,False
+terraclimate,et_potencial,UF bahia,2001-2010,13.848,0.896,False
+terraclimate,et_potencial,UF bahia,2011-2020,13.788,0.938,False
+terraclimate,et_potencial,UF bahia,2021-2025,9.911,0.924,False
+terraclimate,et_potencial,UF ceara,1961-1970,19.968,0.508,False
+terraclimate,et_potencial,UF ceara,1971-1980,21.171,0.219,True
+terraclimate,et_potencial,UF ceara,1981-1990,16.976,0.853,False
+terraclimate,et_potencial,UF ceara,1991-2000,18.235,0.759,False
+terraclimate,et_potencial,UF ceara,2001-2010,16.608,0.845,False
+terraclimate,et_potencial,UF ceara,2011-2020,15.927,0.881,False
+terraclimate,et_potencial,UF ceara,2021-2025,12.742,0.786,False
+terraclimate,et_potencial,UF distrito federal,1961-1970,9.989,0.116,True
+terraclimate,et_potencial,UF distrito federal,1971-1980,9.782,0.525,False
+terraclimate,et_potencial,UF distrito federal,1981-1990,6.89,0.867,False
+terraclimate,et_potencial,UF distrito federal,1991-2000,6.87,0.884,False
+terraclimate,et_potencial,UF distrito federal,2001-2010,9.762,0.832,False
+terraclimate,et_potencial,UF distrito federal,2011-2020,12.165,0.848,False
+terraclimate,et_potencial,UF distrito federal,2021-2025,12.02,0.871,False
+terraclimate,et_potencial,UF espirito santo,1961-1970,13.978,0.644,False
+terraclimate,et_potencial,UF espirito santo,1971-1980,16.461,0.613,False
+terraclimate,et_potencial,UF espirito santo,1981-1990,12.011,0.907,False
+terraclimate,et_potencial,UF espirito santo,1991-2000,10.269,0.909,False
+terraclimate,et_potencial,UF espirito santo,2001-2010,12.804,0.936,False
+terraclimate,et_potencial,UF espirito santo,2011-2020,14.964,0.921,False
+terraclimate,et_potencial,UF espirito santo,2021-2025,10.688,0.888,False
+terraclimate,et_potencial,UF goias,1961-1970,11.927,0.338,True
+terraclimate,et_potencial,UF goias,1971-1980,8.492,0.554,False
+terraclimate,et_potencial,UF goias,1981-1990,5.502,0.88,False
+terraclimate,et_potencial,UF goias,1991-2000,5.397,0.879,False
+terraclimate,et_potencial,UF goias,2001-2010,9.337,0.877,False
+terraclimate,et_potencial,UF goias,2011-2020,8.234,0.92,False
+terraclimate,et_potencial,UF goias,2021-2025,5.284,0.902,False
+terraclimate,et_potencial,UF maranhao,1961-1970,18.682,0.492,True
+terraclimate,et_potencial,UF maranhao,1971-1980,19.378,0.455,True
+terraclimate,et_potencial,UF maranhao,1981-1990,14.889,0.85,False
+terraclimate,et_potencial,UF maranhao,1991-2000,14.279,0.789,False
+terraclimate,et_potencial,UF maranhao,2001-2010,9.123,0.903,True
+terraclimate,et_potencial,UF maranhao,2011-2020,10.497,0.848,False
+terraclimate,et_potencial,UF maranhao,2021-2025,3.022,0.828,True
+terraclimate,et_potencial,UF mato grosso,1961-1970,13.403,0.428,True
+terraclimate,et_potencial,UF mato grosso,1971-1980,7.49,0.411,False
+terraclimate,et_potencial,UF mato grosso,1981-1990,6.585,0.532,False
+terraclimate,et_potencial,UF mato grosso,1991-2000,5.878,0.699,False
+terraclimate,et_potencial,UF mato grosso,2001-2010,9.258,0.624,False
+terraclimate,et_potencial,UF mato grosso,2011-2020,9.636,0.817,False
+terraclimate,et_potencial,UF mato grosso,2021-2025,5.748,0.831,False
+terraclimate,et_potencial,UF mato grosso do sul,1961-1970,3.255,0.537,False
+terraclimate,et_potencial,UF mato grosso do sul,1971-1980,0.124,0.446,True
+terraclimate,et_potencial,UF mato grosso do sul,1981-1990,1.151,0.726,False
+terraclimate,et_potencial,UF mato grosso do sul,1991-2000,2.622,0.752,False
+terraclimate,et_potencial,UF mato grosso do sul,2001-2010,5.994,0.751,False
+terraclimate,et_potencial,UF mato grosso do sul,2011-2020,4.387,0.818,False
+terraclimate,et_potencial,UF mato grosso do sul,2021-2025,-2.597,0.868,True
+terraclimate,et_potencial,UF minas gerais,1961-1970,13.873,0.606,False
+terraclimate,et_potencial,UF minas gerais,1971-1980,12.563,0.558,False
+terraclimate,et_potencial,UF minas gerais,1981-1990,11.382,0.936,False
+terraclimate,et_potencial,UF minas gerais,1991-2000,9.666,0.918,False
+terraclimate,et_potencial,UF minas gerais,2001-2010,12.017,0.928,False
+terraclimate,et_potencial,UF minas gerais,2011-2020,13.358,0.936,False
+terraclimate,et_potencial,UF minas gerais,2021-2025,11.653,0.895,False
+terraclimate,et_potencial,UF para,1961-1970,13.87,0.315,True
+terraclimate,et_potencial,UF para,1971-1980,8.699,0.349,True
+terraclimate,et_potencial,UF para,1981-1990,7.671,0.711,False
+terraclimate,et_potencial,UF para,1991-2000,8.267,0.615,False
+terraclimate,et_potencial,UF para,2001-2010,14.006,0.722,True
+terraclimate,et_potencial,UF para,2011-2020,7.109,0.788,False
+terraclimate,et_potencial,UF para,2021-2025,2.692,0.789,True
+terraclimate,et_potencial,UF paraiba,1961-1970,19.525,0.384,True
+terraclimate,et_potencial,UF paraiba,1971-1980,21.154,0.104,True
+terraclimate,et_potencial,UF paraiba,1981-1990,22.642,0.835,False
+terraclimate,et_potencial,UF paraiba,1991-2000,25.497,0.755,False
+terraclimate,et_potencial,UF paraiba,2001-2010,25.974,0.832,False
+terraclimate,et_potencial,UF paraiba,2011-2020,25.041,0.843,False
+terraclimate,et_potencial,UF paraiba,2021-2025,18.838,0.658,False
+terraclimate,et_potencial,UF parana,1961-1970,5.025,0.635,False
+terraclimate,et_potencial,UF parana,1971-1980,2.868,0.517,False
+terraclimate,et_potencial,UF parana,1981-1990,2.693,0.875,False
+terraclimate,et_potencial,UF parana,1991-2000,5.13,0.839,False
+terraclimate,et_potencial,UF parana,2001-2010,8.035,0.793,False
+terraclimate,et_potencial,UF parana,2011-2020,6.992,0.896,False
+terraclimate,et_potencial,UF parana,2021-2025,4.679,0.901,False
+terraclimate,et_potencial,UF pernambuco,1961-1970,21.303,0.432,True
+terraclimate,et_potencial,UF pernambuco,1971-1980,23.145,0.091,True
+terraclimate,et_potencial,UF pernambuco,1981-1990,23.15,0.823,False
+terraclimate,et_potencial,UF pernambuco,1991-2000,26.785,0.821,False
+terraclimate,et_potencial,UF pernambuco,2001-2010,26.148,0.825,False
+terraclimate,et_potencial,UF pernambuco,2011-2020,25.867,0.811,False
+terraclimate,et_potencial,UF pernambuco,2021-2025,19.389,0.807,False
+terraclimate,et_potencial,UF piaui,1961-1970,19.426,0.483,True
+terraclimate,et_potencial,UF piaui,1971-1980,26.719,0.38,True
+terraclimate,et_potencial,UF piaui,1981-1990,20.358,0.781,False
+terraclimate,et_potencial,UF piaui,1991-2000,20.117,0.795,False
+terraclimate,et_potencial,UF piaui,2001-2010,15.853,0.884,False
+terraclimate,et_potencial,UF piaui,2011-2020,18.681,0.877,False
+terraclimate,et_potencial,UF piaui,2021-2025,12.396,0.819,True
+terraclimate,et_potencial,UF rio de janeiro,1961-1970,3.725,0.728,False
+terraclimate,et_potencial,UF rio de janeiro,1971-1980,5.85,0.545,False
+terraclimate,et_potencial,UF rio de janeiro,1981-1990,8.591,0.903,False
+terraclimate,et_potencial,UF rio de janeiro,1991-2000,11.233,0.895,False
+terraclimate,et_potencial,UF rio de janeiro,2001-2010,12.196,0.922,False
+terraclimate,et_potencial,UF rio de janeiro,2011-2020,12.381,0.88,False
+terraclimate,et_potencial,UF rio de janeiro,2021-2025,7.174,0.878,False
+terraclimate,et_potencial,UF rio grande do norte,1961-1970,28.035,0.365,True
+terraclimate,et_potencial,UF rio grande do norte,1971-1980,23.427,0.122,True
+terraclimate,et_potencial,UF rio grande do norte,1981-1990,22.663,0.82,False
+terraclimate,et_potencial,UF rio grande do norte,1991-2000,23.1,0.721,False
+terraclimate,et_potencial,UF rio grande do norte,2001-2010,25.876,0.819,False
+terraclimate,et_potencial,UF rio grande do norte,2011-2020,23.67,0.832,False
+terraclimate,et_potencial,UF rio grande do norte,2021-2025,16.997,0.649,True
+terraclimate,et_potencial,UF rio grande do sul,1961-1970,-1.961,0.729,False
+terraclimate,et_potencial,UF rio grande do sul,1971-1980,2.079,0.769,False
+terraclimate,et_potencial,UF rio grande do sul,1981-1990,-1.81,0.71,False
+terraclimate,et_potencial,UF rio grande do sul,1991-2000,-0.096,0.911,False
+terraclimate,et_potencial,UF rio grande do sul,2001-2010,-0.828,0.897,False
+terraclimate,et_potencial,UF rio grande do sul,2011-2020,0.717,0.905,False
+terraclimate,et_potencial,UF rio grande do sul,2021-2025,-1.193,0.927,False
+terraclimate,et_potencial,UF rondonia,1961-1970,14.111,0.119,True
+terraclimate,et_potencial,UF rondonia,1971-1980,4.559,0.315,False
+terraclimate,et_potencial,UF rondonia,1981-1990,4.798,0.374,False
+terraclimate,et_potencial,UF rondonia,1991-2000,3.791,0.415,True
+terraclimate,et_potencial,UF rondonia,2001-2010,9.082,0.35,False
+terraclimate,et_potencial,UF rondonia,2011-2020,16.271,0.65,True
+terraclimate,et_potencial,UF rondonia,2021-2025,10.01,0.738,False
+terraclimate,et_potencial,UF roraima,1961-1970,-0.796,0.099,False
+terraclimate,et_potencial,UF roraima,1971-1980,0.001,0.395,False
+terraclimate,et_potencial,UF roraima,1981-1990,-2.659,0.611,False
+terraclimate,et_potencial,UF roraima,1991-2000,-0.862,0.599,False
+terraclimate,et_potencial,UF roraima,2001-2010,5.73,0.716,True
+terraclimate,et_potencial,UF roraima,2011-2020,7.317,0.667,True
+terraclimate,et_potencial,UF roraima,2021-2025,-3.738,0.861,False
+terraclimate,et_potencial,UF santa catarina,1961-1970,1.084,0.613,False
+terraclimate,et_potencial,UF santa catarina,1971-1980,4.031,0.568,False
+terraclimate,et_potencial,UF santa catarina,1981-1990,1.8,0.798,False
+terraclimate,et_potencial,UF santa catarina,1991-2000,7.497,0.8,False
+terraclimate,et_potencial,UF santa catarina,2001-2010,6.113,0.791,False
+terraclimate,et_potencial,UF santa catarina,2011-2020,4.06,0.898,False
+terraclimate,et_potencial,UF santa catarina,2021-2025,3.742,0.88,False
+terraclimate,et_potencial,UF sao paulo,1961-1970,13.836,0.423,True
+terraclimate,et_potencial,UF sao paulo,1971-1980,8.623,0.46,True
+terraclimate,et_potencial,UF sao paulo,1981-1990,8.006,0.879,False
+terraclimate,et_potencial,UF sao paulo,1991-2000,8.545,0.84,False
+terraclimate,et_potencial,UF sao paulo,2001-2010,10.335,0.863,False
+terraclimate,et_potencial,UF sao paulo,2011-2020,9.097,0.856,False
+terraclimate,et_potencial,UF sao paulo,2021-2025,4.836,0.91,False
+terraclimate,et_potencial,UF sergipe,1961-1970,12.545,0.502,False
+terraclimate,et_potencial,UF sergipe,1971-1980,17.15,0.239,True
+terraclimate,et_potencial,UF sergipe,1981-1990,15.276,0.877,False
+terraclimate,et_potencial,UF sergipe,1991-2000,16.135,0.842,False
+terraclimate,et_potencial,UF sergipe,2001-2010,18.237,0.868,False
+terraclimate,et_potencial,UF sergipe,2011-2020,15.221,0.772,False
+terraclimate,et_potencial,UF sergipe,2021-2025,12.26,0.816,False
+terraclimate,et_potencial,UF tocantins,1961-1970,13.912,0.562,False
+terraclimate,et_potencial,UF tocantins,1971-1980,13.473,0.569,False
+terraclimate,et_potencial,UF tocantins,1981-1990,10.022,0.841,False
+terraclimate,et_potencial,UF tocantins,1991-2000,7.365,0.815,False
+terraclimate,et_potencial,UF tocantins,2001-2010,12.514,0.85,False
+terraclimate,et_potencial,UF tocantins,2011-2020,10.512,0.895,False
+terraclimate,et_potencial,UF tocantins,2021-2025,6.458,0.827,False
+terraclimate,et_real,Brasil,1961-1970,4.909,0.569,False
+terraclimate,et_real,Brasil,1971-1980,5.634,0.534,False
+terraclimate,et_real,Brasil,1981-1990,7.482,0.649,False
+terraclimate,et_real,Brasil,1991-2000,7.041,0.665,False
+terraclimate,et_real,Brasil,2001-2010,7.861,0.662,False
+terraclimate,et_real,Brasil,2011-2020,8.154,0.715,False
+terraclimate,et_real,Brasil,2021-2025,8.081,0.882,False
+terraclimate,et_real,Centro-Oeste,1961-1970,7.211,0.31,False
+terraclimate,et_real,Centro-Oeste,1971-1980,6.635,0.467,False
+terraclimate,et_real,Centro-Oeste,1981-1990,9.318,0.667,False
+terraclimate,et_real,Centro-Oeste,1991-2000,7.515,0.709,False
+terraclimate,et_real,Centro-Oeste,2001-2010,6.495,0.621,False
+terraclimate,et_real,Centro-Oeste,2011-2020,9.495,0.723,False
+terraclimate,et_real,Centro-Oeste,2021-2025,9.804,0.826,False
+terraclimate,et_real,Nordeste,1961-1970,-4.1,0.586,False
+terraclimate,et_real,Nordeste,1971-1980,1.594,0.644,False
+terraclimate,et_real,Nordeste,1981-1990,5.283,0.719,True
+terraclimate,et_real,Nordeste,1991-2000,3.237,0.677,False
+terraclimate,et_real,Nordeste,2001-2010,-3.313,0.674,False
+terraclimate,et_real,Nordeste,2011-2020,-1.207,0.817,False
+terraclimate,et_real,Nordeste,2021-2025,0.042,0.817,False
+terraclimate,et_real,Norte,1961-1970,6.8,0.369,False
+terraclimate,et_real,Norte,1971-1980,6.926,0.373,False
+terraclimate,et_real,Norte,1981-1990,7.226,0.56,False
+terraclimate,et_real,Norte,1991-2000,8.083,0.524,False
+terraclimate,et_real,Norte,2001-2010,12.6,0.508,False
+terraclimate,et_real,Norte,2011-2020,10.867,0.644,False
+terraclimate,et_real,Norte,2021-2025,8.705,0.904,False
+terraclimate,et_real,Sudeste,1961-1970,8.73,0.502,False
+terraclimate,et_real,Sudeste,1971-1980,7.333,0.383,False
+terraclimate,et_real,Sudeste,1981-1990,12.202,0.381,False
+terraclimate,et_real,Sudeste,1991-2000,9.892,0.542,False
+terraclimate,et_real,Sudeste,2001-2010,7.989,0.64,False
+terraclimate,et_real,Sudeste,2011-2020,8.402,0.427,False
+terraclimate,et_real,Sudeste,2021-2025,12.911,0.384,False
+terraclimate,et_real,Sul,1961-1970,-0.52,-0.205,False
+terraclimate,et_real,Sul,1971-1980,0.402,0.0,False
+terraclimate,et_real,Sul,1981-1990,2.032,0.043,False
+terraclimate,et_real,Sul,1991-2000,2.249,0.004,False
+terraclimate,et_real,Sul,2001-2010,3.286,0.15,False
+terraclimate,et_real,Sul,2011-2020,3.846,0.252,False
+terraclimate,et_real,Sul,2021-2025,9.081,0.221,True
+terraclimate,et_real,UF acre,1961-1970,13.25,0.219,False
+terraclimate,et_real,UF acre,1971-1980,8.18,0.13,True
+terraclimate,et_real,UF acre,1981-1990,9.117,0.07,False
+terraclimate,et_real,UF acre,1991-2000,12.961,0.042,False
+terraclimate,et_real,UF acre,2001-2010,21.26,0.275,True
+terraclimate,et_real,UF acre,2011-2020,23.336,0.483,True
+terraclimate,et_real,UF acre,2021-2025,14.862,0.851,False
+terraclimate,et_real,UF alagoas,1961-1970,-22.378,0.528,True
+terraclimate,et_real,UF alagoas,1971-1980,-12.305,0.626,True
+terraclimate,et_real,UF alagoas,1981-1990,-6.879,0.731,False
+terraclimate,et_real,UF alagoas,1991-2000,-4.371,0.628,False
+terraclimate,et_real,UF alagoas,2001-2010,-3.51,0.436,False
+terraclimate,et_real,UF alagoas,2011-2020,-3.741,0.667,False
+terraclimate,et_real,UF alagoas,2021-2025,-5.96,0.783,False
+terraclimate,et_real,UF amapa,1961-1970,-4.1,0.331,False
+terraclimate,et_real,UF amapa,1971-1980,-5.956,0.454,False
+terraclimate,et_real,UF amapa,1981-1990,-5.416,0.475,False
+terraclimate,et_real,UF amapa,1991-2000,-6.546,0.336,False
+terraclimate,et_real,UF amapa,2001-2010,-3.963,0.374,False
+terraclimate,et_real,UF amapa,2011-2020,-5.622,0.581,False
+terraclimate,et_real,UF amapa,2021-2025,-4.59,0.806,False
+terraclimate,et_real,UF amazonas,1961-1970,9.941,0.041,False
+terraclimate,et_real,UF amazonas,1971-1980,7.506,0.195,False
+terraclimate,et_real,UF amazonas,1981-1990,7.535,0.38,False
+terraclimate,et_real,UF amazonas,1991-2000,10.615,0.519,False
+terraclimate,et_real,UF amazonas,2001-2010,18.773,0.408,True
+terraclimate,et_real,UF amazonas,2011-2020,15.896,0.317,True
+terraclimate,et_real,UF amazonas,2021-2025,12.629,0.803,False
+terraclimate,et_real,UF bahia,1961-1970,-1.869,0.642,False
+terraclimate,et_real,UF bahia,1971-1980,0.595,0.583,False
+terraclimate,et_real,UF bahia,1981-1990,8.282,0.711,True
+terraclimate,et_real,UF bahia,1991-2000,4.881,0.603,False
+terraclimate,et_real,UF bahia,2001-2010,0.508,0.596,False
+terraclimate,et_real,UF bahia,2011-2020,1.759,0.752,False
+terraclimate,et_real,UF bahia,2021-2025,5.107,0.721,False
+terraclimate,et_real,UF ceara,1961-1970,1.277,0.596,False
+terraclimate,et_real,UF ceara,1971-1980,9.183,0.653,True
+terraclimate,et_real,UF ceara,1981-1990,10.285,0.773,True
+terraclimate,et_real,UF ceara,1991-2000,10.065,0.715,True
+terraclimate,et_real,UF ceara,2001-2010,-4.187,0.618,True
+terraclimate,et_real,UF ceara,2011-2020,2.509,0.719,False
+terraclimate,et_real,UF ceara,2021-2025,3.659,0.673,False
+terraclimate,et_real,UF distrito federal,1961-1970,-1.911,0.48,False
+terraclimate,et_real,UF distrito federal,1971-1980,-0.016,0.408,False
+terraclimate,et_real,UF distrito federal,1981-1990,-3.177,0.709,False
+terraclimate,et_real,UF distrito federal,1991-2000,-2.771,0.585,False
+terraclimate,et_real,UF distrito federal,2001-2010,-2.644,0.691,False
+terraclimate,et_real,UF distrito federal,2011-2020,-1.291,0.58,False
+terraclimate,et_real,UF distrito federal,2021-2025,0.784,0.612,False
+terraclimate,et_real,UF espirito santo,1961-1970,8.517,0.295,False
+terraclimate,et_real,UF espirito santo,1971-1980,2.595,0.456,False
+terraclimate,et_real,UF espirito santo,1981-1990,4.376,0.269,False
+terraclimate,et_real,UF espirito santo,1991-2000,2.141,0.535,False
+terraclimate,et_real,UF espirito santo,2001-2010,3.842,0.343,False
+terraclimate,et_real,UF espirito santo,2011-2020,1.562,0.349,False
+terraclimate,et_real,UF espirito santo,2021-2025,5.536,0.537,False
+terraclimate,et_real,UF goias,1961-1970,3.44,0.485,False
+terraclimate,et_real,UF goias,1971-1980,3.955,0.557,False
+terraclimate,et_real,UF goias,1981-1990,3.409,0.764,False
+terraclimate,et_real,UF goias,1991-2000,3.842,0.697,False
+terraclimate,et_real,UF goias,2001-2010,2.727,0.74,False
+terraclimate,et_real,UF goias,2011-2020,5.649,0.689,False
+terraclimate,et_real,UF goias,2021-2025,7.005,0.729,False
+terraclimate,et_real,UF maranhao,1961-1970,-0.147,0.392,False
+terraclimate,et_real,UF maranhao,1971-1980,5.808,0.692,True
+terraclimate,et_real,UF maranhao,1981-1990,3.241,0.741,False
+terraclimate,et_real,UF maranhao,1991-2000,1.825,0.554,False
+terraclimate,et_real,UF maranhao,2001-2010,-4.452,0.594,False
+terraclimate,et_real,UF maranhao,2011-2020,-0.108,0.788,False
+terraclimate,et_real,UF maranhao,2021-2025,-2.167,0.928,False
+terraclimate,et_real,UF mato grosso,1961-1970,10.078,0.173,False
+terraclimate,et_real,UF mato grosso,1971-1980,9.344,0.451,False
+terraclimate,et_real,UF mato grosso,1981-1990,11.933,0.611,False
+terraclimate,et_real,UF mato grosso,1991-2000,9.495,0.653,False
+terraclimate,et_real,UF mato grosso,2001-2010,7.4,0.564,False
+terraclimate,et_real,UF mato grosso,2011-2020,11.639,0.644,False
+terraclimate,et_real,UF mato grosso,2021-2025,9.641,0.827,False
+terraclimate,et_real,UF mato grosso do sul,1961-1970,3.935,0.255,False
+terraclimate,et_real,UF mato grosso do sul,1971-1980,2.77,0.22,False
+terraclimate,et_real,UF mato grosso do sul,1981-1990,8.611,0.322,False
+terraclimate,et_real,UF mato grosso do sul,1991-2000,6.208,0.405,False
+terraclimate,et_real,UF mato grosso do sul,2001-2010,7.67,0.263,False
+terraclimate,et_real,UF mato grosso do sul,2011-2020,7.946,0.618,False
+terraclimate,et_real,UF mato grosso do sul,2021-2025,13.043,0.73,True
+terraclimate,et_real,UF minas gerais,1961-1970,7.435,0.562,False
+terraclimate,et_real,UF minas gerais,1971-1980,5.684,0.483,False
+terraclimate,et_real,UF minas gerais,1981-1990,9.696,0.451,False
+terraclimate,et_real,UF minas gerais,1991-2000,6.074,0.565,False
+terraclimate,et_real,UF minas gerais,2001-2010,3.713,0.657,False
+terraclimate,et_real,UF minas gerais,2011-2020,4.463,0.429,False
+terraclimate,et_real,UF minas gerais,2021-2025,9.538,0.357,False
+terraclimate,et_real,UF para,1961-1970,4.47,0.487,False
+terraclimate,et_real,UF para,1971-1980,7.859,0.5,False
+terraclimate,et_real,UF para,1981-1990,8.312,0.571,False
+terraclimate,et_real,UF para,1991-2000,7.308,0.545,False
+terraclimate,et_real,UF para,2001-2010,8.632,0.497,False
+terraclimate,et_real,UF para,2011-2020,4.724,0.646,False
+terraclimate,et_real,UF para,2021-2025,5.664,0.929,False
+terraclimate,et_real,UF paraiba,1961-1970,-24.837,0.658,False
+terraclimate,et_real,UF paraiba,1971-1980,-18.693,0.595,False
+terraclimate,et_real,UF paraiba,1981-1990,-13.212,0.743,True
+terraclimate,et_real,UF paraiba,1991-2000,-21.166,0.669,False
+terraclimate,et_real,UF paraiba,2001-2010,-23.24,0.525,False
+terraclimate,et_real,UF paraiba,2011-2020,-19.89,0.619,False
+terraclimate,et_real,UF paraiba,2021-2025,-22.416,0.704,False
+terraclimate,et_real,UF parana,1961-1970,-0.67,-0.025,True
+terraclimate,et_real,UF parana,1971-1980,1.098,-0.148,False
+terraclimate,et_real,UF parana,1981-1990,5.612,-0.055,False
+terraclimate,et_real,UF parana,1991-2000,5.18,0.14,False
+terraclimate,et_real,UF parana,2001-2010,6.878,0.115,False
+terraclimate,et_real,UF parana,2011-2020,6.845,0.121,False
+terraclimate,et_real,UF parana,2021-2025,12.601,-0.021,True
+terraclimate,et_real,UF pernambuco,1961-1970,-19.624,0.647,True
+terraclimate,et_real,UF pernambuco,1971-1980,-5.904,0.662,False
+terraclimate,et_real,UF pernambuco,1981-1990,1.181,0.746,True
+terraclimate,et_real,UF pernambuco,1991-2000,-0.448,0.67,True
+terraclimate,et_real,UF pernambuco,2001-2010,-7.68,0.617,False
+terraclimate,et_real,UF pernambuco,2011-2020,-7.073,0.727,False
+terraclimate,et_real,UF pernambuco,2021-2025,-7.271,0.779,False
+terraclimate,et_real,UF piaui,1961-1970,-4.72,0.499,True
+terraclimate,et_real,UF piaui,1971-1980,3.238,0.639,False
+terraclimate,et_real,UF piaui,1981-1990,8.605,0.712,True
+terraclimate,et_real,UF piaui,1991-2000,7.523,0.534,True
+terraclimate,et_real,UF piaui,2001-2010,-1.852,0.614,False
+terraclimate,et_real,UF piaui,2011-2020,-4.839,0.779,True
+terraclimate,et_real,UF piaui,2021-2025,0.846,0.826,False
+terraclimate,et_real,UF rio de janeiro,1961-1970,8.443,0.416,False
+terraclimate,et_real,UF rio de janeiro,1971-1980,8.142,0.068,False
+terraclimate,et_real,UF rio de janeiro,1981-1990,9.852,0.332,False
+terraclimate,et_real,UF rio de janeiro,1991-2000,13.262,0.295,False
+terraclimate,et_real,UF rio de janeiro,2001-2010,13.543,0.282,False
+terraclimate,et_real,UF rio de janeiro,2011-2020,12.574,0.184,False
+terraclimate,et_real,UF rio de janeiro,2021-2025,15.472,0.05,False
+terraclimate,et_real,UF rio grande do norte,1961-1970,-6.945,0.65,False
+terraclimate,et_real,UF rio grande do norte,1971-1980,-4.389,0.628,False
+terraclimate,et_real,UF rio grande do norte,1981-1990,-2.606,0.764,False
+terraclimate,et_real,UF rio grande do norte,1991-2000,-9.628,0.662,False
+terraclimate,et_real,UF rio grande do norte,2001-2010,-16.837,0.544,True
+terraclimate,et_real,UF rio grande do norte,2011-2020,-5.428,0.626,False
+terraclimate,et_real,UF rio grande do norte,2021-2025,-9.427,0.718,False
+terraclimate,et_real,UF rio grande do sul,1961-1970,-0.521,-0.132,False
+terraclimate,et_real,UF rio grande do sul,1971-1980,-0.411,0.046,False
+terraclimate,et_real,UF rio grande do sul,1981-1990,-0.401,0.112,False
+terraclimate,et_real,UF rio grande do sul,1991-2000,-0.516,-0.034,False
+terraclimate,et_real,UF rio grande do sul,2001-2010,0.697,0.266,False
+terraclimate,et_real,UF rio grande do sul,2011-2020,2.191,0.285,False
+terraclimate,et_real,UF rio grande do sul,2021-2025,7.954,0.474,True
+terraclimate,et_real,UF rondonia,1961-1970,9.212,0.304,False
+terraclimate,et_real,UF rondonia,1971-1980,8.757,0.263,False
+terraclimate,et_real,UF rondonia,1981-1990,13.601,0.275,False
+terraclimate,et_real,UF rondonia,1991-2000,12.247,0.336,False
+terraclimate,et_real,UF rondonia,2001-2010,12.651,0.267,False
+terraclimate,et_real,UF rondonia,2011-2020,19.138,0.171,True
+terraclimate,et_real,UF rondonia,2021-2025,12.408,0.838,False
+terraclimate,et_real,UF roraima,1961-1970,0.082,-0.185,False
+terraclimate,et_real,UF roraima,1971-1980,4.211,0.024,False
+terraclimate,et_real,UF roraima,1981-1990,1.075,0.265,False
+terraclimate,et_real,UF roraima,1991-2000,1.637,0.564,False
+terraclimate,et_real,UF roraima,2001-2010,8.858,0.239,True
+terraclimate,et_real,UF roraima,2011-2020,11.118,0.462,True
+terraclimate,et_real,UF roraima,2021-2025,2.897,0.806,False
+terraclimate,et_real,UF santa catarina,1961-1970,-0.187,-0.156,False
+terraclimate,et_real,UF santa catarina,1971-1980,1.382,-0.019,False
+terraclimate,et_real,UF santa catarina,1981-1990,1.814,0.018,False
+terraclimate,et_real,UF santa catarina,1991-2000,4.57,0.324,False
+terraclimate,et_real,UF santa catarina,2001-2010,3.466,0.389,False
+terraclimate,et_real,UF santa catarina,2011-2020,2.502,0.392,False
+terraclimate,et_real,UF santa catarina,2021-2025,5.11,0.243,False
+terraclimate,et_real,UF sao paulo,1961-1970,11.605,0.244,True
+terraclimate,et_real,UF sao paulo,1971-1980,11.574,0.152,True
+terraclimate,et_real,UF sao paulo,1981-1990,19.515,0.199,False
+terraclimate,et_real,UF sao paulo,1991-2000,19.174,0.311,False
+terraclimate,et_real,UF sao paulo,2001-2010,17.331,0.397,False
+terraclimate,et_real,UF sao paulo,2011-2020,17.354,0.491,False
+terraclimate,et_real,UF sao paulo,2021-2025,21.518,0.462,False
+terraclimate,et_real,UF sergipe,1961-1970,-15.275,0.593,True
+terraclimate,et_real,UF sergipe,1971-1980,-7.626,0.578,True
+terraclimate,et_real,UF sergipe,1981-1990,-5.102,0.782,False
+terraclimate,et_real,UF sergipe,1991-2000,-1.611,0.65,False
+terraclimate,et_real,UF sergipe,2001-2010,6.399,0.405,True
+terraclimate,et_real,UF sergipe,2011-2020,4.669,0.663,True
+terraclimate,et_real,UF sergipe,2021-2025,-0.54,0.692,False
+terraclimate,et_real,UF tocantins,1961-1970,4.539,0.417,False
+terraclimate,et_real,UF tocantins,1971-1980,6.82,0.536,False
+terraclimate,et_real,UF tocantins,1981-1990,6.802,0.64,False
+terraclimate,et_real,UF tocantins,1991-2000,4.705,0.438,False
+terraclimate,et_real,UF tocantins,2001-2010,3.811,0.709,False
+terraclimate,et_real,UF tocantins,2011-2020,6.884,0.779,False
+terraclimate,et_real,UF tocantins,2021-2025,6.214,0.804,False
+terraclimate,pr_mm,Brasil,1961-1970,2.358,0.828,False
+terraclimate,pr_mm,Brasil,1971-1980,0.268,0.93,False
+terraclimate,pr_mm,Brasil,1981-1990,2.914,0.93,False
+terraclimate,pr_mm,Brasil,1991-2000,-1.095,0.821,False
+terraclimate,pr_mm,Brasil,2001-2010,-2.493,0.836,False
+terraclimate,pr_mm,Brasil,2011-2020,0.502,0.807,False
+terraclimate,pr_mm,Brasil,2021-2025,11.237,0.942,True
+terraclimate,pr_mm,Centro-Oeste,1961-1970,-2.589,0.892,False
+terraclimate,pr_mm,Centro-Oeste,1971-1980,1.147,0.844,False
+terraclimate,pr_mm,Centro-Oeste,1981-1990,0.663,0.861,False
+terraclimate,pr_mm,Centro-Oeste,1991-2000,-4.505,0.693,False
+terraclimate,pr_mm,Centro-Oeste,2001-2010,-3.772,0.799,False
+terraclimate,pr_mm,Centro-Oeste,2011-2020,-2.819,0.691,False
+terraclimate,pr_mm,Centro-Oeste,2021-2025,10.765,0.932,True
+terraclimate,pr_mm,Nordeste,1961-1970,-4.183,0.991,False
+terraclimate,pr_mm,Nordeste,1971-1980,-4.385,0.996,False
+terraclimate,pr_mm,Nordeste,1981-1990,-2.186,0.997,False
+terraclimate,pr_mm,Nordeste,1991-2000,-0.269,0.939,False
+terraclimate,pr_mm,Nordeste,2001-2010,-4.545,0.956,False
+terraclimate,pr_mm,Nordeste,2011-2020,-2.934,0.928,False
+terraclimate,pr_mm,Nordeste,2021-2025,10.357,0.961,True
+terraclimate,pr_mm,Norte,1961-1970,5.994,0.705,False
+terraclimate,pr_mm,Norte,1971-1980,0.443,0.823,False
+terraclimate,pr_mm,Norte,1981-1990,3.679,0.867,False
+terraclimate,pr_mm,Norte,1991-2000,-0.941,0.801,False
+terraclimate,pr_mm,Norte,2001-2010,-2.331,0.755,False
+terraclimate,pr_mm,Norte,2011-2020,1.563,0.78,False
+terraclimate,pr_mm,Norte,2021-2025,11.657,0.946,True
+terraclimate,pr_mm,Sudeste,1961-1970,-1.454,0.922,False
+terraclimate,pr_mm,Sudeste,1971-1980,2.129,0.932,False
+terraclimate,pr_mm,Sudeste,1981-1990,5.634,0.956,True
+terraclimate,pr_mm,Sudeste,1991-2000,-0.106,0.835,False
+terraclimate,pr_mm,Sudeste,2001-2010,-2.826,0.89,False
+terraclimate,pr_mm,Sudeste,2011-2020,-1.096,0.866,False
+terraclimate,pr_mm,Sudeste,2021-2025,5.875,0.978,True
+terraclimate,pr_mm,Sul,1961-1970,0.292,0.966,False
+terraclimate,pr_mm,Sul,1971-1980,2.06,0.963,False
+terraclimate,pr_mm,Sul,1981-1990,7.38,0.941,False
+terraclimate,pr_mm,Sul,1991-2000,4.478,0.921,False
+terraclimate,pr_mm,Sul,2001-2010,3.165,0.941,False
+terraclimate,pr_mm,Sul,2011-2020,6.8,0.902,False
+terraclimate,pr_mm,Sul,2021-2025,16.593,0.979,True
+terraclimate,pr_mm,UF acre,1961-1970,27.366,0.172,True
+terraclimate,pr_mm,UF acre,1971-1980,3.52,0.275,False
+terraclimate,pr_mm,UF acre,1981-1990,8.959,0.275,False
+terraclimate,pr_mm,UF acre,1991-2000,-1.732,0.395,True
+terraclimate,pr_mm,UF acre,2001-2010,-5.1,0.288,True
+terraclimate,pr_mm,UF acre,2011-2020,11.244,0.345,True
+terraclimate,pr_mm,UF acre,2021-2025,4.901,0.714,False
+terraclimate,pr_mm,UF alagoas,1961-1970,-6.811,0.982,True
+terraclimate,pr_mm,UF alagoas,1971-1980,-6.067,0.991,True
+terraclimate,pr_mm,UF alagoas,1981-1990,-6.592,0.992,True
+terraclimate,pr_mm,UF alagoas,1991-2000,0.75,0.808,False
+terraclimate,pr_mm,UF alagoas,2001-2010,0.278,0.781,False
+terraclimate,pr_mm,UF alagoas,2011-2020,2.9,0.784,False
+terraclimate,pr_mm,UF alagoas,2021-2025,7.876,0.816,True
+terraclimate,pr_mm,UF amapa,1961-1970,5.026,0.114,True
+terraclimate,pr_mm,UF amapa,1971-1980,2.942,0.681,True
+terraclimate,pr_mm,UF amapa,1981-1990,13.227,0.764,False
+terraclimate,pr_mm,UF amapa,1991-2000,14.525,0.649,False
+terraclimate,pr_mm,UF amapa,2001-2010,20.513,0.633,True
+terraclimate,pr_mm,UF amapa,2011-2020,12.433,0.685,False
+terraclimate,pr_mm,UF amapa,2021-2025,-2.646,0.655,True
+terraclimate,pr_mm,UF amazonas,1961-1970,1.22,0.81,False
+terraclimate,pr_mm,UF amazonas,1971-1980,-1.51,0.806,False
+terraclimate,pr_mm,UF amazonas,1981-1990,4.971,0.761,False
+terraclimate,pr_mm,UF amazonas,1991-2000,-3.446,0.667,False
+terraclimate,pr_mm,UF amazonas,2001-2010,-7.09,0.751,True
+terraclimate,pr_mm,UF amazonas,2011-2020,2.689,0.706,False
+terraclimate,pr_mm,UF amazonas,2021-2025,12.195,0.962,True
+terraclimate,pr_mm,UF bahia,1961-1970,-6.024,0.993,True
+terraclimate,pr_mm,UF bahia,1971-1980,-4.669,0.996,False
+terraclimate,pr_mm,UF bahia,1981-1990,-0.336,0.998,False
+terraclimate,pr_mm,UF bahia,1991-2000,0.794,0.902,False
+terraclimate,pr_mm,UF bahia,2001-2010,-4.394,0.944,False
+terraclimate,pr_mm,UF bahia,2011-2020,1.8,0.965,False
+terraclimate,pr_mm,UF bahia,2021-2025,-0.922,0.986,False
+terraclimate,pr_mm,UF ceara,1961-1970,-7.014,0.995,False
+terraclimate,pr_mm,UF ceara,1971-1980,-7.471,0.995,False
+terraclimate,pr_mm,UF ceara,1981-1990,-7.464,0.996,False
+terraclimate,pr_mm,UF ceara,1991-2000,-3.187,0.894,False
+terraclimate,pr_mm,UF ceara,2001-2010,-13.484,0.872,True
+terraclimate,pr_mm,UF ceara,2011-2020,-10.166,0.867,False
+terraclimate,pr_mm,UF ceara,2021-2025,11.003,0.877,True
+terraclimate,pr_mm,UF distrito federal,1961-1970,-6.53,0.887,False
+terraclimate,pr_mm,UF distrito federal,1971-1980,-6.79,0.92,False
+terraclimate,pr_mm,UF distrito federal,1981-1990,-4.64,0.894,False
+terraclimate,pr_mm,UF distrito federal,1991-2000,-5.239,0.865,False
+terraclimate,pr_mm,UF distrito federal,2001-2010,-7.731,0.852,False
+terraclimate,pr_mm,UF distrito federal,2011-2020,-3.294,0.817,False
+terraclimate,pr_mm,UF distrito federal,2021-2025,6.351,0.908,True
+terraclimate,pr_mm,UF espirito santo,1961-1970,7.635,0.809,False
+terraclimate,pr_mm,UF espirito santo,1971-1980,2.951,0.865,False
+terraclimate,pr_mm,UF espirito santo,1981-1990,2.256,0.901,False
+terraclimate,pr_mm,UF espirito santo,1991-2000,-0.391,0.799,False
+terraclimate,pr_mm,UF espirito santo,2001-2010,5.112,0.818,False
+terraclimate,pr_mm,UF espirito santo,2011-2020,0.062,0.829,False
+terraclimate,pr_mm,UF espirito santo,2021-2025,4.161,0.946,False
+terraclimate,pr_mm,UF goias,1961-1970,-5.512,0.925,False
+terraclimate,pr_mm,UF goias,1971-1980,0.502,0.909,False
+terraclimate,pr_mm,UF goias,1981-1990,-2.559,0.946,False
+terraclimate,pr_mm,UF goias,1991-2000,-3.662,0.833,False
+terraclimate,pr_mm,UF goias,2001-2010,-5.03,0.79,False
+terraclimate,pr_mm,UF goias,2011-2020,-9.063,0.788,True
+terraclimate,pr_mm,UF goias,2021-2025,9.933,0.937,True
+terraclimate,pr_mm,UF maranhao,1961-1970,-0.079,0.923,False
+terraclimate,pr_mm,UF maranhao,1971-1980,-2.265,0.976,False
+terraclimate,pr_mm,UF maranhao,1981-1990,0.107,0.988,False
+terraclimate,pr_mm,UF maranhao,1991-2000,-0.976,0.837,False
+terraclimate,pr_mm,UF maranhao,2001-2010,-3.362,0.892,False
+terraclimate,pr_mm,UF maranhao,2011-2020,-4.589,0.733,False
+terraclimate,pr_mm,UF maranhao,2021-2025,16.764,0.909,True
+terraclimate,pr_mm,UF mato grosso,1961-1970,-1.001,0.825,False
+terraclimate,pr_mm,UF mato grosso,1971-1980,1.054,0.654,False
+terraclimate,pr_mm,UF mato grosso,1981-1990,0.94,0.741,False
+terraclimate,pr_mm,UF mato grosso,1991-2000,-5.032,0.538,False
+terraclimate,pr_mm,UF mato grosso,2001-2010,-3.697,0.65,False
+terraclimate,pr_mm,UF mato grosso,2011-2020,-2.35,0.509,False
+terraclimate,pr_mm,UF mato grosso,2021-2025,6.952,0.919,True
+terraclimate,pr_mm,UF mato grosso do sul,1961-1970,-4.253,0.854,True
+terraclimate,pr_mm,UF mato grosso do sul,1971-1980,2.244,0.833,False
+terraclimate,pr_mm,UF mato grosso do sul,1981-1990,3.398,0.863,False
+terraclimate,pr_mm,UF mato grosso do sul,1991-2000,-3.68,0.776,True
+terraclimate,pr_mm,UF mato grosso do sul,2001-2010,-2.588,0.828,False
+terraclimate,pr_mm,UF mato grosso do sul,2011-2020,2.152,0.749,False
+terraclimate,pr_mm,UF mato grosso do sul,2021-2025,26.722,0.912,True
+terraclimate,pr_mm,UF minas gerais,1961-1970,-3.417,0.923,False
+terraclimate,pr_mm,UF minas gerais,1971-1980,-2.431,0.954,False
+terraclimate,pr_mm,UF minas gerais,1981-1990,0.99,0.968,False
+terraclimate,pr_mm,UF minas gerais,1991-2000,-2.52,0.899,False
+terraclimate,pr_mm,UF minas gerais,2001-2010,-5.761,0.909,False
+terraclimate,pr_mm,UF minas gerais,2011-2020,-4.384,0.896,False
+terraclimate,pr_mm,UF minas gerais,2021-2025,0.159,0.986,False
+terraclimate,pr_mm,UF para,1961-1970,10.373,0.778,True
+terraclimate,pr_mm,UF para,1971-1980,2.102,0.819,False
+terraclimate,pr_mm,UF para,1981-1990,1.021,0.922,False
+terraclimate,pr_mm,UF para,1991-2000,1.701,0.774,False
+terraclimate,pr_mm,UF para,2001-2010,1.793,0.745,False
+terraclimate,pr_mm,UF para,2011-2020,-3.396,0.651,True
+terraclimate,pr_mm,UF para,2021-2025,11.52,0.876,True
+terraclimate,pr_mm,UF paraiba,1961-1970,-2.167,0.992,False
+terraclimate,pr_mm,UF paraiba,1971-1980,-4.014,0.994,False
+terraclimate,pr_mm,UF paraiba,1981-1990,-4.942,0.997,False
+terraclimate,pr_mm,UF paraiba,1991-2000,-0.641,0.867,False
+terraclimate,pr_mm,UF paraiba,2001-2010,-4.88,0.815,False
+terraclimate,pr_mm,UF paraiba,2011-2020,-3.948,0.836,False
+terraclimate,pr_mm,UF paraiba,2021-2025,8.929,0.799,True
+terraclimate,pr_mm,UF parana,1961-1970,2.101,0.949,True
+terraclimate,pr_mm,UF parana,1971-1980,5.042,0.925,False
+terraclimate,pr_mm,UF parana,1981-1990,13.557,0.946,False
+terraclimate,pr_mm,UF parana,1991-2000,9.632,0.87,False
+terraclimate,pr_mm,UF parana,2001-2010,5.501,0.897,False
+terraclimate,pr_mm,UF parana,2011-2020,9.072,0.914,False
+terraclimate,pr_mm,UF parana,2021-2025,17.064,0.968,True
+terraclimate,pr_mm,UF pernambuco,1961-1970,-1.717,0.984,False
+terraclimate,pr_mm,UF pernambuco,1971-1980,-5.372,0.992,False
+terraclimate,pr_mm,UF pernambuco,1981-1990,-5.264,0.996,False
+terraclimate,pr_mm,UF pernambuco,1991-2000,5.1,0.846,True
+terraclimate,pr_mm,UF pernambuco,2001-2010,-1.302,0.839,False
+terraclimate,pr_mm,UF pernambuco,2011-2020,-0.589,0.846,False
+terraclimate,pr_mm,UF pernambuco,2021-2025,18.417,0.868,True
+terraclimate,pr_mm,UF piaui,1961-1970,-6.469,0.993,False
+terraclimate,pr_mm,UF piaui,1971-1980,-5.646,0.995,False
+terraclimate,pr_mm,UF piaui,1981-1990,-4.511,0.997,False
+terraclimate,pr_mm,UF piaui,1991-2000,-2.104,0.878,False
+terraclimate,pr_mm,UF piaui,2001-2010,-5.0,0.896,False
+terraclimate,pr_mm,UF piaui,2011-2020,-7.496,0.835,False
+terraclimate,pr_mm,UF piaui,2021-2025,24.034,0.866,True
+terraclimate,pr_mm,UF rio de janeiro,1961-1970,5.584,0.824,False
+terraclimate,pr_mm,UF rio de janeiro,1971-1980,8.605,0.762,False
+terraclimate,pr_mm,UF rio de janeiro,1981-1990,7.202,0.855,False
+terraclimate,pr_mm,UF rio de janeiro,1991-2000,4.725,0.645,False
+terraclimate,pr_mm,UF rio de janeiro,2001-2010,8.837,0.572,False
+terraclimate,pr_mm,UF rio de janeiro,2011-2020,3.475,0.716,False
+terraclimate,pr_mm,UF rio de janeiro,2021-2025,8.106,0.909,False
+terraclimate,pr_mm,UF rio grande do norte,1961-1970,-7.239,0.993,False
+terraclimate,pr_mm,UF rio grande do norte,1971-1980,-5.079,0.994,False
+terraclimate,pr_mm,UF rio grande do norte,1981-1990,-6.429,0.995,False
+terraclimate,pr_mm,UF rio grande do norte,1991-2000,4.371,0.829,True
+terraclimate,pr_mm,UF rio grande do norte,2001-2010,-4.514,0.742,False
+terraclimate,pr_mm,UF rio grande do norte,2011-2020,-2.842,0.778,False
+terraclimate,pr_mm,UF rio grande do norte,2021-2025,-2.801,0.792,False
+terraclimate,pr_mm,UF rio grande do sul,1961-1970,-1.092,0.949,False
+terraclimate,pr_mm,UF rio grande do sul,1971-1980,0.748,0.956,False
+terraclimate,pr_mm,UF rio grande do sul,1981-1990,2.903,0.948,False
+terraclimate,pr_mm,UF rio grande do sul,1991-2000,0.87,0.884,False
+terraclimate,pr_mm,UF rio grande do sul,2001-2010,2.249,0.926,False
+terraclimate,pr_mm,UF rio grande do sul,2011-2020,6.35,0.873,False
+terraclimate,pr_mm,UF rio grande do sul,2021-2025,16.936,0.981,True
+terraclimate,pr_mm,UF rondonia,1961-1970,10.497,0.743,True
+terraclimate,pr_mm,UF rondonia,1971-1980,4.26,0.565,False
+terraclimate,pr_mm,UF rondonia,1981-1990,6.947,0.491,False
+terraclimate,pr_mm,UF rondonia,1991-2000,4.411,0.39,False
+terraclimate,pr_mm,UF rondonia,2001-2010,-0.009,0.632,False
+terraclimate,pr_mm,UF rondonia,2011-2020,4.515,0.57,False
+terraclimate,pr_mm,UF rondonia,2021-2025,8.679,0.786,False
+terraclimate,pr_mm,UF roraima,1961-1970,20.543,0.251,True
+terraclimate,pr_mm,UF roraima,1971-1980,0.295,0.606,False
+terraclimate,pr_mm,UF roraima,1981-1990,-6.093,0.641,True
+terraclimate,pr_mm,UF roraima,1991-2000,-11.562,0.69,True
+terraclimate,pr_mm,UF roraima,2001-2010,-4.29,0.749,False
+terraclimate,pr_mm,UF roraima,2011-2020,4.279,0.718,False
+terraclimate,pr_mm,UF roraima,2021-2025,17.343,0.879,True
+terraclimate,pr_mm,UF santa catarina,1961-1970,0.558,0.902,False
+terraclimate,pr_mm,UF santa catarina,1971-1980,-0.102,0.899,False
+terraclimate,pr_mm,UF santa catarina,1981-1990,8.712,0.827,False
+terraclimate,pr_mm,UF santa catarina,1991-2000,4.53,0.864,False
+terraclimate,pr_mm,UF santa catarina,2001-2010,1.346,0.835,False
+terraclimate,pr_mm,UF santa catarina,2011-2020,3.754,0.88,False
+terraclimate,pr_mm,UF santa catarina,2021-2025,14.92,0.93,True
+terraclimate,pr_mm,UF sao paulo,1961-1970,0.236,0.939,False
+terraclimate,pr_mm,UF sao paulo,1971-1980,11.189,0.868,True
+terraclimate,pr_mm,UF sao paulo,1981-1990,16.447,0.918,True
+terraclimate,pr_mm,UF sao paulo,1991-2000,4.273,0.73,False
+terraclimate,pr_mm,UF sao paulo,2001-2010,0.338,0.78,False
+terraclimate,pr_mm,UF sao paulo,2011-2020,4.526,0.802,False
+terraclimate,pr_mm,UF sao paulo,2021-2025,19.624,0.934,True
+terraclimate,pr_mm,UF sergipe,1961-1970,-7.635,0.986,True
+terraclimate,pr_mm,UF sergipe,1971-1980,-5.127,0.984,True
+terraclimate,pr_mm,UF sergipe,1981-1990,-1.704,0.98,False
+terraclimate,pr_mm,UF sergipe,1991-2000,3.143,0.863,False
+terraclimate,pr_mm,UF sergipe,2001-2010,9.364,0.798,True
+terraclimate,pr_mm,UF sergipe,2011-2020,21.118,0.764,True
+terraclimate,pr_mm,UF sergipe,2021-2025,10.308,0.784,True
+terraclimate,pr_mm,UF tocantins,1961-1970,-8.209,0.955,True
+terraclimate,pr_mm,UF tocantins,1971-1980,0.344,0.948,False
+terraclimate,pr_mm,UF tocantins,1981-1990,4.104,0.967,False
+terraclimate,pr_mm,UF tocantins,1991-2000,1.889,0.862,False
+terraclimate,pr_mm,UF tocantins,2001-2010,2.492,0.891,False
+terraclimate,pr_mm,UF tocantins,2011-2020,1.751,0.861,False
+terraclimate,pr_mm,UF tocantins,2021-2025,24.723,0.895,True
+terraclimate,rs,Brasil,1961-1970,2.569,0.324,True
+terraclimate,rs,Brasil,1971-1980,1.965,0.087,False
+terraclimate,rs,Brasil,1981-1990,1.529,0.67,False
+terraclimate,rs,Brasil,1991-2000,1.698,0.681,False
+terraclimate,rs,Brasil,2001-2010,2.03,0.706,False
+terraclimate,rs,Brasil,2011-2020,1.973,0.785,False
+terraclimate,rs,Brasil,2021-2025,1.208,0.582,True
+terraclimate,rs,Centro-Oeste,1961-1970,2.961,0.282,True
+terraclimate,rs,Centro-Oeste,1971-1980,2.206,0.279,False
+terraclimate,rs,Centro-Oeste,1981-1990,1.849,0.601,False
+terraclimate,rs,Centro-Oeste,1991-2000,1.972,0.723,False
+terraclimate,rs,Centro-Oeste,2001-2010,1.821,0.595,False
+terraclimate,rs,Centro-Oeste,2011-2020,2.075,0.835,False
+terraclimate,rs,Centro-Oeste,2021-2025,1.49,0.729,False
+terraclimate,rs,Nordeste,1961-1970,2.462,0.543,True
+terraclimate,rs,Nordeste,1971-1980,2.134,0.327,True
+terraclimate,rs,Nordeste,1981-1990,1.781,0.892,False
+terraclimate,rs,Nordeste,1991-2000,1.826,0.811,False
+terraclimate,rs,Nordeste,2001-2010,1.437,0.863,False
+terraclimate,rs,Nordeste,2011-2020,1.842,0.935,False
+terraclimate,rs,Nordeste,2021-2025,1.004,0.802,True
+terraclimate,rs,Norte,1961-1970,2.648,0.011,True
+terraclimate,rs,Norte,1971-1980,1.774,0.003,False
+terraclimate,rs,Norte,1981-1990,1.339,0.546,False
+terraclimate,rs,Norte,1991-2000,1.582,0.468,False
+terraclimate,rs,Norte,2001-2010,2.57,0.604,True
+terraclimate,rs,Norte,2011-2020,2.144,0.56,False
+terraclimate,rs,Norte,2021-2025,1.095,0.42,True
+terraclimate,rs,Sudeste,1961-1970,2.602,0.518,True
+terraclimate,rs,Sudeste,1971-1980,2.357,0.369,True
+terraclimate,rs,Sudeste,1981-1990,1.792,0.91,False
+terraclimate,rs,Sudeste,1991-2000,1.744,0.863,False
+terraclimate,rs,Sudeste,2001-2010,1.756,0.908,False
+terraclimate,rs,Sudeste,2011-2020,1.944,0.935,False
+terraclimate,rs,Sudeste,2021-2025,1.699,0.827,False
+terraclimate,rs,Sul,1961-1970,1.269,0.58,False
+terraclimate,rs,Sul,1971-1980,1.458,0.4,True
+terraclimate,rs,Sul,1981-1990,0.808,0.745,False
+terraclimate,rs,Sul,1991-2000,1.287,0.835,False
+terraclimate,rs,Sul,2001-2010,1.188,0.763,False
+terraclimate,rs,Sul,2011-2020,1.027,0.921,False
+terraclimate,rs,Sul,2021-2025,0.9,0.765,False
+terraclimate,rs,UF acre,1961-1970,3.089,-0.106,True
+terraclimate,rs,UF acre,1971-1980,1.464,0.112,False
+terraclimate,rs,UF acre,1981-1990,0.463,0.287,True
+terraclimate,rs,UF acre,1991-2000,1.087,0.153,False
+terraclimate,rs,UF acre,2001-2010,2.477,0.412,True
+terraclimate,rs,UF acre,2011-2020,2.981,0.527,True
+terraclimate,rs,UF acre,2021-2025,1.481,0.204,False
+terraclimate,rs,UF alagoas,1961-1970,1.521,0.422,True
+terraclimate,rs,UF alagoas,1971-1980,1.169,0.061,True
+terraclimate,rs,UF alagoas,1981-1990,0.929,0.863,False
+terraclimate,rs,UF alagoas,1991-2000,0.929,0.814,False
+terraclimate,rs,UF alagoas,2001-2010,0.905,0.81,False
+terraclimate,rs,UF alagoas,2011-2020,0.981,0.874,False
+terraclimate,rs,UF alagoas,2021-2025,0.574,0.736,False
+terraclimate,rs,UF amapa,1961-1970,1.245,0.192,True
+terraclimate,rs,UF amapa,1971-1980,0.567,0.062,False
+terraclimate,rs,UF amapa,1981-1990,0.535,0.59,False
+terraclimate,rs,UF amapa,1991-2000,0.883,0.328,False
+terraclimate,rs,UF amapa,2001-2010,1.111,0.547,False
+terraclimate,rs,UF amapa,2011-2020,0.66,0.584,False
+terraclimate,rs,UF amapa,2021-2025,0.561,0.313,False
+terraclimate,rs,UF amazonas,1961-1970,2.766,0.002,True
+terraclimate,rs,UF amazonas,1971-1980,1.773,0.138,False
+terraclimate,rs,UF amazonas,1981-1990,1.256,0.499,True
+terraclimate,rs,UF amazonas,1991-2000,1.648,0.503,False
+terraclimate,rs,UF amazonas,2001-2010,2.956,0.503,True
+terraclimate,rs,UF amazonas,2011-2020,2.448,0.389,True
+terraclimate,rs,UF amazonas,2021-2025,1.125,0.329,True
+terraclimate,rs,UF bahia,1961-1970,2.312,0.599,True
+terraclimate,rs,UF bahia,1971-1980,1.867,0.411,True
+terraclimate,rs,UF bahia,1981-1990,1.618,0.904,False
+terraclimate,rs,UF bahia,1991-2000,1.538,0.869,False
+terraclimate,rs,UF bahia,2001-2010,1.391,0.865,False
+terraclimate,rs,UF bahia,2011-2020,1.734,0.936,False
+terraclimate,rs,UF bahia,2021-2025,1.179,0.808,False
+terraclimate,rs,UF ceara,1961-1970,2.628,0.446,True
+terraclimate,rs,UF ceara,1971-1980,2.464,0.237,True
+terraclimate,rs,UF ceara,1981-1990,1.923,0.857,False
+terraclimate,rs,UF ceara,1991-2000,2.202,0.732,False
+terraclimate,rs,UF ceara,2001-2010,1.776,0.841,False
+terraclimate,rs,UF ceara,2011-2020,2.019,0.879,False
+terraclimate,rs,UF ceara,2021-2025,1.115,0.676,True
+terraclimate,rs,UF distrito federal,1961-1970,2.516,0.411,True
+terraclimate,rs,UF distrito federal,1971-1980,1.752,0.335,True
+terraclimate,rs,UF distrito federal,1981-1990,1.405,0.829,False
+terraclimate,rs,UF distrito federal,1991-2000,1.101,0.829,False
+terraclimate,rs,UF distrito federal,2001-2010,0.999,0.813,False
+terraclimate,rs,UF distrito federal,2011-2020,1.474,0.881,False
+terraclimate,rs,UF distrito federal,2021-2025,1.435,0.783,False
+terraclimate,rs,UF espirito santo,1961-1970,2.163,0.547,True
+terraclimate,rs,UF espirito santo,1971-1980,2.082,0.504,True
+terraclimate,rs,UF espirito santo,1981-1990,1.406,0.909,False
+terraclimate,rs,UF espirito santo,1991-2000,1.179,0.883,False
+terraclimate,rs,UF espirito santo,2001-2010,1.252,0.905,False
+terraclimate,rs,UF espirito santo,2011-2020,1.341,0.915,False
+terraclimate,rs,UF espirito santo,2021-2025,1.022,0.797,False
+terraclimate,rs,UF goias,1961-1970,2.792,0.411,True
+terraclimate,rs,UF goias,1971-1980,2.015,0.315,True
+terraclimate,rs,UF goias,1981-1990,1.607,0.817,False
+terraclimate,rs,UF goias,1991-2000,1.446,0.794,False
+terraclimate,rs,UF goias,2001-2010,1.502,0.811,False
+terraclimate,rs,UF goias,2011-2020,1.767,0.91,False
+terraclimate,rs,UF goias,2021-2025,1.255,0.808,False
+terraclimate,rs,UF maranhao,1961-1970,2.888,0.35,True
+terraclimate,rs,UF maranhao,1971-1980,2.335,0.295,True
+terraclimate,rs,UF maranhao,1981-1990,1.817,0.805,False
+terraclimate,rs,UF maranhao,1991-2000,1.959,0.695,False
+terraclimate,rs,UF maranhao,2001-2010,1.117,0.818,True
+terraclimate,rs,UF maranhao,2011-2020,1.693,0.751,False
+terraclimate,rs,UF maranhao,2021-2025,0.455,0.646,True
+terraclimate,rs,UF mato grosso,1961-1970,3.247,0.178,True
+terraclimate,rs,UF mato grosso,1971-1980,2.237,0.174,False
+terraclimate,rs,UF mato grosso,1981-1990,1.989,0.445,False
+terraclimate,rs,UF mato grosso,1991-2000,2.124,0.674,False
+terraclimate,rs,UF mato grosso,2001-2010,1.953,0.498,False
+terraclimate,rs,UF mato grosso,2011-2020,2.144,0.76,False
+terraclimate,rs,UF mato grosso,2021-2025,1.681,0.703,False
+terraclimate,rs,UF mato grosso do sul,1961-1970,2.427,0.333,False
+terraclimate,rs,UF mato grosso do sul,1971-1980,2.316,0.275,False
+terraclimate,rs,UF mato grosso do sul,1981-1990,1.738,0.644,False
+terraclimate,rs,UF mato grosso do sul,1991-2000,2.106,0.614,False
+terraclimate,rs,UF mato grosso do sul,2001-2010,1.809,0.609,False
+terraclimate,rs,UF mato grosso do sul,2011-2020,2.203,0.768,False
+terraclimate,rs,UF mato grosso do sul,2021-2025,1.242,0.633,True
+terraclimate,rs,UF minas gerais,1961-1970,2.593,0.584,True
+terraclimate,rs,UF minas gerais,1971-1980,2.345,0.417,True
+terraclimate,rs,UF minas gerais,1981-1990,1.839,0.918,False
+terraclimate,rs,UF minas gerais,1991-2000,1.684,0.888,False
+terraclimate,rs,UF minas gerais,2001-2010,1.658,0.909,False
+terraclimate,rs,UF minas gerais,2011-2020,1.979,0.94,False
+terraclimate,rs,UF minas gerais,2021-2025,1.783,0.82,False
+terraclimate,rs,UF para,1961-1970,2.742,0.087,True
+terraclimate,rs,UF para,1971-1980,2.021,0.038,False
+terraclimate,rs,UF para,1981-1990,1.682,0.583,False
+terraclimate,rs,UF para,1991-2000,1.907,0.452,False
+terraclimate,rs,UF para,2001-2010,2.703,0.619,True
+terraclimate,rs,UF para,2011-2020,1.798,0.632,False
+terraclimate,rs,UF para,2021-2025,1.084,0.413,True
+terraclimate,rs,UF paraiba,1961-1970,2.361,0.318,True
+terraclimate,rs,UF paraiba,1971-1980,1.964,0.076,True
+terraclimate,rs,UF paraiba,1981-1990,1.816,0.859,False
+terraclimate,rs,UF paraiba,1991-2000,1.889,0.709,False
+terraclimate,rs,UF paraiba,2001-2010,1.968,0.777,False
+terraclimate,rs,UF paraiba,2011-2020,2.191,0.858,False
+terraclimate,rs,UF paraiba,2021-2025,1.61,0.671,False
+terraclimate,rs,UF parana,1961-1970,1.479,0.437,True
+terraclimate,rs,UF parana,1971-1980,1.515,0.363,True
+terraclimate,rs,UF parana,1981-1990,1.031,0.822,False
+terraclimate,rs,UF parana,1991-2000,1.633,0.808,False
+terraclimate,rs,UF parana,2001-2010,1.783,0.753,False
+terraclimate,rs,UF parana,2011-2020,1.327,0.906,False
+terraclimate,rs,UF parana,2021-2025,1.184,0.73,False
+terraclimate,rs,UF pernambuco,1961-1970,2.455,0.431,True
+terraclimate,rs,UF pernambuco,1971-1980,2.087,0.106,True
+terraclimate,rs,UF pernambuco,1981-1990,1.965,0.849,False
+terraclimate,rs,UF pernambuco,1991-2000,2.025,0.755,False
+terraclimate,rs,UF pernambuco,2001-2010,1.949,0.817,False
+terraclimate,rs,UF pernambuco,2011-2020,2.003,0.891,False
+terraclimate,rs,UF pernambuco,2021-2025,1.445,0.736,True
+terraclimate,rs,UF piaui,1961-1970,2.298,0.454,True
+terraclimate,rs,UF piaui,1971-1980,2.541,0.432,True
+terraclimate,rs,UF piaui,1981-1990,2.125,0.849,False
+terraclimate,rs,UF piaui,1991-2000,2.137,0.763,False
+terraclimate,rs,UF piaui,2001-2010,1.361,0.827,True
+terraclimate,rs,UF piaui,2011-2020,2.083,0.882,False
+terraclimate,rs,UF piaui,2021-2025,0.853,0.735,True
+terraclimate,rs,UF rio de janeiro,1961-1970,1.672,0.608,False
+terraclimate,rs,UF rio de janeiro,1971-1980,1.474,0.344,True
+terraclimate,rs,UF rio de janeiro,1981-1990,1.4,0.886,False
+terraclimate,rs,UF rio de janeiro,1991-2000,1.665,0.866,False
+terraclimate,rs,UF rio de janeiro,2001-2010,1.584,0.883,False
+terraclimate,rs,UF rio de janeiro,2011-2020,1.704,0.929,False
+terraclimate,rs,UF rio de janeiro,2021-2025,1.34,0.767,False
+terraclimate,rs,UF rio grande do norte,1961-1970,2.782,0.297,True
+terraclimate,rs,UF rio grande do norte,1971-1980,2.099,0.051,False
+terraclimate,rs,UF rio grande do norte,1981-1990,1.785,0.846,False
+terraclimate,rs,UF rio grande do norte,1991-2000,2.001,0.688,False
+terraclimate,rs,UF rio grande do norte,2001-2010,2.219,0.764,False
+terraclimate,rs,UF rio grande do norte,2011-2020,2.405,0.85,False
+terraclimate,rs,UF rio grande do norte,2021-2025,1.781,0.536,False
+terraclimate,rs,UF rio grande do sul,1961-1970,1.112,0.613,False
+terraclimate,rs,UF rio grande do sul,1971-1980,1.443,0.433,True
+terraclimate,rs,UF rio grande do sul,1981-1990,0.649,0.684,False
+terraclimate,rs,UF rio grande do sul,1991-2000,0.89,0.856,False
+terraclimate,rs,UF rio grande do sul,2001-2010,0.675,0.84,False
+terraclimate,rs,UF rio grande do sul,2011-2020,0.793,0.911,False
+terraclimate,rs,UF rio grande do sul,2021-2025,0.651,0.835,False
+terraclimate,rs,UF rondonia,1961-1970,3.223,-0.107,True
+terraclimate,rs,UF rondonia,1971-1980,2.054,-0.018,False
+terraclimate,rs,UF rondonia,1981-1990,1.667,0.265,False
+terraclimate,rs,UF rondonia,1991-2000,1.613,0.365,False
+terraclimate,rs,UF rondonia,2001-2010,1.962,0.258,False
+terraclimate,rs,UF rondonia,2011-2020,2.859,0.408,True
+terraclimate,rs,UF rondonia,2021-2025,2.37,0.414,False
+terraclimate,rs,UF roraima,1961-1970,0.666,-0.045,False
+terraclimate,rs,UF roraima,1971-1980,0.239,0.294,False
+terraclimate,rs,UF roraima,1981-1990,-0.024,0.57,False
+terraclimate,rs,UF roraima,1991-2000,0.045,0.386,False
+terraclimate,rs,UF roraima,2001-2010,1.386,0.635,True
+terraclimate,rs,UF roraima,2011-2020,1.854,0.512,True
+terraclimate,rs,UF roraima,2021-2025,-0.242,0.698,False
+terraclimate,rs,UF santa catarina,1961-1970,1.295,0.572,False
+terraclimate,rs,UF santa catarina,1971-1980,1.384,0.347,True
+terraclimate,rs,UF santa catarina,1981-1990,0.817,0.743,False
+terraclimate,rs,UF santa catarina,1991-2000,1.737,0.753,False
+terraclimate,rs,UF santa catarina,2001-2010,1.463,0.722,False
+terraclimate,rs,UF santa catarina,2011-2020,1.096,0.911,False
+terraclimate,rs,UF santa catarina,2021-2025,1.045,0.769,False
+terraclimate,rs,UF sao paulo,1961-1970,2.859,0.282,True
+terraclimate,rs,UF sao paulo,1971-1980,2.586,0.288,True
+terraclimate,rs,UF sao paulo,1981-1990,1.82,0.847,False
+terraclimate,rs,UF sao paulo,1991-2000,1.998,0.783,False
+terraclimate,rs,UF sao paulo,2001-2010,2.104,0.803,False
+terraclimate,rs,UF sao paulo,2011-2020,2.012,0.896,False
+terraclimate,rs,UF sao paulo,2021-2025,1.688,0.828,False
+terraclimate,rs,UF sergipe,1961-1970,1.59,0.5,True
+terraclimate,rs,UF sergipe,1971-1980,1.196,0.106,True
+terraclimate,rs,UF sergipe,1981-1990,0.719,0.857,False
+terraclimate,rs,UF sergipe,1991-2000,0.956,0.789,False
+terraclimate,rs,UF sergipe,2001-2010,1.184,0.851,False
+terraclimate,rs,UF sergipe,2011-2020,1.041,0.833,False
+terraclimate,rs,UF sergipe,2021-2025,0.774,0.714,False
+terraclimate,rs,UF tocantins,1961-1970,3.102,0.442,True
+terraclimate,rs,UF tocantins,1971-1980,2.426,0.399,True
+terraclimate,rs,UF tocantins,1981-1990,1.956,0.754,False
+terraclimate,rs,UF tocantins,1991-2000,1.584,0.754,False
+terraclimate,rs,UF tocantins,2001-2010,2.051,0.794,False
+terraclimate,rs,UF tocantins,2011-2020,1.872,0.846,False
+terraclimate,rs,UF tocantins,2021-2025,0.992,0.752,True
+terraclimate,runoff,Brasil,1961-1970,-43.834,0.176,False
+terraclimate,runoff,Brasil,1971-1980,-41.996,0.618,False
+terraclimate,runoff,Brasil,1981-1990,-38.642,0.717,False
+terraclimate,runoff,Brasil,1991-2000,-39.979,0.647,False
+terraclimate,runoff,Brasil,2001-2010,-45.348,0.56,False
+terraclimate,runoff,Brasil,2011-2020,-41.973,0.655,False
+terraclimate,runoff,Brasil,2021-2025,-41.036,0.789,False
+terraclimate,runoff,Centro-Oeste,1961-1970,-30.673,0.132,True
+terraclimate,runoff,Centro-Oeste,1971-1980,-59.812,0.527,False
+terraclimate,runoff,Centro-Oeste,1981-1990,-49.814,0.68,True
+terraclimate,runoff,Centro-Oeste,1991-2000,-53.67,0.682,False
+terraclimate,runoff,Centro-Oeste,2001-2010,-61.334,0.657,False
+terraclimate,runoff,Centro-Oeste,2011-2020,-60.193,0.655,False
+terraclimate,runoff,Centro-Oeste,2021-2025,-57.9,0.814,False
+terraclimate,runoff,Nordeste,1961-1970,-49.701,0.732,True
+terraclimate,runoff,Nordeste,1971-1980,-27.163,0.866,True
+terraclimate,runoff,Nordeste,1981-1990,-37.747,0.947,False
+terraclimate,runoff,Nordeste,1991-2000,-22.781,0.836,True
+terraclimate,runoff,Nordeste,2001-2010,-29.758,0.852,True
+terraclimate,runoff,Nordeste,2011-2020,-37.285,0.824,False
+terraclimate,runoff,Nordeste,2021-2025,-40.074,0.886,False
+terraclimate,runoff,Norte,1961-1970,-50.49,0.319,True
+terraclimate,runoff,Norte,1971-1980,-43.278,0.546,False
+terraclimate,runoff,Norte,1981-1990,-41.675,0.644,False
+terraclimate,runoff,Norte,1991-2000,-43.349,0.675,False
+terraclimate,runoff,Norte,2001-2010,-45.526,0.603,False
+terraclimate,runoff,Norte,2011-2020,-40.495,0.693,False
+terraclimate,runoff,Norte,2021-2025,-40.1,0.842,False
+terraclimate,runoff,Sudeste,1961-1970,-32.497,0.412,True
+terraclimate,runoff,Sudeste,1971-1980,-33.758,0.823,False
+terraclimate,runoff,Sudeste,1981-1990,-19.054,0.891,True
+terraclimate,runoff,Sudeste,1991-2000,-25.591,0.682,True
+terraclimate,runoff,Sudeste,2001-2010,-46.081,0.788,True
+terraclimate,runoff,Sudeste,2011-2020,-44.293,0.753,True
+terraclimate,runoff,Sudeste,2021-2025,-47.922,0.903,True
+terraclimate,runoff,Sul,1961-1970,-0.033,0.66,False
+terraclimate,runoff,Sul,1971-1980,2.819,0.792,False
+terraclimate,runoff,Sul,1981-1990,7.131,0.838,True
+terraclimate,runoff,Sul,1991-2000,8.93,0.824,True
+terraclimate,runoff,Sul,2001-2010,-9.649,0.834,True
+terraclimate,runoff,Sul,2011-2020,-9.717,0.851,True
+terraclimate,runoff,Sul,2021-2025,-10.112,0.902,True
+terraclimate,runoff,UF acre,1961-1970,-68.179,0.239,True
+terraclimate,runoff,UF acre,1971-1980,-65.549,0.244,False
+terraclimate,runoff,UF acre,1981-1990,-59.51,-0.131,False
+terraclimate,runoff,UF acre,1991-2000,-61.597,0.19,False
+terraclimate,runoff,UF acre,2001-2010,-69.853,0.134,True
+terraclimate,runoff,UF acre,2011-2020,-54.713,0.288,True
+terraclimate,runoff,UF acre,2021-2025,-56.83,0.751,False
+terraclimate,runoff,UF alagoas,1961-1970,-86.428,0.311,True
+terraclimate,runoff,UF alagoas,1971-1980,-80.087,0.149,True
+terraclimate,runoff,UF alagoas,1981-1990,-76.338,0.702,False
+terraclimate,runoff,UF alagoas,1991-2000,-71.663,0.415,False
+terraclimate,runoff,UF alagoas,2001-2010,-64.488,0.383,True
+terraclimate,runoff,UF alagoas,2011-2020,-57.332,0.534,True
+terraclimate,runoff,UF alagoas,2021-2025,-71.062,0.896,False
+terraclimate,runoff,UF amapa,1961-1970,-47.245,0.243,False
+terraclimate,runoff,UF amapa,1971-1980,-48.3,0.538,False
+terraclimate,runoff,UF amapa,1981-1990,-55.846,0.557,True
+terraclimate,runoff,UF amapa,1991-2000,-59.086,0.575,True
+terraclimate,runoff,UF amapa,2001-2010,-42.884,0.373,True
+terraclimate,runoff,UF amapa,2011-2020,-41.013,0.568,True
+terraclimate,runoff,UF amapa,2021-2025,-50.645,0.877,False
+terraclimate,runoff,UF amazonas,1961-1970,-53.128,0.351,True
+terraclimate,runoff,UF amazonas,1971-1980,-39.751,0.579,False
+terraclimate,runoff,UF amazonas,1981-1990,-31.527,0.674,False
+terraclimate,runoff,UF amazonas,1991-2000,-35.701,0.614,False
+terraclimate,runoff,UF amazonas,2001-2010,-44.195,0.71,True
+terraclimate,runoff,UF amazonas,2011-2020,-32.41,0.606,False
+terraclimate,runoff,UF amazonas,2021-2025,-34.168,0.902,False
+terraclimate,runoff,UF bahia,1961-1970,-39.081,0.82,False
+terraclimate,runoff,UF bahia,1971-1980,-27.341,0.877,True
+terraclimate,runoff,UF bahia,1981-1990,-37.474,0.961,False
+terraclimate,runoff,UF bahia,1991-2000,-26.782,0.918,True
+terraclimate,runoff,UF bahia,2001-2010,-29.383,0.85,True
+terraclimate,runoff,UF bahia,2011-2020,-37.718,0.898,False
+terraclimate,runoff,UF bahia,2021-2025,-49.154,0.936,True
+terraclimate,runoff,UF ceara,1961-1970,-48.176,0.633,True
+terraclimate,runoff,UF ceara,1971-1980,-2.704,0.871,True
+terraclimate,runoff,UF ceara,1981-1990,-32.763,0.868,True
+terraclimate,runoff,UF ceara,1991-2000,12.407,0.828,True
+terraclimate,runoff,UF ceara,2001-2010,-23.627,0.74,False
+terraclimate,runoff,UF ceara,2011-2020,-12.364,0.775,True
+terraclimate,runoff,UF ceara,2021-2025,-36.916,0.871,True
+terraclimate,runoff,UF distrito federal,1961-1970,-58.124,0.416,True
+terraclimate,runoff,UF distrito federal,1971-1980,-50.828,0.71,True
+terraclimate,runoff,UF distrito federal,1981-1990,-54.882,0.791,False
+terraclimate,runoff,UF distrito federal,1991-2000,-47.585,0.74,True
+terraclimate,runoff,UF distrito federal,2001-2010,-59.058,0.635,False
+terraclimate,runoff,UF distrito federal,2011-2020,-60.234,0.711,False
+terraclimate,runoff,UF distrito federal,2021-2025,-56.543,0.867,False
+terraclimate,runoff,UF espirito santo,1961-1970,7.31,0.281,True
+terraclimate,runoff,UF espirito santo,1971-1980,-20.682,0.658,True
+terraclimate,runoff,UF espirito santo,1981-1990,-23.336,0.752,True
+terraclimate,runoff,UF espirito santo,1991-2000,-36.599,0.533,False
+terraclimate,runoff,UF espirito santo,2001-2010,-34.471,0.657,False
+terraclimate,runoff,UF espirito santo,2011-2020,-36.696,0.785,False
+terraclimate,runoff,UF espirito santo,2021-2025,-41.107,0.893,True
+terraclimate,runoff,UF goias,1961-1970,-61.007,0.474,True
+terraclimate,runoff,UF goias,1971-1980,-64.536,0.712,False
+terraclimate,runoff,UF goias,1981-1990,-60.181,0.814,False
+terraclimate,runoff,UF goias,1991-2000,-59.048,0.792,False
+terraclimate,runoff,UF goias,2001-2010,-67.19,0.677,True
+terraclimate,runoff,UF goias,2011-2020,-67.847,0.734,True
+terraclimate,runoff,UF goias,2021-2025,-59.828,0.786,False
+terraclimate,runoff,UF maranhao,1961-1970,-48.601,0.427,True
+terraclimate,runoff,UF maranhao,1971-1980,-31.609,0.719,False
+terraclimate,runoff,UF maranhao,1981-1990,-39.006,0.851,True
+terraclimate,runoff,UF maranhao,1991-2000,-26.96,0.61,False
+terraclimate,runoff,UF maranhao,2001-2010,-30.196,0.789,False
+terraclimate,runoff,UF maranhao,2011-2020,-37.825,0.699,True
+terraclimate,runoff,UF maranhao,2021-2025,-26.688,0.693,False
+terraclimate,runoff,UF mato grosso,1961-1970,-25.197,0.014,True
+terraclimate,runoff,UF mato grosso,1971-1980,-64.279,0.345,False
+terraclimate,runoff,UF mato grosso,1981-1990,-57.071,0.601,False
+terraclimate,runoff,UF mato grosso,1991-2000,-61.859,0.506,False
+terraclimate,runoff,UF mato grosso,2001-2010,-63.681,0.497,False
+terraclimate,runoff,UF mato grosso,2011-2020,-62.65,0.43,False
+terraclimate,runoff,UF mato grosso,2021-2025,-60.05,0.803,False
+terraclimate,runoff,UF mato grosso do sul,1961-1970,4.347,0.236,True
+terraclimate,runoff,UF mato grosso do sul,1971-1980,-23.234,0.583,False
+terraclimate,runoff,UF mato grosso do sul,1981-1990,15.628,0.665,True
+terraclimate,runoff,UF mato grosso do sul,1991-2000,8.157,0.624,True
+terraclimate,runoff,UF mato grosso do sul,2001-2010,-36.632,0.793,True
+terraclimate,runoff,UF mato grosso do sul,2011-2020,-30.902,0.653,True
+terraclimate,runoff,UF mato grosso do sul,2021-2025,-25.86,0.85,False
+terraclimate,runoff,UF minas gerais,1961-1970,-30.659,0.368,True
+terraclimate,runoff,UF minas gerais,1971-1980,-36.123,0.862,False
+terraclimate,runoff,UF minas gerais,1981-1990,-23.689,0.927,True
+terraclimate,runoff,UF minas gerais,1991-2000,-29.243,0.77,True
+terraclimate,runoff,UF minas gerais,2001-2010,-45.875,0.801,True
+terraclimate,runoff,UF minas gerais,2011-2020,-41.953,0.823,True
+terraclimate,runoff,UF minas gerais,2021-2025,-45.107,0.916,True
+terraclimate,runoff,UF para,1961-1970,-40.588,0.108,False
+terraclimate,runoff,UF para,1971-1980,-42.481,0.585,False
+terraclimate,runoff,UF para,1981-1990,-50.293,0.661,True
+terraclimate,runoff,UF para,1991-2000,-46.514,0.594,False
+terraclimate,runoff,UF para,2001-2010,-39.673,0.512,False
+terraclimate,runoff,UF para,2011-2020,-46.96,0.676,False
+terraclimate,runoff,UF para,2021-2025,-40.736,0.764,False
+terraclimate,runoff,UF paraiba,1961-1970,-30.698,0.7,True
+terraclimate,runoff,UF paraiba,1971-1980,10.422,0.858,True
+terraclimate,runoff,UF paraiba,1981-1990,-12.967,0.953,False
+terraclimate,runoff,UF paraiba,1991-2000,13.788,0.615,True
+terraclimate,runoff,UF paraiba,2001-2010,-5.549,0.716,True
+terraclimate,runoff,UF paraiba,2011-2020,-21.2,0.555,True
+terraclimate,runoff,UF paraiba,2021-2025,-27.644,0.859,True
+terraclimate,runoff,UF parana,1961-1970,-21.955,0.649,False
+terraclimate,runoff,UF parana,1971-1980,-9.65,0.623,True
+terraclimate,runoff,UF parana,1981-1990,5.245,0.812,True
+terraclimate,runoff,UF parana,1991-2000,-0.078,0.793,True
+terraclimate,runoff,UF parana,2001-2010,-20.043,0.802,False
+terraclimate,runoff,UF parana,2011-2020,-18.053,0.84,False
+terraclimate,runoff,UF parana,2021-2025,-21.759,0.919,False
+terraclimate,runoff,UF pernambuco,1961-1970,-50.274,0.41,True
+terraclimate,runoff,UF pernambuco,1971-1980,-22.384,0.668,True
+terraclimate,runoff,UF pernambuco,1981-1990,-38.785,0.719,False
+terraclimate,runoff,UF pernambuco,1991-2000,-18.23,0.41,True
+terraclimate,runoff,UF pernambuco,2001-2010,-20.169,0.46,True
+terraclimate,runoff,UF pernambuco,2011-2020,-40.385,0.502,False
+terraclimate,runoff,UF pernambuco,2021-2025,-53.156,0.712,True
+terraclimate,runoff,UF piaui,1961-1970,-62.582,0.53,True
+terraclimate,runoff,UF piaui,1971-1980,-20.72,0.764,True
+terraclimate,runoff,UF piaui,1981-1990,-30.443,0.862,False
+terraclimate,runoff,UF piaui,1991-2000,-3.247,0.711,True
+terraclimate,runoff,UF piaui,2001-2010,-29.728,0.69,False
+terraclimate,runoff,UF piaui,2011-2020,-46.926,0.691,True
+terraclimate,runoff,UF piaui,2021-2025,-44.571,0.796,True
+terraclimate,runoff,UF rio de janeiro,1961-1970,-54.98,0.664,False
+terraclimate,runoff,UF rio de janeiro,1971-1980,-29.117,0.489,True
+terraclimate,runoff,UF rio de janeiro,1981-1990,-32.06,0.66,True
+terraclimate,runoff,UF rio de janeiro,1991-2000,-43.155,0.54,True
+terraclimate,runoff,UF rio de janeiro,2001-2010,-54.232,0.583,False
+terraclimate,runoff,UF rio de janeiro,2011-2020,-58.216,0.704,False
+terraclimate,runoff,UF rio de janeiro,2021-2025,-57.231,0.906,False
+terraclimate,runoff,UF rio grande do norte,1961-1970,-55.324,0.568,True
+terraclimate,runoff,UF rio grande do norte,1971-1980,-18.462,0.908,True
+terraclimate,runoff,UF rio grande do norte,1981-1990,-47.046,0.885,True
+terraclimate,runoff,UF rio grande do norte,1991-2000,-36.344,0.619,False
+terraclimate,runoff,UF rio grande do norte,2001-2010,-38.484,0.646,False
+terraclimate,runoff,UF rio grande do norte,2011-2020,-22.961,0.612,True
+terraclimate,runoff,UF rio grande do norte,2021-2025,-67.253,0.721,True
+terraclimate,runoff,UF rio grande do sul,1961-1970,20.444,0.598,True
+terraclimate,runoff,UF rio grande do sul,1971-1980,20.741,0.79,True
+terraclimate,runoff,UF rio grande do sul,1981-1990,12.791,0.858,False
+terraclimate,runoff,UF rio grande do sul,1991-2000,23.527,0.735,True
+terraclimate,runoff,UF rio grande do sul,2001-2010,2.532,0.825,True
+terraclimate,runoff,UF rio grande do sul,2011-2020,1.023,0.799,True
+terraclimate,runoff,UF rio grande do sul,2021-2025,1.463,0.914,True
+terraclimate,runoff,UF rondonia,1961-1970,-64.608,-0.092,True
+terraclimate,runoff,UF rondonia,1971-1980,-79.663,0.096,False
+terraclimate,runoff,UF rondonia,1981-1990,-76.051,0.108,False
+terraclimate,runoff,UF rondonia,1991-2000,-75.867,0.369,False
+terraclimate,runoff,UF rondonia,2001-2010,-79.114,0.368,False
+terraclimate,runoff,UF rondonia,2011-2020,-75.403,0.403,False
+terraclimate,runoff,UF rondonia,2021-2025,-73.907,0.777,False
+terraclimate,runoff,UF roraima,1961-1970,-55.625,0.181,True
+terraclimate,runoff,UF roraima,1971-1980,-17.981,0.397,True
+terraclimate,runoff,UF roraima,1981-1990,-25.158,0.467,True
+terraclimate,runoff,UF roraima,1991-2000,-43.255,0.555,True
+terraclimate,runoff,UF roraima,2001-2010,-34.593,0.551,False
+terraclimate,runoff,UF roraima,2011-2020,-23.647,0.583,True
+terraclimate,runoff,UF roraima,2021-2025,-35.371,0.874,False
+terraclimate,runoff,UF santa catarina,1961-1970,-13.866,0.545,False
+terraclimate,runoff,UF santa catarina,1971-1980,-18.39,0.641,False
+terraclimate,runoff,UF santa catarina,1981-1990,-5.107,0.639,True
+terraclimate,runoff,UF santa catarina,1991-2000,-9.553,0.807,True
+terraclimate,runoff,UF santa catarina,2001-2010,-22.835,0.72,False
+terraclimate,runoff,UF santa catarina,2011-2020,-21.042,0.818,False
+terraclimate,runoff,UF santa catarina,2021-2025,-21.321,0.904,False
+terraclimate,runoff,UF sao paulo,1961-1970,-36.085,0.37,False
+terraclimate,runoff,UF sao paulo,1971-1980,-29.988,0.625,True
+terraclimate,runoff,UF sao paulo,1981-1990,-4.478,0.663,True
+terraclimate,runoff,UF sao paulo,1991-2000,-14.906,0.572,True
+terraclimate,runoff,UF sao paulo,2001-2010,-46.343,0.663,True
+terraclimate,runoff,UF sao paulo,2011-2020,-46.764,0.436,True
+terraclimate,runoff,UF sao paulo,2021-2025,-54.679,0.812,True
+terraclimate,runoff,UF sergipe,1961-1970,-85.012,0.35,True
+terraclimate,runoff,UF sergipe,1971-1980,-81.61,0.328,False
+terraclimate,runoff,UF sergipe,1981-1990,-78.063,0.491,False
+terraclimate,runoff,UF sergipe,1991-2000,-79.287,0.43,False
+terraclimate,runoff,UF sergipe,2001-2010,-53.466,0.366,True
+terraclimate,runoff,UF sergipe,2011-2020,-63.601,0.407,True
+terraclimate,runoff,UF sergipe,2021-2025,-68.302,0.633,True
+terraclimate,runoff,UF tocantins,1961-1970,-55.902,0.512,False
+terraclimate,runoff,UF tocantins,1971-1980,-50.041,0.703,False
+terraclimate,runoff,UF tocantins,1981-1990,-51.682,0.823,False
+terraclimate,runoff,UF tocantins,1991-2000,-54.443,0.73,False
+terraclimate,runoff,UF tocantins,2001-2010,-58.627,0.767,False
+terraclimate,runoff,UF tocantins,2011-2020,-57.952,0.656,False
+terraclimate,runoff,UF tocantins,2021-2025,-50.957,0.853,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,1961-1970,-151.402,0.566,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,1971-1980,-159.566,0.679,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,1981-1990,-153.209,0.676,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,1991-2000,-149.992,0.759,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,2001-2010,-149.641,0.705,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,2011-2020,-144.134,0.8,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Brasil,2021-2025,-132.863,0.98,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1961-1970,-123.733,0.324,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1971-1980,-132.403,0.508,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1981-1990,-130.331,0.64,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1991-2000,-129.419,0.606,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,2001-2010,-123.734,0.623,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,2011-2020,-120.615,0.805,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Centro-Oeste,2021-2025,-103.8,0.899,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,1961-1970,-133.036,0.819,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,1971-1980,-137.937,0.746,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,1981-1990,-124.332,0.886,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,1991-2000,-115.073,0.871,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,2001-2010,-120.445,0.799,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,2011-2020,-108.93,0.788,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Nordeste,2021-2025,-112.824,0.878,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,1961-1970,-206.289,0.472,True
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,1971-1980,-217.059,0.737,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,1981-1990,-211.274,0.717,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,1991-2000,-207.251,0.789,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,2001-2010,-206.539,0.738,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,2011-2020,-203.177,0.872,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Norte,2021-2025,-184.976,0.984,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,1961-1970,-81.344,0.45,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,1971-1980,-87.163,0.628,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,1981-1990,-79.643,0.738,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,1991-2000,-82.259,0.658,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,2001-2010,-83.252,0.791,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,2011-2020,-71.974,0.645,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sudeste,2021-2025,-69.079,0.846,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,1961-1970,-43.894,0.5,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,1971-1980,-46.558,0.748,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,1981-1990,-45.181,0.711,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,1991-2000,-46.728,0.711,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,2001-2010,-46.378,0.761,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,2011-2020,-45.316,0.723,False
+terraclimate,soil_moisture_0_100cm_m3_m3,Sul,2021-2025,-40.367,0.776,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,1961-1970,-188.794,0.293,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,1971-1980,-197.644,0.184,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,1981-1990,-190.783,0.349,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,1991-2000,-188.942,0.341,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,2001-2010,-188.138,0.359,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,2011-2020,-186.822,0.613,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF acre,2021-2025,-171.655,0.869,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,1961-1970,-110.705,0.562,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,1971-1980,-106.784,0.538,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,1981-1990,-105.328,0.738,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,1991-2000,-89.985,0.519,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,2001-2010,-103.063,0.55,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,2011-2020,-83.774,0.817,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF alagoas,2021-2025,-104.323,0.748,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,1961-1970,-340.957,0.433,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,1971-1980,-348.539,0.711,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,1981-1990,-341.543,0.666,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,1991-2000,-333.553,0.489,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,2001-2010,-331.11,0.621,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,2011-2020,-331.528,0.793,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amapa,2021-2025,-336.438,0.878,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,1961-1970,-147.339,0.226,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,1971-1980,-154.342,0.732,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,1981-1990,-151.594,0.679,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,1991-2000,-149.233,0.658,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,2001-2010,-147.911,0.66,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,2011-2020,-144.951,0.805,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF amazonas,2021-2025,-126.576,0.98,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,1961-1970,-65.024,0.837,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,1971-1980,-66.471,0.771,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,1981-1990,-58.528,0.887,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,1991-2000,-54.006,0.877,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,2001-2010,-55.704,0.794,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,2011-2020,-44.875,0.799,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF bahia,2021-2025,-56.222,0.887,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,1961-1970,-95.598,0.732,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,1971-1980,-92.921,0.772,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,1981-1990,-84.249,0.857,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,1991-2000,-71.642,0.914,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,2001-2010,-88.601,0.83,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,2011-2020,-71.6,0.826,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF ceara,2021-2025,-77.779,0.81,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,1961-1970,-105.431,0.311,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,1971-1980,-111.168,0.406,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,1981-1990,-105.925,0.407,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,1991-2000,-105.502,0.504,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,2001-2010,-101.872,0.639,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,2011-2020,-100.065,0.583,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF distrito federal,2021-2025,-92.541,0.842,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,1961-1970,-109.82,0.353,True
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,1971-1980,-126.998,0.727,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,1981-1990,-117.905,0.71,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,1991-2000,-114.68,0.79,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,2001-2010,-120.092,0.778,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,2011-2020,-99.639,0.724,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF espirito santo,2021-2025,-96.077,0.88,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,1961-1970,-97.131,0.341,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,1971-1980,-101.869,0.426,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,1981-1990,-99.002,0.397,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,1991-2000,-97.691,0.591,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,2001-2010,-96.312,0.634,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,2011-2020,-92.459,0.669,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF goias,2021-2025,-79.8,0.932,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,1961-1970,-313.165,0.56,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,1971-1980,-329.619,0.632,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,1981-1990,-298.72,0.796,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,1991-2000,-290.244,0.722,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,2001-2010,-290.17,0.497,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,2011-2020,-283.649,0.675,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF maranhao,2021-2025,-273.257,0.91,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,1961-1970,-171.019,0.232,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,1971-1980,-182.916,0.452,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,1981-1990,-179.904,0.556,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,1991-2000,-178.371,0.569,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,2001-2010,-170.988,0.498,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,2011-2020,-166.356,0.781,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso,2021-2025,-147.522,0.931,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1961-1970,-33.212,0.329,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1971-1980,-37.707,0.483,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1981-1990,-38.726,0.659,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1991-2000,-39.696,0.509,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,2001-2010,-34.112,0.62,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,2011-2020,-35.359,0.759,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,2021-2025,-19.453,0.819,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,1961-1970,-99.179,0.52,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,1971-1980,-105.699,0.729,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,1981-1990,-95.133,0.772,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,1991-2000,-99.362,0.673,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,2001-2010,-100.37,0.785,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,2011-2020,-84.768,0.712,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF minas gerais,2021-2025,-84.036,0.911,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,1961-1970,-268.358,0.609,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,1971-1980,-285.475,0.67,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,1981-1990,-275.447,0.764,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,1991-2000,-266.628,0.75,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,2001-2010,-268.656,0.791,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,2011-2020,-265.009,0.825,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF para,2021-2025,-243.789,0.966,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,1961-1970,-79.769,0.81,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,1971-1980,-88.146,0.826,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,1981-1990,-81.149,0.908,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,1991-2000,-58.718,0.836,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,2001-2010,-79.663,0.702,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,2011-2020,-58.569,0.73,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF paraiba,2021-2025,-70.371,0.823,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,1961-1970,-42.67,0.495,True
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,1971-1980,-45.401,0.723,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,1981-1990,-42.047,0.745,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,1991-2000,-44.236,0.603,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,2001-2010,-43.081,0.706,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,2011-2020,-41.77,0.735,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF parana,2021-2025,-36.12,0.775,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,1961-1970,-54.743,0.83,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,1971-1980,-56.624,0.804,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,1981-1990,-62.059,0.827,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,1991-2000,-36.79,0.761,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,2001-2010,-54.771,0.808,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,2011-2020,-38.0,0.709,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF pernambuco,2021-2025,-45.248,0.841,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,1961-1970,-144.06,0.716,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,1971-1980,-148.088,0.662,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,1981-1990,-127.753,0.81,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,1991-2000,-119.251,0.709,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,2001-2010,-123.023,0.697,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,2011-2020,-112.041,0.74,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF piaui,2021-2025,-107.872,0.851,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1961-1970,-82.967,0.632,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1971-1980,-87.956,0.45,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1981-1990,-86.77,0.588,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1991-2000,-85.358,0.654,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,2001-2010,-87.307,0.64,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,2011-2020,-83.038,0.628,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,2021-2025,-75.998,0.832,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1961-1970,-57.852,0.822,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1971-1980,-61.417,0.829,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1981-1990,-56.942,0.879,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1991-2000,-43.311,0.794,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,2001-2010,-54.95,0.671,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,2011-2020,-41.97,0.689,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,2021-2025,-59.93,0.774,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1961-1970,-44.551,0.507,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1971-1980,-47.046,0.647,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1981-1990,-47.486,0.612,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1991-2000,-48.548,0.758,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,2001-2010,-48.535,0.749,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,2011-2020,-47.695,0.683,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,2021-2025,-42.275,0.817,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,1961-1970,-266.6,0.168,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,1971-1980,-285.7,0.238,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,1981-1990,-274.889,0.57,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,1991-2000,-273.533,0.641,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,2001-2010,-273.753,0.393,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,2011-2020,-269.303,0.644,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF rondonia,2021-2025,-239.246,0.892,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,1961-1970,-192.138,0.02,True
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,1971-1980,-186.91,0.556,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,1981-1990,-201.903,0.58,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,1991-2000,-206.377,0.824,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,2001-2010,-195.451,0.793,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,2011-2020,-193.53,0.847,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF roraima,2021-2025,-180.386,0.974,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,1961-1970,-44.493,0.482,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,1971-1980,-47.506,0.649,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,1981-1990,-44.881,0.657,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,1991-2000,-46.531,0.484,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,2001-2010,-46.848,0.561,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,2011-2020,-45.649,0.653,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF santa catarina,2021-2025,-43.518,0.749,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,1961-1970,-34.601,0.411,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,1971-1980,-36.885,0.334,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,1981-1990,-35.625,0.682,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,1991-2000,-36.251,0.612,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,2001-2010,-36.243,0.535,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,2011-2020,-35.447,0.653,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sao paulo,2021-2025,-28.371,0.748,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,1961-1970,-51.102,0.669,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,1971-1980,-54.13,0.528,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,1981-1990,-54.598,0.698,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,1991-2000,-47.774,0.51,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,2001-2010,-49.577,0.418,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,2011-2020,-38.043,0.782,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF sergipe,2021-2025,-47.437,0.608,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,1961-1970,-164.347,0.379,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,1971-1980,-176.263,0.615,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,1981-1990,-161.343,0.57,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,1991-2000,-160.989,0.621,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,2001-2010,-159.756,0.551,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,2011-2020,-152.23,0.77,False
+terraclimate,soil_moisture_0_100cm_m3_m3,UF tocantins,2021-2025,-141.408,0.898,False
+terraclimate,tmax_C,Brasil,1961-1970,0.427,0.798,False
+terraclimate,tmax_C,Brasil,1971-1980,0.331,0.789,False
+terraclimate,tmax_C,Brasil,1981-1990,0.505,0.913,False
+terraclimate,tmax_C,Brasil,1991-2000,0.61,0.937,False
+terraclimate,tmax_C,Brasil,2001-2010,0.815,0.887,False
+terraclimate,tmax_C,Brasil,2011-2020,0.762,0.875,False
+terraclimate,tmax_C,Brasil,2021-2025,0.965,0.958,False
+terraclimate,tmax_C,Centro-Oeste,1961-1970,0.432,0.684,False
+terraclimate,tmax_C,Centro-Oeste,1971-1980,0.424,0.817,False
+terraclimate,tmax_C,Centro-Oeste,1981-1990,0.605,0.871,False
+terraclimate,tmax_C,Centro-Oeste,1991-2000,0.667,0.925,False
+terraclimate,tmax_C,Centro-Oeste,2001-2010,0.841,0.854,False
+terraclimate,tmax_C,Centro-Oeste,2011-2020,0.801,0.821,False
+terraclimate,tmax_C,Centro-Oeste,2021-2025,1.149,0.906,False
+terraclimate,tmax_C,Nordeste,1961-1970,0.825,0.532,False
+terraclimate,tmax_C,Nordeste,1971-1980,0.488,0.751,False
+terraclimate,tmax_C,Nordeste,1981-1990,0.7,0.936,False
+terraclimate,tmax_C,Nordeste,1991-2000,0.875,0.947,False
+terraclimate,tmax_C,Nordeste,2001-2010,1.1,0.931,False
+terraclimate,tmax_C,Nordeste,2011-2020,1.308,0.896,False
+terraclimate,tmax_C,Nordeste,2021-2025,1.486,0.896,True
+terraclimate,tmax_C,Norte,1961-1970,0.006,0.768,False
+terraclimate,tmax_C,Norte,1971-1980,0.118,0.781,False
+terraclimate,tmax_C,Norte,1981-1990,0.25,0.893,False
+terraclimate,tmax_C,Norte,1991-2000,0.348,0.92,False
+terraclimate,tmax_C,Norte,2001-2010,0.641,0.866,False
+terraclimate,tmax_C,Norte,2011-2020,0.474,0.869,False
+terraclimate,tmax_C,Norte,2021-2025,0.561,0.965,False
+terraclimate,tmax_C,Sudeste,1961-1970,1.187,0.884,False
+terraclimate,tmax_C,Sudeste,1971-1980,0.685,0.766,False
+terraclimate,tmax_C,Sudeste,1981-1990,0.944,0.834,False
+terraclimate,tmax_C,Sudeste,1991-2000,1.057,0.845,False
+terraclimate,tmax_C,Sudeste,2001-2010,1.13,0.936,False
+terraclimate,tmax_C,Sudeste,2011-2020,1.039,0.841,False
+terraclimate,tmax_C,Sudeste,2021-2025,1.502,0.96,False
+terraclimate,tmax_C,Sul,1961-1970,0.811,0.94,False
+terraclimate,tmax_C,Sul,1971-1980,0.454,0.892,False
+terraclimate,tmax_C,Sul,1981-1990,0.638,0.855,False
+terraclimate,tmax_C,Sul,1991-2000,0.709,0.884,False
+terraclimate,tmax_C,Sul,2001-2010,0.618,0.909,False
+terraclimate,tmax_C,Sul,2011-2020,0.631,0.895,False
+terraclimate,tmax_C,Sul,2021-2025,0.828,0.924,False
+terraclimate,tmax_C,UF acre,1961-1970,-0.597,0.333,True
+terraclimate,tmax_C,UF acre,1971-1980,0.37,0.647,False
+terraclimate,tmax_C,UF acre,1981-1990,0.662,0.769,False
+terraclimate,tmax_C,UF acre,1991-2000,0.801,0.871,False
+terraclimate,tmax_C,UF acre,2001-2010,0.665,0.811,False
+terraclimate,tmax_C,UF acre,2011-2020,0.711,0.636,False
+terraclimate,tmax_C,UF acre,2021-2025,0.979,0.822,False
+terraclimate,tmax_C,UF alagoas,1961-1970,1.559,0.582,False
+terraclimate,tmax_C,UF alagoas,1971-1980,1.201,0.731,True
+terraclimate,tmax_C,UF alagoas,1981-1990,1.539,0.839,False
+terraclimate,tmax_C,UF alagoas,1991-2000,2.016,0.913,False
+terraclimate,tmax_C,UF alagoas,2001-2010,2.282,0.868,False
+terraclimate,tmax_C,UF alagoas,2011-2020,2.408,0.812,False
+terraclimate,tmax_C,UF alagoas,2021-2025,2.355,0.797,False
+terraclimate,tmax_C,UF amapa,1961-1970,0.76,0.713,False
+terraclimate,tmax_C,UF amapa,1971-1980,0.366,0.402,False
+terraclimate,tmax_C,UF amapa,1981-1990,0.305,0.694,False
+terraclimate,tmax_C,UF amapa,1991-2000,0.383,0.528,False
+terraclimate,tmax_C,UF amapa,2001-2010,0.783,0.667,False
+terraclimate,tmax_C,UF amapa,2011-2020,0.479,0.525,False
+terraclimate,tmax_C,UF amapa,2021-2025,0.786,0.879,False
+terraclimate,tmax_C,UF amazonas,1961-1970,-0.145,0.733,True
+terraclimate,tmax_C,UF amazonas,1971-1980,0.194,0.745,False
+terraclimate,tmax_C,UF amazonas,1981-1990,0.416,0.829,False
+terraclimate,tmax_C,UF amazonas,1991-2000,0.494,0.846,False
+terraclimate,tmax_C,UF amazonas,2001-2010,0.888,0.862,False
+terraclimate,tmax_C,UF amazonas,2011-2020,0.645,0.816,False
+terraclimate,tmax_C,UF amazonas,2021-2025,0.484,0.976,False
+terraclimate,tmax_C,UF bahia,1961-1970,0.188,0.645,False
+terraclimate,tmax_C,UF bahia,1971-1980,0.321,0.746,False
+terraclimate,tmax_C,UF bahia,1981-1990,0.592,0.931,False
+terraclimate,tmax_C,UF bahia,1991-2000,0.673,0.96,False
+terraclimate,tmax_C,UF bahia,2001-2010,0.848,0.928,False
+terraclimate,tmax_C,UF bahia,2011-2020,1.103,0.921,False
+terraclimate,tmax_C,UF bahia,2021-2025,1.307,0.915,True
+terraclimate,tmax_C,UF ceara,1961-1970,1.296,0.437,True
+terraclimate,tmax_C,UF ceara,1971-1980,0.686,0.78,True
+terraclimate,tmax_C,UF ceara,1981-1990,0.787,0.891,True
+terraclimate,tmax_C,UF ceara,1991-2000,1.015,0.908,False
+terraclimate,tmax_C,UF ceara,2001-2010,1.367,0.916,False
+terraclimate,tmax_C,UF ceara,2011-2020,1.761,0.82,False
+terraclimate,tmax_C,UF ceara,2021-2025,1.993,0.787,True
+terraclimate,tmax_C,UF distrito federal,1961-1970,0.55,0.569,False
+terraclimate,tmax_C,UF distrito federal,1971-1980,1.043,0.556,False
+terraclimate,tmax_C,UF distrito federal,1981-1990,0.854,0.876,False
+terraclimate,tmax_C,UF distrito federal,1991-2000,0.759,0.931,False
+terraclimate,tmax_C,UF distrito federal,2001-2010,1.001,0.859,False
+terraclimate,tmax_C,UF distrito federal,2011-2020,1.061,0.876,False
+terraclimate,tmax_C,UF distrito federal,2021-2025,1.829,0.953,True
+terraclimate,tmax_C,UF espirito santo,1961-1970,0.707,0.836,True
+terraclimate,tmax_C,UF espirito santo,1971-1980,0.546,0.702,True
+terraclimate,tmax_C,UF espirito santo,1981-1990,1.557,0.752,False
+terraclimate,tmax_C,UF espirito santo,1991-2000,1.592,0.836,False
+terraclimate,tmax_C,UF espirito santo,2001-2010,1.531,0.838,False
+terraclimate,tmax_C,UF espirito santo,2011-2020,1.16,0.818,False
+terraclimate,tmax_C,UF espirito santo,2021-2025,1.336,0.908,False
+terraclimate,tmax_C,UF goias,1961-1970,1.308,0.664,False
+terraclimate,tmax_C,UF goias,1971-1980,1.124,0.786,False
+terraclimate,tmax_C,UF goias,1981-1990,1.179,0.861,False
+terraclimate,tmax_C,UF goias,1991-2000,1.417,0.933,False
+terraclimate,tmax_C,UF goias,2001-2010,1.479,0.908,False
+terraclimate,tmax_C,UF goias,2011-2020,1.293,0.836,False
+terraclimate,tmax_C,UF goias,2021-2025,2.027,0.894,True
+terraclimate,tmax_C,UF maranhao,1961-1970,1.413,0.47,True
+terraclimate,tmax_C,UF maranhao,1971-1980,0.354,0.698,False
+terraclimate,tmax_C,UF maranhao,1981-1990,0.509,0.899,False
+terraclimate,tmax_C,UF maranhao,1991-2000,0.706,0.861,False
+terraclimate,tmax_C,UF maranhao,2001-2010,0.875,0.856,False
+terraclimate,tmax_C,UF maranhao,2011-2020,0.799,0.78,False
+terraclimate,tmax_C,UF maranhao,2021-2025,0.918,0.85,False
+terraclimate,tmax_C,UF mato grosso,1961-1970,0.177,0.6,False
+terraclimate,tmax_C,UF mato grosso,1971-1980,0.173,0.752,False
+terraclimate,tmax_C,UF mato grosso,1981-1990,0.363,0.855,False
+terraclimate,tmax_C,UF mato grosso,1991-2000,0.302,0.899,False
+terraclimate,tmax_C,UF mato grosso,2001-2010,0.632,0.78,False
+terraclimate,tmax_C,UF mato grosso,2011-2020,0.495,0.757,False
+terraclimate,tmax_C,UF mato grosso,2021-2025,0.677,0.882,False
+terraclimate,tmax_C,UF mato grosso do sul,1961-1970,0.235,0.828,True
+terraclimate,tmax_C,UF mato grosso do sul,1971-1980,0.376,0.851,False
+terraclimate,tmax_C,UF mato grosso do sul,1981-1990,0.657,0.869,False
+terraclimate,tmax_C,UF mato grosso do sul,1991-2000,0.857,0.864,False
+terraclimate,tmax_C,UF mato grosso do sul,2001-2010,0.754,0.877,False
+terraclimate,tmax_C,UF mato grosso do sul,2011-2020,1.087,0.841,False
+terraclimate,tmax_C,UF mato grosso do sul,2021-2025,1.472,0.945,True
+terraclimate,tmax_C,UF minas gerais,1961-1970,0.922,0.863,False
+terraclimate,tmax_C,UF minas gerais,1971-1980,0.466,0.734,False
+terraclimate,tmax_C,UF minas gerais,1981-1990,0.881,0.841,False
+terraclimate,tmax_C,UF minas gerais,1991-2000,0.912,0.883,False
+terraclimate,tmax_C,UF minas gerais,2001-2010,1.047,0.924,False
+terraclimate,tmax_C,UF minas gerais,2011-2020,0.888,0.854,False
+terraclimate,tmax_C,UF minas gerais,2021-2025,1.381,0.957,False
+terraclimate,tmax_C,UF para,1961-1970,0.167,0.747,False
+terraclimate,tmax_C,UF para,1971-1980,0.021,0.604,False
+terraclimate,tmax_C,UF para,1981-1990,-0.074,0.896,False
+terraclimate,tmax_C,UF para,1991-2000,0.064,0.89,False
+terraclimate,tmax_C,UF para,2001-2010,0.225,0.821,False
+terraclimate,tmax_C,UF para,2011-2020,0.012,0.8,False
+terraclimate,tmax_C,UF para,2021-2025,0.269,0.943,False
+terraclimate,tmax_C,UF paraiba,1961-1970,1.494,0.464,True
+terraclimate,tmax_C,UF paraiba,1971-1980,1.347,0.594,False
+terraclimate,tmax_C,UF paraiba,1981-1990,1.397,0.856,False
+terraclimate,tmax_C,UF paraiba,1991-2000,1.819,0.847,False
+terraclimate,tmax_C,UF paraiba,2001-2010,2.338,0.856,True
+terraclimate,tmax_C,UF paraiba,2011-2020,2.673,0.814,True
+terraclimate,tmax_C,UF paraiba,2021-2025,2.831,0.785,True
+terraclimate,tmax_C,UF parana,1961-1970,1.261,0.891,False
+terraclimate,tmax_C,UF parana,1971-1980,0.899,0.801,False
+terraclimate,tmax_C,UF parana,1981-1990,0.886,0.87,False
+terraclimate,tmax_C,UF parana,1991-2000,0.992,0.777,False
+terraclimate,tmax_C,UF parana,2001-2010,1.052,0.849,False
+terraclimate,tmax_C,UF parana,2011-2020,0.989,0.847,False
+terraclimate,tmax_C,UF parana,2021-2025,1.243,0.94,False
+terraclimate,tmax_C,UF pernambuco,1961-1970,1.696,0.451,True
+terraclimate,tmax_C,UF pernambuco,1971-1980,1.465,0.757,False
+terraclimate,tmax_C,UF pernambuco,1981-1990,1.486,0.899,False
+terraclimate,tmax_C,UF pernambuco,1991-2000,1.827,0.922,False
+terraclimate,tmax_C,UF pernambuco,2001-2010,2.182,0.861,False
+terraclimate,tmax_C,UF pernambuco,2011-2020,2.64,0.883,True
+terraclimate,tmax_C,UF pernambuco,2021-2025,2.747,0.89,True
+terraclimate,tmax_C,UF piaui,1961-1970,0.572,0.295,True
+terraclimate,tmax_C,UF piaui,1971-1980,0.139,0.687,False
+terraclimate,tmax_C,UF piaui,1981-1990,0.436,0.897,False
+terraclimate,tmax_C,UF piaui,1991-2000,0.638,0.891,False
+terraclimate,tmax_C,UF piaui,2001-2010,0.79,0.869,False
+terraclimate,tmax_C,UF piaui,2011-2020,1.02,0.817,False
+terraclimate,tmax_C,UF piaui,2021-2025,1.254,0.778,True
+terraclimate,tmax_C,UF rio de janeiro,1961-1970,1.235,0.896,False
+terraclimate,tmax_C,UF rio de janeiro,1971-1980,0.958,0.797,False
+terraclimate,tmax_C,UF rio de janeiro,1981-1990,1.42,0.806,False
+terraclimate,tmax_C,UF rio de janeiro,1991-2000,1.414,0.857,False
+terraclimate,tmax_C,UF rio de janeiro,2001-2010,1.216,0.926,False
+terraclimate,tmax_C,UF rio de janeiro,2011-2020,1.16,0.814,False
+terraclimate,tmax_C,UF rio de janeiro,2021-2025,1.453,0.93,False
+terraclimate,tmax_C,UF rio grande do norte,1961-1970,1.241,0.456,True
+terraclimate,tmax_C,UF rio grande do norte,1971-1980,0.955,0.641,False
+terraclimate,tmax_C,UF rio grande do norte,1981-1990,1.226,0.845,False
+terraclimate,tmax_C,UF rio grande do norte,1991-2000,1.245,0.848,False
+terraclimate,tmax_C,UF rio grande do norte,2001-2010,1.721,0.887,False
+terraclimate,tmax_C,UF rio grande do norte,2011-2020,1.97,0.819,True
+terraclimate,tmax_C,UF rio grande do norte,2021-2025,2.049,0.684,True
+terraclimate,tmax_C,UF rio grande do sul,1961-1970,0.373,0.944,False
+terraclimate,tmax_C,UF rio grande do sul,1971-1980,0.032,0.905,False
+terraclimate,tmax_C,UF rio grande do sul,1981-1990,0.389,0.761,False
+terraclimate,tmax_C,UF rio grande do sul,1991-2000,0.41,0.926,False
+terraclimate,tmax_C,UF rio grande do sul,2001-2010,0.245,0.93,False
+terraclimate,tmax_C,UF rio grande do sul,2011-2020,0.379,0.924,False
+terraclimate,tmax_C,UF rio grande do sul,2021-2025,0.544,0.906,False
+terraclimate,tmax_C,UF rondonia,1961-1970,-0.04,0.657,False
+terraclimate,tmax_C,UF rondonia,1971-1980,-0.019,0.589,False
+terraclimate,tmax_C,UF rondonia,1981-1990,0.371,0.551,False
+terraclimate,tmax_C,UF rondonia,1991-2000,0.289,0.687,False
+terraclimate,tmax_C,UF rondonia,2001-2010,0.713,0.656,False
+terraclimate,tmax_C,UF rondonia,2011-2020,0.845,0.653,False
+terraclimate,tmax_C,UF rondonia,2021-2025,0.764,0.904,False
+terraclimate,tmax_C,UF roraima,1961-1970,-0.848,0.528,True
+terraclimate,tmax_C,UF roraima,1971-1980,-0.546,0.554,False
+terraclimate,tmax_C,UF roraima,1981-1990,-0.352,0.63,False
+terraclimate,tmax_C,UF roraima,1991-2000,-0.19,0.712,False
+terraclimate,tmax_C,UF roraima,2001-2010,0.204,0.7,False
+terraclimate,tmax_C,UF roraima,2011-2020,0.561,0.665,True
+terraclimate,tmax_C,UF roraima,2021-2025,0.699,0.939,True
+terraclimate,tmax_C,UF santa catarina,1961-1970,1.165,0.884,False
+terraclimate,tmax_C,UF santa catarina,1971-1980,0.777,0.833,False
+terraclimate,tmax_C,UF santa catarina,1981-1990,0.855,0.876,False
+terraclimate,tmax_C,UF santa catarina,1991-2000,1.005,0.803,False
+terraclimate,tmax_C,UF santa catarina,2001-2010,0.815,0.867,False
+terraclimate,tmax_C,UF santa catarina,2011-2020,0.632,0.867,False
+terraclimate,tmax_C,UF santa catarina,2021-2025,0.804,0.902,False
+terraclimate,tmax_C,UF sao paulo,1961-1970,1.877,0.859,True
+terraclimate,tmax_C,UF sao paulo,1971-1980,1.17,0.783,False
+terraclimate,tmax_C,UF sao paulo,1981-1990,0.899,0.835,False
+terraclimate,tmax_C,UF sao paulo,1991-2000,1.236,0.744,False
+terraclimate,tmax_C,UF sao paulo,2001-2010,1.237,0.939,False
+terraclimate,tmax_C,UF sao paulo,2011-2020,1.348,0.813,False
+terraclimate,tmax_C,UF sao paulo,2021-2025,1.821,0.954,True
+terraclimate,tmax_C,UF sergipe,1961-1970,0.947,0.474,True
+terraclimate,tmax_C,UF sergipe,1971-1980,0.921,0.65,True
+terraclimate,tmax_C,UF sergipe,1981-1990,1.177,0.815,False
+terraclimate,tmax_C,UF sergipe,1991-2000,1.464,0.903,False
+terraclimate,tmax_C,UF sergipe,2001-2010,1.748,0.785,False
+terraclimate,tmax_C,UF sergipe,2011-2020,2.071,0.789,True
+terraclimate,tmax_C,UF sergipe,2021-2025,2.267,0.752,True
+terraclimate,tmax_C,UF tocantins,1961-1970,0.807,0.429,True
+terraclimate,tmax_C,UF tocantins,1971-1980,0.498,0.749,False
+terraclimate,tmax_C,UF tocantins,1981-1990,0.873,0.886,False
+terraclimate,tmax_C,UF tocantins,1991-2000,0.99,0.909,False
+terraclimate,tmax_C,UF tocantins,2001-2010,1.302,0.877,False
+terraclimate,tmax_C,UF tocantins,2011-2020,1.039,0.826,False
+terraclimate,tmax_C,UF tocantins,2021-2025,1.658,0.701,True
+terraclimate,tmin_C,Brasil,1961-1970,0.34,0.599,True
+terraclimate,tmin_C,Brasil,1971-1980,1.056,0.762,False
+terraclimate,tmin_C,Brasil,1981-1990,0.943,0.812,False
+terraclimate,tmin_C,Brasil,1991-2000,0.931,0.825,False
+terraclimate,tmin_C,Brasil,2001-2010,1.176,0.765,False
+terraclimate,tmin_C,Brasil,2011-2020,0.98,0.785,False
+terraclimate,tmin_C,Brasil,2021-2025,1.067,0.91,False
+terraclimate,tmin_C,Centro-Oeste,1961-1970,0.414,0.376,True
+terraclimate,tmin_C,Centro-Oeste,1971-1980,1.221,0.717,False
+terraclimate,tmin_C,Centro-Oeste,1981-1990,1.217,0.725,False
+terraclimate,tmin_C,Centro-Oeste,1991-2000,1.058,0.744,False
+terraclimate,tmin_C,Centro-Oeste,2001-2010,1.221,0.646,False
+terraclimate,tmin_C,Centro-Oeste,2011-2020,1.227,0.631,False
+terraclimate,tmin_C,Centro-Oeste,2021-2025,1.218,0.83,False
+terraclimate,tmin_C,Nordeste,1961-1970,0.393,0.113,True
+terraclimate,tmin_C,Nordeste,1971-1980,1.259,0.44,False
+terraclimate,tmin_C,Nordeste,1981-1990,0.951,0.669,False
+terraclimate,tmin_C,Nordeste,1991-2000,0.945,0.701,False
+terraclimate,tmin_C,Nordeste,2001-2010,1.136,0.531,False
+terraclimate,tmin_C,Nordeste,2011-2020,1.021,0.664,False
+terraclimate,tmin_C,Nordeste,2021-2025,1.175,0.745,False
+terraclimate,tmin_C,Norte,1961-1970,0.113,0.614,True
+terraclimate,tmin_C,Norte,1971-1980,0.772,0.6,False
+terraclimate,tmin_C,Norte,1981-1990,0.669,0.712,False
+terraclimate,tmin_C,Norte,1991-2000,0.72,0.641,False
+terraclimate,tmin_C,Norte,2001-2010,1.126,0.764,False
+terraclimate,tmin_C,Norte,2011-2020,0.784,0.721,False
+terraclimate,tmin_C,Norte,2021-2025,0.859,0.853,False
+terraclimate,tmin_C,Sudeste,1961-1970,0.875,0.831,True
+terraclimate,tmin_C,Sudeste,1971-1980,1.479,0.743,False
+terraclimate,tmin_C,Sudeste,1981-1990,1.299,0.717,False
+terraclimate,tmin_C,Sudeste,1991-2000,1.407,0.747,False
+terraclimate,tmin_C,Sudeste,2001-2010,1.52,0.617,False
+terraclimate,tmin_C,Sudeste,2011-2020,1.349,0.715,False
+terraclimate,tmin_C,Sudeste,2021-2025,1.463,0.854,False
+terraclimate,tmin_C,Sul,1961-1970,0.573,0.947,False
+terraclimate,tmin_C,Sul,1971-1980,1.201,0.971,False
+terraclimate,tmin_C,Sul,1981-1990,1.322,0.883,False
+terraclimate,tmin_C,Sul,1991-2000,1.114,0.934,False
+terraclimate,tmin_C,Sul,2001-2010,0.935,0.967,False
+terraclimate,tmin_C,Sul,2011-2020,0.858,0.93,False
+terraclimate,tmin_C,Sul,2021-2025,1.059,0.936,False
+terraclimate,tmin_C,UF acre,1961-1970,0.317,0.468,True
+terraclimate,tmin_C,UF acre,1971-1980,0.556,0.42,False
+terraclimate,tmin_C,UF acre,1981-1990,0.736,0.418,False
+terraclimate,tmin_C,UF acre,1991-2000,1.031,0.546,False
+terraclimate,tmin_C,UF acre,2001-2010,1.563,0.71,True
+terraclimate,tmin_C,UF acre,2011-2020,1.468,0.649,False
+terraclimate,tmin_C,UF acre,2021-2025,1.234,0.802,False
+terraclimate,tmin_C,UF alagoas,1961-1970,0.527,0.327,True
+terraclimate,tmin_C,UF alagoas,1971-1980,1.047,0.438,False
+terraclimate,tmin_C,UF alagoas,1981-1990,0.856,0.56,False
+terraclimate,tmin_C,UF alagoas,1991-2000,1.05,0.592,False
+terraclimate,tmin_C,UF alagoas,2001-2010,1.395,0.475,False
+terraclimate,tmin_C,UF alagoas,2011-2020,1.266,0.577,False
+terraclimate,tmin_C,UF alagoas,2021-2025,1.31,0.761,False
+terraclimate,tmin_C,UF amapa,1961-1970,0.533,0.211,False
+terraclimate,tmin_C,UF amapa,1971-1980,0.377,0.3,False
+terraclimate,tmin_C,UF amapa,1981-1990,0.38,0.665,False
+terraclimate,tmin_C,UF amapa,1991-2000,0.785,0.091,False
+terraclimate,tmin_C,UF amapa,2001-2010,1.317,0.44,True
+terraclimate,tmin_C,UF amapa,2011-2020,0.462,0.463,False
+terraclimate,tmin_C,UF amapa,2021-2025,0.967,0.73,False
+terraclimate,tmin_C,UF amazonas,1961-1970,-0.01,0.635,False
+terraclimate,tmin_C,UF amazonas,1971-1980,0.339,0.656,False
+terraclimate,tmin_C,UF amazonas,1981-1990,0.324,0.598,False
+terraclimate,tmin_C,UF amazonas,1991-2000,0.348,0.486,False
+terraclimate,tmin_C,UF amazonas,2001-2010,0.702,0.741,False
+terraclimate,tmin_C,UF amazonas,2011-2020,0.42,0.497,False
+terraclimate,tmin_C,UF amazonas,2021-2025,0.514,0.804,False
+terraclimate,tmin_C,UF bahia,1961-1970,0.107,0.1,True
+terraclimate,tmin_C,UF bahia,1971-1980,1.397,0.563,False
+terraclimate,tmin_C,UF bahia,1981-1990,1.162,0.652,False
+terraclimate,tmin_C,UF bahia,1991-2000,1.1,0.698,False
+terraclimate,tmin_C,UF bahia,2001-2010,1.113,0.501,False
+terraclimate,tmin_C,UF bahia,2011-2020,1.066,0.629,False
+terraclimate,tmin_C,UF bahia,2021-2025,1.074,0.666,False
+terraclimate,tmin_C,UF ceara,1961-1970,1.028,0.315,False
+terraclimate,tmin_C,UF ceara,1971-1980,1.032,0.519,False
+terraclimate,tmin_C,UF ceara,1981-1990,0.806,0.681,False
+terraclimate,tmin_C,UF ceara,1991-2000,0.874,0.659,False
+terraclimate,tmin_C,UF ceara,2001-2010,0.939,0.732,False
+terraclimate,tmin_C,UF ceara,2011-2020,0.848,0.712,False
+terraclimate,tmin_C,UF ceara,2021-2025,1.251,0.778,False
+terraclimate,tmin_C,UF distrito federal,1961-1970,0.421,-0.062,True
+terraclimate,tmin_C,UF distrito federal,1971-1980,1.644,0.624,True
+terraclimate,tmin_C,UF distrito federal,1981-1990,1.56,0.68,False
+terraclimate,tmin_C,UF distrito federal,1991-2000,1.095,0.521,False
+terraclimate,tmin_C,UF distrito federal,2001-2010,0.987,0.425,False
+terraclimate,tmin_C,UF distrito federal,2011-2020,0.776,0.462,False
+terraclimate,tmin_C,UF distrito federal,2021-2025,1.254,0.72,False
+terraclimate,tmin_C,UF espirito santo,1961-1970,1.402,0.755,False
+terraclimate,tmin_C,UF espirito santo,1971-1980,1.178,0.74,False
+terraclimate,tmin_C,UF espirito santo,1981-1990,1.032,0.607,False
+terraclimate,tmin_C,UF espirito santo,1991-2000,1.043,0.696,False
+terraclimate,tmin_C,UF espirito santo,2001-2010,1.179,0.658,False
+terraclimate,tmin_C,UF espirito santo,2011-2020,1.343,0.755,False
+terraclimate,tmin_C,UF espirito santo,2021-2025,1.333,0.864,False
+terraclimate,tmin_C,UF goias,1961-1970,0.143,0.238,True
+terraclimate,tmin_C,UF goias,1971-1980,1.141,0.658,False
+terraclimate,tmin_C,UF goias,1981-1990,0.914,0.672,False
+terraclimate,tmin_C,UF goias,1991-2000,0.827,0.68,False
+terraclimate,tmin_C,UF goias,2001-2010,0.761,0.427,False
+terraclimate,tmin_C,UF goias,2011-2020,0.673,0.583,False
+terraclimate,tmin_C,UF goias,2021-2025,0.952,0.808,False
+terraclimate,tmin_C,UF maranhao,1961-1970,0.289,0.01,False
+terraclimate,tmin_C,UF maranhao,1971-1980,1.109,0.358,False
+terraclimate,tmin_C,UF maranhao,1981-1990,0.732,0.536,False
+terraclimate,tmin_C,UF maranhao,1991-2000,0.556,0.546,False
+terraclimate,tmin_C,UF maranhao,2001-2010,1.059,0.428,False
+terraclimate,tmin_C,UF maranhao,2011-2020,0.747,0.564,False
+terraclimate,tmin_C,UF maranhao,2021-2025,0.991,0.664,False
+terraclimate,tmin_C,UF mato grosso,1961-1970,0.633,0.062,True
+terraclimate,tmin_C,UF mato grosso,1971-1980,1.516,0.597,False
+terraclimate,tmin_C,UF mato grosso,1981-1990,1.499,0.615,False
+terraclimate,tmin_C,UF mato grosso,1991-2000,1.202,0.547,False
+terraclimate,tmin_C,UF mato grosso,2001-2010,1.585,0.538,False
+terraclimate,tmin_C,UF mato grosso,2011-2020,1.75,0.503,False
+terraclimate,tmin_C,UF mato grosso,2021-2025,1.582,0.735,False
+terraclimate,tmin_C,UF mato grosso do sul,1961-1970,0.133,0.84,False
+terraclimate,tmin_C,UF mato grosso do sul,1971-1980,0.568,0.802,False
+terraclimate,tmin_C,UF mato grosso do sul,1981-1990,0.803,0.837,False
+terraclimate,tmin_C,UF mato grosso do sul,1991-2000,0.921,0.872,False
+terraclimate,tmin_C,UF mato grosso do sul,2001-2010,0.766,0.87,False
+terraclimate,tmin_C,UF mato grosso do sul,2011-2020,0.472,0.791,False
+terraclimate,tmin_C,UF mato grosso do sul,2021-2025,0.577,0.871,False
+terraclimate,tmin_C,UF minas gerais,1961-1970,0.81,0.705,True
+terraclimate,tmin_C,UF minas gerais,1971-1980,1.465,0.668,False
+terraclimate,tmin_C,UF minas gerais,1981-1990,1.168,0.633,False
+terraclimate,tmin_C,UF minas gerais,1991-2000,1.253,0.702,False
+terraclimate,tmin_C,UF minas gerais,2001-2010,1.484,0.432,False
+terraclimate,tmin_C,UF minas gerais,2011-2020,1.416,0.673,False
+terraclimate,tmin_C,UF minas gerais,2021-2025,1.521,0.792,False
+terraclimate,tmin_C,UF para,1961-1970,0.251,0.397,True
+terraclimate,tmin_C,UF para,1971-1980,1.197,0.385,False
+terraclimate,tmin_C,UF para,1981-1990,0.943,0.694,False
+terraclimate,tmin_C,UF para,1991-2000,0.953,0.533,False
+terraclimate,tmin_C,UF para,2001-2010,1.464,0.679,True
+terraclimate,tmin_C,UF para,2011-2020,0.949,0.691,False
+terraclimate,tmin_C,UF para,2021-2025,0.991,0.825,False
+terraclimate,tmin_C,UF paraiba,1961-1970,0.48,0.448,True
+terraclimate,tmin_C,UF paraiba,1971-1980,0.878,0.353,True
+terraclimate,tmin_C,UF paraiba,1981-1990,0.835,0.637,True
+terraclimate,tmin_C,UF paraiba,1991-2000,1.415,0.635,False
+terraclimate,tmin_C,UF paraiba,2001-2010,1.586,0.428,False
+terraclimate,tmin_C,UF paraiba,2011-2020,1.389,0.667,False
+terraclimate,tmin_C,UF paraiba,2021-2025,1.753,0.723,False
+terraclimate,tmin_C,UF parana,1961-1970,1.165,0.887,True
+terraclimate,tmin_C,UF parana,1971-1980,1.755,0.889,False
+terraclimate,tmin_C,UF parana,1981-1990,1.971,0.899,False
+terraclimate,tmin_C,UF parana,1991-2000,1.816,0.851,False
+terraclimate,tmin_C,UF parana,2001-2010,1.693,0.916,False
+terraclimate,tmin_C,UF parana,2011-2020,1.778,0.848,False
+terraclimate,tmin_C,UF parana,2021-2025,2.036,0.912,False
+terraclimate,tmin_C,UF pernambuco,1961-1970,1.145,0.415,True
+terraclimate,tmin_C,UF pernambuco,1971-1980,1.633,0.375,False
+terraclimate,tmin_C,UF pernambuco,1981-1990,1.409,0.656,False
+terraclimate,tmin_C,UF pernambuco,1991-2000,1.9,0.683,False
+terraclimate,tmin_C,UF pernambuco,2001-2010,2.104,0.515,False
+terraclimate,tmin_C,UF pernambuco,2011-2020,1.979,0.69,False
+terraclimate,tmin_C,UF pernambuco,2021-2025,2.133,0.765,False
+terraclimate,tmin_C,UF piaui,1961-1970,0.492,-0.087,False
+terraclimate,tmin_C,UF piaui,1971-1980,1.35,0.273,True
+terraclimate,tmin_C,UF piaui,1981-1990,0.741,0.553,False
+terraclimate,tmin_C,UF piaui,1991-2000,0.645,0.571,False
+terraclimate,tmin_C,UF piaui,2001-2010,0.815,0.435,False
+terraclimate,tmin_C,UF piaui,2011-2020,0.844,0.518,False
+terraclimate,tmin_C,UF piaui,2021-2025,1.112,0.561,False
+terraclimate,tmin_C,UF rio de janeiro,1961-1970,0.847,0.861,False
+terraclimate,tmin_C,UF rio de janeiro,1971-1980,1.569,0.796,False
+terraclimate,tmin_C,UF rio de janeiro,1981-1990,1.346,0.751,False
+terraclimate,tmin_C,UF rio de janeiro,1991-2000,1.398,0.774,False
+terraclimate,tmin_C,UF rio de janeiro,2001-2010,1.432,0.776,False
+terraclimate,tmin_C,UF rio de janeiro,2011-2020,1.295,0.713,False
+terraclimate,tmin_C,UF rio de janeiro,2021-2025,1.331,0.828,False
+terraclimate,tmin_C,UF rio grande do norte,1961-1970,0.335,0.379,True
+terraclimate,tmin_C,UF rio grande do norte,1971-1980,0.658,0.417,False
+terraclimate,tmin_C,UF rio grande do norte,1981-1990,0.7,0.644,False
+terraclimate,tmin_C,UF rio grande do norte,1991-2000,0.919,0.759,False
+terraclimate,tmin_C,UF rio grande do norte,2001-2010,1.4,0.552,False
+terraclimate,tmin_C,UF rio grande do norte,2011-2020,1.156,0.505,False
+terraclimate,tmin_C,UF rio grande do norte,2021-2025,1.008,0.733,False
+terraclimate,tmin_C,UF rio grande do sul,1961-1970,0.221,0.963,False
+terraclimate,tmin_C,UF rio grande do sul,1971-1980,0.667,0.965,False
+terraclimate,tmin_C,UF rio grande do sul,1981-1990,0.748,0.808,False
+terraclimate,tmin_C,UF rio grande do sul,1991-2000,0.511,0.951,False
+terraclimate,tmin_C,UF rio grande do sul,2001-2010,0.322,0.972,False
+terraclimate,tmin_C,UF rio grande do sul,2011-2020,0.124,0.955,False
+terraclimate,tmin_C,UF rio grande do sul,2021-2025,0.247,0.918,False
+terraclimate,tmin_C,UF rondonia,1961-1970,0.485,0.453,True
+terraclimate,tmin_C,UF rondonia,1971-1980,1.138,0.409,False
+terraclimate,tmin_C,UF rondonia,1981-1990,0.975,0.476,False
+terraclimate,tmin_C,UF rondonia,1991-2000,1.147,0.614,False
+terraclimate,tmin_C,UF rondonia,2001-2010,1.722,0.659,True
+terraclimate,tmin_C,UF rondonia,2011-2020,1.787,0.722,True
+terraclimate,tmin_C,UF rondonia,2021-2025,1.614,0.739,False
+terraclimate,tmin_C,UF roraima,1961-1970,-0.081,0.325,True
+terraclimate,tmin_C,UF roraima,1971-1980,0.55,0.513,False
+terraclimate,tmin_C,UF roraima,1981-1990,0.482,0.692,False
+terraclimate,tmin_C,UF roraima,1991-2000,0.48,0.09,False
+terraclimate,tmin_C,UF roraima,2001-2010,0.561,0.453,False
+terraclimate,tmin_C,UF roraima,2011-2020,0.662,0.567,False
+terraclimate,tmin_C,UF roraima,2021-2025,0.722,0.9,False
+terraclimate,tmin_C,UF santa catarina,1961-1970,0.382,0.906,True
+terraclimate,tmin_C,UF santa catarina,1971-1980,1.626,0.948,False
+terraclimate,tmin_C,UF santa catarina,1981-1990,1.665,0.889,False
+terraclimate,tmin_C,UF santa catarina,1991-2000,1.438,0.866,False
+terraclimate,tmin_C,UF santa catarina,2001-2010,1.166,0.928,False
+terraclimate,tmin_C,UF santa catarina,2011-2020,1.114,0.885,False
+terraclimate,tmin_C,UF santa catarina,2021-2025,1.43,0.928,False
+terraclimate,tmin_C,UF sao paulo,1961-1970,0.935,0.918,True
+terraclimate,tmin_C,UF sao paulo,1971-1980,1.551,0.79,False
+terraclimate,tmin_C,UF sao paulo,1981-1990,1.641,0.813,False
+terraclimate,tmin_C,UF sao paulo,1991-2000,1.831,0.724,False
+terraclimate,tmin_C,UF sao paulo,2001-2010,1.681,0.837,False
+terraclimate,tmin_C,UF sao paulo,2011-2020,1.203,0.753,False
+terraclimate,tmin_C,UF sao paulo,2021-2025,1.374,0.876,False
+terraclimate,tmin_C,UF sergipe,1961-1970,0.378,0.244,True
+terraclimate,tmin_C,UF sergipe,1971-1980,1.336,0.433,False
+terraclimate,tmin_C,UF sergipe,1981-1990,1.083,0.622,False
+terraclimate,tmin_C,UF sergipe,1991-2000,1.042,0.602,False
+terraclimate,tmin_C,UF sergipe,2001-2010,1.419,0.552,False
+terraclimate,tmin_C,UF sergipe,2011-2020,1.208,0.633,False
+terraclimate,tmin_C,UF sergipe,2021-2025,1.177,0.653,False
+terraclimate,tmin_C,UF tocantins,1961-1970,-0.292,0.015,True
+terraclimate,tmin_C,UF tocantins,1971-1980,1.484,0.239,False
+terraclimate,tmin_C,UF tocantins,1981-1990,1.377,0.43,False
+terraclimate,tmin_C,UF tocantins,1991-2000,1.396,0.53,False
+terraclimate,tmin_C,UF tocantins,2001-2010,1.601,0.24,False
+terraclimate,tmin_C,UF tocantins,2011-2020,1.115,0.452,False
+terraclimate,tmin_C,UF tocantins,2021-2025,1.405,0.631,False
+terraclimate,u2,Brasil,1961-1970,0.072,0.747,False
+terraclimate,u2,Brasil,1971-1980,0.122,-0.118,True
+terraclimate,u2,Brasil,1981-1990,0.087,0.561,False
+terraclimate,u2,Brasil,1991-2000,0.052,0.557,False
+terraclimate,u2,Brasil,2001-2010,0.011,0.777,False
+terraclimate,u2,Brasil,2011-2020,-0.092,0.81,False
+terraclimate,u2,Brasil,2021-2025,-0.139,0.703,False
+terraclimate,u2,Centro-Oeste,1961-1970,-0.126,0.828,False
+terraclimate,u2,Centro-Oeste,1971-1980,-0.228,0.263,False
+terraclimate,u2,Centro-Oeste,1981-1990,-0.244,0.426,False
+terraclimate,u2,Centro-Oeste,1991-2000,-0.288,0.654,False
+terraclimate,u2,Centro-Oeste,2001-2010,-0.143,0.608,False
+terraclimate,u2,Centro-Oeste,2011-2020,-0.251,0.708,False
+terraclimate,u2,Centro-Oeste,2021-2025,-0.273,0.776,False
+terraclimate,u2,Nordeste,1961-1970,0.45,0.675,False
+terraclimate,u2,Nordeste,1971-1980,0.777,0.048,True
+terraclimate,u2,Nordeste,1981-1990,0.616,0.6,False
+terraclimate,u2,Nordeste,1991-2000,0.587,0.725,False
+terraclimate,u2,Nordeste,2001-2010,0.513,0.823,False
+terraclimate,u2,Nordeste,2011-2020,0.278,0.813,True
+terraclimate,u2,Nordeste,2021-2025,0.205,0.825,True
+terraclimate,u2,Norte,1961-1970,0.124,0.346,False
+terraclimate,u2,Norte,1971-1980,0.084,0.394,False
+terraclimate,u2,Norte,1981-1990,0.073,0.192,False
+terraclimate,u2,Norte,1991-2000,0.058,0.386,False
+terraclimate,u2,Norte,2001-2010,-0.093,0.395,False
+terraclimate,u2,Norte,2011-2020,-0.2,0.619,True
+terraclimate,u2,Norte,2021-2025,-0.242,0.331,True
+terraclimate,u2,Sudeste,1961-1970,-0.065,0.311,False
+terraclimate,u2,Sudeste,1971-1980,0.043,0.369,False
+terraclimate,u2,Sudeste,1981-1990,0.073,0.806,False
+terraclimate,u2,Sudeste,1991-2000,-0.042,0.662,False
+terraclimate,u2,Sudeste,2001-2010,-0.024,0.657,False
+terraclimate,u2,Sudeste,2011-2020,-0.004,0.814,False
+terraclimate,u2,Sudeste,2021-2025,-0.053,0.75,False
+terraclimate,u2,Sul,1961-1970,-0.443,0.731,True
+terraclimate,u2,Sul,1971-1980,-0.222,0.235,True
+terraclimate,u2,Sul,1981-1990,-0.252,0.515,False
+terraclimate,u2,Sul,1991-2000,-0.268,0.787,False
+terraclimate,u2,Sul,2001-2010,-0.143,0.504,False
+terraclimate,u2,Sul,2011-2020,-0.068,0.725,False
+terraclimate,u2,Sul,2021-2025,-0.141,0.732,False
+terraclimate,u2,UF acre,1961-1970,0.182,0.016,True
+terraclimate,u2,UF acre,1971-1980,-0.195,0.16,False
+terraclimate,u2,UF acre,1981-1990,-0.022,0.192,False
+terraclimate,u2,UF acre,1991-2000,-0.005,-0.091,False
+terraclimate,u2,UF acre,2001-2010,-0.045,0.5,False
+terraclimate,u2,UF acre,2011-2020,-0.023,0.182,False
+terraclimate,u2,UF acre,2021-2025,-0.185,0.067,False
+terraclimate,u2,UF alagoas,1961-1970,0.846,0.122,False
+terraclimate,u2,UF alagoas,1971-1980,1.034,-0.177,False
+terraclimate,u2,UF alagoas,1981-1990,1.06,0.606,True
+terraclimate,u2,UF alagoas,1991-2000,0.926,0.355,False
+terraclimate,u2,UF alagoas,2001-2010,0.797,0.262,False
+terraclimate,u2,UF alagoas,2011-2020,0.215,0.408,True
+terraclimate,u2,UF alagoas,2021-2025,0.199,0.45,True
+terraclimate,u2,UF amapa,1961-1970,0.088,0.13,False
+terraclimate,u2,UF amapa,1971-1980,0.126,-0.493,False
+terraclimate,u2,UF amapa,1981-1990,0.09,0.405,False
+terraclimate,u2,UF amapa,1991-2000,0.285,0.369,False
+terraclimate,u2,UF amapa,2001-2010,0.219,0.496,False
+terraclimate,u2,UF amapa,2011-2020,-0.065,0.535,False
+terraclimate,u2,UF amapa,2021-2025,-0.003,0.509,False
+terraclimate,u2,UF amazonas,1961-1970,0.166,0.081,False
+terraclimate,u2,UF amazonas,1971-1980,0.106,0.241,False
+terraclimate,u2,UF amazonas,1981-1990,0.073,-0.025,False
+terraclimate,u2,UF amazonas,1991-2000,0.071,0.034,False
+terraclimate,u2,UF amazonas,2001-2010,-0.099,0.433,False
+terraclimate,u2,UF amazonas,2011-2020,-0.164,0.302,True
+terraclimate,u2,UF amazonas,2021-2025,-0.254,0.201,True
+terraclimate,u2,UF bahia,1961-1970,0.347,0.683,False
+terraclimate,u2,UF bahia,1971-1980,0.562,0.115,True
+terraclimate,u2,UF bahia,1981-1990,0.359,0.385,False
+terraclimate,u2,UF bahia,1991-2000,0.416,0.651,False
+terraclimate,u2,UF bahia,2001-2010,0.436,0.849,False
+terraclimate,u2,UF bahia,2011-2020,0.223,0.76,False
+terraclimate,u2,UF bahia,2021-2025,0.168,0.759,False
+terraclimate,u2,UF ceara,1961-1970,0.469,0.473,True
+terraclimate,u2,UF ceara,1971-1980,0.99,-0.209,True
+terraclimate,u2,UF ceara,1981-1990,0.792,0.736,False
+terraclimate,u2,UF ceara,1991-2000,0.781,0.771,False
+terraclimate,u2,UF ceara,2001-2010,0.671,0.784,False
+terraclimate,u2,UF ceara,2011-2020,0.346,0.83,True
+terraclimate,u2,UF ceara,2021-2025,0.31,0.589,True
+terraclimate,u2,UF distrito federal,1961-1970,0.028,0.283,False
+terraclimate,u2,UF distrito federal,1971-1980,-0.044,0.38,False
+terraclimate,u2,UF distrito federal,1981-1990,-0.179,0.578,True
+terraclimate,u2,UF distrito federal,1991-2000,-0.025,0.799,False
+terraclimate,u2,UF distrito federal,2001-2010,0.13,0.836,False
+terraclimate,u2,UF distrito federal,2011-2020,0.143,0.637,False
+terraclimate,u2,UF distrito federal,2021-2025,0.103,0.791,False
+terraclimate,u2,UF espirito santo,1961-1970,-0.066,0.282,False
+terraclimate,u2,UF espirito santo,1971-1980,0.548,0.303,True
+terraclimate,u2,UF espirito santo,1981-1990,0.104,0.444,False
+terraclimate,u2,UF espirito santo,1991-2000,-0.009,0.554,False
+terraclimate,u2,UF espirito santo,2001-2010,0.039,0.438,False
+terraclimate,u2,UF espirito santo,2011-2020,0.16,0.661,False
+terraclimate,u2,UF espirito santo,2021-2025,0.11,0.594,False
+terraclimate,u2,UF goias,1961-1970,-0.051,0.52,False
+terraclimate,u2,UF goias,1971-1980,-0.113,0.387,False
+terraclimate,u2,UF goias,1981-1990,-0.249,0.629,False
+terraclimate,u2,UF goias,1991-2000,-0.243,0.819,False
+terraclimate,u2,UF goias,2001-2010,-0.092,0.807,False
+terraclimate,u2,UF goias,2011-2020,-0.191,0.757,False
+terraclimate,u2,UF goias,2021-2025,-0.253,0.573,False
+terraclimate,u2,UF maranhao,1961-1970,0.23,0.505,False
+terraclimate,u2,UF maranhao,1971-1980,0.741,0.133,True
+terraclimate,u2,UF maranhao,1981-1990,0.593,0.56,True
+terraclimate,u2,UF maranhao,1991-2000,0.462,0.661,True
+terraclimate,u2,UF maranhao,2001-2010,0.234,0.685,False
+terraclimate,u2,UF maranhao,2011-2020,0.092,0.656,False
+terraclimate,u2,UF maranhao,2021-2025,-0.028,0.689,True
+terraclimate,u2,UF mato grosso,1961-1970,-0.03,0.747,False
+terraclimate,u2,UF mato grosso,1971-1980,-0.121,0.187,False
+terraclimate,u2,UF mato grosso,1981-1990,-0.164,0.191,False
+terraclimate,u2,UF mato grosso,1991-2000,-0.222,0.388,False
+terraclimate,u2,UF mato grosso,2001-2010,-0.121,0.496,False
+terraclimate,u2,UF mato grosso,2011-2020,-0.156,0.58,False
+terraclimate,u2,UF mato grosso,2021-2025,-0.133,0.645,False
+terraclimate,u2,UF mato grosso do sul,1961-1970,-0.432,0.658,False
+terraclimate,u2,UF mato grosso do sul,1971-1980,-0.601,0.032,False
+terraclimate,u2,UF mato grosso do sul,1981-1990,-0.436,0.379,False
+terraclimate,u2,UF mato grosso do sul,1991-2000,-0.496,0.666,False
+terraclimate,u2,UF mato grosso do sul,2001-2010,-0.251,0.529,True
+terraclimate,u2,UF mato grosso do sul,2011-2020,-0.546,0.677,False
+terraclimate,u2,UF mato grosso do sul,2021-2025,-0.641,0.714,False
+terraclimate,u2,UF minas gerais,1961-1970,0.054,0.132,True
+terraclimate,u2,UF minas gerais,1971-1980,0.171,0.388,True
+terraclimate,u2,UF minas gerais,1981-1990,0.182,0.801,False
+terraclimate,u2,UF minas gerais,1991-2000,0.061,0.76,False
+terraclimate,u2,UF minas gerais,2001-2010,0.088,0.739,False
+terraclimate,u2,UF minas gerais,2011-2020,0.125,0.76,False
+terraclimate,u2,UF minas gerais,2021-2025,0.104,0.694,False
+terraclimate,u2,UF para,1961-1970,0.118,0.509,False
+terraclimate,u2,UF para,1971-1980,0.092,-0.062,False
+terraclimate,u2,UF para,1981-1990,0.168,0.732,False
+terraclimate,u2,UF para,1991-2000,0.109,0.661,False
+terraclimate,u2,UF para,2001-2010,-0.084,0.405,False
+terraclimate,u2,UF para,2011-2020,-0.304,0.632,True
+terraclimate,u2,UF para,2021-2025,-0.286,0.412,True
+terraclimate,u2,UF paraiba,1961-1970,0.682,0.31,False
+terraclimate,u2,UF paraiba,1971-1980,0.88,0.163,False
+terraclimate,u2,UF paraiba,1981-1990,1.039,0.76,False
+terraclimate,u2,UF paraiba,1991-2000,0.958,0.732,False
+terraclimate,u2,UF paraiba,2001-2010,0.85,0.663,False
+terraclimate,u2,UF paraiba,2011-2020,0.438,0.763,True
+terraclimate,u2,UF paraiba,2021-2025,0.282,0.633,True
+terraclimate,u2,UF parana,1961-1970,-0.167,0.438,False
+terraclimate,u2,UF parana,1971-1980,-0.355,-0.007,False
+terraclimate,u2,UF parana,1981-1990,-0.256,0.532,False
+terraclimate,u2,UF parana,1991-2000,-0.32,0.514,False
+terraclimate,u2,UF parana,2001-2010,-0.155,0.373,False
+terraclimate,u2,UF parana,2011-2020,-0.079,0.691,False
+terraclimate,u2,UF parana,2021-2025,-0.163,0.727,False
+terraclimate,u2,UF pernambuco,1961-1970,0.648,0.349,True
+terraclimate,u2,UF pernambuco,1971-1980,0.932,-0.008,False
+terraclimate,u2,UF pernambuco,1981-1990,0.953,0.626,False
+terraclimate,u2,UF pernambuco,1991-2000,0.964,0.637,False
+terraclimate,u2,UF pernambuco,2001-2010,0.933,0.763,False
+terraclimate,u2,UF pernambuco,2011-2020,0.491,0.652,True
+terraclimate,u2,UF pernambuco,2021-2025,0.374,0.675,True
+terraclimate,u2,UF piaui,1961-1970,0.583,0.361,True
+terraclimate,u2,UF piaui,1971-1980,0.988,0.141,True
+terraclimate,u2,UF piaui,1981-1990,0.722,0.439,True
+terraclimate,u2,UF piaui,1991-2000,0.667,0.715,False
+terraclimate,u2,UF piaui,2001-2010,0.552,0.787,False
+terraclimate,u2,UF piaui,2011-2020,0.448,0.86,False
+terraclimate,u2,UF piaui,2021-2025,0.425,0.735,False
+terraclimate,u2,UF rio de janeiro,1961-1970,-0.863,0.261,True
+terraclimate,u2,UF rio de janeiro,1971-1980,-0.475,0.31,True
+terraclimate,u2,UF rio de janeiro,1981-1990,-0.202,0.388,False
+terraclimate,u2,UF rio de janeiro,1991-2000,-0.129,0.263,False
+terraclimate,u2,UF rio de janeiro,2001-2010,-0.168,0.381,False
+terraclimate,u2,UF rio de janeiro,2011-2020,-0.216,0.642,False
+terraclimate,u2,UF rio de janeiro,2021-2025,-0.362,0.763,False
+terraclimate,u2,UF rio grande do norte,1961-1970,1.317,0.27,True
+terraclimate,u2,UF rio grande do norte,1971-1980,1.094,0.026,True
+terraclimate,u2,UF rio grande do norte,1981-1990,1.093,0.744,False
+terraclimate,u2,UF rio grande do norte,1991-2000,0.986,0.762,False
+terraclimate,u2,UF rio grande do norte,2001-2010,1.084,0.774,False
+terraclimate,u2,UF rio grande do norte,2011-2020,0.499,0.739,True
+terraclimate,u2,UF rio grande do norte,2021-2025,0.322,0.402,True
+terraclimate,u2,UF rio grande do sul,1961-1970,-0.613,0.575,True
+terraclimate,u2,UF rio grande do sul,1971-1980,-0.117,0.262,False
+terraclimate,u2,UF rio grande do sul,1981-1990,-0.239,0.43,False
+terraclimate,u2,UF rio grande do sul,1991-2000,-0.247,0.789,False
+terraclimate,u2,UF rio grande do sul,2001-2010,-0.148,0.574,False
+terraclimate,u2,UF rio grande do sul,2011-2020,-0.063,0.739,False
+terraclimate,u2,UF rio grande do sul,2021-2025,-0.144,0.812,False
+terraclimate,u2,UF rondonia,1961-1970,-0.039,0.088,True
+terraclimate,u2,UF rondonia,1971-1980,-0.32,0.107,False
+terraclimate,u2,UF rondonia,1981-1990,-0.281,0.046,False
+terraclimate,u2,UF rondonia,1991-2000,-0.345,0.069,False
+terraclimate,u2,UF rondonia,2001-2010,-0.308,0.316,False
+terraclimate,u2,UF rondonia,2011-2020,-0.182,0.33,False
+terraclimate,u2,UF rondonia,2021-2025,-0.169,0.344,False
+terraclimate,u2,UF roraima,1961-1970,0.247,-0.081,False
+terraclimate,u2,UF roraima,1971-1980,0.417,0.217,True
+terraclimate,u2,UF roraima,1981-1990,0.149,0.177,False
+terraclimate,u2,UF roraima,1991-2000,0.283,0.333,False
+terraclimate,u2,UF roraima,2001-2010,-0.002,0.279,False
+terraclimate,u2,UF roraima,2011-2020,-0.18,0.45,True
+terraclimate,u2,UF roraima,2021-2025,-0.235,0.646,True
+terraclimate,u2,UF santa catarina,1961-1970,-0.511,0.417,True
+terraclimate,u2,UF santa catarina,1971-1980,-0.257,0.282,False
+terraclimate,u2,UF santa catarina,1981-1990,-0.281,0.434,False
+terraclimate,u2,UF santa catarina,1991-2000,-0.222,0.693,False
+terraclimate,u2,UF santa catarina,2001-2010,-0.101,0.443,False
+terraclimate,u2,UF santa catarina,2011-2020,-0.06,0.507,False
+terraclimate,u2,UF santa catarina,2021-2025,-0.089,0.343,False
+terraclimate,u2,UF sao paulo,1961-1970,-0.205,0.672,False
+terraclimate,u2,UF sao paulo,1971-1980,-0.256,0.314,False
+terraclimate,u2,UF sao paulo,1981-1990,-0.137,0.752,False
+terraclimate,u2,UF sao paulo,1991-2000,-0.27,0.553,False
+terraclimate,u2,UF sao paulo,2001-2010,-0.272,0.605,False
+terraclimate,u2,UF sao paulo,2011-2020,-0.295,0.836,False
+terraclimate,u2,UF sao paulo,2021-2025,-0.393,0.708,False
+terraclimate,u2,UF sergipe,1961-1970,0.699,0.128,False
+terraclimate,u2,UF sergipe,1971-1980,0.99,-0.086,True
+terraclimate,u2,UF sergipe,1981-1990,0.982,0.516,True
+terraclimate,u2,UF sergipe,1991-2000,0.684,0.377,False
+terraclimate,u2,UF sergipe,2001-2010,0.654,0.191,False
+terraclimate,u2,UF sergipe,2011-2020,0.21,0.493,True
+terraclimate,u2,UF sergipe,2021-2025,0.165,0.538,True
+terraclimate,u2,UF tocantins,1961-1970,-0.064,0.484,False
+terraclimate,u2,UF tocantins,1971-1980,0.14,0.071,True
+terraclimate,u2,UF tocantins,1981-1990,-0.062,0.634,False
+terraclimate,u2,UF tocantins,1991-2000,-0.145,0.425,False
+terraclimate,u2,UF tocantins,2001-2010,-0.161,0.707,False
+terraclimate,u2,UF tocantins,2011-2020,-0.137,0.749,False
+terraclimate,u2,UF tocantins,2021-2025,-0.198,0.588,False
+terraclimate,vpd,Brasil,1961-1970,-0.104,0.493,False
+terraclimate,vpd,Brasil,1971-1980,-0.132,0.627,False
+terraclimate,vpd,Brasil,1981-1990,-0.093,0.519,False
+terraclimate,vpd,Brasil,1991-2000,-0.092,0.751,False
+terraclimate,vpd,Brasil,2001-2010,0.014,0.257,True
+terraclimate,vpd,Brasil,2011-2020,0.018,0.63,True
+terraclimate,vpd,Brasil,2021-2025,-0.054,0.969,False
+terraclimate,vpd,Centro-Oeste,1961-1970,-0.117,0.227,False
+terraclimate,vpd,Centro-Oeste,1971-1980,-0.149,0.646,False
+terraclimate,vpd,Centro-Oeste,1981-1990,-0.123,0.55,False
+terraclimate,vpd,Centro-Oeste,1991-2000,-0.148,0.655,False
+terraclimate,vpd,Centro-Oeste,2001-2010,0.023,0.345,True
+terraclimate,vpd,Centro-Oeste,2011-2020,0.038,0.713,True
+terraclimate,vpd,Centro-Oeste,2021-2025,-0.026,0.895,False
+terraclimate,vpd,Nordeste,1961-1970,-0.069,0.211,True
+terraclimate,vpd,Nordeste,1971-1980,-0.054,0.465,False
+terraclimate,vpd,Nordeste,1981-1990,-0.008,0.767,False
+terraclimate,vpd,Nordeste,1991-2000,0.032,0.677,False
+terraclimate,vpd,Nordeste,2001-2010,0.076,0.599,False
+terraclimate,vpd,Nordeste,2011-2020,0.088,0.712,False
+terraclimate,vpd,Nordeste,2021-2025,0.032,0.945,False
+terraclimate,vpd,Norte,1961-1970,-0.148,0.547,False
+terraclimate,vpd,Norte,1971-1980,-0.187,0.565,False
+terraclimate,vpd,Norte,1981-1990,-0.141,0.238,False
+terraclimate,vpd,Norte,1991-2000,-0.152,0.727,False
+terraclimate,vpd,Norte,2001-2010,-0.032,0.349,True
+terraclimate,vpd,Norte,2011-2020,-0.033,0.617,True
+terraclimate,vpd,Norte,2021-2025,-0.123,0.977,False
+terraclimate,vpd,Sudeste,1961-1970,0.004,0.681,False
+terraclimate,vpd,Sudeste,1971-1980,-0.055,0.687,False
+terraclimate,vpd,Sudeste,1981-1990,-0.006,0.587,False
+terraclimate,vpd,Sudeste,1991-2000,0.015,0.565,False
+terraclimate,vpd,Sudeste,2001-2010,0.123,0.624,True
+terraclimate,vpd,Sudeste,2011-2020,0.111,0.591,False
+terraclimate,vpd,Sudeste,2021-2025,0.045,0.98,False
+terraclimate,vpd,Sul,1961-1970,-0.063,0.71,False
+terraclimate,vpd,Sul,1971-1980,-0.067,0.721,False
+terraclimate,vpd,Sul,1981-1990,-0.064,0.663,False
+terraclimate,vpd,Sul,1991-2000,-0.045,0.674,False
+terraclimate,vpd,Sul,2001-2010,-0.049,0.647,False
+terraclimate,vpd,Sul,2011-2020,-0.042,0.745,False
+terraclimate,vpd,Sul,2021-2025,-0.072,0.985,False
+terraclimate,vpd,UF acre,1961-1970,-0.171,0.373,False
+terraclimate,vpd,UF acre,1971-1980,-0.197,0.354,False
+terraclimate,vpd,UF acre,1981-1990,-0.102,0.053,False
+terraclimate,vpd,UF acre,1991-2000,-0.103,0.505,False
+terraclimate,vpd,UF acre,2001-2010,-0.101,0.253,False
+terraclimate,vpd,UF acre,2011-2020,-0.085,0.282,False
+terraclimate,vpd,UF acre,2021-2025,-0.157,0.903,False
+terraclimate,vpd,UF alagoas,1961-1970,0.067,0.339,False
+terraclimate,vpd,UF alagoas,1971-1980,0.132,0.662,False
+terraclimate,vpd,UF alagoas,1981-1990,0.162,0.624,False
+terraclimate,vpd,UF alagoas,1991-2000,0.276,0.683,True
+terraclimate,vpd,UF alagoas,2001-2010,0.248,0.568,False
+terraclimate,vpd,UF alagoas,2011-2020,0.252,0.523,False
+terraclimate,vpd,UF alagoas,2021-2025,0.164,0.892,False
+terraclimate,vpd,UF amapa,1961-1970,0.03,0.329,False
+terraclimate,vpd,UF amapa,1971-1980,-0.194,0.321,True
+terraclimate,vpd,UF amapa,1981-1990,-0.131,0.358,True
+terraclimate,vpd,UF amapa,1991-2000,-0.131,0.147,True
+terraclimate,vpd,UF amapa,2001-2010,0.035,0.442,False
+terraclimate,vpd,UF amapa,2011-2020,-0.018,0.695,False
+terraclimate,vpd,UF amapa,2021-2025,-0.01,0.749,False
+terraclimate,vpd,UF amazonas,1961-1970,-0.2,0.694,False
+terraclimate,vpd,UF amazonas,1971-1980,-0.182,0.521,False
+terraclimate,vpd,UF amazonas,1981-1990,-0.135,0.094,False
+terraclimate,vpd,UF amazonas,1991-2000,-0.145,0.545,False
+terraclimate,vpd,UF amazonas,2001-2010,-0.079,0.352,False
+terraclimate,vpd,UF amazonas,2011-2020,-0.067,0.441,False
+terraclimate,vpd,UF amazonas,2021-2025,-0.188,0.954,False
+terraclimate,vpd,UF bahia,1961-1970,-0.197,0.387,True
+terraclimate,vpd,UF bahia,1971-1980,-0.027,0.703,False
+terraclimate,vpd,UF bahia,1981-1990,0.018,0.781,False
+terraclimate,vpd,UF bahia,1991-2000,0.046,0.794,False
+terraclimate,vpd,UF bahia,2001-2010,0.091,0.677,False
+terraclimate,vpd,UF bahia,2011-2020,0.073,0.798,False
+terraclimate,vpd,UF bahia,2021-2025,0.026,0.989,False
+terraclimate,vpd,UF ceara,1961-1970,0.057,-0.062,False
+terraclimate,vpd,UF ceara,1971-1980,-0.093,0.38,False
+terraclimate,vpd,UF ceara,1981-1990,-0.057,0.68,False
+terraclimate,vpd,UF ceara,1991-2000,-0.031,0.628,False
+terraclimate,vpd,UF ceara,2001-2010,-0.014,0.584,False
+terraclimate,vpd,UF ceara,2011-2020,0.04,0.663,False
+terraclimate,vpd,UF ceara,2021-2025,0.075,0.812,False
+terraclimate,vpd,UF distrito federal,1961-1970,-0.051,-0.063,True
+terraclimate,vpd,UF distrito federal,1971-1980,0.06,0.604,False
+terraclimate,vpd,UF distrito federal,1981-1990,0.085,0.542,False
+terraclimate,vpd,UF distrito federal,1991-2000,0.11,0.559,False
+terraclimate,vpd,UF distrito federal,2001-2010,0.174,0.347,False
+terraclimate,vpd,UF distrito federal,2011-2020,0.13,0.663,False
+terraclimate,vpd,UF distrito federal,2021-2025,0.173,0.953,False
+terraclimate,vpd,UF espirito santo,1961-1970,0.081,0.652,False
+terraclimate,vpd,UF espirito santo,1971-1980,0.004,0.392,False
+terraclimate,vpd,UF espirito santo,1981-1990,0.054,0.385,False
+terraclimate,vpd,UF espirito santo,1991-2000,0.048,0.668,False
+terraclimate,vpd,UF espirito santo,2001-2010,0.134,0.562,False
+terraclimate,vpd,UF espirito santo,2011-2020,0.156,0.491,True
+terraclimate,vpd,UF espirito santo,2021-2025,0.052,0.966,False
+terraclimate,vpd,UF goias,1961-1970,-0.063,0.073,True
+terraclimate,vpd,UF goias,1971-1980,-0.023,0.725,False
+terraclimate,vpd,UF goias,1981-1990,0.015,0.615,False
+terraclimate,vpd,UF goias,1991-2000,0.063,0.686,False
+terraclimate,vpd,UF goias,2001-2010,0.156,0.555,False
+terraclimate,vpd,UF goias,2011-2020,0.135,0.741,False
+terraclimate,vpd,UF goias,2021-2025,0.139,0.886,False
+terraclimate,vpd,UF maranhao,1961-1970,0.009,0.113,False
+terraclimate,vpd,UF maranhao,1971-1980,-0.158,0.33,False
+terraclimate,vpd,UF maranhao,1981-1990,-0.101,0.709,False
+terraclimate,vpd,UF maranhao,1991-2000,-0.064,0.529,False
+terraclimate,vpd,UF maranhao,2001-2010,0.013,0.459,False
+terraclimate,vpd,UF maranhao,2011-2020,-0.015,0.681,False
+terraclimate,vpd,UF maranhao,2021-2025,-0.078,0.908,False
+terraclimate,vpd,UF mato grosso,1961-1970,-0.138,0.19,False
+terraclimate,vpd,UF mato grosso,1971-1980,-0.184,0.562,False
+terraclimate,vpd,UF mato grosso,1981-1990,-0.177,0.459,False
+terraclimate,vpd,UF mato grosso,1991-2000,-0.242,0.591,True
+terraclimate,vpd,UF mato grosso,2001-2010,-0.02,0.17,True
+terraclimate,vpd,UF mato grosso,2011-2020,0.007,0.633,True
+terraclimate,vpd,UF mato grosso,2021-2025,-0.087,0.871,False
+terraclimate,vpd,UF mato grosso do sul,1961-1970,-0.117,0.543,False
+terraclimate,vpd,UF mato grosso do sul,1971-1980,-0.183,0.678,False
+terraclimate,vpd,UF mato grosso do sul,1981-1990,-0.122,0.682,False
+terraclimate,vpd,UF mato grosso do sul,1991-2000,-0.121,0.671,False
+terraclimate,vpd,UF mato grosso do sul,2001-2010,0.001,0.624,True
+terraclimate,vpd,UF mato grosso do sul,2011-2020,0.024,0.774,True
+terraclimate,vpd,UF mato grosso do sul,2021-2025,-0.034,0.955,False
+terraclimate,vpd,UF minas gerais,1961-1970,-0.021,0.637,False
+terraclimate,vpd,UF minas gerais,1971-1980,-0.061,0.747,False
+terraclimate,vpd,UF minas gerais,1981-1990,-0.021,0.659,False
+terraclimate,vpd,UF minas gerais,1991-2000,0.0,0.653,False
+terraclimate,vpd,UF minas gerais,2001-2010,0.128,0.586,True
+terraclimate,vpd,UF minas gerais,2011-2020,0.119,0.635,True
+terraclimate,vpd,UF minas gerais,2021-2025,0.055,0.982,False
+terraclimate,vpd,UF para,1961-1970,-0.08,0.204,False
+terraclimate,vpd,UF para,1971-1980,-0.189,0.517,False
+terraclimate,vpd,UF para,1981-1990,-0.157,0.415,False
+terraclimate,vpd,UF para,1991-2000,-0.181,0.559,False
+terraclimate,vpd,UF para,2001-2010,-0.007,0.385,False
+terraclimate,vpd,UF para,2011-2020,-0.022,0.638,False
+terraclimate,vpd,UF para,2021-2025,-0.105,0.939,False
+terraclimate,vpd,UF paraiba,1961-1970,0.064,0.111,True
+terraclimate,vpd,UF paraiba,1971-1980,0.096,0.202,True
+terraclimate,vpd,UF paraiba,1981-1990,0.134,0.619,True
+terraclimate,vpd,UF paraiba,1991-2000,0.244,0.595,False
+terraclimate,vpd,UF paraiba,2001-2010,0.24,0.572,False
+terraclimate,vpd,UF paraiba,2011-2020,0.341,0.666,True
+terraclimate,vpd,UF paraiba,2021-2025,0.25,0.719,False
+terraclimate,vpd,UF parana,1961-1970,-0.08,0.459,False
+terraclimate,vpd,UF parana,1971-1980,-0.079,0.607,False
+terraclimate,vpd,UF parana,1981-1990,-0.056,0.648,False
+terraclimate,vpd,UF parana,1991-2000,-0.048,0.471,False
+terraclimate,vpd,UF parana,2001-2010,-0.017,0.562,False
+terraclimate,vpd,UF parana,2011-2020,0.003,0.757,False
+terraclimate,vpd,UF parana,2021-2025,-0.038,0.989,False
+terraclimate,vpd,UF pernambuco,1961-1970,0.097,0.241,True
+terraclimate,vpd,UF pernambuco,1971-1980,0.113,0.392,True
+terraclimate,vpd,UF pernambuco,1981-1990,0.146,0.742,False
+terraclimate,vpd,UF pernambuco,1991-2000,0.23,0.723,False
+terraclimate,vpd,UF pernambuco,2001-2010,0.209,0.655,False
+terraclimate,vpd,UF pernambuco,2011-2020,0.335,0.739,True
+terraclimate,vpd,UF pernambuco,2021-2025,0.231,0.899,False
+terraclimate,vpd,UF piaui,1961-1970,-0.1,0.027,False
+terraclimate,vpd,UF piaui,1971-1980,-0.121,0.369,False
+terraclimate,vpd,UF piaui,1981-1990,-0.066,0.737,False
+terraclimate,vpd,UF piaui,1991-2000,-0.031,0.683,False
+terraclimate,vpd,UF piaui,2001-2010,0.04,0.618,False
+terraclimate,vpd,UF piaui,2011-2020,0.063,0.682,False
+terraclimate,vpd,UF piaui,2021-2025,-0.021,0.873,False
+terraclimate,vpd,UF rio de janeiro,1961-1970,-0.019,0.692,False
+terraclimate,vpd,UF rio de janeiro,1971-1980,-0.021,0.574,False
+terraclimate,vpd,UF rio de janeiro,1981-1990,0.017,0.46,False
+terraclimate,vpd,UF rio de janeiro,1991-2000,0.035,0.391,False
+terraclimate,vpd,UF rio de janeiro,2001-2010,0.099,0.489,False
+terraclimate,vpd,UF rio de janeiro,2011-2020,0.087,0.386,False
+terraclimate,vpd,UF rio de janeiro,2021-2025,-0.001,0.951,False
+terraclimate,vpd,UF rio grande do norte,1961-1970,0.107,0.003,False
+terraclimate,vpd,UF rio grande do norte,1971-1980,0.072,0.29,False
+terraclimate,vpd,UF rio grande do norte,1981-1990,0.098,0.585,False
+terraclimate,vpd,UF rio grande do norte,1991-2000,0.155,0.652,False
+terraclimate,vpd,UF rio grande do norte,2001-2010,0.164,0.552,False
+terraclimate,vpd,UF rio grande do norte,2011-2020,0.268,0.597,True
+terraclimate,vpd,UF rio grande do norte,2021-2025,0.178,0.759,False
+terraclimate,vpd,UF rio grande do sul,1961-1970,-0.041,0.784,False
+terraclimate,vpd,UF rio grande do sul,1971-1980,-0.062,0.814,False
+terraclimate,vpd,UF rio grande do sul,1981-1990,-0.076,0.636,False
+terraclimate,vpd,UF rio grande do sul,1991-2000,-0.053,0.768,False
+terraclimate,vpd,UF rio grande do sul,2001-2010,-0.076,0.651,False
+terraclimate,vpd,UF rio grande do sul,2011-2020,-0.072,0.798,False
+terraclimate,vpd,UF rio grande do sul,2021-2025,-0.096,0.99,False
+terraclimate,vpd,UF rondonia,1961-1970,-0.128,0.286,False
+terraclimate,vpd,UF rondonia,1971-1980,-0.274,0.439,True
+terraclimate,vpd,UF rondonia,1981-1990,-0.159,0.384,False
+terraclimate,vpd,UF rondonia,1991-2000,-0.192,0.379,False
+terraclimate,vpd,UF rondonia,2001-2010,-0.024,0.151,True
+terraclimate,vpd,UF rondonia,2011-2020,0.071,0.459,True
+terraclimate,vpd,UF rondonia,2021-2025,-0.078,0.911,False
+terraclimate,vpd,UF roraima,1961-1970,-0.39,0.521,True
+terraclimate,vpd,UF roraima,1971-1980,-0.257,0.364,False
+terraclimate,vpd,UF roraima,1981-1990,-0.329,0.071,False
+terraclimate,vpd,UF roraima,1991-2000,-0.321,0.487,False
+terraclimate,vpd,UF roraima,2001-2010,-0.196,0.262,False
+terraclimate,vpd,UF roraima,2011-2020,-0.154,0.612,True
+terraclimate,vpd,UF roraima,2021-2025,-0.217,0.911,False
+terraclimate,vpd,UF santa catarina,1961-1970,-0.092,0.477,False
+terraclimate,vpd,UF santa catarina,1971-1980,-0.054,0.624,False
+terraclimate,vpd,UF santa catarina,1981-1990,-0.047,0.601,False
+terraclimate,vpd,UF santa catarina,1991-2000,-0.016,0.504,False
+terraclimate,vpd,UF santa catarina,2001-2010,-0.038,0.631,False
+terraclimate,vpd,UF santa catarina,2011-2020,-0.049,0.619,False
+terraclimate,vpd,UF santa catarina,2021-2025,-0.071,0.97,False
+terraclimate,vpd,UF sao paulo,1961-1970,0.053,0.658,False
+terraclimate,vpd,UF sao paulo,1971-1980,-0.057,0.605,False
+terraclimate,vpd,UF sao paulo,1981-1990,0.013,0.596,False
+terraclimate,vpd,UF sao paulo,1991-2000,0.038,0.44,False
+terraclimate,vpd,UF sao paulo,2001-2010,0.115,0.749,False
+terraclimate,vpd,UF sao paulo,2011-2020,0.088,0.639,False
+terraclimate,vpd,UF sao paulo,2021-2025,0.027,0.978,False
+terraclimate,vpd,UF sergipe,1961-1970,-0.005,0.295,True
+terraclimate,vpd,UF sergipe,1971-1980,0.157,0.681,False
+terraclimate,vpd,UF sergipe,1981-1990,0.124,0.628,False
+terraclimate,vpd,UF sergipe,1991-2000,0.168,0.69,False
+terraclimate,vpd,UF sergipe,2001-2010,0.196,0.526,False
+terraclimate,vpd,UF sergipe,2011-2020,0.194,0.558,False
+terraclimate,vpd,UF sergipe,2021-2025,0.162,0.854,False
+terraclimate,vpd,UF tocantins,1961-1970,-0.054,0.053,True
+terraclimate,vpd,UF tocantins,1971-1980,-0.073,0.337,True
+terraclimate,vpd,UF tocantins,1981-1990,0.037,0.57,False
+terraclimate,vpd,UF tocantins,1991-2000,0.063,0.559,False
+terraclimate,vpd,UF tocantins,2001-2010,0.251,0.088,True
+terraclimate,vpd,UF tocantins,2011-2020,0.126,0.692,False
+terraclimate,vpd,UF tocantins,2021-2025,0.157,0.725,False
