@@ -66,6 +66,11 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   S 1,053 × 1,054) e 0 incoerência física. **Rodar a simulação de novo depois do motor da noite de 25→26/11** (Actions
   do `sab-motor` → Motor SAB → Run workflow → branch `claude/tender-maxwell-6ka6dt`, modo simular) para a prévia
   cobrir os 11 meses. O workflow agora guarda o `previa_v18.csv` (commit `4dae9eb`).
+- ✅ **K26 rodada 7 (1981–1990) pronta** (main, 25/11 18h25, 79 min): 3.652 dias sem buraco nem repetição (A1 OK); máscara
+  igual nas 16 bandas (H OK); A3 e B em atenção (contagem do dia × máscara; escoamento fora da faixa em 15 mês-classe);
+  C com a FALHA já conhecida (escoamento do ERA5 > chuva observada em 42,8 milhões de 258 milhões de pixel-dias; Rs
+  acima do céu claro em 9.136). Comparar com a rodada 7 anterior (v1.8, 18/11) nas conclusões:
+  `rotinas/resultados/k26_rodada7/2026-11-25/` (na `main`).
 - ⏳ **Depois da prévia:** K16 da V1.8 (o painel e o `sab_pedido.py` não mudam: a correção é na gravação, mas a K16
   confere que leitura e e-mail continuam iguais) e, só com aprovação do responsável, a etapa B (gravar com a V1.8: o
   motor refaz os dias de 2026; o histórico não muda). **Conclusões só quando todos os resultados saírem** (pedido do
