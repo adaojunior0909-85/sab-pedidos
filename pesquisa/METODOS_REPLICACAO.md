@@ -20,6 +20,7 @@ regras de decisão (fixadas antes de rodar) e os arquivos de saída. Tudo é **s
 | As 16 variáveis: o método de 2026 em 2021–2025 | `python pesquisa/validar_metodo_2026.py A` | `pesquisa/resultados_metodo_2026/parte_a/*.csv` |
 | As 16 variáveis: 2026 × GLDAS-2.1 (régua 2022–2024) | `python pesquisa/validar_metodo_2026.py B` | `pesquisa/resultados_metodo_2026/parte_b_gldas.csv` |
 | Histórico 1961–2025 × TerraClimate e CHIRPS | `python pesquisa/validar_historico.py` | `pesquisa/resultados_historico/anos/*.csv` |
+| Correção dos dias ERA5 (C0 a C3), fora da amostra 2016–2025, e 2026 × CHIRPS (só relato) | `python pesquisa/validar_correcao_era5.py` (testes sem Earth Engine: `python pesquisa/teste_correcao_era5.py`) | `pesquisa/resultados_correcao_era5/regional/*.csv`, `pixels/dias_*.csv.gz`, `chirps_2026.csv` |
 | Todas as métricas, região × período × mês | `python pesquisa/metricas_completas.py` | `pesquisa/METRICAS_COMPLETAS.csv.gz`, `pesquisa/DADOS_PAREADOS.csv.gz` |
 | Resumo por mês do ano (legível) | `python pesquisa/resumo_por_mes.py` | `pesquisa/RESULTADOS_POR_MES.md` |
 
