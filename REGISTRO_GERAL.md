@@ -95,7 +95,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 04:01, Brasília)
+# Apêndice automático (refeito em 25/11/2026 04:02, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -118,11 +118,11 @@ Arquivo: `rotinas/conferencia/CONFERENCIA_FINAL.md`
 
 #### Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 03:57 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). **Todas as tarefas terminaram.**
+Atualizado em 25/11/2026 04:02 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
-| O histórico 1961-2025, década por década, contra TerraClimate e CHIRPS | ❌ quebrou 3 vezes | 3 | 25/11 03:57 | pesquisa/resultados_historico/RESULTADOS.md |
+| O histórico 1961-2025, década por década, contra TerraClimate e CHIRPS | ⏳ na fila | 1 | 25/11 04:02 | pesquisa/resultados_historico/RESULTADOS.md |
 
 O LOG de cada tarefa fica em `rotinas/conferencia/logs/<tarefa>.txt`. ❌ = me mande esse LOG.
 
@@ -458,6 +458,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 06:58 | Conferência: começou historico  |
 | 25/11/2026 06:57 | Validar histórico: a chuva do TerraClimate é a banda pr (não ppt); a tarefa volta para a fila |
 | 25/11/2026 06:57 | Conferência: historico (falhou)  |
 | 25/11/2026 06:53 | Conferência: começou historico  |
@@ -536,4 +537,39 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 | 18/11/2026 15:50 | Merge pull request #2 from adaojunior0909-85/correcao-pedido-uma-variavel |
 | 18/11/2026 18:35 | Corrige pedido de uma variável só saindo com a coluna vazia |
 | 15/11/2026 20:32 | Merge pull request #1 from adaojunior0909-85/manutencao-versoes |
+| 15/11/2026 20:29 | Manutenção: versões fixas das bibliotecas e actions no Node 24 |
+| 04/11/2026 08:17 | sab_pedido.py |
+| 04/11/2026 08:14 | sab_pedido.py |
+| 03/11/2026 22:58 | sab_pedido.py |
+| 01/11/2026 17:52 | Delete .github/workflows/motor_05b.yml |
+| 01/11/2026 17:52 | Delete testes/teste_rodar_motor.py |
+| 01/11/2026 17:49 | Add files via upload |
+| 01/11/2026 17:48 | Add files via upload |
+| 01/11/2026 17:14 | Add files via upload |
+| 01/11/2026 17:14 | Add files via upload |
+| 01/11/2026 17:13 | Add files via upload |
+| 01/11/2026 17:11 | Add files via upload |
+| 01/11/2026 17:08 | pedido_sab.yml |
+| 01/11/2026 17:06 | README.md |
+| 01/11/2026 17:05 | requirements.txt |
+| 01/11/2026 17:04 | fumaca_sab_pedido.py |
+| 01/11/2026 17:03 | teste_sab_pedido.py |
+| 01/11/2026 17:01 | sab_pedido.py |
+| 01/11/2026 08:47 | sab_pedido.py |
+| 01/11/2026 08:18 | pedido_sab.yml |
+| 01/11/2026 08:11 | pedido_sab.yml |
+| 01/11/2026 07:11 | sab_pedido.py |
+| 01/11/2026 01:53 | sab_pedido.py |
+| 01/11/2026 01:29 | sab_pedido.py |
+| 01/11/2026 01:19 | Rename sab_pedido_v2.py to sab_pedido.py |
+| 01/11/2026 01:17 | Delete sab_pedido.py |
+| 01/11/2026 01:16 | Add files via upload |
+| 01/11/2026 00:33 | sab_pedido.py |
+| 01/11/2026 00:26 | sab_pedido.py |
+| 31/10/2026 22:56 | teste_sab_pedido.py |
+| 31/10/2026 22:55 | sab_pedido.py |
+| 30/10/2026 06:25 | teste_sab_pedido.py |
+| 30/10/2026 06:23 | sab_pedido.py |
+| 30/10/2026 00:41 | pedido_sab.yml |
+| 30/10/2026 00:25 | Add files via upload |
 
