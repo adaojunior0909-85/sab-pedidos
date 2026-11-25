@@ -114,3 +114,32 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    chirps 2003 pronto em 1378 s
    chirps 2004 pronto em 1410 s
    chirps 2005 pronto em 1259 s
+
+===== 25/11/2026 14:53 (Brasília), tentativa 2 =====
+código: commit ab35ed74f4d2d6b1910da68294d49adb0e0123d3 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chirps 2006 pronto em 395 s
+   chirps 2007 pronto em 1405 s
+   chirps 2008 pronto em 1360 s
+   chirps 2009 pronto em 1428 s
+   chirps 2010 pronto em 1360 s
+   chirps 2011 pronto em 1425 s
+   chirps 2012 pronto em 1547 s
+   chirps 2013 pronto em 1263 s
+   chirps 2014 pronto em 1249 s
+   chirps 2015 pronto em 1336 s
+   chirps 2016 pronto em 1291 s
+   ⚠️ chirps 2017-08: Project clima-492922 is not registered to use Earth Engine. Visit https://console.cloud.google.com/earth-engine/configuration?project=clima-492922 to 
+   chirps 2017 pronto em 1359 s
+   chirps 2018 pronto em 1308 s
+   ⚠️ chirps 2019-02: Computation timed out.
+   chirps 2019 pronto em 1688 s
+Tempo desta vez acabou; a próxima retoma daqui.
