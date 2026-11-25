@@ -5,7 +5,7 @@ mostra o último resultado de cada rotina, com os números e o que fazer se algo
 
 | Rotina | Quando | O que faz | Grava no Earth Engine? |
 |---|---|---|---|
-| Saúde do banco (`saude/saude_semanal.py`) | toda segunda-feira, 14h29 | confere se o motor gravou nas últimas noites (dias de 2026 sem buraco, previsão até hoje + 10 dias, tudo na V1.6 ou na V1.7, histórico intocado) | não |
+| Conferência da gravação (`gravacao/conferencia_gravacao.py`; antes "saúde do banco") | toda segunda-feira, 14h29 | confere se o motor gravou nas últimas noites (dias de 2026 sem buraco, previsão até hoje + 10 dias, tudo na V1.6 ou na V1.7, histórico intocado) | não |
 | RONI do mês (`roni/rodar_roni.py`) | todo dia 11, 10h23 | roda o `02_auditoria_roni_cpc.py` (sem mudança) e regrava o asset `RONI_CPC_v6`, com cópia de segurança e conferência | **sim** (só o RONI) |
 | K26, rodada 1 (`k26/rodar_rodada1.py`) | todo dia 15, 15h41 | roda a K26 v1.12 (sem mudança) em 2026 inteiro, ~35 min, e compara com a execução anterior | não |
 | Piloto (`../pesquisa/piloto.py`) | dias 3 e 17, 08h17 | emite a previsão estendida de Tmin e Tmax e confere as vencidas | não |

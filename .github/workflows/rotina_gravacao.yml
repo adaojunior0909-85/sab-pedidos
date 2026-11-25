@@ -1,23 +1,23 @@
-# ROTINA SEMANAL: toda segunda-feira, às 14h29 de Brasília, confere no SAB_V1 (só leitura) se o motor gravou nas
+# CONFERÊNCIA DA GRAVAÇÃO (antes "saúde do banco"; renomeada em 25/11/2026): toda segunda-feira, às 14h29 de Brasília, confere no SAB_V1 (só leitura) se o motor gravou nas
 # últimas noites: dias de 2026 sem buraco, previsão até hoje + 10 dias, ERA5 com até 10 dias de atraso, o dia de hoje
-# gravado há menos de 30 h, tudo na V1.6 e o histórico intocado. Resultado no rotinas/PAINEL.md.
+# gravado há menos de 30 h, tudo na V1.6 ou V1.7 e o histórico intocado. Resultado no rotinas/PAINEL.md.
 # [24/11] O motor agendado para 23h07 tem começado de manhã (06h40-09h20 de Brasília: o GitHub atrasa o agendamento);
 # esta rotina roda à tarde, depois dele.
-name: Rotina - saude do banco
+name: Rotina - conferencia da gravacao
 
 on:
   schedule:
     - cron: '29 17 * * 1'       # 14h29 de Brasília, toda segunda-feira (depois do motor)
   push:
     branches: [rotinas-automaticas]
-    paths: [rotinas/saude/**, rotinas/estado.py, .github/workflows/rotina_saude.yml]
+    paths: [rotinas/gravacao/**, rotinas/estado.py, .github/workflows/rotina_gravacao.yml]
   workflow_dispatch:
 
 permissions:
   contents: write     # só para subir rotinas/ (resultados e painel de controle)
 
 concurrency:
-  group: rotina-saude
+  group: rotina-gravacao
   cancel-in-progress: false
 
 jobs:
@@ -42,10 +42,10 @@ jobs:
           mkdir -p ~/.config/earthengine
           printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
 
-      - name: Saúde do banco
+      - name: Conferência da gravação
         env:
           PYTHONUNBUFFERED: '1'
-        run: python -W ignore rotinas/saude/saude_semanal.py
+        run: python -W ignore rotinas/gravacao/conferencia_gravacao.py
 
       - name: Apagar a credencial da máquina
         if: always()
@@ -58,7 +58,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add rotinas
           if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
-          git commit -m "Rotina: saúde do banco ($(date -u +%Y-%m-%d))"
+          git commit -m "Rotina: conferência da gravação ($(date -u +%Y-%m-%d))"
           git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
           # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
           python rotinas/estado.py > /dev/null

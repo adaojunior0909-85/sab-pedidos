@@ -17,7 +17,7 @@ BRT = timezone(timedelta(hours=-3))
 SIMBOLO = {'ok': '✅', 'conferir': '👀', 'atencao': '⚠️', 'falhou': '❌', 'esperando': '⏳'}
 # rotina: (nome, quando roda, o que fazer se der problema)
 ROTINAS = {
-    'saude': ('Saúde do banco (motor gravou?)', 'toda segunda-feira, 14h29',
+    'gravacao': ('Conferência da gravação (o motor gravou?)', 'toda segunda-feira, 14h29',
               'Abra o Actions do sab-motor: a rodada da noite deu erro? Me mande o log.'),
     'roni': ('RONI do mês (02_auditoria_roni_cpc.py)', 'todo dia 11, 10h23',
              'Se parou num empate do CPC, o log diz qual valor digitar; me mande o log.'),

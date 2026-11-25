@@ -1,10 +1,10 @@
-# Saúde do banco, toda semana (só LÊ o Earth Engine): o motor gravou nas últimas noites? Confere no SAB_V1 de 2026:
+# Conferência da gravação (antes "saúde do banco"), toda semana (só LÊ o Earth Engine): o motor gravou nas últimas noites? Confere no SAB_V1 de 2026:
 #   - dias seguidos, sem buraco e sem repetição, de 01/01/2026 até o fim da previsão;
 #   - a previsão (GFS) chega a pelo menos hoje + 10 dias e o último dia ERA5 tem no máximo 10 dias de atraso;
 #   - a hora em que o dia de hoje foi gravado: o motor roda toda noite (23h07), então ele não pode ter mais de 30 h;
 #   - todos os dias de 2026 numa versão do algoritmo aceita (V1.6 ou V1.7: na troca, o motor refaz os dias aos poucos) e
 #     o histórico (até 31/12/2025) sem versão nova.
-#     python rotinas/saude/saude_semanal.py
+#     python rotinas/gravacao/conferencia_gravacao.py
 import os
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -61,10 +61,10 @@ def main():
     resumo.append(f"{len(dias)} dias de 2026 ({len(era5)} ERA5 até {ult_era5}, {len(gfs)} GFS até {ult}); "
                   f"dia {alvo} gravado há {horas:.0f} h; versões {por_versao}" + ('' if hist else '; histórico intocado'))
     if problemas:
-        estado.registrar('saude', 'falhou', problemas + resumo)
+        estado.registrar('gravacao', 'falhou', problemas + resumo)
         print('\n'.join(problemas))
         raise SystemExit(1)
-    estado.registrar('saude', 'ok', resumo)
+    estado.registrar('gravacao', 'ok', resumo)
     print(resumo[0])
 
 
