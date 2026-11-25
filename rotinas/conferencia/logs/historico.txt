@@ -82,3 +82,37 @@ Traceback (most recent call last):
   File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_historico.py", line 95, in main
     raise RuntimeError(f'{ano}-{mes:02d}: não deu depois de 4 tentativas')
 RuntimeError: 1961-01: não deu depois de 4 tentativas
+
+===== 25/11/2026 04:15 (Brasília), tentativa 1 =====
+código: commit 6d17c08bc053cf497ec7952f7d4dfa5634c4b5da | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   1961 pronto em 862 s
+   1962 pronto em 857 s
+   1963 pronto em 854 s
+   1964 pronto em 779 s
+   1965 pronto em 873 s
+   1966 pronto em 824 s
+   1967 pronto em 814 s
+   1968 pronto em 909 s
+   1969 pronto em 801 s
+   1970 pronto em 847 s
+   1971 pronto em 791 s
+   1972 pronto em 769 s
+   1973 pronto em 1231 s
+   1974 pronto em 808 s
+   1975 pronto em 917 s
+   1976 pronto em 824 s
+   1977 pronto em 977 s
+   1978 pronto em 858 s
+   1979 pronto em 914 s
+   1980 pronto em 933 s
+   1981 pronto em 1002 s
+Tempo desta vez acabou; a próxima retoma daqui.
