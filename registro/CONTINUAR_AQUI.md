@@ -39,7 +39,7 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 
 ## Decisões esperando o responsável
 0. ✅ **Protocolo da correção APROVADO (25/11, ~07h)**, incluindo 2026 × CHIRPS só como relato (fora da regra).
-   Congelado no commit `161324a` (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no `validacoes-2` e no branch de
+   Congelado no commit `1de7696` do `validacoes-2` (`161324a` no branch de trabalho) (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no `validacoes-2` e no branch de
    trabalho) ANTES de rodar. PRÓXIMO: escrever `pesquisa/validar_correcao_era5.py` (só leitura) e pô-lo na fila; o
    disparo é combinado com o responsável. Resumo: teste fora da amostra com origem móvel (cada ano de 2016 a 2025
    calibrado só com os anos anteriores); métodos C0 (atual), C1 (10 anos), C2 (15 anos), C3 (atual + ajuste regional
