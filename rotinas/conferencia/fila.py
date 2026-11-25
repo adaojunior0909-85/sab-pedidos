@@ -55,10 +55,22 @@ TAREFAS = [
     {'id': 'metodo_2026_B', 'nome': 'As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024',
      'cmd': PY + ['pesquisa/validar_metodo_2026.py', 'B'], 'min': 60,
      'resultado': 'pesquisa/resultados_metodo_2026/RESULTADOS_B.md'},
+    {'id': 'historico', 'nome': 'O histórico 1961-2025, década por década, contra TerraClimate e CHIRPS',
+     'cmd': PY + ['pesquisa/validar_historico.py'], 'min': 30, 'parcial': True,
+     'resultado': 'pesquisa/resultados_historico/RESULTADOS.md'},
+    {'id': 'por_mes', 'nome': 'Todas as validações abertas por mês do ano (estação chuvosa x seca)',
+     'cmd': PY + ['pesquisa/resumo_por_mes.py'], 'min': 5, 'depois_de': ['metodo_2026_B', 'historico'],
+     'resultado': 'pesquisa/RESULTADOS_POR_MES.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte
 ]
+
+# FILA_SO=id1,id2 roda só essas tarefas (ex.: num branch de teste); nesse modo a fila se chama de novo enquanto
+# faltar alguma e nunca desliga o agendamento
+SO = [x.strip() for x in (os.environ.get('FILA_SO') or '').split(',') if x.strip()]
+if SO:
+    TAREFAS = [t for t in TAREFAS if t['id'] in SO]
 
 
 def ler():
@@ -103,8 +115,11 @@ def pode(t, st, agora, sobra_min):
     e = st.get(t['id'], {})
     if e.get('situacao') in ('ok', 'falhou'):
         return False, 'já feita'
-    if t.get('depois_de') and st.get(t['depois_de'], {}).get('situacao') != 'ok':
-        return False, f"espera {t['depois_de']}"
+    antes = t.get('depois_de') or []
+    antes = [antes] if isinstance(antes, str) else antes
+    falta = [x for x in antes if st.get(x, {}).get('situacao') not in ('ok', 'falhou')]
+    if falta:
+        return False, f"espera {', '.join(falta)}"
     if t.get('nao_antes') and agora.strftime('%Y-%m-%d') < t['nao_antes']:
         return False, f"só a partir de {t['nao_antes']}"
     if t['min'] * 1.5 > sobra_min:
@@ -237,7 +252,15 @@ def main():
     acabou = all(st.get(x['id'], {}).get('situacao') in ('ok', 'falhou') for x in TAREFAS)
     escrever_final(st, acabou)
     subir('Conferência: situação da fila [skip ci]')
-    if acabou and os.environ.get('GITHUB_ACTIONS') == 'true':
+    if SO and not acabou and os.environ.get('GITHUB_ACTIONS') == 'true':
+        presas = [t['id'] for t in TAREFAS if st.get(t['id'], {}).get('situacao') not in ('ok', 'falhou')
+                  and pode(t, st, estado.agora(), ORCAMENTO_MIN)[0]]
+        if presas:
+            print(f'Ainda faltam {presas}: chamando a fila de novo neste branch.')
+            subprocess.run(['gh', 'workflow', 'run', 'rotina_conferencia.yml', '--ref',
+                            os.environ.get('GITHUB_REF_NAME', 'main'), '-f', f'so={",".join(SO)}'], cwd=RAIZ)
+        return
+    if acabou and not SO and os.environ.get('GITHUB_ACTIONS') == 'true':
         print('Fila vazia: desligando o agendamento da conferência.')
         subprocess.run(['gh', 'workflow', 'disable', 'rotina_conferencia.yml'], cwd=RAIZ)
 
