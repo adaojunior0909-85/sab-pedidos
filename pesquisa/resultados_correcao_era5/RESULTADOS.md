@@ -84,3 +84,16 @@ Fração de dias com chuva no BR-DWGD nesses pixels: 40.8%.
 
 Nada é gravado por este teste. Se algum método passou, o próximo passo (com aprovação) é o motor em simulação (05a), a prévia de 2026 e a K16; uma janela de anos exige um asset novo (escrita, aprovação separada).
 
+## Só relatado (fora da regra): 2026 × CHIRPS
+
+Meses 1 a 9; viés do total do período contra o CHIRPS (%). Régua: 2024, quando o SAB é o BR-DWGD. Método vencedor na chuva: C3.
+
+| Região | 2024 (régua) | 2026 gravado | 2026 C0 | 2026 C1 | 2026 C2 | 2026 C3 |
+|---|---|---|---|---|---|---|
+| Norte | +2.4 | -1.2 | -1.3 | +3.5 | +0.8 | +7.1 |
+| Nordeste | +6.6 | -15.6 | -15.9 | -10.8 | -12.7 | -4.1 |
+| Centro-Oeste | -1.4 | -21.3 | -21.3 | -15.2 | -17.9 | -10.0 |
+| Sudeste | -1.1 | -2.9 | -2.9 | +3.3 | +1.7 | +5.6 |
+| Sul | +3.8 | +4.1 | +4.4 | +13.4 | +11.5 | +15.5 |
+| Brasil | +2.3 | -5.8 | -5.9 | -0.4 | -2.9 | +3.6 |
+

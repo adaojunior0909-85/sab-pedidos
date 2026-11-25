@@ -71,7 +71,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | Escoamento total | vazão observada de 512 bacias (CAMELS-BR, ANA) | 1981–2018 | KGE mediano 0,31, viés −35% (o SAB fica abaixo do rio); nenhum dos 3 métodos alternativos passou nas 4 condições → **o atual fica, com aviso por região** |
 | As 16 (parte A) | o próprio método de 2026 (rota ERA5 do motor V1.7) aplicado a 2021–2025 × o banco (BR-DWGD no núcleo) | 2021–2025 | **o método SUBESTIMA a chuva em todos os anos e regiões: Brasil −9,6% (pior ano −13%), Nordeste −12%, Centro-Oeste −12% (pior ano −16%), Norte −9%, Sul −8%, Sudeste −7%**. ETo +3,5%, radiação +0,6 MJ/m²/dia, ET real +3%, UR −0,9 p.p., Tmax +0,2 °C; Tmin, vento e as variáveis do ERA5 sem desvio relevante. Explica a maior parte da chuva baixa de 2026 × CHIRPS (Centro-Oeste −21%, Nordeste −16%); o que sobra em 2026 está perto do pior ano. Hipótese: viés não estacionário (a calibração é a média de 1986–2025; nos anos recentes o ERA5-Land fica mais seco que o BR-DWGD). **Proposta: correção da chuva (e da radiação/ETo) dos dias ERA5, com protocolo fixado antes, simulação 05a e K16; o banco não muda antes disso** |
 | As 16 (parte B) | GLDAS-2.1 (NASA) com régua 2022–2024 | 2026 (meses 1–10) | **pronta (25/11, 06h47).** Chuva de 2026 FORA da régua no **Nordeste** (SAB − GLDAS = −10,8%; régua +11,6 a +18,6) e no **Centro-Oeste** (−7,3%; régua +3,9 a +14,2): a terceira fonte independente (depois da Parte A e do CHIRPS) que aponta o método de 2026, não o clima. Radiação do Nordeste acima da régua (+0,2 contra −2,4 a −1,2 MJ), coerente com a Parte A. Tmax, Tmin, UR, VPD, ETo, ET real e umidade do solo dentro da régua em quase tudo. Fora da régua também: escoamento superficial (Norte, Sudeste, Sul, Brasil, acima) e subsuperficial (Norte, Sul), temperatura do solo e da folha (Norte e Centro-Oeste, abaixo), a investigar depois (variáveis do ERA5-Land; no histórico entram com a correção de leitura dos dias V1.0). `pesquisa/resultados_metodo_2026/RESULTADOS_B.md` (na `main`) |
-| Chuva, radiação e ETo (correção dos dias ERA5) | o BR-DWGD, fora da amostra (cada ano calibrado só com os anteriores; 120 meses × 5 regiões; extremos em todos os pixels entregues e p99 em 1.500 pixels) | 2016–2025 | **CHUVA: o C3 passa nas 4 condições** (C0 × razão BR-DWGD/C0 da região e do mês nos 5 anos anteriores, limitada a [0,8; 1,5]): mediana do |viés anual| 8,4% → 4,3% (−4,1 p.p.); o Brasil melhora em 9 de 10 anos (2024: −13,6% → −6,2%); r_anomalias sem queda; dias de chuva, Rx1day e p99 dentro dos limites (p99 16,8% → 13,8%). C1 e C2 reprovam só na condição 1 (−2,1 e −1,8 p.p.). **RADIAÇÃO/ETo: nenhum passa** (o C3 reduz a radiação no Brasil +0,45 → +0,25 MJ, mas a ETo só cai 0,8 p.p. (precisava 1) e piora 1,1 p.p. no Sul): o C0 fica. 2026 × CHIRPS (só relato) pendente. `pesquisa/resultados_correcao_era5/RESULTADOS.md` |
+| Chuva, radiação e ETo (correção dos dias ERA5) | o BR-DWGD, fora da amostra (cada ano calibrado só com os anteriores; 120 meses × 5 regiões; extremos em todos os pixels entregues e p99 em 1.500 pixels) | 2016–2025 | **CHUVA: o C3 passa nas 4 condições** (C0 × razão BR-DWGD/C0 da região e do mês nos 5 anos anteriores, limitada a [0,8; 1,5]): mediana do |viés anual| 8,4% → 4,3% (−4,1 p.p.); o Brasil melhora em 9 de 10 anos (2024: −13,6% → −6,2%); r_anomalias sem queda; dias de chuva, Rx1day e p99 dentro dos limites (p99 16,8% → 13,8%). C1 e C2 reprovam só na condição 1 (−2,1 e −1,8 p.p.). **RADIAÇÃO/ETo: nenhum passa** (o C3 reduz a radiação no Brasil +0,45 → +0,25 MJ, mas a ETo só cai 0,8 p.p. (precisava 1) e piora 1,1 p.p. no Sul): o C0 fica. 2026 × CHIRPS (só relato): o C3 aproxima o Nordeste (−15,6% → −4,1%; régua +6,6%) e o Centro-Oeste (−21,3% → −10,0%; régua −1,4%) e passa do ponto no Sul (+4,1% → +15,5%; régua +3,8%). `pesquisa/resultados_correcao_era5/RESULTADOS.md` |
 | 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | na fila (resultado no apêndice) |
 | Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
 | Previsão GFS 1–15 dias | ERA5 do dia, com a persistência como base | diária desde 24/11 | primeira medida por prazo depois de ~1 semana de fotografias |
@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 17:16, Brasília)
+# Apêndice automático (refeito em 25/11/2026 18:03, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -471,6 +471,8 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 20:35 | Registro: prévia da V1.8 passou (1 dia); refazer depois do motor da noite |
+| 25/11/2026 20:16 | Registro: vigia automática e mapa do que é verificado (variável x referência x período) |
 | 25/11/2026 20:08 | Registro: motor V1.8 etapa A (simulação disparada) e fila da main disparada |
 | 25/11/2026 20:01 | Registro: sab-pedidos público (minutos do Actions deixam de faltar) |
 | 25/11/2026 18:29 | Correção ERA5: resultado (chuva → C3; radiação/ETo → C0 fica), dados e registro; minutos do Actions esgotados |
