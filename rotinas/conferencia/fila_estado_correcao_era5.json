@@ -56,5 +56,10 @@
   "fim": "25/11 06:47",
   "minutos": 123,
   "codigo": 0
+ },
+ "correcao_era5": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 08:10"
  }
 }
