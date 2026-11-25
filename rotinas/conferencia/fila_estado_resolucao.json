@@ -33,7 +33,10 @@
  },
  "resolucao": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 04:15"
+  "situacao": "pendente",
+  "inicio": "25/11 04:15",
+  "fim": "25/11 04:22",
+  "minutos": 7,
+  "codigo": 1
  }
 }
