@@ -25,7 +25,10 @@
  },
  "escoamento_metricas": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 03:36"
+  "situacao": "ok",
+  "inicio": "25/11 03:36",
+  "fim": "25/11 03:36",
+  "minutos": 0,
+  "codigo": 0
  }
 }

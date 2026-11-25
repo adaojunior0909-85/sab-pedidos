@@ -7,7 +7,7 @@ Atualizado em 25/11/2026 03:36 (Brasília) pela fila automática (`rotinas/confe
 | 2026 (ERA5 calibrado) contra CHIRPS (chuva) e MODIS (calor) | ✅ pronta | 1 | 25/11 03:28 | pesquisa/resultados_2026/RESULTADOS.md |
 | Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ✅ pronta | 1 | 25/11 03:33 | pesquisa/resultados_solo_folha/RESULTADOS.md |
 | Escoamento x vazão do CAMELS-BR: extração 1981-2018 (512 bacias) | ✅ pronta | 1 | 25/11 03:36 |  |
-| Escoamento x CAMELS-BR: métricas e decisão do protocolo | ⏳ na fila | 0 |  | pesquisa/resultados_escoamento/RESULTADOS.md |
+| Escoamento x CAMELS-BR: métricas e decisão do protocolo | ✅ pronta | 1 | 25/11 03:36 | pesquisa/resultados_escoamento/RESULTADOS.md |
 | K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
 | K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada1/ |
 | K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
@@ -98,4 +98,60 @@ Correlação das anomalias mensais (ciclo do ano retirado), por região. Regra f
 | tfolha_C | LST dia | 0.80 | 0.81 | 0.71 | 0.80 | 0.53 | 0.70 | 0.80 | -7.02 | mantém |
 | tsolo_C | LST noite | 0.81 | 0.74 | 0.59 | 0.80 | 0.81 | 0.76 | 0.80 | +6.75 | mantém |
 | et_real | MOD16 | 0.06 | 0.67 | 0.52 | 0.47 | 0.46 | 0.25 | 0.47 | -8.07 | mantém como índice (aviso) |
+
+---
+
+## Escoamento x CAMELS-BR: métricas e decisão do protocolo
+
+(cópia de `pesquisa/resultados_escoamento/RESULTADOS.md`)
+
+### Escoamento do SAB contra a vazão observada (CAMELS-BR), 1981–2018
+
+Protocolo fixado antes de rodar: `pesquisa/PROTOCOLO_ESCOAMENTO_CAMELS.md`. Total mensal na bacia; bacias com pelo menos 24 meses válidos. Fonte da vazão: CAMELS-BR v1.1 (Chagas et al., 2020, doi:10.5281/zenodo.3964745, CC-BY-4.0).
+
+## Brasil (mediana entre as bacias)
+
+| Método | Período | Bacias | KGE | Viés (%) | |Viés| (%) | r |
+|---|---|---|---|---|---|---|
+| M0 atual (entregue) | 1981-2018 | 512 | 0.31 | -35 | 38 | 0.73 |
+| M1 gravado | 1981-2018 | 512 | 0.30 | -30 | 38 | 0.71 |
+| M2 ERA5-Land puro | 1981-2018 | 512 | 0.27 | -10 | 21 | 0.80 |
+| M3 coef. ERA5 × chuva SAB | 1981-2018 | 512 | 0.30 | -15 | 20 | 0.86 |
+| M0 atual (entregue) | 1981-1999 | 512 | 0.28 | -31 | 36 | 0.72 |
+| M1 gravado | 1981-1999 | 512 | 0.28 | -27 | 37 | 0.71 |
+| M2 ERA5-Land puro | 1981-1999 | 512 | 0.15 | -3 | 19 | 0.80 |
+| M3 coef. ERA5 × chuva SAB | 1981-1999 | 512 | 0.22 | -12 | 18 | 0.87 |
+| M0 atual (entregue) | 2000-2018 | 512 | 0.31 | -40 | 42 | 0.75 |
+| M1 gravado | 2000-2018 | 512 | 0.30 | -35 | 40 | 0.73 |
+| M2 ERA5-Land puro | 2000-2018 | 512 | 0.36 | -17 | 25 | 0.80 |
+| M3 coef. ERA5 × chuva SAB | 2000-2018 | 512 | 0.39 | -18 | 24 | 0.87 |
+
+## Por região hidrográfica (1981–2018, mediana)
+
+| Região | Bacias | KGE M0 | Viés M0 (%) | KGE M1 | KGE M2 | KGE M3 | Viés M3 (%) |
+|---|---|---|---|---|---|---|---|
+| amazon | 22 | 0.33 | -46 | 0.42 | 0.66 | 0.70 | -2 |
+| e_atlantic | 49 | 0.01 | -55 | -0.03 | 0.11 | 0.19 | -66 |
+| eastern_ne_atlantic | 6 | -0.00 | -74 | 0.10 | -0.31 | -0.18 | -86 |
+| paraguay | 2 | 0.06 | -70 | 0.47 | 0.56 | 0.54 | -32 |
+| parana | 145 | 0.35 | -35 | 0.35 | 0.26 | 0.28 | -18 |
+| parnaiba | 9 | -0.89 | +4 | -2.86 | -2.02 | -1.39 | +46 |
+| s_atlantic | 41 | 0.48 | -30 | 0.49 | 0.63 | 0.70 | -15 |
+| sao_francisco | 54 | -0.20 | -22 | -0.57 | 0.20 | 0.20 | -14 |
+| se_atlantic | 83 | 0.34 | -38 | 0.35 | 0.13 | 0.19 | -10 |
+| tocantins-araguaia | 33 | 0.20 | -52 | -0.04 | 0.05 | 0.02 | -2 |
+| uruguay | 41 | 0.55 | -27 | 0.56 | 0.69 | 0.73 | -21 |
+| western_ne_atlantic | 27 | 0.03 | +27 | -0.56 | -2.28 | -2.57 | +130 |
+
+## Regra de decisão (as quatro condições)
+
+| Candidato | 1. KGE +0,10 (todo) | 2. melhora em ≥ 60% | 3. vale nas duas metades | 4. |viés| não piora | Passa? |
+|---|---|---|---|---|---|
+| M1 gravado | ❌ (-0.01) | ❌ (57%) | ❌ | ✅ | não |
+| M2 ERA5-Land puro | ❌ (-0.04) | ❌ (52%) | ❌ | ✅ | não |
+| M3 coef. ERA5 × chuva SAB | ❌ (-0.01) | ❌ (58%) | ❌ | ✅ | não |
+
+## Decisão
+
+Nenhum candidato passou nas quatro condições: **o M0 fica**. O dicionário ganha o aviso quantitativo (KGE e viés do M0 por região, tabela acima).
 
