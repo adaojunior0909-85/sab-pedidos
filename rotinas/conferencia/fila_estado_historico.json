@@ -32,12 +32,9 @@
   "codigo": 0
  },
  "historico": {
-  "tentativas": 0,
-  "situacao": "pendente",
-  "inicio": "25/11 14:39",
-  "fim": "25/11 19:52",
-  "minutos": 313,
-  "codigo": 3
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 19:52"
  },
  "resolucao": {
   "tentativas": 1,
