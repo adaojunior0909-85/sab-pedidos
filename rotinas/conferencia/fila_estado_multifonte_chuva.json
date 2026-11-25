@@ -1,0 +1,49 @@
+{
+ "validar_2026": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:19",
+  "fim": "25/11 03:28",
+  "minutos": 10,
+  "codigo": 0
+ },
+ "solo_folha": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:28",
+  "fim": "25/11 03:33",
+  "minutos": 5,
+  "codigo": 0
+ },
+ "escoamento_extrair": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:33",
+  "fim": "25/11 03:36",
+  "minutos": 3,
+  "codigo": 0
+ },
+ "escoamento_metricas": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:36",
+  "fim": "25/11 03:36",
+  "minutos": 0,
+  "codigo": 0
+ },
+ "historico": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 04:15"
+ },
+ "resolucao": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:01"
+ },
+ "multifonte_chuva": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ }
+}
