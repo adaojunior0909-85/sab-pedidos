@@ -91,3 +91,222 @@ Traceback (most recent call last):
     raise _translate_cloud_exception(e)  # pylint: disable=raise-missing-from
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ee.ee_exception.EEException: Image.stratifiedSample: The class band must be integer typed.
+
+===== 25/11/2026 08:10 (Brasília), tentativa 1 =====
+código: commit d3b6964e634ca905de8dd2038b7fe810113f52dc | earthengine-api 1.7.51 | Python 3.12.16
+🔄 Iniciando SAB V1.7 no projeto: clima-492922...
+🕒 Timestamp de Operação (Local/BRT): 2026-11-25 08:10:15
+
+📡 Última data ERA5-Land: 2026-11-15 | Última data BR-DWGD: 2025-12-31
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+Receita: maior diferença 1.55% contra o asset SICSB_1986_2025
+   1500 pixels sorteados; por região: {'Norte': 300, 'Nordeste': 300, 'Centro-Oeste': 300, 'Sudeste': 300, 'Sul': 300}
+   pixels agregados 1986: 18000 linhas em 0.1 min
+   pixels agregados 1987: 18000 linhas em 0.1 min
+   pixels agregados 1988: 18000 linhas em 0.1 min
+   pixels agregados 1989: 18000 linhas em 0.1 min
+   pixels agregados 1990: 18000 linhas em 0.1 min
+   pixels agregados 1991: 18000 linhas em 0.6 min
+   pixels agregados 1992: 18000 linhas em 0.1 min
+   pixels agregados 1993: 18000 linhas em 1.1 min
+   pixels agregados 1994: 18000 linhas em 0.1 min
+   pixels agregados 1995: 18000 linhas em 0.1 min
+   pixels agregados 1996: 18000 linhas em 0.1 min
+   pixels agregados 1997: 18000 linhas em 0.1 min
+   pixels agregados 1998: 18000 linhas em 0.1 min
+   pixels agregados 1999: 18000 linhas em 0.1 min
+   pixels agregados 2000: 18000 linhas em 0.1 min
+   pixels agregados 2001: 18000 linhas em 0.1 min
+   pixels agregados 2002: 18000 linhas em 0.1 min
+   pixels agregados 2003: 18000 linhas em 0.1 min
+   pixels agregados 2004: 18000 linhas em 0.1 min
+   pixels agregados 2005: 18000 linhas em 0.1 min
+   pixels agregados 2006: 18000 linhas em 0.2 min
+   pixels agregados 2007: 18000 linhas em 0.1 min
+   pixels agregados 2008: 18000 linhas em 0.1 min
+   pixels agregados 2009: 18000 linhas em 0.1 min
+   pixels agregados 2010: 18000 linhas em 0.1 min
+   pixels agregados 2011: 18000 linhas em 0.1 min
+   pixels agregados 2012: 18000 linhas em 0.1 min
+   pixels agregados 2013: 18000 linhas em 0.1 min
+   pixels agregados 2014: 18000 linhas em 0.1 min
+   pixels agregados 2015: 18000 linhas em 0.1 min
+   pixels agregados 2016: 18000 linhas em 0.1 min
+   pixels agregados 2017: 18000 linhas em 0.1 min
+   pixels agregados 2018: 18000 linhas em 0.1 min
+   pixels agregados 2019: 18000 linhas em 0.1 min
+   pixels agregados 2020: 18000 linhas em 0.1 min
+   pixels agregados 2021: 18000 linhas em 0.1 min
+   pixels agregados 2022: 18000 linhas em 0.1 min
+   pixels agregados 2023: 18000 linhas em 0.1 min
+   pixels agregados 2024: 18000 linhas em 0.1 min
+   pixels agregados 2025: 18000 linhas em 0.1 min
+   pixels dias 2016: 549000 linhas em 1.2 min
+   pixels dias 2017: 547500 linhas em 1.1 min
+   pixels dias 2018: 547500 linhas em 1.0 min
+   pixels dias 2019: 547500 linhas em 1.1 min
+   pixels dias 2020: 549000 linhas em 1.1 min
+   pixels dias 2021: 547500 linhas em 1.0 min
+   pixels dias 2022: 547500 linhas em 1.0 min
+   pixels dias 2023: 547500 linhas em 1.1 min
+   pixels dias 2024: 549000 linhas em 1.1 min
+   pixels dias 2025: 547500 linhas em 1.0 min
+   2016-01 pronto em 2.2 min | razão C3 No 1.00, No 0.99, Ce 0.97, Su 1.04, Su 1.07 | Δ Rs No +0.13, No -0.04, Ce +0.10, Su +0.30, Su -0.01
+   2016-02 pronto em 3.4 min | razão C3 No 0.96, No 1.02, Ce 0.99, Su 1.00, Su 1.03 | Δ Rs No +0.35, No -0.21, Ce +0.25, Su +0.42, Su -0.19
+   2016-03 pronto em 2.6 min | razão C3 No 0.95, No 1.01, Ce 1.00, Su 1.02, Su 1.07 | Δ Rs No +0.42, No -0.06, Ce +0.23, Su +0.07, Su -0.06
+   2016-04 pronto em 2.4 min | razão C3 No 0.97, No 1.01, Ce 1.01, Su 1.06, Su 0.97 | Δ Rs No +0.16, No +0.06, Ce -0.21, Su -0.06, Su -0.16
+   2016-05 pronto em 2.9 min | razão C3 No 1.01, No 1.07, Ce 1.14, Su 1.09, Su 0.99 | Δ Rs No -0.14, No +0.03, Ce -0.07, Su +0.09, Su -0.18
+   2016-06 pronto em 3.0 min | razão C3 No 1.04, No 0.97, Ce 1.18, Su 1.16, Su 1.04 | Δ Rs No -0.10, No +0.17, Ce +0.16, Su +0.22, Su -0.08
+   2016-07 pronto em 3.4 min | razão C3 No 1.07, No 0.93, Ce 1.31, Su 1.02, Su 1.07 | Δ Rs No -0.25, No +0.09, Ce -0.14, Su -0.01, Su -0.09
+   2016-08 pronto em 2.1 min | razão C3 No 1.13, No 0.98, Ce 1.50, Su 1.21, Su 1.23 | Δ Rs No +0.02, No -0.03, Ce +0.52, Su +0.32, Su +0.21
+   2016-09 pronto em 2.1 min | razão C3 No 1.13, No 1.08, Ce 1.23, Su 1.15, Su 1.05 | Δ Rs No +0.10, No -0.06, Ce +1.00, Su +0.10, Su -0.18
+   2016-10 pronto em 3.4 min | razão C3 No 0.95, No 1.14, Ce 1.02, Su 1.10, Su 1.13 | Δ Rs No +0.26, No +0.21, Ce +0.39, Su +0.12, Su -0.31
+   2016-11 pronto em 3.3 min | razão C3 No 0.98, No 1.07, Ce 0.99, Su 1.04, Su 1.04 | Δ Rs No +0.41, No +0.10, Ce +0.45, Su +0.49, Su +0.19
+   2016-12 pronto em 2.2 min | razão C3 No 0.98, No 1.03, Ce 0.96, Su 1.02, Su 1.02 | Δ Rs No +0.10, No +0.00, Ce +0.31, Su +0.31, Su +0.07
+   2017-01 pronto em 4.1 min | razão C3 No 1.00, No 1.00, Ce 0.94, Su 1.00, Su 1.09 | Δ Rs No -0.02, No -0.02, Ce +0.22, Su +0.39, Su +0.01
+   2017-02 pronto em 3.0 min | razão C3 No 0.95, No 1.02, Ce 0.99, Su 1.01, Su 1.06 | Δ Rs No +0.43, No -0.29, Ce +0.12, Su +0.47, Su -0.39
+   2017-03 pronto em 2.0 min | razão C3 No 0.96, No 0.99, Ce 0.99, Su 1.03, Su 1.04 | Δ Rs No +0.52, No -0.10, Ce +0.16, Su -0.22, Su -0.09
+   2017-04 pronto em 3.8 min | razão C3 No 0.98, No 0.99, Ce 1.00, Su 1.05, Su 1.00 | Δ Rs No -0.04, No -0.10, Ce -0.37, Su -0.12, Su -0.41
+   2017-05 pronto em 3.1 min | razão C3 No 1.01, No 1.06, Ce 1.11, Su 1.10, Su 0.98 | Δ Rs No -0.18, No -0.08, Ce -0.14, Su -0.01, Su -0.30
+   2017-06 pronto em 2.5 min | razão C3 No 1.06, No 0.98, Ce 1.16, Su 1.16, Su 1.05 | Δ Rs No -0.05, No +0.13, Ce +0.11, Su +0.23, Su -0.14
+   2017-07 pronto em 2.0 min | razão C3 No 1.07, No 0.95, Ce 1.30, Su 1.03, Su 1.06 | Δ Rs No -0.34, No +0.02, Ce -0.19, Su +0.05, Su -0.06
+   2017-08 pronto em 3.3 min | razão C3 No 1.11, No 0.96, Ce 1.36, Su 1.16, Su 1.14 | Δ Rs No -0.15, No -0.07, Ce +0.26, Su +0.31, Su +0.17
+   2017-09 pronto em 2.8 min | razão C3 No 1.07, No 1.02, Ce 1.12, Su 1.12, Su 1.06 | Δ Rs No +0.09, No +0.03, Ce +0.97, Su +0.17, Su -0.06
+   2017-10 pronto em 3.3 min | razão C3 No 0.98, No 1.20, Ce 1.03, Su 1.08, Su 1.16 | Δ Rs No +0.21, No +0.24, Ce +0.25, Su +0.14, Su -0.36
+   2017-11 pronto em 3.5 min | razão C3 No 0.99, No 1.05, Ce 0.99, Su 1.02, Su 1.07 | Δ Rs No +0.23, No +0.04, Ce +0.22, Su +0.31, Su +0.15
+   2017-12 pronto em 2.3 min | razão C3 No 0.98, No 1.02, Ce 0.98, Su 1.03, Su 1.03 | Δ Rs No +0.03, No -0.04, Ce +0.10, Su +0.23, Su +0.06
+   2018-01 pronto em 2.3 min | razão C3 No 1.00, No 1.00, Ce 0.94, Su 0.99, Su 1.09 | Δ Rs No -0.05, No +0.04, Ce +0.11, Su +0.44, Su -0.24
+   2018-02 pronto em 3.0 min | razão C3 No 0.94, No 1.02, Ce 0.98, Su 1.00, Su 1.08 | Δ Rs No +0.43, No -0.29, Ce +0.18, Su +0.36, Su -0.40
+   2018-03 pronto em 3.5 min | razão C3 No 0.96, No 0.98, Ce 0.98, Su 1.04, Su 1.04 | Δ Rs No +0.46, No -0.10, Ce +0.12, Su -0.18, Su -0.08
+   2018-04 pronto em 3.2 min | razão C3 No 0.98, No 1.02, Ce 1.03, Su 1.06, Su 1.04 | Δ Rs No +0.02, No -0.05, Ce -0.41, Su +0.01, Su -0.38
+   2018-05 pronto em 2.9 min | razão C3 No 1.00, No 1.07, Ce 1.10, Su 1.13, Su 0.98 | Δ Rs No -0.19, No -0.08, Ce -0.22, Su -0.06, Su -0.34
+   2018-06 pronto em 2.8 min | razão C3 No 1.06, No 1.00, Ce 1.13, Su 1.15, Su 1.06 | Δ Rs No -0.15, No +0.10, Ce +0.02, Su +0.22, Su -0.11
+   2018-07 pronto em 3.1 min | razão C3 No 1.08, No 0.95, Ce 1.33, Su 1.04, Su 1.09 | Δ Rs No -0.38, No +0.11, Ce -0.33, Su +0.10, Su -0.11
+   2018-08 pronto em 2.6 min | razão C3 No 1.12, No 0.94, Ce 1.32, Su 1.06, Su 1.16 | Δ Rs No -0.12, No -0.11, Ce +0.13, Su +0.12, Su +0.07
+   2018-09 pronto em 2.7 min | razão C3 No 1.04, No 1.07, Ce 1.11, Su 1.11, Su 1.05 | Δ Rs No +0.07, No +0.26, Ce +0.93, Su +0.18, Su -0.13
+   2018-10 pronto em 2.3 min | razão C3 No 0.98, No 1.14, Ce 1.02, Su 1.09, Su 1.18 | Δ Rs No +0.26, No +0.23, Ce +0.08, Su +0.09, Su -0.36
+   2018-11 pronto em 4.6 min | razão C3 No 0.99, No 1.06, Ce 1.00, Su 1.05, Su 1.08 | Δ Rs No +0.16, No +0.10, Ce +0.06, Su +0.14, Su +0.01
+   2018-12 pronto em 4.0 min | razão C3 No 1.00, No 1.01, Ce 0.99, Su 1.03, Su 1.03 | Δ Rs No -0.10, No -0.13, Ce +0.01, Su +0.24, Su +0.19
+   2019-01 pronto em 2.7 min | razão C3 No 1.00, No 1.01, Ce 0.96, Su 1.00, Su 1.07 | Δ Rs No -0.20, No -0.10, Ce -0.15, Su +0.41, Su -0.37
+   2019-02 pronto em 2.3 min | razão C3 No 0.96, No 1.03, Ce 0.98, Su 1.00, Su 1.09 | Δ Rs No +0.26, No -0.26, Ce +0.19, Su +0.36, Su -0.44
+   2019-03 pronto em 2.8 min | razão C3 No 0.96, No 1.02, Ce 0.97, Su 1.04, Su 1.08 | Δ Rs No +0.35, No -0.13, Ce -0.05, Su -0.16, Su -0.17
+   2019-04 pronto em 3.2 min | razão C3 No 0.99, No 1.04, Ce 1.04, Su 1.07, Su 1.08 | Δ Rs No -0.06, No -0.23, Ce -0.46, Su +0.02, Su -0.45
+   2019-05 pronto em 1.7 min | razão C3 No 0.99, No 1.06, Ce 1.13, Su 1.09, Su 1.00 | Δ Rs No -0.16, No -0.15, Ce -0.21, Su -0.01, Su -0.36
+   2019-06 pronto em 2.1 min | razão C3 No 1.06, No 0.99, Ce 1.03, Su 1.13, Su 1.08 | Δ Rs No -0.23, No +0.04, Ce -0.03, Su +0.19, Su -0.21
+   2019-07 pronto em 2.5 min | razão C3 No 1.08, No 0.92, Ce 1.28, Su 1.02, Su 1.09 | Δ Rs No -0.57, No +0.01, Ce -0.48, Su -0.03, Su -0.13
+   2019-08 pronto em 2.8 min | razão C3 No 1.11, No 0.90, Ce 1.22, Su 1.10, Su 1.14 | Δ Rs No -0.18, No -0.22, Ce -0.07, Su -0.03, Su -0.07
+   2019-09 pronto em 2.9 min | razão C3 No 1.05, No 1.01, Ce 1.16, Su 1.08, Su 1.09 | Δ Rs No -0.01, No +0.15, Ce +0.72, Su +0.11, Su -0.11
+   2019-10 pronto em 3.2 min | razão C3 No 0.99, No 1.06, Ce 1.04, Su 1.12, Su 1.17 | Δ Rs No +0.20, No +0.10, Ce -0.15, Su +0.07, Su -0.46
+   2019-11 pronto em 2.6 min | razão C3 No 0.98, No 1.07, Ce 1.03, Su 1.05, Su 1.04 | Δ Rs No +0.10, No +0.04, Ce -0.07, Su +0.13, Su -0.10
+   2019-12 pronto em 2.0 min | razão C3 No 1.00, No 1.06, Ce 0.99, Su 1.03, Su 1.05 | Δ Rs No -0.07, No -0.22, Ce -0.09, Su +0.11, Su +0.09
+   2020-01 pronto em 2.5 min | razão C3 No 1.00, No 1.00, Ce 0.97, Su 1.01, Su 1.10 | Δ Rs No -0.09, No -0.15, Ce -0.20, Su +0.36, Su -0.41
+   2020-02 pronto em 1.8 min | razão C3 No 0.97, No 1.02, Ce 0.99, Su 1.00, Su 1.06 | Δ Rs No +0.22, No -0.26, Ce -0.06, Su +0.18, Su -0.48
+   2020-03 pronto em 3.2 min | razão C3 No 0.96, No 1.00, Ce 0.99, Su 1.05, Su 1.04 | Δ Rs No +0.33, No -0.09, Ce -0.24, Su -0.16, Su -0.28
+   2020-04 pronto em 4.6 min | razão C3 No 1.00, No 1.06, Ce 1.05, Su 1.08, Su 1.09 | Δ Rs No -0.13, No -0.26, Ce -0.53, Su +0.00, Su -0.52
+   2020-05 pronto em 2.8 min | razão C3 No 1.00, No 1.07, Ce 1.10, Su 1.11, Su 0.98 | Δ Rs No -0.17, No -0.23, Ce -0.24, Su -0.01, Su -0.35
+   2020-06 pronto em 2.9 min | razão C3 No 1.06, No 1.00, Ce 1.01, Su 1.16, Su 1.03 | Δ Rs No -0.33, No -0.10, Ce -0.08, Su +0.16, Su -0.26
+   2020-07 pronto em 3.0 min | razão C3 No 1.07, No 0.98, Ce 1.22, Su 1.08, Su 1.08 | Δ Rs No -0.55, No -0.12, Ce -0.53, Su -0.04, Su -0.23
+   2020-08 pronto em 2.6 min | razão C3 No 1.12, No 0.93, Ce 1.24, Su 1.09, Su 1.14 | Δ Rs No -0.21, No -0.27, Ce -0.21, Su -0.00, Su -0.12
+   2020-09 pronto em 2.9 min | razão C3 No 1.04, No 0.97, Ce 1.12, Su 1.06, Su 1.03 | Δ Rs No -0.07, No +0.05, Ce +0.50, Su +0.14, Su -0.26
+   2020-10 pronto em 3.0 min | razão C3 No 1.02, No 1.02, Ce 1.10, Su 1.15, Su 1.17 | Δ Rs No +0.13, No +0.02, Ce -0.33, Su +0.11, Su -0.54
+   2020-11 pronto em 3.5 min | razão C3 No 0.99, No 1.10, Ce 1.06, Su 1.06, Su 1.04 | Δ Rs No +0.02, No -0.16, Ce -0.39, Su -0.19, Su -0.26
+   2020-12 pronto em 2.5 min | razão C3 No 1.01, No 1.07, Ce 1.02, Su 1.03, Su 1.04 | Δ Rs No -0.04, No -0.26, Ce -0.46, Su +0.01, Su +0.01
+   2021-01 pronto em 3.8 min | razão C3 No 1.03, No 1.03, Ce 1.00, Su 0.98, Su 1.08 | Δ Rs No -0.12, No -0.15, Ce -0.07, Su +0.41, Su -0.36
+   2021-02 pronto em 3.0 min | razão C3 No 0.99, No 1.02, Ce 0.99, Su 1.02, Su 1.07 | Δ Rs No +0.17, No -0.16, Ce -0.13, Su +0.18, Su -0.52
+   2021-03 pronto em 3.9 min | razão C3 No 0.97, No 1.01, Ce 1.00, Su 1.09, Su 1.07 | Δ Rs No +0.23, No -0.02, Ce -0.29, Su -0.05, Su -0.38
+   2021-04 pronto em 2.6 min | razão C3 No 1.00, No 1.04, Ce 1.12, Su 1.07, Su 1.13 | Δ Rs No -0.15, No -0.27, Ce -0.60, Su -0.06, Su -0.57
+   2021-05 pronto em 3.7 min | razão C3 No 1.01, No 1.05, Ce 1.18, Su 1.15, Su 1.01 | Δ Rs No -0.28, No -0.24, Ce -0.38, Su -0.09, Su -0.39
+   2021-06 pronto em 3.8 min | razão C3 No 1.07, No 1.00, Ce 0.97, Su 1.23, Su 1.04 | Δ Rs No -0.52, No -0.12, Ce -0.19, Su -0.07, Su -0.32
+   2021-07 pronto em 2.7 min | razão C3 No 1.12, No 1.00, Ce 1.50, Su 1.13, Su 1.14 | Δ Rs No -0.80, No -0.18, Ce -0.62, Su -0.05, Su -0.25
+   2021-08 pronto em 3.7 min | razão C3 No 1.13, No 0.96, Ce 1.27, Su 1.13, Su 1.12 | Δ Rs No -0.41, No -0.28, Ce -0.32, Su -0.06, Su -0.17
+   2021-09 pronto em 2.8 min | razão C3 No 1.07, No 1.01, Ce 1.12, Su 1.03, Su 1.06 | Δ Rs No -0.22, No +0.04, Ce +0.28, Su +0.15, Su -0.49
+   2021-10 pronto em 3.3 min | razão C3 No 1.06, No 1.08, Ce 1.14, Su 1.10, Su 1.17 | Δ Rs No +0.10, No -0.08, Ce -0.52, Su -0.11, Su -0.74
+   2021-11 pronto em 2.7 min | razão C3 No 1.00, No 1.09, Ce 1.08, Su 1.07, Su 1.09 | Δ Rs No +0.02, No -0.18, Ce -0.33, Su -0.18, Su -0.46
+   2021-12 pronto em 2.6 min | razão C3 No 1.04, No 1.11, Ce 1.04, Su 1.06, Su 1.02 | Δ Rs No +0.10, No -0.31, Ce -0.37, Su +0.03, Su -0.11
+   2022-01 pronto em 2.3 min | razão C3 No 1.04, No 1.06, Ce 1.06, Su 1.01, Su 1.09 | Δ Rs No -0.09, No -0.55, Ce -0.54, Su +0.06, Su -0.54
+   2022-02 pronto em 2.0 min | razão C3 No 1.01, No 1.05, Ce 1.00, Su 1.02, Su 1.05 | Δ Rs No -0.08, No -0.32, Ce -0.18, Su +0.03, Su -0.62
+   2022-03 pronto em 2.7 min | razão C3 No 0.99, No 1.04, Ce 1.03, Su 1.10, Su 1.08 | Δ Rs No -0.02, No -0.23, Ce -0.52, Su -0.05, Su -0.45
+   2022-04 pronto em 2.8 min | razão C3 No 1.01, No 1.06, Ce 1.11, Su 1.08, Su 1.10 | Δ Rs No -0.37, No -0.45, Ce -0.73, Su -0.16, Su -0.45
+   2022-05 pronto em 2.9 min | razão C3 No 1.03, No 1.07, Ce 1.23, Su 1.16, Su 1.04 | Δ Rs No -0.52, No -0.41, Ce -0.47, Su -0.23, Su -0.36
+   2022-06 pronto em 2.9 min | razão C3 No 1.08, No 1.03, Ce 1.14, Su 1.34, Su 1.05 | Δ Rs No -0.95, No -0.33, Ce -0.28, Su -0.18, Su -0.29
+   2022-07 pronto em 2.6 min | razão C3 No 1.11, No 1.02, Ce 1.50, Su 1.14, Su 1.13 | Δ Rs No -1.00, No -0.30, Ce -0.71, Su -0.22, Su -0.30
+   2022-08 pronto em 3.1 min | razão C3 No 1.15, No 0.98, Ce 1.34, Su 1.14, Su 1.14 | Δ Rs No -0.55, No -0.38, Ce -0.33, Su -0.12, Su -0.24
+   2022-09 pronto em 2.8 min | razão C3 No 1.22, No 1.09, Ce 1.38, Su 1.09, Su 1.08 | Δ Rs No -0.39, No -0.15, Ce +0.20, Su -0.15, Su -0.79
+   2022-10 pronto em 3.8 min | razão C3 No 1.12, No 1.15, Ce 1.22, Su 1.12, Su 1.16 | Δ Rs No -0.04, No -0.30, Ce -0.69, Su -0.31, Su -0.79
+   2022-11 pronto em 3.1 min | razão C3 No 1.04, No 1.12, Ce 1.09, Su 1.09, Su 1.07 | Δ Rs No +0.04, No -0.32, Ce -0.19, Su -0.14, Su -0.51
+   2022-12 pronto em 3.2 min | razão C3 No 1.05, No 1.13, Ce 1.05, Su 1.06, Su 1.04 | Δ Rs No +0.07, No -0.34, Ce -0.28, Su +0.06, Su -0.10
+   2023-01 pronto em 2.7 min | razão C3 No 1.07, No 1.10, Ce 1.09, Su 1.01, Su 1.10 | Δ Rs No -0.25, No -0.64, Ce -0.69, Su +0.06, Su -0.58
+   2023-02 pronto em 2.4 min | razão C3 No 1.03, No 1.06, Ce 1.03, Su 1.02, Su 1.03 | Δ Rs No -0.28, No -0.41, Ce -0.37, Su +0.04, Su -0.65
+   2023-03 pronto em 2.8 min | razão C3 No 1.00, No 1.06, Ce 1.06, Su 1.11, Su 1.06 | Δ Rs No -0.08, No -0.24, Ce -0.67, Su -0.03, Su -0.52
+   2023-04 pronto em 2.6 min | razão C3 No 1.02, No 1.07, Ce 1.13, Su 1.07, Su 1.09 | Δ Rs No -0.51, No -0.50, Ce -0.80, Su -0.30, Su -0.56
+   2023-05 pronto em 2.8 min | razão C3 No 1.03, No 1.11, Ce 1.32, Su 1.15, Su 1.08 | Δ Rs No -0.64, No -0.55, Ce -0.59, Su -0.43, Su -0.42
+   2023-06 pronto em 2.9 min | razão C3 No 1.10, No 1.03, Ce 1.23, Su 1.24, Su 1.06 | Δ Rs No -1.14, No -0.45, Ce -0.46, Su -0.31, Su -0.35
+   2023-07 pronto em 2.3 min | razão C3 No 1.11, No 1.05, Ce 1.50, Su 1.09, Su 1.15 | Δ Rs No -1.04, No -0.52, Ce -0.68, Su -0.37, Su -0.37
+   2023-08 pronto em 2.7 min | razão C3 No 1.17, No 1.03, Ce 1.35, Su 1.15, Su 1.09 | Δ Rs No -0.67, No -0.44, Ce -0.28, Su -0.17, Su -0.26
+   2023-09 pronto em 2.4 min | razão C3 No 1.30, No 1.03, Ce 1.36, Su 1.12, Su 1.05 | Δ Rs No -0.44, No -0.41, Ce +0.16, Su -0.24, Su -0.69
+   2023-10 pronto em 3.5 min | razão C3 No 1.14, No 1.16, Ce 1.24, Su 1.11, Su 1.12 | Δ Rs No -0.22, No -0.46, Ce -0.77, Su -0.31, Su -0.75
+   2023-11 pronto em 4.3 min | razão C3 No 1.05, No 1.11, Ce 1.11, Su 1.10, Su 1.07 | Δ Rs No +0.04, No -0.38, Ce -0.18, Su -0.08, Su -0.39
+   2023-12 pronto em 2.4 min | razão C3 No 1.06, No 1.13, Ce 1.04, Su 1.06, Su 1.08 | Δ Rs No +0.13, No -0.26, Ce -0.19, Su +0.17, Su -0.21
+   2024-01 pronto em 4.0 min | razão C3 No 1.08, No 1.13, Ce 1.10, Su 1.01, Su 1.08 | Δ Rs No -0.33, No -0.70, Ce -0.68, Su +0.14, Su -0.59
+   2024-02 pronto em 2.9 min | razão C3 No 1.03, No 1.08, Ce 1.05, Su 1.05, Su 1.05 | Δ Rs No -0.32, No -0.67, Ce -0.56, Su -0.03, Su -0.75
+   2024-03 pronto em 3.9 min | razão C3 No 1.02, No 1.06, Ce 1.06, Su 1.15, Su 1.03 | Δ Rs No -0.15, No -0.29, Ce -0.66, Su -0.11, Su -0.46
+Tempo desta vez acabou; a próxima retoma daqui.
+# Correção da chuva, da radiação e da ETo nos dias ERA5: teste fora da amostra
+
+Protocolo aprovado e congelado antes de rodar (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, com a emenda 1: extremos em todos os pixels). Cada ano de teste é calibrado só com os anos anteriores. Referência: o que o banco entrega (BR-DWGD no núcleo), pixels entregues. Só leitura: nada foi gravado no Earth Engine.
+
+Conferência da receita (média 1986-2025 recalculada × `SICSB_1986_2025`, janeiro e julho, 6 regiões, chuva e radiação): maior diferença 1.55% (limite 2%).
+
+**Parcial:** 8 de 10 anos de teste completos ([2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]). A decisão só sai com os 10.
+
+## Chuva: |viés anual| (mediana dos anos de teste) e r_anomalias
+
+| Método | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil | Mediana das 5 |
+|---|---|---|---|---|---|---|---|
+| C0 | 6.8% (r 0.90) | 6.8% (r 0.98) | 8.7% (r 0.94) | 7.1% (r 0.98) | 8.4% (r 0.96) | 7.5% (r 0.90) | 7.09% |
+| C1 | 6.3% (r 0.89) | 5.1% (r 0.98) | 7.5% (r 0.94) | 4.2% (r 0.98) | 2.6% (r 0.96) | 6.4% (r 0.91) | 5.09% |
+| C2 | 6.6% (r 0.89) | 5.3% (r 0.98) | 8.8% (r 0.94) | 4.2% (r 0.98) | 3.5% (r 0.96) | 6.7% (r 0.90) | 5.33% |
+| C3 | 5.0% (r 0.91) | 4.2% (r 0.98) | 6.8% (r 0.94) | 3.5% (r 0.98) | 2.4% (r 0.96) | 4.6% (r 0.93) | 4.19% |
+
+### Viés anual da chuva no Brasil (%)
+
+| Ano | C0 | C1 | C2 | C3 |
+|---|---|---|---|---|
+| 2016 | +2.8 | +4.6 | +4.7 | +3.8 |
+| 2017 | -2.2 | -2.2 | -1.4 | -1.9 |
+| 2018 | -3.5 | -2.9 | -2.5 | -2.9 |
+| 2019 | -7.1 | -6.5 | -6.2 | -6.2 |
+| 2020 | -7.8 | -7.0 | -7.2 | -6.5 |
+| 2021 | -8.6 | -7.2 | -7.8 | -5.4 |
+| 2022 | -8.6 | -6.3 | -7.4 | -3.4 |
+| 2023 | -13.6 | -11.1 | -12.3 | -8.1 |
+
+## Dias de chuva e maior chuva do mês, em todos os pixels entregues
+
+Em cada célula: fração de dias com chuva (%) / erro do Rx1day (%). BR-DWGD: só a fração.
+
+| Método | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|
+| BR-DWGD | 65.0 | 29.8 | 41.7 | 32.1 | 36.0 | 48.4 |
+| C0 | 65.6 / 47.8 | 34.0 / 53.0 | 42.8 / 44.1 | 34.5 / 43.4 | 38.3 / 39.1 | 50.1 / 46.4 |
+| C1 | 66.2 / 48.1 | 34.1 / 54.0 | 43.2 / 44.9 | 34.9 / 44.3 | 38.9 / 39.9 | 50.5 / 47.0 |
+| C2 | 66.1 / 47.8 | 34.1 / 53.6 | 43.3 / 44.5 | 35.0 / 44.1 | 38.8 / 39.6 | 50.5 / 46.7 |
+| C3 | 66.1 / 48.0 | 34.5 / 53.6 | 43.4 / 44.5 | 35.2 / 43.8 | 39.0 / 39.4 | 50.6 / 46.8 |
+
+## Radiação e ETo: viés nos meses de teste
+
+| Método | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|
+| C0 | +0.45 MJ / +2.8% | +0.43 MJ / +1.7% | +0.40 MJ / +1.5% | +0.10 MJ / -0.1% | +0.47 MJ / -0.1% | +0.40 MJ / +1.8% |
+| C1 | +0.51 MJ / +3.1% | +0.48 MJ / +1.9% | +0.44 MJ / +1.7% | +0.27 MJ / +0.5% | +0.48 MJ / +0.0% | +0.46 MJ / +2.1% |
+| C2 | +0.61 MJ / +3.5% | +0.52 MJ / +2.0% | +0.43 MJ / +1.7% | +0.22 MJ / +0.4% | +0.49 MJ / +0.0% | +0.51 MJ / +2.3% |
+| C3 | +0.34 MJ / +2.3% | +0.29 MJ / +1.3% | +0.27 MJ / +1.0% | +0.15 MJ / +0.1% | +0.19 MJ / -1.1% | +0.29 MJ / +1.4% |
+
