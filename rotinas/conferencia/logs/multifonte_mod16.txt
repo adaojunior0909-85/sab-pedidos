@@ -1,0 +1,42 @@
+
+===== 25/11/2026 20:22 (Brasília), tentativa 1 =====
+código: commit 5a206c245bf389b67595e6880068cdc89c3ab980 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/data.py", line 361, in _execute_cloud_call
+    return call.execute(num_retries=num_retries)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/googleapiclient/_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/googleapiclient/http.py", line 1018, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 400 when requesting https://earthengine.googleapis.com/v1/projects/clima-492922/value:compute?prettyPrint=false&alt=json returned "Image.select: Band pattern 'et_potencial' was applied to an Image with no bands. See https://developers.google.com/earth-engine/guides/debugging#no-bands". Details: "Image.select: Band pattern 'et_potencial' was applied to an Image with no bands. See https://developers.google.com/earth-engine/guides/debugging#no-bands">
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_multifonte.py", line 283, in <module>
+    resumo() if arg == 'resumo' else rodar(arg)
+                                     ^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_multifonte.py", line 183, in rodar
+    bandas = img.bandNames().getInfo()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/computedobject.py", line 108, in getInfo
+    return data.computeValue(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/data.py", line 1082, in computeValue
+    return _execute_cloud_call(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/data.py", line 363, in _execute_cloud_call
+    raise _translate_cloud_exception(e)  # pylint: disable=raise-missing-from
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ee.ee_exception.EEException: Image.select: Band pattern 'et_potencial' was applied to an Image with no bands. See https://developers.google.com/earth-engine/guides/debugging#no-bands
