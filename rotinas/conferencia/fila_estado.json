@@ -30,5 +30,10 @@
   "fim": "25/11 03:36",
   "minutos": 0,
   "codigo": 0
+ },
+ "metodo_2026_A": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 03:41"
  }
 }
