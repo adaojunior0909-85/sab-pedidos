@@ -32,9 +32,9 @@
   "codigo": 0
  },
  "resolucao": {
-  "tentativas": 2,
-  "situacao": "pendente",
-  "inicio": "25/11 04:22",
+  "tentativas": 3,
+  "situacao": "rodando",
+  "inicio": "25/11 04:26",
   "fim": "25/11 04:26",
   "minutos": 5,
   "codigo": 1
