@@ -1,6 +1,6 @@
 # Validação de 2026 (ERA5 calibrado) contra referências INDEPENDENTES do ERA5, enquanto não há estações de 2026
 # disponíveis (o GSOD da NOAA vai até 2025 e o portal do INMET recusa acesso de fora do Brasil). Só LÊ o Earth Engine.
-#   A. CHUVA: total mensal do SAB x GPM-IMERG V07 mensal (NASA, satélite + pluviômetros do GPCC), por região e pixel a
+#   A. CHUVA: total mensal do SAB x CHIRPS (UCSB, satélite + estações; o IMERG mensal no Earth Engine para em set/2025), por região e pixel a
 #      pixel (correlação espacial), nos meses de 2026 e, como régua, nos mesmos meses de 2024 (SAB = BR-DWGD, observado).
 #   B. CALOR: anomalia da Tmax do SAB (mês de 2026 menos a média do mesmo mês em 2003-2024, BR-DWGD) x anomalia da
 #      temperatura da superfície de dia do MODIS (MOD11A2, mesma conta). Se o calor de out/nov de 2026 for real, os dois
@@ -26,7 +26,7 @@ CRS, TRANSFORM = sp.CRS, sp.TRANSFORM
 BRASIL = ee.Geometry.Rectangle([-74.0, -34.0, -34.0, 5.5], None, False)
 CLASSE = ee.Image(sp.MASCARA).select('classe').unmask(0, False)
 ENTREGUE = CLASSE.gte(1).And(CLASSE.lte(3))
-IMERG = ee.ImageCollection('NASA/GPM_L3/IMERG_MONTHLY_V07').select('precipitation')
+CHIRPS = ee.ImageCollection('UCSB-CHG/CHIRPS/PENTAD').select('precipitation')   # mm por pêntada
 MODIS = ee.ImageCollection('MODIS/061/MOD11A2').select('LST_Day_1km')
 
 
@@ -69,21 +69,20 @@ def comparar(a, b, rotulo, regs):
 def main():
     os.makedirs(SAIDA, exist_ok=True)
     regs = regioes()
-    fim_imerg, fim_modis = ultimo(IMERG.filterDate('2025-06-01', '2027-01-01')), ultimo(MODIS.filterDate('2026-01-01', '2027-01-01'))
+    fim_imerg, fim_modis = ultimo(CHIRPS.filterDate('2026-01-01', '2027-01-01')), ultimo(MODIS.filterDate('2026-01-01', '2027-01-01'))
     inv = ee.ImageCollection(sp.SAB).filterDate('2026-01-01', '2027-01-01')
     vers = dict(zip(inv.aggregate_array('system:index').getInfo(), inv.aggregate_array('versao').getInfo()))
     ult_era5 = max(k for k, v in vers.items() if v == 'provisoria_era5')[4:].replace('_', '-')
-    print(f'Último mês do IMERG: {fim_imerg} | último MODIS: {fim_modis} | último dia ERA5 do SAB: {ult_era5}', flush=True)
+    print(f'Última pêntada do CHIRPS: {fim_imerg} | último MODIS: {fim_modis} | último dia ERA5 do SAB: {ult_era5}', flush=True)
     linhas = []
-    # A. chuva mensal: meses de 2026 com IMERG e com o mês inteiro em ERA5 no SAB, e os mesmos meses de 2024
-    meses = [m for m in range(1, 13) if f'2026-{m:02d}-01' <= fim_imerg and date(2026, m, 28) < date.fromisoformat(ult_era5)]
+    # A. chuva mensal: meses de 2026 com CHIRPS (a última pêntada começa no dia 26) e com o mês inteiro em ERA5 no SAB, e os mesmos meses de 2024
+    meses = [m for m in range(1, 13) if f'2026-{m:02d}-26' <= fim_imerg and date(2026, m, 28) < date.fromisoformat(ult_era5)]
     for ano in (2026, 2024):
         for m in meses:
             ini = ee.Date.fromYMD(ano, m, 1)
             fim = ini.advance(1, 'month')
-            dias = fim.difference(ini, 'day')
             s = sab(ini, fim).select('pr_mm').sum()
-            r = ee.Image(IMERG.filterDate(ini, fim).first()).multiply(24).multiply(dias)
+            r = CHIRPS.filterDate(ini, fim).sum()
             linhas += [dict(x, ano=ano, mes=m, variavel='chuva_mm_mes') for x in comparar(s, r, f'chuva {ano}-{m:02d}', regs)]
             print(f'   chuva {ano}-{m:02d} pronta', flush=True)
     # B. anomalia de calor: meses de 2026 com MODIS, contra 2003-2024; régua: os mesmos meses de 2024 contra 2003-2023
@@ -108,12 +107,12 @@ def main():
 
 def resumo(df, fim_imerg, fim_modis, ult_era5):
     L = ['# 2026 (ERA5 calibrado) contra referências independentes do ERA5', '',
-         f'Gerado com: IMERG mensal até {fim_imerg}, MODIS até {fim_modis}, SAB ERA5 até {ult_era5}. A régua é 2024, '
+         f'Gerado com: CHIRPS (pêntadas) até {fim_imerg}, MODIS até {fim_modis}, SAB ERA5 até {ult_era5}. A régua é 2024, '
          'quando o SAB é o BR-DWGD (observado): 2026 está bom se concordar com os satélites tanto quanto 2024 concorda.', '']
     c = df[df.variavel == 'chuva_mm_mes'].copy()
     if len(c):
         c['vies_pct'] = 100 * (c.sab / c.referencia - 1)
-        L += ['## Chuva mensal: SAB x GPM-IMERG', '',
+        L += ['## Chuva mensal: SAB x CHIRPS', '',
               '| Ano | Região | Viés médio do SAB (%) | Correlação espacial média (Brasil) |', '|---|---|---|---|']
         for (ano, reg), g in c.groupby(['ano', 'regiao']):
             L.append(f'| {ano} | {reg} | {g.vies_pct.mean():+.1f} | {g.correlacao_espacial_brasil.mean():.2f} |')
@@ -123,6 +122,10 @@ def resumo(df, fim_imerg, fim_modis, ult_era5):
         L += ['## Calor: anomalia da Tmax do SAB x anomalia da temperatura de superfície do MODIS', '',
               '| Mês | Região | Anomalia Tmax SAB (°C) | Anomalia LST MODIS (°C) | Correlação espacial (Brasil) |',
               '|---|---|---|---|---|']
+        L.insert(len(L) - 3, 'Atenção: o Terra (MODIS) saiu da órbita fixa em 2022 e passa cada vez mais cedo, então a '
+                 'temperatura de superfície dele esfria artificialmente ano a ano; o NÍVEL da anomalia do MODIS não '
+                 'serve. O que vale é a CORRELAÇÃO ESPACIAL (o desenho do calor no mapa), comparada à de 2024.')
+        L.insert(len(L) - 3, '')
         for r in t.sort_values(['ano', 'mes', 'regiao']).itertuples():
             L.append(f'| {r.ano}-{r.mes:02d} | {r.regiao} | {r.sab:+.2f} | {r.referencia:+.2f} | '
                      f'{r.correlacao_espacial_brasil:.2f} |')
