@@ -111,11 +111,14 @@ def resumo(df, fim_imerg, fim_modis, ult_era5):
          'quando o SAB é o BR-DWGD (observado): 2026 está bom se concordar com os satélites tanto quanto 2024 concorda.', '']
     c = df[df.variavel == 'chuva_mm_mes'].copy()
     if len(c):
-        c['vies_pct'] = 100 * (c.sab / c.referencia - 1)
-        L += ['## Chuva mensal: SAB x CHIRPS', '',
-              '| Ano | Região | Viés médio do SAB (%) | Correlação espacial média (Brasil) |', '|---|---|---|---|']
-        for (ano, reg), g in c.groupby(['ano', 'regiao']):
-            L.append(f'| {ano} | {reg} | {g.vies_pct.mean():+.1f} | {g.correlacao_espacial_brasil.mean():.2f} |')
+        meses = sorted(c.mes.unique())
+        L += ['## Chuva mensal: SAB x CHIRPS', '', f'Meses {meses[0]} a {meses[-1]}; viés do TOTAL do período (os meses '
+              'secos não pesam mais que os chuvosos).', '',
+              '| Ano | Região | Total SAB (mm) | Total CHIRPS (mm) | Viés do SAB (%) | Correlação espacial média (Brasil) |',
+              '|---|---|---|---|---|---|']
+        for (ano, reg), g in c.sort_values('ano', ascending=False).groupby(['ano', 'regiao'], sort=False):
+            L.append(f'| {ano} | {reg} | {g.sab.sum():.0f} | {g.referencia.sum():.0f} | '
+                     f'{100 * (g.sab.sum() / g.referencia.sum() - 1):+.1f} | {g.correlacao_espacial_brasil.mean():.2f} |')
         L.append('')
     t = df[df.variavel == 'anomalia_tmax_x_lst_C']
     if len(t):
