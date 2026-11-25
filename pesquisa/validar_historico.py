@@ -29,7 +29,7 @@ TC = ee.ImageCollection('IDAHO_EPSCOR/TERRACLIMATE')
 CHIRPS = ee.ImageCollection('UCSB-CHG/CHIRPS/PENTAD').select('precipitation')
 # variável do SAB: (banda do TerraClimate, escala para a unidade do SAB por dia ou por mês, soma no mês?)
 PARES = {
-    'pr_mm': ('pr', 'ppt', 1.0, True),
+    'pr_mm': ('pr', 'pr', 1.0, True),
     'tmax_C': ('tmax_C', 'tmmx', 0.1, False),
     'tmin_C': ('tmin_C', 'tmmn', 0.1, False),
     'vpd': ('vpd', 'vpd', 0.01, False),
