@@ -44,8 +44,12 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
    `metodo_2026`, que rodam na `main`, e do `historico`). Não rodar `metricas_completas.py` antes disso: sairia
    incompleto.
 4. Ler os resultados e escrever as conclusões em `registro/REGISTRO_MANUAL.md` (seção 4), principalmente:
-   - a chuva de 2026 no Centro-Oeste (−21%) e no Nordeste (−16%) × CHIRPS: a Parte A diz se é o método (se o método
-     também erra assim em 2021–2025, propor correção com protocolo fixado antes; o banco não muda sem simulação);
+   - **Parte A PRONTA (25/11, 05h30):** o método de 2026 subestima a chuva em TODOS os anos de 2021–2025 e regiões
+     (Brasil −9,6%; Nordeste e Centro-Oeste −12%, pior ano −16%) e superestima ETo (+3,5%) e radiação (+0,6 MJ). Isso
+     explica a maior parte da chuva baixa de 2026 × CHIRPS. PRÓXIMO TRABALHO PRINCIPAL: propor ao responsável a
+     correção dos dias ERA5 (ex.: calibração pelos anos recentes, 2016–2025, ou fator por década), com protocolo e
+     regra fixados ANTES, teste fora da amostra (como a K21: treino em uns anos, teste em outros), simulação 05a no
+     sab-motor e K16. Nada é gravado sem o responsável aprovar. Ver `pesquisa/resultados_metodo_2026/RESULTADOS_A.md`;
    - o resultado da sensibilidade à resolução (`pesquisa/resultados_resolucao/RESULTADOS.md`);
    - avisos no dicionário: ET real como índice (Norte r = 0,06 × MOD16); escoamento abaixo da vazão dos rios (−35%).
 5. **Atualizar a pasta de entrega:** a base que monta o zip NÃO está no GitHub. Peça ao responsável para enviar na
