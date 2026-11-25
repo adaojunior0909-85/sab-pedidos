@@ -67,7 +67,7 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 | `main` | K26 rodada 7 (25/11 à tarde); rodadas 1–4 (2026 e previsão) a partir de 26/11, depois que o motor V1.7 regravar 2026; rodadas 5, 6, 8–11 a partir de 01/12 | agendado |
 | `validacoes-2` (cadeia `so=historico`) | histórico 1961–2025 × TerraClimate e CHIRPS, 5 regiões + Brasil + 27 estados | rodando (recomeçou 04h15) |
 | `validacoes-2` (cadeia `so=resolucao`) | sensibilidade à resolução: cada referência na grade do SAB × nativa, todas as variáveis e meses | rodando (recomeçou 04h33, depois da correção do erro 'features') |
-| `main` | rotinas fixas: previsão 16h13 diária, saúde (seg 14h29), RONI (dia 11), K26 (dia 15), piloto (dias 3 e 17) | ligadas |
+| `main` | rotinas fixas: previsão 16h13 diária, conferência da gravação (seg 14h29; antes "saúde do banco", renomeada no PR #11, esperando o merge), RONI (dia 11), K26 (dia 15), piloto (dias 3 e 17) | ligadas, mas **nenhuma rodou por horário até 25/11** (o GitHub atrasa os agendamentos: o motor, marcado para 23h07, começa entre 06h40 e 09h20); conferir se a previsão das 16h13 rodou sozinha |
 
 As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tarefa quebrar 3 vezes, fica `falhou` no
 `fila_estado_<cadeia>.json` e o erro no LOG: corrigir o script, apagar a entrada da tarefa no json e disparar de novo:
@@ -103,7 +103,7 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
    ~10 min); (c) mandar o zip ao responsável. O zip passa de 30 MB: o responsável guarda no computador/Drive, não
    precisa reenviar. Se mudar algo da base (painel, Colab, Apps Script), mudar em `entrega/base_07/` e subir.
 6. O repositório `sab-motor` não vem junto numa conversa nova: se precisar (ex.: conferir se o motor V1.7 regravou
-   2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (saúde do banco)
+   2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (conferência da gravação)
    mostra quantos dias estão em cada versão do motor.
 
 ## Avisos conhecidos
