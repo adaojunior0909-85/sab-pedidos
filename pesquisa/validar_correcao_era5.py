@@ -47,6 +47,10 @@
 #     meses. "Melhorar" e "piorar" comparam os |viés| com os do C0. Se mais de um método passar na radiação, vence o
 #     de menor |viés| da radiação no Brasil; diferença < 0,05 MJ: o mais simples (C1, C2, C3), como na chuva.
 #
+# MEMÓRIA (técnico, 25/11, 2ª versão): a 1ª tentativa estourou a memória do Earth Engine ao somar ~1.240 dias do
+#   ERA5-Land por mês. A média do ERA5 agora vem do ERA5-Land MENSAL (soma do mês / dias, a mesma conta, linear); o
+#   BR-DWGD continua diário, com chuva e radiação em pedidos separados; sem a reprojeção explícita; e, se ainda faltar
+#   memória, o pedido é feito região por região. A conferência da receita abaixo prova que o resultado é o do asset.
 # CONFERÊNCIA DA RECEITA (antes de tudo, técnica, não é regra): a média recalculada aqui para 1986-2025 tem de bater
 #   com o asset SICSB_1986_2025 (chuva e radiação, BR-DWGD e ERA5, médias regionais de janeiro e julho) a 2%; se não
 #   bater, o script para (código 1) sem rodar o resto.
@@ -364,15 +368,18 @@ def reduzir(img, bandas, rotulo):
     """Média regional (pixels entregues), em grupos de bandas cada vez menores se o servidor recusar."""
     E = iniciar()
     ee, v, sp = E['ee'], E['v'], E['sp']
-    for tentativa, grupos in enumerate((1, 3, 6, len(bandas))):
+    # 1) todas as regiões juntas; 2) em 3 grupos de bandas; 3) região por região; 4) região por região, banda a banda
+    for tentativa, (grupos, separar) in enumerate(((1, False), (3, False), (1, True), (len(bandas), True))):
         try:
             res = {}
             n = -(-len(bandas) // grupos)
-            for i in range(0, len(bandas), n):
-                fc = img.select(bandas[i:i + n]).updateMask(v.ENTREGUE).reduceRegions(
-                    collection=E['regs'], reducer=ee.Reducer.mean(), crs=sp.CRS, crsTransform=sp.TRANSFORM, tileScale=16)
-                for f in fc.getInfo()['features']:
-                    res.setdefault(f['properties']['regiao'], {}).update(f['properties'])
+            colecoes = ([E['regs'].filter(ee.Filter.eq('regiao', r)) for r in REGIOES] if separar else [E['regs']])
+            for col in colecoes:
+                for i in range(0, len(bandas), n):
+                    fc = img.select(bandas[i:i + n]).updateMask(v.ENTREGUE).reduceRegions(
+                        collection=col, reducer=ee.Reducer.mean(), crs=sp.CRS, crsTransform=sp.TRANSFORM, tileScale=16)
+                    for f in fc.getInfo()['features']:
+                        res.setdefault(f['properties']['regiao'], {}).update(f['properties'])
             return res
         except Exception as e:  # noqa: BLE001
             print(f'   ⚠️ {rotulo}: {str(e)[:160]} | de novo em pedidos menores', flush=True)
@@ -388,17 +395,33 @@ def br_limpo(img):
                          img.select('Rs').updateMask(mask).multiply(0.15708661).add(-0.057087).rename('Rs')])
 
 
-def era_limpo(img):
-    """O2: chuva sem reamostrar, radiação bilinear (sem tirar o 0: a matriz original não tirava)."""
-    ee = iniciar()['ee']
-    return ee.Image.cat([img.select('total_precipitation_sum').multiply(1000).max(0).rename('pr'),
-                         img.select('surface_solar_radiation_downwards_sum').divide(1e6).resample('bilinear').rename('Rs')])
+ERA5_MENSAL = 'ECMWF/ERA5_LAND/MONTHLY_AGGR'
 
 
-def soma_conta(col, mes, a0, a1, prep):
+def era_mensal_soma(img):
+    """Um mês do ERA5-Land mensal como somas e contagens diárias: chuva (mm) e radiação (MJ/m², bilinear), e o número
+    de dias. A média dos dias do O2 = soma do mês / dias (as duas contas são lineares; a conferência da receita prova)."""
     ee = iniciar()['ee']
-    c = col.filter(ee.Filter.calendarRange(mes, mes, 'month')).filterDate(f'{a0}-01-01', f'{a1 + 1}-01-01').map(prep)
-    return c.reduce(ee.Reducer.sum().combine(ee.Reducer.count(), sharedInputs=True))   # pr_sum, pr_count, Rs_sum, Rs_count
+    d0 = ee.Date(img.get('system:time_start'))
+    n = ee.Image.constant(d0.advance(1, 'month').difference(d0, 'day')).toFloat()
+    return ee.Image.cat([img.select('total_precipitation_sum').multiply(1000).max(0).rename('pr_sum'),
+                         img.select('surface_solar_radiation_downwards_sum').divide(1e6).resample('bilinear')
+                         .rename('Rs_sum'), n.rename('pr_count'), n.rename('Rs_count')])
+
+
+def soma_conta_era(mes, a0, a1):
+    ee = iniciar()['ee']
+    return (ee.ImageCollection(ERA5_MENSAL).filter(ee.Filter.calendarRange(mes, mes, 'month'))
+            .filterDate(f'{a0}-01-01', f'{a1 + 1}-01-01').map(era_mensal_soma).sum())
+
+
+def soma_conta_br(mes, a0, a1, var):
+    """BR-DWGD diário: soma e contagem dos dias válidos de uma variável (separadas, para o pedido ficar leve)."""
+    E = iniciar()
+    ee = E['ee']
+    c = (E['m']['colChuvaGeral'].filter(ee.Filter.calendarRange(mes, mes, 'month'))
+         .filterDate(f'{a0}-01-01', f'{a1 + 1}-01-01').map(lambda i: br_limpo(i).select(var)))
+    return c.reduce(ee.Reducer.sum().combine(ee.Reducer.count(), sharedInputs=True))   # <var>_sum, <var>_count
 
 
 def climatologias(mes, Y, metodos=('C0', 'C1', 'C2')):
@@ -408,18 +431,18 @@ def climatologias(mes, Y, metodos=('C0', 'C1', 'C2')):
     blocos = {}
     for b, (a0, a1) in pedacos(Y).items():
         if a1 >= a0 and any(b in BLOCOS[k] for k in metodos):
-            blocos[b] = (soma_conta(m['colChuvaGeral'], mes, a0, a1, br_limpo),
-                         soma_conta(m['colecao_era5'], mes, a0, a1, era_limpo))
+            blocos[b] = ({v_: soma_conta_br(mes, a0, a1, v_) for v_ in ('pr', 'Rs')}, soma_conta_era(mes, a0, a1))
     out = {}
     for k in metodos:
         bs = [b for b in BLOCOS[k] if b in blocos]
         im = []
         for fonte, i in (('br', 0), ('era', 1)):
             for var in ('pr', 'Rs'):
-                s = ee.Image.cat([blocos[b][i].select(f'{var}_sum') for b in bs]).reduce(ee.Reducer.sum())
-                n = ee.Image.cat([blocos[b][i].select(f'{var}_count') for b in bs]).reduce(ee.Reducer.sum())
+                fontes = [blocos[b][i][var] if fonte == 'br' else blocos[b][i] for b in bs]
+                s = ee.Image.cat([x.select(f'{var}_sum') for x in fontes]).reduce(ee.Reducer.sum())
+                n = ee.Image.cat([x.select(f'{var}_count') for x in fontes]).reduce(ee.Reducer.sum())
                 im.append(s.divide(n).rename(f'{var}_m_{fonte}'))
-        out[k] = ee.Image.cat(im).toFloat().reproject(crs=sp.CRS, crsTransform=sp.TRANSFORM)
+        out[k] = ee.Image.cat(im).toFloat()       # a grade do SAB vem do pedido (e do expandir_borda do motor)
     return out
 
 
@@ -614,7 +637,7 @@ def _feats(pontos):
 
 
 def agregados_pixels(ano, pontos):
-    """Anos só de climatologia: somas e contagens mensais da chuva do ERA5 bruto e do BR-DWGD nos pixels."""
+    """Somas e contagens mensais da chuva do ERA5 (mensal, como a climatologia regional) e do BR-DWGD nos pixels."""
     E = iniciar()
     ee, sp, m = E['ee'], E['sp'], E['m']
     proj = ee.Projection(sp.CRS, sp.TRANSFORM)
@@ -625,10 +648,9 @@ def agregados_pixels(ano, pontos):
             ims = []
             for mes in meses:
                 ini, fim = f'{ano}-{mes:02d}-01', (date(ano, mes, 1) + timedelta(days=32)).replace(day=1).isoformat()
-                era = m['colecao_era5'].filterDate(ini, fim).map(
-                    lambda i: i.select('total_precipitation_sum').multiply(1000).max(0).rename('e'))
+                era = ee.ImageCollection(ERA5_MENSAL).filterDate(ini, fim).map(era_mensal_soma).sum()
                 br = m['colChuvaGeral'].filterDate(ini, fim).map(lambda i: br_limpo(i).select('pr').rename('b'))
-                ims += [era.sum().rename(f's_era_{mes}'), era.count().rename(f'n_era_{mes}'),
+                ims += [era.select('pr_sum').rename(f's_era_{mes}'), era.select('pr_count').rename(f'n_era_{mes}'),
                         br.sum().rename(f's_br_{mes}'), br.count().rename(f'n_br_{mes}')]
             r = gi(ee.Image.cat(ims).sampleRegions(collection=ee.FeatureCollection(feats), properties=['pid'],
                                                    projection=proj, geometries=False, tileScale=16),
@@ -733,7 +755,7 @@ def fmt(x, nd=1, sinal=True):
 
 def pixels_prontos():
     pix = os.path.join(SAIDA, 'pixels')
-    ag = [os.path.join(pix, f'agregados_{a}.csv.gz') for a in range(ANO_INICIO_CLIMA, ANOS_TESTE[0])]
+    ag = [os.path.join(pix, f'agregados_{a}.csv.gz') for a in range(ANO_INICIO_CLIMA, ANOS_TESTE[-1] + 1)]
     di = [os.path.join(pix, f'dias_{a}.csv.gz') for a in ANOS_TESTE]
     return all(os.path.exists(a) for a in ag + di + [os.path.join(pix, 'pontos.csv')]), ag, di
 
@@ -794,7 +816,7 @@ def resumo():
                 gr = g[g.regiao == r]
                 razoes[(Y, mes, r)] = razao_c3(gr[gr.metodo == 'BR'].valor, gr[gr.metodo == 'C0'].valor)
         dias = pd.concat(pd.read_csv(a) for a in di)
-        agregados = pd.concat([pd.read_csv(a) for a in ag] + [agregar_dias(dias)], ignore_index=True)
+        agregados = pd.concat([pd.read_csv(a) for a in ag], ignore_index=True)
         mp = metricas_pixels(chuva_pixels(agregados, dias, pontos, razoes))
         L += [f"## Percentil 99 diário em {mp['n_pixels']} pixels A ({mp['n_dias']:,} pixel-dias de 2016-2025)".replace(',', '.'),
               '', f"Fração de dias com chuva no BR-DWGD nesses pixels: {100 * mp['fracao_br']:.1f}%.", '',
@@ -873,16 +895,16 @@ def main():
         raise SystemExit(f'A média recalculada não bate com o asset (>{100 * TOL_RECEITA:.0f}%): o teste não roda.')
     # pixels primeiro (mais leves): o sorteio, as somas dos anos de climatologia e os dias dos anos de teste
     pontos = pontos_sorteio()
-    for ano in range(ANO_INICIO_CLIMA, 2026):
-        teste = ano in ANOS_TESTE
-        arq = os.path.join(SAIDA, 'pixels', f"{'dias' if teste else 'agregados'}_{ano}.csv.gz")
+    tarefas = [('agregados', a) for a in range(ANO_INICIO_CLIMA, 2026)] + [('dias', a) for a in ANOS_TESTE]
+    for tipo, ano in tarefas:
+        arq = os.path.join(SAIDA, 'pixels', f'{tipo}_{ano}.csv.gz')
         if os.path.exists(arq):
             continue
         tempo()
         t0 = time.time()
-        d = dias_pixels(ano, pontos) if teste else agregados_pixels(ano, pontos)
-        d.round(2).to_csv(arq, index=False)
-        print(f'   pixels {ano}: {len(d)} linhas em {(time.time() - t0) / 60:.1f} min', flush=True)
+        d = dias_pixels(ano, pontos) if tipo == 'dias' else agregados_pixels(ano, pontos)
+        d.round(3).to_csv(arq, index=False)
+        print(f'   pixels {tipo} {ano}: {len(d)} linhas em {(time.time() - t0) / 60:.1f} min', flush=True)
     for Y in ANOS_TESTE:
         for mes in range(1, 13):
             arq = os.path.join(SAIDA, 'regional', f'{Y}_{mes:02d}.csv')

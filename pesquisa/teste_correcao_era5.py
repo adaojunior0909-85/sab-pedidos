@@ -101,8 +101,7 @@ for ano in range(1986, 2026):
                        'br': br.ravel()})
     if ano in t.ANOS_TESTE:
         df.to_csv(os.path.join(pasta, 'pixels', f'dias_{ano}.csv.gz'), index=False)
-    else:
-        t.agregar_dias(df).to_csv(os.path.join(pasta, 'pixels', f'agregados_{ano}.csv.gz'), index=False)
+    t.agregar_dias(df).to_csv(os.path.join(pasta, 'pixels', f'agregados_{ano}.csv.gz'), index=False)
 t.resumo()
 txt = open(os.path.join(pasta, 'RESULTADOS.md'), encoding='utf-8').read()
 confere('**Chuva: troca para C1.**' in txt, 'a regra escolhe o C1 na chuva (o C3 reprova no Rx1day)')
