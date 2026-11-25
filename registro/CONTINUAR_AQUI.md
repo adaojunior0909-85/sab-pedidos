@@ -1,4 +1,4 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~13h de Brasília)
+# Para continuar numa conversa nova (estado em 25/11/2026, ~17h15 de Brasília)
 
 ## Cole isto na conversa nova
 > Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
@@ -117,6 +117,35 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 6. O repositório `sab-motor` não vem junto numa conversa nova: se precisar (ex.: conferir se o motor V1.7 regravou
    2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (conferência da gravação)
    mostra quantos dias estão em cada versão do motor.
+
+## Vigia automática (desde 25/11, ~17h)
+Tarefa agendada **"SAB – vigiar os testes"** (a cada 2 h, minuto 13; dispara NA conversa do branch
+`claude/tender-maxwell-6ka6dt`, que tem o GitHub ligado). Confere as cadeias, a simulação da V1.8, o motor da noite e se
+os agendamentos do `sab-pedidos` voltaram; pode disparar de novo uma cadeia parada e corrigir um erro de código
+pequeno (uma vez por tarefa por dia); notifica o celular só quando algo precisa do responsável, quando sai um
+resultado importante ou quando tudo termina. Quando tudo terminar: abre o PR `validacoes-2` → `main` (sem merge),
+resume os resultados aqui e se desliga. Nunca: merge, gravação no Earth Engine, motor gravando a V1.8.
+
+## O que é verificado (cobertura)
+- **Consistência física (K26), o banco inteiro:** 1961 até o último dia da previsão, as 16 variáveis, ~1,7 bilhão
+  de pixel-dias (rodadas 1–4: 2026 e previsão; 5–11: 1961–2025 por década).
+- **Referências independentes:**
+
+| Variável | Referência | Período |
+|---|---|---|
+| Chuva | TerraClimate; CHIRPS; BR-DWGD fora da amostra (correção); GLDAS | 1961–2025; 1981–2026; 2016–2025; 2026 |
+| Tmax, Tmin, VPD, radiação, vento, ETo | TerraClimate; método de 2026 × BR-DWGD; GLDAS | 1961–2025; 2021–2025; 2026 |
+| ET real | TerraClimate; MOD16; GLDAS | 1961–2025; 2016–2021; 2026 |
+| Água no solo 0–100 cm | TerraClimate (correlação); GLDAS | 1961–2025; 2026 |
+| Escoamento total | TerraClimate; vazão de 512 bacias (CAMELS-BR); GLDAS | 1961–2025; 1981–2018; 2026 |
+| Umidade relativa | via VPD (TerraClimate); BR-DWGD; GLDAS | 1961–2025; 2021–2025; 2026 |
+| Umidade do solo 0–5 cm | SMAP; GLDAS | 2016–2021; 2026 |
+| Temperatura do solo e da folha | MODIS; GLDAS | 2016–2021; 2026 |
+| Transpiração, escoamento subsuperficial | GLDAS | 2026 |
+| Previsão GFS (1–15 dias) | o dia observado, por prazo | rotina diária desde 24/11 |
+
+Limite: fora dos anos acima, umidade 0–5 cm, temperaturas do solo e da folha, transpiração e escoamento
+subsuperficial só têm a conferência física (não há observação independente para o Brasil inteiro desde 1961).
 
 ## O que falta auditar e corrigir (lista viva; riscar quando fechar)
 1. **Agendamentos do `sab-pedidos` não disparam:** nenhuma execução por horário (cron) no repositório, em nenhuma

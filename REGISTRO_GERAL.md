@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 15:29, Brasília)
+# Apêndice automático (refeito em 25/11/2026 17:16, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -471,6 +471,9 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 20:08 | Registro: motor V1.8 etapa A (simulação disparada) e fila da main disparada |
+| 25/11/2026 20:01 | Registro: sab-pedidos público (minutos do Actions deixam de faltar) |
+| 25/11/2026 18:29 | Correção ERA5: resultado (chuva → C3; radiação/ETo → C0 fica), dados e registro; minutos do Actions esgotados |
 | 25/11/2026 17:53 | Conferência: começou resolucao  |
 | 25/11/2026 17:53 | Conferência: resolucao (pendente)  |
 | 25/11/2026 17:39 | Conferência: começou historico  |
