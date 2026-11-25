@@ -441,3 +441,58 @@ Traceback (most recent call last):
   File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/ee_number.py", line 41, in __init__
     raise ee_exception.EEException(
 ee.ee_exception.EEException: Invalid argument specified for ee.Number(): 1
+
+===== 25/11/2026 14:35 (Brasília), tentativa 3 =====
+código: commit 5102e4904eed3da81b3c15a8c0c8906f35cc21da | earthengine-api 1.7.51 | Python 3.12.16
+🔄 Iniciando SAB V1.7 no projeto: clima-492922...
+🕒 Timestamp de Operação (Local/BRT): 2026-11-25 14:35:18
+
+📡 Última data ERA5-Land: 2026-11-17 | Última data BR-DWGD: 2025-12-31
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+Receita: maior diferença 1.55% contra o asset SICSB_1986_2025
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 929, in <module>
+    main()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 921, in main
+    chirps_2026()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 729, in chirps_2026
+    cl = climatologias(mes, 2026)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 434, in climatologias
+    blocos[b] = ({v_: soma_conta_br(mes, a0, a1, v_) for v_ in ('pr', 'Rs')}, soma_conta_era(mes, a0, a1))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 422, in soma_conta_br
+    c = (E['m']['colChuvaGeral'].filter(ee.Filter.calendarRange(mes, mes, 'month'))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/filter.py", line 249, in calendarRange
+    return apifunction.ApiFunction.call_(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/apifunction.py", line 84, in call_
+    return cls.lookup(name).call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/function.py", line 63, in call
+    return self.apply(self.nameArgs(args, kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/function.py", line 76, in apply
+    result = computedobject.ComputedObject(self, self.promoteArgs(named_args))
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/function.py", line 104, in promoteArgs
+    promoted_args[name] = Function._promoter(args[name], arg_spec['type'])
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/__init__.py", line 399, in _Promote
+    return Number(arg)
+           ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/computedobject.py", line 29, in __call__
+    return type.__call__(cls, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/ee_number.py", line 41, in __init__
+    raise ee_exception.EEException(
+ee.ee_exception.EEException: Invalid argument specified for ee.Number(): 1
