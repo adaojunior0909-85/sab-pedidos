@@ -33,7 +33,10 @@
  },
  "historico": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 03:46"
+  "situacao": "pendente",
+  "inicio": "25/11 03:46",
+  "fim": "25/11 03:50",
+  "minutos": 3,
+  "codigo": 1
  }
 }
