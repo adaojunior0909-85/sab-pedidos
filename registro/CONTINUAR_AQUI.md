@@ -47,9 +47,19 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ✅ **`resolucao` roda completa**, sem amostra de anos, mesmo levando ~2 dias (decisão de 25/11).
 - ✅ **"Saúde do banco" virou "Conferência da gravação"** (PR #11, juntado em 25/11): `rotina_gravacao.yml`,
   `rotinas/gravacao/conferencia_gravacao.py`, `rotinas/estado/gravacao.json`.
-- ⏳ **Depois do teste da correção:** se algum método passar, aprovar (a) a climatologia nova no Earth Engine (ex.:
-  `SICSB_2016_2025`; é ESCRITA, aprovação separada), (b) o motor V1.8 em simulação (05a) e (c) a K16. Se nenhum
-  passar: aprovar o aviso da chuva de 2026 no dicionário (com os números da Parte A).
+- ✅ **Teste da correção TERMINOU (25/11, ~15h; os 120 meses):** **chuva → C3 passa** nas 4 condições (mediana do
+  |viés anual| 8,4% → 4,3%; Brasil melhor em 9 de 10 anos); **radiação/ETo → nenhum passa** (o C0 fica). Resultado:
+  `pesquisa/resultados_correcao_era5/RESULTADOS.md`. Falta só o relato 2026 × CHIRPS (precisa de ~30 min de GitHub;
+  o erro de tipo do mês já foi corrigido no commit `c4f63f5`; zerar a entrada `correcao_era5` do
+  `fila_estado_correcao_era5.json` e disparar de novo a cadeia no branch de trabalho).
+- ⏳ **Próximo, com aprovação do responsável:** o motor V1.8 em simulação (05a no `sab-motor`) com a chuva dos dias ERA5
+  pelo C3. O C3 NÃO precisa de climatologia nova no Earth Engine: usa a `SICSB_1986_2025` de sempre × 60 razões (12
+  meses × 5 regiões) tiradas de 2021–2025 (as da Parte A). Depois: prévia de 2026, K16, aprovação e 05b (regrava só
+  2026; o histórico não muda).
+- ⛔ **Minutos do GitHub Actions do `sab-pedidos` (privado) esgotados em 25/11, ~15h** (2.000 do plano gratuito). Param
+  os pedidos por e-mail, a fila (`historico`, `resolucao`, CHIRPS da correção) e as rotinas do `sab-pedidos`. O motor
+  (`sab-motor`, público) NÃO é afetado. Decisão do responsável: tornar o `sab-pedidos` público (minutos ilimitados; o
+  repositório não guarda e-mails de solicitantes), pagar o excedente (~US$ 20–30 para o que falta) ou esperar o ciclo.
 - ⏳ **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem (eu abro, o responsável junta).
 - ⏳ **Agendamentos do `sab-pedidos`:** se até a noite de 25/11 a previsão das 16h13 não tiver rodado sozinha, propor ao
   responsável o conserto (ver "O que falta auditar e corrigir", item 1).
