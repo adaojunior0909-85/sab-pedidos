@@ -31,21 +31,19 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   - `claude/gifted-brahmagupta-4wyvci` (25/11, 06h47): rascunho do protocolo da correção da chuva, da radiação e da
     ETo dos dias ERA5 (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`). **Já copiado** para o branch abaixo; pode ser
     ignorado.
-  - `claude/tender-maxwell-6ka6dt` (25/11, ~07h): o `validacoes-2` + o rascunho do protocolo + o registro da Parte B.
-    É o branch de trabalho atual; trazer para o `validacoes-2` (ou abrir PR) quando o responsável aprovar.
+  - `claude/tender-maxwell-6ka6dt` (25/11, ~07h): o `validacoes-2` + a `main` (juntadas, com os arquivos de situação da
+    `main`) + o protocolo aprovado. Branch de trabalho atual (script do teste da correção). O registro e o protocolo
+    também estão no `validacoes-2`: uma versão só.
 - **Uma conversa por vez.** Duas conversas mexendo no repositório ao mesmo tempo se atropelam: a antiga para quando a
   nova começa.
 
 ## Decisões esperando o responsável
-1. **Aprovar o protocolo da correção** (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no branch acima). Resumo: teste fora
-   da amostra com origem móvel (cada ano de 2016 a 2025 calibrado só com os anos anteriores); métodos C0 (atual), C1
-   (janela de 10 anos), C2 (15 anos) e C3 (atual + ajuste regional dos últimos 5 anos); a chuva só troca se cumprir as
-   4 condições (mediana do |viés| −3 p.p.; melhora em ≥ 7 de 10 anos; `r_anomalias` não cai mais de 0,02; dias de
-   chuva e percentil 99 não pioram). Depois de aprovado: congelar num commit ANTES de rodar e escrever o script de
-   teste (só leitura).
-   - **Sugestão a levar ao responsável (ele decide):** conferir também o método aprovado em **2026 contra o CHIRPS**:
-     se a chuva corrigida de 2026 no Centro-Oeste e no Nordeste chegar perto do CHIRPS (como na régua de 2024), é uma
-     confirmação independente. Só relatado; não entra na regra.
+0. ✅ **Protocolo da correção APROVADO (25/11, ~07h)**, incluindo 2026 × CHIRPS só como relato (fora da regra).
+   Congelado no commit `161324a` (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no `validacoes-2` e no branch de
+   trabalho) ANTES de rodar. PRÓXIMO: escrever `pesquisa/validar_correcao_era5.py` (só leitura) e pô-lo na fila; o
+   disparo é combinado com o responsável. Resumo: teste fora da amostra com origem móvel (cada ano de 2016 a 2025
+   calibrado só com os anos anteriores); métodos C0 (atual), C1 (10 anos), C2 (15 anos), C3 (atual + ajuste regional
+   dos últimos 5 anos); a chuva só troca se cumprir as 4 condições.
 2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
    método passar. O asset atual e o histórico não mudam.
 3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
