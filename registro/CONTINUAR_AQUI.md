@@ -49,9 +49,10 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   `rotinas/gravacao/conferencia_gravacao.py`, `rotinas/estado/gravacao.json`.
 - ✅ **Teste da correção TERMINOU (25/11, ~15h; os 120 meses):** **chuva → C3 passa** nas 4 condições (mediana do
   |viés anual| 8,4% → 4,3%; Brasil melhor em 9 de 10 anos); **radiação/ETo → nenhum passa** (o C0 fica). Resultado:
-  `pesquisa/resultados_correcao_era5/RESULTADOS.md`. Falta só o relato 2026 × CHIRPS (precisa de ~30 min de GitHub;
-  o erro de tipo do mês já foi corrigido no commit `c4f63f5`; zerar a entrada `correcao_era5` do
-  `fila_estado_correcao_era5.json` e disparar de novo a cadeia no branch de trabalho).
+  `pesquisa/resultados_correcao_era5/RESULTADOS.md`. **Relato 2026 × CHIRPS pronto (25/11, 17h15; fora da regra):**
+  viés do total jan–set contra o CHIRPS (régua 2024 → 2026 gravado → 2026 com C3): Nordeste +6,6 → −15,6 → −4,1;
+  Centro-Oeste −1,4 → −21,3 → −10,0; Brasil +2,3 → −5,8 → +3,6; mas Sul +3,8 → +4,1 → +15,5, Sudeste −1,1 → −2,9 →
+  +5,6 e Norte +2,4 → −1,2 → +7,1 (o C3 aproxima o NE e o CO e passa do ponto no Sul). Só relato: não muda a decisão.
 - ✅ **Responsável (25/11, ~17h): "pode fazer tudo e vamos aguardar todos os resultados para tirarmos as nossas
   conclusões".** Feito: (a) a fila da `main` disparada à mão (K26 rodada 7); (b) **motor V1.8, etapa A**, no branch
   `claude/tender-maxwell-6ka6dt` do `sab-motor` (commit `5739ed0`): chuva dos dias ERA5 = V1.7 × `RAZAO_CHUVA_C3`
