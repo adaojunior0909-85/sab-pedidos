@@ -1,6 +1,7 @@
 # Correção da chuva, da radiação e da ETo nos dias ERA5: teste fora da amostra com origem móvel. SÓ LEITURA no
 # Earth Engine (as funções de escrita ficam bloqueadas). Protocolo APROVADO e congelado ANTES de rodar:
-# pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md (commit 1de7696 do validacoes-2, 25/11/2026). Nada aqui muda a regra.
+# pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md (commit 1de7696 do validacoes-2, 25/11/2026) + EMENDA 1 (25/11/2026,
+# também antes de rodar, pedida pelo responsável: os extremos em todos os pixels). Nada aqui muda a regra.
 #
 # PERGUNTA: uma calibração que pesa os anos recentes reduz o erro da chuva (e da radiação e da ETo) em anos que ela
 #   não viu, sem piorar a variação de mês a mês nem os extremos?
@@ -13,29 +14,35 @@
 #   Em todos: o teto da chuva diária (motor V1.6), a radiação <= céu claro, o 0 de radiação como vazio (V1.7) e a ETo
 #   FAO-56 recalculada com a radiação corrigida. As outras entradas da ETo (Tmax, Tmin, UR, vento) são as do motor V1.7
 #   (iguais nos quatro métodos). A referência é o que o banco entrega (BR-DWGD no núcleo; sab_pedido.colecao), nos
-#   pixels entregues (classes 1-3), nas 5 regiões e no Brasil.
+#   pixels entregues (classes 1-3), nas 5 regiões e no Brasil. Tudo é calculado pixel a pixel e dia a dia no Earth
+#   Engine; as médias regionais pesam cada pixel pela fração dele dentro da região.
 #
-# REGRA DE DECISÃO (copiada do protocolo; fixada antes):
+# REGRA DE DECISÃO (do protocolo, com a emenda 1 na condição 4; fixada antes):
 #   CHUVA: um método substitui o C0 só se cumprir AS QUATRO:
 #     1. a mediana, entre as 5 regiões, do |viés anual| (a mediana dos 10 anos de cada região) cai >= 3 p.p.;
 #     2. no Brasil, o |viés anual| melhora em >= 7 dos 10 anos;
 #     3. o r_anomalias mensal (ciclo anual retirado) não cai mais de 0,02 em nenhuma das 5 regiões;
-#     4. nos 150 pixels da K21: a fração de dias com chuva (>= 1 mm) não se afasta do BR-DWGD mais 2 p.p. do que o C0
-#        já se afasta, e o erro do percentil 99 diário não cresce mais de 5%.
+#     4. extremos e dias de chuva (EMENDA 1: os três itens precisam passar):
+#        4a. TODOS os pixels entregues: em cada uma das 5 regiões, a fração de dias com chuva (>= 1 mm) não se afasta
+#            do BR-DWGD mais 2 p.p. do que o C0 já se afasta;
+#        4b. TODOS os pixels entregues: em cada uma das 5 regiões, o erro da maior chuva diária do mês (Rx1day) não
+#            cresce mais de 5% em relação ao do C0;
+#        4c. 1.500 pixels A (300 por região, sorteio fixo, semente 21; antes eram os 150 da K21): o erro do percentil
+#            99 diário não cresce mais de 5% em relação ao do C0.
 #     Mais de um passa: vence o de menor mediana do |viés|; diferença < 0,5 p.p.: o mais simples (C1, C2, C3).
 #   RADIAÇÃO E ETo (juntas): substitui o C0 se o |viés| da radiação no Brasil cair >= 0,2 MJ/m²/dia, o da ETo cair
 #     >= 1 p.p., e nenhuma região piorar mais de 0,1 MJ ou 0,5 p.p.
-#   SÓ RELATADO (fora da regra): o método vencedor (e os outros) aplicados a 2026 x CHIRPS, com a régua de 2024.
+#   SÓ RELATADO (fora da regra): os quatro métodos aplicados a 2026 x CHIRPS, com a régua de 2024.
 #
-# COMO AS CONTAS FORAM FIXADAS (o protocolo não descia a esse detalhe; escrito aqui ANTES de rodar):
+# COMO AS CONTAS FORAM FIXADAS (escrito aqui ANTES de rodar):
 #   - viés anual da chuva = 100 x (total do ano do método / total do BR-DWGD - 1), na média da região;
 #   - r_anomalias = correlação de Pearson dos 120 totais mensais (2016-2025) de cada região, cada um menos a média do
 #     mesmo mês do ano nos 10 anos (método e BR-DWGD, cada um com a sua média);
-#   - condição 4: fração de dias com chuva = pixel-dias >= 1 mm / pixel-dias com BR-DWGD, os 150 pixels e os 10 anos
-#     juntos; erro do percentil 99 = média, nos pixels, de |p99 do método / p99 do BR-DWGD - 1|, e "não cresce mais de
-#     5%" = erro do método <= 1,05 x erro do C0 (o crescimento relativo, a leitura mais rígida);
-#   - C3 no pixel: o C0 do pixel x a razão da região dele (no Brasil, a média das 5 regiões pesada pela área entregue
-#     de cada uma, que é o que a média do Brasil faz);
+#   - 4a: fração = soma, nos 120 meses, da média regional dos dias >= 1 mm / soma dos dias (no BR-DWGD, dos dias com
+#     dado); 4b: erro = soma, nos 120 meses, da média regional de |Rx1day do método - Rx1day do BR-DWGD| (pixel a
+#     pixel) / soma da média regional do Rx1day do BR-DWGD; 4c: erro = média, nos pixels, de |p99 do método / p99 do
+#     BR-DWGD - 1|, com os dias de 2016-2025 juntos. "Não cresce mais de 5%" = erro <= 1,05 x o do C0 (relativo);
+#   - C3 da chuva: C0 x a razão da região do pixel (fora das 5 regiões, razão 1), dia a dia, sem refazer o teto;
 #   - radiação: viés = média dos 120 meses de (método - BR-DWGD), em MJ/m²/dia; ETo: 100 x (total/total - 1) nos 120
 #     meses. "Melhorar" e "piorar" comparam os |viés| com os do C0. Se mais de um método passar na radiação, vence o
 #     de menor |viés| da radiação no Brasil; diferença < 0,05 MJ: o mais simples (C1, C2, C3), como na chuva.
@@ -68,17 +75,18 @@ REGIOES = REGIOES5 + ['Brasil']
 RAZAO_C3 = (0.8, 1.5)
 ANOS_C3 = 5
 CHUVA_DIA = 1.0                                 # mm (como a K21)
-N_PONTOS, SEMENTE = 150, 21                     # os pixels da K21
-REGIAO_K21 = [-75.0, -35.0, -28.0, 6.5]
+PONTOS_POR_REGIAO, SEMENTE = 300, 21            # emenda 1: 1.500 pixels A (antes, os 150 da K21)
+REGIAO_SORTEIO = [-75.0, -35.0, -28.0, 6.5]
 FATOR_MAX = 5.0                                 # do motor (conferido contra a cópia carregada)
 FATOR_TETO_CHUVA = 1.5
 TOL_RECEITA = 0.02
-# regra (protocolo)
+EPS = 1e-9                                      # só arredondamento: um empate exato não reprova
+# regra (protocolo + emenda 1)
 QUEDA_MEDIANA_PP = 3.0
 ANOS_MELHORA_MIN = 7
 QUEDA_R_MAX = 0.02
 AFASTA_FRACAO_PP = 2.0
-CRESCE_P99 = 0.05
+CRESCE_EXTREMO = 0.05
 DESEMPATE_PP = 0.5
 QUEDA_RS_MJ, QUEDA_ETO_PP = 0.2, 1.0
 PIORA_RS_MJ, PIORA_ETO_PP = 0.1, 0.5
@@ -97,6 +105,11 @@ def pedacos(Y):
 
 
 BLOCOS = {'C0': 'abc', 'C1': 'c', 'C2': 'bc'}
+
+
+def dias_no_mes(ano, mes):
+    d0 = date(ano, mes, 1)
+    return ((d0 + timedelta(days=32)).replace(day=1) - d0).days
 
 
 # ============================================================ contas puras (testadas em teste_correcao_era5.py)
@@ -139,29 +152,53 @@ def r_anomalias(mensal):
     return float(np.corrcoef(d.am, d.ar)[0, 1])
 
 
-def metricas_chuva(reg):
-    """reg: DataFrame regiao, ano, mes, metodo (C0..C3 ou BR), valor (total mensal de chuva).
-    Devolve {metodo: {...}} com o viés anual por região e ano, a mediana, os anos melhores e o r_anomalias."""
-    br = reg[reg.metodo == 'BR'].set_index(['regiao', 'ano', 'mes']).valor
+def serie(alvo, metodo, variavel, regiao):
+    s = alvo[(alvo.metodo == metodo) & (alvo.variavel == variavel) & (alvo.regiao == regiao)]
+    return s.groupby(['ano', 'mes']).valor.first()
+
+
+def metricas_chuva(alvo):
+    """alvo: as linhas do ano-alvo (ano == ano_alvo). Viés anual por região e ano, a mediana, o r_anomalias."""
     out = {}
     for k in METODOS:
-        mk = reg[reg.metodo == k].set_index(['regiao', 'ano', 'mes']).valor
-        vies = {(r, a): vies_pct(mk.loc[r, a], br.loc[r, a]) for r in REGIOES for a in ANOS_TESTE
-                if (r, a) in mk.index.droplevel(2) and (r, a) in br.index.droplevel(2)}
-        med_reg = {r: float(np.nanmedian([abs(vies[(r, a)]) for a in ANOS_TESTE if (r, a) in vies])) for r in REGIOES}
-        r_an = {}
+        vies, med_reg, r_an = {}, {}, {}
         for r in REGIOES:
-            m = pd.DataFrame({'metodo': mk.loc[r], 'ref': br.loc[r]}).reset_index()
+            mk, br = serie(alvo, k, 'pr', r), serie(alvo, 'BR', 'pr', r)
+            i = mk.index.intersection(br.index)
+            for a in ANOS_TESTE:
+                ia = [x for x in i if x[0] == a]
+                if len(ia) == 12:
+                    vies[(r, a)] = vies_pct(mk.loc[ia], br.loc[ia])
+            med_reg[r] = float(np.nanmedian([abs(vies[(r, a)]) for a in ANOS_TESTE if (r, a) in vies] or [np.nan]))
+            m = pd.DataFrame({'metodo': mk.loc[i], 'ref': br.loc[i]}).reset_index()
             r_an[r] = r_anomalias(m)
         out[k] = {'vies': vies, 'mediana_regiao': med_reg,
                   'mediana5': float(np.median([med_reg[r] for r in REGIOES5])), 'r_anom': r_an}
     return out
 
 
+def metricas_extremos(alvo):
+    """4a e 4b em todos os pixels entregues, por região."""
+    out = {'BR': {}}
+    for r in REGIOES:
+        wet, n = serie(alvo, 'BR', 'wet', r), serie(alvo, 'BR', 'n', r)
+        out['BR'][r] = {'fracao': float(wet.sum() / n.sum()) if n.sum() else float('nan')}
+    for k in METODOS:
+        out[k] = {}
+        for r in REGIOES:
+            wet = serie(alvo, k, 'wet', r)
+            dias = sum(dias_no_mes(a, m) for a, m in wet.index)
+            drx, rx_br = serie(alvo, k, 'drx', r), serie(alvo, 'BR', 'rx', r)
+            i = drx.index.intersection(rx_br.index)
+            out[k][r] = {'fracao': float(wet.sum() / dias) if dias else float('nan'),
+                         'erro_rx': float(drx.loc[i].sum() / rx_br.loc[i].sum()) if rx_br.loc[i].sum() else float('nan')}
+    return out
+
+
 def metricas_pixels(dias, ks=METODOS):
-    """dias: DataFrame pid, data, br, C0..C3 (chuva diária nos pixels, anos de teste, só dias com BR-DWGD)."""
+    """4c. dias: DataFrame pid, br, C0..C3 (chuva diária nos pixels, anos de teste, só dias com BR-DWGD)."""
     d = dias.dropna(subset=['br'])
-    out = {'fracao_br': float((d.br >= CHUVA_DIA).mean())}
+    out = {'fracao_br': float((d.br >= CHUVA_DIA).mean()), 'n_pixels': int(d.pid.nunique()), 'n_dias': len(d)}
     p99_br = d.groupby('pid').br.quantile(0.99)
     ok = p99_br[p99_br > 0].index
     for k in ks:
@@ -171,28 +208,32 @@ def metricas_pixels(dias, ks=METODOS):
     return out
 
 
-def decidir_chuva(mc, mp):
+def decidir_chuva(mc, mx, mp):
     """As 4 condições para C1..C3 contra o C0. Devolve (vencedor ou None, detalhes por método)."""
     c0 = mc['C0']
-    afast0 = abs(mp['C0']['fracao'] - mp['fracao_br'])
     det, passam = {}, []
     for k in SIMPLICIDADE:
         mk = mc[k]
-        cond1 = c0['mediana5'] - mk['mediana5'] >= QUEDA_MEDIANA_PP
+        cond1 = c0['mediana5'] - mk['mediana5'] >= QUEDA_MEDIANA_PP - EPS
         melhores = sum(1 for a in ANOS_TESTE if ('Brasil', a) in mk['vies'] and ('Brasil', a) in c0['vies']
                        and abs(mk['vies'][('Brasil', a)]) < abs(c0['vies'][('Brasil', a)]))
         cond2 = melhores >= ANOS_MELHORA_MIN
         quedas = {r: c0['r_anom'][r] - mk['r_anom'][r] for r in REGIOES5}
-        cond3 = all(np.isfinite(q) and q <= QUEDA_R_MAX for q in quedas.values())
-        afast = abs(mp[k]['fracao'] - mp['fracao_br'])
-        eps = 1e-9                                   # só arredondamento: um empate exato não reprova
-        cond4 = (afast <= afast0 + AFASTA_FRACAO_PP / 100.0 + eps) and \
-            (mp[k]['erro_p99'] <= (1 + CRESCE_P99) * mp['C0']['erro_p99'] + eps)
+        cond3 = all(np.isfinite(q) and q <= QUEDA_R_MAX + EPS for q in quedas.values())
+        piora_fr = {r: abs(mx[k][r]['fracao'] - mx['BR'][r]['fracao']) - abs(mx['C0'][r]['fracao'] - mx['BR'][r]['fracao'])
+                    for r in REGIOES5}
+        cresc_rx = {r: mx[k][r]['erro_rx'] / mx['C0'][r]['erro_rx'] - 1 if mx['C0'][r]['erro_rx'] else 0.0
+                    for r in REGIOES5}
+        c4a = all(np.isfinite(p) and p <= AFASTA_FRACAO_PP / 100 + EPS for p in piora_fr.values())
+        c4b = all(mx[k][r]['erro_rx'] <= (1 + CRESCE_EXTREMO) * mx['C0'][r]['erro_rx'] + EPS for r in REGIOES5)
+        c4c = mp[k]['erro_p99'] <= (1 + CRESCE_EXTREMO) * mp['C0']['erro_p99'] + EPS
         det[k] = {'cond1': cond1, 'queda_mediana_pp': c0['mediana5'] - mk['mediana5'], 'cond2': cond2,
                   'anos_melhores': melhores, 'cond3': cond3, 'maior_queda_r': max(quedas.values()),
-                  'cond4': cond4, 'afastamento_fracao_pp': 100 * afast, 'afastamento_fracao_c0_pp': 100 * afast0,
-                  'erro_p99': mp[k]['erro_p99'], 'erro_p99_c0': mp['C0']['erro_p99']}
-        det[k]['passa'] = cond1 and cond2 and cond3 and cond4
+                  'c4a': c4a, 'pior_afastamento_pp': 100 * max(piora_fr.values()),
+                  'c4b': c4b, 'pior_crescimento_rx': max(cresc_rx.values()),
+                  'c4c': c4c, 'erro_p99': mp[k]['erro_p99'], 'erro_p99_c0': mp['C0']['erro_p99']}
+        det[k]['cond4'] = c4a and c4b and c4c
+        det[k]['passa'] = cond1 and cond2 and cond3 and det[k]['cond4']
         if det[k]['passa']:
             passam.append(k)
     return escolher(passam, {k: mc[k]['mediana5'] for k in passam}, DESEMPATE_PP), det
@@ -207,17 +248,14 @@ def escolher(passam, nota, desempate):
     return empatados[0]
 
 
-def metricas_rad(reg):
-    """reg: regiao, ano, mes, metodo, variavel (rs/eto), valor. Viés pooled dos 120 meses por região."""
+def metricas_rad(alvo):
+    """Viés dos 120 meses por região: radiação (média das diferenças) e ETo (%)."""
     out = {}
     for k in METODOS:
         out[k] = {}
         for r in REGIOES:
-            def serie(met, var):
-                s = reg[(reg.metodo == met) & (reg.variavel == var) & (reg.regiao == r)]
-                return s.set_index(['ano', 'mes']).valor
-            rs_k, rs_b = serie(k, 'rs'), serie('BR', 'rs')
-            et_k, et_b = serie(k, 'eto'), serie('BR', 'eto')
+            rs_k, rs_b = serie(alvo, k, 'rs', r), serie(alvo, 'BR', 'rs', r)
+            et_k, et_b = serie(alvo, k, 'eto', r), serie(alvo, 'BR', 'eto', r)
             i_rs, i_et = rs_k.index.intersection(rs_b.index), et_k.index.intersection(et_b.index)
             out[k][r] = {'vies_rs': float((rs_k.loc[i_rs] - rs_b.loc[i_rs]).mean()),
                          'vies_eto': vies_pct(et_k.loc[i_et], et_b.loc[i_et])}
@@ -232,48 +270,24 @@ def decidir_rad(mr):
         queda_et = abs(c0['Brasil']['vies_eto']) - abs(mk['Brasil']['vies_eto'])
         piora = {r: (abs(mk[r]['vies_rs']) - abs(c0[r]['vies_rs']), abs(mk[r]['vies_eto']) - abs(c0[r]['vies_eto']))
                  for r in REGIOES5}
-        ok_reg = all(p[0] <= PIORA_RS_MJ and p[1] <= PIORA_ETO_PP for p in piora.values())
+        ok_reg = all(p[0] <= PIORA_RS_MJ + EPS and p[1] <= PIORA_ETO_PP + EPS for p in piora.values())
         det[k] = {'queda_rs': queda_rs, 'queda_eto_pp': queda_et, 'pior_regiao_rs': max(p[0] for p in piora.values()),
                   'pior_regiao_eto_pp': max(p[1] for p in piora.values()),
-                  'passa': queda_rs >= QUEDA_RS_MJ and queda_et >= QUEDA_ETO_PP and ok_reg}
+                  'passa': queda_rs >= QUEDA_RS_MJ - EPS and queda_et >= QUEDA_ETO_PP - EPS and ok_reg}
         if det[k]['passa']:
             passam.append(k)
     return escolher(passam, {k: abs(mr[k]['Brasil']['vies_rs']) for k in passam}, DESEMPATE_RS_MJ), det
 
 
-def brasil_ponderado(valores, pesos):
-    """Média do Brasil a partir das 5 regiões, pesada pela área entregue de cada uma."""
-    num = sum(valores[r] * pesos[r] for r in REGIOES5 if r in valores and np.isfinite(valores[r]))
-    den = sum(pesos[r] for r in REGIOES5 if r in valores and np.isfinite(valores[r]))
-    return num / den if den else float('nan')
-
-
-def c3_chuva_regional(df, pesos):
-    """Acrescenta as linhas do C3 da chuva (C0 x razão da região), ano-alvo a ano-alvo e mês a mês.
-    df: as linhas brutas (ano_alvo, ano, mes, regiao, metodo, variavel, valor)."""
-    novas = []
-    for (Y, mes), g in df[df.variavel == 'pr'].groupby(['ano_alvo', 'mes']):
-        anos_l = range(Y - ANOS_C3, Y)
-        vals = {}
-        for r in REGIOES5:
-            br = g[(g.regiao == r) & (g.metodo == 'BR') & g.ano.isin(anos_l)].valor
-            c0 = g[(g.regiao == r) & (g.metodo == 'C0') & g.ano.isin(anos_l)].valor
-            c0y = g[(g.regiao == r) & (g.metodo == 'C0') & (g.ano == Y)].valor
-            if len(c0y) and len(br) == ANOS_C3 and len(c0) == ANOS_C3:
-                vals[r] = razao_c3(br, c0) * float(c0y.iloc[0])
-        if len(vals) == len(REGIOES5):
-            vals['Brasil'] = brasil_ponderado(vals, pesos)
-        novas += [{'ano_alvo': Y, 'ano': Y, 'mes': mes, 'regiao': r, 'metodo': 'C3', 'variavel': 'pr', 'valor': v}
-                  for r, v in vals.items()]
-    return pd.concat([df, pd.DataFrame(novas)], ignore_index=True)
-
-
-def deltas_c3(linhas_l, Y):
+def deltas_c3(linhas_l):
     """Razão da chuva e diferença da radiação (BR - C0) por região, a partir das linhas de Y-5..Y-1 de um mês."""
     d = pd.DataFrame(linhas_l)
     razao, delta = {}, {}
     for r in REGIOES5:
-        g = d[d.regiao == r]
+        g = d[d.regiao == r] if len(d) else d
+        if not len(g):
+            razao[r], delta[r] = 1.0, 0.0
+            continue
         pr_br, pr_c0 = g[(g.metodo == 'BR') & (g.variavel == 'pr')], g[(g.metodo == 'C0') & (g.variavel == 'pr')]
         rs_br = g[(g.metodo == 'BR') & (g.variavel == 'rs')].set_index('ano').valor
         rs_c0 = g[(g.metodo == 'C0') & (g.variavel == 'rs')].set_index('ano').valor
@@ -283,25 +297,34 @@ def deltas_c3(linhas_l, Y):
     return razao, delta
 
 
-def chuva_pixels(dados, pontos, razoes):
-    """Chuva diária dos 4 métodos nos pixels, para os anos de teste, a partir dos dias brutos de 1986-2025.
-    dados: pid, data, era, br (diários). pontos: pid, regiao, prmax_01..12. razoes: {(Y, mes, regiao): razão C3}."""
-    d = dados.copy()
-    d['ano'] = d.data.str[:4].astype(int)
-    d['mes'] = d.data.str[5:7].astype(int)
+def clima_pixels(agregados, a0, a1):
+    """Média diária por pixel e mês na janela [a0, a1], a partir das somas mensais (pid, ano, mes, s_era, n_era, s_br, n_br)."""
+    h = agregados[(agregados.ano >= a0) & (agregados.ano <= a1)]
+    g = h.groupby(['pid', 'mes'])[['s_era', 'n_era', 's_br', 'n_br']].sum()
+    return pd.DataFrame({'m_era': g.s_era / g.n_era.replace(0, np.nan), 'm_br': g.s_br / g.n_br.replace(0, np.nan)})
+
+
+def agregar_dias(dias):
+    """Somas mensais por pixel a partir dos dias (para os anos de teste entrarem nas janelas seguintes)."""
+    d = dias.copy()
+    d['ano'] = d.dia // 10000
+    d['mes'] = d.dia // 100 % 100
+    return d.groupby(['pid', 'ano', 'mes']).agg(s_era=('era', 'sum'), n_era=('era', 'count'),
+                                                s_br=('br', 'sum'), n_br=('br', 'count')).reset_index()
+
+
+def chuva_pixels(agregados, dias_teste, pontos, razoes):
+    """Chuva diária dos 4 métodos nos pixels, nos anos de teste.
+    agregados: somas mensais de 1986-2025; dias_teste: pid, dia (AAAAMMDD), era, br; pontos: pid, regiao,
+    prmax_01..12; razoes: {(Y, mes, regiao): razão C3}."""
     pm = pontos.set_index('pid')
     saida = []
     for Y in ANOS_TESTE:
-        alvo = d[d.ano == Y]
-        clim = {}
-        for k in ('C0', 'C1', 'C2'):
-            a0, a1 = janela(k, Y)
-            h = d[(d.ano >= a0) & (d.ano <= a1)]
-            clim[k] = h.groupby(['pid', 'mes']).agg(m_era=('era', 'mean'), m_br=('br', 'mean'))
-        x = alvo.copy()
+        x = dias_teste[dias_teste.dia // 10000 == Y].copy()
+        x['mes'] = x.dia // 100 % 100
         prmax = np.array([pm.loc[p, f'prmax_{m:02d}'] for p, m in zip(x.pid, x.mes)], float)
-        for k, c in clim.items():
-            cc = c.reindex(list(zip(x.pid, x.mes)))
+        for k in ('C0', 'C1', 'C2'):
+            cc = clima_pixels(agregados, *janela(k, Y)).reindex(list(zip(x.pid, x.mes)))
             x[k] = chuva_corrigida(x.era.values, fator(cc.m_br.values, cc.m_era.values), prmax)
         reg = [pm.loc[p, 'regiao'] for p in x.pid]
         x['C3'] = x.C0.values * np.array([razoes.get((Y, m, r), 1.0) for m, r in zip(x.mes, reg)])
@@ -341,7 +364,7 @@ def reduzir(img, bandas, rotulo):
     """Média regional (pixels entregues), em grupos de bandas cada vez menores se o servidor recusar."""
     E = iniciar()
     ee, v, sp = E['ee'], E['v'], E['sp']
-    for tentativa, grupos in enumerate((1, 2, 4, len(bandas))):
+    for tentativa, grupos in enumerate((1, 3, 6, len(bandas))):
         try:
             res = {}
             n = -(-len(bandas) // grupos)
@@ -400,43 +423,12 @@ def climatologias(mes, Y, metodos=('C0', 'C1', 'C2')):
     return out
 
 
-def dia_metodos(d, climas, eqm, delta_img=None, com_eto=True):
-    """Chuva, radiação e ETo de um dia pela rota ERA5 do motor V1.7, trocando só a climatologia da chuva e da
-    radiação. delta_img: a diferença regional do C3 (radiação)."""
+def imagem_regional(valores, padrao):
+    """Pinta um valor por região (as 5) numa imagem; fora delas, o padrão."""
     E = iniciar()
-    ee, m = E['ee'], E['m']
-    c = m['_componentes_era5'](d)
-    era = ee.Image(m['colecao_era5'].filterDate(ee.Date(d), ee.Date(d).advance(1, 'day')).first())
-    pr_raw = era.select('total_precipitation_sum').multiply(1000).max(0)
-    rs_cru = era.select('surface_solar_radiation_downwards_sum').divide(1e6)
-    rs_raw = rs_cru.updateMask(rs_cru.gt(0)).resample('bilinear')
-    bandas = []
-    rs0 = None
-    for k, cl in climas.items():
-        pr = m['teto_chuva'](m['calib_multiplicativa'](pr_raw, cl.select('pr_m_br'), cl.select('pr_m_era')).max(0),
-                             pr_raw, eqm)
-        rs = m['limitar_rs'](m['calib_multiplicativa'](rs_raw, cl.select('Rs_m_br'), cl.select('Rs_m_era')).max(0), d)
-        rs0 = rs if k == 'C0' else rs0
-        bandas += [pr.rename(f'{k}_pr'), rs.rename(f'{k}_rs')]
-        if com_eto:
-            bandas.append(m['eto_penman_monteith'](c['tmax_C'], c['tmin_C'], c['RH'], c['u2'], rs, d).rename(f'{k}_eto'))
-    if delta_img is not None:
-        rs3 = m['limitar_rs'](rs0.add(delta_img).max(0), d)
-        bandas += [rs3.rename('C3_rs'),
-                   m['eto_penman_monteith'](c['tmax_C'], c['tmin_C'], c['RH'], c['u2'], rs3, d).rename('C3_eto')]
-    return ee.Image.cat(bandas).updateMask(m['MASCARA_SAB'])
-
-
-def mensal_metodos(ano, mes, climas, delta_img=None, com_eto=True):
-    ee = iniciar()['ee']
-    d0 = date(ano, mes, 1)
-    d1 = (d0 + timedelta(days=32)).replace(day=1)
-    dias = [(d0 + timedelta(days=k)).isoformat() for k in range((d1 - d0).days)]
-    col = ee.ImageCollection([dia_metodos(d, climas, E_eqm(mes), delta_img, com_eto) for d in dias])
-    nomes = col.first().bandNames()
-    soma = col.select('.*_(pr|eto)').sum()
-    media = col.select('.*_rs').mean()
-    return ee.Image.cat([soma, media]).select(nomes)
+    ee = E['ee']
+    fc = E['regs5'].map(lambda f: f.set('v', ee.Dictionary(valores).get(f.get('regiao'))))
+    return ee.Image.constant(padrao).toFloat().paint(fc, 'v')
 
 
 def E_eqm(mes):
@@ -444,25 +436,83 @@ def E_eqm(mes):
     return E['ee'].Image(f"{E['m']['ASSET_EQM']}/Matriz_EQM_{mes:02d}")
 
 
-def entregue_mensal(ano, mes, com_eto=True):
+def dia_metodos(d, climas, eqm, razao_img=None, delta_img=None, com_eto=True):
+    """Chuva, radiação e ETo de um dia pela rota ERA5 do motor V1.7, trocando só a climatologia da chuva e da
+    radiação. razao_img / delta_img: os ajustes regionais do C3 (chuva / radiação)."""
+    E = iniciar()
+    ee, m = E['ee'], E['m']
+    c = m['_componentes_era5'](d)
+    era = ee.Image(m['colecao_era5'].filterDate(ee.Date(d), ee.Date(d).advance(1, 'day')).first())
+    pr_raw = era.select('total_precipitation_sum').multiply(1000).max(0)
+    rs_cru = era.select('surface_solar_radiation_downwards_sum').divide(1e6)
+    rs_raw = rs_cru.updateMask(rs_cru.gt(0)).resample('bilinear')
+    bandas, pr0, rs0 = [], None, None
+
+    def eto(rs):
+        return m['eto_penman_monteith'](c['tmax_C'], c['tmin_C'], c['RH'], c['u2'], rs, d)
+
+    for k, cl in climas.items():
+        pr = m['teto_chuva'](m['calib_multiplicativa'](pr_raw, cl.select('pr_m_br'), cl.select('pr_m_era')).max(0),
+                             pr_raw, eqm)
+        rs = m['limitar_rs'](m['calib_multiplicativa'](rs_raw, cl.select('Rs_m_br'), cl.select('Rs_m_era')).max(0), d)
+        if k == 'C0':
+            pr0, rs0 = pr, rs
+        bandas += [pr.rename(f'{k}_pr'), rs.rename(f'{k}_rs')] + ([eto(rs).rename(f'{k}_eto')] if com_eto else [])
+    if razao_img is not None:
+        bandas.append(pr0.multiply(razao_img).rename('C3_pr'))
+    if delta_img is not None:
+        rs3 = m['limitar_rs'](rs0.add(delta_img).max(0), d)
+        bandas += [rs3.rename('C3_rs')] + ([eto(rs3).rename('C3_eto')] if com_eto else [])
+    return ee.Image.cat(bandas).updateMask(m['MASCARA_SAB'])
+
+
+def agregar_mes(col, ks, extremos=True, com_eto=True, com_rs=True):
+    """Do dia para o mês: chuva (total, dias >= 1 mm, maior dia), radiação (média), ETo (total)."""
+    ee = iniciar()['ee']
+    pr = [f'{k}_pr' for k in ks]
+    im = [col.select(pr).sum()]
+    if extremos:
+        im.append(col.select(pr).map(lambda i: ee.Image(i).gte(CHUVA_DIA)).sum().rename([f'{k}_wet' for k in ks]))
+        im.append(col.select(pr).max().rename([f'{k}_rx' for k in ks]))
+    if com_rs:
+        im.append(col.select([f'{k}_rs' for k in ks]).mean())
+    if com_eto:
+        im.append(col.select([f'{k}_eto' for k in ks]).sum())
+    return ee.Image.cat(im)
+
+
+def mensal_metodos(ano, mes, climas, razao_img=None, delta_img=None, com_eto=True, extremos=True, com_rs=True):
+    ee = iniciar()['ee']
+    dias = [date(ano, mes, k).isoformat() for k in range(1, dias_no_mes(ano, mes) + 1)]
+    col = ee.ImageCollection([dia_metodos(d, climas, E_eqm(mes), razao_img, delta_img, com_eto) for d in dias])
+    ks = list(climas) + (['C3'] if razao_img is not None else [])
+    return agregar_mes(col, ks, extremos=extremos, com_eto=com_eto, com_rs=com_rs)
+
+
+def entregue_mensal(ano, mes, extremos=True, com_eto=True):
     E = iniciar()
     ini = date(ano, mes, 1)
     fim = (ini + timedelta(days=32)).replace(day=1)
     col = E['sp'].colecao(E['vm'].BRASIL, ini.isoformat(), fim.isoformat())
-    im = [col.select('pr_mm').sum().rename('BR_pr'), col.select('rs').mean().rename('BR_rs')]
+    pr = col.select('pr_mm')
+    im = [pr.sum().rename('BR_pr'), col.select('rs').mean().rename('BR_rs')]
+    if extremos:
+        ee = E['ee']
+        im += [pr.map(lambda i: ee.Image(i).gte(CHUVA_DIA)).sum().rename('BR_wet'), pr.count().rename('BR_n'),
+               pr.max().rename('BR_rx')]
     if com_eto:
         im.append(col.select('et_potencial').sum().rename('BR_eto'))
     return E['ee'].Image.cat(im)
 
 
-def linhas_de(res, Y, ano, mes, prefixo_ano=None):
+def linhas_de(res, Y, ano, mes, prefixo_ano=False):
     out = []
     for reg, p in res.items():
         for chave, valor in p.items():
             if chave == 'regiao' or valor is None:
                 continue
             partes = chave.split('_')
-            if prefixo_ano is not None:
+            if prefixo_ano:
                 if not partes[0].startswith('a'):
                     continue
                 ano_l, partes = int(partes[0][1:]), partes[1:]
@@ -478,26 +528,23 @@ def regional_mes(Y, mes):
     E = iniciar()
     ee = E['ee']
     cl = climatologias(mes, Y)
-    # L: anos Y-5..Y-1, C0 (com a climatologia de 1986..Y-1) e o que o banco entrega
     imgs, bandas = [], []
     for a in range(Y - ANOS_C3, Y):
-        mm = mensal_metodos(a, mes, {'C0': cl['C0']}, com_eto=False)
-        en = entregue_mensal(a, mes, com_eto=False)
-        par = ee.Image.cat([mm, en])
+        mm = mensal_metodos(a, mes, {'C0': cl['C0']}, com_eto=False, extremos=False)
+        en = entregue_mensal(a, mes, extremos=False, com_eto=False)
         nomes = ['C0_pr', 'C0_rs', 'BR_pr', 'BR_rs']
-        imgs.append(par.select(nomes, [f'a{a}_{x}' for x in nomes]))
+        imgs.append(ee.Image.cat([mm, en]).select(nomes, [f'a{a}_{x}' for x in nomes]))
         bandas += [f'a{a}_{x}' for x in nomes]
     res_l = reduzir(ee.Image.cat(imgs), bandas, f'{Y}-{mes:02d} (anos anteriores)')
     lin_l = linhas_de(res_l, Y, None, mes, prefixo_ano=True)
-    razao, delta = deltas_c3(lin_l, Y)
-    fc = E['regs5'].map(lambda f: f.set('delta', ee.Dictionary(delta).get(f.get('regiao'))))
-    delta_img = ee.Image.constant(0).toFloat().paint(fc, 'delta')
-    # T: o ano-alvo, C0/C1/C2 (chuva, radiação, ETo), C3 (radiação, ETo) e o que o banco entrega
-    mm = mensal_metodos(Y, mes, cl, delta_img=delta_img)
+    razao, delta = deltas_c3(lin_l)
+    mm = mensal_metodos(Y, mes, cl, razao_img=imagem_regional(razao, 1.0), delta_img=imagem_regional(delta, 0.0))
     en = entregue_mensal(Y, mes)
-    par = ee.Image.cat([mm, en])
-    nomes = [f'{k}_{x}' for k in ('C0', 'C1', 'C2') for x in ('pr', 'rs', 'eto')] + ['C3_rs', 'C3_eto',
-                                                                                     'BR_pr', 'BR_rs', 'BR_eto']
+    ks = METODOS
+    drx = [mm.select(f'{k}_rx').subtract(en.select('BR_rx')).abs().rename(f'{k}_drx') for k in ks]
+    par = ee.Image.cat([mm, en] + drx)
+    nomes = ([f'{k}_{x}' for k in ks for x in ('pr', 'wet', 'rx', 'drx', 'rs', 'eto')]
+             + ['BR_pr', 'BR_wet', 'BR_n', 'BR_rx', 'BR_rs', 'BR_eto'])
     res_t = reduzir(par.select(nomes), nomes, f'{Y}-{mes:02d} (ano-alvo)')
     return lin_l + linhas_de(res_t, Y, Y, mes), razao, delta
 
@@ -527,121 +574,113 @@ def conferir_receita():
     return df
 
 
-def pesos_regioes():
-    arq = os.path.join(SAIDA, 'pesos_regioes.csv')
-    if os.path.exists(arq):
-        p = pd.read_csv(arq)
-        return dict(zip(p.regiao, p.peso))
-    E = iniciar()
-    ee, v, sp = E['ee'], E['v'], E['sp']
-    fc = ee.Image.constant(1).rename('peso').updateMask(v.ENTREGUE).reduceRegions(
-        collection=E['regs'], reducer=ee.Reducer.sum(), crs=sp.CRS, crsTransform=sp.TRANSFORM, tileScale=8)
-    p = {f['properties']['regiao']: f['properties']['sum'] for f in gi(fc, 'pesos')['features']}
-    pd.DataFrame({'regiao': list(p), 'peso': list(p.values())}).to_csv(arq, index=False)
-    return p
-
-
-def pontos_k21():
-    """Os 150 pixels A da K21 (mesmo sorteio e semente), a região de cada um e o maior dia do BR-DWGD por mês."""
+def pontos_sorteio():
+    """1.500 pixels A, 300 por região (sorteio fixo), e o maior dia do BR-DWGD por mês em cada um."""
     arq = os.path.join(SAIDA, 'pixels', 'pontos.csv')
     if os.path.exists(arq):
         return pd.read_csv(arq)
     E = iniciar()
-    ee, sp, m = E['ee'], E['sp'], E['m']
+    ee, sp = E['ee'], E['sp']
     proj = ee.Projection(sp.CRS, sp.TRANSFORM)
     classe = ee.Image(sp.MASCARA).select('classe')
-    sorteio = (ee.Image.pixelLonLat().addBands(classe)
-               .stratifiedSample(numPoints=0, classBand='classe', region=ee.Geometry.Rectangle(REGIAO_K21, None, False),
-                                 projection=proj, seed=SEMENTE, classValues=[1], classPoints=[N_PONTOS],
-                                 geometries=True, tileScale=4))
-    pts = [{'pid': k, 'lon': f['geometry']['coordinates'][0], 'lat': f['geometry']['coordinates'][1]}
+    idx = E['regs5'].map(lambda f: f.set('idx', ee.Number(ee.List(REGIOES5).indexOf(f.get('regiao'))).add(1)))
+    estrato = ee.Image.constant(0).toInt().paint(idx, 'idx').rename('estrato')
+    estrato = estrato.updateMask(classe.eq(1).And(estrato.gt(0)))
+    sorteio = (ee.Image.pixelLonLat().addBands(estrato)
+               .stratifiedSample(numPoints=0, classBand='estrato', region=ee.Geometry.Rectangle(REGIAO_SORTEIO, None, False),
+                                 projection=proj, seed=SEMENTE, classValues=[1, 2, 3, 4, 5],
+                                 classPoints=[PONTOS_POR_REGIAO] * 5, geometries=True, tileScale=4))
+    pts = [{'pid': k, 'lon': f['geometry']['coordinates'][0], 'lat': f['geometry']['coordinates'][1],
+            'regiao': REGIOES5[int(f['properties']['estrato']) - 1]}
            for k, f in enumerate(gi(sorteio, 'pontos')['features'])]
     fc = ee.FeatureCollection([ee.Feature(ee.Geometry.Point([p['lon'], p['lat']]), {'pid': p['pid']}) for p in pts])
-    idx = E['regs5'].map(lambda f: f.set('idx', ee.Number(ee.List(REGIOES5).indexOf(f.get('regiao'))).add(1)))
-    img = ee.Image.cat([ee.Image.constant(0).toInt().paint(idx, 'idx').rename('regiao_idx')] +
-                       [E_eqm(mm).select('pr_max_br').rename(f'prmax_{mm:02d}') for mm in range(1, 13)])
+    img = ee.Image.cat([E_eqm(mm).select('pr_max_br').rename(f'prmax_{mm:02d}') for mm in range(1, 13)])
     amostra = gi(img.sampleRegions(collection=fc, properties=['pid'], projection=proj, geometries=False, tileScale=16),
-                 'pontos: região e teto')
+                 'pontos: teto da chuva')
     por = {f['properties']['pid']: f['properties'] for f in amostra['features']}
     for p in pts:
-        q = por.get(p['pid'], {})
-        i = int(q.get('regiao_idx') or 0)
-        p['regiao'] = REGIOES5[i - 1] if i else 'fora'
         for mm in range(1, 13):
-            p[f'prmax_{mm:02d}'] = q.get(f'prmax_{mm:02d}')
+            p[f'prmax_{mm:02d}'] = por.get(p['pid'], {}).get(f'prmax_{mm:02d}')
     df = pd.DataFrame(pts)
     os.makedirs(os.path.dirname(arq), exist_ok=True)
     df.to_csv(arq, index=False)
-    print(f'   {len(df)} pixels da K21; por região: {df.regiao.value_counts().to_dict()}', flush=True)
+    print(f'   {len(df)} pixels sorteados; por região: {df.regiao.value_counts().to_dict()}', flush=True)
     return df
 
 
-def dias_pixels(ano, pontos):
-    """Chuva diária bruta do ERA5 e do BR-DWGD nos pixels (um pedido por mês, como a K21)."""
+def _feats(pontos):
+    ee = iniciar()['ee']
+    return [ee.Feature(ee.Geometry.Point([lo, la]), {'pid': int(p)}) for p, lo, la in zip(pontos.pid, pontos.lon, pontos.lat)]
+
+
+def agregados_pixels(ano, pontos):
+    """Anos só de climatologia: somas e contagens mensais da chuva do ERA5 bruto e do BR-DWGD nos pixels."""
+    E = iniciar()
+    ee, sp, m = E['ee'], E['sp'], E['m']
+    proj = ee.Projection(sp.CRS, sp.TRANSFORM)
+    feats = _feats(pontos)
+    linhas = []
+    for meses in ([list(range(1, 13))] + [[x] for x in range(1, 13)]):
+        try:
+            ims = []
+            for mes in meses:
+                ini, fim = f'{ano}-{mes:02d}-01', (date(ano, mes, 1) + timedelta(days=32)).replace(day=1).isoformat()
+                era = m['colecao_era5'].filterDate(ini, fim).map(
+                    lambda i: i.select('total_precipitation_sum').multiply(1000).max(0).rename('e'))
+                br = m['colChuvaGeral'].filterDate(ini, fim).map(lambda i: br_limpo(i).select('pr').rename('b'))
+                ims += [era.sum().rename(f's_era_{mes}'), era.count().rename(f'n_era_{mes}'),
+                        br.sum().rename(f's_br_{mes}'), br.count().rename(f'n_br_{mes}')]
+            r = gi(ee.Image.cat(ims).sampleRegions(collection=ee.FeatureCollection(feats), properties=['pid'],
+                                                   projection=proj, geometries=False, tileScale=16),
+                   f'agregados {ano} {meses[0]:02d}')
+            for f in r['features']:
+                q = f['properties']
+                for mes in meses:
+                    linhas.append({'pid': q['pid'], 'ano': ano, 'mes': mes, 's_era': q.get(f's_era_{mes}'),
+                                   'n_era': q.get(f'n_era_{mes}'), 's_br': q.get(f's_br_{mes}'),
+                                   'n_br': q.get(f'n_br_{mes}')})
+            if len(meses) == 12:
+                break
+        except Exception as e:  # noqa: BLE001
+            if len(meses) == 12:
+                print(f'   ⚠️ agregados {ano}: {str(e)[:150]} | de novo mês a mês', flush=True)
+                linhas = []
+                continue
+            raise
+    return pd.DataFrame(linhas)
+
+
+def dias_pixels(ano, pontos, lote=500):
+    """Anos de teste: chuva diária bruta do ERA5 e do BR-DWGD nos pixels (um pedido por mês e lote de pontos)."""
     E = iniciar()
     ee, sp, m = E['ee'], E['sp'], E['m']
     x0, y0, dx = sp.TRANSFORM[2], sp.TRANSFORM[5], sp.TRANSFORM[0]
-    chave = {(int(math.floor((lo - x0) / dx + 1e-6)), int(math.floor((y0 - la) / dx + 1e-6))): p
+    chave = {(int(math.floor((lo - x0) / dx + 1e-6)), int(math.floor((y0 - la) / dx + 1e-6))): int(p)
              for p, lo, la in zip(pontos.pid, pontos.lon, pontos.lat)}
-    geo = ee.Geometry.MultiPoint([[lo, la] for lo, la in zip(pontos.lon, pontos.lat)])
-    quadros = []
+    partes = {'era': [], 'br': []}
     for mes in range(1, 13):
-        ini = date(ano, mes, 1)
-        fim = (ini + timedelta(days=32)).replace(day=1)
+        ini, fim = f'{ano}-{mes:02d}-01', (date(ano, mes, 1) + timedelta(days=32)).replace(day=1).isoformat()
         # ee.Image(...): no Python, copyProperties devolve um Element (o erro da K21 v3)
-        era = m['colecao_era5'].filterDate(ini.isoformat(), fim.isoformat()).map(
-            lambda i: ee.Image(i.select('total_precipitation_sum').multiply(1000).max(0).rename('era')
-                               .copyProperties(i, ['system:time_start'])))
-        br = m['colChuvaGeral'].filterDate(ini.isoformat(), fim.isoformat()).map(
-            lambda i: ee.Image(br_limpo(i).select('pr').rename('br').copyProperties(i, ['system:time_start'])))
-        for nome, col in (('era', era), ('br', br)):
-            r = gi(ee.ImageCollection(col).getRegion(geo, None, sp.CRS, sp.TRANSFORM), f'pixels {nome} {ano}-{mes:02d}')
-            d = pd.DataFrame(r[1:], columns=r[0])
-            ix = np.floor((d.longitude.astype(float) - x0) / dx + 1e-6).astype(int)
-            iy = np.floor((y0 - d.latitude.astype(float)) / dx + 1e-6).astype(int)
-            d['pid'] = [chave.get((a, b)) for a, b in zip(ix, iy)]
-            d['data'] = pd.to_datetime(d['time'], unit='ms', utc=True).dt.strftime('%Y-%m-%d')
-            quadros.append(d.dropna(subset=['pid'])[['pid', 'data', nome]].assign(fonte=nome))
-    era = pd.concat([q for q in quadros if len(q) and q.fonte.iloc[0] == 'era'])[['pid', 'data', 'era']]
-    br = pd.concat([q for q in quadros if len(q) and q.fonte.iloc[0] == 'br'])[['pid', 'data', 'br']]
+        cols = {'era': m['colecao_era5'].filterDate(ini, fim).map(
+                    lambda i: ee.Image(i.select('total_precipitation_sum').multiply(1000).max(0).rename('v')
+                                       .copyProperties(i, ['system:time_start']))),
+                'br': m['colChuvaGeral'].filterDate(ini, fim).map(
+                    lambda i: ee.Image(br_limpo(i).select('pr').rename('v').copyProperties(i, ['system:time_start'])))}
+        for i in range(0, len(pontos), lote):
+            sub = pontos.iloc[i:i + lote]
+            geo = ee.Geometry.MultiPoint([[lo, la] for lo, la in zip(sub.lon, sub.lat)])
+            for nome, col in cols.items():
+                r = gi(ee.ImageCollection(col).getRegion(geo, None, sp.CRS, sp.TRANSFORM),
+                       f'pixels {nome} {ano}-{mes:02d} lote {i // lote + 1}')
+                d = pd.DataFrame(r[1:], columns=r[0])
+                ix = np.floor((d.longitude.astype(float) - x0) / dx + 1e-6).astype(int)
+                iy = np.floor((y0 - d.latitude.astype(float)) / dx + 1e-6).astype(int)
+                d['pid'] = [chave.get((a, b)) for a, b in zip(ix, iy)]
+                d['dia'] = pd.to_datetime(d['time'], unit='ms', utc=True).dt.strftime('%Y%m%d').astype(int)
+                partes[nome].append(d.dropna(subset=['pid'])[['pid', 'dia', 'v']].rename(columns={'v': nome}))
+    era, br = pd.concat(partes['era']), pd.concat(partes['br'])
     era['pid'], br['pid'] = era.pid.astype(int), br.pid.astype(int)
-    return era.merge(br, on=['pid', 'data'], how='left')
-
-
-def chirps_2026(razoes_2026, pesos):
-    """Só relato: a chuva de 2026 pelos quatro métodos (janelas até 2025) x CHIRPS, mesmos meses e máscara da
-    validação de 2026; a régua (2024) e o 2026 gravado vêm de pesquisa/resultados_2026/validacao_2026_independente.csv."""
-    arq = os.path.join(SAIDA, 'chirps_2026.csv')
-    if os.path.exists(arq):
-        return pd.read_csv(arq)
-    E = iniciar()
-    ee, v = E['ee'], E['v']
-    ref = pd.read_csv(os.path.join(AQUI, 'resultados_2026', 'validacao_2026_independente.csv'))
-    meses = sorted(ref[(ref.variavel == 'chuva_mm_mes') & (ref.ano == 2026)].mes.unique())
-    linhas = []
-    for mes in meses:
-        cl = climatologias(mes, 2026)
-        ini = date(2026, mes, 1)
-        fim = (ini + timedelta(days=32)).replace(day=1)
-        mm = mensal_metodos(2026, mes, cl, com_eto=False).select(['C0_pr', 'C1_pr', 'C2_pr'])
-        par = ee.Image.cat([mm, v.CHIRPS.filterDate(ini.isoformat(), fim.isoformat()).sum().rename('CHIRPS_pr')])
-        res = reduzir(par, ['C0_pr', 'C1_pr', 'C2_pr', 'CHIRPS_pr'], f'2026-{mes:02d} x CHIRPS')
-        vals = {r: res[r]['C0_pr'] * razoes_2026.get((mes, r), 1.0) for r in REGIOES5
-                if res.get(r, {}).get('C0_pr') is not None}
-        vals['Brasil'] = brasil_ponderado(vals, pesos)
-        for reg, p in res.items():
-            for k in ('C0', 'C1', 'C2', 'CHIRPS'):
-                linhas.append({'ano': 2026, 'mes': mes, 'regiao': reg, 'serie': k, 'valor': p.get(f'{k}_pr')})
-            linhas.append({'ano': 2026, 'mes': mes, 'regiao': reg, 'serie': 'C3', 'valor': vals.get(reg)})
-        print(f'   2026-{mes:02d} x CHIRPS pronto', flush=True)
-    for r in ref[(ref.variavel == 'chuva_mm_mes') & ref.mes.isin(meses)].itertuples():
-        serie = 'gravado' if r.ano == 2026 else 'BR-DWGD'
-        linhas.append({'ano': r.ano, 'mes': r.mes, 'regiao': r.regiao, 'serie': serie, 'valor': r.sab})
-        if r.ano == 2024:
-            linhas.append({'ano': 2024, 'mes': r.mes, 'regiao': r.regiao, 'serie': 'CHIRPS', 'valor': r.referencia})
-    df = pd.DataFrame(linhas)
-    df.to_csv(arq, index=False)
-    return df
+    return era.merge(br, on=['pid', 'dia'], how='left').drop_duplicates(['pid', 'dia'])
 
 
 def razoes_parte_a():
@@ -652,9 +691,51 @@ def razoes_parte_a():
     return {(mes, r): razao_c3(g.entregue, g.metodo_2026) for (mes, r), g in df.groupby(['mes', 'regiao'])}
 
 
+def chirps_2026():
+    """Só relato: a chuva de 2026 pelos quatro métodos (janelas até 2025) x CHIRPS, mesmos meses e máscara da
+    validação de 2026; a régua (2024) e o 2026 gravado vêm de pesquisa/resultados_2026/validacao_2026_independente.csv."""
+    arq = os.path.join(SAIDA, 'chirps_2026.csv')
+    if os.path.exists(arq):
+        return pd.read_csv(arq)
+    E = iniciar()
+    ee, v = E['ee'], E['v']
+    razoes = razoes_parte_a()
+    ref = pd.read_csv(os.path.join(AQUI, 'resultados_2026', 'validacao_2026_independente.csv'))
+    meses = sorted(ref[(ref.variavel == 'chuva_mm_mes') & (ref.ano == 2026)].mes.unique())
+    linhas = []
+    for mes in meses:
+        cl = climatologias(mes, 2026)
+        ini = date(2026, mes, 1)
+        fim = (ini + timedelta(days=32)).replace(day=1)
+        rz = imagem_regional({r: razoes.get((mes, r), 1.0) for r in REGIOES5}, 1.0)
+        mm = mensal_metodos(2026, mes, cl, razao_img=rz, com_eto=False, extremos=False, com_rs=False)
+        par = ee.Image.cat([mm, v.CHIRPS.filterDate(ini.isoformat(), fim.isoformat()).sum().rename('CHIRPS_pr')])
+        bandas = [f'{k}_pr' for k in METODOS] + ['CHIRPS_pr']
+        res = reduzir(par.select(bandas), bandas, f'2026-{mes:02d} x CHIRPS')
+        for reg, p in res.items():
+            for k in METODOS + ['CHIRPS']:
+                linhas.append({'ano': 2026, 'mes': mes, 'regiao': reg, 'serie': k, 'valor': p.get(f'{k}_pr')})
+        print(f'   2026-{mes:02d} x CHIRPS pronto', flush=True)
+    for r in ref[(ref.variavel == 'chuva_mm_mes') & ref.mes.isin(meses)].itertuples():
+        linhas.append({'ano': r.ano, 'mes': r.mes, 'regiao': r.regiao,
+                       'serie': 'gravado' if r.ano == 2026 else 'BR-DWGD', 'valor': r.sab})
+        if r.ano == 2024:
+            linhas.append({'ano': 2024, 'mes': r.mes, 'regiao': r.regiao, 'serie': 'CHIRPS', 'valor': r.referencia})
+    df = pd.DataFrame(linhas)
+    df.to_csv(arq, index=False)
+    return df
+
+
 # ============================================================ resumo
 def fmt(x, nd=1, sinal=True):
     return '-' if x is None or not np.isfinite(x) else (f'{x:+.{nd}f}' if sinal else f'{x:.{nd}f}')
+
+
+def pixels_prontos():
+    pix = os.path.join(SAIDA, 'pixels')
+    ag = [os.path.join(pix, f'agregados_{a}.csv.gz') for a in range(ANO_INICIO_CLIMA, ANOS_TESTE[0])]
+    di = [os.path.join(pix, f'dias_{a}.csv.gz') for a in ANOS_TESTE]
+    return all(os.path.exists(a) for a in ag + di + [os.path.join(pix, 'pontos.csv')]), ag, di
 
 
 def resumo():
@@ -662,15 +743,14 @@ def resumo():
     if not arqs:
         print('Nada baixado ainda.')
         return
-    pesos = pesos_regioes()
-    bruto = pd.concat(pd.read_csv(a) for a in arqs)
-    df = c3_chuva_regional(bruto, pesos)
-    alvo = df[df.ano == df.ano_alvo].copy()
+    df = pd.concat(pd.read_csv(a) for a in arqs)
+    alvo = df[df.ano == df.ano_alvo]
     completos = sorted(Y for Y, g in alvo.groupby('ano_alvo') if g.mes.nunique() == 12)
+    alvo = alvo[alvo.ano_alvo.isin(completos)]
     L = ['# Correção da chuva, da radiação e da ETo nos dias ERA5: teste fora da amostra', '',
-         'Protocolo aprovado e congelado antes de rodar: `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Cada ano de teste '
-         'é calibrado só com os anos anteriores. Referência: o que o banco entrega (BR-DWGD no núcleo), pixels '
-         'entregues. Só leitura: nada foi gravado no Earth Engine.', '']
+         'Protocolo aprovado e congelado antes de rodar (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, com a emenda 1: '
+         'extremos em todos os pixels). Cada ano de teste é calibrado só com os anos anteriores. Referência: o que o '
+         'banco entrega (BR-DWGD no núcleo), pixels entregues. Só leitura: nada foi gravado no Earth Engine.', '']
     rec = os.path.join(SAIDA, 'receita.csv')
     if os.path.exists(rec):
         r = pd.read_csv(rec)
@@ -679,9 +759,9 @@ def resumo():
     if len(completos) < len(ANOS_TESTE):
         L += [f'**Parcial:** {len(completos)} de {len(ANOS_TESTE)} anos de teste completos ({completos}). '
               'A decisão só sai com os 10.', '']
-    chuva = alvo[(alvo.variavel == 'pr') & alvo.ano_alvo.isin(completos)][['regiao', 'ano', 'mes', 'metodo', 'valor']]
+    mc = mx = mr = mp = None
     if completos:
-        mc = metricas_chuva(chuva)
+        mc, mx, mr = metricas_chuva(alvo), metricas_extremos(alvo), metricas_rad(alvo)
         L += ['## Chuva: |viés anual| (mediana dos anos de teste) e r_anomalias', '',
               '| Método | ' + ' | '.join(REGIOES) + ' | Mediana das 5 |', '|---|' + '---|' * (len(REGIOES) + 1)]
         for k in METODOS:
@@ -692,50 +772,50 @@ def resumo():
               '|---|' + '---|' * len(METODOS)]
         for a in completos:
             L.append(f'| {a} | ' + ' | '.join(fmt(mc[k]['vies'].get(('Brasil', a))) for k in METODOS) + ' |')
-        L.append('')
-    pix = os.path.join(SAIDA, 'pixels')
-    anos_px = sorted(glob.glob(os.path.join(pix, 'dias_*.csv.gz')))
-    mp = None
-    if completos and len(completos) == len(ANOS_TESTE) and len(anos_px) == 2025 - ANO_INICIO_CLIMA + 1:
-        pontos = pd.read_csv(os.path.join(pix, 'pontos.csv'))
-        razoes = {}
-        for Y in ANOS_TESTE:
-            for mes in range(1, 13):
-                g = df[(df.ano_alvo == Y) & (df.mes == mes) & (df.variavel == 'pr') & df.ano.between(Y - ANOS_C3, Y - 1)]
-                for r in REGIOES5:
-                    gr = g[g.regiao == r]
-                    razoes[(Y, mes, r)] = razao_c3(gr[gr.metodo == 'BR'].valor, gr[gr.metodo == 'C0'].valor)
-        dados = pd.concat(pd.read_csv(a) for a in anos_px)
-        dias = chuva_pixels(dados, pontos, razoes)
-        mp = metricas_pixels(dias)
-        L += ['## Extremos nos 150 pixels da K21 (dias de 2016-2025)', '',
-              f"Fração de dias com chuva (>= {CHUVA_DIA:.0f} mm) no BR-DWGD: {100 * mp['fracao_br']:.1f}%.", '',
-              '| Método | Fração de dias com chuva (%) | Erro do percentil 99 |', '|---|---|---|']
+        L += ['', '## Dias de chuva e maior chuva do mês, em todos os pixels entregues', '',
+              'Em cada célula: fração de dias com chuva (%) / erro do Rx1day (%). BR-DWGD: só a fração.', '',
+              '| Método | ' + ' | '.join(REGIOES) + ' |', '|---|' + '---|' * len(REGIOES),
+              '| BR-DWGD | ' + ' | '.join(f"{fmt(100 * mx['BR'][r]['fracao'], 1, False)}" for r in REGIOES) + ' |']
         for k in METODOS:
-            L.append(f"| {k} | {100 * mp[k]['fracao']:.1f} | {100 * mp[k]['erro_p99']:.1f}% |")
-        L.append('')
-    rad = alvo[alvo.variavel.isin(['rs', 'eto']) & alvo.ano_alvo.isin(completos)]
-    if completos:
-        mr = metricas_rad(rad)
-        L += ['## Radiação e ETo: viés nos meses de teste', '',
+            L.append(f'| {k} | ' + ' | '.join(f"{fmt(100 * mx[k][r]['fracao'], 1, False)} / "
+                                               f"{fmt(100 * mx[k][r]['erro_rx'], 1, False)}" for r in REGIOES) + ' |')
+        L += ['', '## Radiação e ETo: viés nos meses de teste', '',
               '| Método | ' + ' | '.join(REGIOES) + ' |', '|---|' + '---|' * len(REGIOES)]
         for k in METODOS:
             L.append(f'| {k} | ' + ' | '.join(f"{fmt(mr[k][r]['vies_rs'], 2)} MJ / {fmt(mr[k][r]['vies_eto'])}%"
                                                for r in REGIOES) + ' |')
         L.append('')
-    if mp is not None:
-        venc_c, det_c = decidir_chuva(mc, mp)
+    prontos, ag, di = pixels_prontos()
+    if len(completos) == len(ANOS_TESTE) and prontos:
+        pontos = pd.read_csv(os.path.join(SAIDA, 'pixels', 'pontos.csv'))
+        razoes = {}
+        for (Y, mes), g in df[(df.variavel == 'pr') & (df.ano < df.ano_alvo)].groupby(['ano_alvo', 'mes']):
+            for r in REGIOES5:
+                gr = g[g.regiao == r]
+                razoes[(Y, mes, r)] = razao_c3(gr[gr.metodo == 'BR'].valor, gr[gr.metodo == 'C0'].valor)
+        dias = pd.concat(pd.read_csv(a) for a in di)
+        agregados = pd.concat([pd.read_csv(a) for a in ag] + [agregar_dias(dias)], ignore_index=True)
+        mp = metricas_pixels(chuva_pixels(agregados, dias, pontos, razoes))
+        L += [f"## Percentil 99 diário em {mp['n_pixels']} pixels A ({mp['n_dias']:,} pixel-dias de 2016-2025)".replace(',', '.'),
+              '', f"Fração de dias com chuva no BR-DWGD nesses pixels: {100 * mp['fracao_br']:.1f}%.", '',
+              '| Método | Fração de dias com chuva (%) | Erro do percentil 99 |', '|---|---|---|']
+        for k in METODOS:
+            L.append(f"| {k} | {100 * mp[k]['fracao']:.1f} | {100 * mp[k]['erro_p99']:.1f}% |")
+        L.append('')
+        venc_c, det_c = decidir_chuva(mc, mx, mp)
         venc_r, det_r = decidir_rad(mr)
+        s = {True: '✅', False: '❌'}
         L += ['## Decisão (regra fixada antes)', '', '### Chuva', '',
               '| Método | 1. mediana cai >= 3 p.p. | 2. Brasil melhora em >= 7 de 10 anos | 3. r_anom não cai > 0,02 | '
-              '4. dias de chuva e p99 | Passa? |', '|---|---|---|---|---|---|']
-        s = {True: '✅', False: '❌'}
+              '4a. dias de chuva (todas as regiões) | 4b. Rx1day (todas as regiões) | 4c. p99 | Passa? |',
+              '|---|---|---|---|---|---|---|---|']
         for k in SIMPLICIDADE:
             d = det_c[k]
             L.append(f"| {k} | {s[d['cond1']]} {d['queda_mediana_pp']:+.2f} p.p. | {s[d['cond2']]} {d['anos_melhores']} | "
-                     f"{s[d['cond3']]} maior queda {d['maior_queda_r']:+.3f} | {s[d['cond4']]} afastamento "
-                     f"{d['afastamento_fracao_pp']:.2f} p.p. (C0 {d['afastamento_fracao_c0_pp']:.2f}); p99 "
-                     f"{100 * d['erro_p99']:.1f}% (C0 {100 * d['erro_p99_c0']:.1f}%) | {s[d['passa']]} |")
+                     f"{s[d['cond3']]} maior queda {d['maior_queda_r']:+.3f} | {s[d['c4a']]} pior região "
+                     f"{d['pior_afastamento_pp']:+.2f} p.p. além do C0 | {s[d['c4b']]} pior região "
+                     f"{100 * d['pior_crescimento_rx']:+.1f}% | {s[d['c4c']]} {100 * d['erro_p99']:.1f}% "
+                     f"(C0 {100 * d['erro_p99_c0']:.1f}%) | {s[d['passa']]} |")
         L += ['', f"**Chuva: {'troca para ' + venc_c if venc_c else 'nenhum método passou; o C0 (atual) fica'}.**", '',
               '### Radiação e ETo', '',
               '| Método | |viés| da radiação no Brasil cai (MJ) | |viés| da ETo no Brasil cai (p.p.) | pior região '
@@ -764,8 +844,8 @@ def relato_chirps(venc):
          f"SAB é o BR-DWGD. Método vencedor na chuva: {venc or 'nenhum (C0)'}.", '',
          '| Região | 2024 (régua) | 2026 gravado | 2026 C0 | 2026 C1 | 2026 C2 | 2026 C3 |', '|---|---|---|---|---|---|---|']
     for r in REGIOES:
-        def v(ano, serie):
-            a = c[(c.ano == ano) & (c.regiao == r) & (c.serie == serie)].valor.sum()
+        def v(ano, serie_):
+            a = c[(c.ano == ano) & (c.regiao == r) & (c.serie == serie_)].valor.sum()
             b = c[(c.ano == ano) & (c.regiao == r) & (c.serie == 'CHIRPS')].valor.sum()
             return 100 * (a / b - 1) if b else float('nan')
         L.append(f"| {r} | {fmt(v(2024, 'BR-DWGD'))} | {fmt(v(2026, 'gravado'))} | " +
@@ -791,7 +871,18 @@ def main():
     if not pior <= TOL_RECEITA:
         print(rec.sort_values('dif_rel', ascending=False).head(10).to_string())
         raise SystemExit(f'A média recalculada não bate com o asset (>{100 * TOL_RECEITA:.0f}%): o teste não roda.')
-    pesos = pesos_regioes()
+    # pixels primeiro (mais leves): o sorteio, as somas dos anos de climatologia e os dias dos anos de teste
+    pontos = pontos_sorteio()
+    for ano in range(ANO_INICIO_CLIMA, 2026):
+        teste = ano in ANOS_TESTE
+        arq = os.path.join(SAIDA, 'pixels', f"{'dias' if teste else 'agregados'}_{ano}.csv.gz")
+        if os.path.exists(arq):
+            continue
+        tempo()
+        t0 = time.time()
+        d = dias_pixels(ano, pontos) if teste else agregados_pixels(ano, pontos)
+        d.round(2).to_csv(arq, index=False)
+        print(f'   pixels {ano}: {len(d)} linhas em {(time.time() - t0) / 60:.1f} min', flush=True)
     for Y in ANOS_TESTE:
         for mes in range(1, 13):
             arq = os.path.join(SAIDA, 'regional', f'{Y}_{mes:02d}.csv')
@@ -804,17 +895,8 @@ def main():
             print(f'   {Y}-{mes:02d} pronto em {(time.time() - t0) / 60:.1f} min | razão C3 '
                   + ', '.join(f'{r[:2]} {razao[r]:.2f}' for r in REGIOES5)
                   + ' | Δ Rs ' + ', '.join(f'{r[:2]} {delta[r]:+.2f}' for r in REGIOES5), flush=True)
-    pontos = pontos_k21()
-    for ano in range(ANO_INICIO_CLIMA, 2026):
-        arq = os.path.join(SAIDA, 'pixels', f'dias_{ano}.csv.gz')
-        if os.path.exists(arq):
-            continue
-        tempo()
-        d = dias_pixels(ano, pontos)
-        d.round(3).to_csv(arq, index=False)
-        print(f'   pixels {ano}: {len(d)} pixel-dias', flush=True)
     tempo()
-    chirps_2026(razoes_parte_a(), pesos)
+    chirps_2026()
     resumo()
 
 
