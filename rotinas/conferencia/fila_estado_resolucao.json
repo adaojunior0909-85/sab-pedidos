@@ -37,10 +37,8 @@
   "inicio": "25/11 04:15"
  },
  "resolucao": {
-  "tentativas": 1,
-  "situacao": "pendente",
-  "inicio": "25/11 09:38",
-  "fim": "25/11 14:53",
-  "codigo": "tempo"
+  "tentativas": 2,
+  "situacao": "rodando",
+  "inicio": "25/11 14:53"
  }
 }
