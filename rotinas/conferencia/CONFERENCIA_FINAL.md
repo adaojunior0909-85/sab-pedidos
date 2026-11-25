@@ -1,6 +1,6 @@
 # Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 03:36 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 25/11/2026 04:43 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
@@ -8,6 +8,8 @@ Atualizado em 25/11/2026 03:36 (Brasília) pela fila automática (`rotinas/confe
 | Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ✅ pronta | 1 | 25/11 03:33 | pesquisa/resultados_solo_folha/RESULTADOS.md |
 | Escoamento x vazão do CAMELS-BR: extração 1981-2018 (512 bacias) | ✅ pronta | 1 | 25/11 03:36 |  |
 | Escoamento x CAMELS-BR: métricas e decisão do protocolo | ✅ pronta | 1 | 25/11 03:36 | pesquisa/resultados_escoamento/RESULTADOS.md |
+| As 16 variáveis: o método de 2026 aplicado a 2021-2025 (contra o BR-DWGD) | ✅ pronta | 1 | 25/11 04:43 | pesquisa/resultados_metodo_2026/RESULTADOS_A.md |
+| As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024 | ⏳ na fila | 0 |  | pesquisa/resultados_metodo_2026/RESULTADOS_B.md |
 | K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
 | K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada1/ |
 | K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
@@ -154,4 +156,33 @@ Protocolo fixado antes de rodar: `pesquisa/PROTOCOLO_ESCOAMENTO_CAMELS.md`. Tota
 ## Decisão
 
 Nenhum candidato passou nas quatro condições: **o M0 fica**. O dicionário ganha o aviso quantitativo (KGE e viés do M0 por região, tabela acima).
+
+---
+
+## As 16 variáveis: o método de 2026 aplicado a 2021-2025 (contra o BR-DWGD)
+
+(cópia de `pesquisa/resultados_metodo_2026/RESULTADOS_A.md`)
+
+### Parte A: o método de 2026 aplicado a 2021–2025 (anos com BR-DWGD)
+
+Erro do método = rota ERA5 do motor V1.7 menos o que o banco entrega no mesmo mês (somas: % do total; médias: diferença na unidade). Em cada célula: o erro dos 5 anos juntos e, entre colchetes, o menor e o maior erro de um ano só. **Nas 8 primeiras linhas a referência é a observação (BR-DWGD)**; nas outras, o próprio ERA5 do histórico (mede só a emenda).
+
+| Variável | Unid. | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|---|
+| Chuva | % | -9.18 [-15.2 a -5.6] | -12.40 [-16.9 a -9.2] | -11.90 [-16.1 a -7.8] | -6.75 [-12.8 a -3.0] | -7.53 [-12.1 a +0.2] | -9.64 [-13.3 a -7.2] |
+| Tmax | °C | +0.41 [+0.2 a +0.7] | -0.10 [-0.2 a +0.0] | +0.24 [+0.1 a +0.3] | +0.17 [+0.1 a +0.2] | +0.13 [-0.1 a +0.3] | +0.24 [+0.1 a +0.4] |
+| Tmin | °C | -0.05 [-0.3 a +0.2] | -0.08 [-0.1 a -0.0] | -0.13 [-0.2 a -0.1] | -0.05 [-0.1 a -0.0] | -0.02 [-0.1 a +0.0] | -0.07 [-0.2 a +0.1] |
+| Umidade relativa | p.p. | -0.32 [-0.9 a +0.6] | -2.13 [-2.9 a -1.6] | -0.41 [-0.9 a -0.0] | -1.28 [-1.4 a -1.1] | -1.80 [-2.0 a -1.5] | -0.88 [-1.2 a -0.5] |
+| Déficit de pressão de vapor | kPa | +0.03 [-0.0 a +0.1] | +0.08 [+0.1 a +0.1] | +0.02 [+0.0 a +0.0] | +0.05 [+0.0 a +0.1] | +0.04 [+0.0 a +0.0] | +0.04 [+0.0 a +0.1] |
+| ETo | % | +5.34 [+3.3 a +7.9] | +3.93 [+3.2 a +5.0] | +2.04 [+0.7 a +3.1] | +0.53 [+0.1 a +1.5] | +0.13 [-1.0 a +1.1] | +3.53 [+2.3 a +4.7] |
+| Radiação solar | MJ/m²/dia | +0.80 [+0.6 a +1.2] | +0.64 [+0.4 a +0.9] | +0.44 [+0.2 a +0.6] | +0.19 [+0.0 a +0.5] | +0.35 [+0.2 a +0.6] | +0.60 [+0.5 a +0.8] |
+| Vento | m/s | +0.12 [+0.0 a +0.2] | +0.23 [+0.2 a +0.2] | +0.01 [-0.0 a +0.0] | +0.01 [-0.0 a +0.0] | -0.07 [-0.2 a +0.0] | +0.09 [+0.0 a +0.1] |
+| ET real | % | +4.82 [+4.0 a +5.2] | +1.71 [+1.3 a +2.0] | +2.08 [+1.9 a +2.3] | +1.09 [+0.9 a +1.3] | +2.01 [+1.2 a +2.9] | +3.31 [+2.7 a +3.5] |
+| Transpiração | % | +2.03 [+1.7 a +2.4] | +0.04 [+0.0 a +0.1] | +0.33 [+0.2 a +0.5] | +0.09 [+0.1 a +0.1] | +0.59 [+0.4 a +0.8] | +1.17 [+1.0 a +1.4] |
+| Escoamento superficial | % | -0.08 [-0.1 a -0.1] | -0.09 [-0.1 a -0.0] | -0.00 [-0.0 a +0.0] | -0.00 [-0.0 a +0.0] | -0.05 [-0.1 a -0.0] | -0.06 [-0.1 a -0.0] |
+| Escoamento subsuperficial | % | -0.01 [-0.0 a -0.0] | -0.02 [-0.1 a +0.1] | -0.01 [-0.0 a +0.0] | -0.00 [-0.0 a +0.0] | +0.00 [-0.0 a +0.0] | -0.01 [-0.0 a -0.0] |
+| Temperatura do solo | °C | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Temperatura da folha | °C | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Umidade do solo 0-5 cm | m³/m³ | +0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | -0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
+| Umidade do solo 0-100 cm | m³/m³ | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [+0.0 a +0.0] | +0.00 [-0.0 a +0.0] | +0.00 [+0.0 a +0.0] |
 
