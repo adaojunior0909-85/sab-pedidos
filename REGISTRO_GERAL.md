@@ -43,7 +43,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | 22/11 | **K26 fechada (1961–2026)**: 1,7 bilhão de pixel-dias; 11 de 20 testes físicos sem nenhuma violação; escoamento > chuva em 14% dos pixel-dias (modelo × observação). **Radiação impossível vazia na leitura** (Rs < 3% do topo da atmosfera → Rs, ETo e déficit vazios): `sab_pedido.py` 2026.11.22 (PR #7) e painel 2026.11.5; **K16 v7.1** aprovada | `K26_FINAL_1961_2026/K26_RESULTADO_FINAL.md` |
 | 24/11 | Causa do Rs = 0 no litoral (ERA5-Land com 0 no mar em 04–20/03 e 23/09–08/10/2026); **motor V1.7** (Rs 0 vira vazio; PR #3 do `sab-motor`); **rotinas automáticas** (PR #8: saúde do banco, RONI, K26 mensal, piloto, painel `rotinas/PAINEL.md`); RONI de novembro (ASO = +2,0 °C); **K22 v2** e **K24 v1** registradas | `00_LEIA`, seções de 24/11 |
 | 24–25/11 | **Validações extras e conferência final automática** (PRs #9 e #10): acerto da previsão GFS por prazo (rotina diária); 2026 × CHIRPS e MODIS; solo, folha e ET real × SMAP e MODIS; escoamento × vazão dos rios (CAMELS-BR); teste das 16 variáveis (método de 2026 em 2021–2025; 2026 × GLDAS-2.1); histórico por década × TerraClimate e CHIRPS; tudo também por mês do ano. A fila `rotinas/conferencia/fila.py` roda sozinha e refaz a K26 de 1961 até a previsão | `rotinas/conferencia/CONFERENCIA_FINAL.md` e a seção 4 abaixo |
-| 25/11, manhã | **Parte A pronta:** o método de 2026 subestima a chuva em todos os anos de 2021–2025 (Brasil −9,6%; Nordeste e Centro-Oeste −12%; na seca do Norte e do Centro-Oeste até −35% a −47%) e superestima ETo (+3,5%) e radiação; piora em 2023–2024 (viés não estacionário). **Rascunho do protocolo da correção** dos dias ERA5 (C0 a C3, teste fora da amostra com origem móvel, regra de 4 condições), esperando aprovação: branch `claude/gifted-brahmagupta-4wyvci`, `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Pasta de entrega remontável só pelo repositório (`entrega/`) | `registro/CONTINUAR_AQUI.md` |
+| 25/11, manhã | **Parte A pronta:** o método de 2026 subestima a chuva em todos os anos de 2021–2025 (Brasil −9,6%; Nordeste e Centro-Oeste −12%; na seca do Norte e do Centro-Oeste até −35% a −47%) e superestima ETo (+3,5%) e radiação; piora em 2023–2024 (viés não estacionário). **Parte B pronta (06h47):** 2026 × GLDAS-2.1 confirma a chuva baixa no Nordeste e no Centro-Oeste (fora da régua 2022–2024). **Protocolo da correção** dos dias ERA5 (C0 a C3, teste fora da amostra com origem móvel, regra de 4 condições; 2026 × CHIRPS só relatado) **aprovado e congelado antes de rodar**: `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Pasta de entrega remontável só pelo repositório (`entrega/`) | `registro/CONTINUAR_AQUI.md` |
 
 ## 3. Regras que valem sempre
 
@@ -69,7 +69,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | ET real | MODIS MOD16 | 2016–2021 | r = 0,47 (Norte 0,06) → **mantém como índice, com aviso** |
 | Escoamento total | vazão observada de 512 bacias (CAMELS-BR, ANA) | 1981–2018 | KGE mediano 0,31, viés −35% (o SAB fica abaixo do rio); nenhum dos 3 métodos alternativos passou nas 4 condições → **o atual fica, com aviso por região** |
 | As 16 (parte A) | o próprio método de 2026 (rota ERA5 do motor V1.7) aplicado a 2021–2025 × o banco (BR-DWGD no núcleo) | 2021–2025 | **o método SUBESTIMA a chuva em todos os anos e regiões: Brasil −9,6% (pior ano −13%), Nordeste −12%, Centro-Oeste −12% (pior ano −16%), Norte −9%, Sul −8%, Sudeste −7%**. ETo +3,5%, radiação +0,6 MJ/m²/dia, ET real +3%, UR −0,9 p.p., Tmax +0,2 °C; Tmin, vento e as variáveis do ERA5 sem desvio relevante. Explica a maior parte da chuva baixa de 2026 × CHIRPS (Centro-Oeste −21%, Nordeste −16%); o que sobra em 2026 está perto do pior ano. Hipótese: viés não estacionário (a calibração é a média de 1986–2025; nos anos recentes o ERA5-Land fica mais seco que o BR-DWGD). **Proposta: correção da chuva (e da radiação/ETo) dos dias ERA5, com protocolo fixado antes, simulação 05a e K16; o banco não muda antes disso** |
-| As 16 (parte B) | GLDAS-2.1 (NASA) com régua 2022–2024 | 2026 | na fila (resultado no apêndice) |
+| As 16 (parte B) | GLDAS-2.1 (NASA) com régua 2022–2024 | 2026 (meses 1–10) | **pronta (25/11, 06h47).** Chuva de 2026 FORA da régua no **Nordeste** (SAB − GLDAS = −10,8%; régua +11,6 a +18,6) e no **Centro-Oeste** (−7,3%; régua +3,9 a +14,2): a terceira fonte independente (depois da Parte A e do CHIRPS) que aponta o método de 2026, não o clima. Radiação do Nordeste acima da régua (+0,2 contra −2,4 a −1,2 MJ), coerente com a Parte A. Tmax, Tmin, UR, VPD, ETo, ET real e umidade do solo dentro da régua em quase tudo. Fora da régua também: escoamento superficial (Norte, Sudeste, Sul, Brasil, acima) e subsuperficial (Norte, Sul), temperatura do solo e da folha (Norte e Centro-Oeste, abaixo), a investigar depois (variáveis do ERA5-Land; no histórico entram com a correção de leitura dos dias V1.0). `pesquisa/resultados_metodo_2026/RESULTADOS_B.md` (na `main`) |
 | 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | na fila (resultado no apêndice) |
 | Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
 | Previsão GFS 1–15 dias | ERA5 do dia, com a persistência como base | diária desde 24/11 | primeira medida por prazo depois de ~1 semana de fotografias |
@@ -100,7 +100,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 06:50, Brasília)
+# Apêndice automático (refeito em 25/11/2026 06:56, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -469,6 +469,8 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 09:56 | Protocolo da correção dos dias ERA5: APROVADO e congelado antes de rodar (2026 x CHIRPS só como relato) |
+| 25/11/2026 09:50 | Registro: linha de 25/11 dentro da tabela da linha do tempo |
 | 25/11/2026 09:50 | Registro: branches das conversas (claude/*), decisões esperando o responsável, protocolo da correção em rascunho e comando de retomada que busca todos os branches |
 | 25/11/2026 09:33 | Entrega: a base de montagem (pasta 07), os extras e um script que remonta o zip só com o repositório |
 | 25/11/2026 08:33 | Registro: resultado da Parte A (o método de 2026 subestima a chuva ~10% em 2021-2025) e o próximo trabalho |
@@ -568,4 +570,32 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 | 18/11/2026 15:50 | Merge pull request #2 from adaojunior0909-85/correcao-pedido-uma-variavel |
 | 18/11/2026 18:35 | Corrige pedido de uma variável só saindo com a coluna vazia |
 | 15/11/2026 20:32 | Merge pull request #1 from adaojunior0909-85/manutencao-versoes |
+| 15/11/2026 20:29 | Manutenção: versões fixas das bibliotecas e actions no Node 24 |
+| 04/11/2026 08:17 | sab_pedido.py |
+| 04/11/2026 08:14 | sab_pedido.py |
+| 03/11/2026 22:58 | sab_pedido.py |
+| 01/11/2026 17:52 | Delete .github/workflows/motor_05b.yml |
+| 01/11/2026 17:52 | Delete testes/teste_rodar_motor.py |
+| 01/11/2026 17:49 | Add files via upload |
+| 01/11/2026 17:48 | Add files via upload |
+| 01/11/2026 17:14 | Add files via upload |
+| 01/11/2026 17:14 | Add files via upload |
+| 01/11/2026 17:13 | Add files via upload |
+| 01/11/2026 17:11 | Add files via upload |
+| 01/11/2026 17:08 | pedido_sab.yml |
+| 01/11/2026 17:06 | README.md |
+| 01/11/2026 17:05 | requirements.txt |
+| 01/11/2026 17:04 | fumaca_sab_pedido.py |
+| 01/11/2026 17:03 | teste_sab_pedido.py |
+| 01/11/2026 17:01 | sab_pedido.py |
+| 01/11/2026 08:47 | sab_pedido.py |
+| 01/11/2026 08:18 | pedido_sab.yml |
+| 01/11/2026 08:11 | pedido_sab.yml |
+| 01/11/2026 07:11 | sab_pedido.py |
+| 01/11/2026 01:53 | sab_pedido.py |
+| 01/11/2026 01:29 | sab_pedido.py |
+| 01/11/2026 01:19 | Rename sab_pedido_v2.py to sab_pedido.py |
+| 01/11/2026 01:17 | Delete sab_pedido.py |
+| 01/11/2026 01:16 | Add files via upload |
+| 01/11/2026 00:33 | sab_pedido.py |
 
