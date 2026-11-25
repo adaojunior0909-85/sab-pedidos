@@ -1,0 +1,53 @@
+# CONFERÊNCIA FINAL DO SAB: de 2 em 2 horas (10h17 a 20h17 de Brasília) roda a fila rotinas/conferencia/fila.py, que
+# faz, uma atrás da outra, as tarefas que faltam para fechar a auditoria (validações de 2026, do solo e da folha, o
+# escoamento contra o CAMELS-BR e a K26 de 1961 até a previsão) e sobe resultados, LOG e o
+# rotinas/conferencia/CONFERENCIA_FINAL.md. SÓ LEITURA no Earth Engine. Quando a fila acaba, o agendamento se desliga.
+name: Rotina - Conferência final (fila)
+
+on:
+  schedule:
+    - cron: '17 13,15,17,19,21,23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write     # subir resultados e o painel
+  actions: write      # desligar o próprio agendamento quando a fila acabar
+
+concurrency:
+  group: rotina-conferencia
+  cancel-in-progress: false
+
+jobs:
+  fila:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Fila da conferência
+        env:
+          PYTHONUNBUFFERED: '1'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python -W ignore rotinas/conferencia/fila.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials

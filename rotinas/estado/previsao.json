@@ -1,0 +1,12 @@
+{
+ "rotina": "previsao",
+ "quando": "24/11/2026 22:16",
+ "situacao": "ok",
+ "resumo": [
+  "fotografia de 2026-11-24: 24 dias GFS (2026-11-16 a 2026-12-09) e a persistência (2026-11-15)",
+  "0 dia(s) previsto(s) conferido(s) nesta execução",
+  "ainda nenhum dia previsto virou ERA5 (o primeiro resultado sai em cerca de uma semana)"
+ ],
+ "pasta": "rotinas/resultados/previsao/",
+ "detalhes": {}
+}

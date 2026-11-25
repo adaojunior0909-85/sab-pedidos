@@ -12,6 +12,11 @@ on:
     branches: [rotinas-automaticas]
     paths: [rotinas/k26/**, .github/workflows/rotina_k26.yml]
   workflow_dispatch:
+    inputs:
+      rodada:
+        description: 'Rodada da K26 (1 = 2026, a do painel; 5 a 12 = décadas do histórico)'
+        required: false
+        default: '1'
 
 permissions:
   contents: write     # só para subir rotinas/ (resultados e painel de controle)
@@ -45,6 +50,7 @@ jobs:
       - name: K26, rodada 1
         env:
           PYTHONUNBUFFERED: '1'
+          K26_RODADA: ${{ inputs.rodada || '1' }}
         run: python -W ignore rotinas/k26/rodar_rodada1.py
 
       - name: Apagar a credencial da máquina

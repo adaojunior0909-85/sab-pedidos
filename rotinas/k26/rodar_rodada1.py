@@ -2,6 +2,8 @@
 # leitura) no GitHub Actions, guarda os CSV e o LOG em rotinas/resultados/k26_rodada1/<data>/ e registra no painel
 # de controle os números que importam, ao lado dos da execução anterior.
 #     python rotinas/k26/rodar_rodada1.py
+# [25/11] K26_RODADA=7 (ou outra) roda outra rodada à mão (Actions > Rotina - K26 > Run workflow > rodada): os CSV vão
+# para rotinas/resultados/k26_rodada<N>/<data>/ e o painel não muda (ele acompanha só a rodada 1, a de 2026).
 import glob
 import importlib.util
 import json
@@ -55,7 +57,28 @@ def numeros(pasta):
     return n
 
 
+def outra_rodada(rodada):
+    """Uma rodada que não é a 1 (ex.: 7 = 1981-1990): só guarda os CSV e o LOG; o painel não muda."""
+    dia = estado.agora().strftime('%Y-%m-%d')
+    destino = os.path.join(estado.RAIZ, f'rotinas/resultados/k26_rodada{rodada}/{dia}')
+    trabalho = tempfile.mkdtemp(prefix='k26_')
+    k = carregar_k26()
+    k.RAIZ = trabalho
+    feitas = k.rodar_sequencia([rodada])
+    os.makedirs(destino, exist_ok=True)
+    for p in sorted(glob.glob(os.path.join(trabalho, f'K26_rodada{rodada}_*'))):
+        if os.path.isdir(p):
+            for f in os.listdir(p):
+                shutil.copy2(os.path.join(p, f), destino)
+    print(json.dumps(numeros(destino), ensure_ascii=False, indent=1))
+    if not feitas or not feitas[0][1]:
+        raise SystemExit(1)
+
+
 def main():
+    rodada = int(os.environ.get('K26_RODADA') or 1)
+    if rodada != 1:
+        return outra_rodada(rodada)
     dia = estado.agora().strftime('%Y-%m-%d')
     pasta_rel = f'rotinas/resultados/k26_rodada1/{dia}'
     destino = os.path.join(estado.RAIZ, pasta_rel)

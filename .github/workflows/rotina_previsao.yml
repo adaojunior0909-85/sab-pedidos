@@ -1,0 +1,67 @@
+# ROTINA DIÁRIA: todo dia, às 16h13 de Brasília (depois do motor), fotografa a previsão GFS em vigor e confere as
+# fotografias antigas cujos dias já viraram ERA5: erro por prazo (1 a 15 dias), variável e região, e ganho sobre a
+# persistência. Só leitura. Resultado em rotinas/resultados/previsao/ACERTO.md e no rotinas/PAINEL.md.
+# [24/11] O motor agendado para 23h07 tem começado de manhã (06h40-09h20 de Brasília: o GitHub atrasa o agendamento);
+# esta rotina roda à tarde, depois dele.
+name: Rotina - acerto da previsao
+
+on:
+  schedule:
+    - cron: '13 19 * * *'       # 16h13 de Brasília, todo dia (depois do motor)
+  push:
+    branches: [validacoes-extra]
+    paths: [rotinas/previsao/**, .github/workflows/rotina_previsao.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir rotinas/ (resultados e painel de controle)
+
+concurrency:
+  group: rotina-previsao
+  cancel-in-progress: false
+
+jobs:
+  rotina:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Acerto da previsão
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python -W ignore rotinas/previsao/acerto_previsao.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os resultados e o painel de controle
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rotinas
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Rotina: acerto da previsão ($(date -u +%Y-%m-%d))"
+          git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+          # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
+          python rotinas/estado.py > /dev/null
+          git add rotinas/PAINEL.md
+          git diff --cached --quiet || git commit -q --amend --no-edit
+          for i in 1 2 3 4; do git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep $((5 * i)); git pull --rebase -X theirs origin "$GITHUB_REF_NAME"; done

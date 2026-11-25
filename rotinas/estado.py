@@ -23,6 +23,11 @@ ROTINAS = {
              'Se parou num empate do CPC, o log diz qual valor digitar; me mande o log.'),
     'k26': ('K26, rodada 1 (2026 inteiro, só leitura)', 'todo dia 15, 15h41',
             'Compare com a execução anterior (colunas da tabela); me mande a pasta do resultado.'),
+    'previsao': ('Acerto da previsão GFS (1 a 15 dias)', 'todo dia, 16h13',
+                 'Me mande o log; a fotografia do dia que faltar só tira aquele dia da conta.'),
+    'conferencia': ('Conferência final (validações, escoamento e K26 de 1961 até a previsão)',
+                    'de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha)',
+                    'Leia rotinas/conferencia/CONFERENCIA_FINAL.md; tarefa ❌ = me mande o LOG dela (rotinas/conferencia/logs/).'),
     'piloto': ('Piloto da previsão estendida (Tmin e Tmax)', 'dias 3 e 17, 08h17',
                'Leia pesquisa/piloto/CONFERENCIA.md quando aparecer.'),
 }
