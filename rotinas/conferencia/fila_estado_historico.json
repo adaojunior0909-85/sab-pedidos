@@ -33,8 +33,11 @@
  },
  "historico": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 19:52"
+  "situacao": "ok",
+  "inicio": "25/11 19:52",
+  "fim": "25/11 19:52",
+  "minutos": 0,
+  "codigo": 0
  },
  "resolucao": {
   "tentativas": 1,
