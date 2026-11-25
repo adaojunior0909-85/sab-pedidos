@@ -116,3 +116,35 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    1980 pronto em 933 s
    1981 pronto em 1002 s
 Tempo desta vez acabou; a próxima retoma daqui.
+
+===== 25/11/2026 09:23 (Brasília), tentativa 1 =====
+código: commit a683d1ff97cf18b0be3594fd7fe5c10d8fe40465 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   1982 pronto em 933 s
+   1983 pronto em 1007 s
+   1984 pronto em 823 s
+   1985 pronto em 874 s
+   1986 pronto em 841 s
+   1987 pronto em 867 s
+   1988 pronto em 868 s
+   1989 pronto em 925 s
+   1990 pronto em 1009 s
+   1991 pronto em 855 s
+   1992 pronto em 973 s
+   1993 pronto em 898 s
+   1994 pronto em 835 s
+   1995 pronto em 900 s
+   1996 pronto em 1001 s
+   1997 pronto em 929 s
+   1998 pronto em 848 s
+   1999 pronto em 950 s
+   2000 pronto em 858 s
+   2001 pronto em 887 s
