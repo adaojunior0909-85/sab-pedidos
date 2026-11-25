@@ -19,3 +19,24 @@ Traceback (most recent call last):
   File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_historico.py", line 95, in main
     raise RuntimeError(f'{ano}-{mes:02d}: não deu depois de 4 tentativas')
 RuntimeError: 1961-01: não deu depois de 4 tentativas
+
+===== 25/11/2026 03:50 (Brasília), tentativa 2 =====
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   ⚠️ 1961-01: Image.select: Band pattern 'ppt' did not match any bands. Available bands: [aet, def, pdsi, pet, pr, ro, soil, srad, swe, tmmn, tmmx, vap, vpd, vs]
+   ⚠️ 1961-01: Image.select: Band pattern 'ppt' did not match any bands. Available bands: [aet, def, pdsi, pet, pr, ro, soil, srad, swe, tmmn, tmmx, vap, vpd, vs]
+   ⚠️ 1961-01: Image.select: Band pattern 'ppt' did not match any bands. Available bands: [aet, def, pdsi, pet, pr, ro, soil, srad, swe, tmmn, tmmx, vap, vpd, vs]
+   ⚠️ 1961-01: Image.select: Band pattern 'ppt' did not match any bands. Available bands: [aet, def, pdsi, pet, pr, ro, soil, srad, swe, tmmn, tmmx, vap, vpd, vs]
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_historico.py", line 153, in <module>
+    main()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_historico.py", line 95, in main
+    raise RuntimeError(f'{ano}-{mes:02d}: não deu depois de 4 tentativas')
+RuntimeError: 1961-01: não deu depois de 4 tentativas
