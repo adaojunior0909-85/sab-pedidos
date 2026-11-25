@@ -70,6 +70,9 @@ TAREFAS = [
     {'id': 'correcao_era5', 'nome': 'Correção da chuva, radiação e ETo dos dias ERA5: teste fora da amostra (protocolo aprovado)',
      'cmd': PY + ['pesquisa/validar_correcao_era5.py'], 'min': 30, 'parcial': True,
      'resultado': 'pesquisa/resultados_correcao_era5/RESULTADOS.md'},
+    {'id': 'fase2_leva1', 'nome': 'Fase 2, leva 1: garoa (M1), radiação R1 (M2) e temperaturas/UR/vento T2 (M3), fora da amostra',
+     'cmd': PY + ['pesquisa/validar_fase2.py'], 'min': 30, 'parcial': True,
+     'resultado': 'pesquisa/resultados_fase2/RESULTADOS_LEVA1.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte
