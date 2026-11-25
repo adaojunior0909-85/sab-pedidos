@@ -39,11 +39,17 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 
 ## Decisões esperando o responsável
 0. ✅ **Protocolo da correção APROVADO (25/11, ~07h)**, incluindo 2026 × CHIRPS só como relato (fora da regra).
-   Congelado no commit `1de7696` do `validacoes-2` (`161324a` no branch de trabalho) (`pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`, no `validacoes-2` e no branch de
-   trabalho) ANTES de rodar. PRÓXIMO: escrever `pesquisa/validar_correcao_era5.py` (só leitura) e pô-lo na fila; o
-   disparo é combinado com o responsável. Resumo: teste fora da amostra com origem móvel (cada ano de 2016 a 2025
-   calibrado só com os anos anteriores); métodos C0 (atual), C1 (10 anos), C2 (15 anos), C3 (atual + ajuste regional
-   dos últimos 5 anos); a chuva só troca se cumprir as 4 condições.
+   Congelado no commit `1de7696` do `validacoes-2` (`161324a` no branch de trabalho) ANTES de rodar.
+1. **Script do teste PRONTO, esperando o responsável autorizar o disparo** (branch `claude/tender-maxwell-6ka6dt`,
+   commit `167ffa9`): `pesquisa/validar_correcao_era5.py` (só leitura; tarefa `correcao_era5` na fila desse branch) e
+   `pesquisa/teste_correcao_era5.py` (20 conferências sem Earth Engine, todas ok). Antes de tudo, o script confere se
+   a média recalculada para 1986–2025 bate com o asset `SICSB_1986_2025` (2%); se não bater, para sem rodar o resto.
+   Pontos que o protocolo não detalhava, fixados no cabeçalho ANTES de rodar (o responsável pode pedir mudança antes do
+   disparo): erro do p99 "não cresce mais de 5%" = relativo (≤ 1,05 × o do C0); r_anomalias nas 5 regiões; C3 no
+   pixel = C0 × razão da região; empate na radiação: < 0,05 MJ → o mais simples. Disparo (depois do OK):
+   `gh api -X POST repos/adaojunior0909-85/sab-pedidos/actions/workflows/rotina_conferencia.yml/dispatches -f ref=claude/tender-maxwell-6ka6dt -f 'inputs[so]=correcao_era5'`
+   (os resultados sobem nesse branch; a cadeia se chama de novo até acabar; tempo estimado de várias horas: 240
+   pedidos regionais pesados, 960 dos pixels e 9 do CHIRPS).
 2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
    método passar. O asset atual e o histórico não mudam.
 3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
