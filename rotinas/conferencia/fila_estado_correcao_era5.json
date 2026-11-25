@@ -58,11 +58,8 @@
   "codigo": 0
  },
  "correcao_era5": {
-  "tentativas": 0,
-  "situacao": "pendente",
-  "inicio": "25/11 08:10",
-  "fim": "25/11 13:15",
-  "minutos": 305,
-  "codigo": 3
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 13:31"
  }
 }
