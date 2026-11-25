@@ -33,9 +33,9 @@
  },
  "historico": {
   "tentativas": 3,
-  "situacao": "rodando",
+  "situacao": "falhou",
   "inicio": "25/11 03:53",
-  "fim": "25/11 03:53",
+  "fim": "25/11 03:57",
   "minutos": 3,
   "codigo": 1
  }

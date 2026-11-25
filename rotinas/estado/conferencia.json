@@ -1,9 +1,9 @@
 {
  "rotina": "conferencia",
- "quando": "25/11/2026 03:53",
- "situacao": "esperando",
+ "quando": "25/11/2026 03:57",
+ "situacao": "atencao",
  "resumo": [
-  "0 de 1 tarefas prontas"
+  "0 de 1 tarefas prontas; quebraram: historico; TERMINOU: leia o CONFERENCIA_FINAL.md"
  ],
  "pasta": "rotinas/conferencia/CONFERENCIA_FINAL.md",
  "detalhes": {}

@@ -1,6 +1,6 @@
 # Painel de controle das rotinas automáticas do SAB
 
-Atualizado em 25/11/2026 03:53 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
+Atualizado em 25/11/2026 03:57 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
 
 | Rotina | Quando roda | Última execução | Situação | Resumo |
 |---|---|---|---|---|
@@ -8,7 +8,7 @@ Atualizado em 25/11/2026 03:53 (Brasília). Cada rotina roda sozinha no GitHub A
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | 24/11/2026 21:14 | ✅ | asset RONI_CPC_v6 regravado e conferido (921 estações) |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 15h41 | 24/11/2026 20:56 | 👀 | 343 dias de 2026 (até 2026-12-09); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
 | Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 24/11/2026 22:16 | ✅ | fotografia de 2026-11-24: 24 dias GFS (2026-11-16 a 2026-12-09) e a persistência (2026-11-15) |
-| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 03:53 | ⏳ | 0 de 1 tarefas prontas |
+| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 03:57 | ⚠️ | 0 de 1 tarefas prontas; quebraram: historico; TERMINOU: leia o CONFERENCIA_FINAL.md |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
 
 ## Detalhes da última execução de cada rotina
@@ -50,10 +50,11 @@ Atualizado em 25/11/2026 03:53 (Brasília). Cada rotina roda sozinha no GitHub A
 
 ### Conferência final (validações, escoamento e K26 de 1961 até a previsão)
 
-⏳ 25/11/2026 03:53 (Brasília)
+⚠️ 25/11/2026 03:57 (Brasília)
 
-- 0 de 1 tarefas prontas
+- 0 de 1 tarefas prontas; quebraram: historico; TERMINOU: leia o CONFERENCIA_FINAL.md
 - Resultados: `rotinas/conferencia/CONFERENCIA_FINAL.md`
+- **O que fazer:** Leia rotinas/conferencia/CONFERENCIA_FINAL.md; tarefa ❌ = me mande o LOG dela (rotinas/conferencia/logs/).
 
 ### Piloto da previsão estendida (Tmin e Tmax)
 
