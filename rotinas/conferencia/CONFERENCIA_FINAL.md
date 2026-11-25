@@ -1,11 +1,11 @@
 # Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 03:28 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 25/11/2026 03:33 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
 | 2026 (ERA5 calibrado) contra CHIRPS (chuva) e MODIS (calor) | ✅ pronta | 1 | 25/11 03:28 | pesquisa/resultados_2026/RESULTADOS.md |
-| Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ⏳ na fila | 0 |  | pesquisa/resultados_solo_folha/RESULTADOS.md |
+| Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021) | ✅ pronta | 1 | 25/11 03:33 | pesquisa/resultados_solo_folha/RESULTADOS.md |
 | Escoamento x vazão do CAMELS-BR: extração 1981-2018 (512 bacias) | ⏳ na fila | 0 |  |  |
 | Escoamento x CAMELS-BR: métricas e decisão do protocolo | ⏳ na fila | 0 |  | pesquisa/resultados_escoamento/RESULTADOS.md |
 | K26 rodada 7 (1981-1990) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada7/ |
@@ -81,4 +81,21 @@ Atenção: o Terra (MODIS) saiu da órbita fixa em 2022 e passa cada vez mais ce
 | 2026-10 | Norte | +2.25 | -2.15 | 0.70 |
 | 2026-10 | Sudeste | -0.15 | -7.80 | 0.70 |
 | 2026-10 | Sul | -2.42 | -8.34 | 0.70 |
+
+---
+
+## Umidade do solo, temperatura da folha e do solo, ET real contra satélites (2016-2021)
+
+(cópia de `pesquisa/resultados_solo_folha/RESULTADOS.md`)
+
+### Solo, folha e ET real do SAB contra satélites independentes (2016–2021)
+
+Correlação das anomalias mensais (ciclo do ano retirado), por região. Regra fixada antes de rodar: mediana das 5 regiões r ≥ 0,6 mantém; 0,3–0,6 mantém como índice com aviso; < 0,3 recomendo retirar.
+
+| Variável | Referência | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil | Mediana (5 regiões) | Viés médio (SAB − ref.) | Recomendação |
+|---|---|---|---|---|---|---|---|---|---|
+| umidade_0_5cm | SMAP | 0.42 | 0.93 | 0.78 | 0.89 | 0.93 | 0.61 | 0.89 | -0.02 | mantém |
+| tfolha_C | LST dia | 0.80 | 0.81 | 0.71 | 0.80 | 0.53 | 0.70 | 0.80 | -7.02 | mantém |
+| tsolo_C | LST noite | 0.81 | 0.74 | 0.59 | 0.80 | 0.81 | 0.76 | 0.80 | +6.75 | mantém |
+| et_real | MOD16 | 0.06 | 0.67 | 0.52 | 0.47 | 0.46 | 0.25 | 0.47 | -8.07 | mantém como índice (aviso) |
 

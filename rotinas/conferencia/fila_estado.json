@@ -9,7 +9,10 @@
  },
  "solo_folha": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 03:28"
+  "situacao": "ok",
+  "inicio": "25/11 03:28",
+  "fim": "25/11 03:33",
+  "minutos": 5,
+  "codigo": 0
  }
 }
