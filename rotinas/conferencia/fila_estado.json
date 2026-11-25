@@ -1,7 +1,10 @@
 {
  "validar_2026": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 03:19"
+  "situacao": "ok",
+  "inicio": "25/11 03:19",
+  "fim": "25/11 03:28",
+  "minutos": 10,
+  "codigo": 0
  }
 }
