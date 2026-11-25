@@ -1,0 +1,32 @@
+
+===== 25/11/2026 07:48 (Brasília), tentativa 1 =====
+código: commit 8bd34d210ece533742a4b521c737486fd53e705f | earthengine-api 1.7.51 | Python 3.12.16
+🔄 Iniciando SAB V1.7 no projeto: clima-492922...
+🕒 Timestamp de Operação (Local/BRT): 2026-11-25 07:48:18
+
+📡 Última data ERA5-Land: 2026-11-15 | Última data BR-DWGD: 2025-12-31
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   ⚠️ receita mês 01: User memory limit exceeded. | de novo em pedidos menores
+   ⚠️ receita mês 01: User memory limit exceeded. | de novo em pedidos menores
+   ⚠️ receita mês 01: User memory limit exceeded. | de novo em pedidos menores
+   ⚠️ receita mês 01: User memory limit exceeded. | de novo em pedidos menores
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 907, in <module>
+    main()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 868, in main
+    rec = conferir_receita()
+          ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 565, in conferir_receita
+    res = reduzir(par, [f'{x}_{b}' for b in bs for x in ('novo', 'asset')], f'receita mês {mes:02d}')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/validar_correcao_era5.py", line 380, in reduzir
+    raise RuntimeError(f'{rotulo}: não deu depois de 4 tentativas')
+RuntimeError: receita mês 01: não deu depois de 4 tentativas
