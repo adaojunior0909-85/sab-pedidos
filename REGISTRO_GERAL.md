@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 15:29, Brasília)
+# Apêndice automático (refeito em 25/11/2026 17:16, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -531,6 +531,12 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 20:15 | Conferência: correcao_era5 (ok)  |
+| 25/11/2026 20:08 | Registro: motor V1.8 etapa A e fila da main |
+| 25/11/2026 20:01 | Conferência: começou correcao_era5  |
+| 25/11/2026 20:01 | Registro: sab-pedidos público |
+| 25/11/2026 20:00 | Fila: correcao_era5 volta para a fila (falta só 2026 x CHIRPS; repositório agora público) |
+| 25/11/2026 18:29 | Registro: resultado da correção e minutos do Actions esgotados |
 | 25/11/2026 18:29 | Correção ERA5: resultado com os 10 anos de teste — chuva troca para C3 (passa nas 4 condições); radiação/ETo: nenhum passa (o C0 fica). 2026 x CHIRPS pendente (sem minutos do GitHub) |
 | 25/11/2026 18:28 | Correção ERA5: mês do 2026 x CHIRPS como int do Python (o Earth Engine recusa o int64 do numpy) |
 | 25/11/2026 17:35 | Conferência: correcao_era5 (falhou)  |
