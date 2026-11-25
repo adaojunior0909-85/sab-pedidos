@@ -548,7 +548,13 @@ Trimestres comparados: 475 (1981 a 2026)
 🔹 Concordância de fase (episódios): 92.2%
 
 💾 Arquivos locais: RONI_CPC_v6.csv e auditoria_RONI_SAB_x_CPC.csv
-ℹ️ GRAVAR_ASSET = False: nada foi gravado no Earth Engine.
+
+⏳ Gravando projects/clima-492922/assets/RONI_CPC_v6...
+   ACL do asset atual: {'owners': [], 'readers': [], 'writers': [], 'all_users_can_read': True}
+   ACL final de RONI_CPC_v6: {'owners': [], 'readers': [], 'writers': [], 'all_users_can_read': True}
+✅ 921 estações gravadas em projects/clima-492922/assets/RONI_CPC_v6 (esperado 921).
+✅ 921 estações conferidas no asset (estações, RONI, RONI_2c, Trimestre, mês central, data_ms, chave_join, system:time_start).
+   Versão anterior (RONI_CPC_v6_ANTERIOR) apagada.
 
 📝 Tabela noaa_data com as estações de hoje, para colar no lugar da linha do mesmo ano (opcional):
 2026 -0.9 -0.8 -0.4 0.0 0.5 1.0 1.4 1.7 2.0 NaN NaN NaN

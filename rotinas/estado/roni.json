@@ -1,9 +1,9 @@
 {
  "rotina": "roni",
- "quando": "24/11/2026 20:22",
+ "quando": "24/11/2026 21:14",
  "situacao": "ok",
  "resumo": [
-  "teste (só auditoria; GRAVAR_ASSET = False): rodou sem erro; nada foi gravado",
+  "asset RONI_CPC_v6 regravado e conferido (921 estações)",
   "Estações acrescentadas do arquivo do CPC: [[2026, 'ASO', 1.97, 2.0]]"
  ],
  "pasta": "rotinas/resultados/roni/2026-11-24",
