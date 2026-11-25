@@ -283,8 +283,13 @@ def main():
                   and pode(t, st, estado.agora(), ORCAMENTO_MIN)[0]]
         if presas:
             print(f'Ainda faltam {presas}: chamando a fila de novo neste branch.')
-            subprocess.run(['gh', 'workflow', 'run', 'rotina_conferencia.yml', '--ref',
-                            os.environ.get('GITHUB_REF_NAME', 'main'), '-f', f'so={",".join(SO)}'], cwd=RAIZ)
+            for i in range(4):          # [25/11] o GitHub às vezes responde 500/502: sem repetir, a cadeia parava
+                r = subprocess.run(['gh', 'workflow', 'run', 'rotina_conferencia.yml', '--ref',
+                                    os.environ.get('GITHUB_REF_NAME', 'main'), '-f', f'so={",".join(SO)}'], cwd=RAIZ)
+                if r.returncode == 0:
+                    break
+                print(f'   a chamada falhou (código {r.returncode}); de novo em {60 * (i + 1)} s', flush=True)
+                time.sleep(60 * (i + 1))
         return
     if acabou and not SO and os.environ.get('GITHUB_ACTIONS') == 'true':
         print('Fila vazia: desligando o agendamento da conferência.')
