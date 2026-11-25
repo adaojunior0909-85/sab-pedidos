@@ -55,6 +55,9 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 2. **Criar a climatologia nova no Earth Engine** (ex.: `SICSB_2016_2025`): é ESCRITA; aprovação separada e só se algum
    método passar. O asset atual e o histórico não mudam.
 3. **Juntar o PR `validacoes-2` → `main`** quando `historico` e `resolucao` terminarem.
+   - Ritmo (25/11, 10h30): `historico` com 1961–1981 prontos (~15 min/ano; faltam ~11 h); `resolucao` com o CHIRPS de
+     1981–1993 pronto (~25 min/ano; faltam ~40 h: o resto do CHIRPS e os 65 anos do TerraClimate). **Decisão do
+     responsável (25/11): a `resolucao` roda completa, sem amostra de anos**, mesmo levando ~2 dias.
 
 ## O que está rodando sozinho (GitHub Actions, workflow "Rotina - Conferência final (fila)")
 | Onde | Tarefa | Situação |
