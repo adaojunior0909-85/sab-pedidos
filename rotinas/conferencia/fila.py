@@ -49,6 +49,12 @@ TAREFAS = [
     {'id': 'escoamento_metricas', 'nome': 'Escoamento x CAMELS-BR: métricas e decisão do protocolo',
      'cmd': PY + ['pesquisa/escoamento/escoamento_metricas.py'], 'min': 5, 'depois_de': 'escoamento_extrair',
      'resultado': 'pesquisa/resultados_escoamento/RESULTADOS.md'},
+    {'id': 'metodo_2026_A', 'nome': 'As 16 variáveis: o método de 2026 aplicado a 2021-2025 (contra o BR-DWGD)',
+     'cmd': PY + ['pesquisa/validar_metodo_2026.py', 'A'], 'min': 30, 'parcial': True,
+     'resultado': 'pesquisa/resultados_metodo_2026/RESULTADOS_A.md'},
+    {'id': 'metodo_2026_B', 'nome': 'As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024',
+     'cmd': PY + ['pesquisa/validar_metodo_2026.py', 'B'], 'min': 60,
+     'resultado': 'pesquisa/resultados_metodo_2026/RESULTADOS_B.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte

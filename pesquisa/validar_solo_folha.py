@@ -80,7 +80,7 @@ def main():
          'Correlação das anomalias mensais (ciclo do ano retirado), por região. Regra fixada antes de rodar: mediana das '
          '5 regiões r ≥ 0,6 mantém; 0,3–0,6 mantém como índice com aviso; < 0,3 recomendo retirar.', '',
          '| Variável | Referência | ' + ' | '.join(['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul', 'Brasil'])
-         + ' | Mediana (5 regiões) | Viés médio (SAB − ref.) | Recomendação |', '|---' * 10 + '|']
+         + ' | Mediana (5 regiões) | Viés médio (SAB − ref.) | Recomendação |', '|---' * 11 + '|']
     for var, ref in PARES.items():
         g = df[df.variavel == var].dropna(subset=['anom_sab', 'anom_referencia'])
         r = g.groupby('regiao').apply(lambda x: x.anom_sab.corr(x.anom_referencia))
