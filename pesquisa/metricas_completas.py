@@ -86,7 +86,32 @@ def metricas(g, var):
         a, b = g.anom_sab.to_numpy(float), g.anom_ref.to_numpy(float)
         x['r_anomalias'] = np.corrcoef(a, b)[0, 1] if a.std() > 0 and b.std() > 0 else np.nan
     x['soma'] = var in SOMAS
+    x.update(intervalo(s, o, var))
     return x
+
+
+RNG = np.random.default_rng(20261125)        # semente fixa: o mesmo intervalo a cada execução
+N_BOOT = 1000
+
+
+def intervalo(s, o, var):
+    """Intervalo de confiança de 95% (bootstrap dos meses, 1000 reamostragens, percentis 2,5 e 97,5) do viés
+    (% do total nas somas, diferença nas médias) e de r. Mostra quanto o número de pontos (n) pesa no resultado."""
+    n = len(s)
+    if n < 10 or n > 5000:     # > 5000 (bacia-meses do escoamento juntos): o intervalo é estreitíssimo; ver as bacias
+        if n > 5000:
+            return {'ic95_vies_inf': np.nan, 'ic95_vies_sup': np.nan, 'ic95_r_inf': np.nan, 'ic95_r_sup': np.nan,
+                    'ic95_obs': 'n > 5000: não calculado'}
+        return {'ic95_vies_inf': np.nan, 'ic95_vies_sup': np.nan, 'ic95_r_inf': np.nan, 'ic95_r_sup': np.nan}
+    i = RNG.integers(0, n, size=(N_BOOT, n))
+    bs, bo = s[i], o[i]
+    v = 100 * (bs.sum(1) / bo.sum(1) - 1) if var in SOMAS else (bs - bo).mean(1)
+    sc, oc = bs - bs.mean(1, keepdims=True), bo - bo.mean(1, keepdims=True)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        r = (sc * oc).sum(1) / np.sqrt((sc ** 2).sum(1) * (oc ** 2).sum(1))
+    q = lambda a: np.nanpercentile(a, [2.5, 97.5]) if np.isfinite(a).any() else (np.nan, np.nan)  # noqa: E731
+    (vi, vs), (ri, rs) = q(v), q(r)
+    return {'ic95_vies_inf': vi, 'ic95_vies_sup': vs, 'ic95_r_inf': ri, 'ic95_r_sup': rs}
 
 
 def periodos(anos):

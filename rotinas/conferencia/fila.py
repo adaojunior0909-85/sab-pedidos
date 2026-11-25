@@ -6,6 +6,7 @@
 #   código de saída de uma tarefa: 0 = pronta; 3 = adiantou, mas falta (continua na próxima); outro = quebrou
 #     python rotinas/conferencia/fila.py            roda o que der
 #     python rotinas/conferencia/fila.py --lista    só mostra a fila
+import glob
 import json
 import os
 import subprocess
@@ -18,7 +19,6 @@ RAIZ = os.path.dirname(os.path.dirname(AQUI))
 sys.path.insert(0, os.path.dirname(AQUI))
 import estado  # noqa: E402
 
-ARQ_ESTADO = os.path.join(AQUI, 'fila_estado.json')
 LOGS = os.path.join(AQUI, 'logs')
 FINAL = os.path.join(AQUI, 'CONFERENCIA_FINAL.md')
 ORCAMENTO_MIN = float(os.environ.get('FILA_MINUTOS') or 320)     # o job tem 350 min
@@ -64,6 +64,9 @@ TAREFAS = [
     {'id': 'metricas', 'nome': 'Todas as métricas, região por região, período e mês (para replicação)',
      'cmd': PY + ['pesquisa/metricas_completas.py'], 'min': 5, 'depois_de': ['metodo_2026_B', 'historico'],
      'resultado': 'pesquisa/METODOS_REPLICACAO.md'},
+    {'id': 'resolucao', 'nome': 'Sensibilidade à resolução: cada referência na grade do SAB x na resolução nativa',
+     'cmd': PY + ['pesquisa/sensibilidade_resolucao.py'], 'min': 30, 'parcial': True,
+     'resultado': 'pesquisa/resultados_resolucao/RESULTADOS.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte
@@ -74,13 +77,18 @@ TAREFAS = [
 SO = [x.strip() for x in (os.environ.get('FILA_SO') or '').split(',') if x.strip()]
 if SO:
     TAREFAS = [t for t in TAREFAS if t['id'] in SO]
+# cada cadeia FILA_SO tem o seu arquivo de estado (duas cadeias rodam juntas sem se atropelar); a leitura junta todos
+ARQ_ESTADO = os.path.join(AQUI, 'fila_estado' + ('_' + '_'.join(SO) if SO else '') + '.json')
 
 
 def ler():
-    try:
-        return json.load(open(ARQ_ESTADO))
-    except (OSError, ValueError):
-        return {}
+    st = {}
+    for arq in sorted(glob.glob(os.path.join(AQUI, 'fila_estado*.json')), key=lambda a: a == ARQ_ESTADO):
+        try:
+            st.update(json.load(open(arq)))
+        except (OSError, ValueError):
+            pass
+    return st
 
 
 def gravar(st):
@@ -206,6 +214,8 @@ def numeros_k26(t):
 
 
 def escrever_final(st, acabou):
+    if SO:
+        return                     # numa cadeia parcial, só os resultados e o estado dela; o resumo é da fila toda
     L = ['# Conferência final do SAB (1961 até a previsão)', '',
          f'Atualizado em {estado.agora():%d/%m/%Y %H:%M} (Brasília) pela fila automática '
          f'(`rotinas/conferencia/fila.py`). ' + ('**Todas as tarefas terminaram.**' if acabou else 'Ainda há tarefas na fila.'),

@@ -67,7 +67,7 @@ def imagens_mes(ano, mes):
 
 
 def main():
-    regs = v.regioes()
+    regs = v.regioes(com_ufs=True)
     pasta = os.path.join(SAIDA, 'anos')
     os.makedirs(pasta, exist_ok=True)
     ultimo_tc = int(v.ultimo(TC)[:4])

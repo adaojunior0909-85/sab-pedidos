@@ -129,6 +129,13 @@ sobre os n valores mensais do grupo):
 | `kge` | 1 − √((r − 1)² + (σs/σo − 1)² + (μs/μo − 1)²) (Gupta et al., 2009) |
 | `nse` | 1 − Σ(s − o)² / Σ(o − ō)² (Nash e Sutcliffe, 1970) |
 
+| `ic95_vies_inf`, `ic95_vies_sup` | intervalo de confiança de 95% do viés por bootstrap dos meses (1000 reamostragens, semente 20261125, percentis 2,5 e 97,5); **nas somas é o intervalo de `vies_pct`**, nas médias o de `vies`; só com 10 ≤ n ≤ 5000 |
+| `ic95_r_inf`, `ic95_r_sup` | o mesmo para `r` |
+
+- **Número de pontos:** cada valor é a média de uma área inteira (todos os pixels entregues da região, do estado ou da
+  bacia), não de alguns pontos. O `n` é o número de meses (ou bacia-meses) do grupo; o intervalo de confiança mostra
+  quanto o resultado depende desse `n`. Áreas: as 5 regiões e o Brasil (todas as comparações) e os 27 estados (o
+  histórico por década e a sensibilidade à resolução); no escoamento, 512 bacias.
 - **`periodo`:** `todos`, cada ano e, nas séries com 15 anos ou mais, cada década.
 - **`mes`:** `todos` ou 1 a 12 (o mesmo mês do ano em todos os anos do período: mede a estação).
 - Grupos com um valor só não têm métrica: o valor está em `DADOS_PAREADOS.csv.gz` (colunas `comparacao, referencia,

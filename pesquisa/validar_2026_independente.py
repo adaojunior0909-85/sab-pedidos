@@ -37,10 +37,14 @@ def sab(ini, fim):
     return ee.ImageCollection(sp.SAB).filterDate(ini, fim).map(padronizar)
 
 
-def regioes():
+def regioes(com_ufs=False):
+    """As 5 regiões e o Brasil; com_ufs=True acrescenta os 27 estados (regiao = 'UF <nome do GAUL>')."""
     gaul = ee.FeatureCollection('FAO/GAUL/2015/level1').filter(ee.Filter.eq('ADM0_NAME', 'Brazil'))
     nomes = gaul.aggregate_array('ADM1_NAME').getInfo()
     feats = []
+    if com_ufs:
+        feats += [ee.Feature(gaul.filter(ee.Filter.eq('ADM1_NAME', n)).geometry(100), {'regiao': f'UF {sem_acento(n)}'})
+                  for n in sorted(set(nomes))]
     for reg in ('Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'):
         ufs = [n for n in nomes if UF_REGIAO.get(sem_acento(n)) == reg]
         feats.append(ee.Feature(gaul.filter(ee.Filter.inList('ADM1_NAME', ufs)).union(100).geometry(100), {'regiao': reg}))

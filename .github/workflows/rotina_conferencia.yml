@@ -19,7 +19,7 @@ permissions:
   actions: write      # desligar o próprio agendamento quando a fila acabar
 
 concurrency:
-  group: rotina-conferencia-${{ github.ref_name }}
+  group: rotina-conferencia-${{ github.ref_name }}-${{ inputs.so }}
   cancel-in-progress: false
 
 jobs:
