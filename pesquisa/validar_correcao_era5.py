@@ -723,7 +723,7 @@ def chirps_2026():
     ee, v = E['ee'], E['v']
     razoes = razoes_parte_a()
     ref = pd.read_csv(os.path.join(AQUI, 'resultados_2026', 'validacao_2026_independente.csv'))
-    meses = sorted(ref[(ref.variavel == 'chuva_mm_mes') & (ref.ano == 2026)].mes.unique())
+    meses = sorted(int(m) for m in ref[(ref.variavel == 'chuva_mm_mes') & (ref.ano == 2026)].mes.unique())   # int do Python (o Earth Engine recusa o do numpy)
     linhas = []
     for mes in meses:
         cl = climatologias(mes, 2026)
