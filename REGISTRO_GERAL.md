@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 20:10, Brasília)
+# Apêndice automático (refeito em 25/11/2026 20:22, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -609,6 +609,11 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 23:22 | Conferência: começou multifonte_gldas21  |
+| 25/11/2026 23:22 | Conferência: começou multifonte_mod16  |
+| 25/11/2026 23:22 | Conferência: começou multifonte_era5  |
+| 25/11/2026 23:21 | Várias referências contra o banco (fase 2, emenda 1): ERA5-Land bruto, GLDAS-2.0 e 2.1, PERSIANN-CDR, IMERG, MOD16; 5 cadeias na fila |
+| 25/11/2026 23:10 | Registro: historico pronto; décadas com degrau e o que a 2ª referência precisa confirmar (M5) |
 | 25/11/2026 23:01 | Conferência: começou resolucao  |
 | 25/11/2026 23:00 | Conferência: resolucao (pendente)  |
 | 25/11/2026 22:52 | Conferência: historico (ok)  |

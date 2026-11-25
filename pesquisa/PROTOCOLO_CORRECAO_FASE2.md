@@ -101,3 +101,25 @@ Depende de ~30 dias de fotografias da rotina diária (desde 24/11).
 3. **M5** quando o `historico` terminar; **M6** com 30 dias de fotografias (~24/12).
 4. **M4**: os avisos do dicionário entram com as conclusões.
 Resultados em `pesquisa/resultados_fase2/` (um `RESULTADOS_<módulo>.md` por módulo).
+
+## Emenda 1 (25/11/2026, ~20h20, ANTES de rodar o M5; pedida pelo responsável: "o máximo de comparações e tudo registrado, para o máximo de variáveis")
+O M5 passa a usar **várias referências**, não só o TerraClimate e o CHIRPS. Cada uma é comparada com o banco mês a mês,
+nas 5 regiões, no Brasil e nos 27 estados, com a mesma conta e a mesma regra de "degrau" do `pesquisa/validar_historico.py`
+(viés da década longe da mediana das décadas por mais que a tolerância, ou correlação das anomalias < 0,5 quando a
+mediana é ≥ 0,7; década com menos de 24 meses fica de fora; a fonte precisa cobrir pelo menos 3 décadas).
+
+| Referência | Variáveis | Período | Independente do banco? |
+|---|---|---|---|
+| TerraClimate | chuva, Tmax, Tmin, VPD, radiação, vento, ETo, ET real, água no solo, escoamento | 1961–2025 | sim (semi: usa estações do CRU) |
+| CHIRPS | chuva | 1981–2025 | sim (semi: usa estações) |
+| PERSIANN-CDR | chuva | 1983–2025 | sim (satélite) |
+| IMERG (mensal) | chuva | 2000–2025 | sim (satélite) |
+| GLDAS-2.0 | chuva, Tmax, Tmin, UR, VPD, radiação, vento, ET real, transpiração, solo (temperatura e umidade), folha, escoamento | 1961–2014 | sim |
+| GLDAS-2.1 | as mesmas | 2000–2025 | sim |
+| ERA5-Land bruto | chuva, Tmax, Tmin, UR, VPD, radiação, vento | 1961–2025 | sim para as variáveis do BR-DWGD; **não** para as do modelo (que vêm dele) |
+| MOD16 | ET real | 2001–2025 | sim |
+
+**Regra de confirmação (substitui a "2ª referência" do M5):** uma década × variável × região é **confirmada** se o degrau
+aparecer em **pelo menos 2 referências independentes** (o GLDAS-2.0 e o 2.1 contam como uma só; o ERA5-Land não conta
+para as variáveis do modelo). Só a década confirmada passa ao teste do ajuste do M5 (regra do M5, sem mudança). Tudo o
+que cada fonte mostrar é registrado, confirmado ou não, em `pesquisa/resultados_multifonte/`.
