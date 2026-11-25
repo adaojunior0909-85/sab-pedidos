@@ -43,7 +43,6 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | 22/11 | **K26 fechada (1961–2026)**: 1,7 bilhão de pixel-dias; 11 de 20 testes físicos sem nenhuma violação; escoamento > chuva em 14% dos pixel-dias (modelo × observação). **Radiação impossível vazia na leitura** (Rs < 3% do topo da atmosfera → Rs, ETo e déficit vazios): `sab_pedido.py` 2026.11.22 (PR #7) e painel 2026.11.5; **K16 v7.1** aprovada | `K26_FINAL_1961_2026/K26_RESULTADO_FINAL.md` |
 | 24/11 | Causa do Rs = 0 no litoral (ERA5-Land com 0 no mar em 04–20/03 e 23/09–08/10/2026); **motor V1.7** (Rs 0 vira vazio; PR #3 do `sab-motor`); **rotinas automáticas** (PR #8: saúde do banco, RONI, K26 mensal, piloto, painel `rotinas/PAINEL.md`); RONI de novembro (ASO = +2,0 °C); **K22 v2** e **K24 v1** registradas | `00_LEIA`, seções de 24/11 |
 | 24–25/11 | **Validações extras e conferência final automática** (PRs #9 e #10): acerto da previsão GFS por prazo (rotina diária); 2026 × CHIRPS e MODIS; solo, folha e ET real × SMAP e MODIS; escoamento × vazão dos rios (CAMELS-BR); teste das 16 variáveis (método de 2026 em 2021–2025; 2026 × GLDAS-2.1); histórico por década × TerraClimate e CHIRPS; tudo também por mês do ano. A fila `rotinas/conferencia/fila.py` roda sozinha e refaz a K26 de 1961 até a previsão | `rotinas/conferencia/CONFERENCIA_FINAL.md` e a seção 4 abaixo |
-
 | 25/11, manhã | **Parte A pronta:** o método de 2026 subestima a chuva em todos os anos de 2021–2025 (Brasil −9,6%; Nordeste e Centro-Oeste −12%; na seca do Norte e do Centro-Oeste até −35% a −47%) e superestima ETo (+3,5%) e radiação; piora em 2023–2024 (viés não estacionário). **Rascunho do protocolo da correção** dos dias ERA5 (C0 a C3, teste fora da amostra com origem móvel, regra de 4 condições), esperando aprovação: branch `claude/gifted-brahmagupta-4wyvci`, `pesquisa/PROTOCOLO_CORRECAO_ERA5_2026.md`. Pasta de entrega remontável só pelo repositório (`entrega/`) | `registro/CONTINUAR_AQUI.md` |
 
 ## 3. Regras que valem sempre
@@ -470,6 +469,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 09:50 | Registro: branches das conversas (claude/*), decisões esperando o responsável, protocolo da correção em rascunho e comando de retomada que busca todos os branches |
 | 25/11/2026 09:33 | Entrega: a base de montagem (pasta 07), os extras e um script que remonta o zip só com o repositório |
 | 25/11/2026 08:33 | Registro: resultado da Parte A (o método de 2026 subestima a chuva ~10% em 2021-2025) e o próximo trabalho |
 | 25/11/2026 07:33 | Conferência: começou resolucao  |
