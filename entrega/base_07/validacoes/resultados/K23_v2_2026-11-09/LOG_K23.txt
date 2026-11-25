@@ -1,0 +1,134 @@
+====================================================================================================
+K23 v2: AUDITORIA DA EMENDA ERA5 -> GFS DA TMAX (somente leitura) | 2026-11-09 01:39 (BRT)
+====================================================================================================
+🔒 Trava de somente leitura ativa.
+
+✅ A OK: a V1.6 não mexe na Tmax da emenda (conferência do código, 08/11)
+   rota GFS da Tmax/Tmin igual na V1.5 e na V1.6 (40 de 41 itens idênticos; processarDia_GFS muda só chuva, radiação e propriedades); Tmax do ERA5 sem mudança (PRÉVIA 3: 0% dos pixels); PRÉVIA 6: 02, 09, 15 e 18/11 da V1.6 iguais ao gravado pela V1.5
+[B] Tmax do SAB_V1 de 2026-10-18 a 2026-11-23 (Brasil)
+   37 dias lidos
+      data          versao  alg   max   p99  media  lon_max  lat_max
+2026-10-18 provisoria_era5 V1.5 40.04 38.56  32.61   -37.35    -9.85
+2026-10-19 provisoria_era5 V1.5 40.21 38.06  32.71   -37.35    -9.85
+2026-10-20 provisoria_era5 V1.5 39.84 38.81  33.44   -41.95    -4.35
+2026-10-21 provisoria_era5 V1.5 41.62 39.94  33.46   -55.95   -16.95
+2026-10-22 provisoria_era5 V1.5 40.55 39.31  33.28   -42.05    -6.25
+2026-10-23 provisoria_era5 V1.5 40.29 39.44  34.33   -43.65    -7.55
+2026-10-24 provisoria_era5 V1.5 41.58 40.43  35.41   -41.95    -6.15
+2026-10-25 provisoria_era5 V1.5 41.18 40.19  34.89   -44.15   -14.25
+2026-10-26 provisoria_era5 V1.5 41.72 39.62  33.15   -37.35    -9.85
+2026-10-27 provisoria_era5 V1.5 40.73 39.06  32.75   -37.35    -9.85
+2026-10-28 provisoria_era5 V1.5 40.76 39.56  32.49   -55.45    -3.75
+2026-10-29 provisoria_era5 V1.5 41.06 39.81  32.41   -60.65     2.85
+2026-10-30 provisoria_era5 V1.5 40.25 39.06  32.70   -61.05     3.75
+2026-10-31 provisoria_era5 V1.5 40.69 39.19  33.32   -42.25    -8.35
+2026-11-01 provisoria_era5 V1.5 41.43 39.94  34.24   -56.85    -0.45
+2026-11-02  provisoria_gfs V1.5 44.28 39.44  34.29   -60.65     2.85
+2026-11-03  provisoria_gfs V1.5 40.58 39.56  34.42   -56.55   -16.75
+2026-11-04  provisoria_gfs V1.5 41.52 39.69  34.37   -60.65     2.85
+2026-11-05  provisoria_gfs V1.5 43.52 39.56  34.73   -60.65     2.85
+2026-11-06  provisoria_gfs V1.5 43.46 39.81  34.99   -60.65     2.85
+2026-11-07  provisoria_gfs V1.5 43.81 40.06  34.89   -60.65     2.85
+2026-11-08  provisoria_gfs V1.5 44.11 39.63  33.64   -60.65     2.85
+2026-11-09  provisoria_gfs V1.5 43.80 39.61  32.57   -60.65     2.85
+2026-11-10  provisoria_gfs V1.5 41.09 38.19  32.27   -60.65     2.85
+2026-11-11  provisoria_gfs V1.5 40.94 38.06  32.46   -60.65     2.85
+2026-11-12  provisoria_gfs V1.5 41.48 38.43  32.80   -60.65     2.85
+2026-11-13  provisoria_gfs V1.5 42.89 38.81  32.95   -60.65     2.85
+2026-11-14  provisoria_gfs V1.5 42.32 38.43  32.55   -60.65     2.85
+2026-11-15  provisoria_gfs V1.5 41.37 37.06  31.99   -60.65     2.85
+2026-11-16  provisoria_gfs V1.5 39.00 36.68  31.37   -61.05     3.85
+2026-11-17  provisoria_gfs V1.5 40.45 37.68  31.57   -60.65     2.85
+2026-11-18  provisoria_gfs V1.5 42.10 38.69  32.31   -60.65     2.85
+2026-11-19  provisoria_gfs V1.5 41.93 38.69  32.83   -60.75     3.05
+2026-11-20  provisoria_gfs V1.5 42.83 38.69  32.82   -60.65     2.85
+2026-11-21  provisoria_gfs V1.5 39.56 38.19  32.80   -42.25    -7.25
+2026-11-22  provisoria_gfs V1.5 39.78 37.93  31.99   -41.85    -5.35
+2026-11-23  provisoria_gfs V1.5 39.89 38.31  32.10   -41.55    -5.05
+ℹ️ B INFO: emenda atual: 2026-11-01 (ERA5) -> 2026-11-02 (GFS)
+   máximo nacional 41.4 -> 44.3 °C (+2.8); p99 39.9 -> 39.4; média 34.24 -> 34.29; máximo do GFS em (-60.65; 2.85)
+
+[C] emenda pixel a pixel x variação natural de um dia para o outro
+   BR-DWGD 2011: 5 pares
+   BR-DWGD 2012: 5 pares
+   BR-DWGD 2013: 5 pares
+   BR-DWGD 2014: 5 pares
+   BR-DWGD 2015: 5 pares
+   BR-DWGD 2016: 5 pares
+   BR-DWGD 2017: 5 pares
+   BR-DWGD 2018: 5 pares
+   BR-DWGD 2019: 5 pares
+   BR-DWGD 2020: 5 pares
+   BR-DWGD 2021: 5 pares
+   BR-DWGD 2022: 5 pares
+   BR-DWGD 2023: 5 pares
+   BR-DWGD 2024: 5 pares
+   BR-DWGD 2025: 5 pares
+                              abs_media  desvio  p99_abs  pct_acima_5
+fonte                                                                
+BR-DWGD                           0.392   2.298    6.970        5.077
+EMENDA                            0.049   1.883    5.528        1.675
+SAB ERA5 2026                     0.567   2.015    6.342        3.549
+SAB GFS 2026 (só referência)      0.127   1.576    5.402        1.365
+✅ C OK: emenda pixel a pixel dentro da variação natural de um dia para o outro
+   abs_media 0.05 (p95 natural 1.40) ok; desvio 1.88 (p95 natural 3.29) ok; p99_abs 5.53 (p95 natural 10.79) ok; 1.68% dos pixels com |Δ| > 5 °C; 85 pares naturais
+
+[D] máximo nacional da Tmax por dia no BR-DWGD, 10-15 a 11-30, 1991-2025
+⚠️ D ATENÇÃO: saltos do máximo nacional de um dia para o outro no BR-DWGD
+   1610 pares; |Δ| >= 2.8 °C (emenda atual) em 1.1% dos pares; |Δ| >= 2.8 °C (PRÉVIA de 08/11) em 1.2%; p95 dos saltos 2.1 °C; o limite da PRÉVIA é 2 °C (|Δ| > 2 em 5.6% dos pares)
+   1610 pares de dias lidos
+
+[E] o pixel do máximo do 1º dia GFS x o recorde do pixel no BR-DWGD
+      data  tmax_C
+2026-10-18   39.84
+2026-10-19   37.05
+2026-10-20   36.83
+2026-10-21   39.10
+2026-10-22   39.80
+2026-10-23   39.64
+2026-10-24   40.81
+2026-10-25   40.81
+2026-10-26   41.01
+2026-10-27   40.51
+2026-10-28   40.47
+2026-10-29   41.06
+2026-10-30   40.08
+2026-10-31   40.11
+2026-11-01   40.55
+2026-11-02   44.28
+2026-11-03   40.02
+2026-11-04   41.52
+2026-11-05   43.52
+2026-11-06   43.46
+2026-11-07   43.81
+2026-11-08   44.11
+2026-11-09   43.80
+2026-11-10   41.09
+2026-11-11   40.94
+2026-11-12   41.48
+2026-11-13   42.89
+2026-11-14   42.32
+2026-11-15   41.37
+2026-11-16   38.36
+2026-11-17   40.45
+2026-11-18   42.10
+2026-11-19   41.48
+2026-11-20   42.83
+2026-11-21   39.01
+2026-11-22   38.92
+2026-11-23   39.30
+⚠️ E ATENÇÃO: máximo do 1º dia GFS x recorde do próprio pixel (BR-DWGD out-nov)
+   pixel (-60.65; 2.85): GFS 44.3 °C; recorde do pixel 42.6 °C e p99 40.6 °C (2135 dias, 1991-2025); folga da regra 1.0 °C
+
+====================================================================================================
+RESULTADO K23
+====================================================================================================
+   A   OK        a V1.6 não mexe na Tmax da emenda (conferência do código, 08/11)
+   B   INFO      emenda atual: 2026-11-01 (ERA5) -> 2026-11-02 (GFS)
+   C   OK        emenda pixel a pixel dentro da variação natural de um dia para o outro
+   D   ATENÇÃO   saltos do máximo nacional de um dia para o outro no BR-DWGD
+   E   ATENÇÃO   máximo do 1º dia GFS x recorde do próprio pixel (BR-DWGD out-nov)
+
+   ⚠️ A V1.6 é neutra na emenda (A), mas a emenda da rota GFS (no ar desde a V1.5) tem sinal de defeito (C ou E). Não siga sozinho: me envie o zip para decidirmos juntos.
+
+Tempo: 2 min. Nada foi gravado no Earth Engine (trava de somente leitura).

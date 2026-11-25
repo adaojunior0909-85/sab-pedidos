@@ -1,0 +1,6 @@
+item;status;titulo;texto
+A;OK;a V1.6 não mexe na Tmax da emenda (conferência do código, 08/11);"rota GFS da Tmax/Tmin igual na V1.5 e na V1.6 (40 de 41 itens idênticos; processarDia_GFS muda só chuva, radiação e propriedades); Tmax do ERA5 sem mudança (PRÉVIA 3: 0% dos pixels); PRÉVIA 6: 02, 09, 15 e 18/11 da V1.6 iguais ao gravado pela V1.5"
+B;INFO;emenda atual: 2026-11-01 (ERA5) -> 2026-11-02 (GFS);"máximo nacional 41.4 -> 44.3 °C (+2.8); p99 39.9 -> 39.4; média 34.24 -> 34.29; máximo do GFS em (-60.65; 2.85)"
+C;OK;emenda pixel a pixel dentro da variação natural de um dia para o outro;"abs_media 0.05 (p95 natural 1.40) ok; desvio 1.88 (p95 natural 3.29) ok; p99_abs 5.53 (p95 natural 10.79) ok; 1.68% dos pixels com |Δ| > 5 °C; 85 pares naturais"
+D;ATENÇÃO;saltos do máximo nacional de um dia para o outro no BR-DWGD;"1610 pares; |Δ| >= 2.8 °C (emenda atual) em 1.1% dos pares; |Δ| >= 2.8 °C (PRÉVIA de 08/11) em 1.2%; p95 dos saltos 2.1 °C; o limite da PRÉVIA é 2 °C (|Δ| > 2 em 5.6% dos pares)"
+E;ATENÇÃO;máximo do 1º dia GFS x recorde do próprio pixel (BR-DWGD out-nov);"pixel (-60.65; 2.85): GFS 44.3 °C; recorde do pixel 42.6 °C e p99 40.6 °C (2135 dias, 1991-2025); folga da regra 1.0 °C"

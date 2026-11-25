@@ -1,0 +1,24 @@
+====================================================================================================
+09 MATRIZ EQM E1 | 2026-11-08 18:51 (BRT) | SIMULAÇÃO: nada é gravado | projects/clima-492922/assets/SICSB_EQM_1986_2025
+====================================================================================================
+🔒 SIMULAR = True: criar, apagar, exportar e cancelar estão bloqueados.
+
+1) Mês 07, 1986-2025, em 150 pixels A: valores diários e quantis em Python (40 pedidos, de 3 a 10 min)...
+   1995: 4650 pixel-dias
+   2005: 4650 pixel-dias
+   2015: 4650 pixel-dias
+   2025: 4650 pixel-dias
+   150 pontos | médias dos quantis (UR em %, vento em m/s):
+             RH    u2
+ERA5 p05  54.85  0.52
+ERA5 p50  67.66  1.21
+ERA5 p95  80.79  1.95
+BR p05    60.35  0.56
+BR p50    70.92  1.07
+BR p95    81.85  1.88
+   maior dia de chuva do BR-DWGD (média dos pontos): 38.8 mm (máx. 142.2 mm)
+✅ Amostra conferida: 85 bandas, quantis em ordem, valores dentro dos limites físicos.
+
+2) Coleção projects/clima-492922/assets/SICSB_EQM_1986_2025: não existe
+
+ℹ️ SIMULAR = True: nada foi gravado (2 min). Sem ❌: rode o 09b.

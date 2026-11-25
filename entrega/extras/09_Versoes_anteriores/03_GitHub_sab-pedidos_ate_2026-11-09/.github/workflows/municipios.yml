@@ -1,0 +1,39 @@
+# SAB: grava no Drive a lista de municípios do GAUL 2015 que o formulário usa (versão 2026.11.01)
+# Rode à mão UMA vez (aba Actions > Lista de municípios > Run workflow), antes do montarFormulario do Apps Script.
+# Só lê o Earth Engine e exporta 1 CSV para a pasta SAB_config do Drive. Não grava asset.
+name: Lista de municípios
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  listar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar a biblioteca do Earth Engine
+        run: pip install earthengine-api==1.7.51
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Exportar a lista
+        run: python listar_municipios.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials

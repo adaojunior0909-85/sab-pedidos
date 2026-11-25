@@ -1,0 +1,46 @@
+  periodo versao  pixel_dias
+1961-1970  v1.12   258153008
+1971-1980  v1.12   258223697
+1981-1990   v1.8   258153008
+1991-2000   v1.9   258223697
+2001-2025  v1.11   645453209
+     2026  v1.12    24071872
+  periodo  runoff_sup_gt_pr_%  runoff_sup_gt_pr_10_%  runoff_sup_gt_pr_50_%  runoff_sup_gt_200_%  rs_gt_rso_motor_%  rs_zero_%
+1961-1970            13.72388                0.68904                0.06461              0.00747            0.00001    0.00010
+1971-1980            15.96138                0.69544                0.05420              0.00530            0.00017    0.00010
+1981-1990            16.58900                0.64615                0.04400              0.00410            0.00354    0.00009
+1991-2000            15.78134                0.68286                0.05162              0.00389            0.00008    0.00011
+2001-2025            12.13176                0.66251                0.07372              0.00766            0.01854    0.00010
+     2026             0.48363                0.14684                0.03559              0.01588            0.00008    0.00489
+  periodo  rs_zero__A  rs_zero__B  rs_zero__C_interior  eto_zero_com_rs__A  eto_zero_com_rs__B  eto_zero_com_rs__C_interior  rs_gt_rso_motor__A  rs_gt_rso_motor__B  rs_gt_rso_motor__C_interior
+1961-1970           0           0                  264                   0                   0                           32                  12                   5                            0
+1971-1980           0           0                  250                   0                   0                           59                 334                 112                            0
+1981-1990           0           0                  241                   0                   0                           59                7495                1641                            0
+1991-2000           0           0                  279                   0                   0                           67                 214                   1                            0
+2001-2025           0           0                  664                   0                   0                          116              119171                 480                            0
+     2026         747         429                    0                   0                   0                            0                   0                  16                            3
+com algo: ['runoff_sup_gt_pr', 'runoff_sup_gt_pr_10', 'runoff_sup_gt_pr_50', 'runoff_sup_gt_200', 'rs_gt_rso_motor', 'rs_gt_rso_audit', 'rs_zero', 'eto_zero_com_rs', 'rs_lt_003ra']
+sempre zero: ['rs_ge_ra', 'etr_gt_eto', 'transp_gt_etr', 'tmax_lt_tmin', 'rh_fora', 'solo_gt_max', 'negativo', 'vpd_incoerente', 'pr_ge_450', 'u2_fora', 't_fora']
+  periodo  runoff_sup_gt_pr  runoff_sup_gt_pr_10  runoff_sup_gt_pr_50  runoff_sup_gt_200  rs_gt_rso_motor  rs_gt_rso_audit  rs_zero  eto_zero_com_rs  rs_lt_003ra
+1961-1970          35428617              1778765               166785              19292               17                0      264               32            7
+1971-1980          41216056              1795797               139962              13680              446               23      250               59            6
+1981-1990          42825013              1668050               113583              10585             9136             3934      241               59           18
+1991-2000          40751170              1763317               133302              10052              215                1      279               67            7
+2001-2025          78304857              4276215               475836              49440           119651            17982      664              116           19
+     2026            116419                35347                 8568               3823               19                0     1176                0         1021
+  periodo      variavel       max     classe     mes  meses_classe_fora
+1961-1970 runoff_sup_mm 1646.7153          A    1965                 18
+1961-1970 runoff_sub_mm  639.5228          A    1965                  1
+1961-1970  et_potencial   17.6002 C_interior    1966                  1
+1971-1980 runoff_sup_mm 1597.8870          B    1974                 19
+1981-1990 runoff_sup_mm 1763.0625          B    1985                 15
+1991-2000 runoff_sup_mm  948.5974          A    1991                 15
+2001-2025 runoff_sup_mm 1865.3030          B    2008                 52
+     2026 runoff_sup_mm 1099.5475          A 2026-02                  8
+  periodo A1   A2      A3       B B_borda     C C_borda       H    P     G
+1961-1970 OK INFO ATENCAO ATENCAO    INFO FALHA    INFO      OK  NaN   NaN
+1971-1980 OK INFO ATENCAO ATENCAO    INFO FALHA    INFO      OK  NaN   NaN
+1981-1990 OK INFO ATENCAO ATENCAO     NaN FALHA     NaN ATENCAO  NaN   NaN
+1991-2000 OK INFO ATENCAO ATENCAO    INFO FALHA    INFO      OK  NaN   NaN
+2001-2025 OK INFO ATENCAO ATENCAO    INFO FALHA    INFO      OK  NaN   NaN
+     2026 OK INFO ATENCAO ATENCAO    INFO FALHA    INFO      OK INFO FALHA

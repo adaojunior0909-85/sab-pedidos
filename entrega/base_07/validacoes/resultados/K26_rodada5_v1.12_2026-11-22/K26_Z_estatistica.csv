@@ -1,0 +1,12 @@
+tabela;metrica;variavel;classe;grupo;n_dias;media;mediana;desvio;ic95_inf;ic95_sup;outliers_15iqr;outliers_30iqr;limite_inf_tukey;limite_sup_tukey
+CD;pct_rs_gt_rso_motor;rs_gt_rso_motor;todas;BR-DWGD;120;0,005924;9,7e-05;0,010187;0,004889;0,006881;29;19;-0,008111;0,013518
+CD;pct_rs_gt_rso_audit;rs_gt_rso_audit;todas;BR-DWGD;120;0,004987;0,0;0,008941;0,004095;0,005745;30;27;-0,004822;0,008037
+CD;pct_runoff_sup_gt_pr;runoff_sup_gt_pr;todas;BR-DWGD;120;13,699033;13,670536;4,917153;12,065681;15,385836;2;0;1,992465;25,27287
+CD;pct_i_runoff_total_gt_pr;i_runoff_total_gt_pr;todas;BR-DWGD;120;23,552571;20,947192;7,743502;21,609205;26,086943;1;0;1,700814;44,088651
+CD;pct_eto_zero_com_rs;eto_zero_com_rs;todas;BR-DWGD;120;0,000222;0,000182;0,000162;0,000178;0,000262;2;0;-0,000243;0,000655
+CD;pct_rs_ge_ra;rs_ge_ra;todas;BR-DWGD;120;0,000525;0,0;0,001698;0,00029;0,000761;30;29;-1,7e-05;2,8e-05
+CD;pct_rs_lt_003ra;rs_lt_003ra;todas;BR-DWGD;120;1,3e-05;0,0;4,9e-05;5e-06;2,3e-05;12;12;0,0;0,0
+CD;pct_runoff_sup_gt_pr_10;runoff_sup_gt_pr_10;todas;BR-DWGD;120;0,689105;0,56502;0,523552;0,545171;0,870423;5;1;-0,536355;1,761905
+CD;pct_runoff_sup_gt_pr_50;runoff_sup_gt_pr_50;todas;BR-DWGD;120;0,064838;0,028711;0,100393;0,041758;0,095093;13;3;-0,079824;0,168324
+CD;pct_runoff_sup_gt_200;runoff_sup_gt_200;todas;BR-DWGD;120;0,007508;0,00134;0,018192;0,003709;0,012681;14;9;-0,01016;0,017183
+CD;pct_rs_zero;rs_zero;todas;BR-DWGD;120;0,001026;0,0;0,001957;0,000852;0,001171;30;28;-0,00097;0,001616

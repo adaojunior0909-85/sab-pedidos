@@ -1,0 +1,68 @@
+# SAB: converte os CSV de um pedido para Excel (.xlsx) (versão 2026.11.01)
+# Disparado pelo Apps Script (repository_dispatch, tipo converter_xlsx) quando os CSV de um pedido com formato
+# xlsx ou ambos ficam prontos; ou à mão, na aba Actions, para testes. Não usa o Earth Engine, só o Google Drive.
+name: Converter para Excel
+
+on:
+  repository_dispatch:
+    types: [converter_xlsx]
+  workflow_dispatch:
+    inputs:
+      pedido_id:
+        description: 'ID do pedido'
+        required: true
+      pasta_id:
+        description: 'ID da pasta SAB_pedido_<ID> no Drive (o trecho depois de /folders/ no link)'
+        required: true
+      modo:
+        description: 'xlsx (só Excel) ou ambos (CSV e Excel)'
+        required: true
+        default: 'ambos'
+      simular:
+        description: 'Só listar o que faria'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: xlsx-${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
+  cancel-in-progress: false
+
+jobs:
+  converter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Testes da conversão (sem rede)
+        run: python testes/teste_sab_xlsx.py
+
+      - name: Credencial (a mesma do Earth Engine, com permissão do Drive)
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Converter
+        env:
+          PEDIDO_ID: ${{ github.event.client_payload.pedido_id || inputs.pedido_id }}
+          PASTA_ID: ${{ github.event.client_payload.pasta_id || inputs.pasta_id }}
+          MODO: ${{ github.event.client_payload.modo || inputs.modo }}
+          SIMULAR: ${{ ((github.event_name == 'workflow_dispatch' && inputs.simular) || github.event.client_payload.simular == '1') && '1' || '0' }}
+        run: python sab_xlsx.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials

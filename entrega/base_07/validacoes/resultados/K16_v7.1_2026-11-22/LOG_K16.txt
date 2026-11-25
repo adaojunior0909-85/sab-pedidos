@@ -1,0 +1,53 @@
+🔎 K16: identidade do envio por e-mail com o painel | 2026-11-22 22:40 (BRT)
+   rotina sab_pedido.py 2026.11.22 | SHA-256 84cd7fedb606d3a946ec6fa8bcacc43ea5e92f10d7edf275fe8f7d148ba9a32b
+   painel de referência: 2026.10.4 (revisao 18h30 de 22/10/2026)
+   [v3] painel que gera os CSV de comparação: 2026.11.5 | SHA-256 5fa97d9a49735b252f5faf734b657128cd9e9baa1f8264637f4d901eb82921d3
+
+A/B) Pedidos montados pela rotina do e-mail e exportados para a pasta K16_teste_2026.11.22
+   A1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+   A2: Município(s): Pato Branco, Clevelandia (Paraná) | Clevelandia: 16 pontos, Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Clevelandia_2025, Diaria_Pato_Branco_2025
+   A3: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Mensal_Pato_Branco_2025
+   A4: 1 polígono(s) desenhado(s) | Poligono_1: 6 pontos | 1 arquivo(s): Diaria_Poligono_1_2025
+   A5: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Pato_Branco_2015_El_Nino_Forte, Diaria_Pato_Branco_2016_El_Nino_Forte | Filtro ENSO El Nino forte: 3 mês(es) do passado no período (a previsão entra sempre).
+   A6: 1 polígono(s) desenhado(s) | Poligono_1: 20 pontos | 1 arquivo(s): Diaria_Poligono_1_2024
+   B1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+   B2: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+   A7: 1 polígono(s) desenhado(s) | Poligono_1: 20 pontos | 1 arquivo(s): Diaria_Poligono_1_2026
+
+E1) Pato Branco, 01/09/2026 a 2026-12-07: 1 arquivo(s), 1470 linhas
+
+P) CSV do painel, gerados pelo próprio painel (Node.js + Earth Engine), em MeuDrive/K16_painel/<caso>/
+   todos os casos já têm CSV do painel em K16_painel: nada a gerar
+
+C) Link na hora do Paraná, 01/01 a 31/03/2025: 19 variáveis x 3 (pr, tmax, tmin), alternados
+   RODAR_PARTE_C = False: não medido nesta versão (a regra da radiação não muda o tempo do link; v6: o limite é o mesmo para qualquer escolha)
+
+   Acompanhando as exportações a cada 30 s (até 3 h)
+
+Comparação com os CSV do painel (MeuDrive/K16_painel/<caso>/)
+   ✅ A1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   (achado em outra pasta do Drive: K16_teste_2026.11.22 (1)/K16_20261122_2154_A1__00_Dicionario_Variaveis_SAB.csv)
+   ✅ A1 dicionário: 35 variáveis do painel; 29 idênticas, 6 com texto novo de propósito, + Fonte_ENSO
+   ✅ A2 Diaria_Clevelandia_2025: 5840 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A3 Mensal_Pato_Branco_2025: 180 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A4 Diaria_Poligono_1_2025: 540 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2015_El_Nino_Forte: 915 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2016_El_Nino_Forte: 435 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A6 Diaria_Poligono_1_2024: 1820 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A7 Diaria_Poligono_1_2026: 620 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ E1 colunas ENSO na previsão: 1470 linhas, 360 de previsão; Fonte_ENSO na previsão ['Persistencia']; Sem_Dado 0; fontes no período ['Estimativa_OISST', 'Estimativa_OISST_parcial', 'Persistencia']
+   ✅ R7 radiação impossível vazia (A7, Lagoa Mirim, 03/2026): 527 linhas com dado (93 sem dado nenhum, fora da conta); 102 célula(s) de radiação vazias em 17 dia(s) (2026-03-04 a 2026-03-20); fora da janela []; radiação abaixo de 0,5 MJ/m² 0; nessas linhas ETo ou déficit preenchidos 0, ET real vazia 0; ETo vazia com a radiação preenchida 0
+
+====================================================================================================
+RESULTADO FINAL K16
+====================================================================================================
+   ✅ IDENTIDADE APROVADA: a rotina do e-mail gera os mesmos arquivos do painel (nomes e células das colunas do painel) e as colunas ENSO da previsão estão completas (E1).
+      ➜ Pode seguir para o teste de ponta a ponta (formulário -> GitHub -> e-mail).
+   Links (s): 19 variáveis [] | 3 variáveis [] | razões []
+   ➖ Parte C não rodada nesta versão (RODAR_PARTE_C = False); vale a medida da v6.
+
+Tempo desta execução: 1 min. Nada foi gravado no Earth Engine.
+Os CSV estão em K16_teste_2026.11.22 e K16_painel_2026.11.5 no seu Drive; pode apagá-las depois de me enviar o zip.

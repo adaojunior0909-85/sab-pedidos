@@ -1,0 +1,41 @@
+====================================================================================================
+09 MATRIZ EQM E1 | 2026-11-08 19:39 (BRT) | GRAVAÇÃO | projects/clima-492922/assets/SICSB_EQM_1986_2025
+====================================================================================================
+1) Mês 07, 1986-2025, em 150 pixels A: valores diários e quantis em Python (40 pedidos, de 3 a 10 min)...
+   1995: 4650 pixel-dias
+   2005: 4650 pixel-dias
+   2015: 4650 pixel-dias
+   2025: 4650 pixel-dias
+   150 pontos | médias dos quantis (UR em %, vento em m/s):
+             RH    u2
+ERA5 p05  54.85  0.52
+ERA5 p50  67.66  1.21
+ERA5 p95  80.79  1.95
+BR p05    60.35  0.56
+BR p50    70.92  1.07
+BR p95    81.85  1.88
+   maior dia de chuva do BR-DWGD (média dos pontos): 38.8 mm (máx. 142.2 mm)
+✅ Amostra conferida: 85 bandas, quantis em ordem, valores dentro dos limites físicos.
+
+2) Coleção projects/clima-492922/assets/SICSB_EQM_1986_2025: não existe
+   coleção criada: projects/clima-492922/assets/SICSB_EQM_1986_2025
+🚀 12 exportações iniciadas (code.earthengine.google.com/tasks). Acompanhando a cada 60 s, até 240 min...
+   19:40 tarefas: {'READY': 9, 'RUNNING': 3}
+   19:41 tarefas: {'READY': 7, 'RUNNING': 5}
+   19:42 tarefas: {'RUNNING': 6, 'READY': 6}
+   19:48 tarefas: {'READY': 7, 'RUNNING': 5}
+   19:50 tarefas: {'READY': 6, 'RUNNING': 5, 'COMPLETED': 1}
+   19:51 tarefas: {'RUNNING': 6, 'READY': 5, 'COMPLETED': 1}
+   19:52 tarefas: {'RUNNING': 6, 'READY': 4, 'COMPLETED': 2}
+   19:57 tarefas: {'RUNNING': 6, 'COMPLETED': 3, 'READY': 3}
+   19:59 tarefas: {'RUNNING': 6, 'COMPLETED': 5, 'READY': 1}
+   20:00 tarefas: {'COMPLETED': 6, 'RUNNING': 5, 'READY': 1}
+   20:03 tarefas: {'COMPLETED': 7, 'RUNNING': 5}
+   20:08 tarefas: {'COMPLETED': 8, 'RUNNING': 4}
+   20:12 tarefas: {'COMPLETED': 9, 'RUNNING': 3}
+   20:15 tarefas: {'COMPLETED': 11, 'RUNNING': 1}
+   20:17 tarefas: {'COMPLETED': 12}
+
+3) Conferência do gravado
+   mês 07: 150 pontos comparados, 0 de 12750 valores fora da tolerância {'RH': 2.0, 'u2': 0.2, 'pr_max_br': 0.5} em relação aos quantis do NumPy
+✅ projects/clima-492922/assets/SICSB_EQM_1986_2025: 12 meses da versão E1, 85 bandas, grade nativa, quantis em ordem e o mês 07 igual ao calculado. Próximo passo: o 05a V1.6 (simulação do motor).

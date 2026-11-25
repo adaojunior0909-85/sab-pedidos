@@ -1,0 +1,87 @@
+🔎 K16: identidade do envio por e-mail com o painel | 2026-11-22 21:54 (BRT)
+   rotina sab_pedido.py 2026.11.22 | SHA-256 84cd7fedb606d3a946ec6fa8bcacc43ea5e92f10d7edf275fe8f7d148ba9a32b
+   painel de referência: 2026.10.4 (revisao 18h30 de 22/10/2026)
+   [v3] painel que gera os CSV de comparação: 2026.11.5 | SHA-256 5fa97d9a49735b252f5faf734b657128cd9e9baa1f8264637f4d901eb82921d3
+
+A/B) Pedidos montados pela rotina do e-mail e exportados para a pasta K16_teste_2026.11.22
+   A1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+      🚀 Diaria_Pato_Branco_2025: tarefa 7J5WA5JGZB5Q3A6PWMZZYQPQ
+      🚀 00_Dicionario_Variaveis_SAB: tarefa 5VKD46TCMLS2FPMNJSUITW6P
+   A2: Município(s): Pato Branco, Clevelandia (Paraná) | Clevelandia: 16 pontos, Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Clevelandia_2025, Diaria_Pato_Branco_2025
+      🚀 Diaria_Clevelandia_2025: tarefa J7WGBQK7VTKIOHYVKA6LANDV
+      🚀 Diaria_Pato_Branco_2025: tarefa DGXIWIC7TVDUAWDQ64LBNZUM
+   A3: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Mensal_Pato_Branco_2025
+      🚀 Mensal_Pato_Branco_2025: tarefa SMHRP6SIS5FVHN76PWXV3DVN
+   A4: 1 polígono(s) desenhado(s) | Poligono_1: 6 pontos | 1 arquivo(s): Diaria_Poligono_1_2025
+      🚀 Diaria_Poligono_1_2025: tarefa Y6YILWNADSQ4WR4QGGKNQAQ5
+   A5: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Pato_Branco_2015_El_Nino_Forte, Diaria_Pato_Branco_2016_El_Nino_Forte | Filtro ENSO El Nino forte: 3 mês(es) do passado no período (a previsão entra sempre).
+      🚀 Diaria_Pato_Branco_2015_El_Nino_Forte: tarefa YP7T5THVL4CSHH2MDRYY4DXZ
+      🚀 Diaria_Pato_Branco_2016_El_Nino_Forte: tarefa NYGXZDZH4UY5HXHNILINNQES
+   A6: 1 polígono(s) desenhado(s) | Poligono_1: 20 pontos | 1 arquivo(s): Diaria_Poligono_1_2024
+      🚀 Diaria_Poligono_1_2024: tarefa M7MDB2NWFTUZ34FOZYGBCTCK
+   B1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+      🚀 Diaria_Pato_Branco_2025: tarefa LVOSG73KBO7LIVRTVJBYTSGH
+   B2: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+      🚀 Diaria_Pato_Branco_2025: tarefa ZQOJT2IPTZM2FQ4PP4D4D6SP
+   A7: 1 polígono(s) desenhado(s) | Poligono_1: 20 pontos | 1 arquivo(s): Diaria_Poligono_1_2026
+      🚀 Diaria_Poligono_1_2026: tarefa EU7HIGVL6NPBMFDKWODPWAAI
+
+E1) Pato Branco, 01/09/2026 a 2026-12-07: 1 arquivo(s), 1470 linhas
+      🚀 Diaria_Pato_Branco_2026: tarefa 5N5ILCQ7VP663V2TU4HQOHZR
+
+P) CSV do painel, gerados pelo próprio painel (Node.js + Earth Engine), em MeuDrive/K16_painel/<caso>/
+   instalando a biblioteca JavaScript do Earth Engine (@google/earthengine, a do Code Editor)...
+   rodando o painel 2026.11.5 para A1, A2, A3, A4, A5, A6, A7 (de 2 a 20 min por caso)...
+   Earth Engine iniciado (biblioteca JavaScript v1)
+   A1: preenchendo a tela
+   A1: processando (esperando 2 link(s))
+   ✅ painel A1: 2 arquivo(s) em 39 s
+   A2: preenchendo a tela
+   A2: processando (esperando 2 link(s))
+   ✅ painel A2: 3 arquivo(s) em 57 s
+   A3: preenchendo a tela
+   A3: processando (esperando 1 link(s))
+   ✅ painel A3: 2 arquivo(s) em 21 s
+   A4: preenchendo a tela
+   A4: processando (esperando 1 link(s))
+   ✅ painel A4: 2 arquivo(s) em 15 s
+   A5: preenchendo a tela
+   A5: processando (esperando 2 link(s))
+   ✅ painel A5: 3 arquivo(s) em 46 s
+   A6: preenchendo a tela
+   A6: processando (esperando 1 link(s))
+   ✅ painel A6: 2 arquivo(s) em 15 s
+   A7: preenchendo a tela
+   A7: processando (esperando 1 link(s))
+   ✅ painel A7: 2 arquivo(s) em 10 s
+
+C) Link na hora do Paraná, 01/01 a 31/03/2025: 19 variáveis x 3 (pr, tmax, tmin), alternados
+   RODAR_PARTE_C = False: não medido nesta versão (a regra da radiação não muda o tempo do link; v6: o limite é o mesmo para qualquer escolha)
+
+   Acompanhando as exportações a cada 30 s (até 3 h)
+
+Comparação com os CSV do painel (MeuDrive/K16_painel/<caso>/)
+   ✅ A1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ❌ A1 dicionário: dicionário do painel ou da rotina ausente
+   ✅ A2 Diaria_Clevelandia_2025: 5840 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A3 Mensal_Pato_Branco_2025: 180 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A4 Diaria_Poligono_1_2025: 540 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2015_El_Nino_Forte: 915 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2016_El_Nino_Forte: 435 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A6 Diaria_Poligono_1_2024: 1820 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A7 Diaria_Poligono_1_2026: 620 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ❌ R7 radiação impossível vazia (A7, Lagoa Mirim, 03/2026): 195 célula(s) de radiação vazias em 31 dia(s) (2026-03-01 a 2026-03-31); fora da janela ['2026-03-01', '2026-03-02', '2026-03-03']; radiação abaixo de 0,5 MJ/m² 0; nessas linhas ETo ou déficit preenchidos 0, ET real vazia 93; ETo vazia com a radiação preenchida 0
+   ❌ E1 colunas ENSO na previsão: 195 célula(s) de radiação vazias em 31 dia(s) (2026-03-01 a 2026-03-31); fora da janela ['2026-03-01', '2026-03-02', '2026-03-03']; radiação abaixo de 0,5 MJ/m² 0; nessas linhas ETo ou déficit preenchidos 0, ET real vazia 93; ETo vazia com a radiação preenchida 0
+
+====================================================================================================
+RESULTADO FINAL K16
+====================================================================================================
+   ❌ IDENTIDADE NÃO APROVADA: A1=False, A2=True, A3=True, A4=True, A5=True, A6=True, B1=True, B2=True, A7=True, E1=True, R7=False. NÃO ligue o envio por e-mail; me envie o zip.
+   Links (s): 19 variáveis [] | 3 variáveis [] | razões []
+   ➖ Parte C não rodada nesta versão (RODAR_PARTE_C = False); vale a medida da v6.
+
+Tempo desta execução: 20 min. Nada foi gravado no Earth Engine.
+Os CSV estão em K16_teste_2026.11.22 e K16_painel_2026.11.5 no seu Drive; pode apagá-las depois de me enviar o zip.

@@ -1,0 +1,7 @@
+v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31;var=todas
+v=1;res=D;tipo=E;uf=Paraná,Santa Catarina;ini=2025-01-01;fim=2025-12-31;var=todas
+v=1;res=M;tipo=M;uf=Paraná;mun=Pato Branco,Clevelândia;ini=2025-01-01;fim=2025-12-31;var=pr,tmax
+v=1;res=D;tipo=P;pol=-26.2000 -52.7000,-26.2000 -52.6000,-26.3000 -52.6000,-26.3000 -52.7000|-25.123456 -51.000000,-25.0 -50.9,-25.1 -50.9,-25.1 -51.0;ini=2025-01-01;fim=2025-12-31;var=todas
+v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31;var=todas;enso=El_Nino_Forte
+v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31;var=todas;fmt=xlsx
+v=1;res=D;tipo=E;uf=Paraná;ini=2025-01-01;fim=2025-12-31;var=todas;fmt=ambos

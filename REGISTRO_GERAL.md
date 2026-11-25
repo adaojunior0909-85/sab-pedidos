@@ -98,7 +98,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 05:33, Brasília)
+# Apêndice automático (refeito em 25/11/2026 06:33, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -467,6 +467,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 08:33 | Registro: resultado da Parte A (o método de 2026 subestima a chuva ~10% em 2021-2025) e o próximo trabalho |
 | 25/11/2026 07:33 | Conferência: começou resolucao  |
 | 25/11/2026 07:32 | Resolução: as duas médias voltam numa coleção só (o dicionário não trazia as features); fila limpa os campos da tentativa anterior; ponto de continuação revisto depois do teste de retomada |
 | 25/11/2026 07:32 | Conferência: resolucao (falhou)  |

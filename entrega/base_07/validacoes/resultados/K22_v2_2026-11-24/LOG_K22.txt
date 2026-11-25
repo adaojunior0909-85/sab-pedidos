@@ -1,0 +1,43 @@
+====================================================================================================
+K22: CONFERÊNCIA DO MOTOR V1.6 NOS DIAS DE 2026 (somente leitura) | 2026-11-24 20:04 (BRT)
+====================================================================================================
+🔒 Trava de somente leitura ativa.
+
+         versao  alg  dias
+provisoria_era5 V1.6   319
+ provisoria_gfs V1.6    24
+✅ 1 OK: inventário de 2026 e histórico intocado
+   os 343 dias provisórios e de previsão de 2026 estão na V1.6 | método gravado: ['UR eqm; vento media'] | histórico com a V1.6: 0
+
+[2] coerência física
+   2026-01-15 (ERA5): {'data': '2026-01-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-02-15 (ERA5): {'data': '2026-02-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-03-15 (ERA5): {'data': '2026-03-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-04-15 (ERA5): {'data': '2026-04-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-05-15 (ERA5): {'data': '2026-05-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-06-15 (ERA5): {'data': '2026-06-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-07-15 (ERA5): {'data': '2026-07-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-08-15 (ERA5): {'data': '2026-08-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-09-15 (ERA5): {'data': '2026-09-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 1, 'transp_acima': 0, 'ur_fora': 0}
+   2026-10-15 (ERA5): {'data': '2026-10-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-11-15 (ERA5): {'data': '2026-11-15', 'tipo': 'ERA5', 'chuva_acima': 0, 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-11-16 (GFS): {'data': '2026-11-16', 'tipo': 'GFS', 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-11-28 (GFS): {'data': '2026-11-28', 'tipo': 'GFS', 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+   2026-12-09 (GFS): {'data': '2026-12-09', 'tipo': 'GFS', 'etr_acima': 0, 'n_pix': 72046, 'rs_acima': 0, 'transp_acima': 0, 'ur_fora': 0}
+❌ 2 FALHA: coerência física dos dias V1.6
+   14 dias, 1,008,644 pixel-dias: rs_acima 1, ur_fora 0, etr_acima 0, transp_acima 0, chuva_acima 0
+
+[3] emenda 2025 -> 2026: desvio das anomalias diárias da UR e do vento (150 pixels A)
+✅ 3 OK: emenda 2025 -> 2026 da UR (vento só informação)
+   desvio das anomalias diárias / BR-DWGD 2016-2025: UR 1.24 (antes) -> 1.02 (faixa 0.85-1.15); vento 1.71 -> 1.65 (correção na média, como a V1.5: informação) | viés médio UR -0.00 %, vento +0.10 m/s (informação: 2026 não é a média de 2016-2025)
+
+====================================================================================================
+RESULTADO K22
+====================================================================================================
+   1   OK       inventário de 2026 e histórico intocado
+   2   FALHA    coerência física dos dias V1.6
+   3   OK       emenda 2025 -> 2026 da UR (vento só informação)
+
+   ❌ Há falha: me envie o zip (o histórico não é afetado; dá para voltar o motor para a V1.5).
+
+Tempo: 2 min. Nada foi gravado no Earth Engine (trava de somente leitura).

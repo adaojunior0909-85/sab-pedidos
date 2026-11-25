@@ -1,0 +1,1491 @@
+<title>Envio por e-mail SAB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: caderno de campo técnico. Coluna única de leitura, passos numerados (são uma sequência real),
+   blocos de código recolhíveis com botão de copiar, fases separadas por faixas. */
+:root {
+  --papel: #f6f8f7;          /* fundo */
+  --folha: #ffffff;          /* superfícies */
+  --tinta: #17241f;          /* texto */
+  --apagado: #56645e;        /* texto secundário */
+  --linha: #d5ddd9;          /* bordas */
+  --mata: #1f6b52;           /* acento: verde-mata */
+  --trigo: #b7791f;          /* atenção */
+  --erro: #b42318;
+  --ok: #1f7a4a;
+  --codigo-fundo: #eef2f0;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --texto: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #0f1513; --folha: #161f1c; --tinta: #e3ebe7; --apagado: #9aaaa3; --linha: #2c3a35;
+    --mata: #5cc39b; --trigo: #e0a64a; --erro: #f27166; --ok: #5cc39b; --codigo-fundo: #1b2622; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #0f1513; --folha: #161f1c; --tinta: #e3ebe7; --apagado: #9aaaa3; --linha: #2c3a35;
+  --mata: #5cc39b; --trigo: #e0a64a; --erro: #f27166; --ok: #5cc39b; --codigo-fundo: #1b2622; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--papel); color: var(--tinta); font-family: var(--texto); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+h1 { font-size: clamp(2.3rem, 6vw, 3.2rem); font-weight: 700; }
+h2 { font-size: 1.9rem; font-weight: 600; }
+h3 { font-size: 1.35rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--mata); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--mata); outline-offset: 2px; }
+.rotulo { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.9rem; color: var(--mata); font-weight: 600; }
+.lead { font-size: 1.15rem; color: var(--apagado); max-width: 62ch; }
+.pilha { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+code { font-family: var(--mono); font-size: 0.86em; background: var(--codigo-fundo); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+
+/* fluxo */
+.fluxo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.fluxo span.no { background: var(--folha); border: 1px solid var(--linha); border-radius: 6px; padding: 6px 10px; font-size: 0.95rem; }
+.fluxo span.seta { color: var(--apagado); }
+.fluxo span.no b { color: var(--mata); }
+
+/* tabelas */
+.rolagem { overflow-x: auto; border: 1px solid var(--linha); border-radius: 8px; background: var(--folha); }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+th { font-family: var(--display); font-weight: 600; font-size: 1rem; letter-spacing: 0.03em; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* fases e passos */
+.fase { border-top: 3px solid var(--mata); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.passo { display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 14px; }
+.passo .n { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--mata); line-height: 1; font-variant-numeric: tabular-nums; }
+.passo .corpo { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+ol.acoes, ul.acoes { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 4px; }
+.aviso { border-left: 4px solid var(--trigo); background: var(--folha); padding: 10px 14px; border-radius: 0 6px 6px 0; }
+.aviso.ok { border-left-color: var(--ok); }
+.aviso.perigo { border-left-color: var(--erro); }
+.aviso strong { font-weight: 700; }
+
+/* código */
+details.cod { border: 1px solid var(--linha); border-radius: 8px; background: var(--folha); min-width: 0; }
+details.cod > summary { cursor: pointer; padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; list-style: none; }
+details.cod > summary::-webkit-details-marker { display: none; }
+details.cod > summary::before { content: "▸"; color: var(--mata); }
+details.cod[open] > summary::before { content: "▾"; }
+details.cod .nome { font-family: var(--mono); font-weight: 600; font-size: 0.92rem; }
+details.cod .info { color: var(--apagado); font-size: 0.88rem; }
+.barra { display: flex; justify-content: flex-end; gap: 8px; padding: 0 12px 8px; }
+button.copiar { font: 600 0.9rem var(--texto); color: var(--folha); background: var(--mata); border: 0; border-radius: 6px; padding: 6px 14px; cursor: pointer; }
+button.copiar:hover { filter: brightness(1.1); }
+pre { margin: 0; padding: 12px 14px; background: var(--codigo-fundo); border-top: 1px solid var(--linha); overflow-x: auto;
+      font-family: var(--mono); font-size: 0.8rem; line-height: 1.5; max-height: 520px; border-radius: 0 0 8px 8px; }
+pre.curto { max-height: none; }
+.status { display: inline-block; font-family: var(--mono); font-size: 0.82rem; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--linha); white-space: nowrap; }
+.s-ok { color: var(--ok); border-color: var(--ok); }
+.s-espera { color: var(--trigo); border-color: var(--trigo); }
+.s-erro { color: var(--erro); border-color: var(--erro); }
+footer { color: var(--apagado); font-size: 0.9rem; border-top: 1px solid var(--linha); padding-top: 14px; }
+.indice { display: flex; flex-wrap: wrap; gap: 6px; }
+.indice a { font-size: 0.88rem; text-decoration: none; border: 1px solid var(--linha); background: var(--folha); border-radius: 6px; padding: 3px 9px; color: var(--tinta); }
+.indice a:hover { border-color: var(--mata); color: var(--mata); }
+.onde { color: var(--apagado); font-size: 0.95rem; }
+label.feito { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--mata); cursor: pointer; align-self: flex-start;
+  border: 1px solid var(--linha); background: var(--folha); border-radius: 6px; padding: 4px 12px; }
+label.feito input { width: 1.1rem; height: 1.1rem; accent-color: var(--mata); }
+.passo:has(label.feito input:checked) h3 { color: var(--apagado); }
+.passo { scroll-margin-top: 16px; }
+@media (max-width: 480px) { body { font-size: 16px; } .passo { grid-template-columns: 2rem 1fr; gap: 0 10px; } .passo .n { font-size: 1.6rem; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main>
+<header class="pilha">
+  <span class="rotulo">SAB · projeto clima-492922 · sistema pronto em 03/11/2026 · atualizado em 18/11/2026</span>
+  <h1>Envio dos dados por e-mail, passo a passo</h1>
+  <p class="lead">O envio automático dos dados do SAB e a atualização diária do banco, só com serviços gratuitos que não pedem cartão. <strong>Tudo está montado e validado</strong> (validação final dos dados K17–K19: validado com ressalvas documentadas; 58 testes offline OK). <strong>24/11/2026: radiação impossível vazia no ar</strong> (<code>sab_pedido.py</code> 2026.11.22 e painel <strong>2026.11.5</strong>; <a href="#r0">passos R1 a R3</a> feitos: K16 v7.1 ✅ 22/11, PR #7 juntado 23/11, painel colado 24/11). <strong>18/11/2026:</strong> pedido de uma variável só corrigido (<code>sab_pedido.py</code> 2026.11.19), painel <strong>2026.11.4</strong> (aviso do escoamento no dicionário) e <strong>K16 v6</strong>: rode a K16 v6 e, com ✅, cole o painel 2026.11.4 (quadro do painel, abaixo); detalhes no <code>00_LEIA_PRIMEIRO.md</code>. <strong>Etapa 1 (correção dos pixels B) implantada em 04/11/2026</strong> (<a href="#e1">registro</a>). Painel no ar: <a href="https://clima-492922.projects.earthengine.app/view/adao-alves-rodrigues-junior-sab">adao-alves-rodrigues-junior-sab</a>, versão 2026.11.5 (código no passo <a href="#u17">U17</a>). <strong>08/11/2026:</strong> motor <strong>uma vez por dia, às 23h07</strong> (<a href="#h0">passos H1 a H3, feitos</a>) e <strong>etapa 2 (motor V1.6) revista depois da K21 v3a</strong> (o vento sai do mapeamento de quantis): K21 v4 ✅, 09a ✅, 09b ✅ (matriz gravada), 05a V1.6 ✅ e K23 (o aviso era de um ponto quente da previsão GFS em Roraima, que já existia na V1.5). <strong>09/11/2026: motor V1.6 no GitHub (E2-5 feito); a 1ª gravação é na noite de 09/11.</strong> <a href="#e2-5c">K24 (E2-5c)</a> e <a href="#e2-6">K22 v2 (E2-6)</a> feitas em 24/11: sem excesso da Tmax do GFS (a V1.7 da Tmax não é necessária) e etapa 2 (V1.6) encerrada. A <a href="#u20">K17, validação final dos dados (U20)</a>, rodou em 03/11/2026: o código reproduz os dados; as únicas diferenças vêm de revisão do ERA5-Land e do SMAP na fonte. Para o dia a dia, vá direto a <a href="#f6">Sistema pronto: rotina e manutenção</a>. Os passos U1 a U19 ficam como registro e para remontar algo do zero.</p>
+</header>
+
+<section class="pilha" aria-labelledby="r0">
+  <h2 id="r0">Radiação impossível vazia (22/11/2026), clique a clique</h2>
+  <p>A K26 achou Rs = 0 nas planilhas (de dia isso não existe) e, no litoral em 2026, uma ETo calculada com esse 0. A correção é na leitura: onde Rs fica abaixo de 3% da radiação no topo da atmosfera, <strong>Rs, ETo e déficit do dia saem vazios</strong>, no e-mail e no painel. O banco não muda. Faça os três passos <strong>nesta ordem</strong>, fora da janela do motor (22h50–01h00). Os passos R2 e R3 vão <strong>no mesmo dia</strong>, para o e-mail e o painel não ficarem diferentes.</p>
+</section>
+
+<article class="passo" id="r1"><span class="n">R1</span><div class="corpo">
+  <h3>K16 v7 no Colab (30 a 60 min)</h3>
+  <p class="onde">Onde: <a href="https://colab.research.google.com">colab.research.google.com</a>, com a conta do projeto <code>clima-492922</code>. Ela grava só CSV no seu Drive (pastas <code>K16_teste_2026.11.22</code> e <code>K16_painel_2026.11.5</code>); nada no Earth Engine.</p>
+  <ol class="acoes">
+    <li>Colab → <strong>Arquivo → Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong>.</li>
+    <li>No <a href="#u19">passo U19</a>, abra o quadro <code>K16_validacao_identidade_email.py</code> → <strong>Copiar</strong>. No Colab, clique na célula → <strong>Ctrl+V</strong>. Não edite nada.</li>
+    <li><strong>Ctrl+Enter</strong>. Se pedir acesso ao Drive ou ao Earth Engine, escolha a conta do projeto e permita.</li>
+    <li>Confira a 1ª linha do log: <code>VALIDAÇÃO K16 v7.1</code> (a v7.1, de 23/11, só conserta a conferência; rodar de novo reaproveita tudo e leva poucos minutos). Deixe a aba aberta até o fim.</li>
+    <li>No fim aparece <code>✅ IDENTIDADE APROVADA</code> (com <code>✅ A7</code> e <code>✅ R7</code>) ou <code>❌ IDENTIDADE NÃO APROVADA</code>. O Colab baixa <code>validacao_K16_….zip</code>: <strong>me envie o zip</strong> nos dois casos.</li>
+    <li>Com ❌, pare aqui: não faça o R2 nem o R3.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-r1"> Feito</label>
+</div></article>
+
+<article class="passo" id="r2"><span class="n">R2</span><div class="corpo">
+  <h3>Juntar o PR #7 no GitHub (2 min, só com a K16 v7 ✅)</h3>
+  <ol class="acoes">
+    <li>Abra <a href="https://github.com/adaojunior0909-85/sab-pedidos/pull/7">github.com/adaojunior0909-85/sab-pedidos/pull/7</a>, já logado na sua conta.</li>
+    <li>Role até o fim da página → botão verde <strong>Merge pull request</strong> → <strong>Confirm merge</strong>.</li>
+    <li>Aparece <em>Pull request successfully merged and closed</em>. Pode clicar em <strong>Delete branch</strong>. Desse momento em diante os pedidos por e-mail já saem com a regra nova.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-r2"> Feito</label>
+</div></article>
+
+<article class="passo" id="r3"><span class="n">R3</span><div class="corpo">
+  <h3>Colar o painel 2026.11.5 no app oficial (5 min, logo depois do R2)</h3>
+  <p class="onde">Onde: <a href="https://code.earthengine.google.com">code.earthengine.google.com</a>.</p>
+  <ol class="acoes">
+    <li>Aba <strong>Scripts</strong> (esquerda) → abra <code>SAB_painel_2026_10_6</code>.</li>
+    <li>Clique no editor → <strong>Ctrl+A</strong> → <strong>Delete</strong>.</li>
+    <li>No <a href="#u17">passo U17</a>, quadro <code>06_painel_sab_2026_11_5_PRONTO.js</code> → <strong>Copiar</strong> → no editor, <strong>Ctrl+V</strong>. Confira com Ctrl+F: <code>versao: '2026.11.5'</code>.</li>
+    <li><strong>Save</strong> → <strong>Run</strong>. O painel abre à direita sem erro vermelho no <em>Console</em>.</li>
+    <li><strong>Apps</strong> (no alto) → na linha <code>adao-alves-rodrigues-junior-sab</code>, o <strong>lápis</strong> → <em>Overwrite with current contents of editor</em> → <strong>Update</strong>.</li>
+    <li>Abra o <a href="https://clima-492922.projects.earthengine.app/view/adao-alves-rodrigues-junior-sab">app</a> numa aba nova (Ctrl+F5) e confira a versão 2026.11.5 no topo.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-r3"> Feito</label>
+</div></article>
+
+<section class="pilha" aria-labelledby="como">
+  <h2 id="como">Como funciona</h2>
+  <div class="fluxo" role="list">
+    <span class="no" role="listitem"><b>Painel</b> ou <b>formulário</b> monta o pedido</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>Planilha + Apps Script</b> fila e e-mails</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>GitHub</b> manda calcular</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>Earth Engine</b> exporta</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>Seu Drive</b> pasta do pedido</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>GitHub</b> converte para Excel, se pedido</span><span class="seta" aria-hidden="true">→</span>
+    <span class="no" role="listitem"><b>E-mail</b> com o link</span>
+  </div>
+  <p>Quem pede vê só o formulário (ou a caixa do painel) e os dois e-mails: o de confirmação e o do link. O nome e o e-mail ficam na sua planilha. Para o GitHub vão só o número do pedido e o que foi pedido (local, período, variáveis, filtro ENSO e formato).</p>
+  <p>O cálculo é o mesmo do painel (validado na 2026.10.4; o painel em uso é a 2026.10.7, que só mudou textos e a caixa do e-mail). A validação K16 v3 (passo U19) confere isso célula a célula: aprovada em 03/11/2026. A pasta de cada pedido segue o padrão do painel, com um arquivo por local e por ano, e traz no fim de cada linha 6 colunas sobre o El Niño / La Niña.</p>
+  <p>Separado do envio, o <strong>motor 05b</strong> roda sozinho no GitHub uma vez por dia, às 23h07 (desde 08/11/2026; antes, 15h07 e 23h07), num repositório público próprio (<code>sab-motor</code>). Enquanto ele roda, nenhum pedido novo começa.</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Serviço</th><th>Limite gratuito</th><th>Quando passa do limite</th></tr></thead>
+    <tbody>
+      <tr><td>GitHub Actions, <code>sab-pedidos</code> (privado)</td><td class="num">2.000 min/mês (~2 min por pedido + ~3 min por milhão de linhas em Excel)</td><td>Para até o mês seguinte, sem cobrar</td></tr>
+      <tr><td>GitHub Actions, <code>sab-motor</code> (público)</td><td class="num">sem limite de minutos; até 6 h por execução</td><td>Não se aplica</td></tr>
+      <tr><td>Gmail pelo Apps Script</td><td class="num">100 e-mails/dia (3 por pedido)</td><td>O e-mail espera o dia seguinte</td></tr>
+      <tr><td>Seu Google Drive</td><td class="num">15 GB; pastas apagadas em 7 dias</td><td>Acima de 85%, os pedidos esperam na fila</td></tr>
+      <tr><td>Earth Engine (não comercial)</td><td class="num">Uso de outubro: 0,59% da cota</td><td>Continua gratuito</td></tr>
+    </tbody>
+  </table></div>
+  <div class="rolagem"><table>
+    <thead><tr><th>Regra do pedido por e-mail</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Linhas por pedido</td><td class="num">até 10.000.000 (≈ 14 anos do Paraná)</td></tr>
+      <tr><td>Linhas por arquivo</td><td class="num">até 1.000.000 (o Excel abre 1.048.576); acima disso o ano vira blocos de meses</td></tr>
+      <tr><td>Arquivos por pedido</td><td class="num">até 400</td></tr>
+      <tr><td>Estados por pedido</td><td class="num">até 6 (o Brasil inteiro estourou a memória do Earth Engine em 31/10)</td></tr>
+      <tr><td>Pedidos por e-mail</td><td class="num">até 3 a cada 24 h</td></tr>
+      <tr><td>Pedidos calculando ao mesmo tempo</td><td class="num">1 (os outros esperam na fila; a conversão para Excel não ocupa a vaga)</td></tr>
+      <tr><td>Horário sem pedido novo</td><td class="num">22h50 à 01h00, e enquanto o motor estiver na fila ou rodando no GitHub</td></tr>
+      <tr><td>Formato</td><td>CSV, Excel (.xlsx) ou os dois; Excel até 3 milhões de linhas por pedido</td></tr>
+      <tr><td>El Niño / La Niña</td><td>6 colunas em todo arquivo; filtro por fenômeno opcional, com os cenários do painel</td></tr>
+      <tr><td>Pasta no seu Drive</td><td>Apagada 7 dias depois da entrega (ou da falha); a linha da planilha fica</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="fase" aria-labelledby="f6">
+  <span class="rotulo">Desde 03/11/2026 · uso do dia a dia</span>
+  <h2 id="f6">Sistema pronto: rotina e manutenção</h2>
+  <p>Daqui para a frente quase tudo roda sozinho. Abaixo: o que roda quando, o que conferir toda semana e todo mês, como trocar cada peça e o que fazer quando algo dá errado. Os códigos estão no zip <code>SAB_entrega_final_2026-11-08.zip</code>, uma pasta por serviço.</p>
+  <nav class="indice" aria-label="Seções da manutenção">
+    <a href="#m-agenda">Agenda automática</a><a href="#m-semana">Toda semana</a><a href="#m-mes">Todo mês: RONI</a>
+    <a href="#m-trimestre">A cada 3 meses</a><a href="#m-pecas">Trocar uma peça</a><a href="#m-motor">Motor parado</a>
+    <a href="#m-problemas">Problemas comuns</a><a href="#m-segredos">Segredos</a><a href="#m-testes">Testes</a>
+    <a href="#m-validacao">Validação final</a><a href="#m-brdwgd">BR-DWGD de 2026</a><a href="#m-auditorias">Repetir auditorias</a>
+    <a href="#m-planejadas">Correções planejadas</a><a href="#e1">Etapa 1: implantar a correção</a>
+    <a href="#m-pedidos">Pedidos: abas novas e zerar</a><a href="#h0">Motor 1x por dia (23h07)</a><a href="#e2">Etapa 2: motor V1.6</a>
+  </nav>
+</section>
+
+<section class="pilha" aria-labelledby="m-agenda">
+  <h3 id="m-agenda">Agenda automática (horário de Brasília)</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Quando</th><th>O quê</th><th>Onde ver</th></tr></thead>
+    <tbody>
+      <tr><td class="num">23h07, todo dia (o GitHub começa ~40 min depois, ~23h47; ~20 min)</td><td>Motor 05b grava os dias novos (ERA5 provisório) e a previsão GFS de 15 dias. O histórico 1961–2025 é protegido.</td><td>GitHub <code>sab-motor</code> → Actions → Motor SAB</td></tr>
+      <tr><td class="num">22h50–01h00, e enquanto o motor roda</td><td>Nenhum pedido novo começa (os da fila esperam)</td><td>Aba <strong>Pedidos</strong>, coluna Detalhe</td></tr>
+      <tr><td class="num">a cada 1 min enquanto há pedido calculando ou convertendo (desde 08/11; 5 min se a etapa passar de 45 min); de segurança, a cada 10 min</td><td><code>verificarPedidos</code>: registra, acompanha, converte para Excel, entrega e já despacha o próximo da fila, em sequência</td><td>Apps Script → Execuções</td></tr>
+      <tr><td class="num">1 vez por dia</td><td>Apaga as pastas <code>SAB_pedido_*</code> com mais de 7 dias</td><td>—</td></tr>
+      <tr><td class="num">todo mês</td><td>Registro em <code>ATIVIDADE.md</code> (o GitHub desliga agendamentos parados há 60 dias)</td><td><code>sab-motor</code> → Code</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<article class="passo" id="m-semana"><span class="n">S</span><div class="corpo">
+  <h3>Toda semana (5 minutos)</h3>
+  <ol class="acoes">
+    <li><strong>Planilha de respostas</strong> → aba <strong>Pedidos</strong> → coluna <strong>Status</strong> → procure <span class="status s-erro">falha</span>. A coluna Detalhe diz o motivo. Para tentar de novo: apague o <code>ID_Pedido</code> da linha e escreva <code>na_fila</code> no Status.</li>
+    <li><strong>GitHub</strong> → <code>sab-motor</code> → aba <strong>Actions</strong>: as execuções devem estar com ✅ verde. Se houver ❌: clique nela → clique no passo vermelho → copie só as últimas linhas (sem segredos) e me mande.</li>
+    <li><strong>GitHub</strong> → <code>sab-pedidos</code> → <strong>Actions</strong>: o mesmo.</li>
+    <li><strong>Google Drive</strong> → <em>Armazenamento</em> (esquerda, embaixo): acima de 85%, os pedidos esperam. Esvazie a lixeira.</li>
+  </ol>
+</div></article>
+
+<article class="passo" id="m-mes"><span class="n">M</span><div class="corpo">
+  <h3>Todo mês, depois do dia 10: RONI oficial do CPC</h3>
+  <p class="onde">Arquivo: <code>02_Colab/banco/02_auditoria_roni_cpc.py</code>. Grava o asset <code>RONI_CPC_v6</code> (o painel e o e-mail leem dele).</p>
+  <ol class="acoes">
+    <li>Confira se o CPC já publicou o trimestre novo: <a href="https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt">RONI.ascii.txt</a> (última linha).</li>
+    <li>Fora da janela do motor (22h50–01h00), abra <a href="https://colab.research.google.com">colab.research.google.com</a> → <strong>Arquivo → Novo notebook</strong>.</li>
+    <li><em>Ambiente de execução → Reiniciar sessão</em>.</li>
+    <li>Abra o arquivo no seu computador (bloco de notas) → Ctrl+A → Ctrl+C → clique na célula do Colab → Ctrl+V → <strong>Ctrl+Enter</strong>.</li>
+    <li>Autorize com a conta do projeto, se pedir.</li>
+    <li>Certo: perto do fim, <strong>"✅ N estações gravadas em …RONI_CPC_v6"</strong> e <strong>"✅ N estações conferidas no asset"</strong>. Se parar com ❌, mande o print só da mensagem.</li>
+    <li>Confira no app público: <strong>📊 Ver a situação e a estimativa</strong> deve mostrar o trimestre novo, sem "not found".</li>
+  </ol>
+</div></article>
+
+<article class="passo" id="m-trimestre"><span class="n">T</span><div class="corpo">
+  <h3>A cada 3 meses, ou depois de mudar algo no banco: auditoria</h3>
+  <ol class="acoes">
+    <li>Mesmo jeito do mensal, com <code>02_Colab/banco/08_auditoria_completa_SAB.py</code>. <strong>Só lê</strong>; leva de 10 a 30 min.</li>
+    <li>No fim o Colab baixa um zip <code>auditoria_SAB_…</code>: guarde e me mande se houver ❌ ou ATENÇÃO.</li>
+    <li>Opcional, na mesma época: <code>07a</code> e <code>07b</code> (conferência das normais, só leitura).</li>
+  </ol>
+</div></article>
+
+<section class="pilha" aria-labelledby="m-pecas">
+  <h3 id="m-pecas">Trocar uma peça, clique a clique</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Peça</th><th>Passos</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Painel</strong><br><code>06_painel_*_PRONTO.js</code></td><td>Code Editor → aba Scripts → abra o <code>SAB_painel_2026_10_6</code> (é o único script do painel; o nome não acompanha a versão) → clique no código → Ctrl+A → Delete → cole o arquivo <code>_PRONTO</code> (já traz o endereço <code>/exec</code> dos pedidos) → Ctrl+F confira <code>versao:</code> e <code>urlPedidoEmail: 'https://…/exec'</code> → <strong>Save</strong> → <strong>Run</strong> (sem erro vermelho no Console) → <strong>Apps</strong> → lápis da linha <code>adao-alves-rodrigues-junior-sab</code> → <em>Overwrite with current contents of editor</em> → <strong>Update</strong> → teste no link numa aba anônima. Se o <em>cálculo</em> mudou, rode a K16 antes do Update. Para voltar: cole a versão anterior do mesmo jeito.</td></tr>
+      <tr><td><strong>Apps Script</strong><br><code>Codigo.gs</code></td><td>Planilha → <strong>Extensões → Apps Script</strong> → <code>Código.gs</code> → Ctrl+A → Delete → cole → <strong>Ctrl+S</strong> (a 2ª linha mostra a versão) → <strong>Implantar → Gerenciar implantações</strong> → selecione o App da Web ativo → lápis → <em>Versão: Nova versão</em> → <strong>Implantar</strong>. O endereço <code>/exec</code> não muda.</td></tr>
+      <tr><td><strong>Arquivo no GitHub</strong></td><td>Repositório → clique no arquivo → lápis ✏️ (<em>Edit this file</em>) → Ctrl+A → cole → <strong>Commit changes…</strong> → <strong>Commit changes</strong>. Arquivo novo: <strong>Add file → Create new file</strong>; para criar pasta, digite <code>pasta/arquivo</code> no nome.</td></tr>
+      <tr><td><strong>Motor</strong><br><code>05a</code>/<code>05b</code></td><td>Simule a versão nova no Colab (05a) → no <code>sab-motor</code> troque <strong>juntos</strong> <code>05a</code>, <code>05b</code> e <code>SHA256_MOTOR.txt</code> → Actions → Motor SAB → <strong>Run workflow</strong> com <code>simular</code>. Sem o SHA certo o lançador não roda (é de propósito).</td></tr>
+      <tr><td><strong>Rotina do e-mail</strong><br><code>sab_pedido.py</code></td><td>Troque no <code>sab-pedidos</code> → rode a K16 no Colab → só com A1–A5, B1 e E1 = True deixe o envio aberto.</td></tr>
+      <tr><td><strong>Credencial do Earth Engine</strong></td><td><code>02_Colab/envio_email/colab_credencial.py</code> no Colab (sessão nova) → marque todas as caixas na autorização → copie a linha entre os tracinhos → GitHub de cada repositório → <em>Settings → Secrets and variables → Actions</em> → <code>EE_CREDENCIAL</code> → lápis → cole → <strong>Update secret</strong> → no Colab: <em>Editar → Limpar todas as saídas</em>.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<article class="passo" id="m-motor"><span class="n">!</span><div class="corpo">
+  <h3>Se o motor do GitHub parar</h3>
+  <ol class="acoes">
+    <li><code>sab-motor</code> → <strong>Actions</strong> → <strong>Motor SAB</strong> (esquerda) → <strong>Run workflow</strong> → modo <code>simular</code> → <strong>Run workflow</strong>.</li>
+    <li>Verde? Repita com <code>gravar</code>.</li>
+    <li>Se o GitHub estiver fora do ar: rode o <code>05b</code> no Colab, em sessão nova, como antes da automação (nunca junto com o GitHub).</li>
+    <li>Se aparecer "Agendamento desativado por inatividade": Actions → Motor SAB → <strong>Enable workflow</strong>.</li>
+  </ol>
+</div></article>
+
+<section class="pilha" aria-labelledby="m-validacao">
+  <h3 id="m-validacao">Validação final (03/11/2026): resultado e decisão</h3>
+  <p><strong>Decisão:</strong> o banco está <strong>validado com ressalvas documentadas</strong> e segue em uso como está. O histórico 1961–2025 <strong>não é regravado</strong> (trava ligada). As correções entram depois, na leitura (histórico) e no motor V1.6 (2026 em diante), sempre com simulação antes.</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Auditoria</th><th>O que mostrou</th></tr></thead>
+    <tbody>
+      <tr><td>K17 (11h44 e 12h26)</td><td>Inventário, RONI, máscara, 2026 = V1.5 e coerência física ✅. Histórico = V1.0; calibrações = O2 e O4, menos as variáveis acumuladas do ERA5-Land revistas na fonte.</td></tr>
+      <tr><td>K18 (17h55)</td><td>A revisão do ERA5-Land começa em jul/2017 e é contínua desde out/2018 (~0,3% na ET real, sem viés). Pixels B: chuva diária com 4,8 mm de diferença para o BR-DWGD; ETo 20%.</td></tr>
+      <tr><td>K19 + K19b (19h29 e 20h21)</td><td>1961–2018 idênticos nas 16 bandas e 4 classes. Nenhum valor impossível em 1,67 bilhão de pixel-dias. Radiação acima do céu claro em 18% dos dias dos pixels C e em 1.695 pixel-dias A de 2026. ETo do BR-DWGD × do motor: −0,8%. Emenda 2026: o mapeamento de quantis não melhora a chuva, mas melhora a UR (−22% de erro) e o vento (−33%). Quebras no início da série (~1971) em UR, Tmin e chuva: só documentar.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Guarde os zips das rodadas (K17, K18, K19 e K19b): são o registro da validação para a tese. O texto completo está no <code>00_LEIA_PRIMEIRO.md</code>, seção 9.</p>
+</section>
+
+<article class="passo" id="m-brdwgd"><span class="n">B</span><div class="corpo">
+  <h3>Quando o BR-DWGD passar a cobrir 2026</h3>
+  <p>O motor <strong>não troca sozinho</strong> o provisório (ERA5) pelo BR-DWGD: a chave <code>CONVERTER_EM_DEFINITIVO</code> está em <code>False</code> de propósito. Ele avisa.</p>
+  <ol class="acoes">
+    <li>Uma vez por mês (junto com o RONI): <code>github.com/&lt;seu usuário&gt;/sab-motor</code> → <strong>Actions</strong> → <strong>Motor SAB</strong> (coluna da esquerda) → clique na última execução verde → clique no job → abra o passo que roda o motor.</li>
+    <li>Procure, perto do início, a linha <code>Última data BR-DWGD: …</code>. Enquanto ela disser <code>2025-12-31</code>, não há nada a fazer.</li>
+    <li>Se aparecer <code>⏸️ BR-DWGD já cobre até &lt;data&gt;: N dias aguardam decisão</code>: <strong>não mude nada</strong> e me avise com um print só dessa linha.</li>
+    <li>Eu preparo: (a) uma auditoria só leitura da versão nova do BR-DWGD (se ela também revisou 1961–2025 e se a emenda 2025→2026 fica contínua); (b) o <code>05a</code> e o <code>05b</code> com a chave ligada e o <code>SHA256_MOTOR.txt</code> novo. Não edite a chave à mão: o lançador confere o SHA e o motor para se ele não bater.</li>
+    <li>Você roda o <code>05a</code> (simulação) no Colab, me manda a lista dos dias que seriam convertidos, troca os três arquivos no <code>sab-motor</code> (como em <a href="#m-pecas">Trocar uma peça</a>) e roda <strong>Run workflow</strong> com <code>simular</code> e depois <code>gravar</code>.</li>
+    <li>Se o autor publicar o BR-DWGD num endereço novo (em vez de estender <code>projects/ee-alexandrexavier/assets/BR-DWGD</code>), o motor não percebe sozinho: me avise, que eu troco o endereço no código.</li>
+  </ol>
+</div></article>
+
+<article class="passo" id="m-auditorias"><span class="n">A</span><div class="corpo">
+  <h3>Quando repetir as auditorias</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Auditoria</th><th>Quando</th><th>Tempo</th></tr></thead>
+    <tbody>
+      <tr><td><code>08_auditoria_completa_SAB.py</code></td><td>a cada 3 meses (rotina)</td><td>10–30 min</td></tr>
+      <tr><td><code>K16_validacao_identidade_email.py</code></td><td>quando mudar o cálculo do painel ou do <code>sab_pedido.py</code></td><td>30–60 min</td></tr>
+      <tr><td><code>K17_validacao_final_SAB.py</code></td><td>uma vez por ano e depois de qualquer mudança no motor</td><td>15–35 min</td></tr>
+      <tr><td><code>K19_auditoria_profunda_SAB.py</code> (v4)</td><td>uma vez por ano, ou antes de publicar a tese</td><td>1h30–3h</td></tr>
+      <tr><td><code>K18</code> e <code>K19b</code></td><td>já feitas; só se eu pedir</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <ol class="acoes">
+    <li>Sempre: Colab → <strong>Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong> → cole o arquivo inteiro (sem editar) → <strong>Ctrl+Enter</strong> → autorize a conta se pedir.</li>
+    <li>Fora da janela do motor (22h50–01h00; até 07/11 também 14h50–16h30). A K19 se recusa a começar se for invadir uma janela e diz o horário.</li>
+    <li>Uma de cada vez. No fim, o zip baixa sozinho: guarde e me envie.</li>
+    <li>Cota do Earth Engine: o projeto é nível Partner (360 milhões de EECU-segundos por mês). Para conferir: Console do Google Cloud → projeto CLIMA → <strong>IAM e administrador → Cotas e limites do sistema</strong> → filtre por <em>Earth Engine</em> → linha <em>Noncommercial EECU-seconds per month</em>.</li>
+  </ol>
+</div></article>
+
+<section class="pilha" aria-labelledby="m-planejadas">
+  <h3 id="m-planejadas">Correções planejadas (ainda não feitas)</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Etapa</th><th>O que muda</th><th>Onde</th><th>Validação</th></tr></thead>
+    <tbody>
+      <tr><td>1 <strong>(implantada em 04/11/2026)</strong></td><td>Pixels B: núcleo (chuva, Tmax, Tmin, UR, VPD, ETo, radiação, vento) vindo do BR-DWGD; ET real ≤ ETo e transpiração ≤ ET real refeitos. Radiação dos pixels C limitada ao céu claro (FAO-56), descrita na <code>Qualidade_Pixel</code> do dicionário. Painel 2026.11.1 (hoje 2026.11.3) e <code>sab_pedido.py</code> 2026.11.03.</td><td>na leitura (o banco não muda)</td><td>K20 + K16 v4 (caso A6, Lagoa dos Patos): <a href="#e1">passos E1 a E4</a></td></tr>
+      <tr><td>2 <strong>(em validação: K21 v4)</strong></td><td>Motor V1.6, só 2026 em diante: UR dos dias ERA5 pelo mapeamento de quantis (matriz nova SICSB_EQM_1986_2025); radiação limitada ao céu claro (FAO-56) nos dias ERA5 e GFS; teto da chuva corrigida em 1,5 x o maior dia do BR-DWGD no pixel e mês (o dia de 546 mm). A chuva e o vento continuam com a correção da média (o vento saiu do mapeamento de quantis na K21 v3a, 08/11). Rodada única às 23h07.</td><td>motor (2026+); histórico travado</td><td>K21 (fora da amostra), 09a, prévia do 05a, K22: <a href="#e2">passos E2-1 a E2-6</a></td></tr>
+      <tr><td>Tese</td><td>Ressalvas: revisão do ERA5 desde 2017; início da série (1961 a ~1975); ET real ≤ ETo é escolha do modelo; vento do BR-DWGD com poucas estações.</td><td>texto</td><td>números da K17, K18 e K19</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>A etapa 1 foi implantada em 04/11/2026</strong> (K20 e K16 v4 aprovadas em 03/11; painel no app <code>adao-alves-rodrigues-junior-sab</code>; pedido por e-mail SAB2026-00020 conferido). A etapa 2 (V1.6, revista em 08/11) segue pela <a href="#e2-1">K21 v4</a>: <a href="#e2">passos E2-1 a E2-6</a>, um de cada vez.</p>
+</section>
+
+<article class="passo" id="m-pedidos"><span class="n">P</span><div class="corpo">
+  <h3>Pedidos: abas Pedidos e Pedidos_Teste, número SAB-0001 e zerar (Apps Script 2026.11.08a)</h3>
+  <p><strong>O que muda:</strong> cada pedido (do formulário ou do painel) vira <strong>uma linha</strong>, na <strong>ordem de chegada</strong>, numa aba só do sistema: <strong>Pedidos</strong> (usuários; número <code>SAB-0001</code>, <code>SAB-0002</code>…) ou <strong>Pedidos_Teste</strong> (pedidos feitos com o seu e-mail; número <code>TESTE-0001</code>…, sem o limite de 3 por dia). O <code>ID_Pedido</code> é a 1ª coluna. A aba de respostas do formulário fica só com as respostas cruas: o sistema não escreve mais nela (antes o Forms enfiava respostas no meio das linhas do painel e a ordem se perdia). As duas abas dividem a mesma fila: um cálculo por vez, por ordem de chegada.</p>
+  <p class="aviso">Faça fora da janela do motor (22h50–01h00) e quando a aba de respostas não tiver nenhum pedido com Status <code>enviado</code>, <code>em_preparo</code> ou <code>convertendo</code>.</p>
+  <p><strong>A. Colar o código novo</strong></p>
+  <ol class="acoes">
+    <li>Abra a <strong>planilha de respostas</strong> → menu <strong>Extensões → Apps Script</strong>.</li>
+    <li>À esquerda, clique em <code>Código.gs</code> → clique no código → <strong>Ctrl+A</strong> → <strong>Delete</strong>.</li>
+    <li>Copie o quadro <code>Codigo.gs</code> do passo <a href="#u14">U14</a> (ou o arquivo <code>05_Apps_Script/Codigo.gs</code> do zip) e cole com <strong>Ctrl+V</strong>.</li>
+    <li>Confira a 2ª linha: tem de terminar com <code>Versão 2026.11.08a</code> (substitui a 2026.11.04a, que está no ar, e a 2026.11.05 e a 2026.11.08, que não foram implantadas). Aperte <strong>Ctrl+S</strong>.</li>
+  </ol>
+  <p><strong>B. Atualizar o App da Web</strong> (sem isso, o botão do painel continua usando o código antigo)</p>
+  <ol class="acoes">
+    <li>No alto, à direita: <strong>Implantar → Gerenciar implantações</strong>.</li>
+    <li>Clique no <strong>lápis</strong> (Editar) → em <em>Versão</em>, escolha <strong>Nova versão</strong> → <strong>Implantar</strong> → <strong>Concluído</strong>. O endereço <code>/exec</code> não muda.</li>
+  </ol>
+  <p><strong>C. Criar as abas</strong></p>
+  <ol class="acoes">
+    <li>Na barra do alto, na lista de funções (ao lado de <em>Depurar</em>), escolha <strong>configurar</strong> → <strong>Executar</strong>.</li>
+    <li>No <em>Registro de execução</em> tem de aparecer <code>✅ Abas de registro: Pedidos e Pedidos_Teste</code> e <code>✅ Acionadores criados</code>.</li>
+    <li>Volte à planilha: há duas abas novas embaixo, <strong>Pedidos</strong> e <strong>Pedidos_Teste</strong>, com o cabeçalho e a 1ª linha congelada.</li>
+  </ol>
+  <p><strong>D. Zerar todos os pedidos</strong> (apaga tudo, sem registro: não dá para desfazer)</p>
+  <ol class="acoes">
+    <li>Na lista de funções, escolha <strong>zerarPedidos</strong> → <strong>Executar</strong>. Se pedir autorização: <strong>Revisar permissões</strong> → conta → <strong>Avançado</strong> → <strong>Acessar … (não seguro)</strong> → <strong>Permitir</strong>.</li>
+    <li>Tem de aparecer <code>✅ Pedidos zerados: … O próximo pedido será SAB-0001 (teste: TESTE-0001).</code></li>
+    <li>Se aparecer <code>Há pedido em cálculo (…)</code>: nada foi apagado. Espere a entrega e rode de novo.</li>
+    <li>O que é apagado: as linhas das abas Pedidos e Pedidos_Teste, as respostas da aba do formulário e do próprio Google Forms, as colunas antigas de controle da aba do formulário (ID_Pedido, Status, Detalhe…) e todas as pastas <code>SAB_pedido_</code> do Drive (vão para a lixeira do Drive).</li>
+  </ol>
+  <p><strong>E. Conferir</strong></p>
+  <ol class="acoes">
+    <li>Escolha <strong>testarMotor</strong> → <strong>Executar</strong>: sem <code>⚠️</code>.</li>
+    <li>Faça um pedido pequeno pelo painel com o <strong>seu</strong> e-mail: ele aparece na aba <strong>Pedidos_Teste</strong> como <code>TESTE-0001</code>.</li>
+    <li>O primeiro pedido de um usuário vai aparecer na aba <strong>Pedidos</strong> como <code>SAB-0001</code>.</li>
+    <li>Opcional: outros e-mails de teste (um colega que ajuda a testar) → engrenagem <strong>Configurações do projeto</strong> → <strong>Propriedades do script</strong> → <strong>Adicionar propriedade</strong> → nome <code>EMAILS_TESTE</code>, valor <code>email1@x.com, email2@y.com</code> → <strong>Salvar</strong>.</li>
+  </ol>
+  <p><strong>Para voltar atrás:</strong> cole o <code>Codigo.gs</code> 2026.11.03 do zip anterior, faça o passo B e rode <code>configurar</code>. As abas Pedidos e Pedidos_Teste ficam, sem uso.</p>
+  <label class="feito"><input type="checkbox" id="feito-m-pedidos"> Feito</label>
+</div></article>
+
+<section class="fase" aria-labelledby="h0">
+  <span class="rotulo">08/11/2026 · feito (H1 e H2 em 08/11; vale para a V1.5 e a V1.6)</span>
+  <h2 id="h0">Motor uma vez por dia, às 23h07, clique a clique</h2>
+  <p><strong>O que muda:</strong> o motor deixa de rodar às 15h07 e passa a rodar <strong>só às 23h07</strong> (o GitHub começa uns 40 min depois, por volta das 23h47, e a rodada leva ~20 min). A rodada da noite pega o dia novo do ERA5-Land, que chega durante o dia, e a rodada 00Z do GFS do mesmo dia (completa no Earth Engine por volta das 05h30; K21, parte G). Os pedidos por e-mail ficam livres o dia inteiro; só não começam das <strong>22h50 à 01h00</strong>. O cálculo do motor não muda.</p>
+  <p class="aviso"><strong>Efeito na previsão:</strong> com uma rodada só, a previsão publicada à noite usa a rodada 00Z daquele dia e vale para o dia seguinte inteiro (antes, a das 15h07 já trazia a 00Z do dia). Para voltar às duas rodadas, use o <code>motor_05b.yml</code> do pacote anterior.</p>
+  <p>Faça os dois passos no mesmo dia, entre <strong>09h e 22h</strong>, sem pedido calculando (Status <code>enviado</code>, <code>em_preparo</code> ou <code>convertendo</code> na aba Pedidos). Não suba ainda nenhum arquivo do motor V1.6: isso é o passo E2-5.</p>
+  <nav class="indice" aria-label="Passos do horário único"><a href="#h1">H1 GitHub</a><a href="#h2">H2 Apps Script</a><a href="#h3">H3 Conferir</a></nav>
+</section>
+
+<article class="passo" id="h1"><span class="n">H1</span><div class="corpo">
+  <h3>GitHub: trocar só o agendamento (motor_05b.yml 2026.11.08)</h3>
+  <ol class="acoes">
+    <li>Entre em <a href="https://github.com">github.com</a> → repositório <code>sab-motor</code> → clique na pasta <code>.github</code> → <code>workflows</code> → <code>motor_05b.yml</code>.</li>
+    <li>No canto direito do arquivo, clique no <strong>lápis ✏️</strong> (<em>Edit this file</em>).</li>
+    <li>Clique dentro do texto → <strong>Ctrl+A</strong> → <strong>Delete</strong>.</li>
+    <li>No quadro <code>motor_05b.yml</code> logo abaixo, clique em <strong>Copiar</strong> e cole no GitHub com <strong>Ctrl+V</strong> (ou use o arquivo <code>04_GitHub_sab-motor/.github/workflows/motor_05b.yml</code> do zip).</li>
+    <li>Confira: a 1ª linha termina com <code>(versão 2026.11.08)</code> e, em <code>schedule:</code>, há <strong>uma</strong> linha só: <code>- cron: '7 2 * * *'</code>.</li>
+    <li>Botão verde <strong>Commit changes…</strong> → na janela, <strong>Commit changes</strong>.</li>
+    <li>Não mexa no <code>rodar_motor.py</code> nem nos motores: o agendamento novo serve para a V1.5 (no ar) e para a V1.6.</li>
+  </ol>
+  {{COD:motor_05b.yml}}
+  <label class="feito"><input type="checkbox" id="feito-h1"> Feito</label>
+</div></article>
+
+<article class="passo" id="h2"><span class="n">H2</span><div class="corpo">
+  <h3>Apps Script: janela única e pedido em sequência (Codigo.gs 2026.11.08a)</h3>
+  <p><strong>O que muda nos pedidos:</strong> antes, cada etapa (arquivos prontos → conversão para Excel → e-mail → próximo da fila) só andava na volta seguinte, de 10 em 10 min, e um pedido com Excel esperava até ~20 min a mais. Agora, enquanto um pedido calcula ou converte, o script confere de minuto em minuto e cada etapa segue logo depois da anterior; a entrega e o próximo da fila saem na mesma volta. Sem pedido ativo, fica só a volta de segurança de 10 em 10 min. Para não estourar a cota gratuita do Apps Script (90 min de execução por dia), a volta passa a 5 min se a etapa durar mais de 45 min ou se o dia passar de 600 voltas rápidas.</p>
+  <ol class="acoes">
+    <li>Abra a <strong>planilha de respostas</strong> → menu <strong>Extensões → Apps Script</strong>.</li>
+    <li>À esquerda, clique em <code>Código.gs</code> → clique no código → <strong>Ctrl+A</strong> → <strong>Delete</strong>.</li>
+    <li>Copie o quadro <code>Codigo.gs</code> do passo <a href="#u14">U14</a> (botão <strong>Copiar</strong>) ou abra o arquivo <code>05_Apps_Script/Codigo.gs</code> do zip, selecione tudo e copie. Cole com <strong>Ctrl+V</strong>.</li>
+    <li>Confira a 2ª linha: tem de terminar com <code>Versão 2026.11.08a</code>. Aperte <strong>Ctrl+S</strong>.</li>
+    <li>No alto, à direita: <strong>Implantar → Gerenciar implantações</strong> → <strong>lápis</strong> (Editar) → em <em>Versão</em>, <strong>Nova versão</strong> → <strong>Implantar</strong> → <strong>Concluído</strong>. O endereço <code>/exec</code> não muda, e o painel continua igual.</li>
+    <li>Na lista de funções (ao lado de <em>Depurar</em>), escolha <strong>testarMotor</strong> → <strong>Executar</strong>. O <em>Registro de execução</em> não pode ter <code>⚠️</code>.</li>
+    <li>Não rode <code>configurar</code> nem <code>zerarPedidos</code>: as abas e o acionador de 10 min continuam os mesmos; o acionador de minuto em minuto (<code>verificarRapido</code>) o próprio script cria e apaga sozinho.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-h2"> Feito</label>
+</div></article>
+
+<article class="passo" id="h3"><span class="n">H3</span><div class="corpo">
+  <h3>Conferir (no dia seguinte)</h3>
+  <ol class="acoes">
+    <li>GitHub → <code>sab-motor</code> → aba <strong>Actions</strong> → <strong>Motor SAB</strong>: deve haver <strong>uma</strong> execução agendada por noite (começando por volta das 23h47), com ✅ verde, e nenhuma nova por volta das 15h47.</li>
+    <li>Clique na execução → <strong>motor</strong> → passo <em>Rodar o motor</em>: tem de aparecer <code>🔏 SHA-256 conferido</code> e, no fim, <code>✅ Motor terminou às …</code>.</li>
+    <li>Faça um pedido de teste pequeno pelo painel com o seu e-mail, com Excel: na aba <strong>Pedidos_Teste</strong>, a coluna Detalhe muda de minuto em minuto, e o e-mail chega 1 a 2 min depois de a conversão terminar. Em <strong>Apps Script → Acionadores</strong> (relógio, à esquerda) aparece um <code>verificarRapido</code> enquanto o pedido está ativo; depois da entrega ele some.</li>
+    <li>Planilha → aba <strong>Pedidos</strong>: um pedido feito à tarde começa na hora; um feito às 23h fica com <code>Aguardando: horário do motor SAB (22:50 às 24:00)</code> e começa depois da 01h00.</li>
+    <li>Se aparecer ❌ no GitHub, copie só as últimas linhas do passo vermelho (sem segredos) e me envie.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-h3"> Feito</label>
+</div></article>
+
+<section class="fase" aria-labelledby="e2">
+  <span class="rotulo">Etapa 2 · motor V1.6 (dias de 2026 em diante)</span>
+  <h2 id="e2">Etapa 2: motor V1.6, clique a clique</h2>
+  <p><strong>O que muda:</strong> só os dias de 2026 em diante (provisórios do ERA5 e previsão do GFS). O histórico 1961–2025 continua travado. Três correções decididas pelas auditorias K19/K19b: (1) <strong>umidade relativa</strong> dos dias ERA5 pelo mapeamento de quantis; (2) <strong>radiação</strong> nunca acima da de céu claro (FAO-56); (3) <strong>teto da chuva</strong> corrigida em 1,5 x o maior dia do BR-DWGD no pixel e mês (a correção da média chegou a 546 mm num dia). A chuva e o <strong>vento</strong> continuam com a correção da média.</p>
+  <p class="aviso"><strong>K21 v3a (08/11/2026, 16h33, 26 min):</strong> UR ✅ (erro diário −15,6%; variação 1,25x → 1,04x a do BR-DWGD), radiação ✅, teto da chuva ✅ (0,041% dos dias), ETo ✅ (−3,2%), GFS ✅. <strong>Vento ❌ com quantis:</strong> o erro caiu 9,5%, mas o viés subiu de +0,085 para +0,107 m/s, acima do limite de 0,10 fixado antes de rodar (o vento do BR-DWGD cai com o tempo: 1,16 m/s em 1986–2025 contra 1,09 m/s em 2016–2025). Decisão: o vento fica com a correção da média, e a <strong>K21 v4</strong> valida essa versão com as mesmas regras.</p>
+  <p class="aviso"><strong>K21 v4 (08/11/2026, 18h41, 8 min): ✅ V1.6 REVISTA APROVADA FORA DA AMOSTRA.</strong> UR ✅ (−15,6%), radiação ✅, teto da chuva ✅, ETo ✅ (0,487 → 0,474 mm, −2,6%). Próximo: <a href="#e2-2">E2-2, 09a</a>.</p>
+  <p class="aviso"><strong>08 e 09/11/2026:</strong> 09a ✅, 09b ✅ (37 min), 05a V1.6 ✅ em tudo o que a V1.6 muda, K23 v2 (01h39, 2 min: emenda pixel a pixel normal; o salto da Tmax máxima nacional vem de um pixel de Roraima, -60,65; 2,85, em que a previsão GFS passa do recorde do pixel, 42,6 °C; existe desde a V1.5) e <strong>E2-5 feito em 09/11</strong> (arquivos do GitHub iguais aos do pacote; o teste <em>simular</em> no GitHub deu a mesma prévia do Colab). <strong>Agora:</strong> <a href="#e2-5b">E2-5b</a> (10/11 de manhã), <a href="#e2-5c">E2-5c K24</a> (10/11) e <a href="#e2-6">E2-6 K22 v2</a> (11/11).</p>
+  <p><strong>Ordem:</strong> E2-1 a E2-4 são provas no Colab (só a E2-3 grava, e grava um asset NOVO, sem tocar no banco). A E2-5 troca o motor no GitHub. A E2-6 confere depois. Um passo de cada vez, sempre me mandando o zip antes de seguir. <strong>Fora da janela do motor:</strong> 22h50–01h00 (motor uma vez por dia, às 23h07: passos <a href="#h0">H1 a H3</a>).</p>
+  <p class="aviso"><strong>Antes de cada script no Colab:</strong> colab.research.google.com → <strong>Arquivo → Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong> → confirme. Cole o arquivo inteiro na célula, sem editar, e aperte <strong>Ctrl+Enter</strong>. Se pedir autorização, escolha a conta do projeto → <strong>Permitir</strong>.</p>
+  <nav class="indice" aria-label="Passos da etapa 2">
+    <a href="#e2-1">E2-1 K21 v4</a><a href="#e2-2">E2-2 09a</a><a href="#e2-3">E2-3 09b</a><a href="#e2-4">E2-4 05a V1.6</a><a href="#e2-4b">E2-4b K23</a><a href="#e2-5">E2-5 GitHub</a><a href="#e2-5b">E2-5b 1ª noite</a><a href="#e2-5c">E2-5c K24</a><a href="#e2-6">E2-6 K22</a><a href="#e2-volta">Voltar atrás</a>
+  </nav>
+</section>
+
+<article class="passo" id="e2-1"><span class="n">E2-1</span><div class="corpo">
+  <h3>Prova fora da amostra: K21 v4 (só leitura, ~30 min)</h3>
+  <ol class="acoes">
+    <li>Horário: comece <strong>até as 21h20</strong> ou depois da 01h00 (a janela do motor é 22h50–01h00).</li>
+    <li>Abra <a href="https://colab.research.google.com">colab.research.google.com</a> → <strong>Arquivo → Novo notebook</strong> → menu <strong>Ambiente de execução → Reiniciar sessão</strong> → <strong>Sim</strong>.</li>
+    <li>No quadro <code>K21_validacao_v16_fora_da_amostra.py</code> abaixo, clique em <strong>Copiar</strong> (ou abra o arquivo de <code>02_Colab/validacoes/</code> do zip, <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong>). Clique na célula do Colab → <strong>Ctrl+V</strong> → <strong>Ctrl+Enter</strong>.</li>
+    <li>Confira a 1ª linha do log: <code>K21 v4: VALIDAÇÃO FORA DA AMOSTRA DO MOTOR V1.6 REVISTO (vento pela média…)</code>. Se aparecer a v3a, você colou o arquivo antigo: pare e cole o novo.</li>
+    <li>Se pedir autorização: conta do projeto → <strong>Permitir</strong>. Deixe a aba aberta; o log mostra um ano por linha, de 1986 a 2025.</li>
+    <li>Se aparecer <code>⛔ Não comecei</code>: está perto da janela do motor; rode depois da 01h00 ou no dia seguinte.</li>
+    <li>No fim aparece <strong>RESULTADO K21</strong>. O esperado: <code>U APROVADO</code> (UR), <code>R APROVADO</code>, <code>C APROVADO</code>, <code>E APROVADO</code> e a frase <code>✅ V1.6 REVISTA APROVADA FORA DA AMOSTRA</code>. As linhas <code>V</code> (vento com quantis), <code>X</code> e <code>G</code> são só informação.</li>
+    <li>O Colab baixa <code>validacao_K21_….zip</code>. <strong>Me envie.</strong> Se U, R, C ou E reprovar, <strong>pare aqui</strong>.</li>
+  </ol>
+  {{COD:K21_validacao_v16_fora_da_amostra.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-1"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-2"><span class="n">E2-2</span><div class="corpo">
+  <h3>Matriz de quantis em simulação: 09a (só leitura, 5 a 15 min)</h3>
+  <ol class="acoes">
+    <li>Só com a K21 aprovada. Novo notebook → <strong>Reiniciar sessão</strong> → cole o <code>09a_matriz_eqm_SIMULACAO.py</code> → <strong>Ctrl+Enter</strong>.</li>
+    <li>Tem de aparecer <code>🔒 SIMULAR = True</code> no começo e, no fim, <code>✅ Amostra conferida: 85 bandas, quantis em ordem…</code> e <code>ℹ️ SIMULAR = True: nada foi gravado</code>.</li>
+    <li>O Colab baixa <code>matriz_eqm_….zip</code>. <strong>Me envie.</strong> Com <code>❌</code>, pare aqui.</li>
+  </ol>
+  {{COD:09a_matriz_eqm_SIMULACAO.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-2"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-3"><span class="n">E2-3</span><div class="corpo">
+  <h3>Gravar a matriz de quantis: 09b (grava um asset NOVO, 30 min a 3 h)</h3>
+  <ol class="acoes">
+    <li>Só com o 09a sem ❌ e a sua aprovação. <strong>Sessão nova</strong> (Reiniciar sessão; obrigatório: a trava do 09a fica na sessão) → cole o <code>09b_matriz_eqm_GRAVACAO.py</code> → <strong>Ctrl+Enter</strong>.</li>
+    <li>Ele refaz a amostra, cria a coleção <code>SICSB_EQM_1986_2025</code> e inicia 12 tarefas <code>SAB_EQM_01</code> a <code>SAB_EQM_12</code>. Acompanhe em <a href="https://code.earthengine.google.com/tasks">code.earthengine.google.com/tasks</a>.</li>
+    <li>Pode fechar o Colab: as tarefas continuam no Earth Engine. Quando as 12 estiverem <em>Completed</em>, rode o <strong>09b de novo</strong> (sessão nova): ele não exporta outra vez, só confere.</li>
+    <li>O fim certo é <code>✅ …SICSB_EQM_1986_2025: 12 meses da versão E1, 85 bandas…</code>. <strong>Me envie o zip.</strong></li>
+    <li>Se o App público precisar, nada muda: o painel não lê esta matriz (só o motor).</li>
+  </ol>
+  {{COD:09b_matriz_eqm_GRAVACAO.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-3"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-4"><span class="n">E2-4</span><div class="corpo">
+  <h3>Simulação do motor V1.6: 05a (não grava nada, 20 a 60 min)</h3>
+  <ol class="acoes">
+    <li>Sessão nova → cole o <code>05a_motor_sab_v1_6_SIMULACAO.py</code> (arquivo do zip, <code>02_Colab/banco/</code>; é grande, use o arquivo) → <strong>Ctrl+Enter</strong>.</li>
+    <li>No começo tem de aparecer <code>🧪 MODO SIMULAÇÃO ATIVO</code>, <code>🛡️ TRAVA DO HISTÓRICO LIGADA</code> e <code>✅ Matriz EQM E1: 12 meses…</code>.</li>
+    <li>No fim vêm as PRÉVIAS 1 a 6. A <strong>PRÉVIA 5</strong> tem de dizer <code>✅ Todos os critérios atendidos</code>. A PRÉVIA 4 tem de mostrar <code>radiação acima do céu claro</code> com 0 na coluna V1.6.</li>
+    <li>Baixe a prévia: à esquerda do Colab, ícone de <strong>pasta</strong> → <code>previa_v16.csv</code> → três pontinhos → <strong>Fazer download</strong>.</li>
+    <li>Selecione tudo o que saiu embaixo da célula (clique no texto, <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong>), cole num arquivo de texto e <strong>me envie junto com o previa_v16.csv</strong>. Com <code>⚠️ NÃO EXECUTE AINDA</code>, pare aqui.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-e2-4"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-4b"><span class="n">E2-4b</span><div class="corpo">
+  <h3>Auditoria do aviso da emenda: K23 (só leitura, 15 a 30 min)</h3>
+  <p class="aviso"><strong>Feito em 09/11/2026, 01h39 (2 min).</strong> A ✅ (a V1.6 não mexe na Tmax da emenda), C ✅ (emenda pixel a pixel mais suave que a troca natural de um dia para o outro), D e E ⚠️: o máximo do Brasil no 1º dia GFS (44,3 °C) está num pixel de Roraima (-60,65; 2,85) cujo recorde em out-nov de 1991-2025 é 42,6 °C. É um ponto quente da previsão GFS que já vinha da V1.5. Decisão: seguir para o E2-5 e medir o tamanho do problema com a <a href="#e2-5c">K24</a>.</p>
+  <p class="aviso"><strong>Por quê (08/11/2026):</strong> o 05a V1.6 passou em tudo o que a V1.6 muda, mas a PRÉVIA 5 parou num critério da rota GFS: a Tmax máxima nacional foi de 41,4 °C (último dia ERA5, 01/11) para 44,3 °C (1º dia GFS, 02/11), +2,8 °C, limite ±2 °C. A PRÉVIA 6 mostrou esse dia igual ao que a V1.5 já gravou, e a conferência do código (parte A) mostrou que a rota GFS da Tmax é a mesma nas duas versões. A K23 confirma se o salto é variação natural do tempo ou defeito da calibração do GFS.</p>
+  <ol class="acoes">
+    <li>Horário: comece <strong>até as 22h05</strong> ou depois da 01h00. Sessão nova no Colab (<strong>Ambiente de execução → Reiniciar sessão</strong>).</li>
+    <li>Copie o quadro <code>K23_auditoria_emenda_tmax.py</code> abaixo (ou o arquivo de <code>02_Colab/validacoes/</code> do zip) → cole → <strong>Ctrl+Enter</strong>. A 1ª linha do log diz <code>K23 v2</code> (a v1 parava com o erro 429).</li>
+    <li>O log mostra: <strong>A</strong> (código, ✅), <strong>B</strong> (a série de 18/10 a 23/11 e a emenda atual), <strong>C</strong> (a emenda pixel a pixel x a variação natural de um dia para o outro), <strong>D</strong> (com que frequência o máximo do Brasil salta tanto no BR-DWGD) e <strong>E</strong> (o pixel do máximo x o recorde dele).</li>
+    <li>Esperado: <code>✅ … pode seguir para o E2-5</code>. Com <code>⚠️</code>, pare. Nos dois casos, <strong>me envie o zip</strong> <code>auditoria_K23_….zip</code>.</li>
+  </ol>
+  {{COD:K23_auditoria_emenda_tmax.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-4b"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-5"><span class="n">E2-5</span><div class="corpo">
+  <h3>Trocar o motor no GitHub (sab-motor)</h3>
+  <p class="aviso"><strong>Feito em 09/11/2026.</strong> Os 5 arquivos no GitHub conferem com o pacote, e a execução <em>simular</em> deu <code>✅</code> com o <code>previa_v16.csv</code> igual ao do Colab. A 1ª gravação com a V1.6 é a rodada automática da noite de 09/11 (23h07; começa ~23h47).</p>
+  <p class="aviso">Só com E2-1 a E2-4 aprovados, a K23 (E2-4b) com ✅ e o horário único já feito (<a href="#h0">H1 e H2</a>). Faça entre 09h e 21h.</p>
+  <p><strong>A. Subir os arquivos novos</strong> (do zip, pasta <code>04_GitHub_sab-motor/</code>)</p>
+  <ol class="acoes">
+    <li>github.com → repositório <code>sab-motor</code> → <strong>Add file → Upload files</strong>.</li>
+    <li>Arraste de uma vez estes 5 arquivos: <code>05a_motor_sab_v1_6_SIMULACAO.py</code>, <code>05b_motor_sab_v1_6_GRAVACAO.py</code>, <code>rodar_motor.py</code>, <code>SHA256_MOTOR.txt</code> e <code>README.md</code>. Os que já existem são substituídos. <strong>Não apague</strong> os arquivos da V1.5: eles servem para voltar atrás.</li>
+    <li>Embaixo, <strong>Commit changes</strong>.</li>
+    <li>Confira: abra o <code>rodar_motor.py</code> no GitHub; a 1ª linha tem de terminar com <code>Versão 2026.11.08 &lt;&lt;&lt;</code>, e o <code>SHA256_MOTOR.txt</code> tem de mostrar <code>de4baea7…</code> (05a V1.6) e <code>e6c66b94…</code> (05b V1.6).</li>
+  </ol>
+  <p><strong>B. O horário</strong>: nada a fazer aqui; o <code>motor_05b.yml</code> 2026.11.08 do passo <a href="#h1">H1</a> já roda às 23h07 e serve para a V1.6.</p>
+  <p><strong>C. Teste no próprio GitHub, sem gravar</strong></p>
+  <ol class="acoes">
+    <li>Aba <strong>Actions</strong> → à esquerda, <strong>Motor SAB</strong> → botão <strong>Run workflow</strong> → em <em>modo</em> deixe <strong>simular</strong> → <strong>Run workflow</strong>.</li>
+    <li>Espere o ✅ verde (20 a 60 min). Clique na execução → <strong>motor</strong> → passo <em>Rodar o motor</em>: tem de aparecer <code>🔏 SHA-256 conferido</code>, <code>motor V1.6</code>, <code>Dias ERA5: UR eqm, vento media</code> e <code>✅ Todos os critérios atendidos</code>. Embaixo da execução, em <em>Artifacts</em>, fica o <code>previa</code> (o <code>previa_v16.csv</code>): baixe e me envie.</li>
+    <li>A partir daí a rodada automática das 23h07 já grava com a V1.6. Os dias de 2026 são refeitos aos poucos, sozinhos.</li>
+  </ol>
+  <p><strong>D. Apps Script dos pedidos</strong>: nada a fazer; o <code>Codigo.gs</code> 2026.11.08a do passo <a href="#h2">H2</a> já tem a janela única.</p>
+  <label class="feito"><input type="checkbox" id="feito-e2-5"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-5b"><span class="n">E2-5b</span><div class="corpo">
+  <h3>Conferir a 1ª noite com a V1.6 (10/11, de manhã, 5 min)</h3>
+  <ol class="acoes">
+    <li>Depois das <strong>08h de 10/11</strong>. Abra <a href="https://github.com">github.com</a> → <code>sab-motor</code> → aba <strong>Actions</strong> → à esquerda, <strong>Motor SAB</strong>.</li>
+    <li>A execução de cima tem de ser a <strong>agendada</strong> da noite de 09/11 (começo por volta das 23h47), com ✅ verde.</li>
+    <li>Clique nela → <strong>motor</strong> → passo <em>Rodar o motor</em>: tem de aparecer <code>🔏 SHA-256 conferido: e6c66b94…</code> (o 05b V1.6) e, no fim, <code>✅ Motor terminou às …</code>. Mais acima, na linha <code>📅 [2026]</code>, a coluna <em>na fila</em> mostra quantos dias foram mandados para regravar.</li>
+    <li>Abra <a href="https://code.earthengine.google.com/tasks">code.earthengine.google.com/tasks</a> (conta do projeto): as tarefas <code>SAB_M_2026_…</code> da noite têm de estar <em>Completed</em> (azul). Algumas ainda <em>Running</em> é normal de manhã cedo: espere. <em>Failed</em> (vermelho): clique, copie a mensagem e me envie.</li>
+    <li>Nada mais a fazer: os dias que terminaram são promovidos sozinhos na rodada seguinte. Com ✅ no GitHub e nenhuma <em>Failed</em>, siga para a <a href="#e2-5c">K24</a>.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-e2-5b"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-5c"><span class="n">E2-5c</span><div class="corpo">
+  <h3>Ponto quente da Tmax da previsão: K24 (só leitura, 20 a 60 min)</h3>
+  <p class="aviso"><strong>Por quê:</strong> a K23 achou um pixel em Roraima em que a Tmax da previsão GFS passa do recorde do próprio pixel. A K24 mede se isso é isolado ou sistemático no Brasil todo (comparando com os últimos 30 dias ERA5), mostra onde, separa o que é do GFS bruto e o que é da calibração, e testa um teto (recorde do pixel + 0, 1 ou 2 °C). É a base da V1.7. Não grava nada e não muda nada no ar.</p>
+  <ol class="acoes">
+    <li>Horário: <strong>10/11, entre 08h e 21h50</strong> (de preferência depois do <a href="#e2-5b">E2-5b</a>). Se aparecer <code>⛔ Não comecei</code>, é perto da janela do motor: rode no dia seguinte de manhã.</li>
+    <li><a href="https://colab.research.google.com">colab.research.google.com</a> → <strong>Arquivo → Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong> → <strong>Sim</strong>.</li>
+    <li>No quadro <code>K24_auditoria_tmax_gfs.py</code> abaixo, clique em <strong>Copiar</strong> (ou abra o arquivo de <code>02_Colab/validacoes/</code> do zip, <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong>) → clique na célula → <strong>Ctrl+V</strong> → <strong>Ctrl+Enter</strong>. Se pedir autorização: conta do projeto → <strong>Permitir</strong>.</li>
+    <li>A 1ª linha do log diz <code>K24 v1</code>. Depois vêm as partes <strong>A</strong> (dias gravados), <strong>B</strong> (lote a lote, um pedido por vez; uma linha <code>↻ … servidor ocupado … nova tentativa</code> de vez em quando é normal: ele espera e repete sozinho), <strong>C</strong> (pontos quentes), <strong>D</strong> (GFS bruto x calibrado) e <strong>E</strong> (tabela do teto).</li>
+    <li>No fim, <strong>RESULTADO K24</strong> com uma de duas frases: <code>✅ Sem excesso sistemático: o ponto quente é isolado</code> ou <code>⚠️ Excesso sistemático … a V1.7 … é justificada</code>. As duas são resultados válidos: nada muda no ar.</li>
+    <li>O Colab baixa <code>auditoria_K24_….zip</code>. <strong>Me envie</strong> (com <code>⛔ Auditoria incompleta</code>, mande também o zip).</li>
+  </ol>
+  {{COD:K24_auditoria_tmax_gfs.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-5c"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-6"><span class="n">E2-6</span><div class="corpo">
+  <h3>Conferência depois de implantar: K22 v2 (só leitura, 15 a 40 min)</h3>
+  <ol class="acoes">
+    <li>Quando: <strong>11/11, de manhã</strong> (depois das rodadas de 09/11 e 10/11 com a V1.6). Confira antes em <code>sab-motor</code> → <strong>Actions</strong>: as duas agendadas com ✅, e em <a href="https://code.earthengine.google.com/tasks">tasks</a> nenhuma <em>Failed</em>. Comece até as 22h10.</li>
+    <li>Sessão nova no Colab: <strong>Arquivo → Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong>. A 1ª linha do arquivo que você cola diz <code>CONFERÊNCIA K22 v2</code>; a 1ª linha do log, <code>K22: CONFERÊNCIA DO MOTOR V1.6</code>.</li>
+    <li>No quadro <code>K22_conferencia_v16.py</code> abaixo, clique em <strong>Copiar</strong> (ou abra o arquivo de <code>02_Colab/validacoes/</code> do zip, <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong>) → clique na célula → <strong>Ctrl+V</strong> → <strong>Ctrl+Enter</strong>. Se pedir autorização: conta do projeto → <strong>Permitir</strong>.</li>
+    <li>O esperado: <code>1 OK</code> (todos os dias de 2026 na V1.6, método gravado <code>UR eqm; vento media</code> e nenhum dia até 2025 tocado), <code>2 OK</code> (nenhuma radiação acima do céu claro, nenhuma chuva acima do teto) e <code>3 OK</code> (a variação diária da UR entre 0,85 e 1,15 da do BR-DWGD; o vento é só informação), e a frase <code>✅ MOTOR V1.6 CONFERIDO</code>.</li>
+    <li>Com <code>⏳ O motor ainda está refazendo dias</code>: o motor ainda está refazendo dias de 2026 (não é erro); rode de novo na manhã seguinte e me envie os dois zips.</li>
+    <li>O Colab baixa <code>validacao_K22_….zip</code>. <strong>Me envie.</strong> Com a K22 OK, a etapa 2 está concluída.</li>
+  </ol>
+  {{COD:K22_conferencia_v16.py}}
+  <label class="feito"><input type="checkbox" id="feito-e2-6"> Feito</label>
+</div></article>
+
+<article class="passo" id="e2-volta"><span class="n">↩</span><div class="corpo">
+  <h3>Voltar para a V1.5 (se algo der errado depois do E2-5)</h3>
+  <ol class="acoes">
+    <li>GitHub <code>sab-motor</code> → <strong>Add file → Upload files</strong> → suba o <code>rodar_motor.py</code> versão 2026.11.01 (do <code>SAB_entrega_final_2026-11-03.zip</code>; o agendamento das 23h07 continua valendo) → <strong>Commit changes</strong>.</li>
+    <li>Na próxima rodada, o motor V1.5 refaz sozinho os dias de 2026 gravados pela V1.6 (dia provisório sempre acompanha a versão do motor). O histórico nunca é tocado.</li>
+    <li>A matriz <code>SICSB_EQM_1986_2025</code> pode ficar: a V1.5 não a lê.</li>
+  </ol>
+</div></article>
+
+<section class="fase" aria-labelledby="e1">
+  <span class="rotulo">Etapa 1 · correção de leitura dos pixels B e da radiação</span>
+  <h2 id="e1">Etapa 1: implantar a correção, clique a clique</h2>
+  <p class="aviso"><strong>Feito em 04/11/2026.</strong> Os passos abaixo ficam como registro. Na prática o painel foi colado no script <code>SAB_painel_2026_10_6</code> (não houve script <code>SAB_painel_2026_11_1</code> nem app <code>teste1</code>) e publicado num app novo, com o seu nome no endereço: <a href="https://clima-492922.projects.earthengine.app/view/adao-alves-rodrigues-junior-sab">clima-492922.projects.earthengine.app/view/adao-alves-rodrigues-junior-sab</a>. O app antigo foi apagado. Depois vieram a 2026.11.2 (autoria e link oficial no topo) e a 2026.11.3 (envio por e-mail num clique), sem mudar cálculo.</p>
+  <p><strong>O que muda:</strong> só o que o painel e o e-mail <strong>entregam</strong> para os dias de 1961 a 2025 nos pixels B (lagoas e estuários: chuva, temperaturas, UR, VPD, ETo, radiação e vento passam a vir do BR-DWGD) e a radiação dos pixels C (limitada à de céu claro). <strong>O banco no Earth Engine não muda</strong>, os pixels A (98% do Brasil) e os dias de 2026 não mudam. Para desfazer: voltar o app para a 2026.10.7 e o <code>sab_pedido.py</code> para a 2026.11.01.</p>
+  <p><strong>Ordem:</strong> primeiro as duas provas (E1 e E2, só leitura, no Colab); só com as duas aprovadas, as trocas (E3 e E4). Uma de cada vez e fora das janelas do motor (na época, 14h50–16h30 e 22h50–00h30; desde 08/11, só 22h50–01h00: o GitHub começa o motor uns 40 minutos depois do horário agendado).</p>
+  <nav class="indice" aria-label="Passos da etapa 1">
+    <a href="#e1-1">E1 K20</a><a href="#e1-2">E2 K16 v4</a><a href="#e1-3">E3 Trocar e testar</a><a href="#e1-4">E4 App oficial</a>
+  </nav>
+</section>
+
+<article class="passo" id="e1-1"><span class="n">E1</span><div class="corpo">
+  <h3>Provar a correção no Earth Engine: K20 no Colab</h3>
+  <p class="onde">Onde: Colab, conta do projeto. Só leitura (nada é gravado). De 10 a 25 minutos.</p>
+  <ol class="acoes">
+    <li>Colab → <strong>Arquivo → Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong>.</li>
+    <li>Abra <code>K20_validacao_correcao_pixels_b.py</code> (abaixo) → <strong>Copiar</strong> → clique na célula → <strong>Ctrl+V</strong> (sem editar) → <strong>Ctrl+Enter</strong>. Autorize a conta se pedir.</li>
+    <li>No fim aparece <strong>RESULTADO K20</strong>. Aprovada só com <strong>V1 a V6</strong> ✅:
+      <ul>
+        <li>V1: nos pixels B, as 8 bandas do núcleo = BR-DWGD;</li>
+        <li>V2: nos pixels A, nada muda;</li>
+        <li>V3: nos pixels C, radiação ≤ céu claro e o resto igual;</li>
+        <li>V4: nos pixels B, ET real ≤ ETo e transpiração ≤ ET real;</li>
+        <li>V5: nos dias de 2026, nada muda;</li>
+        <li>V6: o polígono do caso A6 da K16 (Lagoa dos Patos) tem pixels B.</li>
+      </ul></li>
+    <li>O Colab baixa <code>validacao_K20_….zip</code>: me envie. Com ❌, <strong>não troque nada</strong>.</li>
+  </ol>
+  {{COD:K20_validacao_correcao_pixels_b.py}}
+  <label class="feito"><input type="checkbox" id="feito-e1-1"> Feito</label>
+</div></article>
+
+<article class="passo" id="e1-2"><span class="n">E2</span><div class="corpo">
+  <h3>Provar que o e-mail entrega o mesmo que o painel: K16 v4 no Colab</h3>
+  <p class="onde">Onde: Colab, conta do projeto. De 40 a 90 minutos (a K16 v4 refaz tudo, porque o painel e a rotina mudaram).</p>
+  <ol class="acoes">
+    <li>Só depois da K20 aprovada. Colab → <strong>Novo notebook</strong> → <strong>Reiniciar sessão</strong>.</li>
+    <li>Abra o quadro <code>K16_validacao_identidade_email.py</code> do passo <a href="#u19">U19</a> (já é a v4: a 1ª linha diz <code>K16 v4</code>) → <strong>Copiar</strong> → cole → <strong>Ctrl+Enter</strong>. Autorize o Drive e o Earth Engine se pedir.</li>
+    <li>Não apague nada no Drive: a v4 usa pastas novas com a versão no nome (<code>K16_painel_2026.11.1</code>, <code>K16_teste_2026.11.03</code>, <code>K16_2026.11.03</code>). As pastas antigas ficam como registro.</li>
+    <li>Aprovada só com <strong>A1 a A6, B1 e E1</strong> iguais (o A6 é o polígono na Lagoa dos Patos, com pixels B). Me envie o <code>validacao_K16_….zip</code>.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-e1-2"> Feito</label>
+</div></article>
+
+<article class="passo" id="e1-3"><span class="n">E3</span><div class="corpo">
+  <h3>Trocar a rotina do e-mail e o painel do app teste1</h3>
+  <p class="onde">Onde: GitHub (<code>sab-pedidos</code>) e Code Editor do Earth Engine. Só com a K20 e a K16 v4 aprovadas.</p>
+  <ol class="acoes">
+    <li><strong>Rotina do e-mail.</strong> Confira na planilha que não há pedido em <code>em_preparo</code> ou <code>convertendo</code> (passo <a href="#u1">U1</a>). Abra <code>github.com/&lt;seu usuário&gt;/sab-pedidos</code> → clique em <code>sab_pedido.py</code> → lápis ✏️ (<em>Edit this file</em>) → <strong>Ctrl+A</strong> → nesta página, passo <a href="#u2">U2</a>, quadro <code>sab_pedido.py</code> → <strong>Copiar</strong> → no GitHub, <strong>Ctrl+V</strong>. Confira a 1ª linha: <code>Versão 2026.11.03</code> → <strong>Commit changes…</strong> → <strong>Commit changes</strong>.</li>
+    <li><strong>Painel.</strong> <a href="https://code.earthengine.google.com">code.earthengine.google.com</a> → aba <strong>Scripts</strong> → abra o <code>SAB_painel_2026_10_7</code> → <strong>Ctrl+F</strong> <code>urlPedidoEmail:</code> → copie o endereço entre as aspas (termina em <code>/exec</code>).</li>
+    <li><strong>NEW</strong> (botão vermelho) → <strong>File</strong> → <em>File name</em>: <code>SAB_painel_2026_11_1</code> → <strong>OK</strong> → no passo <a href="#u17">U17</a>, quadro <code>06_painel_sab_2026_11_1.js</code> → <strong>Copiar</strong> → no editor vazio, <strong>Ctrl+V</strong>. Confira perto do topo: <code>versao: '2026.11.1'</code>.</li>
+    <li><strong>Ctrl+F</strong> <code>urlPedidoEmail: ''</code> → clique entre as duas aspas → <strong>Ctrl+V</strong> do endereço → <strong>Save</strong> → <strong>Run</strong>. No <em>Console</em> (direita), em poucos segundos deve aparecer <code>BR-DWGD encontrado: correção de leitura … ligada</code>.</li>
+    <li>Com o <code>SAB_painel_2026_11_1</code> aberto: <strong>Apps</strong> (no alto) → na linha <code>teste1</code>, o <strong>lápis</strong> → <em>App source code</em>: <strong>Overwrite with current contents of editor</strong> → <strong>Update</strong>.</li>
+    <li><strong>Teste no link do teste1</strong> (aba anônima), o mesmo polígono do caso A6 da K16, na Lagoa dos Patos:
+      <ol>
+        <li>Em <em>Abrangência</em>, escolha <strong>Coordenadas (Lat / Lon)</strong>; formato <strong>Decimal (ex: -23.5500)</strong>.</li>
+        <li>Digite Lat <code>-30.9</code> e Lon <code>-51.4</code> → <strong>+ Adicionar Ponto</strong>. Repita com <code>-30.9</code> <code>-51.1</code>, <code>-31.2</code> <code>-51.1</code> e <code>-31.2</code> <code>-51.4</code> (4 pontos formam o polígono).</li>
+        <li>Resolução <strong>Diária</strong>, de <code>01/01/2024</code> a <code>31/03/2024</code>, todas as variáveis → <strong>PROCESSAR DADOS CLIMÁTICOS</strong> → baixe o CSV pelo link.</li>
+        <li>No CSV, a coluna <code>Qualidade_Pixel</code> deve ter linhas <code>B</code>. Sem erro vermelho, está certo.</li>
+      </ol></li>
+    <li>Se no app aparecer o aviso <code>BR-DWGD sem permissão de leitura</code>, o asset do autor do BR-DWGD não está aberto para o app: o painel continua funcionando, mas sem a correção. Me mande um print só dessa mensagem.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-e1-3"> Feito</label>
+</div></article>
+
+<article class="passo" id="e1-4"><span class="n">E4</span><div class="corpo">
+  <h3>App oficial</h3>
+  <ol class="acoes">
+    <li>Com o teste do E3 certo: Code Editor → <code>SAB_painel_2026_11_1</code> aberto → <strong>Apps</strong> → na linha do app oficial, o <strong>lápis</strong> → <strong>Overwrite with current contents of editor</strong> → <strong>Update</strong>.</li>
+    <li>Abra o link oficial numa aba anônima e repita o teste da Lagoa dos Patos.</li>
+    <li>Um pedido por e-mail de teste (pelo painel, mesmo polígono, formato CSV) deve chegar com o mesmo conteúdo do link na hora.</li>
+    <li>Pronto: me avise, que eu registro a etapa 1 como implantada e começo a etapa 2 (V1.6).</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-e1-4"> Feito</label>
+</div></article>
+
+<section class="pilha" aria-labelledby="m-problemas">
+  <h3 id="m-problemas">Problemas comuns</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Sintoma</th><th>Causa provável</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>App: "Máscara de qualidade ausente" ou "…not found"</td><td>Asset sem leitura pública</td><td>Code Editor → Assets → asset → Share → <em>Anyone can read</em> → Done (SAB_V1, SAB_MASCARA_QUALIDADE, RONI_CPC_v6, SICSB_SOLO_2015_2025)</td></tr>
+      <tr><td><span class="status s-espera">na_fila</span> "Aguardando: horário do motor"</td><td>Janela do motor</td><td>Nada: segue depois das 16h ou da meia-noite</td></tr>
+      <tr><td><span class="status s-espera">na_fila</span> "GitHub respondeu 401/404"</td><td>GitHub App ou nome do repositório</td><td>Apps Script → função <code>testarApp</code> → <em>Executar</em> → siga o que o registro disser</td></tr>
+      <tr><td><span class="status s-erro">falha</span> "pasta não apareceu no Drive"</td><td>Credencial revogada ou de outra conta</td><td>Refaça a credencial (tabela acima)</td></tr>
+      <tr><td><span class="status s-espera">convertendo</span> há mais de 6 h</td><td>Conversão para Excel falhou</td><td>Entrega só o CSV, com aviso; veja Actions → Converter para Excel</td></tr>
+      <tr><td>Página "Tempo limite do bloqueio"</td><td>Apps Script anterior ao 2026.11.03</td><td>Cole o <code>Codigo.gs</code> 2026.11.03 e faça <em>Nova versão</em> da implantação</td></tr>
+      <tr><td>E-mail não chega</td><td>Spam ou cota de 100 e-mails/dia</td><td>Olhe Spam/Lixo eletrônico; a cota volta no dia seguinte</td></tr>
+      <tr><td>Colab: 403 <code>accessNotConfigured</code> (Drive)</td><td>Drive API desligada no projeto da credencial</td><td>Google Cloud Console → APIs e serviços → Biblioteca → Google Drive API → Ativar</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="pilha" aria-labelledby="m-segredos">
+  <h3 id="m-segredos">Segredos: onde estão (só os nomes)</h3>
+  <div class="aviso perigo">Nunca tire print nem cole em conversa um token, a credencial, a chave <code>.pem</code> ou um <code>github_pat_</code>.</div>
+  <div class="rolagem"><table>
+    <thead><tr><th>Onde</th><th>Nome</th><th>Para quê</th></tr></thead>
+    <tbody>
+      <tr><td>GitHub <code>sab-pedidos</code> e <code>sab-motor</code> → Settings → Secrets → Actions</td><td><code>EE_CREDENCIAL</code></td><td>Earth Engine + Drive (mesma linha nos dois)</td></tr>
+      <tr><td>Apps Script → Configurações do projeto → Propriedades do script</td><td><code>GITHUB_APP_ID</code>, <code>GITHUB_APP_CHAVE</code></td><td>GitHub App: token de 1 h gerado sozinho, sem vencimento</td></tr>
+      <tr><td>idem</td><td><code>GITHUB_REPO</code>, <code>MOTOR_REPO</code>, <code>EMAIL_RESPONSAVEL</code></td><td>Repositórios e seu e-mail</td></tr>
+      <tr><td>idem (o script grava)</td><td><code>GITHUB_APP_INSTALACAO</code>, <code>SAB_CONTADOR</code>, <code>SAB_FORM_LISTAS</code>, <code>SAB_LIMPEZA</code></td><td>Não mexa: instalação do App, IDs, listas do formulário, limpeza</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="pilha" aria-labelledby="m-testes">
+  <h3 id="m-testes">Testes e validações</h3>
+  <ul class="acoes">
+    <li><strong>Testes offline (43):</strong> na pasta <code>07_Base_de_desenvolvimento_e_testes</code> do zip, rode <code>python3 rodar_todos_os_testes.py</code> (Python com numpy, pandas, xlsxwriter, openpyxl e Node 18+). Gera <code>RELATORIO_TESTES.md</code>. No Colab: envie a pasta, <code>!pip install -q xlsxwriter openpyxl</code> e <code>!cd 07_Base_de_desenvolvimento_e_testes && python3 rodar_todos_os_testes.py</code>.</li>
+    <li><strong>K16 v3 (passo U19):</strong> repita sempre que mudar o cálculo do painel ou o <code>sab_pedido.py</code>. Ela gera sozinha os CSV do painel e compara célula a célula.</li>
+    <li><strong>K17 (passo U20):</strong> validação final dos dados, do histórico à previsão, só leitura. Rode uma vez agora; depois, uma vez por ano ou depois de qualquer mudança no motor.</li>
+    <li><strong>K8 a K15:</strong> registro das validações já aprovadas (pasta <code>validacoes</code> da base); não precisam ser repetidas.</li>
+    <li><strong>Scripts originais dos assets fixos</strong> (pasta <code>08_Scripts_originais_somente_registro</code> do zip): o motor mestre V1.0 (<code>O0</code>, que gravou o histórico 1961–2025 do <code>SAB_V1</code>), a V1.1 e a V1.3 (<code>O0b</code> e <code>O1</code>, registro da evolução), a climatologia <code>SICSB_1986_2025</code>, o solo <code>SICSB_SOLO_2015_2025</code>, a matriz GFS V1, as Baselines e o "Código 1" do RONI. ⛔ <strong>Não execute</strong>: cada um começa com <code>raise SystemExit</code>, que para a célula antes de qualquer gravação. Servem para a metodologia da tese.</li>
+  </ul>
+</section>
+
+<section class="fase" aria-labelledby="f0">
+  <span class="rotulo">Atualização de 01 a 03/11/2026 · já feita, fica como registro</span>
+  <h2 id="f0">Atualizar tudo, clique por clique</h2>
+  <p>São 22 passos. Faça um de cada vez, na ordem, e marque <strong>Feito</strong> no fim de cada um (a marca fica guardada neste navegador). Cada código está dentro do passo onde é usado: clique no nome do arquivo para abrir e depois em <strong>Copiar</strong>.</p>
+  <div class="aviso perigo"><strong>Nunca</strong> tire print de uma credencial, de um token ou do segredo. Se algum passo der erro, me mande o print só da mensagem de erro.</div>
+  <nav class="indice" aria-label="Passos da atualização">
+    <a href="#u1">U1 Nada calculando</a><a href="#u2">U2 Trocar arquivos</a><a href="#u3">U3 Criar arquivos</a>
+    <a href="#u4">U4 Simular pedidos</a><a href="#u5">U5 Revogar credencial</a><a href="#u6">U6 Credencial nova</a>
+    <a href="#u7">U7 Segredo sab-pedidos</a><a href="#u8">U8 Criar sab-motor</a><a href="#u9">U9 Arquivos do motor</a>
+    <a href="#u10">U10 Simular motor</a><a href="#u11">U11 Motor gravando</a><a href="#u12">U12 Lista de municípios</a>
+    <a href="#u13">U13 GitHub App</a><a href="#u14">U14 Apps Script</a><a href="#u15">U15 Formulário</a>
+    <a href="#u16">U16 App da Web</a><a href="#u17">U17 Painel 2026.10.7</a><a href="#u18">U18 Testes finais</a>
+    <a href="#u19">U19 K16</a><a href="#u20">U20 K17 validação final</a><a href="#u21">U21 K18 ERA5 e pixels B</a><a href="#u22">U22 K19 auditoria profunda</a>
+  </nav>
+</section>
+
+<article class="passo" id="u1"><span class="n">U1</span><div class="corpo">
+  <h3>Conferir que nada está calculando</h3>
+  <p class="onde">Onde: a planilha de respostas do formulário e o Code Editor do Earth Engine.</p>
+  <ol class="acoes">
+    <li>Abra a planilha de respostas (a mesma do Apps Script).</li>
+    <li>Vá até a coluna <strong>Status</strong> e role até o fim.</li>
+    <li>Nenhuma linha pode estar <span class="status s-espera">enviado</span>, <span class="status s-espera">em_preparo</span> ou <span class="status s-espera">convertendo</span>. Se houver, espere virar <span class="status s-ok">entregue</span> antes de continuar.</li>
+    <li>Abra <a href="https://code.earthengine.google.com/tasks">code.earthengine.google.com/tasks</a>. Nenhuma tarefa começando com <code>SABPED_</code> pode estar com o ícone girando.</li>
+    <li>Feche qualquer Colab aberto com o 05b ou outro script rodando.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u1"> Feito</label>
+</div></article>
+
+<article class="passo" id="u2"><span class="n">U2</span><div class="corpo">
+  <h3>Trocar 6 arquivos no repositório sab-pedidos</h3>
+  <p class="onde">Onde: <a href="https://github.com">github.com</a>, entrando com a conta do GitHub → repositório <code>sab-pedidos</code>.</p>
+  <p><strong>Como trocar um arquivo</strong> (repita para cada um da lista abaixo):</p>
+  <ol class="acoes">
+    <li>Na página do repositório <code>sab-pedidos</code>, clique no nome do arquivo na lista (para os que estão em pasta, clique primeiro na pasta, por exemplo <code>testes</code>, e depois no arquivo).</li>
+    <li>No canto direito, acima do código, clique no <strong>ícone de lápis</strong> (<em>Edit this file</em>).</li>
+    <li>Clique dentro do código, aperte <strong>Ctrl+A</strong> (seleciona tudo) e depois <strong>Delete</strong>. A caixa fica vazia.</li>
+    <li>Nesta página, abra o arquivo com o mesmo nome (lista abaixo) e clique em <strong>Copiar</strong>.</li>
+    <li>Volte ao GitHub, clique na caixa vazia e aperte <strong>Ctrl+V</strong>.</li>
+    <li>Clique no botão verde <strong>Commit changes…</strong> (canto superior direito).</li>
+    <li>Na janela que abre, deixe marcado <em>Commit directly to the main branch</em> e clique no botão verde <strong>Commit changes</strong>.</li>
+    <li>Você volta para a página do arquivo, já com o código novo. Confira a primeira linha (a versão).</li>
+  </ol>
+  <div class="rolagem"><table>
+    <thead><tr><th>Ordem</th><th>Arquivo no GitHub</th><th>A 1ª linha tem de ter</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>sab_pedido.py</code></td><td><code>Versão 2026.11.01</code></td></tr>
+      <tr><td class="num">2</td><td><code>testes/teste_sab_pedido.py</code></td><td><code># Testes das funções puras</code></td></tr>
+      <tr><td class="num">3</td><td><code>testes/fumaca_sab_pedido.py</code></td><td><code># Fumaça</code></td></tr>
+      <tr><td class="num">4</td><td><code>requirements.txt</code></td><td><code>earthengine-api</code> (são 3 linhas)</td></tr>
+      <tr><td class="num">5</td><td><code>README.md</code></td><td><code># sab-pedidos</code></td></tr>
+      <tr><td class="num">6</td><td><code>.github/workflows/pedido_sab.yml</code> (pasta <code>.github</code> → <code>workflows</code>)</td><td><code>(versão 2026.11.01)</code></td></tr>
+    </tbody>
+  </table></div>
+  <div class="aviso">Troque o <code>sab_pedido.py</code> e o <code>teste_sab_pedido.py</code> em seguida, sem pedido no meio: um sem o outro faz o GitHub parar nos testes.</div>
+  {{COD:sab_pedido.py}}
+  {{COD:teste_sab_pedido.py}}
+  {{COD:fumaca_sab_pedido.py}}
+  {{COD:requirements.txt}}
+  {{COD:README.md}}
+  {{COD:pedido_sab.yml}}
+  <label class="feito"><input type="checkbox" id="feito-u2"> Feito</label>
+</div></article>
+
+<article class="passo" id="u3"><span class="n">U3</span><div class="corpo">
+  <h3>Criar 5 arquivos novos no sab-pedidos</h3>
+  <p class="onde">Onde: página inicial do repositório <code>sab-pedidos</code>.</p>
+  <p><strong>Como criar um arquivo</strong> (repita para cada um):</p>
+  <ol class="acoes">
+    <li>Na página inicial do repositório (clique em <code>sab-pedidos</code> no alto, se estiver dentro de uma pasta), clique no botão <strong>Add file</strong> e depois em <strong>Create new file</strong>.</li>
+    <li>Na caixa <em>Name your file…</em>, digite o caminho exatamente como na tabela, com as barras. Ao digitar <code>/</code>, o GitHub transforma o trecho em pasta: é assim mesmo.</li>
+    <li>Nesta página, abra o arquivo com o mesmo nome e clique em <strong>Copiar</strong>; no GitHub, clique na área grande do código e aperte <strong>Ctrl+V</strong>.</li>
+    <li>Clique em <strong>Commit changes…</strong> e depois em <strong>Commit changes</strong>.</li>
+  </ol>
+  <div class="rolagem"><table>
+    <thead><tr><th>Ordem</th><th>Digite no nome</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>sab_xlsx.py</code></td></tr>
+      <tr><td class="num">2</td><td><code>testes/teste_sab_xlsx.py</code></td></tr>
+      <tr><td class="num">3</td><td><code>listar_municipios.py</code></td></tr>
+      <tr><td class="num">4</td><td><code>.github/workflows/converter_xlsx.yml</code></td></tr>
+      <tr><td class="num">5</td><td><code>.github/workflows/municipios.yml</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Você deve ver, na página inicial, os arquivos <code>sab_xlsx.py</code> e <code>listar_municipios.py</code>; na pasta <code>testes</code>, três arquivos; na pasta <code>.github/workflows</code>, três <code>.yml</code>.</p>
+  {{COD:sab_xlsx.py}}
+  {{COD:teste_sab_xlsx.py}}
+  {{COD:listar_municipios.py}}
+  {{COD:converter_xlsx.yml}}
+  {{COD:municipios.yml}}
+  <label class="feito"><input type="checkbox" id="feito-u3"> Feito</label>
+</div></article>
+
+<article class="passo" id="u4"><span class="n">U4</span><div class="corpo">
+  <h3>Simular 3 pedidos (não exporta nada)</h3>
+  <p class="onde">Onde: repositório <code>sab-pedidos</code> → aba <strong>Actions</strong> (no alto, entre <em>Pull requests</em> e <em>Projects</em>).</p>
+  <ol class="acoes">
+    <li>Na coluna da esquerda, clique em <strong>Pedido SAB</strong>.</li>
+    <li>À direita aparece a faixa <em>This workflow has a workflow_dispatch event trigger</em>. Clique no botão <strong>Run workflow</strong> dessa faixa.</li>
+    <li>Abre um quadro com três campos. Deixe <em>ID do pedido</em> = <code>TESTE01</code>, deixe o código que já vem escrito e deixe <strong>marcado</strong> "Só simular".</li>
+    <li>Clique no botão verde <strong>Run workflow</strong> do quadro.</li>
+    <li>Espere uns 5 segundos e aperte <strong>F5</strong>. Aparece uma linha nova no topo da lista, com um círculo amarelo girando. Clique no título dela.</li>
+    <li>Clique no quadrinho <strong>atender</strong> (no meio da tela). Aparecem os passos, cada um com uma setinha.</li>
+    <li>Clique em <strong>Testes da rotina (sem Earth Engine)</strong>: a última linha tem de ser <code>TODOS OS TESTES PASSARAM</code>.</li>
+    <li>Clique em <strong>Atender o pedido</strong>: a última linha tem de ser <code>✅ SIMULAÇÃO OK em … s: nada foi exportado.</code>.</li>
+  </ol>
+  <p>Repita os itens 1 a 8 mais duas vezes. Desta vez, no item 3, apague o código do campo e cole o código indicado:</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Código para colar no campo</th><th>No passo "Atender o pedido" tem de aparecer</th></tr></thead>
+    <tbody>
+      <tr><td><code>v=1;res=D;tipo=BR;ini=1961-01-01;fim=2026-11-15;var=todas</code></td><td><code>❌ PEDIDO RECUSADO: O pedido do Brasil inteiro foi desativado…</code></td></tr>
+      <tr><td><code>v=1;res=D;tipo=E;uf=Paraná;ini=1961-01-01;fim=2026-11-15;var=todas</code></td><td><code>❌ PEDIDO RECUSADO: O pedido teria cerca de … linhas…</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Se o círculo ficar <strong>vermelho</strong> no passo de testes, um arquivo do U2 ficou faltando ou incompleto: abra o passo, role até o primeiro <code>FALHA</code> e me mande o print.</p>
+  <label class="feito"><input type="checkbox" id="feito-u4"> Feito</label>
+</div></article>
+
+<article class="passo" id="u5"><span class="n">U5</span><div class="corpo">
+  <h3>Revogar a credencial antiga do Earth Engine</h3>
+  <p class="onde">Onde: <a href="https://myaccount.google.com/connections">myaccount.google.com/connections</a>, entrando com a conta dona do projeto clima-492922.</p>
+  <div class="aviso">A partir daqui o GitHub fica sem acesso ao Earth Engine até o U7. Faça U5, U6 e U7 seguidos (uns 10 minutos).</div>
+  <ol class="acoes">
+    <li>Abra o endereço acima. Se perguntar, escolha a conta do projeto.</li>
+    <li>Na lista <em>Apps e serviços de terceiros</em>, procure um item com <strong>Earth Engine</strong> no nome (pode aparecer como "Earth Engine", "Google Earth Engine" ou "Earth Engine Python API"). Clique nele.</li>
+    <li>Role até o fim da página do item e clique em <strong>Excluir todas as conexões que você tem com…</strong>.</li>
+    <li>Confirme em <strong>Confirmar</strong> (ou <em>Excluir</em>).</li>
+    <li>Se não achar nenhum item com Earth Engine, pare e me mande o print da lista (ela não mostra nenhuma credencial).</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u5"> Feito</label>
+</div></article>
+
+<article class="passo" id="u6"><span class="n">U6</span><div class="corpo">
+  <h3>Gerar a credencial nova no Colab (versão 3)</h3>
+  <p class="onde">Onde: <a href="https://colab.research.google.com">colab.research.google.com</a>.</p>
+  <ol class="acoes">
+    <li>Clique em <strong>Novo notebook</strong> (ou <em>Arquivo</em> → <em>Novo notebook no Drive</em>).</li>
+    <li>Nesta página, abra <code>colab_credencial.py</code> (abaixo) e clique em <strong>Copiar</strong>.</li>
+    <li>No Colab, clique na célula vazia e aperte <strong>Ctrl+V</strong>. Depois aperte <strong>Ctrl+Enter</strong> (ou o triângulo ▶ à esquerda da célula).</li>
+    <li>Aparece um link azul e, embaixo, uma caixa para colar um código. Clique no link: abre uma aba do Google.</li>
+    <li>Escolha a conta do projeto. Se aparecer "O Google não verificou este app", clique em <strong>Continuar</strong>.</li>
+    <li>Na tela de permissões, clique em <strong>Selecionar tudo</strong> (ou marque <strong>cada caixa</strong>, inclusive a do <strong>Google Drive</strong>). Não escolha nenhuma opção "somente leitura". Clique em <strong>Continuar</strong>.</li>
+    <li>Aparece um código longo. Clique no botão de copiar ao lado dele.</li>
+    <li>Volte à aba do Colab, clique na caixa embaixo do link, aperte <strong>Ctrl+V</strong> e <strong>Enter</strong>.</li>
+    <li>Tem de aparecer <code>✅ Credencial com permissão de exportar (Earth Engine) e de usar o Google Drive</code> e, entre duas linhas de tracinhos, uma linha longa que começa com <code>{</code> e termina com <code>}</code>.</li>
+    <li>Se aparecer <code>❌</code>, rode a célula de novo (item 3) e, no item 6, marque todas as caixas.</li>
+  </ol>
+  <div class="aviso">Deixe esta aba do Colab aberta: a mesma linha vai para o U7 e para o U8. Não feche e não tire print.</div>
+  {{COD:colab_credencial.py}}
+  <label class="feito"><input type="checkbox" id="feito-u6"> Feito</label>
+</div></article>
+
+<article class="passo" id="u7"><span class="n">U7</span><div class="corpo">
+  <h3>Colar a credencial nova no segredo do sab-pedidos</h3>
+  <p class="onde">Onde: repositório <code>sab-pedidos</code> → aba <strong>Settings</strong> (a última, com a engrenagem).</p>
+  <ol class="acoes">
+    <li>No Colab, selecione a linha longa inteira, do <code>{</code> até o <code>}</code> (clique antes do <code>{</code>, segure Shift e clique depois do <code>}</code>), e aperte <strong>Ctrl+C</strong>.</li>
+    <li>No GitHub, em <strong>Settings</strong>, na coluna da esquerda, clique em <strong>Secrets and variables</strong> e depois em <strong>Actions</strong>.</li>
+    <li>Em <em>Repository secrets</em>, na linha <code>EE_CREDENCIAL</code>, clique no <strong>lápis</strong>.</li>
+    <li>Clique na caixa <em>Value</em> (vem vazia: o GitHub nunca mostra o valor antigo) e aperte <strong>Ctrl+V</strong>.</li>
+    <li>Clique em <strong>Update secret</strong>.</li>
+    <li>Para conferir: repita o primeiro teste do U4 (código padrão, "Só simular" marcado). Tem de dar <code>✅ SIMULAÇÃO OK</code>.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u7"> Feito</label>
+</div></article>
+
+<article class="passo" id="u8"><span class="n">U8</span><div class="corpo">
+  <h3>Criar o repositório sab-motor e o segredo dele</h3>
+  <p>O 05b roda de 1 a 2 horas por dia. No repositório privado isso passaria dos 2.000 minutos grátis; num repositório <strong>público</strong> não há limite. O código do motor fica visível; a credencial fica só no segredo, que ninguém vê.</p>
+  <ol class="acoes">
+    <li>No GitHub, clique no <strong>+</strong> (canto superior direito) e em <strong>New repository</strong>.</li>
+    <li>Em <em>Repository name</em>, digite <code>sab-motor</code>.</li>
+    <li>Marque <strong>Public</strong>.</li>
+    <li>Marque <strong>Add a README file</strong> (ou ligue <em>Add README</em>).</li>
+    <li>Clique em <strong>Create repository</strong>.</li>
+    <li>No repositório novo: <strong>Settings</strong> → <strong>Secrets and variables</strong> → <strong>Actions</strong> → botão verde <strong>New repository secret</strong>.</li>
+    <li>Em <em>Name</em>, digite <code>EE_CREDENCIAL</code>. Em <em>Secret</em>, cole a mesma linha do Colab (U6). Clique em <strong>Add secret</strong>.</li>
+    <li>Ainda em <strong>Settings</strong>, na esquerda: <strong>Actions</strong> → <strong>General</strong>. Em <em>Fork pull request workflows from outside collaborators</em>, marque <strong>Require approval for all external contributors</strong> e clique em <strong>Save</strong> logo abaixo.</li>
+    <li>Agora volte ao Colab: <strong>Editar</strong> → <strong>Limpar todas as saídas</strong>, e feche a aba sem salvar.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u8"> Feito</label>
+</div></article>
+
+<article class="passo" id="u9"><span class="n">U9</span><div class="corpo">
+  <h3>Colocar os arquivos no sab-motor</h3>
+  <p class="onde">Onde: página inicial do repositório <code>sab-motor</code>.</p>
+  <p><strong>Os dois motores, por upload</strong> (são grandes demais para colar):</p>
+  <ol class="acoes">
+    <li>No seu computador, abra o zip <code>SAB_pacote_completo_2026-11-01.zip</code> e entre em <code>v41</code> → <code>automacao_motor</code> → <code>sab-motor</code>.</li>
+    <li>No GitHub, clique em <strong>Add file</strong> → <strong>Upload files</strong>.</li>
+    <li>Arraste para a página os arquivos <code>05b_motor_sab_v1_5_GRAVACAO.py</code> e <code>05a_motor_sab_v1_5_SIMULACAO.py</code> (ou clique em <em>choose your files</em> e escolha os dois).</li>
+    <li>Espere os dois aparecerem na lista e clique em <strong>Commit changes</strong>.</li>
+  </ol>
+  <p><strong>Os outros, criando cada um</strong> (como no U3: <strong>Add file</strong> → <strong>Create new file</strong> → nome → colar → <strong>Commit changes…</strong> → <strong>Commit changes</strong>):</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Ordem</th><th>Digite no nome</th><th>Código desta página</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>rodar_motor.py</code></td><td><code>rodar_motor.py</code></td></tr>
+      <tr><td class="num">2</td><td><code>SHA256_MOTOR.txt</code></td><td><code>SHA256_MOTOR.txt</code></td></tr>
+      <tr><td class="num">3</td><td><code>requirements.txt</code></td><td><code>requirements.txt (sab-motor)</code></td></tr>
+      <tr><td class="num">4</td><td><code>ATIVIDADE.md</code></td><td><code>ATIVIDADE.md</code></td></tr>
+      <tr><td class="num">5</td><td><code>testes/teste_rodar_motor.py</code></td><td><code>teste_rodar_motor.py</code></td></tr>
+      <tr><td class="num">6</td><td><code>.github/workflows/motor_05b.yml</code></td><td><code>motor_05b.yml</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>E troque o <code>README.md</code> que o GitHub criou (como no U2: lápis → Ctrl+A → Delete → colar <code>README.md (sab-motor)</code> → <strong>Commit changes</strong>).</p>
+  <p>No fim, a página inicial do <code>sab-motor</code> mostra: <code>.github</code>, <code>testes</code>, os dois motores, <code>ATIVIDADE.md</code>, <code>README.md</code>, <code>SHA256_MOTOR.txt</code>, <code>requirements.txt</code> e <code>rodar_motor.py</code>.</p>
+  {{COD:rodar_motor.py}}
+  {{COD:SHA256_MOTOR.txt}}
+  {{COD:requirements.txt (sab-motor)}}
+  {{COD:ATIVIDADE.md}}
+  {{COD:teste_rodar_motor.py}}
+  {{COD:motor_05b.yml}}
+  {{COD:README.md (sab-motor)}}
+  <label class="feito"><input type="checkbox" id="feito-u9"> Feito</label>
+</div></article>
+
+<article class="passo" id="u10"><span class="n">U10</span><div class="corpo">
+  <h3>Simular o motor pelo GitHub (roda o 05a, não grava)</h3>
+  <p class="onde">Onde: <code>sab-motor</code> → aba <strong>Actions</strong>. Fora das 15h e das 23h.</p>
+  <ol class="acoes">
+    <li>Se aparecer um aviso sobre workflows, clique em <strong>I understand my workflows, go ahead and enable them</strong>.</li>
+    <li>Na esquerda, clique em <strong>Motor SAB</strong> → <strong>Run workflow</strong>.</li>
+    <li>No campo <em>modo</em>, deixe <code>simular</code>. Clique no botão verde <strong>Run workflow</strong>.</li>
+    <li>Aperte <strong>F5</strong>, clique na execução nova e depois no quadrinho <strong>motor</strong>.</li>
+    <li>Abra <strong>Rodar o motor</strong> (a setinha). Confira, de cima para baixo: <code>🔏 SHA-256 conferido</code>, <code>🛡️ Travas conferidas</code>, <code>🛡️ TRAVA DO HISTÓRICO LIGADA</code>, <code>🧪 MODO SIMULAÇÃO ATIVO</code>, as linhas da correção (<code>variancia</code>, teto <code>2.0</code> e <code>1.0</code>) e, no fim, o resumo da simulação e <code>✅ Motor terminou</code>.</li>
+    <li>Pode levar de 20 a 60 minutos. Pode fechar a aba: o GitHub continua sozinho.</li>
+    <li>A prévia (<code>previa_v15</code>) fica no fim da página da execução, em <em>Artifacts</em>. Clique para baixar, se quiser conferir.</li>
+  </ol>
+  <p>Se aparecer <code>❌ O arquivo do motor não é o aprovado</code>, um dos motores do U9 não é o do zip: suba de novo.</p>
+  <label class="feito"><input type="checkbox" id="feito-u10"> Feito</label>
+</div></article>
+
+<article class="passo" id="u11"><span class="n">U11</span><div class="corpo">
+  <h3>Primeira gravação automática (05b)</h3>
+  <ol class="acoes">
+    <li>Não faça nada: às <strong>23h07</strong> o GitHub roda sozinho (desde 08/11/2026, uma vez por dia). Costuma atrasar uns 40 minutos.</li>
+    <li>Depois das 15h30, abra <code>sab-motor</code> → <strong>Actions</strong> → a execução do horário → <strong>motor</strong> → <strong>Rodar o motor</strong>.</li>
+    <li><strong>Não</strong> pode aparecer <code>MODO SIMULAÇÃO</code>. Têm de aparecer <code>Cadeia GFS sequencial</code>, os dias exportados e, no fim, <code>✅ Execução encerrada</code> e <code>✅ Motor terminou</code>.</li>
+    <li>Daqui em diante, <strong>não rode mais o 05b no Colab</strong>. Se quiser rodar fora de hora: <strong>Run workflow</strong> com o modo <code>gravar</code>.</li>
+    <li>Se uma execução falhar, o GitHub manda um e-mail para você. A seguinte refaz o que faltou.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u11"> Feito</label>
+</div></article>
+
+<article class="passo" id="u12"><span class="n">U12</span><div class="corpo">
+  <h3>Gravar a lista de municípios no Drive</h3>
+  <p class="onde">Onde: <code>sab-pedidos</code> → aba <strong>Actions</strong>.</p>
+  <ol class="acoes">
+    <li>Na esquerda, clique em <strong>Lista de municípios</strong> → <strong>Run workflow</strong> → botão verde <strong>Run workflow</strong>.</li>
+    <li>Aperte <strong>F5</strong>, clique na execução nova → <strong>listar</strong> → <strong>Exportar a lista</strong>.</li>
+    <li>A última linha tem de ser <code>✅ SAB_municipios_GAUL2015.csv na pasta SAB_config do Drive…</code>.</li>
+    <li>Abra o Google Drive: tem de existir a pasta <code>SAB_config</code> com o arquivo <code>SAB_municipios_GAUL2015.csv</code>. Não mexa nele.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u12"> Feito</label>
+</div></article>
+
+<article class="passo" id="u13"><span class="n">U13</span><div class="corpo">
+  <h3>Criar o GitHub App (acesso automático, sem troca de token todo ano)</h3>
+  <p>Em vez de tokens que vencem, você cria uma vez um "aplicativo" seu no GitHub. O Apps Script usa a chave dele para gerar sozinho, a cada uso, um token que vale só 1 hora. Nunca mais é preciso trocar nada.</p>
+  <p class="onde">Onde: GitHub → sua foto (canto superior direito) → <strong>Settings</strong> → no fim da coluna da esquerda, <strong>Developer settings</strong> → <strong>GitHub Apps</strong>.</p>
+  <p><strong>A. Criar o App</strong></p>
+  <ol class="acoes">
+    <li>Clique em <strong>New GitHub App</strong>. Se pedir a senha ou o código de confirmação, digite.</li>
+    <li><em>GitHub App name</em>: <code>sab-automacao-adaojunior</code>. O nome tem de ser único no GitHub inteiro; se disser que já existe, acrescente um número no fim.</li>
+    <li><em>Homepage URL</em>: <code>https://github.com/adaojunior0909-85/sab-motor</code>.</li>
+    <li>Deixe <em>Callback URL</em> vazio e as caixas de <em>Identifying and authorizing users</em> como estão.</li>
+    <li>Em <strong>Webhook</strong>, <strong>desmarque</strong> a caixa <em>Active</em>. O campo do endereço some.</li>
+    <li>Em <strong>Permissions</strong>, abra <strong>Repository permissions</strong> e mude só estas duas:
+      <ul class="acoes">
+        <li><strong>Actions</strong> → <strong>Read-only</strong></li>
+        <li><strong>Contents</strong> → <strong>Read and write</strong></li>
+      </ul>
+      (<em>Metadata</em> fica sozinho em <em>Read-only</em>: é assim mesmo.) Não mexa em <em>Organization</em> nem em <em>Account permissions</em>.</li>
+    <li>Em <em>Where can this GitHub App be installed?</em>, deixe <strong>Only on this account</strong>.</li>
+    <li>Clique no botão verde <strong>Create GitHub App</strong>, no fim da página.</li>
+  </ol>
+  <p><strong>B. Anotar o número e gerar a chave</strong></p>
+  <ol class="acoes">
+    <li>Abre a página do App (na esquerda, <strong>General</strong>). Logo no alto, em <em>About</em>, está <strong>App ID</strong> com um número (ex.: <code>1234567</code>). Copie para o bloco de notas. É só o número; não é segredo.</li>
+    <li>Na coluna da esquerda do App, clique em <strong>Credentials</strong> → aba <strong>Key pairs</strong> → botão verde <strong>New key</strong> (nas telas antigas: role a página <em>General</em> até <strong>Private keys</strong> → <strong>Generate a private key</strong>). Se pedir a senha, digite.</li>
+    <li>O navegador baixa um arquivo terminado em <code>.pem</code> (pasta <em>Downloads</em>) e a contagem de <em>Key pairs</em> vira 1. <strong>Esse arquivo é a chave: não mande para ninguém e não tire print dele.</strong></li>
+  </ol>
+  <p><strong>C. Instalar o App nos dois repositórios</strong></p>
+  <ol class="acoes">
+    <li>Na coluna da esquerda da página do App, clique em <strong>Install App</strong>.</li>
+    <li>Na linha da sua conta (<code>adaojunior0909-85</code>), clique em <strong>Install</strong>.</li>
+    <li>Marque <strong>Only select repositories</strong>, clique em <em>Select repositories</em> e escolha <strong>sab-pedidos</strong> e <strong>sab-motor</strong>.</li>
+    <li>Clique em <strong>Install</strong>. Se pedir a senha, digite.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u13"> Feito</label>
+</div></article>
+
+<article class="passo" id="u14"><span class="n">U14</span><div class="corpo">
+  <h3>Apps Script: colar o código, as propriedades e rodar as funções</h3>
+  <p class="onde">Onde: a planilha de respostas → menu <strong>Extensões</strong> → <strong>Apps Script</strong>.</p>
+  <p><strong>A. Colar o código</strong></p>
+  <ol class="acoes">
+    <li>Na esquerda, em <em>Arquivos</em>, clique em <code>Codigo.gs</code>.</li>
+    <li>Clique no código, <strong>Ctrl+A</strong>, <strong>Delete</strong>.</li>
+    <li>Nesta página, abra <code>Codigo.gs</code> (abaixo) → <strong>Copiar</strong>. No Apps Script, <strong>Ctrl+V</strong>.</li>
+    <li>Clique no ícone de <strong>disquete</strong> (Salvar projeto) ou aperte <strong>Ctrl+S</strong>. A 2ª linha do código tem de dizer <code>Versão 2026.11.03</code>.</li>
+  </ol>
+  <p><strong>B. Propriedades do GitHub App</strong></p>
+  <ol class="acoes">
+    <li>Na barra da esquerda, clique na <strong>engrenagem</strong> (<em>Configurações do projeto</em>).</li>
+    <li>Role até <em>Propriedades do script</em> e clique em <strong>Editar propriedades do script</strong>.</li>
+    <li>Clique em <strong>Adicionar propriedade do script</strong>: <em>Propriedade</em> <code>GITHUB_APP_ID</code>, <em>Valor</em> o número do App ID (U13 B1).</li>
+    <li>No computador, abra a pasta <em>Downloads</em>, clique com o botão direito no arquivo <code>.private-key.pem</code> → <strong>Abrir com</strong> → <strong>Bloco de Notas</strong>. Aperte <strong>Ctrl+A</strong> e <strong>Ctrl+C</strong>.</li>
+    <li>De volta ao Apps Script: <strong>Adicionar propriedade do script</strong> → <em>Propriedade</em> <code>GITHUB_APP_CHAVE</code>, clique no <em>Valor</em> e aperte <strong>Ctrl+V</strong>. Pode ficar tudo numa linha só: o script entende.</li>
+    <li>Confira se já existe <code>MOTOR_REPO</code> = <code>adaojunior0909-85/sab-motor</code>. Se não existir, adicione.</li>
+    <li>Clique em <strong>Salvar propriedades do script</strong>. Feche o Bloco de Notas sem salvar.</li>
+  </ol>
+  <p><strong>C. Rodar 4 funções</strong> (volte ao editor: ícone <strong>&lt; &gt;</strong> na barra da esquerda)</p>
+  <ol class="acoes">
+    <li>Na barra do alto, ao lado de <em>Depurar</em>, há uma lista com o nome de uma função. Clique nela e escolha <strong>configurar</strong>. Clique em <strong>Executar</strong>.</li>
+    <li>Se pedir autorização: <strong>Revisar permissões</strong> → escolha a conta → <strong>Avançado</strong> → <strong>Acessar … (não seguro)</strong> → <strong>Permitir</strong>.</li>
+    <li>Embaixo abre o <em>Registro de execução</em>: tem de aparecer <code>✅ Acionadores criados…</code>.</li>
+    <li>Escolha <strong>testarApp</strong> → <strong>Executar</strong>. Tem de aparecer <code>✅ Chave do App aceita e token de 1 hora gerado</code>, <code>✅ adaojunior0909-85/sab-pedidos: o App tem acesso</code> e <code>✅ adaojunior0909-85/sab-motor: o App tem acesso</code>. Se aparecer <code>❌</code>, a própria linha diz o que corrigir; me mande o print dela.</li>
+    <li>Escolha <strong>testarGitHub</strong> → <strong>Executar</strong>. Tem de aparecer <code>✅ GitHub aceitou o acionamento (204)</code>. No <code>sab-pedidos</code> → <strong>Actions</strong> aparece uma execução nova de <em>Pedido SAB</em> (simulação).</li>
+    <li>Escolha <strong>testarMotor</strong> → <strong>Executar</strong>. Tem de aparecer <code>MOTOR_REPO: adaojunior0909-85/sab-motor</code> e <code>▶️ A fila despacharia agora</code> ou <code>⏸️ A fila esperaria agora…</code>. Não pode aparecer <code>⚠️</code>.</li>
+  </ol>
+  <p><strong>D. Apagar o que não serve mais</strong> (só depois dos ✅ do item C)</p>
+  <ol class="acoes">
+    <li>Apps Script → <strong>engrenagem</strong> → <strong>Editar propriedades do script</strong> → na linha <code>GITHUB_TOKEN</code>, clique na <strong>lixeira</strong>. Se houver <code>MOTOR_TOKEN</code>, apague também. <strong>Salvar propriedades do script</strong>.</li>
+    <li>GitHub → foto → <strong>Settings</strong> → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Fine-grained tokens</strong> → clique no token antigo → <strong>Delete</strong> → confirme.</li>
+    <li>No computador, apague o arquivo <code>.private-key.pem</code> da pasta <em>Downloads</em> e esvazie a Lixeira. A chave já está guardada no Apps Script; se um dia precisar de outra, é só gerar uma nova na página do App (U13 B2) e colar no lugar.</li>
+  </ol>
+  {{COD:Codigo.gs}}
+  <label class="feito"><input type="checkbox" id="feito-u14"> Feito</label>
+</div></article>
+
+<article class="passo" id="u15"><span class="n">U15</span><div class="corpo">
+  <h3>Montar o formulário novo e conferir</h3>
+  <ol class="acoes">
+    <li>No Apps Script, escolha <strong>montarFormulario</strong> na lista → <strong>Executar</strong>. Cada execução leva no máximo uns 5 minutos.</li>
+    <li>Se o registro terminar com <code>⏸️ Parte do formulário montada… Rode montarFormulario de novo</code>, clique em <strong>Executar</strong> outra vez. Repita até aparecer o <code>✅</code> (em geral 2 ou 3 vezes; cada vez continua de onde parou).</li>
+    <li>Se pedir autorização de novo (agora para o Drive), faça como no U14 C2.</li>
+    <li>O registro termina com <code>✅ Formulário montado (27 estados, … municípios)</code>.</li>
+    <li>Abra o formulário no modo de edição (na planilha: <strong>Formulário</strong> → <strong>Editar formulário</strong>) e clique no ícone do <strong>olho</strong> (<em>Visualizar</em>), no alto.</li>
+    <li>Percorra sem enviar: <em>Local</em> = Estados → aparecem 5 listas por região → <em>Voltar</em>; <em>Local</em> = Municípios → escolha Paraná → <em>Próxima</em> → aparece a lista dos municípios do Paraná; na página <em>Período e variáveis</em>, a pergunta <em>Formato dos arquivos</em>; em <em>Seus dados</em>, o aviso de SPAM. Feche a aba de visualização.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u15"> Feito</label>
+</div></article>
+
+<article class="passo" id="u16"><span class="n">U16</span><div class="corpo">
+  <h3>Atualizar o App da Web (o endereço não muda)</h3>
+  <ol class="acoes">
+    <li>No Apps Script, clique no botão azul <strong>Implantar</strong> (canto superior direito) → <strong>Gerenciar implantações</strong>.</li>
+    <li>Na esquerda, a implantação ativa já vem escolhida. Clique no <strong>lápis</strong> (<em>Editar</em>), no alto da janela.</li>
+    <li>Em <em>Versão</em>, abra a lista e escolha <strong>Nova versão</strong>.</li>
+    <li>Clique em <strong>Implantar</strong> e depois em <strong>Concluído</strong>.</li>
+    <li>O endereço <code>…/exec</code> continua o mesmo: o painel não precisa mudar a <code>urlPedidoEmail</code>.</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u16"> Feito</label>
+</div></article>
+
+<article class="passo" id="u17"><span class="n">U17</span><div class="corpo">
+  <h3>Painel 2026.10.7 num script novo e no app teste1</h3>
+  <p class="onde">Onde: <a href="https://code.earthengine.google.com">code.earthengine.google.com</a>. O <code>SABTESTE1</code> fica intacto, como cópia de segurança.</p>
+  <ol class="acoes">
+    <li>Na aba <strong>Scripts</strong> (esquerda), abra o <code>SABTESTE1</code>. Aperte <strong>Ctrl+F</strong>, procure <code>urlPedidoEmail:</code> e copie o endereço entre as aspas (começa com <code>https://script.google.com</code> e termina em <code>/exec</code>). Se estiver vazio (<code>''</code>), use o endereço do App da Web do U16.</li>
+    <li>Ainda na aba <strong>Scripts</strong>, clique em <strong>NEW</strong> (botão vermelho) → <strong>File</strong>. Em <em>File name</em>, escreva <code>SAB_painel_2026_10_7</code> → <strong>OK</strong>. Abre um editor vazio (se vier alguma linha de exemplo, Ctrl+A e Delete).</li>
+    <li>Nesta página, no quadro abaixo, clique em <strong>Copiar</strong>. No editor vazio, <strong>Ctrl+V</strong>. Confira: a linha 1 começa com <code>// =====</code> e, perto do topo, aparece <code>versao: '2026.10.7'</code>.</li>
+    <li>Ctrl+F <code>urlPedidoEmail: ''</code> → clique entre as duas aspas → Ctrl+V do endereço → <strong>Save</strong>.</li>
+    <li>Clique em <strong>Run</strong> e veja se o painel abre à direita sem erro vermelho no <em>Console</em>. Teste rápido: clique em <strong>📊 Ver a situação e a estimativa</strong> (bloco El Niño / La Niña) e veja se aparecem AGORA, PRÓXIMOS 3 MESES e o botão <strong>ℹ️ Como ler este resultado</strong>.</li>
+    <li>Com o <code>SAB_painel_2026_10_7</code> aberto, clique em <strong>Apps</strong> (no alto) → na linha <code>teste1</code>, o <strong>lápis</strong> → em <em>Source code</em>, escolha <strong>Current contents of editor</strong> → <strong>Update</strong>. O app pega o código do script que está aberto na tela, por isso ele tem que ser o novo.</li>
+    <li>O app oficial fica como está até a K16 ser aprovada (U19).</li>
+  </ol>
+  <p class="aviso">Desde 22/11/2026 o quadro abaixo traz o painel <strong>2026.11.5</strong> (radiação impossível vazia, com a ETo e o déficit do dia), já com o endereço <code>/exec</code> dos pedidos. Cole só depois da <strong>K16 v7</strong> com ✅ e no mesmo dia em que juntar o PR #7 (<a href="#r3">passo R3</a>). Para atualizar: abra o script <code>SAB_painel_2026_10_6</code> → Ctrl+A → Delete → cole → <strong>Save</strong> → <strong>Run</strong> → <strong>Apps</strong> → lápis da linha <code>adao-alves-rodrigues-junior-sab</code> → <em>Overwrite with current contents of editor</em> → <strong>Update</strong>. Os passos acima ficam como registro da 2026.10.7.</p>
+  {{COD:06_painel_sab_2026_11_5_PRONTO.js}}
+  <label class="feito"><input type="checkbox" id="feito-u17"> Feito</label>
+</div></article>
+
+<article class="passo" id="u18"><span class="n">U18</span><div class="corpo">
+  <h3>Testes de ponta a ponta, com o seu e-mail</h3>
+  <ol class="acoes">
+    <li><strong>Formulário, Excel:</strong> abra o formulário publicado → Municípios → Paraná → marque Pato Branco → datas 01/01/2025 e 31/12/2025 → previsão Não → Sem filtro → Diária → <em>Excel (.xlsx)</em> → Precipitação → seus dados → <strong>Enviar</strong>. Na planilha, o Status vai de <span class="status s-espera">enviado</span> a <span class="status s-espera">convertendo</span> e a <span class="status s-ok">entregue</span>. O .xlsx abre com duplo clique e mostra os números com vírgula (ex.: 18,40).</li>
+    <li><strong>Painel teste1, CSV e Excel:</strong> abra o app → Paraná, Diária, 2025 → processe → na caixa <em>Receber por e-mail</em>, preencha, escolha <em>CSV e Excel (.xlsx)</em>, marque a LGPD → clique no quadro azul <strong>Clique aqui para ENVIAR O PEDIDO</strong> (desde a 2026.11.3; antes eram o botão <em>Gerar o pedido</em> e um link). Chega o e-mail com os dois formatos e as instruções do Excel.</li>
+    <li><strong>Colunas ENSO:</strong> num pedido com a previsão marcada, as últimas colunas do arquivo trazem <code>Fonte_ENSO</code> = <code>Persistencia</code> nas linhas <code>Previsao_GFS</code>, e nenhum <code>Sem_Dado</code>.</li>
+    <li><strong>Recusa:</strong> formulário com 7 estados marcados → chega o e-mail "No máximo 6 estados".</li>
+    <li>Se algum e-mail não chegar, olhe em Spam e Lixo eletrônico e marque "Não é spam".</li>
+  </ol>
+  <label class="feito"><input type="checkbox" id="feito-u18"> Feito</label>
+</div></article>
+
+<article class="passo" id="u19"><span class="n">U19</span><div class="corpo">
+  <h3>Validação K16 v3 no Colab</h3>
+  <ol class="acoes">
+    <li>Escolha um horário fora da janela do motor (22h50–01h00) e sem pedido calculando (U1).</li>
+    <li><strong>Não precisa baixar nada do painel à mão.</strong> A K16 v3 gera sozinha os CSV do painel (parte P): ela roda o próprio código do painel 2026.10.7 no Colab, com o Earth Engine de verdade, preenche cada caso como uma pessoa faria e baixa os mesmos links do botão de download, para <code>Meu Drive/K16_painel/A1</code> … <code>A5</code>. Se você já tiver posto CSV baixados à mão numa dessas pastas, esse caso usa os seus. <strong>Não apague</strong> a pasta <code>K16_teste</code> nem a <code>K16</code>: a K16 reaproveita o que já exportou e os tempos do link (partes A, B, C e E1 não rodam de novo).</li>
+    <li>Colab → <strong>Novo notebook</strong> → abra <code>K16_validacao_identidade_email.py</code> (abaixo) → <strong>Copiar</strong> → cole na célula → <strong>Ctrl+Enter</strong>.</li>
+    <li>Se pedir acesso ao Drive ou ao Earth Engine, autorize com a conta do projeto.</li>
+    <li>Na primeira vez leva de 30 a 60 minutos; repetindo, de 10 a 30 (a parte P instala o Node.js e a biblioteca do Earth Engine e roda os 5 casos). No fim, o Colab baixa <code>validacao_K16_….zip</code>: me mande esse zip.</li>
+    <li>[v7, 22/11/2026] Agora são também o A7 (Lagoa Mirim, março de 2026) e a conferência R7 (radiação impossível vazia); a parte C (tempo do link) fica desligada. Passo a passo da v7 no <a href="#r1">R1</a>.</li>
+    <li>Regra: aprovado só com A1 a A5, B1 e E1 iguais. Só então o app oficial (como no U17, item 6, com o app oficial) e a abertura ao público.</li>
+  </ol>
+  {{COD:K16_validacao_identidade_email.py}}
+  <label class="feito"><input type="checkbox" id="feito-u19"> Feito</label>
+</div></article>
+
+<article class="passo" id="u20"><span class="n">U20</span><div class="corpo">
+  <h3>Validação final dos dados: K17 no Colab</h3>
+  <p class="onde">Onde: Colab, conta do projeto <code>clima-492922</code>. Só leitura: nada é gravado, apagado ou exportado no Earth Engine (a K17 bloqueia essas funções antes de começar).</p>
+  <p>Ela responde, com números, à pergunta "os dados gravados são exatamente o que os códigos dizem, do histórico à previsão?". Traz embutidos, sem mudança, os códigos que gravaram os dados (V1.0, V1.3, V1.5 e as matrizes O2 e O4), recalcula com eles em 1.000 pixels fixos e compara com o que está gravado.</p>
+  <ol class="acoes">
+    <li>Escolha um horário <strong>fora</strong> da janela do motor (22h50–01h00; o ideal é começar até 21h00) e sem K16 rodando.</li>
+    <li>Colab → <strong>Arquivo → Novo notebook</strong>.</li>
+    <li><strong>Ambiente de execução → Reiniciar sessão</strong> (num notebook novo pode pular, mas não faz mal).</li>
+    <li>Abra <code>K17_validacao_final_SAB.py</code> (abaixo) → <strong>Copiar</strong> → clique na célula → <strong>Ctrl+V</strong>. Não edite nada.</li>
+    <li><strong>Ctrl+Enter</strong>. Se pedir para autorizar o Earth Engine, escolha a conta do projeto e permita.</li>
+    <li>Espere de 30 a 80 minutos (na rodada de 03/11, 32 min). É a <strong>v4</strong>: a v1 e a v2 pararam por falta de memória (P2 e P4), a v2 comparava a máscara com a conta errada (P9) e a regra de datas da v3 foi retirada (a data do catálogo não prova revisão). Nenhum cálculo do banco mudou. Cada parte imprime <code>✅ OK</code>, <code>⚠️ ATENÇÃO</code>, <code>❌ FALHA</code>, <code>ℹ️ INFO</code> ou <code>⏭️ NÃO EXECUTADO</code>. Se uma parte falhar, as outras continuam.</li>
+    <li>No fim aparece <strong>RESULTADO FINAL K17</strong> e o Colab baixa <code>validacao_K17_&lt;data&gt;.zip</code> sozinho (se o navegador perguntar, permita o download). <strong>Me envie esse zip</strong>, aprovado ou não.</li>
+  </ol>
+  <div class="rolagem"><table>
+    <thead><tr><th>Parte</th><th>O que confere</th><th>Conta para aprovar?</th></tr></thead>
+    <tbody>
+      <tr><td>P1</td><td>todos os dias de 01/01/1961 até o fim da previsão, sem buraco; versão de cada período; 16 bandas</td><td>sim</td></tr>
+      <tr><td>P2</td><td>histórico gravado = V1.0 recalculada hoje (8 dias de 1961 a 2025). Se houver diferença, o diagnóstico diz se ela está só nas variáveis acumuladas do ERA5-Land (revisão da fonte)</td><td>sim</td></tr>
+      <tr><td>P3</td><td>onde e quanto V1.0, V1.3 e V1.5 diferem, por banda e por classe de pixel</td><td>não (medida para a tese)</td></tr>
+      <tr><td>P4</td><td>matrizes <code>SICSB_1986_2025</code> e <code>SICSB_SOLO_2015_2025</code> = códigos O2 e O4</td><td>sim</td></tr>
+      <tr><td>P5</td><td>últimos dias provisórios de 2026 = V1.5; propriedades da previsão</td><td>sim</td></tr>
+      <tr><td>P6</td><td>coerência física no Brasil todo (ET real ≤ ETo, Tmax ≥ Tmin, UR de 0 a 100 %, chuva ≥ 0, solo ≤ 0,9 depois da correção de leitura)</td><td>sim, não pode ter ❌</td></tr>
+      <tr><td>P7</td><td>chuva mensal do SAB × CHIRPS (fonte independente)</td><td>não (medida)</td></tr>
+      <tr><td>P8</td><td><code>RONI_CPC_v6</code> × arquivo oficial do CPC</td><td>sim</td></tr>
+      <tr><td>P9</td><td>máscara: contagem por classe igual à que o 01b gravou no próprio asset (pixel inteiro: B ~300, C ~48, borda ~1.060)</td><td>sim</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Regra (fixada antes de rodar):</strong> aprovada quando P1, P2, P4, P5, P8 e P9 saem ✅ e P6 não tem ❌. Uma ⚠️ em P2, P4 ou P5 não quer dizer dado errado: pode ser revisão de uma fonte (BR-DWGD, ERA5-Land, SMAP) depois da gravação; o zip mostra qual banda e quanto.</p>
+  {{COD:K17_validacao_final_SAB.py}}
+  <label class="feito"><input type="checkbox" id="feito-u20"> Feito</label>
+</div></article>
+
+<article class="passo" id="u21"><span class="n">U21</span><div class="corpo">
+  <h3>K18: medir a revisão do ERA5 e a correção dos pixels B</h3>
+  <p class="onde">Onde: Colab, conta do projeto. Só leitura. Não aprova nem reprova: só mede, para decidir a correção.</p>
+  <ol class="acoes">
+    <li>Fora da janela do motor (22h50–01h00) e sem K16/K17 rodando.</li>
+    <li>Colab → <strong>Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong>.</li>
+    <li>Abra <code>K18_auditoria_era5_e_pixels_b.py</code> (abaixo) → <strong>Copiar</strong> → cole na célula → <strong>Ctrl+Enter</strong>. Autorize a conta se pedir.</li>
+    <li>Espere de 10 a 30 minutos. No fim aparece <strong>RESULTADO K18</strong> e baixa <code>validacao_K18_&lt;data&gt;.zip</code>: me envie.</li>
+  </ol>
+  <ul class="acoes">
+    <li><strong>Q1:</strong> a partir de quando o ERA5-Land mudou. A conta só vale se os dias de controle (1961 a 2013) e a temperatura do solo saírem iguais; senão aparece ❌ e a K18 avisa.</li>
+    <li><strong>Q2:</strong> quanto a chuva, as temperaturas, a UR, a ETo, a radiação e o vento dos pixels B mudariam com o BR-DWGD. Controle: nos pixels A, gravado = BR-DWGD.</li>
+  </ul>
+  {{COD:K18_auditoria_era5_e_pixels_b.py}}
+  <label class="feito"><input type="checkbox" id="feito-u21"> Feito</label>
+</div></article>
+
+<article class="passo" id="u22"><span class="n">U22</span><div class="corpo">
+  <h3>K19: auditoria profunda (tudo numa célula só)</h3>
+  <p class="onde">Onde: Colab, conta do projeto. Só leitura. Não aprova nem reprova: termina com a lista de candidatas a correção.</p>
+  <ol class="acoes">
+    <li>Comece entre <strong>16h00 e 19h50</strong> ou entre <strong>00h00 e 11h50</strong> (leva de 1h30 a 3h; perto da janela do motor ela se recusa a começar e diz o horário).</li>
+    <li>Colab → <strong>Novo notebook</strong> → <strong>Ambiente de execução → Reiniciar sessão</strong>.</li>
+    <li>Abra <code>K19_auditoria_profunda_SAB.py</code> (abaixo) → <strong>Copiar</strong> → cole na célula → <strong>Ctrl+Enter</strong>. Autorize a conta se pedir.</li>
+    <li>Deixe a aba aberta. Cada parte salva o resultado e refaz o zip ao terminar: se o Colab cair, o zip parcial já está em <code>/content</code> (painel de arquivos à esquerda).</li>
+    <li>No fim aparecem <strong>RESULTADO K19</strong> e <strong>CANDIDATAS A CORREÇÃO</strong>, e baixa <code>validacao_K19_&lt;data&gt;.zip</code>: me envie.</li>
+  </ol>
+  <div class="rolagem"><table>
+    <thead><tr><th>Parte</th><th>O que procura</th><th>Referência</th></tr></thead>
+    <tbody>
+      <tr><td>D2</td><td>valores impossíveis ou suspeitos em todos os dias (Tmax &lt; Tmin, ET real &gt; ETo, radiação acima do céu claro...)</td><td>WMO-No. 1269; ETCCDI; FAO-56</td></tr>
+      <tr><td>D3</td><td>extremos anuais isolados de Tmax, Tmin, chuva e ETo (pixel que foge dos vizinhos), com o local</td><td>teste espacial (Hubbard &amp; You 2005)</td></tr>
+      <tr><td>D4</td><td>ETo gravada x ETo FAO-56 do motor; VPD recalculado</td><td>Allen et al. 1998</td></tr>
+      <tr><td>D5</td><td>emenda 2025 → 2026 em chuva, Tmax, Tmin, UR, radiação e vento: correção na média x mapeamento de quantis</td><td>Teutschbein &amp; Seibert 2012; Cannon et al. 2015</td></tr>
+      <tr><td>D6</td><td>quebras nas séries por estado (SAB x ERA5 e x CHIRPS) e salto em 2026</td><td>Pettitt 1979; Alexandersson 1986</td></tr>
+      <tr><td>D1</td><td>reprodução das 16 bandas, 1 dia por ano e 10 dias de 2026</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>K19b (03/11/2026):</strong> na rodada das 19h29, D2, D3, D4 e D6 terminaram e a D5 e a D1 passaram da memória do Earth Engine. A <code>K19b_auditoria_D5_D1.py</code> roda só essas duas, no formato leve da K19 v4 (D5 mês a mês; D1 nos pixels sorteados). Mesmos passos acima; leva de 40 a 90 min.</p>
+  {{COD:K19b_auditoria_D5_D1.py}}
+  {{COD:K19_auditoria_profunda_SAB.py}}
+  <label class="feito"><input type="checkbox" id="feito-u22"> Feito</label>
+</div></article>
+
+<section class="pilha" aria-labelledby="excel">
+  <h3 id="excel">Abrir o CSV no Excel sem erro nos números</h3>
+  <p>Esse texto vai no e-mail de toda entrega com CSV. O motivo: no Excel em português, o ponto é separador de milhar, e o duplo clique transforma 18.40 em 1840.</p>
+  <ol class="acoes">
+    <li>Excel em branco → <em>Dados</em> → <em>Obter Dados</em> → <em>De Arquivo</em> → <em>De Texto/CSV</em> → escolha o arquivo.</li>
+    <li><em>Origem do Arquivo</em>: <code>65001: Unicode (UTF-8)</code>. <em>Delimitador</em>: <code>Vírgula</code>. <em>Detecção de Tipo de Dados</em>: <code>Não detectar tipos de dados</code>.</li>
+    <li><em>Transformar Dados</em> → selecione as colunas numéricas → botão direito → <em>Alterar Tipo</em> → <em>Usando a Localidade…</em> → <em>Número Decimal</em>, <em>Inglês (Estados Unidos)</em> → OK → <em>Fechar e Carregar</em>.</li>
+  </ol>
+  <p>Com o formato Excel (.xlsx), nada disso é preciso.</p>
+</section>
+
+<section class="fase" aria-labelledby="f1">
+  <span class="rotulo">Montagem inicial · feita de 29 a 31/10, fica para consulta</span>
+  <h2 id="f1">Montar as peças</h2>
+</section>
+
+<article class="passo"><span class="n">1</span><div class="corpo">
+  <h3>Criar a conta e o repositório no GitHub</h3>
+  <ol class="acoes">
+    <li>Crie a conta em <a href="https://github.com/signup">github.com/signup</a>. Pode ser com outro e-mail. É gratuita e não pede cartão.</li>
+    <li>Abra <a href="https://github.com/new">github.com/new</a>. Em <em>Repository name</em>, escreva <code>sab-pedidos</code>. Marque <strong>Private</strong> e clique em <em>Create repository</em>.</li>
+  </ol>
+</div></article>
+
+<article class="passo"><span class="n">2</span><div class="corpo">
+  <h3>Colocar os arquivos da rotina no repositório</h3>
+  <p>Descompacte o <code>SAB_envio_email_2026-10-29.zip</code> no seu computador e abra a pasta <code>sab_pedidos</code>.</p>
+  <ol class="acoes">
+    <li>No repositório, clique em <em>uploading an existing file</em> (ou <em>Add file → Upload files</em>).</li>
+    <li>Arraste <code>sab_pedido.py</code>, <code>requirements.txt</code>, <code>README.md</code> e a pasta <code>testes</code> inteira. Clique em <em>Commit changes</em>.</li>
+    <li>O arquivo da execução fica numa pasta oculta, então crie-o à mão: <em>Add file → Create new file</em>. No nome, digite exatamente <code>.github/workflows/pedido_sab.yml</code>; as barras criam as pastas. Cole o conteúdo abaixo e clique em <em>Commit changes</em>.</li>
+  </ol>
+  <p class="aviso">O código atual deste arquivo está no passo <a href="#u2">U2</a>.</p>
+  <p>No repositório devem ficar <code>.github/workflows/pedido_sab.yml</code>, <code>sab_pedido.py</code>, <code>requirements.txt</code>, <code>README.md</code> e <code>testes/</code>, com os dois testes. Os códigos completos estão também no fim desta página.</p>
+</div></article>
+
+<article class="passo"><span class="n">3</span><div class="corpo">
+  <h3>Gerar a credencial do Earth Engine no Colab</h3>
+  <p>A rotina do GitHub precisa entrar no Earth Engine em seu nome, com a mesma conta Google do projeto. Os arquivos irão para o Drive dessa conta.</p>
+  <ol class="acoes">
+    <li>Abra um notebook novo no Colab e cole a célula abaixo, sozinha. Não rode junto com outro script.</li>
+    <li>Clique no link que aparece e entre com a conta dona do <code>clima-492922</code>. Na página de autorização, <strong>não marque a opção de acesso somente leitura (read-only)</strong>, porque a rotina precisa iniciar exportações. Autorize e cole o código na caixa.</li>
+    <li>A célula confere a permissão. Se aparecer <code>❌ … SOMENTE LEITURA</code>, rode de novo. Com <code>✅</code>, copie a linha inteira entre as tracejadas, que começa com <code>{</code> e termina com <code>}</code>.</li>
+  </ol>
+  <p class="aviso">O código atual deste arquivo está no passo <a href="#u6">U6</a>.</p>
+  <div class="aviso perigo"><strong>Trate como senha.</strong> Esse texto dá acesso ao Earth Engine e ao Drive em seu nome: não tire print dele nem o envie a ninguém. Depois de colar no GitHub (passo 4), use <em>Editar → Limpar todas as saídas</em> e não salve o notebook com ele. Para cancelar a credencial a qualquer momento: <a href="https://myaccount.google.com/connections">myaccount.google.com/connections</a> → remova o acesso do Earth Engine.</div>
+  <div class="aviso">Se o Colab disser que o modo <code>notebook</code> não existe, avise-me com a mensagem de erro. Há outro caminho: o comando <code>earthengine authenticate</code> no seu computador.</div>
+</div></article>
+
+<article class="passo"><span class="n">4</span><div class="corpo">
+  <h3>Guardar a credencial como segredo do repositório</h3>
+  <ol class="acoes">
+    <li>No repositório: <em>Settings → Secrets and variables → Actions → New repository secret</em>.</li>
+    <li>Em <em>Name</em>, escreva <code>EE_CREDENCIAL</code>. Em <em>Secret</em>, cole o texto do passo 3. Clique em <em>Add secret</em>.</li>
+  </ol>
+  <p>O GitHub guarda o segredo criptografado. Ninguém o vê depois de salvo, nem você, e ele não aparece nos registros das execuções.</p>
+</div></article>
+
+<article class="passo"><span class="n">5</span><div class="corpo">
+  <h3>Teste A: simular um pedido pelo GitHub (não exporta nada)</h3>
+  <ol class="acoes">
+    <li>No repositório: aba <em>Actions</em> → <em>Pedido SAB</em> → <em>Run workflow</em>. Deixe os valores como estão, com <em>Só simular</em> marcado, e clique em <em>Run workflow</em>.</li>
+    <li>Em cerca de 1 minuto aparece uma execução. Clique nela, depois em <em>atender</em> e em <em>Atender o pedido</em>.</li>
+  </ol>
+  <div class="aviso ok"><strong>Resultado esperado:</strong> nos testes da rotina, <code>TODOS OS TESTES PASSARAM</code>. No pedido, a linha <code>pedido: Município(s): Pato Branco (Paraná) | 01/01/2025 a 31/12/2025</code>, a grade com os pontos de Pato Branco, o plano <code>Diaria_Pato_Branco_2025.csv</code> com cerca de 5 mil linhas (como o caso C0 da K14) e <code>✅ SIMULAÇÃO OK</code>.</div>
+  <p>Se der erro na <em>Credencial do Earth Engine</em> ou no <code>ee.Initialize</code>, refaça os passos 3 e 4. Se for outro erro, me mande o texto do registro.</p>
+</div></article>
+
+<article class="passo"><span class="n">6</span><div class="corpo">
+  <h3>Criar o formulário e a planilha</h3>
+  <p>Em <a href="https://forms.google.com">forms.google.com</a>, com a mesma conta Google do projeto, crie um formulário em branco chamado <strong>Pedido de dados SAB</strong>. Os títulos das perguntas precisam ser exatamente estes, porque o Apps Script procura cada coluna pelo título:</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Título exato da pergunta</th><th>Tipo</th><th>Obrigatória</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td><code>Código do pedido</code></td><td>Resposta curta</td><td>Sim</td><td>Descrição: "Preenchido pelo painel. Não altere."</td></tr>
+      <tr><td><code>Resumo do pedido</code></td><td>Parágrafo</td><td>Não</td><td>Descrição: "Preenchido pelo painel."</td></tr>
+      <tr><td><code>Nome completo</code></td><td>Resposta curta</td><td>Sim</td><td></td></tr>
+      <tr><td><code>E-mail para receber o link</code></td><td>Resposta curta</td><td>Sim</td><td>⋮ → Validação da resposta → Texto → E-mail</td></tr>
+      <tr><td><code>Instituição</code></td><td>Resposta curta</td><td>Sim</td><td></td></tr>
+      <tr><td><code>Finalidade do uso dos dados</code></td><td>Múltipla escolha</td><td>Sim</td><td>Pesquisa acadêmica · Ensino · Extensão ou assistência técnica · Produção agrícola · Outro</td></tr>
+      <tr><td><code>Consentimento</code></td><td>Caixas de seleção</td><td>Sim</td><td>Uma opção: "Li e concordo com o uso dos meus dados descrito acima."</td></tr>
+    </tbody>
+  </table></div>
+  <p>Coloque este texto na descrição da pergunta <em>Consentimento</em>. Troque o que está entre colchetes:</p>
+  {{COD:texto_lgpd.txt}}
+  <ol class="acoes">
+    <li>Em <em>Configurações → Respostas</em>, deixe <em>Coletar endereços de e-mail</em> em <em>Não coletar</em>; o e-mail vem da pergunta. Assim, quem pede não precisa de conta Google.</li>
+    <li>Na aba <em>Respostas</em>, clique em <em>Vincular ao Planilhas → Criar uma nova planilha</em>.</li>
+    <li>Gere o link pré-preenchido: ⋮ (no alto) → <em>Gerar link pré-preenchido</em>. Em <em>Código do pedido</em>, escreva <code>CODIGO</code>; em <em>Resumo do pedido</em>, <code>RESUMO</code>. Clique em <em>Gerar link → Copiar link</em> e <strong>me mande esse link</strong>. Ele traz os números <code>entry.…</code> de cada pergunta, que o painel usa para preencher o formulário.</li>
+  </ol>
+</div></article>
+
+<article class="passo"><span class="n">7</span><div class="corpo">
+  <h3>Criar o token do GitHub para o Apps Script</h3>
+  <ol class="acoes">
+    <li>Abra <a href="https://github.com/settings/personal-access-tokens/new">github.com/settings/personal-access-tokens/new</a> (<em>Fine-grained token</em>).</li>
+    <li><em>Token name</em>: <code>sab-apps-script</code>. Em <em>Expiration</em>, escolha o prazo mais longo oferecido e anote a data para renovar.</li>
+    <li><em>Repository access</em>: <strong>Only select repositories</strong> → <code>sab-pedidos</code>.</li>
+    <li><em>Permissions → Repository permissions → Contents</em>: <strong>Read and write</strong>. O <em>Metadata</em> entra sozinho como somente leitura. Não marque mais nada.</li>
+    <li>Clique em <em>Generate token</em> e copie o texto, que começa com <code>github_pat_</code>. Ele só aparece uma vez.</li>
+  </ol>
+  <p>Esse token só consegue acionar a rotina do <code>sab-pedidos</code>. Não dá acesso a outros repositórios nem à sua conta.</p>
+</div></article>
+
+<article class="passo"><span class="n">8</span><div class="corpo">
+  <h3>Colar o Apps Script na planilha</h3>
+  <ol class="acoes">
+    <li>Na planilha do passo 6: <em>Extensões → Apps Script</em>. Apague o conteúdo de <code>Código.gs</code>, cole o <code>Codigo.gs</code> abaixo e salve.</li>
+    <li>Na engrenagem <em>Configurações do projeto</em>, marque <em>Mostrar arquivo de manifesto "appsscript.json" no editor</em>. Volte ao editor, abra <code>appsscript.json</code>, troque o conteúdo pelo de baixo e salve. Isso liga o serviço que apaga as pastas vencidas de vez.</li>
+    <li>Ainda em <em>Configurações do projeto → Propriedades do script</em>, adicione as três propriedades:
+      <ul class="acoes">
+        <li><code>GITHUB_TOKEN</code>: o token do passo 7</li>
+        <li><code>GITHUB_REPO</code>: <code>seu-usuario/sab-pedidos</code></li>
+        <li><code>EMAIL_RESPONSAVEL</code>: seu e-mail. Recebe os avisos de falha e as respostas de quem pediu.</li>
+      </ul></li>
+    <li>No código, troque o texto <code>[Preencher: como citar o banco SAB]</code> em <code>CITACAO</code> pela forma de citar o banco.</li>
+    <li>No alto do editor, escolha a função <code>configurar</code> e clique em <em>Executar</em>. O Google pede autorização. Como o script é seu, aparece "o Google não verificou este app": clique em <em>Avançado → Acessar (não seguro)</em> → <em>Permitir</em>.</li>
+    <li>Escolha <code>testarGitHub</code> e clique em <em>Executar</em>. O registro deve mostrar <code>✅ GitHub aceitou o acionamento (204)</code>, e na aba <em>Actions</em> do repositório aparece uma simulação nova com <code>TESTE_GITHUB</code>.</li>
+  </ol>
+  <p class="aviso">O código atual deste arquivo está no passo <a href="#u14">U14</a>.</p>
+  {{COD:appsscript.json}}
+</div></article>
+
+<article class="passo"><span class="n">8b</span><div class="corpo">
+  <h3>Montar o formulário completo (escolher tudo sem o painel)</h3>
+  <p>A função <code>montarFormulario</code> acrescenta ao formulário as seções para a pessoa escolher o pedido ali mesmo. O formulário é só para quem não usa o painel: os pedidos do painel vão direto pelo App da Web (passo 8c). As perguntas que já existem são reaproveitadas; o código e o resumo ficam numa seção interna, que ninguém vê.</p>
+  <ol class="acoes">
+    <li>No Apps Script, cole o <code>Codigo.gs</code> mais recente e salve (Ctrl+S).</li>
+    <li>Escolha <code>montarFormulario</code> → <em>▶ Executar</em>. Na primeira vez, autorize o acesso aos formulários (<em>Avançado → Acessar → Permitir</em>).</li>
+    <li>O registro mostra <code>✅ Formulário montado</code> e o endereço do formulário.</li>
+    <li>Abra o formulário (<em>Visualizar</em>, ícone de olho) e percorra as seções para conferir.</li>
+  </ol>
+  <div class="rolagem"><table>
+    <thead><tr><th>Seção</th><th>O que a pessoa preenche</th></tr></thead>
+    <tbody>
+      <tr><td>Início</td><td>Aviso: o formulário é para quem não usa o painel SAB; quem usa o painel pede por lá. Os arquivos chegam por e-mail, num link do Google Drive que abre sem conta Google; pedidos pequenos vêm também anexados.</td></tr>
+      <tr><td>Local</td><td>Brasil inteiro · Estados · Municípios · Pontos · Área desenhada</td></tr>
+      <tr><td>Estados</td><td>Caixas com os 27 estados; um arquivo por estado</td></tr>
+      <tr><td>Municípios</td><td>Um por linha, "Município - UF" (até 30); acento e maiúscula não importam, e um nome errado volta com sugestões</td></tr>
+      <tr><td>Pontos</td><td>Um por linha, "nome; latitude; longitude" (até 200), em decimal (−26.2285 ou −26,2285) ou em graus (26°13'42"S; 52°40'16"W)</td></tr>
+      <tr><td>Área desenhada</td><td>Vértices "latitude; longitude", pelo menos 4; linha em branco separa as áreas</td></tr>
+      <tr><td>Período e variáveis</td><td>Data inicial e final, incluir a previsão de 15 dias, <strong>filtro El Niño / La Niña</strong> (os mesmos 9 cenários do painel, ou sem filtro), diária ou mensal, e as variáveis (ou todas)</td></tr>
+      <tr><td>Seus dados</td><td>Nome, e-mail, instituição, finalidade e consentimento</td></tr>
+    </tbody>
+  </table></div>
+  <p>Se algo estiver errado (município sem UF, latitude sem o sinal do sul, data final antes da inicial), o pedido é recusado na hora e o e-mail explica o que corrigir. Os pontos recebem os dados do pixel de 0,1° (cerca de 11 km) que os contém. Brasil inteiro e vários estados geram um arquivo por estado.</p>
+</div></article>
+
+<article class="passo"><span class="n">8c</span><div class="corpo">
+  <h3>Publicar o App da Web (pedido direto do painel, sem formulário)</h3>
+  <p>O App da Web é um endereço do seu Apps Script que recebe o pedido feito no painel e o registra na planilha, como se fosse uma resposta do formulário. Usa a mesma fila, os mesmos limites e os mesmos e-mails.</p>
+  <ol class="acoes">
+    <li>No Apps Script, clique no botão azul <strong>Implantar</strong> (canto superior direito) → <strong>Nova implantação</strong>.</li>
+    <li>Clique na engrenagem ao lado de <em>Selecionar tipo</em> → <strong>App da Web</strong>.</li>
+    <li><em>Descrição:</em> <code>Pedidos SAB</code>. <em>Executar como:</em> <strong>Eu</strong> (a sua conta). <em>Quem pode acessar:</em> <strong>Qualquer pessoa</strong>.</li>
+    <li>Clique em <strong>Implantar</strong> e autorize se pedir. Copie o <strong>URL do app da Web</strong>, que termina em <code>/exec</code>: ele vai para o painel (passo 13).</li>
+    <li>Teste: abra esse endereço no navegador. Deve aparecer "Pedido de dados SAB: esta página recebe os pedidos feitos pelo painel".</li>
+  </ol>
+  <div class="aviso"><strong>Se "Qualquer pessoa" não aparecer</strong> (só "Qualquer pessoa da UTFPR"), a conta institucional bloqueia o acesso de fora. Me avise: nesse caso o painel abre o formulário já preenchido, e a pessoa só clica em Enviar.</div>
+  <div class="aviso"><strong>Ao trocar o código do Apps Script depois</strong>, atualize a implantação sem mudar o endereço: <em>Implantar → Gerenciar implantações</em> → lápis → <em>Versão: Nova versão</em> → <em>Implantar</em>. Uma "Nova implantação" criaria outro endereço.</div>
+</div></article>
+
+<section class="fase" aria-labelledby="f2">
+  <span class="rotulo">Fase 2 · simular e validar (antes de abrir para o público)</span>
+  <h2 id="f2">Provar que o arquivo do e-mail é igual ao do painel</h2>
+</section>
+
+<article class="passo"><span class="n">9</span><div class="corpo">
+  <h3>Teste B: uma exportação real pelo GitHub</h3>
+  <ol class="acoes">
+    <li><em>Actions → Pedido SAB → Run workflow</em>. Em <em>ID do pedido</em>, escreva <code>TESTE02</code>, desmarque <em>Só simular</em> e clique em <em>Run workflow</em>.</li>
+    <li>Em 1 a 2 minutos a execução termina com <code>✅ 3 exportação(ões) na fila do Earth Engine</code>.</li>
+    <li>Em <a href="https://code.earthengine.google.com/tasks">code.earthengine.google.com/tasks</a> aparecem as tarefas <code>SABPED_TESTE02_000</code> a <code>_002</code>.</li>
+    <li>Quando terminarem, o seu Drive terá a pasta <code>SAB_pedido_TESTE02</code> com <code>00_Pedido_TESTE02.csv</code>, <code>00_Dicionario_Variaveis_SAB.csv</code> e <code>Diaria_Pato_Branco_2025.csv</code>.</li>
+  </ol>
+</div></article>
+
+<article class="passo"><span class="n">10</span><div class="corpo">
+  <h3>Baixar do painel os arquivos de referência</h3>
+  <p>No painel publicado, sem a caixa de previsão, processe os 5 casos abaixo (só o A5 usa o filtro ENSO). Baixe todos os CSV que o painel gerar e coloque-os no Drive, cada caso na sua pasta:</p>
+  <div class="rolagem"><table>
+    <thead><tr><th>Caso</th><th>No painel</th><th>Pasta no Drive e arquivos</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td>Município Pato Branco (PR), Diária, 01/01/2025 a 31/12/2025</td><td><code>K16_painel/A1/</code>: <code>Diaria_Pato_Branco_2025.csv</code> e <code>00_Dicionario_Variaveis_SAB.csv</code></td></tr>
+      <tr><td>A2</td><td>Municípios Pato Branco e Clevelândia (PR), Diária, 01/01/2025 a 31/12/2025</td><td><code>K16_painel/A2/</code>: <code>Diaria_Pato_Branco_2025.csv</code> e <code>Diaria_Clevelandia_2025.csv</code></td></tr>
+      <tr><td>A3</td><td>Município Pato Branco (PR), Mensal, 01/01/2025 a 31/12/2025</td><td><code>K16_painel/A3/</code>: <code>Mensal_Pato_Branco_2025.csv</code></td></tr>
+      <tr><td>A4</td><td>Coordenadas, formato Decimal, 4 pontos nesta ordem: −26.2/−52.7, −26.2/−52.6, −26.3/−52.6, −26.3/−52.7; Diária, 01/01/2025 a 31/03/2025</td><td><code>K16_painel/A4/</code>: <code>Diaria_Poligono_1_2025.csv</code></td></tr>
+      <tr><td>A5</td><td>Município Pato Branco (PR), Diária, 01/01/2015 a 31/12/2016, com o filtro do item B ligado ("Filtrar os dados do passado por fenômeno" = El Niño forte)</td><td><code>K16_painel/A5/</code>: todos os CSV que o painel gerar (ex.: <code>Diaria_Pato_Branco_2015_El_Nino_Forte.csv</code>)</td></tr>
+    </tbody>
+  </table></div>
+</div></article>
+
+<article class="passo"><span class="n">11</span><div class="corpo">
+  <h3>Rodar a validação K16 no Colab</h3>
+  <ol class="acoes">
+    <li>Reinicie a sessão do Colab (<em>Ambiente de execução → Reiniciar sessão</em>). Não rode junto com o 05b.</li>
+    <li>Cole a K16 inteira numa célula. Na linha <code>PASTA_PEDIDO = ''</code>, escreva <code>'SAB_pedido_TESTE02'</code>; com isso a pasta feita pelo GitHub também é comparada com o painel.</li>
+    <li>Rode. Leva de 30 a 60 minutos. No fim, o Colab baixa <code>validacao_K16_….zip</code>. Me envie o zip.</li>
+  </ol>
+  <div class="aviso"><strong>Regra fixada antes de rodar:</strong> o envio por e-mail só é ligado se os 5 casos tiverem os mesmos nomes de arquivo e CSV idênticos ao painel, se o caso B (só chuva e temperaturas) for igual às mesmas colunas do A1 e se a pasta do GitHub for igual ao painel. A K16 também mede se escolher 3 variáveis em vez de 19 deixa o link na hora mais rápido. Se ficar com até 70% do tempo nas duas rodadas, o limite do link poderá crescer com menos variáveis.</div>
+  <p class="aviso">O código atual deste arquivo está no passo <a href="#u19">U19</a>.</p>
+</div></article>
+
+<article class="passo"><span class="n">12</span><div class="corpo">
+  <h3>Teste de ponta a ponta, com o seu e-mail</h3>
+  <ol class="acoes">
+    <li>Fora do horário das 9h às 12h, abra o formulário (<em>Enviar → link</em>) e responda. Em <em>Código do pedido</em>, cole:<br><code>v=1;res=M;tipo=M;uf=Paraná;mun=Pato Branco;ini=2020-01-01;fim=2024-12-31;var=pr,tmax,tmin</code></li>
+    <li>Em segundos chega o e-mail <em>Recebemos seu pedido</em>. Na planilha, a linha ganha o ID e o status <span class="status s-espera">enviado</span>.</li>
+    <li>Em 10 a 40 minutos, o status passa para <span class="status s-espera">em_preparo</span> e depois <span class="status s-ok">entregue</span>, e chega o e-mail com o link da pasta. Ela terá 5 arquivos mensais, de 2020 a 2024, o manifesto e o dicionário.</li>
+    <li>Abra o link numa janela anônima do navegador, sem a sua conta, para ver o que quem pediu verá.</li>
+  </ol>
+</div></article>
+
+<section class="fase" aria-labelledby="f3">
+  <span class="rotulo">Fase 3 · painel (depois da K16 aprovada)</span>
+  <h2 id="f3">Ligar o botão no painel</h2>
+</section>
+
+<article class="passo"><span class="n">13</span><div class="corpo">
+  <h3>Painel no app de teste</h3>
+  <p>Hoje o painel é o <code>06_painel_sab_2026_10_7.js</code> (passo U17). Ele traz, sobre a 2026.10.4, estas mudanças; o resto é igual.</p>
+  <ul class="acoes">
+    <li><strong>Variáveis do arquivo:</strong> "Todas as variáveis" vem marcada; desmarcando, aparecem as 19 por grupo. Vale para o link na hora e para o e-mail.</li>
+    <li><strong>El Niño / La Niña (2026.10.7):</strong> resultado em tópicos curtos (AGORA e PRÓXIMOS 3 MESES), com a resposta curta primeiro; a explicação longa fica no botão <em>Como ler</em>. Só os textos mudaram.</li>
+    <li><strong>Link na hora ou e-mail:</strong> o painel calcula as linhas. Até 100 mil linhas por arquivo e até 20 arquivos, gera os links como antes e oferece também o e-mail. Acima disso, mostra só a caixa <strong>Receber por e-mail</strong>: a pessoa escreve nome, e-mail, instituição e finalidade, aceita a LGPD e clica no link que aparece. O pedido é registrado na hora, sem o formulário (passo 8c).</li>
+  </ul>
+  <ol class="acoes">
+    <li>No Code Editor do Earth Engine, abra o script do painel e salve uma cópia de segurança da 2026.10.4 (<em>Save as</em>).</li>
+    <li>Apague o conteúdo e cole o <code>06_painel_sab_2026_10_7.js</code> inteiro (abaixo, na lista de códigos, ou no zip).</li>
+    <li>Procure (Ctrl+F) <code>urlPedidoEmail: ''</code> e cole entre as aspas o endereço do App da Web do passo 8c, terminado em <code>/exec</code>. Salve.</li>
+    <li>Publique no app de teste: <em>Apps</em> → <code>teste1</code> → ícone de lápis → em <em>Source code</em>, use o conteúdo atual do editor → <em>Update</em>.</li>
+    <li>Teste no <code>teste1</code>: Pato Branco 2025 (deve gerar os links e oferecer o e-mail) e Paraná 2025 (só a caixa do e-mail). No Paraná, preencha os dados, clique no link azul e confira a página "Pedido recebido" e os dois e-mails.</li>
+    <li>Só depois, atualize o app oficial do mesmo jeito.</li>
+  </ol>
+  <div class="aviso">A regra continua: abrir o envio ao público só depois da K16 aprovada (passo 11).</div>
+</div></article>
+
+<section class="fase" aria-labelledby="f4">
+  <span class="rotulo">Depois de ligado</span>
+  <h2 id="f4">Acompanhar e manter</h2>
+</section>
+
+<section class="pilha" aria-label="Status da planilha">
+  <h3>O que cada status da planilha quer dizer</h3>
+  <div class="rolagem"><table>
+    <thead><tr><th>Status</th><th>Significa</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td><span class="status s-espera">na_fila</span></td><td>Esperando a vez (há outro pedido calculando, é horário do 05b, o Drive está cheio ou o GitHub recusou)</td><td>Nada; a coluna Detalhe diz o motivo</td></tr>
+      <tr><td><span class="status s-espera">enviado</span></td><td>O GitHub recebeu; o manifesto ainda não apareceu</td><td>Nada; vira falha se passar de 6 h</td></tr>
+      <tr><td><span class="status s-espera">em_preparo</span></td><td>Arquivos sendo exportados ("3 de 12 prontos")</td><td>Nada; vira falha se passar de 48 h</td></tr>
+      <tr><td><span class="status s-espera">convertendo</span></td><td>CSV prontos; o GitHub está fazendo os .xlsx</td><td>Nada; depois de 6 h entrega só o CSV, com aviso</td></tr>
+      <tr><td><span class="status s-ok">entregue</span></td><td>Link enviado; a pasta é apagada em 7 dias</td><td>Nada</td></tr>
+      <tr><td><span class="status s-ok">expirado</span></td><td>Pasta apagada</td><td>Nada</td></tr>
+      <tr><td><span class="status s-erro">recusado</span></td><td>Pedido fora das regras; quem pediu recebeu o motivo</td><td>Nada</td></tr>
+      <tr><td><span class="status s-erro">falha</span></td><td>Erro no cálculo; você e quem pediu foram avisados</td><td>Veja Actions e Tasks. Para tentar de novo, na aba Pedidos (ou Pedidos_Teste) apague o ID_Pedido da linha e mude o Status para <code>na_fila</code></td></tr>
+      <tr><td><span class="status">falha_expirada</span></td><td>A pasta da falha foi apagada 7 dias depois</td><td>Nada</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="pilha" aria-label="Manutenção">
+  <h3>Manutenção</h3>
+  <ul class="acoes">
+    <li><strong>Mudança no painel:</strong> se o cálculo do painel mudar (bandas, correções, colunas, formato dos números), o <code>sab_pedido.py</code> precisa da mesma mudança, e a K16 deve ser repetida antes de voltar a atender.</li>
+    <li><strong>Acesso ao GitHub:</strong> pelo GitHub App (U13), sem vencimento. Se algum dia aparecer o aviso "GitHub recusou o acionamento", rode <code>testarApp</code> no Apps Script: ele diz o que corrigir.</li>
+    <li><strong>Horário do motor:</strong> se mudar o <code>cron</code> do <code>motor_05b.yml</code>, mude também <code>JANELAS_MOTOR</code> no <code>Codigo.gs</code> (cron em UTC: 15h de Brasília = 18h UTC).</li>
+    <li><strong>Motor mudou (nova versão do 05a/05b):</strong> simule no Colab como sempre; depois troque no <code>sab-motor</code> os dois arquivos e o <code>SHA256_MOTOR.txt</code> juntos. Sem isso, o lançador para sem rodar.</li>
+    <li><strong>Rotinas que continuam no Colab:</strong> o 02 (RONI, depois do dia 10 de cada mês), as auditorias e as validações. Rode-as fora da janela do motor (22h50–01h00), uma de cada vez.</li>
+    <li><strong>Limpeza:</strong> uma vez por dia o Apps Script apaga as pastas <code>SAB_pedido_*</code> com mais de 7 dias que não são de nenhum pedido em andamento (inclui a <code>SAB_pedido_TESTE02</code>). As pastas <code>K14_teste</code>, <code>K15_teste</code>, <code>K14/</code>, <code>K15/</code>, <code>K16_teste</code>, <code>K16_painel</code> e <code>K16/</code> você apaga à mão, depois de me enviar o zip da K16.</li>
+  </ul>
+</section>
+
+<section class="fase" aria-labelledby="f5">
+  <span class="rotulo">Códigos completos</span>
+  <h2 id="f5">Arquivos da rotina</h2>
+</section>
+<section class="pilha" aria-label="Arquivos">
+  <p>Cada código está dentro do passo onde é usado (U2, U3, U6, U9, U14, U17 e U19). O zip <code>SAB_entrega_final_2026-11-08.zip</code> tem os mesmos arquivos, separados pelo lugar onde vão (Code Editor, Colab, GitHub sab-pedidos, GitHub sab-motor, Apps Script), com o índice <code>00_LEIA_PRIMEIRO.md</code>, a base completa com os 52 testes e a lista de impressões digitais em <code>SHA256SUMS.txt</code>.</p>
+</section>
+
+<footer>
+  Impressões digitais SHA-256: {{SHAS}}
+</footer>
+</main>
+
+<script>
+document.querySelectorAll('label.feito input').forEach(function (c) {
+  try { c.checked = localStorage.getItem(c.id) === '1'; } catch (e) {}
+  c.addEventListener('change', function () { try { localStorage.setItem(c.id, c.checked ? '1' : '0'); } catch (e) {} });
+});
+document.querySelectorAll('button.copiar').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var pre = document.getElementById(b.getAttribute('data-alvo'));
+    var texto = pre.textContent;
+    var feito = function () { var t = b.textContent; b.textContent = 'Copiado'; setTimeout(function () { b.textContent = t; }, 1600); };
+    var selecionar = function () {
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      b.textContent = 'Selecionado: use Ctrl+C';
+      setTimeout(function () { b.textContent = 'Copiar'; }, 2500);
+    };
+    try {
+      navigator.clipboard.writeText(texto).then(feito, selecionar);
+    } catch (e) { selecionar(); }
+  });
+});
+</script>

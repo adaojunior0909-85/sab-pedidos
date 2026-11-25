@@ -1,0 +1,5 @@
+nome_classe;n_pix;rs_gt_rso_motor;rs_gt_rso_audit;etr_gt_eto;transp_gt_etr;tmax_lt_tmin;rh_fora;solo_gt_max;runoff_sup_gt_pr;i_runoff_total_gt_pr;negativo;eto_zero_com_rs;vpd_incoerente;i_sm5_muito_acima_sm100;pr_ge_450;rs_ge_ra;rs_lt_003ra;u2_fora;t_fora;runoff_sup_gt_pr_10;runoff_sup_gt_pr_50;runoff_sup_gt_200;rs_zero
+A;257038142;334;17;0;0;0;0;0;41062978;68175739;0;0;0;0;0;0;0;0;0;1787604;138666;13404;0
+B;1099553;112;6;0;0;0;0;0;152837;238726;0;0;0;0;0;0;0;0;0;8143;1286;271;0
+C_borda;756051;13503;11336;0;0;0;0;0;3982;65371;0;759;0;0;0;1365;43;0;0;853;161;80;2424
+C_interior;86002;0;0;0;0;0;0;0;241;6771;0;59;0;0;0;0;6;0;0;50;10;5;250

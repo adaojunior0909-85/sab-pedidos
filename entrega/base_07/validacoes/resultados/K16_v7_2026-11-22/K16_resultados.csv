@@ -1,0 +1,15 @@
+﻿caso,arquivo,igual,detalhe
+A1,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A1,00_Dicionario_Variaveis_SAB,False,dicionário do painel ou da rotina ausente
+A2,Diaria_Clevelandia_2025,True,5840 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A2,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A3,Mensal_Pato_Branco_2025,True,180 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A4,Diaria_Poligono_1_2025,True,540 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A5,Diaria_Pato_Branco_2015_El_Nino_Forte,True,915 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+A5,Diaria_Pato_Branco_2016_El_Nino_Forte,True,435 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+A6,Diaria_Poligono_1_2024,True,1820 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+B1,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+B2,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A7,Diaria_Poligono_1_2026,True,620 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+R7,A7__Diaria_Poligono_1_2026,False,"195 célula(s) de radiação vazias em 31 dia(s) (2026-03-01 a 2026-03-31); fora da janela ['2026-03-01', '2026-03-02', '2026-03-03']; radiação abaixo de 0,5 MJ/m² 0; nessas linhas ETo ou déficit preenchidos 0, ET real vazia 93; ETo vazia com a radiação preenchida 0"
+E1,E1__Diaria_Pato_Branco_2026,False,"195 célula(s) de radiação vazias em 31 dia(s) (2026-03-01 a 2026-03-31); fora da janela ['2026-03-01', '2026-03-02', '2026-03-03']; radiação abaixo de 0,5 MJ/m² 0; nessas linhas ETo ou déficit preenchidos 0, ET real vazia 93; ETo vazia com a radiação preenchida 0"

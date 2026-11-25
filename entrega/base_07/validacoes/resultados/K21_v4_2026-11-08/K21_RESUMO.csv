@@ -1,0 +1,8 @@
+item;status;titulo;texto
+U;APROVADO;UR: EQM x correção só na média;"erro diário 4.252 -> 3.589 (-15.6%); desvios x1.25 -> x1.04 do BR-DWGD; viés -0.67 -> -0.15 | critérios {'mae_97': True, 'desvio_mais_perto': True, 'vies_ok': True}"
+V;INFO;"vento: EQM (não passa pela regra; o motor fica com a média)";"erro diário 0.349 -> 0.316 (-9.5%); desvios x1.63 -> x1.37 do BR-DWGD; viés +0.08 -> +0.11 | critérios {'mae_97': True, 'desvio_mais_perto': True, 'vies_ok': False}"
+R;APROVADO;radiação limitada ao céu claro;"erro diário 2.256 -> 2.255 MJ/m²; pixel-dias acima de Rso 646 (0.12%) -> 0; BR-DWGD acima de Rso: 91"
+C;APROVADO;teto da chuva (1,5 x o maior dia do BR-DWGD no pixel e mês, treino 1986-2015);"o teto pegou 226 pixel-dias (0.041%); erro mensal 36.50 -> 36.36 mm; maior dia 268 -> 256 mm (BR-DWGD 248); nos dias pegos, o BR-DWGD passou do teto em 2"
+E;APROVADO;ETo (Penman-Monteith) da V1.6 revista (UR do EQM, vento da V1.5, radiação limitada);"erro diário 0.487 -> 0.474 mm (-2.6%); viés +0.090 -> +0.080 mm | com o EQM também no vento seria 0.471 mm (informação)"
+X;INFO;14 pixel-dias de 2026 acima de 400 mm;"o maior: 546 mm em 2026-04-18 (-55.35; 0.45); ERA5 bruto 441 mm; maior dia do BR-DWGD no mês 69 mm; com a V1.6: 441 mm"
+G;INFO;horário da rodada 00Z do GFS (motor às 23h07);"p90: a rodada 00Z completa chega 8.5 h depois das 00Z (5.5 h de Brasília); a rodada única das 23h07 (02h07 UTC do dia seguinte) usa a 00Z do mesmo dia, completa ~18 h antes"

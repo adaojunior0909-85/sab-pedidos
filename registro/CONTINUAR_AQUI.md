@@ -52,14 +52,12 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
      sab-motor e K16. Nada é gravado sem o responsável aprovar. Ver `pesquisa/resultados_metodo_2026/RESULTADOS_A.md`;
    - o resultado da sensibilidade à resolução (`pesquisa/resultados_resolucao/RESULTADOS.md`);
    - avisos no dicionário: ET real como índice (Norte r = 0,06 × MOD16); escoamento abaixo da vazão dos rios (−35%).
-5. **Atualizar a pasta de entrega:** a base que monta o zip NÃO está no GitHub. Peça ao responsável para enviar na
-   conversa o último zip (`SAB_entrega_final_2026-11-25.zip`). Extraia; a base é a pasta
-   `07_Base_de_desenvolvimento_e_testes`. Atualize nela `automacao_email/sab_pedidos/` com o conteúdo do GitHub
-   `sab-pedidos` (main + validacoes-2) e `automacao_motor/sab-motor/` com o `sab-motor`; acrescente uma seção datada
-   no topo do `LEIA_PRIMEIRO_modelo.md`; rode `python3 rodar_todos_os_testes.py` (58 testes; precisa de Node) e
-   `python3 montar_entrega.py <pasta de saída>`; copie da entrega anterior o que o montador não gera (pasta
-   `09_Versoes_anteriores/` e os arquivos soltos da raiz: K22, K24, K25, K26, simular_K25/K26, o guia); copie o
-   `REGISTRO_GERAL.md` para a raiz; refaça o `SHA256SUMS.txt` e o zip.
+5. **Atualizar a pasta de entrega (o zip):** tudo o que é preciso está no repositório, na pasta `entrega/` (a base
+   07, os extras e o script). Não é preciso enviar o zip na conversa. Passos: (a) num checkout com a `main` junta
+   (`git merge origin/main`), escrever a seção nova, datada, no topo de `entrega/base_07/LEIA_PRIMEIRO_modelo.md`;
+   (b) `bash entrega/montar_entrega.sh <pasta de saída>` (roda os 58 testes, monta, confere o SHA-256 e fecha o zip;
+   ~10 min); (c) mandar o zip ao responsável. O zip passa de 30 MB: o responsável guarda no computador/Drive, não
+   precisa reenviar. Se mudar algo da base (painel, Colab, Apps Script), mudar em `entrega/base_07/` e subir.
 6. O repositório `sab-motor` não vem junto numa conversa nova: se precisar (ex.: conferir se o motor V1.7 regravou
    2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (saúde do banco)
    mostra quantos dias estão em cada versão do motor.

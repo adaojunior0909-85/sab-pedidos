@@ -1,0 +1,48 @@
+🔎 K16: identidade do envio por e-mail com o painel | 2026-11-18 22:13 (BRT)
+   rotina sab_pedido.py 2026.11.19 | SHA-256 f4ef16fdf8be112ff5f71a0a1f687f12a2a332fd43149bff0c868d7adb804cc8
+   painel de referência: 2026.10.4 (revisao 18h30 de 22/10/2026)
+   [v3] painel que gera os CSV de comparação: 2026.11.4 | SHA-256 30b194b16d38a45c81aef6144e95c09d13ae8ffff8a9532393cc063bdcd892c3
+
+A/B) Pedidos montados pela rotina do e-mail e exportados para a pasta K16_teste_2026.11.19
+   A1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+   A2: Município(s): Pato Branco, Clevelandia (Paraná) | Clevelandia: 16 pontos, Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Clevelandia_2025, Diaria_Pato_Branco_2025
+   A3: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Mensal_Pato_Branco_2025
+   A4: 1 polígono(s) desenhado(s) | Poligono_1: 6 pontos | 1 arquivo(s): Diaria_Poligono_1_2025
+   A5: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 2 arquivo(s): Diaria_Pato_Branco_2015_El_Nino_Forte, Diaria_Pato_Branco_2016_El_Nino_Forte | Filtro ENSO El Nino forte: 3 mês(es) do passado no período (a previsão entra sempre).
+   A6: 1 polígono(s) desenhado(s) | Poligono_1: 20 pontos | 1 arquivo(s): Diaria_Poligono_1_2024
+   B1: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+   B2: Município(s): Pato Branco (Paraná) | Pato Branco: 15 pontos | 1 arquivo(s): Diaria_Pato_Branco_2025
+
+E1) Pato Branco, 01/09/2026 a 2026-12-03: 1 arquivo(s), 1410 linhas
+
+P) CSV do painel, gerados pelo próprio painel (Node.js + Earth Engine), em MeuDrive/K16_painel/<caso>/
+   todos os casos já têm CSV do painel em K16_painel: nada a gerar
+
+C) Link na hora do Paraná, 01/01 a 31/03/2025: 19 variáveis x 3 (pr, tmax, tmin), alternados
+
+   Acompanhando as exportações a cada 30 s (até 3 h)
+
+Comparação com os CSV do painel (MeuDrive/K16_painel/<caso>/)
+   ✅ A1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A1 dicionário: 35 variáveis do painel; 29 idênticas, 6 com texto novo de propósito, + Fonte_ENSO
+   ✅ A2 Diaria_Clevelandia_2025: 5840 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A3 Mensal_Pato_Branco_2025: 180 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A4 Diaria_Poligono_1_2025: 540 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2015_El_Nino_Forte: 915 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A5 Diaria_Pato_Branco_2016_El_Nino_Forte: 435 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+   ✅ A6 Diaria_Poligono_1_2024: 1820 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B1 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ B2 Diaria_Pato_Branco_2025: 5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+   ✅ E1 colunas ENSO na previsão: 1410 linhas, 345 de previsão; Fonte_ENSO na previsão ['Persistencia']; Sem_Dado 0; fontes no período ['Estimativa_OISST', 'Estimativa_OISST_parcial', 'Persistencia']
+
+====================================================================================================
+RESULTADO FINAL K16
+====================================================================================================
+   ✅ IDENTIDADE APROVADA: a rotina do e-mail gera os mesmos arquivos do painel (nomes e células das colunas do painel) e as colunas ENSO da previsão estão completas (E1).
+      ➜ Pode seguir para o teste de ponta a ponta (formulário -> GitHub -> e-mail).
+   Links (s): 19 variáveis [228.1, 227.5] | 3 variáveis [171.4, 122.7] | razões [0.75, 0.54]
+   ➖ Menos variáveis NÃO aceleram o link o suficiente: o limite do link é o mesmo para qualquer escolha (a escolha ainda deixa o arquivo menor).
+
+Tempo desta execução: 2 min. Nada foi gravado no Earth Engine.
+Os CSV estão em K16_teste_2026.11.19 e K16_painel_2026.11.4 no seu Drive; pode apagá-las depois de me enviar o zip.

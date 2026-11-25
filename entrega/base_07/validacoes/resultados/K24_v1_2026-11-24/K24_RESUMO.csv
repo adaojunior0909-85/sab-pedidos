@@ -1,0 +1,5 @@
+item;status;titulo;texto
+A;INFO;dias auditados;"ERA5 (referência): 2026-10-17 a 2026-11-15 (30 dias); GFS: 2026-11-16 a 2026-12-09 (24 dias); versões gravadas: {'V1.6': np.int64(76)}"
+P1;NÃO;excesso sistemático da Tmax do GFS sobre o recorde do pixel;acima do recorde + 0 °C: GFS 0.514% x ERA5 5.158% dos pixel-dias | acima do recorde + 1 °C: GFS 0.009% x ERA5 2.175% dos pixel-dias | acima do recorde + 2 °C: GFS 0.000% x ERA5 0.812% dos pixel-dias | maior excesso GFS +1.6 °C, ERA5 +4.8 °C
+P2;INFO;pontos quentes (acima do recorde + 1 °C em 5 dias GFS ou mais);0 pixels
+E;INFO;folga sugerida para o teto da V1.7;1 °C acima do recorde do pixel no mês (condições: máxima nacional <= 44.8 °C, emenda <= 2 °C, pega <= 0.5% dos pixel-dias)

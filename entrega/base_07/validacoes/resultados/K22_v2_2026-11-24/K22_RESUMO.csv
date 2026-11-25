@@ -1,0 +1,4 @@
+item;status;titulo;texto
+1;OK;inventário de 2026 e histórico intocado;"os 343 dias provisórios e de previsão de 2026 estão na V1.6 | método gravado: ['UR eqm; vento media'] | histórico com a V1.6: 0"
+2;FALHA;coerência física dos dias V1.6;14 dias, 1,008,644 pixel-dias: rs_acima 1, ur_fora 0, etr_acima 0, transp_acima 0, chuva_acima 0
+3;OK;emenda 2025 -> 2026 da UR (vento só informação);"desvio das anomalias diárias / BR-DWGD 2016-2025: UR 1.24 (antes) -> 1.02 (faixa 0.85-1.15); vento 1.71 -> 1.65 (correção na média, como a V1.5: informação) | viés médio UR -0.00 %, vento +0.10 m/s (informação: 2026 não é a média de 2016-2025)"

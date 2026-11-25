@@ -1,0 +1,13 @@
+﻿caso,arquivo,igual,detalhe
+A1,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A1,00_Dicionario_Variaveis_SAB,True,"35 variáveis do painel; 29 idênticas, 6 com texto novo de propósito, + Fonte_ENSO"
+A2,Diaria_Clevelandia_2025,True,5840 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A2,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A3,Mensal_Pato_Branco_2025,True,180 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A4,Diaria_Poligono_1_2025,True,540 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+A5,Diaria_Pato_Branco_2015_El_Nino_Forte,True,915 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+A5,Diaria_Pato_Branco_2016_El_Nino_Forte,True,435 linhas idênticas (+ 1 coluna(s) ENSO só na rotina)
+A6,Diaria_Poligono_1_2024,True,1820 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+B1,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+B2,Diaria_Pato_Branco_2025,True,5475 linhas idênticas (+ 6 coluna(s) ENSO só na rotina)
+E1,E1__Diaria_Pato_Branco_2026,True,"1410 linhas, 345 de previsão; Fonte_ENSO na previsão ['Persistencia']; Sem_Dado 0; fontes no período ['Estimativa_OISST', 'Estimativa_OISST_parcial', 'Persistencia']"
