@@ -58,6 +58,13 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   (60 razões BR-DWGD/V1.7 de 2021–2025, da Parte A); radiação e ETo iguais à V1.7; sem climatologia nova; a gravação
   da noite CONTINUA na V1.7. Simulação disparada (Actions do `sab-motor` → Motor SAB, modo simular, nesse branch);
   a prévia `previa_v18.csv` exige que só a chuva mude e que a razão observada por região e dia seja a esperada (2%).
+- ✅ **Prévia da V1.8 (1ª, 25/11 17h11): PASSOU** em todos os critérios, mas com **1 dia só** (15/11): a prévia compara
+  com os dias já gravados na V1.7, e os 304 dias que a V1.7 regravou em 25/11 ainda estão na coleção temporária (o
+  motor da noite os promove). Nesse dia: só a chuva mudou (Brasil +12,8%; as outras 15 variáveis idênticas em 100%
+  dos pixels; rota GFS igual), a razão observada = a esperada em cada região (N 1,131; NE 1,147; CO 1,134; SE 1,123;
+  S 1,053 × 1,054) e 0 incoerência física. **Rodar a simulação de novo depois do motor da noite de 25→26/11** (Actions
+  do `sab-motor` → Motor SAB → Run workflow → branch `claude/tender-maxwell-6ka6dt`, modo simular) para a prévia
+  cobrir os 11 meses. O workflow agora guarda o `previa_v18.csv` (commit `4dae9eb`).
 - ⏳ **Depois da prévia:** K16 da V1.8 (o painel e o `sab_pedido.py` não mudam: a correção é na gravação, mas a K16
   confere que leitura e e-mail continuam iguais) e, só com aprovação do responsável, a etapa B (gravar com a V1.8: o
   motor refaz os dias de 2026; o histórico não muda). **Conclusões só quando todos os resultados saírem** (pedido do
