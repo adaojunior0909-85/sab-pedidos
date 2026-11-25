@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 20:22, Brasília)
+# Apêndice automático (refeito em 25/11/2026 20:40, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -531,6 +531,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 23:22 | Registro: várias referências disparadas |
 | 25/11/2026 23:19 | Protocolo da fase 2, emenda 1 (antes de rodar o M5): várias referências por variável; degrau confirmado em 2 independentes |
 | 25/11/2026 23:10 | Registro: historico pronto |
 | 25/11/2026 22:48 | Registro: fase 2 |

@@ -1,4 +1,4 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~17h15 de Brasília)
+# Para continuar numa conversa nova (estado em 25/11/2026, ~20h40 de Brasília)
 
 ## Cole isto na conversa nova
 > Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
@@ -158,6 +158,19 @@ chuva e MOD16 (2001–) na ET real; o resumo junta o TerraClimate e o CHIRPS do 
 **confirmado** se aparecer em ≥ 2 referências independentes. 5 cadeias no `validacoes-2` (`multifonte_*`), disparadas
 em 25/11 ~20h30; resultado em `pesquisa/resultados_multifonte/RESULTADOS.md` e `TODAS_AS_COMPARACOES.csv` (tudo,
 inclusive os estados). Tempo estimado: o GLDAS-2.0 é o mais longo (~1,5 dia).
+
+## O que será corrigido (estado em 25/11, ~20h40)
+| Situação | O quê |
+|---|---|
+| ✅ decidido e aprovado | **Chuva dos dias ERA5 de 2026 em diante (V1.8, C3)**: junta em 26/11 se a prévia com 2026 inteiro passar |
+| ✅ já corrigido antes | Rs = 0 do litoral (V1.7); na leitura: pixels B pelo BR-DWGD, ET real ≤ ETo, Rs impossível vazio, solo/escoamento pelo SMAP nos dias V1.0 |
+| 🔄 depende de teste | garoa da chuva de 2026 (C3G/C3RG); radiação e ETo de 2026 (R1, R2); Tmax/Tmin/UR/VPD/vento de 2026 (T2, T1); décadas do histórico confirmadas por ≥ 2 referências (M5, só na leitura); previsão (M6, ~24/12) |
+| ❌ não corrigir | C1, C2, C3R na chuva; C1–C3 na radiação/ETo; chuva do histórico (degraus não confirmados, por ora); escoamento (nenhum método passou); ET real, transpiração, solo, folha (sem referência para o nível) → avisos no dicionário |
+
+**Pedido final do responsável (25/11, ~20h40): "atualize tudo, automatize tudo, aguardo tudo acabar e as suas
+recomendações".** A vigia faz a etapa final sozinha: PR `validacoes-2` → `main` (sem merge),
+`registro/RECOMENDACOES_FINAIS.md` (cada variável × período: números, precisa corrigir?, método, recomendação), registro
+em dia, pacote de entrega remontado e enviado, notificação no celular.
 
 ## Vigia automática (desde 25/11, ~17h)
 Tarefa agendada **"SAB – vigiar os testes"** (a cada 2 h, minuto 13; dispara NA conversa do branch
