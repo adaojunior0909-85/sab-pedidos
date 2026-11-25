@@ -136,8 +136,14 @@ Tarefa agendada **"SAB – vigiar os testes"** (a cada 2 h, minuto 13; dispara N
 `claude/tender-maxwell-6ka6dt`, que tem o GitHub ligado). Confere as cadeias, a simulação da V1.8, o motor da noite e se
 os agendamentos do `sab-pedidos` voltaram; pode disparar de novo uma cadeia parada e corrigir um erro de código
 pequeno (uma vez por tarefa por dia); notifica o celular só quando algo precisa do responsável, quando sai um
-resultado importante ou quando tudo termina. Quando tudo terminar: abre o PR `validacoes-2` → `main` (sem merge),
-resume os resultados aqui e se desliga. Nunca: merge, gravação no Earth Engine, motor gravando a V1.8.
+resultado importante ou quando tudo termina. Quando tudo terminar: abre o PR `validacoes-2` → `main` (sem merge) e
+resume os resultados aqui. Nunca: merge, gravação no Earth Engine, motor gravando a V1.8.
+**Desde 25/11, 19h17: a vigia também faz as vezes do agendamento do GitHub** (que não dispara no `sab-pedidos`): dispara
+na `main`, quando o horário passou e não houve execução, a previsão (todo dia, 16h13), a conferência da gravação
+(segunda, 14h29), o RONI (dia 11), a K26 mensal (dia 15), o piloto (dias 3 e 17) e a fila da `main` (a cada 2 h, 07h–20h30,
+enquanto houver tarefa). Por isso ela NÃO se desliga quando os testes acabam; só se o responsável pedir ou se os
+agendamentos voltarem (aparecerem execuções com event=schedule). Os pedidos por e-mail não dependem disso (o Apps
+Script dispara na hora do pedido).
 
 ## O que é verificado (cobertura)
 - **Consistência física (K26), o banco inteiro:** 1961 até o último dia da previsão, as 16 variáveis, ~1,7 bilhão
