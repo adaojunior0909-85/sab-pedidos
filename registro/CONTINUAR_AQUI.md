@@ -147,7 +147,7 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 | M3-T2 | Tmax, Tmin, UR, vento: ajuste regional (VPD e ETo recalculadas) | 🔄 idem |
 | M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | ⏳ leva 2 (a vigia implementa quando a leva 1 andar) |
 | M4 | ET real, transpiração, solo, folha, escoamento | conclusão fixada antes: sem referência para corrigir o nível → avisos no dicionário |
-| M5 | histórico 1961–2025 | ⏳ depois do `historico` (correção só na leitura, se uma década suspeita for confirmada por 2ª referência) |
+| M5 | histórico 1961–2025 | ⏳ **o `historico` terminou (25/11, 19h52)**; décadas com degrau: chuva × TerraClimate 2021–2025 em todas as regiões (+6 a +17%) e Sudeste 1981–90, mas o CHIRPS NÃO confirma (2021–25 Brasil +0,0%), e o CHIRPS marca o Centro-Oeste 2011–20 (−7,4%), que o TerraClimate não confirma → chuva sem correção pela regra; Tmin 1961–70 (correlação baixa: NE 0,11, CO 0,38), radiação 1961–80, vento, VPD, ETo e escoamento em várias décadas: falta a 2ª referência (ERA5 bruto), que a vigia roda. `pesquisa/resultados_historico/RESULTADOS.md` |
 | M6 | previsão GFS | ⏳ ~24/12 (30 dias de fotografias) |
 Qualquer método que passar vai ao responsável; **nada é gravado sem autorização**.
 
