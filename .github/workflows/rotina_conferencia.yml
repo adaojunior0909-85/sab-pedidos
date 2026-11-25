@@ -28,6 +28,8 @@ jobs:
     timeout-minutes: 350
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0     # o registro geral lista todas as mudanças
 
       - uses: actions/setup-python@v6
         with:

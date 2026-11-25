@@ -96,7 +96,7 @@ def subir(msg):
     """Sobe resultados, LOG e estado (sem perder o que outra rotina subiu no meio tempo)."""
     if os.environ.get('GITHUB_ACTIONS') != 'true':
         return
-    git('add', 'rotinas', 'pesquisa')
+    git('add', 'rotinas', 'pesquisa', 'registro', 'REGISTRO_GERAL.md')
     if git('diff', '--cached', '--quiet', ok=True):
         return
     git('commit', '-q', '-m', msg)
@@ -215,6 +215,7 @@ def escrever_final(st, acabou):
             L.append('')
     with open(FINAL, 'w', encoding='utf-8') as f:
         f.write('\n'.join(L) + '\n')
+    subprocess.run(PY + ['registro/gerar_registro.py'], cwd=RAIZ, capture_output=True)   # REGISTRO_GERAL.md em dia
     feitas = sum(st.get(t['id'], {}).get('situacao') == 'ok' for t in TAREFAS)
     falhas = [t['id'] for t in TAREFAS if st.get(t['id'], {}).get('situacao') == 'falhou']
     sit = ('atencao' if falhas else 'conferir') if acabou else ('atencao' if falhas else 'esperando')
