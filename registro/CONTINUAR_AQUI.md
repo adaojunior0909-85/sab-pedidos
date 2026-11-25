@@ -136,6 +136,21 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
    2026), peça para adicionar o repositório adaojunior0909-85/sab-motor. A `rotinas/PAINEL.md` (conferência da gravação)
    mostra quantos dias estão em cada versão do motor.
 
+## Fase 2: correção de todas as variáveis (pedido do responsável em 25/11, ~19h40)
+"Analisar tudo automaticamente e gravar SÓ com autorização, seja 2026, seja o banco todo." Protocolo
+`pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, **congelado antes de qualquer resultado** (commit `9a12309`):
+| Módulo | O que testa | Situação (25/11, ~19h50) |
+|---|---|---|
+| M1-C3R | a razão do C3 só onde o viés é consistente | ❌ **não passou** (mediana +0,8 p.p.; r_anom −0,022); o C3 fica. Achado: o C3 piora os dias de chuva (afastamento 9,5 → 12,6 p.p.). `resultados_fase2/RESULTADOS_M1_C3R.md` |
+| M1-C3G, C3RG | corte da garoa (+ C3; + C3 só onde consistente) | 🔄 rodando (cadeia `fase2_leva1`, branch de trabalho) |
+| M2-R1 | radiação × razão regional (ETo recalculada) | 🔄 idem |
+| M3-T2 | Tmax, Tmin, UR, vento: ajuste regional (VPD e ETo recalculadas) | 🔄 idem |
+| M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | ⏳ leva 2 (a vigia implementa quando a leva 1 andar) |
+| M4 | ET real, transpiração, solo, folha, escoamento | conclusão fixada antes: sem referência para corrigir o nível → avisos no dicionário |
+| M5 | histórico 1961–2025 | ⏳ depois do `historico` (correção só na leitura, se uma década suspeita for confirmada por 2ª referência) |
+| M6 | previsão GFS | ⏳ ~24/12 (30 dias de fotografias) |
+Qualquer método que passar vai ao responsável; **nada é gravado sem autorização**.
+
 ## Vigia automática (desde 25/11, ~17h)
 Tarefa agendada **"SAB – vigiar os testes"** (a cada 2 h, minuto 13; dispara NA conversa do branch
 `claude/tender-maxwell-6ka6dt`, que tem o GitHub ligado). Confere as cadeias, a simulação da V1.8, o motor da noite e se

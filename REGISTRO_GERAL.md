@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 19:20, Brasília)
+# Apêndice automático (refeito em 25/11/2026 19:48, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -531,6 +531,11 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 22:48 | Conferência: começou fase2_leva1  |
+| 25/11/2026 22:47 | Fase 2, leva 1 (só leitura): garoa C3G/C3RG (M1), radiação R1 (M2), Tmax/Tmin/UR/vento T2 (M3); tarefa fase2_leva1 na fila |
+| 25/11/2026 22:45 | Fase 2, M1-C3R: não passa (mediana +0,8 p.p., r_anom -0,022); o C3 fica. Achado: o C3 piora os dias de chuva (9,5 -> 12,6 p.p.), alvo do M1-C3G |
+| 25/11/2026 22:40 | Protocolo da fase 2 (correção de todas as variáveis): congelado antes de qualquer resultado |
+| 25/11/2026 22:20 | Registro: V1.8 aprovada (PR sab-motor#4) |
 | 25/11/2026 22:17 | Registro: a vigia dispara as rotinas por relógio |
 | 25/11/2026 22:14 | Registro: K26 rodada 7 pronta |
 | 25/11/2026 21:03 | Registro: relato 2026 x CHIRPS da correção |
