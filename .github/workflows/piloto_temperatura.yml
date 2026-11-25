@@ -19,7 +19,7 @@ on:
         default: ''
 
 permissions:
-  contents: write     # só para subir pesquisa/piloto/ e o OISST novo
+  contents: write     # só para subir pesquisa/piloto/, o OISST novo e o painel de controle (rotinas/)
 
 concurrency:
   group: piloto-temperatura
@@ -58,6 +58,10 @@ jobs:
           PYTHONUNBUFFERED: '1'
         run: python -W ignore pesquisa/piloto.py conferir
 
+      - name: Atualizar o painel de controle (rotinas/PAINEL.md)
+        if: always()
+        run: python rotinas/estado.py piloto
+
       - name: Apagar a credencial da máquina
         if: always()
         run: rm -f ~/.config/earthengine/credentials
@@ -67,8 +71,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pesquisa/piloto pesquisa/dados/sst_mensal.csv
+          git add pesquisa/piloto pesquisa/dados/sst_mensal.csv rotinas
           if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
           git commit -m "Piloto: previsão e conferência ($(date -u +%Y-%m-%d))"
-          git pull --rebase origin "$GITHUB_REF_NAME"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+          # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
+          python rotinas/estado.py > /dev/null
+          git add rotinas/PAINEL.md
+          git diff --cached --quiet || git commit -q --amend --no-edit
+          for i in 1 2 3 4; do git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep $((5 * i)); git pull --rebase -X theirs origin "$GITHUB_REF_NAME"; done

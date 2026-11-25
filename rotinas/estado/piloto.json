@@ -1,0 +1,11 @@
+{
+ "rotina": "piloto",
+ "quando": "24/11/2026 20:19",
+ "situacao": "ok",
+ "resumo": [
+  "1 emissão(ões); a última em 2026-11-16",
+  "conferência: ainda nenhuma (os períodos previstos ainda não terminaram ou o ERA5 não chegou)"
+ ],
+ "pasta": "pesquisa/piloto/",
+ "detalhes": {}
+}

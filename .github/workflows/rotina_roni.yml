@@ -1,0 +1,67 @@
+# ROTINA MENSAL DO RONI: todo dia 11, às 10h23 de Brasília, roda o 02_auditoria_roni_cpc.py (sem mudança) e regrava o
+# asset RONI_CPC_v6 que o painel usa (com cópia de segurança e conferência: se algo não bater, o próprio script
+# restaura a versão anterior). Se parar num empate do CPC, o painel de controle (rotinas/PAINEL.md) diz o que fazer.
+# Fora da main (o teste na branch) roda só a auditoria, sem gravar nada (ROTINA_TESTE=1).
+name: Rotina - RONI do mes
+
+on:
+  schedule:
+    - cron: '23 13 11 * *'      # 10h23 de Brasília, dia 11 (o CPC publica o mês anterior perto do dia 10)
+  push:
+    branches: [rotinas-automaticas]
+    paths: [rotinas/roni/**, .github/workflows/rotina_roni.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir rotinas/ (resultados e painel de controle)
+
+concurrency:
+  group: rotina-roni
+  cancel-in-progress: false
+
+jobs:
+  rotina:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: RONI do mês
+        env:
+          PYTHONUNBUFFERED: '1'
+          ROTINA_TESTE: ${{ github.ref_name != 'main' && '1' || '0' }}
+        run: python -W ignore rotinas/roni/rodar_roni.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os resultados e o painel de controle
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rotinas
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Rotina: RONI do mês ($(date -u +%Y-%m-%d))"
+          git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+          # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
+          python rotinas/estado.py > /dev/null
+          git add rotinas/PAINEL.md
+          git diff --cached --quiet || git commit -q --amend --no-edit
+          for i in 1 2 3 4; do git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep $((5 * i)); git pull --rebase -X theirs origin "$GITHUB_REF_NAME"; done

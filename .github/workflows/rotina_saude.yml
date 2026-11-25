@@ -1,0 +1,67 @@
+# ROTINA SEMANAL: toda segunda-feira, às 14h29 de Brasília, confere no SAB_V1 (só leitura) se o motor gravou nas
+# últimas noites: dias de 2026 sem buraco, previsão até hoje + 10 dias, ERA5 com até 10 dias de atraso, o dia de hoje
+# gravado há menos de 30 h, tudo na V1.6 e o histórico intocado. Resultado no rotinas/PAINEL.md.
+# [24/11] O motor agendado para 23h07 tem começado de manhã (06h40-09h20 de Brasília: o GitHub atrasa o agendamento);
+# esta rotina roda à tarde, depois dele.
+name: Rotina - saude do banco
+
+on:
+  schedule:
+    - cron: '29 17 * * 1'       # 14h29 de Brasília, toda segunda-feira (depois do motor)
+  push:
+    branches: [rotinas-automaticas]
+    paths: [rotinas/saude/**, rotinas/estado.py, .github/workflows/rotina_saude.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write     # só para subir rotinas/ (resultados e painel de controle)
+
+concurrency:
+  group: rotina-saude
+  cancel-in-progress: false
+
+jobs:
+  rotina:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar as bibliotecas
+        run: pip install -r requirements.txt -r pesquisa/requirements.txt
+
+      - name: Credencial do Earth Engine
+        env:
+          EE_CREDENCIAL: ${{ secrets.EE_CREDENCIAL }}
+        run: |
+          if [ -z "$EE_CREDENCIAL" ]; then echo "Falta o segredo EE_CREDENCIAL"; exit 1; fi
+          mkdir -p ~/.config/earthengine
+          printf '%s' "$EE_CREDENCIAL" > ~/.config/earthengine/credentials
+
+      - name: Saúde do banco
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python -W ignore rotinas/saude/saude_semanal.py
+
+      - name: Apagar a credencial da máquina
+        if: always()
+        run: rm -f ~/.config/earthengine/credentials
+
+      - name: Subir os resultados e o painel de controle
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rotinas
+          if git diff --cached --quiet; then echo "Nada novo para subir."; exit 0; fi
+          git commit -m "Rotina: saúde do banco ($(date -u +%Y-%m-%d))"
+          git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+          # o painel é refeito dos estados de todas as rotinas (rotinas/estado/*.json): nunca perde a de outra rotina
+          python rotinas/estado.py > /dev/null
+          git add rotinas/PAINEL.md
+          git diff --cached --quiet || git commit -q --amend --no-edit
+          for i in 1 2 3 4; do git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep $((5 * i)); git pull --rebase -X theirs origin "$GITHUB_REF_NAME"; done
