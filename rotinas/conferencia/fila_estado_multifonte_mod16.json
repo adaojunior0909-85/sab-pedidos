@@ -40,13 +40,5 @@
   "tentativas": 1,
   "situacao": "rodando",
   "inicio": "25/11 20:01"
- },
- "multifonte_mod16": {
-  "tentativas": 3,
-  "situacao": "falhou",
-  "inicio": "25/11 20:22",
-  "fim": "25/11 20:22",
-  "minutos": 0,
-  "codigo": 1
  }
 }

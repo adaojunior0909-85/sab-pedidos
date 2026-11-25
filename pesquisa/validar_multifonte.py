@@ -132,10 +132,13 @@ def ref_chuva(vm, ano, ini, fim, d0, d1):
 
 def ref_mod16(vm, ini, fim):
     ee = vm.ee
-    c = ee.ImageCollection('MODIS/061/MOD16A2').filterDate(ini, fim)
-    et = c.select('ET').map(lambda i: i.updateMask(i.lt(32700)).multiply(0.1)).sum().rename('et_real')
-    pet = c.select('PET').map(lambda i: i.updateMask(i.lt(32700)).multiply(0.1)).sum().rename('et_potencial')
-    return ee.Image.cat([et, pet])
+    # MOD16A2GF (061, com falhas preenchidas, 2001-): a mesma do validar_solo_folha.py; o MOD16A2 061 só começa em 2021
+    c = ee.ImageCollection('MODIS/061/MOD16A2GF').filterDate(ini, fim)
+    vazio = ee.Image.constant([0, 0]).rename(['et_real', 'et_potencial']).updateMask(ee.Image.constant(0)).toFloat()
+    cheio = ee.Image.cat([
+        c.select('ET').map(lambda i: i.updateMask(i.lt(32700)).multiply(0.1)).sum().rename('et_real'),
+        c.select('PET').map(lambda i: i.updateMask(i.lt(32700)).multiply(0.1)).sum().rename('et_potencial')]).toFloat()
+    return ee.Image(ee.Algorithms.If(c.size().gt(0), cheio, vazio))
 
 
 VARS_FONTE = {
