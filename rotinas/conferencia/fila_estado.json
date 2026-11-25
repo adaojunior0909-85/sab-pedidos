@@ -22,5 +22,10 @@
   "fim": "25/11 03:36",
   "minutos": 3,
   "codigo": 0
+ },
+ "escoamento_metricas": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 03:36"
  }
 }
