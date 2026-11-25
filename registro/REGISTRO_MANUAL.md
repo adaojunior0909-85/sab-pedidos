@@ -67,7 +67,8 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | ET real | MODIS MOD16 | 2016–2021 | r = 0,47 (Norte 0,06) → **mantém como índice, com aviso** |
 | Escoamento total | vazão observada de 512 bacias (CAMELS-BR, ANA) | 1981–2018 | KGE mediano 0,31, viés −35% (o SAB fica abaixo do rio); nenhum dos 3 métodos alternativos passou nas 4 condições → **o atual fica, com aviso por região** |
 | As 16 | o próprio método de 2026 em 2021–2025 (× BR-DWGD) e GLDAS-2.1 (NASA) com régua 2022–2024 | 2021–2026 | na fila (resultado no apêndice) |
-| 10 variáveis | TerraClimate (e chuva × CHIRPS) por década | 1961–2025 | na fila (resultado no apêndice) |
+| 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | na fila (resultado no apêndice) |
+| Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
 | Previsão GFS 1–15 dias | ERA5 do dia, com a persistência como base | diária desde 24/11 | primeira medida por prazo depois de ~1 semana de fotografias |
 
 ## 5. Onde está cada coisa
@@ -80,6 +81,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 - **Replicação e auditoria das validações:** `pesquisa/METODOS_REPLICACAO.md` (fontes, agregação, unidades, fórmulas,
   regras) + `pesquisa/METRICAS_COMPLETAS.csv.gz` (todas as métricas, região × período × mês) +
   `pesquisa/DADOS_PAREADOS.csv.gz` (os valores mensais de que saíram).
+- **Para continuar o trabalho numa conversa nova:** `registro/CONTINUAR_AQUI.md`.
 - **Pesquisas e validações novas:** `pesquisa/` (protocolos `PROTOCOLO*.md`, códigos e `resultados_*`).
 - **Conferência final:** `rotinas/conferencia/CONFERENCIA_FINAL.md` (e os LOG em `rotinas/conferencia/logs/`).
 - **Motor:** GitHub `sab-motor` (`05a`/`05b` de cada versão, `SHA256_MOTOR.txt`, `rodar_motor.py`).

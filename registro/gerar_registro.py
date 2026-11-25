@@ -18,6 +18,7 @@ RESULTADOS = [
     ('2026 × GLDAS-2.1', 'pesquisa/resultados_metodo_2026/RESULTADOS_B.md'),
     ('Histórico por década × TerraClimate e CHIRPS', 'pesquisa/resultados_historico/RESULTADOS.md'),
     ('Tudo por mês do ano', 'pesquisa/RESULTADOS_POR_MES.md'),
+    ('Sensibilidade à resolução', 'pesquisa/resultados_resolucao/RESULTADOS.md'),
     ('Previsão estendida (pesquisa)', 'pesquisa/resultados/RESULTADOS.md'),
     ('Acerto da previsão GFS', 'rotinas/resultados/previsao/ACERTO.md'),
 ]

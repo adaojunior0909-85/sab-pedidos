@@ -67,7 +67,8 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | ET real | MODIS MOD16 | 2016–2021 | r = 0,47 (Norte 0,06) → **mantém como índice, com aviso** |
 | Escoamento total | vazão observada de 512 bacias (CAMELS-BR, ANA) | 1981–2018 | KGE mediano 0,31, viés −35% (o SAB fica abaixo do rio); nenhum dos 3 métodos alternativos passou nas 4 condições → **o atual fica, com aviso por região** |
 | As 16 | o próprio método de 2026 em 2021–2025 (× BR-DWGD) e GLDAS-2.1 (NASA) com régua 2022–2024 | 2021–2026 | na fila (resultado no apêndice) |
-| 10 variáveis | TerraClimate (e chuva × CHIRPS) por década | 1961–2025 | na fila (resultado no apêndice) |
+| 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | na fila (resultado no apêndice) |
+| Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
 | Previsão GFS 1–15 dias | ERA5 do dia, com a persistência como base | diária desde 24/11 | primeira medida por prazo depois de ~1 semana de fotografias |
 
 ## 5. Onde está cada coisa
@@ -80,6 +81,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 - **Replicação e auditoria das validações:** `pesquisa/METODOS_REPLICACAO.md` (fontes, agregação, unidades, fórmulas,
   regras) + `pesquisa/METRICAS_COMPLETAS.csv.gz` (todas as métricas, região × período × mês) +
   `pesquisa/DADOS_PAREADOS.csv.gz` (os valores mensais de que saíram).
+- **Para continuar o trabalho numa conversa nova:** `registro/CONTINUAR_AQUI.md`.
 - **Pesquisas e validações novas:** `pesquisa/` (protocolos `PROTOCOLO*.md`, códigos e `resultados_*`).
 - **Conferência final:** `rotinas/conferencia/CONFERENCIA_FINAL.md` (e os LOG em `rotinas/conferencia/logs/`).
 - **Motor:** GitHub `sab-motor` (`05a`/`05b` de cada versão, `SHA256_MOTOR.txt`, `rodar_motor.py`).
@@ -95,7 +97,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 04:02, Brasília)
+# Apêndice automático (refeito em 25/11/2026 04:20, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -105,7 +107,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | 24/11/2026 21:14 | ✅ | asset RONI_CPC_v6 regravado e conferido (921 estações) |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 15h41 | 24/11/2026 20:56 | 👀 | 343 dias de 2026 (até 2026-12-09); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
 | Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 24/11/2026 22:16 | ✅ | fotografia de 2026-11-24: 24 dias GFS (2026-11-16 a 2026-12-09) e a persistência (2026-11-15) |
-| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 03:57 | ⚠️ | 0 de 1 tarefas prontas; quebraram: historico; TERMINOU: leia o CONFERENCIA_FINAL.md |
+| Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 04:02 | ⏳ | 0 de 1 tarefas prontas |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
 
 ## B. Resultado de cada validação
@@ -274,6 +276,12 @@ Arquivo: `pesquisa/resultados_historico/RESULTADOS.md`
 ### Tudo por mês do ano
 
 Arquivo: `pesquisa/RESULTADOS_POR_MES.md`
+
+(ainda não rodou)
+
+### Sensibilidade à resolução
+
+Arquivo: `pesquisa/resultados_resolucao/RESULTADOS.md`
 
 (ainda não rodou)
 
@@ -458,6 +466,13 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 25/11/2026 07:14 | Mais pontos e o peso deles: 27 estados, intervalo de confiança e sensibilidade à resolução na fila |
+| 25/11/2026 07:05 | Métodos: resolução de cada fonte, como entra na grade do SAB e por que pesa pouco nas médias regionais |
+| 25/11/2026 07:04 | Conferência: começou historico  |
+| 25/11/2026 07:04 | Validar histórico: a chuva do SAB é a banda pr_mm (a do TerraClimate é pr); nomes conferidos dos dois lados |
+| 25/11/2026 07:02 | Conferência: começou historico  |
+| 25/11/2026 07:02 | Conferência: historico (pendente)  |
+| 25/11/2026 07:01 | Replicação: métodos completos e todas as métricas (região x período x mês) num arquivo só |
 | 25/11/2026 06:58 | Conferência: começou historico  |
 | 25/11/2026 06:57 | Validar histórico: a chuva do TerraClimate é a banda pr (não ppt); a tarefa volta para a fila |
 | 25/11/2026 06:57 | Conferência: historico (falhou)  |
@@ -537,39 +552,4 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 | 18/11/2026 15:50 | Merge pull request #2 from adaojunior0909-85/correcao-pedido-uma-variavel |
 | 18/11/2026 18:35 | Corrige pedido de uma variável só saindo com a coluna vazia |
 | 15/11/2026 20:32 | Merge pull request #1 from adaojunior0909-85/manutencao-versoes |
-| 15/11/2026 20:29 | Manutenção: versões fixas das bibliotecas e actions no Node 24 |
-| 04/11/2026 08:17 | sab_pedido.py |
-| 04/11/2026 08:14 | sab_pedido.py |
-| 03/11/2026 22:58 | sab_pedido.py |
-| 01/11/2026 17:52 | Delete .github/workflows/motor_05b.yml |
-| 01/11/2026 17:52 | Delete testes/teste_rodar_motor.py |
-| 01/11/2026 17:49 | Add files via upload |
-| 01/11/2026 17:48 | Add files via upload |
-| 01/11/2026 17:14 | Add files via upload |
-| 01/11/2026 17:14 | Add files via upload |
-| 01/11/2026 17:13 | Add files via upload |
-| 01/11/2026 17:11 | Add files via upload |
-| 01/11/2026 17:08 | pedido_sab.yml |
-| 01/11/2026 17:06 | README.md |
-| 01/11/2026 17:05 | requirements.txt |
-| 01/11/2026 17:04 | fumaca_sab_pedido.py |
-| 01/11/2026 17:03 | teste_sab_pedido.py |
-| 01/11/2026 17:01 | sab_pedido.py |
-| 01/11/2026 08:47 | sab_pedido.py |
-| 01/11/2026 08:18 | pedido_sab.yml |
-| 01/11/2026 08:11 | pedido_sab.yml |
-| 01/11/2026 07:11 | sab_pedido.py |
-| 01/11/2026 01:53 | sab_pedido.py |
-| 01/11/2026 01:29 | sab_pedido.py |
-| 01/11/2026 01:19 | Rename sab_pedido_v2.py to sab_pedido.py |
-| 01/11/2026 01:17 | Delete sab_pedido.py |
-| 01/11/2026 01:16 | Add files via upload |
-| 01/11/2026 00:33 | sab_pedido.py |
-| 01/11/2026 00:26 | sab_pedido.py |
-| 31/10/2026 22:56 | teste_sab_pedido.py |
-| 31/10/2026 22:55 | sab_pedido.py |
-| 30/10/2026 06:25 | teste_sab_pedido.py |
-| 30/10/2026 06:23 | sab_pedido.py |
-| 30/10/2026 00:41 | pedido_sab.yml |
-| 30/10/2026 00:25 | Add files via upload |
 
