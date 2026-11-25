@@ -607,8 +607,8 @@ def pontos_sorteio():
     proj = ee.Projection(sp.CRS, sp.TRANSFORM)
     classe = ee.Image(sp.MASCARA).select('classe')
     idx = E['regs5'].map(lambda f: f.set('idx', ee.Number(ee.List(REGIOES5).indexOf(f.get('regiao'))).add(1)))
-    estrato = ee.Image.constant(0).toInt().paint(idx, 'idx').rename('estrato')
-    estrato = estrato.updateMask(classe.eq(1).And(estrato.gt(0)))
+    estrato = ee.Image.constant(0).paint(idx, 'idx').toInt().rename('estrato')      # o sorteio exige inteiro
+    estrato = estrato.updateMask(classe.eq(1).And(estrato.gt(0))).toInt()
     sorteio = (ee.Image.pixelLonLat().addBands(estrato)
                .stratifiedSample(numPoints=0, classBand='estrato', region=ee.Geometry.Rectangle(REGIAO_SORTEIO, None, False),
                                  projection=proj, seed=SEMENTE, classValues=[1, 2, 3, 4, 5],
