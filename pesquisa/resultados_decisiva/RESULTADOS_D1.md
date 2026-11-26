@@ -21,3 +21,26 @@ Conta em dobro: 7727 saltos posto × base refeitos por outra implementação; ma
 
 - base 2015–2019: Norte CLIMA (as referências erram) (BR +1.8%); Nordeste CLIMA (as referências erram) (BR -0.3%); Centro-Oeste CLIMA (as referências erram) (BR -1.6%); Sudeste CLIMA (as referências erram) (BR -1.8%); Sul inconclusivo (BR +1.3%); Brasil CLIMA (as referências erram) (BR -0.2%)
 - só postos com todos os meses consistidos: Norte inconclusivo (< 30 postos) (0 postos); Nordeste inconclusivo (< 30 postos) (0 postos); Centro-Oeste inconclusivo (< 30 postos) (0 postos); Sudeste inconclusivo (< 30 postos) (0 postos); Sul inconclusivo (< 30 postos) (0 postos); Brasil inconclusivo (< 30 postos) (0 postos)
+
+## Ano a ano (relato): mediana dos postos de (base ÷ posto) relativa à média de 2010–2019 do próprio posto, Brasil
+
+| Ano | br | chirps | era5 | imerg | persiann | terraclimate | chuva dos postos (mediana, mm) |
+|---|---|---|---|---|---|---|---|
+| 2010 | -0.0% | -6.3% | +0.8% | +0.4% | +3.1% | +2.3% | 1148 |
+| 2011 | -0.1% | -6.2% | +0.1% | -1.3% | +1.3% | -1.4% | 1400 |
+| 2012 | -0.7% | -0.3% | -3.8% | -2.5% | -0.5% | +2.2% | 1035 |
+| 2013 | -0.3% | -1.9% | -2.4% | -1.4% | +3.4% | -7.0% | 1304 |
+| 2014 | -0.6% | +1.9% | -3.5% | +2.5% | +1.8% | +7.4% | 1014 |
+| 2015 | -0.8% | +5.3% | -0.9% | +1.0% | +2.1% | +1.5% | 988 |
+| 2016 | -1.0% | -3.0% | +3.3% | -3.2% | -23.0% | -4.7% | 1150 |
+| 2017 | -1.0% | -1.6% | -0.1% | -2.1% | +2.7% | +0.8% | 1129 |
+| 2018 | -1.0% | -1.7% | -3.3% | -5.0% | -1.1% | -5.6% | 1271 |
+| 2019 | -1.0% | -0.4% | -3.5% | -1.9% | -2.5% | -11.0% | 1118 |
+| 2020 | -1.0% | -8.9% | -3.5% | -7.5% | -8.3% | -9.1% | 1240 |
+| 2021 | -1.1% | -9.2% | -8.9% | -9.1% | -6.6% | -13.0% | 1220 |
+| 2022 | -1.1% | -10.7% | -8.6% | -12.6% | -8.5% | -10.7% | 1360 |
+| 2023 | -1.3% | -8.7% | -12.8% | -15.4% | -13.1% | -13.9% | 1154 |
+| 2024 | -2.1% | -11.8% | -8.1% | -14.6% | -11.8% | -11.6% | 1208 |
+
+Conferência do nível dos dados: todos os meses usados são do nível 1 (bruto) em todos os anos (a ANA ainda não consistiu 2010–2024 nesses postos), então não há troca de dado consistido por bruto no meio da série.
+
