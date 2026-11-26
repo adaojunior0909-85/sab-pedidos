@@ -1,9 +1,9 @@
 {
  "rotina": "previsao",
- "quando": "25/11/2026 19:18",
+ "quando": "25/11/2026 23:10",
  "situacao": "ok",
  "resumo": [
-  "fotografia de 2026-11-25: 25 dias GFS (2026-11-16 a 2026-12-10) e a persistência (2026-11-15)",
+  "fotografia de 2026-11-25 já existe",
   "0 dia(s) previsto(s) conferido(s) nesta execução",
   "ainda nenhum dia previsto virou ERA5 (o primeiro resultado sai em cerca de uma semana)"
  ],

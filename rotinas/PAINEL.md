@@ -1,13 +1,13 @@
 # Painel de controle das rotinas automáticas do SAB
 
-Atualizado em 25/11/2026 19:34 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
+Atualizado em 25/11/2026 23:10 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
 
 | Rotina | Quando roda | Última execução | Situação | Resumo |
 |---|---|---|---|---|
 | Conferência da gravação (o motor gravou?) | toda segunda-feira, 14h29 | 24/11/2026 20:27 | ✅ | 343 dias de 2026 (319 ERA5 até 2026-11-15, 24 GFS até 2026-12-09); dia 2026-11-24 gravado há 11 h; versões {'V1.6': 343}; histórico intocado |
 | RONI do mês (02_auditoria_roni_cpc.py) | todo dia 11, 10h23 | 24/11/2026 21:14 | ✅ | asset RONI_CPC_v6 regravado e conferido (921 estações) |
 | K26, rodada 1 (2026 inteiro, só leitura) | todo dia 15, 15h41 | 24/11/2026 20:56 | 👀 | 343 dias de 2026 (até 2026-12-09); itens: A1 OK, B ATENCAO, C FALHA, G FALHA, H OK |
-| Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 25/11/2026 19:18 | ✅ | fotografia de 2026-11-25: 25 dias GFS (2026-11-16 a 2026-12-10) e a persistência (2026-11-15) |
+| Acerto da previsão GFS (1 a 15 dias) | todo dia, 16h13 | 25/11/2026 23:10 | ✅ | fotografia de 2026-11-25 já existe |
 | Conferência final (validações, escoamento e K26 de 1961 até a previsão) | de 2 em 2 horas, 10h17 a 20h17, até a fila acabar (depois desliga sozinha) | 25/11/2026 19:34 | ⏳ | 7 de 17 tarefas prontas |
 | Piloto da previsão estendida (Tmin e Tmax) | dias 3 e 17, 08h17 | 24/11/2026 20:19 | ✅ | 1 emissão(ões); a última em 2026-11-16 |
 
@@ -41,9 +41,9 @@ Atualizado em 25/11/2026 19:34 (Brasília). Cada rotina roda sozinha no GitHub A
 
 ### Acerto da previsão GFS (1 a 15 dias)
 
-✅ 25/11/2026 19:18 (Brasília)
+✅ 25/11/2026 23:10 (Brasília)
 
-- fotografia de 2026-11-25: 25 dias GFS (2026-11-16 a 2026-12-10) e a persistência (2026-11-15)
+- fotografia de 2026-11-25 já existe
 - 0 dia(s) previsto(s) conferido(s) nesta execução
 - ainda nenhum dia previsto virou ERA5 (o primeiro resultado sai em cerca de uma semana)
 - Resultados: `rotinas/resultados/previsao/`
