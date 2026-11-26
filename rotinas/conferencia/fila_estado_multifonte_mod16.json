@@ -63,7 +63,10 @@
  },
  "multifonte_mod16": {
   "tentativas": 2,
-  "situacao": "rodando",
-  "inicio": "26/11 01:55"
+  "situacao": "ok",
+  "inicio": "26/11 01:55",
+  "fim": "26/11 02:14",
+  "minutos": 19,
+  "codigo": 0
  }
 }

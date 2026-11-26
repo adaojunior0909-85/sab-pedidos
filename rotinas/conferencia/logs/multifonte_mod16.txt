@@ -159,3 +159,57 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    mod16 2021 pronto em 665 s
    mod16 2022 pronto em 735 s
    mod16 2023 pronto em 691 s
+
+===== 26/11/2026 01:55 (Brasília), tentativa 2 =====
+código: commit b1cad9f9dd5d34a9591e690521d74512e4cc85b1 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   mod16 2024 pronto em 467 s
+   mod16 2025 pronto em 683 s
+# O banco contra várias referências (1961–2025)
+
+Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, emenda 1 (antes de rodar). Viés da década / correlação das anomalias mensais, por fonte. ⚠️ = degrau naquela fonte. **Confirmado** = degrau em ≥ 2 referências independentes (GLDAS-2.0 e 2.1 = uma; ERA5-Land não conta para as variáveis do modelo). Todas as comparações (também os 27 estados) em `TODAS_AS_COMPARACOES.csv`.
+
+## Fontes já comparadas
+
+| Fonte | Variáveis | Anos com dado |
+|---|---|---|
+| chirps | Chuva | 1981–2024 |
+| era5 | Chuva, Radiação, Tmax, Tmin, Umidade relativa, VPD, Vento | 1961–1983 |
+| gldas20 | Chuva, ET real, ETo, Escoamento total, Radiação, Temperatura da folha, Temperatura do solo, Tmax, Tmin, Transpiração, Umidade do solo 0-100 cm, Umidade do solo 0-5 cm, Umidade relativa, VPD, Vento | 1961–1980 |
+| gldas21 | Chuva, ET real, ETo, Escoamento total, Radiação, Temperatura da folha, Temperatura do solo, Tmax, Tmin, Transpiração, Umidade do solo 0-100 cm, Umidade do solo 0-5 cm, Umidade relativa, VPD, Vento | 2000–2020 |
+| imerg | Chuva | 2000–2006 |
+| mod16 | ET real, ETo | 2001–2025 |
+| persiann | Chuva | 1983–2006 |
+| terraclimate | Chuva, ET real, ETo, Escoamento total, Radiação, Tmax, Tmin, Umidade do solo 0-100 cm, VPD, Vento | 1961–2024 |
+
+## Degraus confirmados (≥ 2 referências independentes)
+
+| Variável | Região | Década | Fontes que marcam |
+|---|---|---|---|
+| Radiação | Centro-Oeste | 1961-1970 | ERA5-Land, TerraClimate |
+| Tmin | Brasil | 1961-1970 | ERA5-Land, TerraClimate |
+| Tmin | Nordeste | 1961-1970 | ERA5-Land, TerraClimate |
+| Tmin | Norte | 1961-1970 | ERA5-Land, TerraClimate |
+| Vento | Sul | 1961-1970 | ERA5-Land, TerraClimate |
+| VPD | Nordeste | 1961-1970 | ERA5-Land, TerraClimate |
+
+## Chuva
+
+| Década | Região | chirps | era5 | gldas20 | gldas21 | imerg | persiann | terraclimate |
+|---|---|---|---|---|---|---|---|---|
+| 1961-1970 | Norte | - | ⚠️ +8.3 / 0.31 | +4.9 / 0.72 | - | - | - | +6.0 / 0.70 |
+| 1961-1970 | Nordeste | - | ⚠️ +9.8 / 0.89 | -4.5 / 0.99 | - | - | - | -4.2 / 0.99 |
+| 1961-1970 | Centro-Oeste | - | ⚠️ -17.8 / 0.36 | -8.3 / 0.89 | - | - | - | -2.6 / 0.89 |
+| 1961-1970 | Sudeste | - | -4.5 / 0.77 | -4.6 / 0.91 | - | - | - | -1.5 / 0.92 |
+| 1961-1970 | Sul | - | -5.0 / 0.82 | -2.8 / 0.97 | - | - | - | +0.3 / 0.97 |
+| 1961-1970 | Brasil | - | ⚠️ +1.1 / 0.46 | +0.2 / 0.83 | - | - | - | +2.4 / 0.83 |
+| 1971-1980 | Norte | - | -5.2 / 0.73 | +1.2 / 0.77 | - | - | - | +0.4 / 0.82 |
+| 1971-1980 | Nordeste | - | -6.9 / 0.92 | -6.3 / 1.00 | - | - | - | -4.4 / 1.00 |
