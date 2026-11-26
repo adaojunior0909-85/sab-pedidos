@@ -77,6 +77,9 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   independentes mudam no mesmo ano (2020) e no mesmo sentido → o excesso provavelmente vem do BR-DWGD; suspensão da
   V1.8 confirmada. Proposta (só com autorização): refazer as razões do C3 com 2010–2018. Detalhes:
   `pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md` (validacoes-2); o mecanismo sai do `investigar_brdwgd.py`.
+  **Revisto às ~11h15 com o site oficial e o relatório da v_3.2.4** (rede de ~5.700 pluviômetros em 2020–2024, não
+  rala; só o fim de 2025 é ralo; IMERG/PERSIANN/GLDAS-2.1 dependem todos do GPCC): suspeito continua o BR-DWGD
+  (composição da rede, salto maior no Norte/Nordeste), não provado; seção 4 do mesmo arquivo.
 - ⚠️ **26/11, 07h15: MERGE DA V1.8 SUSPENSO, decisão volta ao responsável.** As várias referências (chuva por
   satélite completa) mostram a chuva do banco em **2021–2025 ~9% acima** da relação das décadas anteriores segundo
   **4 fontes independentes** (GLDAS-2.1 +8,0%, IMERG +8,7%, PERSIANN +9,0%, TerraClimate +11,2%); só o CHIRPS não
