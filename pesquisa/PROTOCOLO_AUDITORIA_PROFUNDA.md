@@ -156,3 +156,9 @@ com as mesmas regras, para separar clima de dado também neles.
 7. **Veredito do A2 por variável × região** (o que a seção 4 usa): "não explica" se ≥ 2 famílias disserem "não explica"
    e nenhuma disser "explica"; "explica" se ≥ 2 famílias disserem "explica" e nenhuma "não explica"; senão inconclusivo.
 8. **Sinal:** rel e dif positivos = o SAB acima da testemunha (em relação à base).
+
+## Emenda 2 (26/11/2026, ~13h20, ANTES de olhar os dados reais; o teste sintético falhou por causa disto)
+O índice do A2 passa a vir de `rotinas/resultados/roni/<data>/RONI_CPC_v6.csv` (a série oficial completa do CPC, 1950 →
+set/2026, coluna RONI, salva pela rotina), e não da `auditoria_RONI_SAB_x_CPC.csv`, que só guarda os meses auditados e
+tem buracos em 2020–2025 (o teste sintético saiu "inconclusivo" nos dois casos por falta de meses). Os valores do RONI
+são os mesmos; nada mais muda.
