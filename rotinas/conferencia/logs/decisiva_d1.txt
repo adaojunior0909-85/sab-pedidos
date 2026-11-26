@@ -1,0 +1,33 @@
+
+===== 26/11/2026 14:40 (Brasília), tentativa 1 =====
+código: commit 2ab973afe2e340cf2fd54db65360dba082e4a95f | earthengine-api 1.7.51 | Python 3.12.16
+   inventário: 7161 candidatos
+   ACRE: 0 estáveis
+   ALAGOAS: 11 estáveis
+   AMAPÁ: 4 estáveis
+   AMAZONAS: 33 estáveis
+   BAHIA: 97 estáveis
+   CEARÁ: 150 estáveis
+   DISTRITO FEDERAL: 9 estáveis
+   ESPÍRITO SANTO: 51 estáveis
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 351, in <module>
+    analise() if (sys.argv[1:] or [''])[0] == 'analise' else main()
+                                                             ^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 345, in main
+    series(cand, limite)
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 121, in series
+    s = serie(cod)
+        ^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 80, in serie
+    s = baixar(f'{API}/HidroSerieHistorica?codEstacao={cod}&dataInicio=01/01/2010&dataFim=31/12/2024&tipoDados=2'
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 49, in baixar
+    raise RuntimeError(f'ANA falhou: {url[:120]}')
+RuntimeError: ANA falhou: https://telemetriaws1.ana.gov.br/ServiceANA.asmx/HidroSerieHistorica?codEstacao=1752002&dataInicio=01/01/2010&dataFim=31
