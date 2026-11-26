@@ -1,6 +1,6 @@
 # Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 25/11/2026 19:34 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 26/11/2026 02:06 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
