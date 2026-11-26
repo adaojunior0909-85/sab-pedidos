@@ -64,3 +64,68 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    gldas20 1999 pronto em 797 s
    gldas20 2000 pronto em 877 s
    gldas20 2001 pronto em 807 s
+
+===== 26/11/2026 06:53 (Brasília), tentativa 3 =====
+código: commit 64fa5e1c868db90ee171ee4f68242028945fcd16 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   gldas20 2002 pronto em 391 s
+   gldas20 2003 pronto em 858 s
+   gldas20 2004 pronto em 854 s
+   gldas20 2005 pronto em 771 s
+   gldas20 2006 pronto em 834 s
+   gldas20 2007 pronto em 866 s
+   gldas20 2008 pronto em 933 s
+   gldas20 2009 pronto em 808 s
+   gldas20 2010 pronto em 860 s
+   gldas20 2011 pronto em 910 s
+   gldas20 2012 pronto em 921 s
+   gldas20 2013 pronto em 924 s
+   gldas20 2014 pronto em 847 s
+# O banco contra várias referências (1961–2025)
+
+Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, emenda 1 (antes de rodar). Viés da década / correlação das anomalias mensais, por fonte. ⚠️ = degrau naquela fonte. **Confirmado** = degrau em ≥ 2 referências independentes (GLDAS-2.0 e 2.1 = uma; ERA5-Land não conta para as variáveis do modelo). Todas as comparações (também os 27 estados) em `TODAS_AS_COMPARACOES.csv`.
+
+## Fontes já comparadas
+
+| Fonte | Variáveis | Anos com dado |
+|---|---|---|
+| chirps | Chuva | 1981–2024 |
+| era5 | Chuva, Radiação, Tmax, Tmin, Umidade relativa, VPD, Vento | 1961–2005 |
+| gldas20 | Chuva, ET real, ETo, Escoamento total, Radiação, Temperatura da folha, Temperatura do solo, Tmax, Tmin, Transpiração, Umidade do solo 0-100 cm, Umidade do solo 0-5 cm, Umidade relativa, VPD, Vento | 1961–2014 |
+| gldas21 | Chuva, ET real, ETo, Escoamento total, Radiação, Temperatura da folha, Temperatura do solo, Tmax, Tmin, Transpiração, Umidade do solo 0-100 cm, Umidade do solo 0-5 cm, Umidade relativa, VPD, Vento | 2000–2025 |
+| imerg | Chuva | 2000–2025 |
+| mod16 | ET real, ETo | 2001–2025 |
+| persiann | Chuva | 1983–2025 |
+| terraclimate | Chuva, ET real, ETo, Escoamento total, Radiação, Tmax, Tmin, Umidade do solo 0-100 cm, VPD, Vento | 1961–2024 |
+
+## Degraus confirmados (≥ 2 referências independentes)
+
+| Variável | Região | Década | Fontes que marcam |
+|---|---|---|---|
+| Umidade relativa | Nordeste | 1961-1970 | ERA5-Land, GLDAS |
+| ETo | Nordeste | 1971-1980 | GLDAS, TerraClimate |
+| ETo | Norte | 2001-2010 | GLDAS, TerraClimate |
+| ET real | Sudeste | 2001-2010 | GLDAS, MOD16 |
+| Chuva | Brasil | 2021-2025 | GLDAS, IMERG, PERSIANN, TerraClimate |
+| Chuva | Centro-Oeste | 2021-2025 | GLDAS, IMERG, PERSIANN, TerraClimate |
+| Chuva | Nordeste | 2021-2025 | GLDAS, IMERG, PERSIANN, TerraClimate |
+| Chuva | Norte | 2021-2025 | GLDAS, IMERG, PERSIANN, TerraClimate |
+| Chuva | Sudeste | 1981-1990 | GLDAS, TerraClimate |
+| Chuva | Sul | 2021-2025 | GLDAS, IMERG, PERSIANN, TerraClimate |
+| Radiação | Brasil | 2021-2025 | GLDAS, TerraClimate |
+| Radiação | Centro-Oeste | 1961-1970 | ERA5-Land, TerraClimate |
+| Radiação | Nordeste | 2021-2025 | GLDAS, TerraClimate |
+| Radiação | Norte | 1991-2000 | ERA5-Land, GLDAS |
+| Radiação | Norte | 2001-2010 | GLDAS, TerraClimate |
+| Escoamento total | Centro-Oeste | 1961-1970 | GLDAS, TerraClimate |
+| Escoamento total | Nordeste | 1961-1970 | GLDAS, TerraClimate |
+| Escoamento total | Nordeste | 1971-1980 | GLDAS, TerraClimate |
+| Escoamento total | Nordeste | 1991-2000 | GLDAS, TerraClimate |

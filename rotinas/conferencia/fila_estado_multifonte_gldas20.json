@@ -48,8 +48,11 @@
  },
  "multifonte_gldas20": {
   "tentativas": 3,
-  "situacao": "rodando",
-  "inicio": "26/11 06:53"
+  "situacao": "ok",
+  "inicio": "26/11 06:53",
+  "fim": "26/11 09:53",
+  "minutos": 180,
+  "codigo": 0
  },
  "multifonte_chuva": {
   "tentativas": 1,
