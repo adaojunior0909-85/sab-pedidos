@@ -37,11 +37,9 @@
   "inicio": "25/11 04:15"
  },
  "resolucao": {
-  "tentativas": 0,
-  "situacao": "pendente",
-  "inicio": "26/11 06:32",
-  "fim": "26/11 11:47",
-  "codigo": "tempo"
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 11:48"
  },
  "multifonte_gldas21": {
   "tentativas": 1,
@@ -67,5 +65,26 @@
   "tentativas": 1,
   "situacao": "rodando",
   "inicio": "25/11 20:40"
+ },
+ "brdwgd": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "26/11 07:30",
+  "fim": "26/11 09:38",
+  "minutos": 128,
+  "codigo": 0
+ },
+ "agua": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 09:03"
+ },
+ "power": {
+  "situacao": "ok",
+  "tentativas": 1,
+  "inicio": "26/11 09:19",
+  "fim": "26/11 09:31",
+  "minutos": 12,
+  "codigo": 0
  }
 }
