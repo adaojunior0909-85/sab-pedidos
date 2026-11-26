@@ -33,19 +33,28 @@ LONS = [(-74, -64), (-64, -54), (-54, -44), (-44, -34)]
 ANO_FIM = int(os.environ.get('POWER_ANO_FIM') or 2025)
 
 
-def idx(lat, lon):
+GRADE_1GRAU = {'ALLSKY_SFC_SW_DWN'}     # a radiação vem na grade nativa de 1° (centros em x,5); o resto, 0,5° × 0,625°
+
+
+def idx(lat, lon, grau1=False):
+    if grau1:
+        return int(np.floor(lat + 90)), int(np.floor(lon + 180))
     return int(np.floor((lat + 90 + 0.25) / 0.5)), int(np.floor((lon + 180 + 0.3125) / 0.625))
 
 
-def pesos():
-    arq = os.path.join(SAIDA, 'pesos_celulas.csv')
+def pesos(grau1=False):
+    arq = os.path.join(SAIDA, 'pesos_celulas_1grau.csv' if grau1 else 'pesos_celulas.csv')
     if os.path.exists(arq):
         return pd.read_csv(arq)
     import validar_metodo_2026 as vm
     ee, v, sp = vm.ee, vm.v, vm.sp
     ll = ee.Image.pixelLonLat()
-    i = ll.select('latitude').add(90.25).divide(0.5).floor()
-    j = ll.select('longitude').add(180.3125).divide(0.625).floor()
+    if grau1:
+        i = ll.select('latitude').add(90).floor()
+        j = ll.select('longitude').add(180).floor()
+    else:
+        i = ll.select('latitude').add(90.25).divide(0.5).floor()
+        j = ll.select('longitude').add(180.3125).divide(0.625).floor()
     cel = i.multiply(1000).add(j).toInt().rename('cel').updateMask(v.ENTREGUE)
     linhas = []
     regs = v.regioes(com_ufs=True)
@@ -88,19 +97,20 @@ def celulas(param):
             for f in js.get('features', []):
                 lon, lat = f['geometry']['coordinates'][:2]
                 serie = f['properties']['parameter'][param]
-                out[idx(lat, lon)] = {(int(k[:4]), int(k[4:])): (np.nan if v == fill or v is None else float(v))
+                out[idx(lat, lon, param in GRADE_1GRAU)] = {(int(k[:4]), int(k[4:])): (np.nan if v == fill or v is None else float(v))
                                       for k, v in serie.items() if int(k[4:]) <= 12}
     return out, versao
 
 
 def main():
     os.makedirs(BRUTO, exist_ok=True)
-    w = pesos()
+    pesos_g = {False: pesos(), True: pesos(True)}
     versoes = {}
     for p in PARAM:
         arq = os.path.join(BRUTO, f'{p}.csv')
-        if os.path.exists(arq):
+        if os.path.exists(arq) and os.path.getsize(arq) > 10:
             continue
+        w = pesos_g[p in GRADE_1GRAU]
         t0 = time.time()
         cel, versoes[p] = celulas(p)
         linhas = []
@@ -122,7 +132,8 @@ def main():
         f.write('# NASA POWER: de onde vieram os números\n\n'
                 f'- API mensal regional, {API}, comunidade AG, 1981–{ANO_FIM}; acesso em {time.strftime("%d/%m/%Y")}; '
                 f'versões da API: {sorted(set(v for v in versoes.values() if v)) or "ver execuções anteriores"}.\n'
-                '- Média regional ponderada pelo número de pixels entregues do SAB em cada célula (pesos_celulas.csv).\n'
+                '- Média regional ponderada pelo número de pixels entregues do SAB em cada célula (pesos_celulas.csv; a '
+                'radiação, na grade nativa de 1°: pesos_celulas_1grau.csv).\n'
                 '- Mês com menos de 90% do peso com dado fica de fora.\n')
     parear()
 
