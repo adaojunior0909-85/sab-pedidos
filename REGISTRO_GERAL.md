@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 25/11/2026 20:40, Brasília)
+# Apêndice automático (refeito em 26/11/2026 01:16, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -609,6 +609,8 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 04:16 | Conferência: resolucao (pendente)  |
+| 25/11/2026 23:40 | Registro: o que será corrigido e a etapa final automática (recomendações, PR, pacote) |
 | 25/11/2026 23:40 | Conferência: começou multifonte_mod16  |
 | 25/11/2026 23:39 | Várias referências: MOD16A2GF (2001-; o MOD16A2 061 só começa em 2021) e mês vazio sem erro; mod16 volta à fila |
 | 25/11/2026 23:22 | Conferência: começou multifonte_chuva  |
