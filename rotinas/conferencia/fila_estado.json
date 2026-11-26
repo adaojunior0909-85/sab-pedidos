@@ -62,5 +62,10 @@
   "fim": "26/11 20:02",
   "minutos": 39,
   "codigo": 0
+ },
+ "k26_rodada2": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 20:02"
  }
 }
