@@ -274,7 +274,8 @@ def main():
         try:
             rodar(t, st, sobra)
         except subprocess.TimeoutExpired:
-            st[t['id']].update(situacao='pendente', fim=estado.agora().strftime('%d/%m %H:%M'), codigo='tempo')
+            # [26/11] corte por tempo com progresso salvo não é falha: não conta como tentativa
+            st[t['id']].update(situacao='pendente', tentativas=0, fim=estado.agora().strftime('%d/%m %H:%M'), codigo='tempo')
             gravar(st)
         acabou = all(st.get(x['id'], {}).get('situacao') in ('ok', 'falhou') for x in TAREFAS)
         escrever_final(st, acabou)
