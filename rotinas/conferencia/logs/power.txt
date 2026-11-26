@@ -1,0 +1,79 @@
+
+===== 26/11/2026 09:04 (Brasília), tentativa 1 =====
+código: commit 2562d33bb4d338589aa185316975703cd7536c04 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   pesos UF acre: 60 células
+   pesos UF alagoas: 15 células
+   pesos UF amapa: 56 células
+   pesos UF amazonas: 473 células
+   pesos UF bahia: 196 células
+   pesos UF ceara: 54 células
+   pesos UF distrito federal: 4 células
+   pesos UF espirito santo: 22 células
+   pesos UF goias: 123 células
+   pesos UF maranhao: 121 células
+   pesos UF mato grosso: 280 células
+   pesos UF mato grosso do sul: 127 células
+   pesos UF minas gerais: 204 células
+   pesos UF name unknown: 0 células
+   pesos UF para: 380 células
+   pesos UF paraiba: 29 células
+   pesos UF parana: 74 células
+   pesos UF pernambuco: 45 células
+   pesos UF piaui: 94 células
+   pesos UF rio de janeiro: 26 células
+   pesos UF rio grande do norte: 28 células
+   pesos UF rio grande do sul: 108 células
+   pesos UF rondonia: 88 células
+   pesos UF roraima: 83 células
+   pesos UF santa catarina: 44 células
+   pesos UF sao paulo: 96 células
+   pesos UF sergipe: 16 células
+   pesos UF tocantins: 105 células
+   pesos Norte: 1125 células
+   pesos Nordeste: 472 células
+   pesos Centro-Oeste: 495 células
+   pesos Sudeste: 300 células
+   pesos Sul: 201 células
+   pesos Brasil: 2424 células
+   PRECTOTCORR: 17820 região-mês em 20 s (API v2.10.1)
+   T2M_MAX_AVG: 17820 região-mês em 20 s (API v2.10.1)
+   T2M_MIN_AVG: 17820 região-mês em 21 s (API v2.10.1)
+   RH2M: 17820 região-mês em 21 s (API v2.10.1)
+   WS2M: 17820 região-mês em 21 s (API v2.10.1)
+   ALLSKY_SFC_SW_DWN: 0 região-mês em 13 s (API v2.10.1)
+   T2MDEW: 17820 região-mês em 21 s (API v2.10.1)
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_power.py", line 158, in <module>
+    parear() if (sys.argv[1:] or [''])[0] == 'parear' else main()
+                                                           ^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_power.py", line 127, in main
+    parear()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_power.py", line 138, in parear
+    b = {p: pd.read_csv(os.path.join(BRUTO, f'{p}.csv')).set_index(['regiao', 'ano', 'mes']).valor for p in PARAM}
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1866, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 423, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 2721, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 3006, in _make_engine
+    return mapping[engine](f, **self.options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 107, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/parsers.pyx", line 735, in pandas._libs.parsers.TextReader.__cinit__
+pandas.errors.EmptyDataError: No columns to parse from file
