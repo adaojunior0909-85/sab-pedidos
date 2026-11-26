@@ -35,3 +35,75 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    chuva 2005 pronto em 787 s
    chuva 2006 pronto em 753 s
 Tempo desta vez acabou; a próxima retoma daqui.
+
+===== 26/11/2026 01:29 (Brasília), tentativa 1 =====
+código: commit 69b1d9b08651988b78ba59c37f2b4bf37a2f40ad | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chuva 2007 pronto em 791 s
+   chuva 2008 pronto em 787 s
+   chuva 2009 pronto em 686 s
+   chuva 2010 pronto em 818 s
+   chuva 2011 pronto em 730 s
+   chuva 2012 pronto em 766 s
+   chuva 2013 pronto em 771 s
+   chuva 2014 pronto em 846 s
+   chuva 2015 pronto em 848 s
+   chuva 2016 pronto em 778 s
+   chuva 2017 pronto em 827 s
+   ⚠️ chuva 2018-01: Computation timed out.
+   chuva 2018 pronto em 1152 s
+   chuva 2019 pronto em 783 s
+   chuva 2020 pronto em 755 s
+   chuva 2021 pronto em 956 s
+   chuva 2022 pronto em 847 s
+   chuva 2023 pronto em 864 s
+   chuva 2024 pronto em 931 s
+   chuva 2025 pronto em 886 s
+# O banco contra várias referências (1961–2025)
+
+Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, emenda 1 (antes de rodar). Viés da década / correlação das anomalias mensais, por fonte. ⚠️ = degrau naquela fonte. **Confirmado** = degrau em ≥ 2 referências independentes (GLDAS-2.0 e 2.1 = uma; ERA5-Land não conta para as variáveis do modelo). Todas as comparações (também os 27 estados) em `TODAS_AS_COMPARACOES.csv`.
+
+## Fontes já comparadas
+
+| Fonte | Variáveis | Anos com dado |
+|---|---|---|
+| chirps | Chuva | 1981–2024 |
+| imerg | Chuva | 2000–2025 |
+| persiann | Chuva | 1983–2025 |
+| terraclimate | Chuva, ET real, ETo, Escoamento total, Radiação, Tmax, Tmin, Umidade do solo 0-100 cm, VPD, Vento | 1961–2024 |
+
+## Degraus confirmados (≥ 2 referências independentes)
+
+| Variável | Região | Década | Fontes que marcam |
+|---|---|---|---|
+| Chuva | Brasil | 2021-2025 | IMERG, PERSIANN, TerraClimate |
+| Chuva | Centro-Oeste | 2021-2025 | IMERG, PERSIANN, TerraClimate |
+| Chuva | Nordeste | 2021-2025 | IMERG, PERSIANN, TerraClimate |
+| Chuva | Norte | 2021-2025 | IMERG, PERSIANN, TerraClimate |
+| Chuva | Sul | 2021-2025 | IMERG, PERSIANN, TerraClimate |
+
+## Chuva
+
+| Década | Região | chirps | imerg | persiann | terraclimate |
+|---|---|---|---|---|---|
+| 1961-1970 | Norte | - | - | - | +6.0 / 0.70 |
+| 1961-1970 | Nordeste | - | - | - | -4.2 / 0.99 |
+| 1961-1970 | Centro-Oeste | - | - | - | -2.6 / 0.89 |
+| 1961-1970 | Sudeste | - | - | - | -1.5 / 0.92 |
+| 1961-1970 | Sul | - | - | - | +0.3 / 0.97 |
+| 1961-1970 | Brasil | - | - | - | +2.4 / 0.83 |
+| 1971-1980 | Norte | - | - | - | +0.4 / 0.82 |
+| 1971-1980 | Nordeste | - | - | - | -4.4 / 1.00 |
+| 1971-1980 | Centro-Oeste | - | - | - | +1.1 / 0.84 |
+| 1971-1980 | Sudeste | - | - | - | +2.1 / 0.93 |
+| 1971-1980 | Sul | - | - | - | +2.1 / 0.96 |
+| 1971-1980 | Brasil | - | - | - | +0.3 / 0.93 |
+| 1981-1990 | Norte | -1.0 / 0.96 | - | -2.8 / 0.93 | +3.7 / 0.87 |

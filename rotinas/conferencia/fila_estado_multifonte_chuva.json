@@ -53,8 +53,11 @@
  },
  "multifonte_chuva": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "26/11 01:29"
+  "situacao": "ok",
+  "inicio": "26/11 01:29",
+  "fim": "26/11 05:53",
+  "minutos": 264,
+  "codigo": 0
  },
  "multifonte_era5": {
   "tentativas": 1,
