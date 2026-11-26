@@ -140,3 +140,19 @@ com as mesmas regras, para separar clima de dado também neles.
    **controles da rede** (A4); A5 já está rodando (`brdwgd`).
 3. A7 (leitura do código e 05a sem 2020–2025).
 4. Decisão (seção 4) → aviso no celular → o responsável decide.
+
+## Emenda 1 (26/11/2026, ~13h, ANTES de rodar qualquer teste; detalhes de implementação que o texto não fixava)
+1. **Valor de uma família com mais de uma base** (F1: IMERG, PERSIANN, GLDAS-2.1; F6: GLDAS-2.0 e 2.1): a mediana das
+   bases da família naquele ano (A1) ou mês (A2). MAD = mediana de |x − mediana|, sem fator de escala.
+2. **Bases só de relato** (não entram na decisão): GLDAS-2.0 na chuva (forçante de Princeton, mistura CRU e GPCP),
+   MOD16 (outra definição de ET), e o ERA5-Land nas variáveis do modelo.
+3. **Ano válido:** 12 meses com dado. **Base válida:** ≥ 8 anos em 2001–2015 (senão a série não entra no A1 nem no A2).
+4. **A2 na chuva:** meses com a testemunha < 5 mm ficam fora (a razão explode na seca). As anomalias mensais usam o
+   ciclo do ano: mediana da razão (ou diferença) de cada mês do calendário em 2001–2015.
+5. **Erro-padrão do A2:** desvio do resíduo em 1981–2019 ÷ √n_ef, n_ef = n × (1 − ρ₁)/(1 + ρ₁), n = meses de 2020–2024
+   com dado e ρ₁ a autocorrelação de 1 mês do resíduo em 1981–2019 (ρ₁ < 0 conta como 0).
+6. **Análogos sem dado:** uma fase (La Niña ou El Niño) sem meses no passado ou no presente não é avaliada; se nenhuma
+   fase puder ser avaliada, a condição (b) é "sem dado" e o A2 daquela família fica **inconclusivo**.
+7. **Veredito do A2 por variável × região** (o que a seção 4 usa): "não explica" se ≥ 2 famílias disserem "não explica"
+   e nenhuma disser "explica"; "explica" se ≥ 2 famílias disserem "explica" e nenhuma "não explica"; senão inconclusivo.
+8. **Sinal:** rel e dif positivos = o SAB acima da testemunha (em relação à base).
