@@ -40,6 +40,11 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- 🧪 **26/11, 10h49: PRÉVIA DA V1.8 COM 2026 INTEIRO PASSOU** (sab-motor run 43, simulação; 11 dias amostrados, todos
+  os critérios ✅; 322 dias ERA5 seriam recalculados). **ΔChuva da V1.8 sobre o painel: Brasil +12,0%** (Norte +9,2,
+  Nordeste +13,5, Centro-Oeste +21,4, Sudeste +12,9, Sul +8,2); o resto igual. É do tamanho do excesso suspeito do
+  BR-DWGD 2021–25 (+10 a +17%). **Merge NÃO feito; decisão do responsável.** O motor da noite (falha das 07h46) foi
+  refeito à mão pelo responsável em modo gravar (run 41, 10h29, sucesso).
 - ⚠️ **26/11, 07h46: MOTOR DA NOITE FALHOU** (sab-motor, run 39, V1.7 gravar): `finalizar_trocas_pendentes` →
   `renameAsset(SAB_V1_TMP/SAB_2026_04_27)` deu 404 (o temporário existia na leitura das propriedades e sumiu na
   troca; provável corrida/consistência do Earth Engine). O dia de hoje não foi gravado. A vigia NÃO roda o motor em
