@@ -73,6 +73,9 @@ TAREFAS = [
     {'id': 'fase2_leva1', 'nome': 'Fase 2, leva 1: garoa (M1), radiação R1 (M2) e temperaturas/UR/vento T2 (M3), fora da amostra',
      'cmd': PY + ['pesquisa/validar_fase2.py'], 'min': 30, 'parcial': True,
      'resultado': 'pesquisa/resultados_fase2/RESULTADOS_LEVA1.md'},
+    {'id': 'fase2_leva2', 'nome': 'Fase 2, leva 2: quantis da radiação R2 (M2) e janela de 10 anos T1 (M3), fora da amostra',
+     'cmd': PY + ['pesquisa/validar_fase2_leva2.py'], 'min': 30, 'parcial': True,
+     'resultado': 'pesquisa/resultados_fase2/RESULTADOS_LEVA2.md'},
     tarefa_k26(7),                                   # a única década que ainda estava na contagem antiga (v1.8)
     *[tarefa_k26(r, '2026-11-26') for r in (1, 2, 3, 4)],        # 2026 e a previsão, depois da regravação V1.7
     *[tarefa_k26(r, '2026-12-01') for r in (5, 6, 8, 9, 10, 11)],  # o histórico (travado) de novo, no mês seguinte
