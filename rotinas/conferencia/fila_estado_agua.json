@@ -76,7 +76,10 @@
  },
  "agua": {
   "tentativas": 2,
-  "situacao": "rodando",
-  "inicio": "26/11 09:43"
+  "situacao": "pendente",
+  "inicio": "26/11 09:43",
+  "fim": "26/11 09:43",
+  "minutos": 0,
+  "codigo": 1
  }
 }
