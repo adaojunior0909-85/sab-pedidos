@@ -47,6 +47,12 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- 🔎 **26/11, ~09h40 (Brasília): NASA POWER pronto e conferido** (extração = API de ponto no DF, dif. 4e-16; radiação
+  na grade de 1°, corrigido). A1/A2 refeitos: **chuva = degrau dos dados** (persistente, El Niño/La Niña não explica)
+  em Brasil, N, NE, CO (falta só o A3); Sul inconclusivo. **Novos degraus confirmados** (POWER + GLDAS e/ou
+  TerraClimate, o ENSO não explica): UR +4 a +8 p.p. e VPD −0,17 a −0,29 kPa no NE/SE (VPD também CO), Tmax −0,9 °C
+  no SE, radiação −4 a −10% no Norte (A2 inconclusivo). Ressalva: o GLDAS-2.1 tem deriva própria desde ~2015; o
+  ERA5-Land até 2025 (ainda na fila) decide. A7: previsão e V1.8 herdam a chuva (4 regiões), a UR (2) e a VPD (3).
 - 🔎 **26/11, ~14h–15h: AUDITORIA PROFUNDA EM ANDAMENTO** (emendas 1–3, todas antes de rodar). Prontos: teste
   sintético (passa), conta em dobro (OK), **A1/A2**: chuva com degrau persistente 2020–24 em Brasil, N, NE, CO e Sul
   (Sudeste não); o El Niño/La Niña **não explica** (r do RONI com a razão ≤ 0,14; resíduo = o degrau; análogos
