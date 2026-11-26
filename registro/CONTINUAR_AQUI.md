@@ -40,6 +40,16 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- ⏳ **26/11, ~13h40: DOIS MÉTODOS PASSARAM, ESPERAM AUTORIZAÇÃO (nada gravado).**
+  (1) **Fase 2, leva 1 (M1): C3G passa nas 4 condições** (garoa: dias de chuva −34,5% de afastamento; mediana do
+  |viés| +0,03 p.p.; p99 12,3% × 13,8% do C3) → seria a V1.8 com limiar de garoa. Ressalva: herda as razões do
+  BR-DWGD 2021–25 e é julgado contra o próprio BR-DWGD. M2-R1 e M3-T2 não passaram.
+  (2) **M5 (ajuste do histórico na leitura): 20 de 34 degraus confirmados passam** (`pesquisa/resultados_fase2/
+  RESULTADOS_M5.md`), entre eles a **chuva 2021–25** em Brasil (×0,890), CO (×0,899), NE (×0,849), SE (×0,949) e
+  Sul (×0,937) (Norte não passa), Tmin 1961–70 (Brasil, Sul), VPD 2001–2020 (várias, só GLDAS+TerraClimate) e
+  radiação 2021–25 (Brasil, NE). **Conflito a decidir:** a auditoria profunda (fase 3, mais exigente, com o A3)
+  deixa a chuva 2021–25 como inconclusiva; o M5 (fase 2) aprova o ajuste. A escolha é do responsável.
+  ERA5-Land (multifonte) PRONTO 11h22; auditoria refeita: ERA5 confirma a chuva (+7,5 a +16%).
 - 🧪 **26/11, 10h49: PRÉVIA DA V1.8 COM 2026 INTEIRO PASSOU** (sab-motor run 43, simulação; 11 dias amostrados, todos
   os critérios ✅; 322 dias ERA5 seriam recalculados). **ΔChuva da V1.8 sobre o painel: Brasil +12,0%** (Norte +9,2,
   Nordeste +13,5, Centro-Oeste +21,4, Sudeste +12,9, Sul +8,2); o resto igual. É do tamanho do excesso suspeito do
