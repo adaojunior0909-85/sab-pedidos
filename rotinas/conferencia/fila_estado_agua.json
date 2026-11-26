@@ -76,7 +76,10 @@
  },
  "agua": {
   "tentativas": 3,
-  "situacao": "rodando",
-  "inicio": "26/11 09:43"
+  "situacao": "falhou",
+  "inicio": "26/11 09:43",
+  "fim": "26/11 09:43",
+  "minutos": 0,
+  "codigo": 1
  }
 }
