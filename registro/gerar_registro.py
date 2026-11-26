@@ -19,6 +19,13 @@ RESULTADOS = [
     ('Histórico por década × TerraClimate e CHIRPS', 'pesquisa/resultados_historico/RESULTADOS.md'),
     ('Tudo por mês do ano', 'pesquisa/RESULTADOS_POR_MES.md'),
     ('Sensibilidade à resolução', 'pesquisa/resultados_resolucao/RESULTADOS.md'),
+    ('Correção dos dias ERA5 (fase 1)', 'pesquisa/resultados_correcao_era5/RESULTADOS.md'),
+    ('Fase 2, M1-C3R', 'pesquisa/resultados_fase2/RESULTADOS_M1_C3R.md'),
+    ('Fase 2, leva 1', 'pesquisa/resultados_fase2/RESULTADOS_LEVA1.md'),
+    ('Fase 2, leva 2', 'pesquisa/resultados_fase2/RESULTADOS_LEVA2.md'),
+    ('Várias referências (multifonte)', 'pesquisa/resultados_multifonte/RESULTADOS.md'),
+    ('BR-DWGD: artigos, site e relatório', 'pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md'),
+    ('BR-DWGD bruto ano a ano', 'pesquisa/resultados_brdwgd/RESULTADOS.md'),
     ('Previsão estendida (pesquisa)', 'pesquisa/resultados/RESULTADOS.md'),
     ('Acerto da previsão GFS', 'rotinas/resultados/previsao/ACERTO.md'),
 ]
