@@ -67,8 +67,11 @@
  },
  "fase2_leva1": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "26/11 11:18"
+  "situacao": "ok",
+  "inicio": "26/11 11:18",
+  "fim": "26/11 12:55",
+  "minutos": 97,
+  "codigo": 0
  },
  "fase2_leva2": {
   "tentativas": 1,
