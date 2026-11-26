@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 01:16, Brasília)
+# Apêndice automático (refeito em 26/11/2026 07:15, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -531,6 +531,12 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 09:12 | Conferência: começou fase2_leva1  |
+| 26/11/2026 09:12 | Conferência: fase2_leva1 (pendente)  |
+| 26/11/2026 08:36 | Conferência: fase2_leva2 (ok)  |
+| 26/11/2026 06:14 | Fila: o corte por tempo não conta como tentativa |
+| 26/11/2026 04:16 | Conferência: começou fase2_leva2  |
+| 26/11/2026 04:16 | Registro: leva 2 disparada |
 | 26/11/2026 04:16 | Fase 2, leva 2 (só leitura): radiação por quantis regionais R2 (M2) e janela de 10 anos T1 para Tmax, Tmin e vento (M3); tarefa fase2_leva2 na fila |
 | 26/11/2026 04:01 | Conferência: começou fase2_leva1  |
 | 26/11/2026 04:01 | Conferência: fase2_leva1 (pendente)  |
