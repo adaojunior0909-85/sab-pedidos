@@ -1,0 +1,37 @@
+
+===== 25/11/2026 20:22 (Brasília), tentativa 1 =====
+código: commit d962c467a0c761eed128c0d8a86b1d48af09e81c | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chuva 1983 pronto em 719 s
+   chuva 1984 pronto em 757 s
+   chuva 1985 pronto em 722 s
+   chuva 1986 pronto em 794 s
+   chuva 1987 pronto em 764 s
+   chuva 1988 pronto em 688 s
+   chuva 1989 pronto em 717 s
+   chuva 1990 pronto em 761 s
+   chuva 1991 pronto em 725 s
+   chuva 1992 pronto em 757 s
+   chuva 1993 pronto em 747 s
+   chuva 1994 pronto em 742 s
+   chuva 1995 pronto em 782 s
+   chuva 1996 pronto em 732 s
+   chuva 1997 pronto em 801 s
+   chuva 1998 pronto em 789 s
+   chuva 1999 pronto em 853 s
+   chuva 2000 pronto em 820 s
+   chuva 2001 pronto em 746 s
+   chuva 2002 pronto em 741 s
+   chuva 2003 pronto em 854 s
+   chuva 2004 pronto em 839 s
+   chuva 2005 pronto em 787 s
+   chuva 2006 pronto em 753 s
+Tempo desta vez acabou; a próxima retoma daqui.
