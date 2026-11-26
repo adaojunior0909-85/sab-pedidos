@@ -110,7 +110,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 08:14, Brasília)
+# Apêndice automático (refeito em 26/11/2026 08:55, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -1664,6 +1664,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 11:14 | Registro: análise profunda proposta (todo o banco) com o NASA POWER como testemunha, a pedido do responsável |
 | 26/11/2026 11:10 | Registro em dia (26/11): investigação do BR-DWGD (artigos, site, relatório v_3.2.4), V1.8 suspensa esperando decisão, resultados da fase 2 e do multifonte no REGISTRO_GERAL |
 | 26/11/2026 11:05 | BR-DWGD: análise revista com o site oficial e o relatório da v_3.2.4 (rede densa em 2020–2024; fim de 2025 ralo; referências GPCC contam como uma) |
 | 26/11/2026 10:44 | Leitura dos artigos do BR-DWGD (2016, 2022) × documentação das outras bases: excesso de chuva pós-2020 provavelmente do BR-DWGD |

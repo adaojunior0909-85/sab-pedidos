@@ -43,6 +43,12 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- 🔒 **26/11, ~12h40: PROTOCOLO DA AUDITORIA PROFUNDA ESCRITO E CONGELADO** (pedido do responsável: "escreva o
+  protocolo, atualize e vamos auditar isso tudo de forma minuciosa"): `pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`
+  (A1 degrau ano a ano; A2 El Niño/La Niña com RONI e análogos; A3 GRACE/SMAP/rios; A4 rede do BR-DWGD; A5
+  decomposição; A6 outros saltos; A7 cadeia 2026/previsão; famílias F1–F8; auditoria com conta em dobro e teste
+  sintético). Resultados em `pesquisa/resultados_auditoria/`. NASA POWER: chuva = MERRA-2 corrigida por
+  pluviômetros (o trecho GEOS-IT recente não tem correção: só relato).
 - 📝 **Análise profunda proposta (26/11, ~12h; protocolo a escrever e congelar com aprovação):** todo o banco, 1961 →
   previsão de 15 dias, as 8 variáveis do BR-DWGD; teste do El Niño/La Niña (RONI, 1981–2019 como régua), GRACE,
   SMAP, vazão da ANA (só com liberação), rede do BR-DWGD (controles Count/dist_nearest), ERA5-Land. **Pedido do
