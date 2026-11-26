@@ -91,7 +91,11 @@
   "codigo": 0
  },
  "decisiva_d1": {
+  "tentativas": 0,
   "situacao": "pendente",
-  "tentativas": 0
+  "inicio": "26/11 18:03",
+  "fim": "26/11 19:02",
+  "minutos": 60,
+  "codigo": 3
  }
 }
