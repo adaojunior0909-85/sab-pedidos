@@ -1,0 +1,35 @@
+
+===== 25/11/2026 20:22 (Brasília), tentativa 1 =====
+código: commit 0cd0eb0097d583869c182c010d2de16dd6dc481c | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   era5 1961 pronto em 719 s
+   era5 1962 pronto em 697 s
+   era5 1963 pronto em 691 s
+   era5 1964 pronto em 780 s
+   era5 1965 pronto em 710 s
+   era5 1966 pronto em 756 s
+   era5 1967 pronto em 732 s
+   era5 1968 pronto em 752 s
+   era5 1969 pronto em 773 s
+   era5 1970 pronto em 851 s
+   era5 1971 pronto em 740 s
+   era5 1972 pronto em 968 s
+   era5 1973 pronto em 831 s
+   era5 1974 pronto em 883 s
+   era5 1975 pronto em 827 s
+   era5 1976 pronto em 792 s
+   era5 1977 pronto em 848 s
+   era5 1978 pronto em 854 s
+   era5 1979 pronto em 768 s
+   era5 1980 pronto em 810 s
+   era5 1981 pronto em 873 s
+   era5 1982 pronto em 805 s
+   era5 1983 pronto em 725 s

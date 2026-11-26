@@ -43,7 +43,9 @@
  },
  "multifonte_era5": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 20:22"
+  "situacao": "pendente",
+  "inicio": "25/11 20:22",
+  "fim": "26/11 01:37",
+  "codigo": "tempo"
  }
 }
