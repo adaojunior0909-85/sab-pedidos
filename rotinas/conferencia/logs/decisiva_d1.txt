@@ -83,3 +83,46 @@ Traceback (most recent call last):
   File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d1.py", line 49, in baixar
     raise RuntimeError(f'ANA falhou: {url[:120]}')
 RuntimeError: ANA falhou: https://telemetriaws1.ana.gov.br/ServiceANA.asmx/HidroSerieHistorica?codEstacao=2047019&dataInicio=01/01/2010&dataFim=31
+
+===== 26/11/2026 17:40 (Brasília), tentativa 3 =====
+código: commit a2ccbbd4cff92553225f49d2f78cb326000c18ed | earthengine-api 1.7.51 | Python 3.12.16
+   ACRE: 0 estáveis
+   ALAGOAS: 11 estáveis
+   AMAPÁ: 4 estáveis
+   AMAZONAS: 33 estáveis
+   BAHIA: 97 estáveis
+   CEARÁ: 150 estáveis
+   DISTRITO FEDERAL: 9 estáveis
+   ESPÍRITO SANTO: 51 estáveis
+   GOIÁS: 29 estáveis
+   MARANHÃO: 59 estáveis
+   MATO GROSSO: 58 estáveis
+   MATO GROSSO DO SUL: 34 estáveis
+   MINAS GERAIS: 150 estáveis
+   PARANÁ: 150 estáveis
+   PARAÍBA: 150 estáveis
+   PARÁ: 43 estáveis
+   PERNAMBUCO: 26 estáveis
+   PIAUÍ: 23 estáveis
+   RIO DE JANEIRO: 53 estáveis
+   RIO GRANDE DO NORTE: 17 estáveis
+   RIO GRANDE DO SUL: 47 estáveis
+   RONDÔNIA: 0 estáveis
+   RORAIMA: 9 estáveis
+   SANTA CATARINA: 42 estáveis
+   SERGIPE: 2 estáveis
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ posto 2049024 sem resposta da ANA (pulado; 1 seguidos)
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ posto 2049027 sem resposta da ANA (pulado; 2 seguidos)
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ ANA: HTTP Error 504: Gateway Time-out
+   ⚠️ posto 2049028 sem resposta da ANA (pulado; 3 seguidos)
+   ANA fora do ar: andamento guardado; retoma depois.
