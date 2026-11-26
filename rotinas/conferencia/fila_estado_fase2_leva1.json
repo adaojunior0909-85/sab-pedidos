@@ -66,12 +66,9 @@
   "codigo": 0
  },
  "fase2_leva1": {
-  "tentativas": 0,
-  "situacao": "pendente",
-  "inicio": "26/11 06:12",
-  "fim": "26/11 11:17",
-  "minutos": 305,
-  "codigo": 3
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 11:18"
  },
  "fase2_leva2": {
   "tentativas": 1,
