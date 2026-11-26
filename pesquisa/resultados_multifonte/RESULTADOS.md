@@ -583,9 +583,9 @@ Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, emenda 1 (antes de rodar). Vi�
 
 | Década | Região | gldas20 | gldas21 |
 |---|---|---|---|
-| 1961-1970 | Norte | -1.2 / 0.67 | - |
-| 1961-1970 | Nordeste | +0.1 / 0.70 | - |
-| 1961-1970 | Centro-Oeste | -0.6 / 0.63 | - |
+| 1961-1970 | Norte | -1.2 / 0.66 | - |
+| 1961-1970 | Nordeste | +0.1 / 0.69 | - |
+| 1961-1970 | Centro-Oeste | -0.6 / 0.62 | - |
 | 1961-1970 | Sudeste | -0.4 / 0.88 | - |
 | 1961-1970 | Sul | -0.5 / 0.93 | - |
 | 1961-1970 | Brasil | -0.7 / 0.77 | - |
