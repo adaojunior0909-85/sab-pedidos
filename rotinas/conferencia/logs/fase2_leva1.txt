@@ -99,3 +99,100 @@ R1: radiação no Brasil -0.07 MJ (precisa ≥ 0,2) · ETo +0.30 p.p. (≥ 1) ·
 | u2 | +0.033 | +0.007 | +0.004 | +0.061 | ❌ |
 
 (parcial)
+
+===== 26/11/2026 01:01 (Brasília), tentativa 1 =====
+código: commit 7b31ae5deace6b0ea07d76a947029ea16bfd5c59 | earthengine-api 1.7.51 | Python 3.12.16
+Limiares da garoa (mm, mediana por região): Norte 1.19, Nordeste 1.46, Centro-Oeste 1.15, Sudeste 1.27, Sul 1.34
+🔄 Iniciando SAB V1.7 no projeto: clima-492922...
+🕒 Timestamp de Operação (Local/BRT): 2026-11-26 01:01:59
+
+📡 Última data ERA5-Land: 2026-11-17 | Última data BR-DWGD: 2025-12-31
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   2019-02 pronto em 7.5 min
+   2019-03 pronto em 6.4 min
+   2019-04 pronto em 7.2 min
+   2019-05 pronto em 6.9 min
+   2019-06 pronto em 7.6 min
+   2019-07 pronto em 6.9 min
+   2019-08 pronto em 7.6 min
+   2019-09 pronto em 7.0 min
+   2019-10 pronto em 8.7 min
+   2019-11 pronto em 7.5 min
+   2019-12 pronto em 8.7 min
+   2020-01 pronto em 8.6 min
+   2020-02 pronto em 7.6 min
+   2020-03 pronto em 9.1 min
+   2020-04 pronto em 7.7 min
+   2020-05 pronto em 7.4 min
+   2020-06 pronto em 9.5 min
+   2020-07 pronto em 8.6 min
+   2020-08 pronto em 10.5 min
+   2020-09 pronto em 7.7 min
+   2020-10 pronto em 6.8 min
+   2020-11 pronto em 7.8 min
+   2020-12 pronto em 7.4 min
+   2021-01 pronto em 8.9 min
+   2021-02 pronto em 8.3 min
+   2021-03 pronto em 8.3 min
+   2021-04 pronto em 9.0 min
+   2021-05 pronto em 8.7 min
+   2021-06 pronto em 8.0 min
+   2021-07 pronto em 8.1 min
+   2021-08 pronto em 8.9 min
+   2021-09 pronto em 7.5 min
+   2021-10 pronto em 11.9 min
+   2021-11 pronto em 8.1 min
+   2021-12 pronto em 9.5 min
+   2022-01 pronto em 8.3 min
+   2022-02 pronto em 8.3 min
+   2022-03 pronto em 7.7 min
+Tempo desta vez acabou; a próxima retoma daqui.
+# Fase 2, leva 1: M1 (garoa), M2-R1 (radiação) e M3-T2 (temperaturas, UR, vento)
+
+Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md` (congelado no commit 9a12309 antes de rodar). Só leitura no Earth Engine. Nada é gravado: um método que passa vai ao responsável, que autoriza (ou não) a gravação.
+
+**Parcial:** 6 de 10 anos de teste ([2016, 2017, 2018, 2019, 2020, 2021]). A decisão só sai com os 10.
+
+## M1. Chuva (base: C3, a V1.8)
+
+| Método | Mediana do |viés anual| (5 regiões) | Pior região | Dias de chuva: afastamento somado (p.p.) | r_anom mínimo |
+|---|---|---|---|---|
+| C0 | 6.25% | Sul 8.3% | 13.82 | 0.882 |
+| C3 | 4.19% | Centro-Oeste 6.8% | 16.06 | 0.888 |
+| C3G | 3.87% | Centro-Oeste 6.9% | 6.69 | 0.883 |
+| C3RG | 3.82% | Centro-Oeste 6.8% | 6.69 | 0.875 |
+
+- **C3G**: 1 ✅ (-0.32 p.p.) · 2 ✅ (dias de chuva +58.4%) · 3 ✅ · 4 Rx1day ✅, p99 pendente → ❌
+
+- **C3RG**: 1 ✅ (-0.37 p.p.) · 2 ✅ (dias de chuva +58.4%) · 3 ✅ · 4 Rx1day ✅, p99 pendente → ❌
+
+**M1: nenhum passou; o C3 (V1.8) fica (parcial).**
+
+## M2. Radiação e ETo (base: V1.7)
+
+| Método | Norte | Nordeste | Centro-Oeste | Sudeste | Sul | Brasil |
+|---|---|---|---|---|---|---|
+| C0 | +0.28 MJ / +1.5% | +0.33 MJ / +0.9% | +0.36 MJ / +1.2% | +0.08 MJ / -0.3% | +0.45 MJ / -0.3% | +0.29 MJ / +1.0% |
+| R1 | +0.27 MJ / +1.5% | +0.26 MJ / +0.7% | +0.33 MJ / +1.1% | +0.19 MJ / +0.1% | +0.23 MJ / -1.1% | +0.27 MJ / +0.9% |
+
+R1: radiação no Brasil +0.02 MJ (precisa ≥ 0,2) · ETo +0.07 p.p. (≥ 1) · pior região +0.11 MJ / +0.75 p.p. · r_anom +0.003 → **não passa; a V1.7 fica (parcial)**
+
+## M3. Tmax, Tmin, UR, VPD e vento (base: V1.7)
+
+| Variável | Base: viés Brasil | T2: viés Brasil | Pior região (piora) | r_anom (maior queda) | Passa? |
+|---|---|---|---|---|---|
+| tmax_C | +0.082 | +0.082 | -0.019 | +0.009 | ❌ |
+| tmin_C | -0.029 | +0.004 | +0.020 | +0.060 | ❌ |
+| RH | +0.397 | -0.542 | +0.874 | +0.006 | ❌ |
+| vpd | -0.014 | +0.023 | +0.024 | +0.005 | ❌ |
+| u2 | +0.050 | +0.019 | +0.016 | +0.071 | ❌ |
+
+(parcial)
