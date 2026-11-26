@@ -74,8 +74,14 @@
   "situacao": "rodando",
   "inicio": "26/11 07:30"
  },
+ "agua": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 09:03"
+ },
  "power": {
-  "situacao": "pendente",
-  "tentativas": 0
+  "situacao": "rodando",
+  "tentativas": 1,
+  "inicio": "26/11 09:19"
  }
 }
