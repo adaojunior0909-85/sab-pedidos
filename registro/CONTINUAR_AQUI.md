@@ -47,6 +47,12 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- ⚖️ **26/11, ~09h50: A3 PRONTO E DECISÃO PROVISÓRIA (seção 4)** — `pesquisa/resultados_auditoria/DECISAO.md`
+  (refazer com `python pesquisa/auditoria_decisao.py` quando o ERA5-Land chegar a 2025). GRACE (até set/2024) neutro
+  em tudo; SMAP neutro, exceto Nordeste "com o SAB". Pela regra fixada antes: **chuva = INCONCLUSIVO** (Brasil, N, CO,
+  Sul → aviso no dicionário, nenhuma correção) e **Nordeste = clima** (SMAP com o SAB), apesar de A1/A2 e do ERA5-Land
+  apontarem dados. **Degrau dos dados CONFIRMADO:** UR (NE, SE), VPD (NE, SE), Tmax (SE). Inconclusivos: radiação
+  Norte, VPD CO. A análise do A3 quebrou na fila (abril duplicado/ausente no GRACE): corrigida e rodada aqui.
 - 🔎 **26/11, ~09h40: `brdwgd` PRONTO.** Banco = BR-DWGD bruto (SAB/BR = 1,000 em todos os anos); metadados iguais em
   todos os anos; **o asset não tem os controles da rede** (A4 só com os NetCDF `pr_Control`). **Contra o ERA5-Land
   (sem pluviômetro): −5 a +2% até 2018; +7,5% em 2020, +9% em 2021–22, +16% em 2023–24** → 4ª família com o degrau.

@@ -111,7 +111,7 @@ def anomalia_pct(s, base):
 
 def erro_loo(x, y, treino, teste):
     """RMSE de deixar-um-de-fora no treino e RMSE fora da amostra no teste (regressão linear y ~ x)."""
-    xt, yt = x.loc[treino], y.loc[treino]
+    xt, yt = x.reindex(treino), y.reindex(treino)          # anos sem dado (ex.: abril sem GRACE) ficam de fora
     ok = xt.notna() & yt.notna()
     xt, yt = xt[ok], yt[ok]
     if len(xt) < 6:
@@ -149,7 +149,7 @@ def analise():
         for reg in ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul', 'Brasil']:
             s = gr[gr.regiao == reg].set_index('data').valor.sort_index()
             abril = s[s.index.month == 4]
-            abril.index = abril.index.year
+            abril = abril.groupby(abril.index.year).mean()      # dois arquivos no mesmo abril: média
             ds = (abril.shift(-1) - abril).dropna()             # ΔS do ano hidrológico que começa em maio do ano y
             c = ch.loc[reg] if reg in ch.index.get_level_values(0) else None
             if c is None or ds.empty:

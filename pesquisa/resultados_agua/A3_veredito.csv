@@ -1,0 +1,13 @@
+testemunha,regiao,veredito
+GRACE,Norte,neutra
+GRACE,Nordeste,neutra
+GRACE,Centro-Oeste,neutra
+GRACE,Sudeste,neutra
+GRACE,Sul,neutra
+GRACE,Brasil,neutra
+SMAP,Norte,neutra
+SMAP,Nordeste,com o SAB
+SMAP,Centro-Oeste,neutra
+SMAP,Sudeste,neutra
+SMAP,Sul,neutra
+SMAP,Brasil,neutra
