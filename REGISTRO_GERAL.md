@@ -102,7 +102,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 01:16, Brasília)
+# Apêndice automático (refeito em 26/11/2026 07:15, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -609,6 +609,30 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 10:14 | Várias referências: resumo refeito (chuva por satélite completa; ERA5-Land e GLDAS-2.0 parciais) |
+| 26/11/2026 09:53 | Conferência: começou multifonte_gldas20  |
+| 26/11/2026 09:52 | Conferência: multifonte_gldas20 (pendente)  |
+| 26/11/2026 09:46 | Conferência: começou multifonte_era5  |
+| 26/11/2026 09:45 | Conferência: multifonte_era5 (pendente)  |
+| 26/11/2026 09:32 | Conferência: começou resolucao  |
+| 26/11/2026 09:31 | Conferência: resolucao (pendente)  |
+| 26/11/2026 08:53 | Conferência: multifonte_chuva (ok)  |
+| 26/11/2026 06:13 | Fila: o corte por tempo (com progresso salvo) não conta como tentativa |
+| 26/11/2026 05:59 | Várias referências: resumo refeito com todas as fontes prontas (MOD16 entrou) |
+| 26/11/2026 05:50 | Conferência: multifonte_gldas21 (ok)  |
+| 26/11/2026 05:14 | Conferência: multifonte_mod16 (ok)  |
+| 26/11/2026 04:55 | Conferência: começou multifonte_mod16  |
+| 26/11/2026 04:55 | Conferência: multifonte_mod16 (pendente)  |
+| 26/11/2026 04:37 | Conferência: começou multifonte_gldas20  |
+| 26/11/2026 04:37 | Conferência: começou multifonte_era5  |
+| 26/11/2026 04:37 | Conferência: multifonte_gldas20 (pendente)  |
+| 26/11/2026 04:37 | Conferência: multifonte_era5 (pendente)  |
+| 26/11/2026 04:35 | Conferência: começou multifonte_gldas21  |
+| 26/11/2026 04:35 | Conferência: multifonte_gldas21 (pendente)  |
+| 26/11/2026 04:29 | Conferência: começou multifonte_chuva  |
+| 26/11/2026 04:29 | Conferência: multifonte_chuva (pendente)  |
+| 26/11/2026 04:16 | Conferência: começou resolucao  |
+| 26/11/2026 04:16 | Registro: leva 2 disparada; parcial da leva 1 |
 | 26/11/2026 04:16 | Conferência: resolucao (pendente)  |
 | 25/11/2026 23:40 | Registro: o que será corrigido e a etapa final automática (recomendações, PR, pacote) |
 | 25/11/2026 23:40 | Conferência: começou multifonte_mod16  |

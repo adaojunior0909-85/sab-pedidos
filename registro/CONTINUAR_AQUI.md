@@ -71,6 +71,11 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   C com a FALHA já conhecida (escoamento do ERA5 > chuva observada em 42,8 milhões de 258 milhões de pixel-dias; Rs
   acima do céu claro em 9.136). Comparar com a rodada 7 anterior (v1.8, 18/11) nas conclusões:
   `rotinas/resultados/k26_rodada7/2026-11-25/` (na `main`).
+- ⚠️ **26/11, 07h15: MERGE DA V1.8 SUSPENSO, decisão volta ao responsável.** As várias referências (chuva por
+  satélite completa) mostram a chuva do banco em **2021–2025 ~9% acima** da relação das décadas anteriores segundo
+  **4 fontes independentes** (GLDAS-2.1 +8,0%, IMERG +8,7%, PERSIANN +9,0%, TerraClimate +11,2%); só o CHIRPS não
+  (+0,0%). As razões do C3 (V1.8) saem justamente do BR-DWGD de 2021–2025: se ele estiver alto, a V1.8 corrige demais
+  (coerente com o Sul +15,5% × CHIRPS). A prévia de 26/11 10h30 roda (só leitura) e NÃO junta o PR sab-motor#4.
 - ✅ **V1.8 APROVADA pelo responsável (25/11, ~19h20: "Junte e aprove o V1.8").** Etapa B pronta no PR
   adaojunior0909-85/sab-motor#4 (`ARQUIVOS['gravar']` = 05b v1_8; head `0b13fda`). Combinado: o merge vem DEPOIS da
   prévia com 2026 inteiro (26/11, 10h30, tarefa agendada "Refazer a prévia da V1.8 com 2026 inteiro"): se passar (≥ 8
@@ -145,7 +150,7 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 | M1-C3G, C3RG | corte da garoa (+ C3; + C3 só onde consistente) | 🔄 rodando (cadeia `fase2_leva1`); parcial 2016–2018: o C3G derruba o afastamento dos dias de chuva de 22,0 para 3,5 p.p. com mediana +0,25 p.p. (falta o p99 e os outros 7 anos) |
 | M2-R1 | radiação × razão regional (ETo recalculada) | 🔄 idem |
 | M3-T2 | Tmax, Tmin, UR, vento: ajuste regional (VPD e ETo recalculadas) | 🔄 idem |
-| M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | 🔄 **leva 2 disparada (26/11, ~01h20)**: `pesquisa/validar_fase2_leva2.py`, cadeia `fase2_leva2` (branch de trabalho) |
+| M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | ❌ **leva 2 pronta (26/11, 05h36): nenhum passou.** R2: radiação Brasil +0,45 → +0,25 MJ, mas ETo só −0,82 p.p. (precisa 1) e r_anom −0,039; T1: os desvios da V1.7 já são pequenos (Tmax +0,16 °C, vento +0,07 m/s) e não melhoram o bastante. `resultados_fase2/RESULTADOS_LEVA2.md` |
 | M4 | ET real, transpiração, solo, folha, escoamento | conclusão fixada antes: sem referência para corrigir o nível → avisos no dicionário |
 | M5 | histórico 1961–2025 | ⏳ **o `historico` terminou (25/11, 19h52)**; décadas com degrau: chuva × TerraClimate 2021–2025 em todas as regiões (+6 a +17%) e Sudeste 1981–90, mas o CHIRPS NÃO confirma (2021–25 Brasil +0,0%), e o CHIRPS marca o Centro-Oeste 2011–20 (−7,4%), que o TerraClimate não confirma → chuva sem correção pela regra; Tmin 1961–70 (correlação baixa: NE 0,11, CO 0,38), radiação 1961–80, vento, VPD, ETo e escoamento em várias décadas: falta a 2ª referência (ERA5 bruto), que a vigia roda. `pesquisa/resultados_historico/RESULTADOS.md` |
 | M6 | previsão GFS | ⏳ ~24/12 (30 dias de fotografias) |
