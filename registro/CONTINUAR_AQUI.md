@@ -71,6 +71,12 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   C com a FALHA já conhecida (escoamento do ERA5 > chuva observada em 42,8 milhões de 258 milhões de pixel-dias; Rs
   acima do céu claro em 9.136). Comparar com a rodada 7 anterior (v1.8, 18/11) nas conclusões:
   `rotinas/resultados/k26_rodada7/2026-11-25/` (na `main`).
+- 🔎 **26/11, ~10h45: leitura dos 2 artigos do BR-DWGD** (Xavier 2016 e 2022) × documentação oficial de GLDAS, IMERG,
+  PERSIANN-CDR, TerraClimate, CHIRPS e ERA5-Land: o artigo de 2022 termina em 31/7/2020 e diz que 2019–2020 têm
+  "muito poucos dados de pluviômetros"; 2021–2025 é extensão **sem documentação publicada**. Quatro famílias
+  independentes mudam no mesmo ano (2020) e no mesmo sentido → o excesso provavelmente vem do BR-DWGD; suspensão da
+  V1.8 confirmada. Proposta (só com autorização): refazer as razões do C3 com 2010–2018. Detalhes:
+  `pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md` (validacoes-2); o mecanismo sai do `investigar_brdwgd.py`.
 - ⚠️ **26/11, 07h15: MERGE DA V1.8 SUSPENSO, decisão volta ao responsável.** As várias referências (chuva por
   satélite completa) mostram a chuva do banco em **2021–2025 ~9% acima** da relação das décadas anteriores segundo
   **4 fontes independentes** (GLDAS-2.1 +8,0%, IMERG +8,7%, PERSIANN +9,0%, TerraClimate +11,2%); só o CHIRPS não
