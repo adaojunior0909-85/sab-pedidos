@@ -40,6 +40,13 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- ✅⚖️ **26/11, ~20h: ANÁLISE DECISIVA — D1 PRONTO: veredito CLIMA.** 1.279 pluviômetros estáveis da ANA (2010–2024):
+  o BR-DWGD acompanha os postos (Brasil −0,6%), e TODAS as referências ficam 7–11% abaixo deles desde 2020 (CHIRPS
+  −9,2, ERA5 −7,1, IMERG −10,4, PERSIANN −8,0, TerraClimate −10,6; IC inteiro < 0). Regra: CLIMA em Brasil, N, NE, CO,
+  Sul; Sudeste inconclusivo (sem SP). **Recomendações:** manter a chuva do BR-DWGD (NÃO aplicar o M5 na chuva
+  2021–25); a V1.8 está na direção certa (C3G é a versão melhorada); manter a matriz do GFS; aviso no dicionário
+  sobre as referências baixas. Degraus de UR/VPD/Tmax/radiação: sem verdade de chão → aviso, sem correção.
+  `pesquisa/resultados_decisiva/DECISAO_FINAL.md`. **Decisões do responsável:** V1.8 (merge do sab-motor#4) ou C3G.
 - 🔬 **26/11, ~14h: ANÁLISE DECISIVA (fase 4) pedida pelo responsável** ("terceira análise mais profunda e detalhada
   para realmente decidir"). Protocolo congelado: `pesquisa/PROTOCOLO_ANALISE_DECISIVA.md` (d2d7dc1). Teste central
   **D1**: pluviômetros ESTÁVEIS da ANA (os mesmos 2010–2024, serviço público telemetriaws1.ana.gov.br, liberado no

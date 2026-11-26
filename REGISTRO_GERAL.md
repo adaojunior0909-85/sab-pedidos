@@ -77,6 +77,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 | 10 variáveis | TerraClimate (e chuva × CHIRPS) por década, 5 regiões + 27 estados | 1961–2025 | **pronto**: chuva com degrau em **2021–2025 em todas as regiões** × TerraClimate (Brasil +11,2%; até 2020, ±3%); × CHIRPS sem degrau na média da década (o CHIRPS também usa estações), mas +7 a +10% no Norte/Nordeste ano a ano. `pesquisa/resultados_historico/RESULTADOS.md` |
 | Todas (várias referências) | TerraClimate, CHIRPS, PERSIANN-CDR, IMERG, GLDAS-2.0/2.1, ERA5-Land, MOD16 (emenda 1 da fase 2) | 1961–2025 | parcial (ERA5-Land e GLDAS-2.0 ainda na fila). **Confirmados** (≥ 2 independentes): chuva Brasil 2021–2025; UR Nordeste 1961–70; ETo Norte 2001–10; ET real Sudeste 2001–10. `pesquisa/resultados_multifonte/RESULTADOS.md` |
 | Fase 2 (correção de todas) | BR-DWGD fora da amostra | 2016–2025 | M1-C3R ❌; M2-R2 ❌ (ETo +0,82 p.p., precisava 1); M3-T1 ❌; leva 1 (C3G, C3RG, R1, T2) na fila. `pesquisa/resultados_fase2/` |
+| Análise decisiva (fase 4) | 1.279 pluviômetros estáveis da ANA (2010–2024) como verdade de chão | 2010–2024 | **CLIMA**: o BR-DWGD acompanha os postos (−0,6%); todas as referências ficam 7–11% abaixo deles desde 2020 → manter a chuva do BR-DWGD; V1.8 na direção certa. `pesquisa/resultados_decisiva/DECISAO_FINAL.md` |
 | Auditoria profunda (fase 3) | famílias F1–F8 (GPCC, CRU, CHIRPS, NASA POWER, ERA5-Land, GLDAS, GRACE/SMAP, rios) | 1961 → previsão | protocolo congelado (`pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`); A1/A2: **chuva com degrau persistente desde 2020 que o El Niño/La Niña não explica** (Brasil, N, NE, CO); A7: a previsão (matriz GFS 2021–2025) e a V1.8 herdam o degrau; A3, POWER e A4 na fila. `pesquisa/resultados_auditoria/` |
 | BR-DWGD bruto | CHIRPS diário, ERA5-Land bruto; artigos e site do autor | 1961–2025 | na fila; leitura dos documentos pronta: `pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md` |
 | Todas as referências | a mesma referência na grade do SAB × na resolução nativa (sensibilidade ao tamanho do pixel) | todos os meses usados | na fila (resultado no apêndice) |
@@ -111,7 +112,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 14:41, Brasília)
+# Apêndice automático (refeito em 26/11/2026 20:01, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -2048,6 +2049,109 @@ Médias regionais nos pixels entregues. total = chuva do ano (mm); dias = dias c
 | 2024 | 1677 | 1.000 | +5.8% | -4.0% | +9.6% | +16.1% | +14.1% | 366 |
 | 2025 | 1693 | 1.000 | +3.7% | -9.1% | +13.6% | +8.3% | +9.3% | 365 |
 
+### Análise decisiva (fase 4): DECISÃO FINAL da chuva
+
+Arquivo: `pesquisa/resultados_decisiva/DECISAO_FINAL.md`
+
+#### Análise decisiva (fase 4): decisão da chuva 2020–2025 (26/11/2026, ~20h)
+
+Protocolo `pesquisa/PROTOCOLO_ANALISE_DECISIVA.md` (congelado em d2d7dc1; emenda 1 antes de qualquer resultado do D1).
+
+##### Resultado
+- **D1 (teste central), 1.279 pluviômetros estáveis da ANA** (os mesmos de 2010 a 2024, 25 estados; São Paulo e
+  Tocantins não concluídos porque a ANA saiu do ar): nos próprios postos, **o BR-DWGD acompanha os pluviômetros**
+  (Brasil −0,6%; regiões entre −3,1% e +2,5%), enquanto **todas as referências ficam abaixo deles desde 2020**:
+  CHIRPS −9,2%, ERA5-Land −7,1%, IMERG −10,4%, PERSIANN −8,0%, TerraClimate −10,6% (Brasil; IC 95% inteiro abaixo de
+  zero). Ano a ano, o degrau das referências contra os postos aparece em **2020** (de ±3% em 2010–2019 para −8 a −15%
+  em 2020–2024). Todos os dados dos postos são do mesmo nível (bruto) em todos os anos.
+  **Veredito pela regra: CLIMA (as referências erram)** no Brasil, Norte, Nordeste, Centro-Oeste e Sul; Sudeste
+  inconclusivo (sem SP). Sensibilidade com base 2015–2019: o mesmo (Sul passa a inconclusivo, Sudeste a CLIMA).
+- **D2:** as referências F1, F2 e F5 são coerentes entre si; o CHIRPS subiu ~6% contra elas desde 2020 (Brasil,
+  Norte) — mesmo assim fica 9% abaixo dos pluviômetros.
+- **D3** (rede do BR-DWGD): não feito (Google Drive bloqueou o download por cota); nova tentativa em 27/11. Não entra
+  na decisão.
+
+##### Decisão (tabela do protocolo, saída "Manter o BR-DWGD")
+| O quê | Decisão |
+|---|---|
+| Histórico 2020–2025 (chuva) | **manter o BR-DWGD**; o ajuste do M5 na chuva 2021–25 NÃO deve ser aplicado |
+| 2026 (dias ERA5) | **a V1.8 (C3) está na direção certa**: ela leva o ERA5-Land ao nível do BR-DWGD, que concorda com os pluviômetros; o C3G (que passou na leva 1) é a versão melhorada |
+| Previsão (matriz do GFS 2021–2025) | **manter**: a calibração foi feita contra uma chuva que os pluviômetros confirmam |
+| Aviso no dicionário | registrar que as bases de satélite e de reanálise ficam ~8–10% abaixo dos pluviômetros desde 2020 |
+
+##### O que isso implica para as outras conclusões
+- A "chuva alta do BR-DWGD" das fases 2 e 3 era, na verdade, **as referências baixas** depois de 2020.
+- Os degraus de UR (+), VPD (−), Tmax (−, Sudeste) e radiação (−) do BR-DWGD desde 2020 vêm das mesmas referências
+  (ERA5-Land, GLDAS, NASA POWER, TerraClimate), que ficaram mais secas; sem estação de chão para essas variáveis (o INMET
+  bloqueia o acesso automático), **não há base para corrigi-los**: aviso no dicionário, nenhuma correção.
+
+### Análise decisiva D1 (pluviômetros estáveis)
+
+Arquivo: `pesquisa/resultados_decisiva/RESULTADOS_D1.md`
+
+#### D1. Pluviômetros estáveis da ANA (2010–2024) como verdade de chão
+
+Protocolo `pesquisa/PROTOCOLO_ANALISE_DECISIVA.md`. Salto = (base ÷ posto) em 2020–24 contra 2010–19, nos mesmos meses; S = mediana dos postos (IC 95% por reamostragem). **DADOS** = S_BR ≥ +4% (IC > 0) e ≥ 2 famílias com |S| ≤ 3%; **CLIMA** = |S_BR| ≤ 3% e ≥ 2 famílias com S ≤ −4% (IC < 0).
+
+Teste sintético (antes dos dados reais): grade com salto inventado → DADOS (a grade erra); chuva real inventada → CLIMA (as referências erram). **PASSOU**
+
+Conta em dobro: 7727 saltos posto × base refeitos por outra implementação; maior diferença 6.8e-14. **OK**
+
+##### Resultado
+
+| Região | Postos | BR-DWGD | CHIRPS (F3) | ERA5-Land (F5) | IMERG (F1) | PERSIANN (F1) | TerraClimate (F2) | Decisão |
+|---|---|---|---|---|---|---|---|---|
+| Norte | 116 | +2.5% [+0.8; +4.3] | -6.3% [-10.0; -2.6] | -7.5% [-10.6; -5.8] | -11.6% [-13.8; -7.7] | -11.3% [-15.1; -9.0] | -12.8% [-15.7; -10.2] | **CLIMA (as referências erram)** |
+| Nordeste | 533 | -0.1% [-1.0; +0.9] | -12.9% [-14.6; -12.0] | -10.3% [-11.9; -8.4] | -19.0% [-20.2; -18.0] | -17.0% [-18.3; -15.8] | -12.0% [-14.5; -9.7] | **CLIMA (as referências erram)** |
+| Centro-Oeste | 130 | -2.0% [-4.1; +0.2] | -5.1% [-6.9; -3.2] | -14.7% [-15.9; -12.4] | -7.1% [-8.9; -5.3] | -7.3% [-11.0; -4.9] | -18.6% [-19.7; -14.3] | **CLIMA (as referências erram)** |
+| Sudeste | 264 | -3.1% [-4.0; -2.1] | -9.3% [-10.8; -7.9] | -2.7% [-4.8; -1.4] | -4.0% [-5.8; -3.1] | +0.5% [-1.3; +2.0] | -6.3% [-8.3; -5.2] | **inconclusivo** |
+| Sul | 236 | +0.1% [-0.9; +1.1] | -3.7% [-5.4; -2.3] | -4.3% [-5.1; -3.1] | -5.3% [-6.3; -4.2] | -3.6% [-5.3; -1.8] | -9.5% [-10.6; -8.0] | **CLIMA (as referências erram)** |
+| Brasil | 1279 | -0.6% [-1.1; -0.0] | -9.2% [-10.0; -8.5] | -7.1% [-7.7; -6.1] | -10.4% [-11.3; -9.7] | -8.0% [-8.9; -7.0] | -10.6% [-11.2; -9.6] | **CLIMA (as referências erram)** |
+
+##### Sensibilidade (relatada)
+
+- base 2015–2019: Norte CLIMA (as referências erram) (BR +1.8%); Nordeste CLIMA (as referências erram) (BR -0.3%); Centro-Oeste CLIMA (as referências erram) (BR -1.6%); Sudeste CLIMA (as referências erram) (BR -1.8%); Sul inconclusivo (BR +1.3%); Brasil CLIMA (as referências erram) (BR -0.2%)
+- só postos com todos os meses consistidos: Norte inconclusivo (< 30 postos) (0 postos); Nordeste inconclusivo (< 30 postos) (0 postos); Centro-Oeste inconclusivo (< 30 postos) (0 postos); Sudeste inconclusivo (< 30 postos) (0 postos); Sul inconclusivo (< 30 postos) (0 postos); Brasil inconclusivo (< 30 postos) (0 postos)
+
+##### Ano a ano (relato): mediana dos postos de (base ÷ posto) relativa à média de 2010–2019 do próprio posto, Brasil
+
+| Ano | br | chirps | era5 | imerg | persiann | terraclimate | chuva dos postos (mediana, mm) |
+|---|---|---|---|---|---|---|---|
+| 2010 | -0.0% | -6.3% | +0.8% | +0.4% | +3.1% | +2.3% | 1148 |
+| 2011 | -0.1% | -6.2% | +0.1% | -1.3% | +1.3% | -1.4% | 1400 |
+| 2012 | -0.7% | -0.3% | -3.8% | -2.5% | -0.5% | +2.2% | 1035 |
+| 2013 | -0.3% | -1.9% | -2.4% | -1.4% | +3.4% | -7.0% | 1304 |
+| 2014 | -0.6% | +1.9% | -3.5% | +2.5% | +1.8% | +7.4% | 1014 |
+| 2015 | -0.8% | +5.3% | -0.9% | +1.0% | +2.1% | +1.5% | 988 |
+| 2016 | -1.0% | -3.0% | +3.3% | -3.2% | -23.0% | -4.7% | 1150 |
+| 2017 | -1.0% | -1.6% | -0.1% | -2.1% | +2.7% | +0.8% | 1129 |
+| 2018 | -1.0% | -1.7% | -3.3% | -5.0% | -1.1% | -5.6% | 1271 |
+| 2019 | -1.0% | -0.4% | -3.5% | -1.9% | -2.5% | -11.0% | 1118 |
+| 2020 | -1.0% | -8.9% | -3.5% | -7.5% | -8.3% | -9.1% | 1240 |
+| 2021 | -1.1% | -9.2% | -8.9% | -9.1% | -6.6% | -13.0% | 1220 |
+| 2022 | -1.1% | -10.7% | -8.6% | -12.6% | -8.5% | -10.7% | 1360 |
+| 2023 | -1.3% | -8.7% | -12.8% | -15.4% | -13.1% | -13.9% | 1154 |
+| 2024 | -2.1% | -11.8% | -8.1% | -14.6% | -11.8% | -11.6% | 1208 |
+
+Conferência do nível dos dados: todos os meses usados são do nível 1 (bruto) em todos os anos (a ANA ainda não consistiu 2010–2024 nesses postos), então não há troca de dado consistido por bruto no meio da série.
+
+### Análise decisiva D2 (referências entre si)
+
+Arquivo: `pesquisa/resultados_decisiva/RESULTADOS_D2.md`
+
+#### D2. As referências de chuva entre si (sem o BR-DWGD)
+
+Mudança da razão anual entre famílias, 2020–2024 contra 2010–2019 (%; mediana dos pares de bases). F1 = IMERG, PERSIANN, GLDAS-2.1 e NASA POWER (GPCC/GPCP); F2 = TerraClimate; F3 = CHIRPS; F5 = ERA5-Land. Regra: uma família com ≥ 2 pares mudando mais de 5% (e os pares sem ela, não) quebrou em 2020.
+
+| Região | F1/F2 | F1/F3 | F1/F5 | F2/F3 | F2/F5 | F3/F5 | Família que quebrou |
+|---|---|---|---|---|---|---|---|
+| Brasil | +0.2 | -5.4 | +0.4 | -5.8 | -0.1 | +6.1 | F3 |
+| Centro-Oeste | +7.5 | -4.9 | +6.4 | -12.1 | -2.0 | +11.4 | nenhuma |
+| Nordeste | -2.0 | -3.6 | -2.6 | -2.0 | -1.0 | +0.8 | nenhuma |
+| Norte | -3.2 | -8.0 | -1.2 | -5.0 | +2.0 | +7.3 | F3 |
+| Sudeste | +2.4 | -0.6 | -2.5 | -2.6 | -4.6 | -1.9 | nenhuma |
+| Sul | +4.3 | -0.3 | -0.6 | -4.7 | -4.8 | -0.3 | nenhuma |
+
 ### Auditoria profunda: DECISÃO (seção 4)
 
 Arquivo: `pesquisa/resultados_auditoria/DECISAO.md`
@@ -3163,6 +3267,28 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 22:59 | Conferência: decisiva_d1 (ok)  |
+| 26/11/2026 22:45 | Conferência: começou decisiva_d1  |
+| 26/11/2026 22:45 | Conferência: decisiva_d1 (pendente)  |
+| 26/11/2026 22:02 | Conferência: começou decisiva_d1  |
+| 26/11/2026 22:02 | Conferência: decisiva_d1 (pendente)  |
+| 26/11/2026 21:37 | Análise decisiva: emenda 1 (antes de qualquer resultado do D1): com a ANA fora do ar, o D1 segue com os 1.248 postos estáveis já coletados e lista os estados que faltam |
+| 26/11/2026 21:03 | Conferência: começou decisiva_d1  |
+| 26/11/2026 21:03 | Conferência: decisiva_d1 (pendente)  |
+| 26/11/2026 20:40 | Conferência: começou decisiva_d1  |
+| 26/11/2026 20:40 | Conferência: decisiva_d1 (pendente)  |
+| 26/11/2026 20:03 | Conferência: começou resolucao  |
+| 26/11/2026 20:03 | Conferência: resolucao (pendente)  |
+| 26/11/2026 18:43 | D1: posto sem resposta da ANA é pulado; 3 seguidos = serviço fora → guarda o andamento e retoma; andamento salvo a cada 20 postos |
+| 26/11/2026 18:40 | Conferência: começou decisiva_d1  |
+| 26/11/2026 18:40 | Conferência: decisiva_d1 (pendente)  |
+| 26/11/2026 17:41 | Conferência: decisiva_d3 (falhou)  |
+| 26/11/2026 17:41 | Conferência: começou decisiva_d3  |
+| 26/11/2026 17:41 | Conferência: decisiva_d3 (pendente)  |
+| 26/11/2026 17:41 | Conferência: começou decisiva_d3  |
+| 26/11/2026 17:41 | Conferência: decisiva_d3 (pendente)  |
+| 26/11/2026 17:41 | Conferência: começou decisiva_d3  |
+| 26/11/2026 17:41 | Registro: análise decisiva (fase 4) em andamento |
 | 26/11/2026 17:40 | Análise decisiva D3: código (controles da chuva da v_3.2.4 baixados da pasta pública do autor; rede estável x mudada; salto × CHIRPS e ERA5) na fila |
 | 26/11/2026 17:40 | Conferência: começou decisiva_d1  |
 | 26/11/2026 17:39 | Análise decisiva D1: código (inventário e séries da ANA, amostragem no Earth Engine, regra, sintético, conta em dobro) na fila; nenhum dado olhado |
