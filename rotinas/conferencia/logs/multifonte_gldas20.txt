@@ -30,3 +30,37 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    gldas20 1978 pronto em 1054 s
    gldas20 1979 pronto em 938 s
    gldas20 1980 pronto em 768 s
+
+===== 26/11/2026 01:37 (Brasília), tentativa 2 =====
+código: commit cd2f89ec59034b545c2899bb6188476cba249073 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   gldas20 1981 pronto em 357 s
+   gldas20 1982 pronto em 833 s
+   gldas20 1983 pronto em 737 s
+   gldas20 1984 pronto em 785 s
+   gldas20 1985 pronto em 861 s
+   gldas20 1986 pronto em 904 s
+   gldas20 1987 pronto em 760 s
+   gldas20 1988 pronto em 1007 s
+   gldas20 1989 pronto em 953 s
+   gldas20 1990 pronto em 890 s
+   ⚠️ gldas20 1991-04: Computation timed out.
+   gldas20 1991 pronto em 1231 s
+   gldas20 1992 pronto em 886 s
+   gldas20 1993 pronto em 887 s
+   gldas20 1994 pronto em 1085 s
+   gldas20 1995 pronto em 958 s
+   gldas20 1996 pronto em 852 s
+   gldas20 1997 pronto em 829 s
+   gldas20 1998 pronto em 831 s
+   gldas20 1999 pronto em 797 s
+   gldas20 2000 pronto em 877 s
+   gldas20 2001 pronto em 807 s
