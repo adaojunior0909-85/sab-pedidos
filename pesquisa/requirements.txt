@@ -1,3 +1,7 @@
 numpy
 pandas
 scipy
+gdown
+xarray
+netCDF4
+dask
