@@ -1,0 +1,202 @@
+
+===== 26/11/2026 07:30 (Brasília), tentativa 1 =====
+código: commit 69bb4de39d9cf686de57ec0693ab210ba7db116b | earthengine-api 1.7.51 | Python 3.12.16
+   metadados 1961: 365 imagens
+   metadados 1962: 365 imagens
+   metadados 1963: 365 imagens
+   metadados 1964: 366 imagens
+   metadados 1965: 365 imagens
+   metadados 1966: 365 imagens
+   metadados 1967: 365 imagens
+   metadados 1968: 366 imagens
+   metadados 1969: 365 imagens
+   metadados 1970: 365 imagens
+   metadados 1971: 365 imagens
+   metadados 1972: 366 imagens
+   metadados 1973: 365 imagens
+   metadados 1974: 365 imagens
+   metadados 1975: 365 imagens
+   metadados 1976: 366 imagens
+   metadados 1977: 365 imagens
+   metadados 1978: 365 imagens
+   metadados 1979: 365 imagens
+   metadados 1980: 366 imagens
+   metadados 1981: 365 imagens
+   metadados 1982: 365 imagens
+   metadados 1983: 365 imagens
+   metadados 1984: 366 imagens
+   metadados 1985: 365 imagens
+   metadados 1986: 365 imagens
+   metadados 1987: 365 imagens
+   metadados 1988: 366 imagens
+   metadados 1989: 365 imagens
+   metadados 1990: 365 imagens
+   metadados 1991: 365 imagens
+   metadados 1992: 366 imagens
+   metadados 1993: 365 imagens
+   metadados 1994: 365 imagens
+   metadados 1995: 365 imagens
+   metadados 1996: 366 imagens
+   metadados 1997: 365 imagens
+   metadados 1998: 365 imagens
+   metadados 1999: 365 imagens
+   metadados 2000: 366 imagens
+   metadados 2001: 365 imagens
+   metadados 2002: 365 imagens
+   metadados 2003: 365 imagens
+   metadados 2004: 366 imagens
+   metadados 2005: 365 imagens
+   metadados 2006: 365 imagens
+   metadados 2007: 365 imagens
+   metadados 2008: 366 imagens
+   metadados 2009: 365 imagens
+   metadados 2010: 365 imagens
+   metadados 2011: 365 imagens
+   metadados 2012: 366 imagens
+   metadados 2013: 365 imagens
+   metadados 2014: 365 imagens
+   metadados 2015: 365 imagens
+   metadados 2016: 366 imagens
+   metadados 2017: 365 imagens
+   metadados 2018: 365 imagens
+   metadados 2019: 365 imagens
+   metadados 2020: 366 imagens
+   metadados 2021: 365 imagens
+   metadados 2022: 365 imagens
+   metadados 2023: 365 imagens
+   metadados 2024: 366 imagens
+   metadados 2025: 365 imagens
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   2025 pronto em 114 s
+   2024 pronto em 105 s
+   2023 pronto em 66 s
+   2022 pronto em 88 s
+   2021 pronto em 110 s
+   2020 pronto em 100 s
+   2019 pronto em 95 s
+   2018 pronto em 121 s
+   2017 pronto em 84 s
+   2016 pronto em 87 s
+   2015 pronto em 76 s
+   2014 pronto em 92 s
+   2013 pronto em 77 s
+   2012 pronto em 187 s
+   2011 pronto em 134 s
+   2010 pronto em 94 s
+   2009 pronto em 64 s
+   2008 pronto em 71 s
+   2007 pronto em 109 s
+   2006 pronto em 97 s
+   2005 pronto em 96 s
+   2004 pronto em 131 s
+   2003 pronto em 120 s
+   2002 pronto em 120 s
+   2001 pronto em 103 s
+   2000 pronto em 87 s
+   1999 pronto em 99 s
+   1998 pronto em 159 s
+   1997 pronto em 150 s
+   1996 pronto em 113 s
+   1995 pronto em 127 s
+   1994 pronto em 186 s
+   1993 pronto em 83 s
+   1992 pronto em 89 s
+   1991 pronto em 67 s
+   1990 pronto em 150 s
+   1989 pronto em 153 s
+   1988 pronto em 101 s
+   1987 pronto em 75 s
+   1986 pronto em 95 s
+   1985 pronto em 201 s
+   1984 pronto em 152 s
+   1983 pronto em 100 s
+   1982 pronto em 158 s
+   1981 pronto em 123 s
+   1980 pronto em 145 s
+   1979 pronto em 139 s
+   1978 pronto em 131 s
+   1977 pronto em 144 s
+   1976 pronto em 115 s
+   1975 pronto em 140 s
+   1974 pronto em 189 s
+   1973 pronto em 116 s
+   1972 pronto em 111 s
+   1971 pronto em 97 s
+   1970 pronto em 143 s
+   1969 pronto em 173 s
+   1968 pronto em 101 s
+   1967 pronto em 128 s
+   1966 pronto em 148 s
+   1965 pronto em 103 s
+   1964 pronto em 144 s
+   1963 pronto em 125 s
+   1962 pronto em 119 s
+   1961 pronto em 115 s
+# O BR-DWGD bruto, ano a ano (1961–2025)
+
+Médias regionais nos pixels entregues. total = chuva do ano (mm); dias = dias com ≥ 1 mm; int = total / dias (mm por dia de chuva); n = pixel-dias válidos no ano (cobertura). BR = BR-DWGD bruto; SAB = o que o banco entrega; CHIRPS diário e ERA5-Land bruto como comparação. Razões em relação à média de 2001–2015.
+
+## Metadados (1ª imagem de cada ano)
+
+| Ano | Imagens | Bandas | Propriedades |
+|---|---|---|---|
+| 1961 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1962 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1963 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1964 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1965 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1966 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1967 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1968 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1969 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1970 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1971 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1972 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1973 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1974 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1975 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1976 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1977 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1978 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1979 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1980 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1981 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1982 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1983 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1984 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1985 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1986 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1987 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1988 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1989 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1990 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1991 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1992 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1993 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1994 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1995 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1996 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1997 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1998 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 1999 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2000 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2001 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2002 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2003 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2004 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2005 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2006 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2007 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2008 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2009 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2010 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2011 | 365 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |
+| 2012 | 366 | u2 Tmin pr Tmax RH ET Rs | BAND_ET_ADD BAND_ET_MULT BAND_ET_UNIT BAND_RH_ADD BAND_RH_MULT BAND_RH_UNIT BAND_Rs_ADD BAND_Rs_MULT BAND_Rs_UNIT BAND_Tmax_ADD BAND_Tmax_MULT BAND_Tmax_UNIT BAND_Tmin_ADD BAND_Tmin_MULT BAND_Tmin_UNIT BAND_pr_ADD BAND_pr_MULT BAND_pr_UNIT BAND_u2_ADD BAND_u2_MULT BAND_u2_UNIT contact day month paper site system:asset_size system:band_names system:bands system:footprint system:id system:index system:time_end system:time_start system:version year |

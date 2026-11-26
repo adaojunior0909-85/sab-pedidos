@@ -71,7 +71,10 @@
  },
  "brdwgd": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "26/11 07:30"
+  "situacao": "ok",
+  "inicio": "26/11 07:30",
+  "fim": "26/11 09:38",
+  "minutos": 128,
+  "codigo": 0
  }
 }
