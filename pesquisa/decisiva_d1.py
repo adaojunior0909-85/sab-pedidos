@@ -124,10 +124,12 @@ def series(cand, limite):
             except RuntimeError:
                 falhas = locals().get('falhas', 0) + 1
                 print(f'   ⚠️ posto {cod} sem resposta da ANA (pulado; {falhas} seguidos)', flush=True)
-                if falhas >= 3:          # o serviço caiu: guarda o andamento e retoma na próxima rodada
+                if falhas >= 3:          # o serviço caiu: guarda o andamento e segue com o que tem (emenda 1)
                     pd.concat([cons, pd.DataFrame(novos)]).to_csv(feito, index=False)
-                    print('   ANA fora do ar: andamento guardado; retoma depois.', flush=True)
-                    raise SystemExit(3)
+                    print('   ANA fora do ar: andamento guardado; o D1 segue com os postos já coletados.', flush=True)
+                    with open(os.path.join(D1, 'ANA_FORA.txt'), 'w', encoding='utf-8') as f:
+                        f.write(f'{time.strftime("%d/%m/%Y %H:%M")} UTC: ANA fora do ar ao consultar {uf}\n')
+                    return pd.concat([cons, pd.DataFrame(novos)])
                 continue                 # posto pulado agora; será tentado de novo na próxima rodada
             ok = estavel(s)
             if ok:
@@ -331,6 +333,15 @@ def analise():
     t = avaliar(sal, cand)
     sal.join(cand.set_index('codigo')[['uf', 'regiao', 'lat', 'lon', 'operadora']]).to_csv(os.path.join(SAIDA, 'D1_saltos_postos.csv'))
     t.to_csv(os.path.join(SAIDA, 'D1_decisao.csv'), index=False)
+    fora = os.path.join(D1, 'ANA_FORA.txt')
+    feitos = pd.read_csv(os.path.join(D1, 'consultados.csv')).merge(cand[['codigo', 'uf']], on='codigo')
+    por_uf = feitos.groupby('uf').estavel.sum()
+    falta = sorted(set(cand.uf) - set(por_uf[por_uf >= 150].index) - set(
+        u for u in cand.uf.unique() if set(cand[cand.uf == u].codigo) <= set(feitos.codigo)))
+    if os.path.exists(fora) and falta:
+        L += [f'**Emenda 1:** a ANA saiu do ar ({open(fora, encoding="utf-8").read().strip()}); o D1 seguiu com os '
+              f'postos já coletados. Estados não concluídos: {", ".join(falta)}. Quando a ANA voltar, o D1 é refeito '
+              'com eles (sensibilidade).', '']
     L += ['## Resultado', '', '| Região | Postos | BR-DWGD | CHIRPS (F3) | ERA5-Land (F5) | IMERG (F1) | PERSIANN (F1) | '
           'TerraClimate (F2) | Decisão |', '|---|---|---|---|---|---|---|---|---|']
     for r in t.itertuples():

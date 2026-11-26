@@ -65,3 +65,9 @@ sensibilidade relatada (consistidos só; base 2015–2019; limiar de estável �
 ## Ordem
 1. D2 (sem rede nova) → 2. D1 pela fila (inventário, séries, amostragem no Earth Engine) → 3. D3 pela fila → 4. D4 se der.
 Resultados em `pesquisa/resultados_decisiva/`.
+
+## Emenda 1 (26/11/2026, ~18h40, ANTES de qualquer resultado do D1; o serviço da ANA saiu do ar duas vezes)
+Se a ANA ficar fora do ar (3 postos seguidos sem resposta depois de 3 tentativas cada), o D1 segue com os postos
+estáveis já coletados (1.248 em 25 estados nesse momento; faltavam São Paulo e Tocantins) e lista no resultado os
+estados não concluídos. Quando a ANA voltar, o D1 é refeito com eles e relatado como sensibilidade; a regra e os
+limiares não mudam.
