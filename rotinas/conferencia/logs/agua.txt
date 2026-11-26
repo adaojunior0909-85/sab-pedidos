@@ -1,0 +1,76 @@
+
+===== 26/11/2026 09:04 (Brasília), tentativa 1 =====
+código: commit f0d6a6ce0d689f824aa8b500c2df4f4cbd3f3fa0 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   grace 2002: 8 meses
+   grace 2003: 11 meses
+   grace 2004: 12 meses
+   grace 2005: 12 meses
+   grace 2006: 12 meses
+   grace 2007: 12 meses
+   grace 2008: 12 meses
+   grace 2009: 12 meses
+   grace 2010: 11 meses
+   grace 2011: 11 meses
+   grace 2012: 10 meses
+   grace 2013: 9 meses
+   grace 2014: 8 meses
+   grace 2015: 9 meses
+   smap 2015: 12 meses
+   grace 2016: 9 meses
+   smap 2016: 12 meses
+   grace 2017: 5 meses
+   smap 2017: 12 meses
+   grace 2018: 6 meses
+   smap 2018: 12 meses
+   grace 2019: 12 meses
+   smap 2019: 12 meses
+   grace 2020: 12 meses
+   smap 2020: 12 meses
+   grace 2021: 12 meses
+   smap 2021: 12 meses
+   grace 2022: 12 meses
+   smap 2022: 12 meses
+   grace 2023: 12 meses
+   smap 2023: 12 meses
+   grace 2024: 9 meses
+   smap 2024: 12 meses
+   smap 2025: 12 meses
+   smap 2026: 12 meses
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_agua.py", line 223, in <module>
+    analise() if (sys.argv[1:] or [''])[0] == 'analise' else extrair()
+                                                             ^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_agua.py", line 94, in extrair
+    analise()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_agua.py", line 166, in analise
+    es0, es1 = erro_loo(x_sab, ds, treino, teste)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/testemunha_agua.py", line 114, in erro_loo
+    xt, yt = x.loc[treino], y.loc[treino]
+                            ~~~~~^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexing.py", line 1342, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexing.py", line 1923, in _getitem_axis
+    return self._getitem_iterable(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexing.py", line 1863, in _getitem_iterable
+    keyarr, indexer = self._get_listlike_indexer(key, axis)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexing.py", line 2093, in _get_listlike_indexer
+    keyarr, indexer = ax._get_indexer_strict(key, axis_name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6557, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6609, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: '[2012, 2016, 2018] not in index'
