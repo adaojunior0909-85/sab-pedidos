@@ -43,6 +43,12 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- 📝 **Análise profunda proposta (26/11, ~12h; protocolo a escrever e congelar com aprovação):** todo o banco, 1961 →
+  previsão de 15 dias, as 8 variáveis do BR-DWGD; teste do El Niño/La Niña (RONI, 1981–2019 como régua), GRACE,
+  SMAP, vazão da ANA (só com liberação), rede do BR-DWGD (controles Count/dist_nearest), ERA5-Land. **Pedido do
+  responsável: incluir o NASA POWER como testemunha** (MERRA-2 nas variáveis do tempo; CERES/GEWEX na radiação;
+  pixel grosso, 0,5° × 0,625° e 1°, o que serve para médias de região e estado). Antes de congelar, ler a
+  documentação oficial do POWER para saber de que família é a chuva dele (se depende do GPCC/CPC).
 - ✅ **Protocolo da correção APROVADO** (25/11, ~07h), com 2026 × CHIRPS só como relato; congelado antes de rodar
   (commit `1de7696` do `validacoes-2`). ✅ **Emenda 1** (25/11, ~08h, pedida pelo responsável, antes de rodar; commit
   `91cd9b3`): a condição 4 usa TODOS os pixels entregues (dias de chuva e Rx1day, em cada uma das 5 regiões) e o p99
