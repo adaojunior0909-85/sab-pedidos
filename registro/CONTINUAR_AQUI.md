@@ -142,10 +142,10 @@ As cadeias do `validacoes-2` se chamam de novo sozinhas até acabar. Se uma tare
 | Módulo | O que testa | Situação (25/11, ~19h50) |
 |---|---|---|
 | M1-C3R | a razão do C3 só onde o viés é consistente | ❌ **não passou** (mediana +0,8 p.p.; r_anom −0,022); o C3 fica. Achado: o C3 piora os dias de chuva (afastamento 9,5 → 12,6 p.p.). `resultados_fase2/RESULTADOS_M1_C3R.md` |
-| M1-C3G, C3RG | corte da garoa (+ C3; + C3 só onde consistente) | 🔄 rodando (cadeia `fase2_leva1`, branch de trabalho) |
+| M1-C3G, C3RG | corte da garoa (+ C3; + C3 só onde consistente) | 🔄 rodando (cadeia `fase2_leva1`); parcial 2016–2018: o C3G derruba o afastamento dos dias de chuva de 22,0 para 3,5 p.p. com mediana +0,25 p.p. (falta o p99 e os outros 7 anos) |
 | M2-R1 | radiação × razão regional (ETo recalculada) | 🔄 idem |
 | M3-T2 | Tmax, Tmin, UR, vento: ajuste regional (VPD e ETo recalculadas) | 🔄 idem |
-| M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | ⏳ leva 2 (a vigia implementa quando a leva 1 andar) |
+| M2-R2, M3-T1 | quantis da radiação; janela de 10 anos | 🔄 **leva 2 disparada (26/11, ~01h20)**: `pesquisa/validar_fase2_leva2.py`, cadeia `fase2_leva2` (branch de trabalho) |
 | M4 | ET real, transpiração, solo, folha, escoamento | conclusão fixada antes: sem referência para corrigir o nível → avisos no dicionário |
 | M5 | histórico 1961–2025 | ⏳ **o `historico` terminou (25/11, 19h52)**; décadas com degrau: chuva × TerraClimate 2021–2025 em todas as regiões (+6 a +17%) e Sudeste 1981–90, mas o CHIRPS NÃO confirma (2021–25 Brasil +0,0%), e o CHIRPS marca o Centro-Oeste 2011–20 (−7,4%), que o TerraClimate não confirma → chuva sem correção pela regra; Tmin 1961–70 (correlação baixa: NE 0,11, CO 0,38), radiação 1961–80, vento, VPD, ETo e escoamento em várias décadas: falta a 2ª referência (ERA5 bruto), que a vigia roda. `pesquisa/resultados_historico/RESULTADOS.md` |
 | M6 | previsão GFS | ⏳ ~24/12 (30 dias de fotografias) |
