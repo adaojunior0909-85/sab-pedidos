@@ -97,7 +97,10 @@
  },
  "decisiva_d3": {
   "tentativas": 3,
-  "situacao": "rodando",
-  "inicio": "26/11 14:41"
+  "situacao": "falhou",
+  "inicio": "26/11 14:41",
+  "fim": "26/11 14:41",
+  "minutos": 0,
+  "codigo": 1
  }
 }

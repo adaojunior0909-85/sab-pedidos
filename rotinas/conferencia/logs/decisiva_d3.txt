@@ -78,3 +78,43 @@ You may still be able to access the file from the browser:
 	https://drive.google.com/uc?id=1xbBl-6E78OyIOvxZPzy3IR316wULhVt6
 
 but Gdown can't. Please check connections and permissions.
+
+===== 26/11/2026 14:41 (Brasília), tentativa 3 =====
+código: commit 3c5115c5e8f85a9feb6dfaf380ebd0b6e4b655a3 | earthengine-api 1.7.51 | Python 3.12.16
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/gdown/download.py", line 492, in _get_download_response
+    url = get_url_from_gdrive_confirmation(contents)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/gdown/download.py", line 85, in get_url_from_gdrive_confirmation
+    raise FileURLRetrievalError(error)
+gdown.exceptions.FileURLRetrievalError: Too many users have viewed or downloaded this file recently. Please try accessing the file again later. If the file you are trying to access is particularly large or is shared with many people, it may take up to 24 hours to be able to view or download the file. If you still can't access a file after 24 hours, contact your domain administrator.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d3.py", line 146, in <module>
+    main()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d3.py", line 114, in main
+    cel = celulas()
+          ^^^^^^^^^
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/decisiva_d3.py", line 34, in celulas
+    gdown.download(id=ZIP_ID, output=z, quiet=False)
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/gdown/download.py", line 876, in download
+    res, url = _get_download_response(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/gdown/download.py", line 503, in _get_download_response
+    raise FileURLRetrievalError(message)
+gdown.exceptions.FileURLRetrievalError: Failed to retrieve file url:
+
+	Too many users have viewed or downloaded this file recently. Please
+	try accessing the file again later. If the file you are trying to
+	access is particularly large or is shared with many people, it may
+	take up to 24 hours to be able to view or download the file. If you
+	still can't access a file after 24 hours, contact your domain
+	administrator.
+
+You may still be able to access the file from the browser:
+
+	https://drive.google.com/uc?id=1xbBl-6E78OyIOvxZPzy3IR316wULhVt6
+
+but Gdown can't. Please check connections and permissions.
