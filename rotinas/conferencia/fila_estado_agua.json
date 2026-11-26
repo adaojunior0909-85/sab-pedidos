@@ -1,0 +1,82 @@
+{
+ "validar_2026": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:19",
+  "fim": "25/11 03:28",
+  "minutos": 10,
+  "codigo": 0
+ },
+ "solo_folha": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:28",
+  "fim": "25/11 03:33",
+  "minutos": 5,
+  "codigo": 0
+ },
+ "escoamento_extrair": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:33",
+  "fim": "25/11 03:36",
+  "minutos": 3,
+  "codigo": 0
+ },
+ "escoamento_metricas": {
+  "tentativas": 1,
+  "situacao": "ok",
+  "inicio": "25/11 03:36",
+  "fim": "25/11 03:36",
+  "minutos": 0,
+  "codigo": 0
+ },
+ "historico": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 04:15"
+ },
+ "resolucao": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:01"
+ },
+ "multifonte_gldas21": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_gldas20": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_chuva": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_era5": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_mod16": {
+  "tentativas": 2,
+  "situacao": "ok",
+  "inicio": "26/11 01:55",
+  "fim": "26/11 02:14",
+  "minutos": 19,
+  "codigo": 0
+ },
+ "brdwgd": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 07:30"
+ },
+ "agua": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 09:03"
+ }
+}
