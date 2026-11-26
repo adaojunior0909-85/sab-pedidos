@@ -43,8 +43,11 @@
  },
  "multifonte_gldas21": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "26/11 01:35"
+  "situacao": "ok",
+  "inicio": "26/11 01:35",
+  "fim": "26/11 02:50",
+  "minutos": 75,
+  "codigo": 0
  },
  "multifonte_gldas20": {
   "tentativas": 1,

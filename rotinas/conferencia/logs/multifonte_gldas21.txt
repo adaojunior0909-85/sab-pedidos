@@ -32,3 +32,60 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    gldas21 2019 pronto em 817 s
    gldas21 2020 pronto em 805 s
 Tempo desta vez acabou; a próxima retoma daqui.
+
+===== 26/11/2026 01:35 (Brasília), tentativa 1 =====
+código: commit fd5c1a970994abdc93fec50aa3b9cfd932f250a8 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   gldas21 2021 pronto em 803 s
+   gldas21 2022 pronto em 959 s
+   gldas21 2023 pronto em 913 s
+   gldas21 2024 pronto em 905 s
+   gldas21 2025 pronto em 892 s
+# O banco contra várias referências (1961–2025)
+
+Protocolo `pesquisa/PROTOCOLO_CORRECAO_FASE2.md`, emenda 1 (antes de rodar). Viés da década / correlação das anomalias mensais, por fonte. ⚠️ = degrau naquela fonte. **Confirmado** = degrau em ≥ 2 referências independentes (GLDAS-2.0 e 2.1 = uma; ERA5-Land não conta para as variáveis do modelo). Todas as comparações (também os 27 estados) em `TODAS_AS_COMPARACOES.csv`.
+
+## Fontes já comparadas
+
+| Fonte | Variáveis | Anos com dado |
+|---|---|---|
+| chirps | Chuva | 1981–2024 |
+| gldas21 | Chuva, ET real, ETo, Escoamento total, Radiação, Temperatura da folha, Temperatura do solo, Tmax, Tmin, Transpiração, Umidade do solo 0-100 cm, Umidade do solo 0-5 cm, Umidade relativa, VPD, Vento | 2000–2025 |
+| imerg | Chuva | 2000–2006 |
+| persiann | Chuva | 1983–2006 |
+| terraclimate | Chuva, ET real, ETo, Escoamento total, Radiação, Tmax, Tmin, Umidade do solo 0-100 cm, VPD, Vento | 1961–2024 |
+
+## Degraus confirmados (≥ 2 referências independentes)
+
+| Variável | Região | Década | Fontes que marcam |
+|---|---|---|---|
+| ETo | Norte | 2001-2010 | GLDAS, TerraClimate |
+| Chuva | Brasil | 2021-2025 | GLDAS, TerraClimate |
+| Chuva | Centro-Oeste | 2021-2025 | GLDAS, TerraClimate |
+| Chuva | Nordeste | 2021-2025 | GLDAS, TerraClimate |
+| Chuva | Norte | 2021-2025 | GLDAS, TerraClimate |
+| Chuva | Sul | 2021-2025 | GLDAS, TerraClimate |
+| Radiação | Brasil | 2021-2025 | GLDAS, TerraClimate |
+| Radiação | Nordeste | 2021-2025 | GLDAS, TerraClimate |
+| Radiação | Norte | 2001-2010 | GLDAS, TerraClimate |
+| Escoamento total | Sudeste | 2011-2020 | GLDAS, TerraClimate |
+| Escoamento total | Sudeste | 2021-2025 | GLDAS, TerraClimate |
+| Escoamento total | Sul | 2021-2025 | GLDAS, TerraClimate |
+| VPD | Brasil | 2001-2010 | GLDAS, TerraClimate |
+| VPD | Centro-Oeste | 2001-2010 | GLDAS, TerraClimate |
+| VPD | Norte | 2001-2010 | GLDAS, TerraClimate |
+| VPD | Sudeste | 2001-2010 | GLDAS, TerraClimate |
+
+## Chuva
+
+| Década | Região | chirps | gldas21 | imerg | persiann | terraclimate |
+|---|---|---|---|---|---|---|
+| 1961-1970 | Norte | - | - | - | - | +6.0 / 0.70 |
