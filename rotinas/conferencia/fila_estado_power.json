@@ -75,11 +75,8 @@
   "inicio": "26/11 07:30"
  },
  "power": {
-  "tentativas": 2,
-  "situacao": "pendente",
-  "inicio": "26/11 09:17",
-  "fim": "26/11 09:17",
-  "minutos": 0,
-  "codigo": 1
+  "tentativas": 3,
+  "situacao": "rodando",
+  "inicio": "26/11 09:17"
  }
 }
