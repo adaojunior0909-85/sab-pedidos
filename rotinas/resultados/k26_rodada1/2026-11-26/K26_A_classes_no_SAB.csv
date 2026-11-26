@@ -1,0 +1,4 @@
+data;rota;com_valor_total;A;B;C_interior;C_borda;com_valor_e_classe;com_valor_sem_classe;classe_sem_valor
+2026-01-01;ERA5;70799;70364;204;24;207;70799;0;1247
+2026-06-22;ERA5;70799;70364;204;24;207;70799;0;1247
+2026-12-11;GFS;70799;70364;204;24;207;70799;0;1247
