@@ -80,8 +80,11 @@
   "inicio": "26/11 09:03"
  },
  "power": {
-  "situacao": "rodando",
+  "situacao": "ok",
   "tentativas": 1,
-  "inicio": "26/11 09:19"
+  "inicio": "26/11 09:19",
+  "fim": "26/11 09:31",
+  "minutos": 12,
+  "codigo": 0
  }
 }

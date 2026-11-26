@@ -135,3 +135,51 @@ Traceback (most recent call last):
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "pandas/_libs/parsers.pyx", line 735, in pandas._libs.parsers.TextReader.__cinit__
 pandas.errors.EmptyDataError: No columns to parse from file
+
+===== 26/11/2026 09:19 (Brasília), tentativa 1 =====
+código: commit 7be67600a1661d8c9e8a5f567e53450110901b60 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   pesos UF acre: 24 células
+   pesos UF alagoas: 8 células
+   pesos UF amapa: 22 células
+   pesos UF amazonas: 160 células
+   pesos UF bahia: 73 células
+   pesos UF ceara: 23 células
+   pesos UF distrito federal: 4 células
+   pesos UF espirito santo: 11 células
+   pesos UF goias: 46 células
+   pesos UF maranhao: 48 células
+   pesos UF mato grosso: 101 células
+   pesos UF mato grosso do sul: 46 células
+   pesos UF minas gerais: 76 células
+   pesos UF name unknown: 0 células
+   pesos UF para: 129 células
+   pesos UF paraiba: 12 células
+   pesos UF parana: 31 células
+   pesos UF pernambuco: 20 células
+   pesos UF piaui: 34 células
+   pesos UF rio de janeiro: 10 células
+   pesos UF rio grande do norte: 10 células
+   pesos UF rio grande do sul: 41 células
+   pesos UF rondonia: 34 células
+   pesos UF roraima: 33 células
+   pesos UF santa catarina: 18 células
+   pesos UF sao paulo: 37 células
+   pesos UF sergipe: 9 células
+   pesos UF tocantins: 38 células
+   pesos Norte: 378 células
+   pesos Nordeste: 166 células
+   pesos Centro-Oeste: 173 células
+   pesos Sudeste: 107 células
+   pesos Sul: 75 células
+   pesos Brasil: 801 células
+   ALLSKY_SFC_SW_DWN: 16632 região-mês em 9 s (API v2.10.1)
+   pares: 124740 linhas, 1981–2025
