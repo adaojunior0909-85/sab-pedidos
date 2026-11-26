@@ -96,11 +96,8 @@
   "inicio": "26/11 14:40"
  },
  "decisiva_d3": {
-  "tentativas": 2,
-  "situacao": "pendente",
-  "inicio": "26/11 14:41",
-  "fim": "26/11 14:41",
-  "minutos": 0,
-  "codigo": 1
+  "tentativas": 3,
+  "situacao": "rodando",
+  "inicio": "26/11 14:41"
  }
 }
