@@ -46,12 +46,12 @@
   "situacao": "rodando",
   "inicio": "25/11 20:22"
  },
- "multifonte_chuva": {
+ "multifonte_gldas20": {
   "tentativas": 1,
   "situacao": "rodando",
   "inicio": "25/11 20:22"
  },
- "multifonte_gldas20": {
+ "multifonte_chuva": {
   "tentativas": 1,
   "situacao": "rodando",
   "inicio": "25/11 20:22"
@@ -62,10 +62,8 @@
   "inicio": "25/11 20:22"
  },
  "multifonte_mod16": {
-  "tentativas": 1,
-  "situacao": "pendente",
-  "inicio": "25/11 20:40",
-  "fim": "26/11 01:55",
-  "codigo": "tempo"
+  "tentativas": 2,
+  "situacao": "rodando",
+  "inicio": "26/11 01:55"
  }
 }
