@@ -58,8 +58,11 @@
  },
  "multifonte_era5": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "26/11 06:46"
+  "situacao": "ok",
+  "inicio": "26/11 06:46",
+  "fim": "26/11 11:22",
+  "minutos": 276,
+  "codigo": 0
  },
  "multifonte_mod16": {
   "tentativas": 1,
