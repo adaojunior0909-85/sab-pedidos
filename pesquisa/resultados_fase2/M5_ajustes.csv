@@ -1,0 +1,49 @@
+variavel,regiao,decada,referencias,ajuste,some_nas_refs,novas_decadas,passa,nota
+RH,Nordeste,1961-1970,"ERA5-Land, GLDAS",-4.6771517128634414,True,2001-2010 (gldas20),False,
+et_potencial,Nordeste,1971-1980,"GLDAS, TerraClimate",0.9628548432682247,False,,False,
+et_potencial,Norte,2001-2010,"GLDAS, TerraClimate",0.9208181003144364,True,1961-1970 (terraclimate),False,
+et_real,Sudeste,2001-2010,"GLDAS, MOD16",0.9209089733900867,True,,True,variável do modelo: só relato (M4)
+pr_mm,Brasil,2021-2025,"ERA5-Land, GLDAS, IMERG, PERSIANN, TerraClimate",0.8900733319623088,True,,True,
+pr_mm,Centro-Oeste,2021-2025,"ERA5-Land, GLDAS, IMERG, PERSIANN, TerraClimate",0.8993151824208759,True,,True,
+pr_mm,Nordeste,2021-2025,"ERA5-Land, GLDAS, IMERG, PERSIANN, TerraClimate",0.8491904661127595,True,,True,
+pr_mm,Norte,2021-2025,"ERA5-Land, GLDAS, IMERG, PERSIANN, TerraClimate",0.8839612584484093,True,1961-1970 (terraclimate),False,
+pr_mm,Sudeste,1981-1990,"GLDAS, TerraClimate",0.9582744045205802,True,,True,
+pr_mm,Sudeste,2021-2025,"ERA5-Land, TerraClimate",0.9487390678168135,True,,True,
+pr_mm,Sul,2011-2020,"ERA5-Land, GLDAS",0.9716048294965663,False,,False,
+pr_mm,Sul,2021-2025,"ERA5-Land, GLDAS, IMERG, PERSIANN, TerraClimate",0.9369762901323793,True,,True,
+rs,Brasil,2021-2025,"ERA5-Land, GLDAS, TerraClimate",1.0390615862211476,True,,True,
+rs,Centro-Oeste,1961-1970,"ERA5-Land, TerraClimate",0.956807750140528,False,,False,
+rs,Centro-Oeste,2021-2025,"ERA5-Land, GLDAS",1.027385940468747,False,,False,
+rs,Nordeste,2021-2025,"ERA5-Land, GLDAS, TerraClimate",1.0404956098448785,True,,True,
+rs,Norte,2001-2010,"GLDAS, TerraClimate",0.954496508458867,True,1961-1970 (era5); 1971-1980 (era5),False,
+rs,Norte,2021-2025,"ERA5-Land, TerraClimate",1.0633782042390953,True,1981-1990 (terraclimate); 1991-2000 (terraclimate); 2011-2020 (gldas21),False,
+runoff,Centro-Oeste,1961-1970,"GLDAS, TerraClimate",0.5572216374495536,True,1981-1990 (gldas20); 1991-2000 (gldas20); 1991-2000 (terraclimate),False,variável do modelo: só relato (M4)
+runoff,Nordeste,1961-1970,"GLDAS, TerraClimate",1.3443282554642526,False,1981-1990 (gldas20); 1981-1990 (terraclimate); 2021-2025 (terraclimate),False,variável do modelo: só relato (M4)
+runoff,Nordeste,1971-1980,"GLDAS, TerraClimate",0.8076735807775708,True,2001-2010 (gldas20),False,variável do modelo: só relato (M4)
+runoff,Nordeste,1991-2000,"GLDAS, TerraClimate",0.8781965780466703,False,,False,variável do modelo: só relato (M4)
+runoff,Norte,1961-1970,"GLDAS, TerraClimate",1.111557075849306,True,,True,variável do modelo: só relato (M4)
+runoff,Sudeste,1961-1970,"GLDAS, TerraClimate",0.949852912254578,False,,False,variável do modelo: só relato (M4)
+runoff,Sudeste,1981-1990,"GLDAS, TerraClimate",0.8950765301482508,False,1991-2000 (gldas20),False,variável do modelo: só relato (M4)
+runoff,Sudeste,2001-2010,"GLDAS, TerraClimate",1.1588652659164198,True,,True,variável do modelo: só relato (M4)
+runoff,Sudeste,2011-2020,"GLDAS, TerraClimate",1.2408832056052508,False,,False,variável do modelo: só relato (M4)
+runoff,Sudeste,2021-2025,"GLDAS, TerraClimate",0.801122454117247,False,,False,variável do modelo: só relato (M4)
+runoff,Sul,1991-2000,"GLDAS, TerraClimate",0.9121139126228099,True,1961-1970 (gldas20); 1981-1990 (gldas20),False,variável do modelo: só relato (M4)
+runoff,Sul,2001-2010,"GLDAS, TerraClimate",1.1099049145584943,True,1971-1980 (gldas20); 2011-2020 (gldas20); 2011-2020 (gldas21),False,variável do modelo: só relato (M4)
+runoff,Sul,2021-2025,"GLDAS, TerraClimate",0.9538345165609523,False,,False,variável do modelo: só relato (M4)
+tmin_C,Brasil,1961-1970,"ERA5-Land, GLDAS, TerraClimate",0.7145451565371911,True,,True,
+tmin_C,Centro-Oeste,1961-1970,"ERA5-Land, TerraClimate",0.638697443542694,False,,False,
+tmin_C,Nordeste,1961-1970,"ERA5-Land, GLDAS, TerraClimate",0.8823276040351241,False,,False,
+tmin_C,Norte,1961-1970,"ERA5-Land, GLDAS, TerraClimate",0.7756987979519104,False,,False,
+tmin_C,Sul,1961-1970,"ERA5-Land, GLDAS",0.5717789232696474,True,,True,
+u2,Nordeste,1971-1980,"ERA5-Land, TerraClimate",0.8523962767290734,False,1981-1990 (gldas20),False,
+u2,Nordeste,2011-2020,"ERA5-Land, TerraClimate",1.0449092312005188,True,,True,
+u2,Nordeste,2021-2025,"ERA5-Land, TerraClimate",1.0584576629536993,False,2011-2020 (gldas21),False,
+u2,Sul,1961-1970,"ERA5-Land, TerraClimate",1.182450446965118,True,,True,
+vpd,Brasil,2001-2010,"GLDAS, TerraClimate",-0.08256684661014092,True,,True,
+vpd,Brasil,2011-2020,"GLDAS, TerraClimate",-0.0611677778115712,True,,True,
+vpd,Centro-Oeste,2001-2010,"GLDAS, TerraClimate",-0.14248300336763853,True,,True,
+vpd,Centro-Oeste,2011-2020,"GLDAS, TerraClimate",-0.0693932767314153,True,,True,
+vpd,Nordeste,1961-1970,"ERA5-Land, GLDAS, TerraClimate",0.12872887345700998,True,,True,
+vpd,Norte,2001-2010,"GLDAS, TerraClimate",-0.11793060598008802,True,,True,
+vpd,Norte,2011-2020,"GLDAS, TerraClimate",-0.04953737880325898,True,,True,
+vpd,Sudeste,2001-2010,"GLDAS, TerraClimate",-0.0849033783516607,True,,True,

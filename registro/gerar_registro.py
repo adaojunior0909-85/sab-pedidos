@@ -23,6 +23,7 @@ RESULTADOS = [
     ('Fase 2, M1-C3R', 'pesquisa/resultados_fase2/RESULTADOS_M1_C3R.md'),
     ('Fase 2, leva 1', 'pesquisa/resultados_fase2/RESULTADOS_LEVA1.md'),
     ('Fase 2, leva 2', 'pesquisa/resultados_fase2/RESULTADOS_LEVA2.md'),
+    ('Fase 2, M5 (ajuste do histórico)', 'pesquisa/resultados_fase2/RESULTADOS_M5.md'),
     ('Várias referências (multifonte)', 'pesquisa/resultados_multifonte/RESULTADOS.md'),
     ('BR-DWGD: artigos, site e relatório', 'pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md'),
     ('BR-DWGD bruto ano a ano', 'pesquisa/resultados_brdwgd/RESULTADOS.md'),
