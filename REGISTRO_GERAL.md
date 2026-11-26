@@ -111,7 +111,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 13:16, Brasília)
+# Apêndice automático (refeito em 26/11/2026 14:41, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -3163,6 +3163,12 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 17:40 | Análise decisiva D3: código (controles da chuva da v_3.2.4 baixados da pasta pública do autor; rede estável x mudada; salto × CHIRPS e ERA5) na fila |
+| 26/11/2026 17:40 | Conferência: começou decisiva_d1  |
+| 26/11/2026 17:39 | Análise decisiva D1: código (inventário e séries da ANA, amostragem no Earth Engine, regra, sintético, conta em dobro) na fila; nenhum dado olhado |
+| 26/11/2026 17:35 | Análise decisiva D2: F1, F2 e F5 coerentes entre si (±0,4% no Brasil); o CHIRPS subiu ~6% contra as outras desde 2020 (Brasil, Norte) e sai das conclusões nessas regiões |
+| 26/11/2026 17:35 | Protocolo da análise decisiva (fase 4), congelado ANTES de qualquer dado: pluviômetros estáveis da ANA como verdade de chão (D1), referências entre si (D2), rede do BR-DWGD (D3), vazão (D4, relato) |
+| 26/11/2026 16:16 | Fase 2, M5: 20 de 34 ajustes dos degraus confirmados passam (chuva 2021–25 em 5 regiões, Tmin 1961–70, VPD, radiação); leva 1: C3G passa; nada gravado, espera autorização |
 | 26/11/2026 16:15 | Fase 2, M5: código do teste do ajuste (detalhes de implementação no cabeçalho), antes de rodar |
 | 26/11/2026 16:15 | Auditoria profunda refeita com o ERA5-Land até 2025: a 4ª família (sem pluviômetro) confirma a chuva (+7,5 a +16%); degrau dos dados confirmado também em UR NE/SE, VPD Brasil/N/NE/SE, ETo Brasil, radiação NE, Tmax CO/SE; chuva segue inconclusiva pelo A3; fator de clima 1986–2025 quase não muda sem 2020–25 |
 | 26/11/2026 14:48 | Conferência: começou resolucao  |
