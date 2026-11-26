@@ -162,3 +162,17 @@ O índice do A2 passa a vir de `rotinas/resultados/roni/<data>/RONI_CPC_v6.csv` 
 set/2026, coluna RONI, salva pela rotina), e não da `auditoria_RONI_SAB_x_CPC.csv`, que só guarda os meses auditados e
 tem buracos em 2020–2025 (o teste sintético saiu "inconclusivo" nos dois casos por falta de meses). Os valores do RONI
 são os mesmos; nada mais muda.
+
+## Emenda 3 (26/11/2026, ~14h, ANTES de rodar o A3 e o NASA POWER; detalhes que o texto não fixava)
+1. **NASA POWER:** Tmax e Tmin = `T2M_MAX_AVG` e `T2M_MIN_AVG` (média das máximas e mínimas diárias; o `T2M_MAX` mensal é
+   a máxima absoluta do mês, conferido contra a API diária); chuva = `PRECTOTCORR` × dias do mês; VPD = média de
+   es(Tmax) e es(Tmin) − es(T2MDEW); sem ETo. Média regional ponderada pelos pixels entregues do SAB em cada célula.
+   **A chuva do POWER entra na F1**: a documentação oficial diz só "observationally corrected" (Reichle et al. 2017),
+   sem nomear a rede, então não há confirmação de rede distinta do GPCC (regra da seção 2).
+2. **A3, erro:** RMSE da regressão linear testemunha ~ anomalia da chuva; no treino por deixar-um-de-fora, no teste fora
+   da amostra. REF = mediana das anomalias (%) das bases F1, F2 e F3 (cada uma relativa à sua média do treino).
+3. **GRACE:** ΔS = armazenamento de abril do ano seguinte − abril do ano (ano hidrológico maio→abril); chuva do mesmo ano
+   hidrológico (12 meses completos). Treino 2003–2019 (anos hidrológicos), teste 2020–2024.
+4. **SMAP:** só o L3 (o L4 assimila chuva observada); anomalia mensal (clima de cada mês em 2015–2019) contra a média
+   das anomalias de chuva do mês e do anterior (limitada a −100% e +300%). Treino 2015–2019, teste 2020–2025.
+5. A3 avaliado nas 5 regiões e no Brasil.

@@ -39,7 +39,7 @@ def familia(base, var):
     if base == 'chirps':
         return 'F3'
     if base == 'power':
-        return 'F4' if var != 'pr_mm' else os.environ.get('POWER_CHUVA_FAMILIA', 'F4')
+        return 'F4' if var != 'pr_mm' else os.environ.get('POWER_CHUVA_FAMILIA', 'F1')   # seção 2: sem rede confirmada, F1
     if base == 'era5':
         return 'F5'
     if base in ('gldas20', 'gldas21'):
@@ -53,8 +53,8 @@ def carregar():
     h.loc[h.variavel == 'pr_chirps', 'variavel'] = 'pr_mm'
     h = h[(h.base != 'chirps') | (h.ano >= 1981)]
     partes = [h[['regiao', 'ano', 'mes', 'variavel', 'base', 'sab', 'referencia']]]
-    for pasta in ('resultados_multifonte', 'resultados_power'):
-        arqs = glob.glob(os.path.join(AQUI, pasta, '*', '*.csv'))
+    for pasta in ('resultados_multifonte/*', 'resultados_power/power'):
+        arqs = glob.glob(os.path.join(AQUI, pasta, '*.csv'))
         if arqs:
             m = pd.concat(pd.read_csv(x) for x in arqs).rename(columns={'fonte': 'base'})
             partes.append(m[['regiao', 'ano', 'mes', 'variavel', 'base', 'sab', 'referencia']])
