@@ -38,7 +38,7 @@ FONTES = ['br', 'chirps', 'era5', 'imerg', 'persiann', 'terraclimate']
 FAMILIA = {'chirps': 'F3', 'era5': 'F5', 'imerg': 'F1', 'persiann': 'F1', 'terraclimate': 'F2'}
 
 
-def baixar(url, tent=5):
+def baixar(url, tent=3):
     for t in range(tent):
         try:
             with urllib.request.urlopen(url, timeout=300) as r:
@@ -118,12 +118,24 @@ def series(cand, limite):
             if time.time() > limite:
                 pd.concat([cons, pd.DataFrame(novos)]).to_csv(feito, index=False)
                 raise SystemExit(3)
-            s = serie(cod)
+            try:
+                s = serie(cod)
+                falhas = 0
+            except RuntimeError:
+                falhas = locals().get('falhas', 0) + 1
+                print(f'   ⚠️ posto {cod} sem resposta da ANA (pulado; {falhas} seguidos)', flush=True)
+                if falhas >= 3:          # o serviço caiu: guarda o andamento e retoma na próxima rodada
+                    pd.concat([cons, pd.DataFrame(novos)]).to_csv(feito, index=False)
+                    print('   ANA fora do ar: andamento guardado; retoma depois.', flush=True)
+                    raise SystemExit(3)
+                continue                 # posto pulado agora; será tentado de novo na próxima rodada
             ok = estavel(s)
             if ok:
                 s.to_csv(os.path.join(D1, 'series', f'{cod}.csv'), index=False)
                 n_ok += 1
             novos.append({'codigo': cod, 'estavel': ok})
+            if len(novos) % 20 == 0:
+                pd.concat([cons, pd.DataFrame(novos)]).to_csv(feito, index=False)
         print(f'   {uf}: {n_ok} estáveis', flush=True)
         pd.concat([cons, pd.DataFrame(novos)]).to_csv(feito, index=False)
     return pd.concat([cons, pd.DataFrame(novos)])
