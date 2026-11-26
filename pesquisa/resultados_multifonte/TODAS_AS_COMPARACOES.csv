@@ -164,6 +164,1689 @@ chirps,pr_mm,UF tocantins,1991-2000,-2.461,0.987,False
 chirps,pr_mm,UF tocantins,2001-2010,-2.246,0.99,False
 chirps,pr_mm,UF tocantins,2011-2020,-8.889,0.907,True
 chirps,pr_mm,UF tocantins,2021-2025,0.681,0.946,False
+era5,RH,Brasil,1961-1970,4.202,0.698,True
+era5,RH,Brasil,1971-1980,0.817,0.749,False
+era5,RH,Brasil,1981-1990,0.341,0.802,False
+era5,RH,Centro-Oeste,1961-1970,4.918,0.503,False
+era5,RH,Centro-Oeste,1971-1980,2.32,0.78,False
+era5,RH,Centro-Oeste,1981-1990,1.705,0.895,False
+era5,RH,Nordeste,1961-1970,8.098,0.7,True
+era5,RH,Nordeste,1971-1980,2.798,0.772,False
+era5,RH,Nordeste,1981-1990,2.081,0.861,False
+era5,RH,Norte,1961-1970,3.443,0.655,True
+era5,RH,Norte,1971-1980,-0.639,0.827,False
+era5,RH,Norte,1981-1990,-0.86,0.498,False
+era5,RH,Sudeste,1961-1970,2.62,0.792,False
+era5,RH,Sudeste,1971-1980,2.314,0.926,False
+era5,RH,Sudeste,1981-1990,0.937,0.903,False
+era5,RH,Sul,1961-1970,-0.307,0.722,False
+era5,RH,Sul,1971-1980,-1.515,0.933,False
+era5,RH,Sul,1981-1990,-1.164,0.953,False
+era5,RH,UF acre,1961-1970,1.721,0.61,False
+era5,RH,UF acre,1971-1980,-0.311,0.638,False
+era5,RH,UF acre,1981-1990,-2.389,0.276,False
+era5,RH,UF alagoas,1961-1970,6.935,0.698,True
+era5,RH,UF alagoas,1971-1980,2.359,0.774,False
+era5,RH,UF alagoas,1981-1990,1.947,0.782,False
+era5,RH,UF amapa,1961-1970,1.235,0.485,False
+era5,RH,UF amapa,1971-1980,0.643,0.431,False
+era5,RH,UF amapa,1981-1990,1.762,0.69,False
+era5,RH,UF amazonas,1961-1970,0.5,0.697,True
+era5,RH,UF amazonas,1971-1980,-2.676,0.845,False
+era5,RH,UF amazonas,1981-1990,-3.301,0.64,False
+era5,RH,UF bahia,1961-1970,8.853,0.815,True
+era5,RH,UF bahia,1971-1980,3.094,0.86,False
+era5,RH,UF bahia,1981-1990,2.563,0.964,False
+era5,RH,UF ceara,1961-1970,5.788,0.759,True
+era5,RH,UF ceara,1971-1980,2.481,0.724,False
+era5,RH,UF ceara,1981-1990,1.346,0.83,False
+era5,RH,UF distrito federal,1961-1970,3.905,0.669,False
+era5,RH,UF distrito federal,1971-1980,1.543,0.867,False
+era5,RH,UF distrito federal,1981-1990,0.587,0.9,False
+era5,RH,UF espirito santo,1961-1970,-2.464,0.739,False
+era5,RH,UF espirito santo,1971-1980,-0.453,0.868,False
+era5,RH,UF espirito santo,1981-1990,0.058,0.911,False
+era5,RH,UF goias,1961-1970,5.963,0.587,False
+era5,RH,UF goias,1971-1980,3.032,0.844,False
+era5,RH,UF goias,1981-1990,1.427,0.897,False
+era5,RH,UF maranhao,1961-1970,6.24,0.569,True
+era5,RH,UF maranhao,1971-1980,1.22,0.652,False
+era5,RH,UF maranhao,1981-1990,0.965,0.666,False
+era5,RH,UF mato grosso,1961-1970,4.395,0.413,True
+era5,RH,UF mato grosso,1971-1980,1.354,0.7,False
+era5,RH,UF mato grosso,1981-1990,2.017,0.865,False
+era5,RH,UF mato grosso do sul,1961-1970,5.236,0.592,False
+era5,RH,UF mato grosso do sul,1971-1980,4.031,0.755,False
+era5,RH,UF mato grosso do sul,1981-1990,1.222,0.875,False
+era5,RH,UF minas gerais,1961-1970,3.842,0.809,False
+era5,RH,UF minas gerais,1971-1980,3.256,0.921,False
+era5,RH,UF minas gerais,1981-1990,2.238,0.91,False
+era5,RH,UF para,1961-1970,5.975,0.465,True
+era5,RH,UF para,1971-1980,0.45,0.754,False
+era5,RH,UF para,1981-1990,1.175,0.176,False
+era5,RH,UF paraiba,1961-1970,11.56,0.739,True
+era5,RH,UF paraiba,1971-1980,6.144,0.674,False
+era5,RH,UF paraiba,1981-1990,3.943,0.674,False
+era5,RH,UF parana,1961-1970,1.113,0.636,False
+era5,RH,UF parana,1971-1980,-0.593,0.886,False
+era5,RH,UF parana,1981-1990,-1.159,0.957,False
+era5,RH,UF pernambuco,1961-1970,8.798,0.696,True
+era5,RH,UF pernambuco,1971-1980,4.143,0.76,False
+era5,RH,UF pernambuco,1981-1990,1.974,0.885,False
+era5,RH,UF piaui,1961-1970,9.388,0.529,True
+era5,RH,UF piaui,1971-1980,3.076,0.671,False
+era5,RH,UF piaui,1981-1990,2.511,0.816,False
+era5,RH,UF rio de janeiro,1961-1970,0.438,0.821,False
+era5,RH,UF rio de janeiro,1971-1980,-0.42,0.912,False
+era5,RH,UF rio de janeiro,1981-1990,-1.536,0.907,False
+era5,RH,UF rio grande do norte,1961-1970,7.405,0.637,True
+era5,RH,UF rio grande do norte,1971-1980,3.603,0.654,False
+era5,RH,UF rio grande do norte,1981-1990,2.113,0.71,False
+era5,RH,UF rio grande do sul,1961-1970,-1.438,0.855,False
+era5,RH,UF rio grande do sul,1971-1980,-2.143,0.944,False
+era5,RH,UF rio grande do sul,1981-1990,-1.23,0.918,False
+era5,RH,UF rondonia,1961-1970,2.464,0.531,False
+era5,RH,UF rondonia,1971-1980,1.858,0.724,False
+era5,RH,UF rondonia,1981-1990,0.575,0.837,False
+era5,RH,UF roraima,1961-1970,5.616,-0.039,True
+era5,RH,UF roraima,1971-1980,-1.402,0.386,False
+era5,RH,UF roraima,1981-1990,-1.908,0.5,False
+era5,RH,UF santa catarina,1961-1970,0.112,0.69,False
+era5,RH,UF santa catarina,1971-1980,-1.516,0.898,False
+era5,RH,UF santa catarina,1981-1990,-0.889,0.946,False
+era5,RH,UF sao paulo,1961-1970,1.063,0.713,False
+era5,RH,UF sao paulo,1971-1980,1.082,0.897,False
+era5,RH,UF sao paulo,1981-1990,-1.51,0.921,False
+era5,RH,UF sergipe,1961-1970,6.919,0.766,True
+era5,RH,UF sergipe,1971-1980,0.489,0.718,False
+era5,RH,UF sergipe,1981-1990,1.43,0.757,False
+era5,RH,UF tocantins,1961-1970,9.987,0.671,True
+era5,RH,UF tocantins,1971-1980,3.646,0.696,False
+era5,RH,UF tocantins,1981-1990,3.049,0.796,False
+era5,pr_mm,Brasil,1961-1970,1.141,0.464,True
+era5,pr_mm,Brasil,1971-1980,-3.333,0.836,False
+era5,pr_mm,Brasil,1981-1990,-5.27,0.856,False
+era5,pr_mm,Centro-Oeste,1961-1970,-17.829,0.357,True
+era5,pr_mm,Centro-Oeste,1971-1980,5.394,0.776,True
+era5,pr_mm,Centro-Oeste,1981-1990,-3.185,0.822,False
+era5,pr_mm,Nordeste,1961-1970,9.774,0.886,True
+era5,pr_mm,Nordeste,1971-1980,-6.905,0.918,False
+era5,pr_mm,Nordeste,1981-1990,-3.121,0.98,False
+era5,pr_mm,Norte,1961-1970,8.27,0.31,True
+era5,pr_mm,Norte,1971-1980,-5.238,0.729,False
+era5,pr_mm,Norte,1981-1990,-6.724,0.825,False
+era5,pr_mm,Sudeste,1961-1970,-4.55,0.769,False
+era5,pr_mm,Sudeste,1971-1980,-0.653,0.936,False
+era5,pr_mm,Sudeste,1981-1990,-4.808,0.966,False
+era5,pr_mm,Sul,1961-1970,-5.008,0.821,False
+era5,pr_mm,Sul,1971-1980,-5.528,0.886,False
+era5,pr_mm,Sul,1981-1990,-3.007,0.967,False
+era5,pr_mm,UF acre,1961-1970,35.687,0.055,True
+era5,pr_mm,UF acre,1971-1980,2.571,0.476,False
+era5,pr_mm,UF acre,1981-1990,-4.604,0.235,True
+era5,pr_mm,UF alagoas,1961-1970,72.975,0.672,True
+era5,pr_mm,UF alagoas,1971-1980,46.478,0.553,False
+era5,pr_mm,UF alagoas,1981-1990,25.63,0.827,True
+era5,pr_mm,UF amapa,1961-1970,17.829,-0.015,False
+era5,pr_mm,UF amapa,1971-1980,13.696,0.512,False
+era5,pr_mm,UF amapa,1981-1990,20.087,0.744,False
+era5,pr_mm,UF amazonas,1961-1970,9.168,0.264,True
+era5,pr_mm,UF amazonas,1971-1980,-5.017,0.755,False
+era5,pr_mm,UF amazonas,1981-1990,-6.733,0.815,False
+era5,pr_mm,UF bahia,1961-1970,5.901,0.898,False
+era5,pr_mm,UF bahia,1971-1980,2.275,0.914,False
+era5,pr_mm,UF bahia,1981-1990,3.523,0.97,False
+era5,pr_mm,UF ceara,1961-1970,6.046,0.817,True
+era5,pr_mm,UF ceara,1971-1980,-15.389,0.877,True
+era5,pr_mm,UF ceara,1981-1990,-8.284,0.952,False
+era5,pr_mm,UF distrito federal,1961-1970,1.559,0.596,False
+era5,pr_mm,UF distrito federal,1971-1980,-3.89,0.798,True
+era5,pr_mm,UF distrito federal,1981-1990,4.666,0.899,False
+era5,pr_mm,UF espirito santo,1961-1970,-11.416,0.699,False
+era5,pr_mm,UF espirito santo,1971-1980,-4.26,0.85,False
+era5,pr_mm,UF espirito santo,1981-1990,-6.625,0.865,False
+era5,pr_mm,UF goias,1961-1970,-6.248,0.631,False
+era5,pr_mm,UF goias,1971-1980,4.82,0.863,True
+era5,pr_mm,UF goias,1981-1990,-3.053,0.907,False
+era5,pr_mm,UF maranhao,1961-1970,7.411,0.649,True
+era5,pr_mm,UF maranhao,1971-1980,-15.255,0.811,True
+era5,pr_mm,UF maranhao,1981-1990,-10.18,0.944,False
+era5,pr_mm,UF mato grosso,1961-1970,-23.314,0.219,True
+era5,pr_mm,UF mato grosso,1971-1980,7.487,0.616,True
+era5,pr_mm,UF mato grosso,1981-1990,-1.319,0.771,False
+era5,pr_mm,UF mato grosso do sul,1961-1970,-9.358,0.534,False
+era5,pr_mm,UF mato grosso do sul,1971-1980,-0.028,0.825,True
+era5,pr_mm,UF mato grosso do sul,1981-1990,-8.53,0.821,False
+era5,pr_mm,UF minas gerais,1961-1970,-5.161,0.774,False
+era5,pr_mm,UF minas gerais,1971-1980,-1.273,0.937,False
+era5,pr_mm,UF minas gerais,1981-1990,-4.175,0.954,False
+era5,pr_mm,UF para,1961-1970,5.634,0.275,True
+era5,pr_mm,UF para,1971-1980,-7.066,0.603,False
+era5,pr_mm,UF para,1981-1990,-7.243,0.801,False
+era5,pr_mm,UF paraiba,1961-1970,49.371,0.776,True
+era5,pr_mm,UF paraiba,1971-1980,27.738,0.827,False
+era5,pr_mm,UF paraiba,1981-1990,30.094,0.954,False
+era5,pr_mm,UF parana,1961-1970,3.821,0.726,False
+era5,pr_mm,UF parana,1971-1980,-0.607,0.813,False
+era5,pr_mm,UF parana,1981-1990,0.437,0.952,False
+era5,pr_mm,UF pernambuco,1961-1970,41.722,0.811,True
+era5,pr_mm,UF pernambuco,1971-1980,10.899,0.837,False
+era5,pr_mm,UF pernambuco,1981-1990,6.839,0.95,False
+era5,pr_mm,UF piaui,1961-1970,1.853,0.785,True
+era5,pr_mm,UF piaui,1971-1980,-17.909,0.875,False
+era5,pr_mm,UF piaui,1981-1990,-14.83,0.936,False
+era5,pr_mm,UF rio de janeiro,1961-1970,-9.121,0.719,True
+era5,pr_mm,UF rio de janeiro,1971-1980,-16.567,0.849,False
+era5,pr_mm,UF rio de janeiro,1981-1990,-19.887,0.841,False
+era5,pr_mm,UF rio grande do norte,1961-1970,22.388,0.757,False
+era5,pr_mm,UF rio grande do norte,1971-1980,10.74,0.879,True
+era5,pr_mm,UF rio grande do norte,1981-1990,28.226,0.897,True
+era5,pr_mm,UF rio grande do sul,1961-1970,-9.696,0.806,False
+era5,pr_mm,UF rio grande do sul,1971-1980,-8.147,0.877,False
+era5,pr_mm,UF rio grande do sul,1981-1990,-5.32,0.934,False
+era5,pr_mm,UF rondonia,1961-1970,-3.941,0.053,True
+era5,pr_mm,UF rondonia,1971-1980,9.42,0.233,True
+era5,pr_mm,UF rondonia,1981-1990,3.089,0.138,False
+era5,pr_mm,UF roraima,1961-1970,31.631,-0.023,True
+era5,pr_mm,UF roraima,1971-1980,-17.332,0.509,False
+era5,pr_mm,UF roraima,1981-1990,-24.897,0.403,True
+era5,pr_mm,UF santa catarina,1961-1970,-7.913,0.779,False
+era5,pr_mm,UF santa catarina,1971-1980,-7.568,0.813,False
+era5,pr_mm,UF santa catarina,1981-1990,-3.607,0.958,False
+era5,pr_mm,UF sao paulo,1961-1970,-1.002,0.641,False
+era5,pr_mm,UF sao paulo,1971-1980,4.424,0.891,True
+era5,pr_mm,UF sao paulo,1981-1990,-3.055,0.943,False
+era5,pr_mm,UF sergipe,1961-1970,61.17,0.732,True
+era5,pr_mm,UF sergipe,1971-1980,44.423,0.7,False
+era5,pr_mm,UF sergipe,1981-1990,21.816,0.735,True
+era5,pr_mm,UF tocantins,1961-1970,-14.616,0.665,False
+era5,pr_mm,UF tocantins,1971-1980,-13.563,0.813,False
+era5,pr_mm,UF tocantins,1981-1990,-9.439,0.931,False
+era5,rs,Brasil,1961-1970,-0.194,0.552,False
+era5,rs,Brasil,1971-1980,-0.35,0.718,False
+era5,rs,Brasil,1981-1990,-0.868,0.673,True
+era5,rs,Centro-Oeste,1961-1970,-0.144,0.44,True
+era5,rs,Centro-Oeste,1971-1980,-0.98,0.737,False
+era5,rs,Centro-Oeste,1981-1990,-1.455,0.549,False
+era5,rs,Nordeste,1961-1970,-0.456,0.871,False
+era5,rs,Nordeste,1971-1980,-0.149,0.776,False
+era5,rs,Nordeste,1981-1990,-0.508,0.925,False
+era5,rs,Norte,1961-1970,-0.014,0.479,False
+era5,rs,Norte,1971-1980,-0.124,0.581,False
+era5,rs,Norte,1981-1990,-0.901,0.73,True
+era5,rs,Sudeste,1961-1970,-0.55,0.699,False
+era5,rs,Sudeste,1971-1980,-0.621,0.896,False
+era5,rs,Sudeste,1981-1990,-0.617,0.904,False
+era5,rs,Sul,1961-1970,-0.219,0.793,False
+era5,rs,Sul,1971-1980,-0.132,0.892,False
+era5,rs,Sul,1981-1990,-0.392,0.931,False
+era5,rs,UF acre,1961-1970,-0.784,0.155,True
+era5,rs,UF acre,1971-1980,-1.606,0.408,False
+era5,rs,UF acre,1981-1990,-2.656,-0.049,True
+era5,rs,UF alagoas,1961-1970,-0.101,0.719,False
+era5,rs,UF alagoas,1971-1980,0.21,0.566,False
+era5,rs,UF alagoas,1981-1990,0.153,0.811,False
+era5,rs,UF amapa,1961-1970,1.378,0.233,False
+era5,rs,UF amapa,1971-1980,1.192,0.427,False
+era5,rs,UF amapa,1981-1990,0.602,0.766,True
+era5,rs,UF amazonas,1961-1970,0.064,0.316,False
+era5,rs,UF amazonas,1971-1980,-0.173,0.483,False
+era5,rs,UF amazonas,1981-1990,-0.882,0.69,True
+era5,rs,UF bahia,1961-1970,-0.551,0.879,False
+era5,rs,UF bahia,1971-1980,-0.611,0.854,False
+era5,rs,UF bahia,1981-1990,-0.655,0.927,False
+era5,rs,UF ceara,1961-1970,-0.51,0.743,False
+era5,rs,UF ceara,1971-1980,-0.111,0.587,False
+era5,rs,UF ceara,1981-1990,-0.806,0.85,False
+era5,rs,UF distrito federal,1961-1970,-0.805,0.675,True
+era5,rs,UF distrito federal,1971-1980,-1.395,0.821,False
+era5,rs,UF distrito federal,1981-1990,-1.416,0.898,False
+era5,rs,UF espirito santo,1961-1970,-0.071,0.749,False
+era5,rs,UF espirito santo,1971-1980,-0.06,0.87,False
+era5,rs,UF espirito santo,1981-1990,-0.566,0.944,False
+era5,rs,UF goias,1961-1970,-0.574,0.609,True
+era5,rs,UF goias,1971-1980,-1.298,0.808,False
+era5,rs,UF goias,1981-1990,-1.425,0.866,False
+era5,rs,UF maranhao,1961-1970,-0.105,0.762,False
+era5,rs,UF maranhao,1971-1980,0.395,0.725,False
+era5,rs,UF maranhao,1981-1990,-0.509,0.891,False
+era5,rs,UF mato grosso,1961-1970,0.169,0.379,True
+era5,rs,UF mato grosso,1971-1980,-1.052,0.63,False
+era5,rs,UF mato grosso,1981-1990,-1.818,0.428,True
+era5,rs,UF mato grosso do sul,1961-1970,-0.497,0.473,True
+era5,rs,UF mato grosso do sul,1971-1980,-0.501,0.737,False
+era5,rs,UF mato grosso do sul,1981-1990,-0.598,0.706,False
+era5,rs,UF minas gerais,1961-1970,-0.694,0.731,False
+era5,rs,UF minas gerais,1971-1980,-0.724,0.891,False
+era5,rs,UF minas gerais,1981-1990,-0.627,0.908,False
+era5,rs,UF para,1961-1970,0.045,0.556,False
+era5,rs,UF para,1971-1980,0.258,0.646,False
+era5,rs,UF para,1981-1990,-0.677,0.674,True
+era5,rs,UF paraiba,1961-1970,-0.51,0.64,False
+era5,rs,UF paraiba,1971-1980,-0.211,0.527,False
+era5,rs,UF paraiba,1981-1990,-0.327,0.824,False
+era5,rs,UF parana,1961-1970,-0.558,0.626,False
+era5,rs,UF parana,1971-1980,-0.48,0.829,False
+era5,rs,UF parana,1981-1990,-0.577,0.901,False
+era5,rs,UF pernambuco,1961-1970,-0.279,0.692,False
+era5,rs,UF pernambuco,1971-1980,0.063,0.636,False
+era5,rs,UF pernambuco,1981-1990,0.046,0.886,False
+era5,rs,UF piaui,1961-1970,-0.895,0.798,True
+era5,rs,UF piaui,1971-1980,0.03,0.732,False
+era5,rs,UF piaui,1981-1990,-0.372,0.887,False
+era5,rs,UF rio de janeiro,1961-1970,-0.663,0.762,False
+era5,rs,UF rio de janeiro,1971-1980,-0.825,0.925,False
+era5,rs,UF rio de janeiro,1981-1990,-0.587,0.911,False
+era5,rs,UF rio grande do norte,1961-1970,0.096,0.643,False
+era5,rs,UF rio grande do norte,1971-1980,0.004,0.515,False
+era5,rs,UF rio grande do norte,1981-1990,-0.462,0.746,False
+era5,rs,UF rio grande do sul,1961-1970,0.039,0.84,False
+era5,rs,UF rio grande do sul,1971-1980,0.192,0.918,False
+era5,rs,UF rio grande do sul,1981-1990,-0.197,0.931,False
+era5,rs,UF rondonia,1961-1970,-0.209,0.311,True
+era5,rs,UF rondonia,1971-1980,-1.23,0.473,False
+era5,rs,UF rondonia,1981-1990,-1.996,0.243,True
+era5,rs,UF roraima,1961-1970,-0.666,0.199,False
+era5,rs,UF roraima,1971-1980,-0.261,0.585,False
+era5,rs,UF roraima,1981-1990,-0.878,0.582,False
+era5,rs,UF santa catarina,1961-1970,-0.274,0.778,False
+era5,rs,UF santa catarina,1971-1980,-0.357,0.83,False
+era5,rs,UF santa catarina,1981-1990,-0.583,0.861,False
+era5,rs,UF sao paulo,1961-1970,-0.282,0.45,True
+era5,rs,UF sao paulo,1971-1980,-0.45,0.863,False
+era5,rs,UF sao paulo,1981-1990,-0.608,0.853,False
+era5,rs,UF sergipe,1961-1970,-0.232,0.789,False
+era5,rs,UF sergipe,1971-1980,-0.057,0.655,False
+era5,rs,UF sergipe,1981-1990,-0.188,0.77,False
+era5,rs,UF tocantins,1961-1970,-0.302,0.676,False
+era5,rs,UF tocantins,1971-1980,-0.325,0.8,False
+era5,rs,UF tocantins,1981-1990,-0.876,0.843,True
+era5,tmax_C,Brasil,1961-1970,1.19,0.707,False
+era5,tmax_C,Brasil,1971-1980,1.408,0.714,False
+era5,tmax_C,Brasil,1981-1990,1.54,0.894,False
+era5,tmax_C,Centro-Oeste,1961-1970,1.511,0.604,False
+era5,tmax_C,Centro-Oeste,1971-1980,1.449,0.778,False
+era5,tmax_C,Centro-Oeste,1981-1990,1.765,0.854,False
+era5,tmax_C,Nordeste,1961-1970,0.493,0.836,False
+era5,tmax_C,Nordeste,1971-1980,0.603,0.785,False
+era5,tmax_C,Nordeste,1981-1990,0.837,0.913,False
+era5,tmax_C,Norte,1961-1970,1.185,0.49,True
+era5,tmax_C,Norte,1971-1980,1.739,0.685,False
+era5,tmax_C,Norte,1981-1990,1.706,0.865,False
+era5,tmax_C,Sudeste,1961-1970,1.616,0.858,False
+era5,tmax_C,Sudeste,1971-1980,1.48,0.889,False
+era5,tmax_C,Sudeste,1981-1990,1.794,0.934,False
+era5,tmax_C,Sul,1961-1970,1.487,0.895,False
+era5,tmax_C,Sul,1971-1980,1.204,0.952,False
+era5,tmax_C,Sul,1981-1990,1.322,0.94,False
+era5,tmax_C,UF acre,1961-1970,0.816,0.19,True
+era5,tmax_C,UF acre,1971-1980,1.917,0.543,False
+era5,tmax_C,UF acre,1981-1990,2.331,0.644,False
+era5,tmax_C,UF alagoas,1961-1970,0.159,0.631,False
+era5,tmax_C,UF alagoas,1971-1980,0.34,0.749,False
+era5,tmax_C,UF alagoas,1981-1990,0.745,0.904,False
+era5,tmax_C,UF amapa,1961-1970,1.217,0.338,False
+era5,tmax_C,UF amapa,1971-1980,1.501,0.515,False
+era5,tmax_C,UF amapa,1981-1990,1.165,0.665,False
+era5,tmax_C,UF amazonas,1961-1970,1.557,0.414,True
+era5,tmax_C,UF amazonas,1971-1980,2.059,0.718,False
+era5,tmax_C,UF amazonas,1981-1990,2.116,0.788,False
+era5,tmax_C,UF bahia,1961-1970,0.358,0.902,False
+era5,tmax_C,UF bahia,1971-1980,0.521,0.739,False
+era5,tmax_C,UF bahia,1981-1990,0.872,0.973,False
+era5,tmax_C,UF ceara,1961-1970,0.467,0.826,False
+era5,tmax_C,UF ceara,1971-1980,0.523,0.75,False
+era5,tmax_C,UF ceara,1981-1990,0.417,0.893,False
+era5,tmax_C,UF distrito federal,1961-1970,0.952,0.776,False
+era5,tmax_C,UF distrito federal,1971-1980,0.932,0.605,False
+era5,tmax_C,UF distrito federal,1981-1990,0.932,0.877,False
+era5,tmax_C,UF espirito santo,1961-1970,1.64,0.733,False
+era5,tmax_C,UF espirito santo,1971-1980,1.582,0.704,False
+era5,tmax_C,UF espirito santo,1981-1990,2.432,0.929,True
+era5,tmax_C,UF goias,1961-1970,1.516,0.682,False
+era5,tmax_C,UF goias,1971-1980,1.256,0.799,False
+era5,tmax_C,UF goias,1981-1990,1.648,0.89,False
+era5,tmax_C,UF maranhao,1961-1970,1.193,0.661,False
+era5,tmax_C,UF maranhao,1971-1980,1.108,0.651,False
+era5,tmax_C,UF maranhao,1981-1990,1.185,0.711,False
+era5,tmax_C,UF mato grosso,1961-1970,1.833,0.47,False
+era5,tmax_C,UF mato grosso,1971-1980,1.729,0.675,False
+era5,tmax_C,UF mato grosso,1981-1990,1.898,0.822,False
+era5,tmax_C,UF mato grosso do sul,1961-1970,0.729,0.687,False
+era5,tmax_C,UF mato grosso do sul,1971-1980,0.952,0.826,False
+era5,tmax_C,UF mato grosso do sul,1981-1990,1.56,0.853,True
+era5,tmax_C,UF minas gerais,1961-1970,1.579,0.84,False
+era5,tmax_C,UF minas gerais,1971-1980,1.426,0.842,False
+era5,tmax_C,UF minas gerais,1981-1990,1.892,0.924,False
+era5,tmax_C,UF para,1961-1970,0.673,0.457,True
+era5,tmax_C,UF para,1971-1980,1.537,0.529,False
+era5,tmax_C,UF para,1981-1990,1.189,0.765,False
+era5,tmax_C,UF paraiba,1961-1970,-0.794,0.684,False
+era5,tmax_C,UF paraiba,1971-1980,-0.37,0.608,False
+era5,tmax_C,UF paraiba,1981-1990,-0.286,0.688,False
+era5,tmax_C,UF parana,1961-1970,1.604,0.832,False
+era5,tmax_C,UF parana,1971-1980,1.482,0.935,False
+era5,tmax_C,UF parana,1981-1990,1.297,0.933,False
+era5,tmax_C,UF pernambuco,1961-1970,-0.132,0.758,False
+era5,tmax_C,UF pernambuco,1971-1980,0.149,0.823,False
+era5,tmax_C,UF pernambuco,1981-1990,0.394,0.931,False
+era5,tmax_C,UF piaui,1961-1970,0.692,0.719,False
+era5,tmax_C,UF piaui,1971-1980,0.749,0.756,False
+era5,tmax_C,UF piaui,1981-1990,1.131,0.904,False
+era5,tmax_C,UF rio de janeiro,1961-1970,1.86,0.923,False
+era5,tmax_C,UF rio de janeiro,1971-1980,1.769,0.908,False
+era5,tmax_C,UF rio de janeiro,1981-1990,2.058,0.927,False
+era5,tmax_C,UF rio grande do norte,1961-1970,-0.272,0.609,False
+era5,tmax_C,UF rio grande do norte,1971-1980,0.034,0.62,False
+era5,tmax_C,UF rio grande do norte,1981-1990,0.136,0.711,False
+era5,tmax_C,UF rio grande do sul,1961-1970,1.371,0.937,False
+era5,tmax_C,UF rio grande do sul,1971-1980,1.012,0.944,False
+era5,tmax_C,UF rio grande do sul,1981-1990,1.281,0.946,False
+era5,tmax_C,UF rondonia,1961-1970,2.026,0.421,False
+era5,tmax_C,UF rondonia,1971-1980,1.359,0.698,False
+era5,tmax_C,UF rondonia,1981-1990,1.559,0.722,False
+era5,tmax_C,UF roraima,1961-1970,0.951,0.192,True
+era5,tmax_C,UF roraima,1971-1980,1.801,0.465,False
+era5,tmax_C,UF roraima,1981-1990,2.178,0.558,False
+era5,tmax_C,UF santa catarina,1961-1970,1.613,0.841,False
+era5,tmax_C,UF santa catarina,1971-1980,1.218,0.902,False
+era5,tmax_C,UF santa catarina,1981-1990,1.51,0.918,False
+era5,tmax_C,UF sao paulo,1961-1970,1.658,0.84,False
+era5,tmax_C,UF sao paulo,1971-1980,1.54,0.944,False
+era5,tmax_C,UF sao paulo,1981-1990,1.408,0.953,False
+era5,tmax_C,UF sergipe,1961-1970,-0.361,0.719,False
+era5,tmax_C,UF sergipe,1971-1980,0.108,0.585,False
+era5,tmax_C,UF sergipe,1981-1990,0.48,0.902,False
+era5,tmax_C,UF tocantins,1961-1970,1.013,0.634,False
+era5,tmax_C,UF tocantins,1971-1980,1.147,0.7,False
+era5,tmax_C,UF tocantins,1981-1990,1.358,0.845,False
+era5,tmin_C,Brasil,1961-1970,-1.601,0.668,True
+era5,tmin_C,Brasil,1971-1980,-0.959,0.82,False
+era5,tmin_C,Brasil,1981-1990,-1.042,0.906,False
+era5,tmin_C,Centro-Oeste,1961-1970,-1.889,0.636,False
+era5,tmin_C,Centro-Oeste,1971-1980,-1.418,0.798,False
+era5,tmin_C,Centro-Oeste,1981-1990,-1.465,0.852,False
+era5,tmin_C,Nordeste,1961-1970,-1.717,0.548,True
+era5,tmin_C,Nordeste,1971-1980,-0.943,0.663,False
+era5,tmin_C,Nordeste,1981-1990,-1.08,0.808,False
+era5,tmin_C,Norte,1961-1970,-1.498,0.453,True
+era5,tmin_C,Norte,1971-1980,-0.766,0.724,False
+era5,tmin_C,Norte,1981-1990,-0.905,0.854,False
+era5,tmin_C,Sudeste,1961-1970,-1.513,0.822,False
+era5,tmin_C,Sudeste,1971-1980,-1.09,0.869,False
+era5,tmin_C,Sudeste,1981-1990,-0.964,0.972,False
+era5,tmin_C,Sul,1961-1970,-1.277,0.961,True
+era5,tmin_C,Sul,1971-1980,-0.722,0.974,False
+era5,tmin_C,Sul,1981-1990,-0.748,0.973,False
+era5,tmin_C,UF acre,1961-1970,-1.599,0.281,False
+era5,tmin_C,UF acre,1971-1980,-1.68,0.5,False
+era5,tmin_C,UF acre,1981-1990,-1.433,0.639,False
+era5,tmin_C,UF alagoas,1961-1970,-0.969,0.415,True
+era5,tmin_C,UF alagoas,1971-1980,-0.395,0.633,False
+era5,tmin_C,UF alagoas,1981-1990,-0.445,0.739,False
+era5,tmin_C,UF amapa,1961-1970,-0.361,0.453,False
+era5,tmin_C,UF amapa,1971-1980,-0.24,0.56,False
+era5,tmin_C,UF amapa,1981-1990,-0.289,0.746,False
+era5,tmin_C,UF amazonas,1961-1970,-1.074,0.451,True
+era5,tmin_C,UF amazonas,1971-1980,-0.795,0.729,False
+era5,tmin_C,UF amazonas,1981-1990,-0.894,0.78,False
+era5,tmin_C,UF bahia,1961-1970,-1.857,0.462,True
+era5,tmin_C,UF bahia,1971-1980,-0.932,0.784,False
+era5,tmin_C,UF bahia,1981-1990,-0.997,0.923,False
+era5,tmin_C,UF ceara,1961-1970,-0.716,0.732,False
+era5,tmin_C,UF ceara,1971-1980,-0.609,0.638,False
+era5,tmin_C,UF ceara,1981-1990,-0.497,0.707,False
+era5,tmin_C,UF distrito federal,1961-1970,-1.012,0.212,False
+era5,tmin_C,UF distrito federal,1971-1980,-0.429,0.656,False
+era5,tmin_C,UF distrito federal,1981-1990,-0.548,0.885,False
+era5,tmin_C,UF espirito santo,1961-1970,-0.376,0.832,False
+era5,tmin_C,UF espirito santo,1971-1980,-0.73,0.891,False
+era5,tmin_C,UF espirito santo,1981-1990,-0.708,0.96,False
+era5,tmin_C,UF goias,1961-1970,-1.465,0.512,True
+era5,tmin_C,UF goias,1971-1980,-0.866,0.737,False
+era5,tmin_C,UF goias,1981-1990,-0.934,0.907,False
+era5,tmin_C,UF maranhao,1961-1970,-2.049,0.312,True
+era5,tmin_C,UF maranhao,1971-1980,-1.026,0.458,False
+era5,tmin_C,UF maranhao,1981-1990,-1.316,0.421,False
+era5,tmin_C,UF mato grosso,1961-1970,-2.067,0.412,False
+era5,tmin_C,UF mato grosso,1971-1980,-1.534,0.624,False
+era5,tmin_C,UF mato grosso,1981-1990,-1.713,0.743,False
+era5,tmin_C,UF mato grosso do sul,1961-1970,-1.863,0.851,False
+era5,tmin_C,UF mato grosso do sul,1971-1980,-1.668,0.882,False
+era5,tmin_C,UF mato grosso do sul,1981-1990,-1.369,0.913,False
+era5,tmin_C,UF minas gerais,1961-1970,-1.597,0.732,False
+era5,tmin_C,UF minas gerais,1971-1980,-1.145,0.829,False
+era5,tmin_C,UF minas gerais,1981-1990,-1.082,0.956,False
+era5,tmin_C,UF para,1961-1970,-1.887,0.319,True
+era5,tmin_C,UF para,1971-1980,-0.544,0.467,False
+era5,tmin_C,UF para,1981-1990,-0.714,0.661,False
+era5,tmin_C,UF paraiba,1961-1970,-1.313,0.732,False
+era5,tmin_C,UF paraiba,1971-1980,-0.905,0.705,False
+era5,tmin_C,UF paraiba,1981-1990,-0.52,0.685,False
+era5,tmin_C,UF parana,1961-1970,-1.799,0.914,False
+era5,tmin_C,UF parana,1971-1980,-1.321,0.933,False
+era5,tmin_C,UF parana,1981-1990,-1.108,0.97,False
+era5,tmin_C,UF pernambuco,1961-1970,-1.027,0.729,False
+era5,tmin_C,UF pernambuco,1971-1980,-0.593,0.699,False
+era5,tmin_C,UF pernambuco,1981-1990,-0.501,0.888,False
+era5,tmin_C,UF piaui,1961-1970,-2.178,0.417,False
+era5,tmin_C,UF piaui,1971-1980,-1.394,0.278,True
+era5,tmin_C,UF piaui,1981-1990,-1.992,0.674,False
+era5,tmin_C,UF rio de janeiro,1961-1970,-0.746,0.919,False
+era5,tmin_C,UF rio de janeiro,1971-1980,-0.379,0.941,False
+era5,tmin_C,UF rio de janeiro,1981-1990,-0.468,0.978,False
+era5,tmin_C,UF rio grande do norte,1961-1970,-1.214,0.62,False
+era5,tmin_C,UF rio grande do norte,1971-1980,-0.757,0.577,False
+era5,tmin_C,UF rio grande do norte,1981-1990,-0.268,0.723,False
+era5,tmin_C,UF rio grande do sul,1961-1970,-0.764,0.972,False
+era5,tmin_C,UF rio grande do sul,1971-1980,-0.339,0.969,False
+era5,tmin_C,UF rio grande do sul,1981-1990,-0.525,0.966,False
+era5,tmin_C,UF rondonia,1961-1970,-1.764,0.436,False
+era5,tmin_C,UF rondonia,1971-1980,-1.494,0.663,False
+era5,tmin_C,UF rondonia,1981-1990,-1.618,0.606,False
+era5,tmin_C,UF roraima,1961-1970,-0.763,0.128,True
+era5,tmin_C,UF roraima,1971-1980,0.12,0.567,False
+era5,tmin_C,UF roraima,1981-1990,-0.13,0.642,False
+era5,tmin_C,UF santa catarina,1961-1970,-1.675,0.936,True
+era5,tmin_C,UF santa catarina,1971-1980,-0.585,0.959,False
+era5,tmin_C,UF santa catarina,1981-1990,-0.632,0.964,False
+era5,tmin_C,UF sao paulo,1961-1970,-1.655,0.897,True
+era5,tmin_C,UF sao paulo,1971-1980,-1.15,0.904,False
+era5,tmin_C,UF sao paulo,1981-1990,-0.824,0.972,False
+era5,tmin_C,UF sergipe,1961-1970,-1.134,0.426,True
+era5,tmin_C,UF sergipe,1971-1980,-0.138,0.568,False
+era5,tmin_C,UF sergipe,1981-1990,-0.23,0.885,False
+era5,tmin_C,UF tocantins,1961-1970,-3.007,0.295,True
+era5,tmin_C,UF tocantins,1971-1980,-1.412,0.343,False
+era5,tmin_C,UF tocantins,1981-1990,-1.826,0.506,False
+era5,u2,Brasil,1961-1970,0.046,0.205,False
+era5,u2,Brasil,1971-1980,0.214,0.429,False
+era5,u2,Brasil,1981-1990,0.163,0.722,False
+era5,u2,Centro-Oeste,1961-1970,0.044,0.096,False
+era5,u2,Centro-Oeste,1971-1980,0.13,0.395,False
+era5,u2,Centro-Oeste,1981-1990,0.085,0.419,False
+era5,u2,Nordeste,1961-1970,-0.317,0.631,True
+era5,u2,Nordeste,1971-1980,0.088,0.338,False
+era5,u2,Nordeste,1981-1990,0.1,0.8,False
+era5,u2,Norte,1961-1970,0.223,0.018,False
+era5,u2,Norte,1971-1980,0.328,0.013,False
+era5,u2,Norte,1981-1990,0.24,0.62,False
+era5,u2,Sudeste,1961-1970,0.052,0.557,False
+era5,u2,Sudeste,1971-1980,0.151,0.781,False
+era5,u2,Sudeste,1981-1990,0.148,0.864,False
+era5,u2,Sul,1961-1970,-0.142,0.598,True
+era5,u2,Sul,1971-1980,0.147,0.74,False
+era5,u2,Sul,1981-1990,0.075,0.753,False
+era5,u2,UF acre,1961-1970,0.182,0.27,True
+era5,u2,UF acre,1971-1980,-0.171,0.074,False
+era5,u2,UF acre,1981-1990,-0.237,0.28,False
+era5,u2,UF alagoas,1961-1970,0.115,0.051,True
+era5,u2,UF alagoas,1971-1980,0.351,0.121,False
+era5,u2,UF alagoas,1981-1990,0.625,0.751,True
+era5,u2,UF amapa,1961-1970,0.004,0.034,True
+era5,u2,UF amapa,1971-1980,0.277,0.296,False
+era5,u2,UF amapa,1981-1990,0.347,0.557,False
+era5,u2,UF amazonas,1961-1970,0.374,-0.169,False
+era5,u2,UF amazonas,1971-1980,0.368,-0.168,False
+era5,u2,UF amazonas,1981-1990,0.222,0.335,False
+era5,u2,UF bahia,1961-1970,-0.155,0.712,False
+era5,u2,UF bahia,1971-1980,0.095,0.4,True
+era5,u2,UF bahia,1981-1990,-0.0,0.755,False
+era5,u2,UF ceara,1961-1970,-0.611,0.507,True
+era5,u2,UF ceara,1971-1980,0.042,0.134,False
+era5,u2,UF ceara,1981-1990,-0.03,0.365,False
+era5,u2,UF distrito federal,1961-1970,0.061,0.381,False
+era5,u2,UF distrito federal,1971-1980,0.032,0.429,False
+era5,u2,UF distrito federal,1981-1990,-0.082,0.625,False
+era5,u2,UF espirito santo,1961-1970,-0.004,0.341,True
+era5,u2,UF espirito santo,1971-1980,0.518,0.585,False
+era5,u2,UF espirito santo,1981-1990,0.377,0.558,False
+era5,u2,UF goias,1961-1970,0.115,0.378,False
+era5,u2,UF goias,1971-1980,0.129,0.49,False
+era5,u2,UF goias,1981-1990,0.073,0.563,False
+era5,u2,UF maranhao,1961-1970,-0.393,0.129,True
+era5,u2,UF maranhao,1971-1980,0.243,0.266,False
+era5,u2,UF maranhao,1981-1990,0.335,0.211,False
+era5,u2,UF mato grosso,1961-1970,0.037,-0.015,False
+era5,u2,UF mato grosso,1971-1980,0.127,0.156,False
+era5,u2,UF mato grosso,1981-1990,0.074,-0.169,False
+era5,u2,UF mato grosso do sul,1961-1970,-0.008,0.235,False
+era5,u2,UF mato grosso do sul,1971-1980,0.139,0.414,False
+era5,u2,UF mato grosso do sul,1981-1990,0.122,0.718,False
+era5,u2,UF minas gerais,1961-1970,0.036,0.555,False
+era5,u2,UF minas gerais,1971-1980,0.113,0.706,False
+era5,u2,UF minas gerais,1981-1990,0.11,0.851,False
+era5,u2,UF para,1961-1970,0.113,0.103,True
+era5,u2,UF para,1971-1980,0.331,0.505,False
+era5,u2,UF para,1981-1990,0.414,0.647,False
+era5,u2,UF paraiba,1961-1970,-0.612,0.473,True
+era5,u2,UF paraiba,1971-1980,-0.315,0.37,False
+era5,u2,UF paraiba,1981-1990,0.03,0.696,True
+era5,u2,UF parana,1961-1970,0.175,0.603,False
+era5,u2,UF parana,1971-1980,0.102,0.624,False
+era5,u2,UF parana,1981-1990,0.065,0.786,False
+era5,u2,UF pernambuco,1961-1970,-0.56,0.442,True
+era5,u2,UF pernambuco,1971-1980,-0.185,0.325,False
+era5,u2,UF pernambuco,1981-1990,-0.042,0.857,False
+era5,u2,UF piaui,1961-1970,-0.341,0.374,True
+era5,u2,UF piaui,1971-1980,0.145,0.412,False
+era5,u2,UF piaui,1981-1990,0.1,0.812,False
+era5,u2,UF rio de janeiro,1961-1970,-0.162,0.586,True
+era5,u2,UF rio de janeiro,1971-1980,0.139,0.513,False
+era5,u2,UF rio de janeiro,1981-1990,0.411,0.435,True
+era5,u2,UF rio grande do norte,1961-1970,-0.216,0.404,False
+era5,u2,UF rio grande do norte,1971-1980,-0.358,0.251,False
+era5,u2,UF rio grande do norte,1981-1990,-0.002,0.604,True
+era5,u2,UF rio grande do sul,1961-1970,-0.458,0.425,True
+era5,u2,UF rio grande do sul,1971-1980,0.094,0.544,False
+era5,u2,UF rio grande do sul,1981-1990,0.031,0.714,False
+era5,u2,UF rondonia,1961-1970,0.28,0.078,False
+era5,u2,UF rondonia,1971-1980,0.108,-0.016,False
+era5,u2,UF rondonia,1981-1990,0.071,-0.069,False
+era5,u2,UF roraima,1961-1970,0.361,0.051,False
+era5,u2,UF roraima,1971-1980,0.816,0.321,True
+era5,u2,UF roraima,1981-1990,0.056,0.418,True
+era5,u2,UF santa catarina,1961-1970,0.108,0.51,False
+era5,u2,UF santa catarina,1971-1980,0.373,0.604,False
+era5,u2,UF santa catarina,1981-1990,0.205,0.445,False
+era5,u2,UF sao paulo,1961-1970,0.134,0.655,False
+era5,u2,UF sao paulo,1971-1980,0.174,0.759,False
+era5,u2,UF sao paulo,1981-1990,0.149,0.821,False
+era5,u2,UF sergipe,1961-1970,-0.089,0.008,True
+era5,u2,UF sergipe,1971-1980,0.255,0.121,False
+era5,u2,UF sergipe,1981-1990,0.48,0.459,True
+era5,u2,UF tocantins,1961-1970,-0.174,0.385,True
+era5,u2,UF tocantins,1971-1980,0.196,0.286,False
+era5,u2,UF tocantins,1981-1990,0.07,0.627,False
+era5,vpd,Brasil,1961-1970,-0.32,0.74,True
+era5,vpd,Brasil,1971-1980,-0.162,0.727,False
+era5,vpd,Brasil,1981-1990,-0.144,0.739,False
+era5,vpd,Centro-Oeste,1961-1970,-0.345,0.59,True
+era5,vpd,Centro-Oeste,1971-1980,-0.209,0.76,False
+era5,vpd,Centro-Oeste,1981-1990,-0.182,0.866,False
+era5,vpd,Nordeste,1961-1970,-0.457,0.683,True
+era5,vpd,Nordeste,1971-1980,-0.236,0.756,False
+era5,vpd,Nordeste,1981-1990,-0.204,0.829,False
+era5,vpd,Norte,1961-1970,-0.329,0.694,True
+era5,vpd,Norte,1971-1980,-0.132,0.809,False
+era5,vpd,Norte,1981-1990,-0.129,0.537,False
+era5,vpd,Sudeste,1961-1970,-0.174,0.804,False
+era5,vpd,Sudeste,1971-1980,-0.156,0.924,False
+era5,vpd,Sudeste,1981-1990,-0.103,0.884,False
+era5,vpd,Sul,1961-1970,-0.079,0.713,False
+era5,vpd,Sul,1971-1980,-0.048,0.926,False
+era5,vpd,Sul,1981-1990,-0.048,0.946,False
+era5,vpd,UF acre,1961-1970,-0.264,0.62,True
+era5,vpd,UF acre,1971-1980,-0.158,0.626,False
+era5,vpd,UF acre,1981-1990,-0.076,0.268,False
+era5,vpd,UF alagoas,1961-1970,-0.423,0.662,True
+era5,vpd,UF alagoas,1971-1980,-0.235,0.814,False
+era5,vpd,UF alagoas,1981-1990,-0.205,0.771,False
+era5,vpd,UF amapa,1961-1970,-0.237,0.51,False
+era5,vpd,UF amapa,1971-1980,-0.193,0.481,False
+era5,vpd,UF amapa,1981-1990,-0.241,0.649,False
+era5,vpd,UF amazonas,1961-1970,-0.203,0.694,True
+era5,vpd,UF amazonas,1971-1980,-0.062,0.842,False
+era5,vpd,UF amazonas,1981-1990,-0.041,0.672,False
+era5,vpd,UF bahia,1961-1970,-0.45,0.83,True
+era5,vpd,UF bahia,1971-1980,-0.225,0.864,False
+era5,vpd,UF bahia,1981-1990,-0.195,0.954,False
+era5,vpd,UF ceara,1961-1970,-0.365,0.749,True
+era5,vpd,UF ceara,1971-1980,-0.231,0.682,False
+era5,vpd,UF ceara,1981-1990,-0.2,0.834,False
+era5,vpd,UF distrito federal,1961-1970,-0.215,0.737,False
+era5,vpd,UF distrito federal,1971-1980,-0.127,0.853,False
+era5,vpd,UF distrito federal,1981-1990,-0.101,0.877,False
+era5,vpd,UF espirito santo,1961-1970,-0.015,0.693,False
+era5,vpd,UF espirito santo,1971-1980,-0.078,0.838,False
+era5,vpd,UF espirito santo,1981-1990,-0.069,0.89,False
+era5,vpd,UF goias,1961-1970,-0.318,0.67,True
+era5,vpd,UF goias,1971-1980,-0.189,0.834,False
+era5,vpd,UF goias,1981-1990,-0.13,0.873,False
+era5,vpd,UF maranhao,1961-1970,-0.42,0.562,True
+era5,vpd,UF maranhao,1971-1980,-0.195,0.656,False
+era5,vpd,UF maranhao,1981-1990,-0.18,0.584,False
+era5,vpd,UF mato grosso,1961-1970,-0.358,0.493,True
+era5,vpd,UF mato grosso,1971-1980,-0.194,0.689,False
+era5,vpd,UF mato grosso,1981-1990,-0.216,0.844,False
+era5,vpd,UF mato grosso do sul,1961-1970,-0.342,0.63,False
+era5,vpd,UF mato grosso do sul,1971-1980,-0.268,0.737,False
+era5,vpd,UF mato grosso do sul,1981-1990,-0.149,0.796,True
+era5,vpd,UF minas gerais,1961-1970,-0.207,0.814,False
+era5,vpd,UF minas gerais,1971-1980,-0.18,0.925,False
+era5,vpd,UF minas gerais,1981-1990,-0.135,0.899,False
+era5,vpd,UF para,1961-1970,-0.45,0.52,True
+era5,vpd,UF para,1971-1980,-0.168,0.724,False
+era5,vpd,UF para,1981-1990,-0.207,0.231,False
+era5,vpd,UF paraiba,1961-1970,-0.619,0.72,True
+era5,vpd,UF paraiba,1971-1980,-0.406,0.627,False
+era5,vpd,UF paraiba,1981-1990,-0.33,0.624,False
+era5,vpd,UF parana,1961-1970,-0.13,0.644,False
+era5,vpd,UF parana,1971-1980,-0.077,0.885,False
+era5,vpd,UF parana,1981-1990,-0.057,0.943,False
+era5,vpd,UF pernambuco,1961-1970,-0.467,0.689,True
+era5,vpd,UF pernambuco,1971-1980,-0.283,0.736,False
+era5,vpd,UF pernambuco,1981-1990,-0.196,0.893,False
+era5,vpd,UF piaui,1961-1970,-0.529,0.521,True
+era5,vpd,UF piaui,1971-1980,-0.246,0.628,False
+era5,vpd,UF piaui,1981-1990,-0.221,0.82,False
+era5,vpd,UF rio de janeiro,1961-1970,-0.1,0.829,False
+era5,vpd,UF rio de janeiro,1971-1980,-0.065,0.911,False
+era5,vpd,UF rio de janeiro,1981-1990,-0.031,0.896,False
+era5,vpd,UF rio grande do norte,1961-1970,-0.493,0.626,True
+era5,vpd,UF rio grande do norte,1971-1980,-0.318,0.609,False
+era5,vpd,UF rio grande do norte,1981-1990,-0.258,0.669,False
+era5,vpd,UF rio grande do sul,1961-1970,-0.036,0.881,False
+era5,vpd,UF rio grande do sul,1971-1980,-0.025,0.943,False
+era5,vpd,UF rio grande do sul,1981-1990,-0.039,0.917,False
+era5,vpd,UF rondonia,1961-1970,-0.293,0.589,False
+era5,vpd,UF rondonia,1971-1980,-0.248,0.752,False
+era5,vpd,UF rondonia,1981-1990,-0.205,0.828,False
+era5,vpd,UF roraima,1961-1970,-0.377,-0.043,True
+era5,vpd,UF roraima,1971-1980,-0.081,0.419,False
+era5,vpd,UF roraima,1981-1990,-0.06,0.486,False
+era5,vpd,UF santa catarina,1961-1970,-0.098,0.588,False
+era5,vpd,UF santa catarina,1971-1980,-0.058,0.861,False
+era5,vpd,UF santa catarina,1981-1990,-0.057,0.91,False
+era5,vpd,UF sao paulo,1961-1970,-0.139,0.743,False
+era5,vpd,UF sao paulo,1971-1980,-0.129,0.898,False
+era5,vpd,UF sao paulo,1981-1990,-0.047,0.907,False
+era5,vpd,UF sergipe,1961-1970,-0.451,0.74,True
+era5,vpd,UF sergipe,1971-1980,-0.177,0.732,False
+era5,vpd,UF sergipe,1981-1990,-0.197,0.763,False
+era5,vpd,UF tocantins,1961-1970,-0.576,0.679,True
+era5,vpd,UF tocantins,1971-1980,-0.26,0.681,False
+era5,vpd,UF tocantins,1981-1990,-0.238,0.747,False
+gldas20,RH,Brasil,1961-1970,-4.275,0.583,False
+gldas20,RH,Brasil,1971-1980,-6.346,0.408,False
+gldas20,RH,Centro-Oeste,1961-1970,-1.211,0.475,False
+gldas20,RH,Centro-Oeste,1971-1980,-3.4,0.487,False
+gldas20,RH,Nordeste,1961-1970,-3.835,0.486,False
+gldas20,RH,Nordeste,1971-1980,-7.89,0.293,False
+gldas20,RH,Norte,1961-1970,-4.145,0.348,False
+gldas20,RH,Norte,1971-1980,-5.77,0.532,False
+gldas20,RH,Sudeste,1961-1970,-7.493,0.596,False
+gldas20,RH,Sudeste,1971-1980,-8.131,0.513,False
+gldas20,RH,Sul,1961-1970,-9.264,0.539,False
+gldas20,RH,Sul,1971-1980,-11.042,0.647,False
+gldas20,RH,UF acre,1961-1970,-0.608,0.243,False
+gldas20,RH,UF acre,1971-1980,-1.074,0.49,False
+gldas20,RH,UF alagoas,1961-1970,-3.76,0.386,False
+gldas20,RH,UF alagoas,1971-1980,-8.177,0.372,False
+gldas20,RH,UF amapa,1961-1970,-4.88,0.268,False
+gldas20,RH,UF amapa,1971-1980,-6.85,0.271,False
+gldas20,RH,UF amazonas,1961-1970,-5.104,0.234,False
+gldas20,RH,UF amazonas,1971-1980,-6.11,0.459,False
+gldas20,RH,UF bahia,1961-1970,-3.758,0.426,False
+gldas20,RH,UF bahia,1971-1980,-8.036,0.449,False
+gldas20,RH,UF ceara,1961-1970,-3.629,0.549,False
+gldas20,RH,UF ceara,1971-1980,-5.385,0.285,False
+gldas20,RH,UF distrito federal,1961-1970,-4.584,0.512,False
+gldas20,RH,UF distrito federal,1971-1980,-7.018,0.483,False
+gldas20,RH,UF espirito santo,1961-1970,-8.18,0.524,False
+gldas20,RH,UF espirito santo,1971-1980,-7.525,0.387,False
+gldas20,RH,UF goias,1961-1970,-3.416,0.481,False
+gldas20,RH,UF goias,1971-1980,-6.009,0.546,False
+gldas20,RH,UF maranhao,1961-1970,-2.53,0.393,False
+gldas20,RH,UF maranhao,1971-1980,-6.881,0.051,False
+gldas20,RH,UF mato grosso,1961-1970,0.084,0.388,False
+gldas20,RH,UF mato grosso,1971-1980,-2.032,0.453,False
+gldas20,RH,UF mato grosso do sul,1961-1970,-2.267,0.481,False
+gldas20,RH,UF mato grosso do sul,1971-1980,-4.253,0.405,False
+gldas20,RH,UF minas gerais,1961-1970,-6.894,0.565,False
+gldas20,RH,UF minas gerais,1971-1980,-7.618,0.437,False
+gldas20,RH,UF para,1961-1970,-4.955,0.299,False
+gldas20,RH,UF para,1971-1980,-7.104,0.501,False
+gldas20,RH,UF paraiba,1961-1970,-4.46,0.462,False
+gldas20,RH,UF paraiba,1971-1980,-9.322,0.35,False
+gldas20,RH,UF parana,1961-1970,-7.284,0.418,False
+gldas20,RH,UF parana,1971-1980,-9.918,0.423,False
+gldas20,RH,UF pernambuco,1961-1970,-5.708,0.453,False
+gldas20,RH,UF pernambuco,1971-1980,-9.179,0.444,False
+gldas20,RH,UF piaui,1961-1970,-4.425,0.444,False
+gldas20,RH,UF piaui,1971-1980,-8.934,0.119,False
+gldas20,RH,UF rio de janeiro,1961-1970,-6.658,0.677,False
+gldas20,RH,UF rio de janeiro,1971-1980,-8.034,0.585,False
+gldas20,RH,UF rio grande do norte,1961-1970,-6.466,0.524,False
+gldas20,RH,UF rio grande do norte,1971-1980,-9.666,0.293,False
+gldas20,RH,UF rio grande do sul,1961-1970,-11.052,0.687,False
+gldas20,RH,UF rio grande do sul,1971-1980,-12.07,0.794,False
+gldas20,RH,UF rondonia,1961-1970,0.382,0.281,False
+gldas20,RH,UF rondonia,1971-1980,1.33,0.533,False
+gldas20,RH,UF roraima,1961-1970,-4.089,0.26,False
+gldas20,RH,UF roraima,1971-1980,-7.621,0.103,False
+gldas20,RH,UF santa catarina,1961-1970,-8.123,0.47,False
+gldas20,RH,UF santa catarina,1971-1980,-10.344,0.652,False
+gldas20,RH,UF sao paulo,1961-1970,-8.919,0.553,False
+gldas20,RH,UF sao paulo,1971-1980,-9.459,0.524,False
+gldas20,RH,UF sergipe,1961-1970,-3.823,0.315,False
+gldas20,RH,UF sergipe,1971-1980,-10.001,0.361,False
+gldas20,RH,UF tocantins,1961-1970,-0.696,0.406,False
+gldas20,RH,UF tocantins,1971-1980,-4.657,0.264,False
+gldas20,et_potencial,Brasil,1961-1970,-35.534,0.596,False
+gldas20,et_potencial,Brasil,1971-1980,-31.11,0.521,False
+gldas20,et_potencial,Centro-Oeste,1961-1970,-39.34,0.493,False
+gldas20,et_potencial,Centro-Oeste,1971-1980,-35.659,0.457,False
+gldas20,et_potencial,Nordeste,1961-1970,-42.785,0.577,False
+gldas20,et_potencial,Nordeste,1971-1980,-36.412,0.26,False
+gldas20,et_potencial,Norte,1961-1970,-29.72,0.406,False
+gldas20,et_potencial,Norte,1971-1980,-25.353,0.611,False
+gldas20,et_potencial,Sudeste,1961-1970,-36.104,0.611,False
+gldas20,et_potencial,Sudeste,1971-1980,-33.571,0.634,False
+gldas20,et_potencial,Sul,1961-1970,-31.413,0.671,False
+gldas20,et_potencial,Sul,1971-1980,-27.607,0.841,False
+gldas20,et_potencial,UF acre,1961-1970,-32.463,0.301,False
+gldas20,et_potencial,UF acre,1971-1980,-36.981,0.137,False
+gldas20,et_potencial,UF alagoas,1961-1970,-37.27,0.508,False
+gldas20,et_potencial,UF alagoas,1971-1980,-32.327,0.358,False
+gldas20,et_potencial,UF amapa,1961-1970,-30.333,0.107,False
+gldas20,et_potencial,UF amapa,1971-1980,-24.388,0.284,False
+gldas20,et_potencial,UF amazonas,1961-1970,-23.378,0.347,False
+gldas20,et_potencial,UF amazonas,1971-1980,-23.245,0.241,False
+gldas20,et_potencial,UF bahia,1961-1970,-41.735,0.599,False
+gldas20,et_potencial,UF bahia,1971-1980,-38.428,0.498,False
+gldas20,et_potencial,UF ceara,1961-1970,-46.96,0.624,False
+gldas20,et_potencial,UF ceara,1971-1980,-42.624,0.268,False
+gldas20,et_potencial,UF distrito federal,1961-1970,-39.82,0.528,False
+gldas20,et_potencial,UF distrito federal,1971-1980,-38.221,0.711,False
+gldas20,et_potencial,UF espirito santo,1961-1970,-38.437,0.678,False
+gldas20,et_potencial,UF espirito santo,1971-1980,-34.294,0.609,False
+gldas20,et_potencial,UF goias,1961-1970,-39.974,0.466,False
+gldas20,et_potencial,UF goias,1971-1980,-37.693,0.627,False
+gldas20,et_potencial,UF maranhao,1961-1970,-42.106,0.293,False
+gldas20,et_potencial,UF maranhao,1971-1980,-29.664,0.157,False
+gldas20,et_potencial,UF mato grosso,1961-1970,-39.012,0.445,False
+gldas20,et_potencial,UF mato grosso,1971-1980,-35.314,0.395,False
+gldas20,et_potencial,UF mato grosso do sul,1961-1970,-39.51,0.434,False
+gldas20,et_potencial,UF mato grosso do sul,1971-1980,-34.439,0.369,False
+gldas20,et_potencial,UF minas gerais,1961-1970,-37.805,0.629,False
+gldas20,et_potencial,UF minas gerais,1971-1980,-35.32,0.628,False
+gldas20,et_potencial,UF para,1961-1970,-30.731,0.304,False
+gldas20,et_potencial,UF para,1971-1980,-20.45,0.562,False
+gldas20,et_potencial,UF paraiba,1961-1970,-39.108,0.593,False
+gldas20,et_potencial,UF paraiba,1971-1980,-33.467,0.363,False
+gldas20,et_potencial,UF parana,1961-1970,-30.745,0.592,False
+gldas20,et_potencial,UF parana,1971-1980,-28.081,0.716,False
+gldas20,et_potencial,UF pernambuco,1961-1970,-38.932,0.531,False
+gldas20,et_potencial,UF pernambuco,1971-1980,-34.028,0.33,False
+gldas20,et_potencial,UF piaui,1961-1970,-46.93,0.465,False
+gldas20,et_potencial,UF piaui,1971-1980,-37.473,0.07,False
+gldas20,et_potencial,UF rio de janeiro,1961-1970,-43.698,0.658,False
+gldas20,et_potencial,UF rio de janeiro,1971-1980,-40.295,0.73,False
+gldas20,et_potencial,UF rio grande do norte,1961-1970,-37.099,0.626,False
+gldas20,et_potencial,UF rio grande do norte,1971-1980,-34.975,0.301,False
+gldas20,et_potencial,UF rio grande do sul,1961-1970,-32.254,0.711,False
+gldas20,et_potencial,UF rio grande do sul,1971-1980,-27.529,0.839,False
+gldas20,et_potencial,UF rondonia,1961-1970,-33.957,0.296,False
+gldas20,et_potencial,UF rondonia,1971-1980,-35.684,0.216,False
+gldas20,et_potencial,UF roraima,1961-1970,-27.588,0.324,False
+gldas20,et_potencial,UF roraima,1971-1980,-23.618,0.406,False
+gldas20,et_potencial,UF santa catarina,1961-1970,-30.216,0.653,False
+gldas20,et_potencial,UF santa catarina,1971-1980,-26.826,0.738,False
+gldas20,et_potencial,UF sao paulo,1961-1970,-29.797,0.484,False
+gldas20,et_potencial,UF sao paulo,1971-1980,-27.531,0.538,False
+gldas20,et_potencial,UF sergipe,1961-1970,-38.707,0.479,False
+gldas20,et_potencial,UF sergipe,1971-1980,-32.788,0.407,False
+gldas20,et_potencial,UF tocantins,1961-1970,-45.88,0.434,False
+gldas20,et_potencial,UF tocantins,1971-1980,-38.091,0.544,False
+gldas20,et_real,Brasil,1961-1970,-9.776,0.627,False
+gldas20,et_real,Brasil,1971-1980,-3.245,0.553,False
+gldas20,et_real,Centro-Oeste,1961-1970,-11.597,0.399,False
+gldas20,et_real,Centro-Oeste,1971-1980,-4.641,0.342,False
+gldas20,et_real,Nordeste,1961-1970,-10.597,0.75,False
+gldas20,et_real,Nordeste,1971-1980,-2.149,0.657,False
+gldas20,et_real,Norte,1961-1970,-10.794,0.346,False
+gldas20,et_real,Norte,1971-1980,-3.948,0.427,False
+gldas20,et_real,Sudeste,1961-1970,-2.159,0.475,False
+gldas20,et_real,Sudeste,1971-1980,0.459,0.429,False
+gldas20,et_real,Sul,1961-1970,-6.002,0.177,False
+gldas20,et_real,Sul,1971-1980,-1.78,0.445,False
+gldas20,et_real,UF acre,1961-1970,-14.585,0.249,False
+gldas20,et_real,UF acre,1971-1980,-17.15,0.077,False
+gldas20,et_real,UF alagoas,1961-1970,-28.368,0.614,False
+gldas20,et_real,UF alagoas,1971-1980,-19.971,0.491,False
+gldas20,et_real,UF amapa,1961-1970,-18.926,0.078,False
+gldas20,et_real,UF amapa,1971-1980,-11.765,0.11,False
+gldas20,et_real,UF amazonas,1961-1970,-5.524,0.039,False
+gldas20,et_real,UF amazonas,1971-1980,-3.796,0.018,False
+gldas20,et_real,UF bahia,1961-1970,-7.464,0.783,False
+gldas20,et_real,UF bahia,1971-1980,-5.367,0.61,False
+gldas20,et_real,UF ceara,1961-1970,-6.554,0.661,False
+gldas20,et_real,UF ceara,1971-1980,3.928,0.653,False
+gldas20,et_real,UF distrito federal,1961-1970,-5.485,0.401,False
+gldas20,et_real,UF distrito federal,1971-1980,1.991,0.401,False
+gldas20,et_real,UF espirito santo,1961-1970,4.924,0.334,False
+gldas20,et_real,UF espirito santo,1971-1980,1.678,0.538,False
+gldas20,et_real,UF goias,1961-1970,-11.303,0.339,False
+gldas20,et_real,UF goias,1971-1980,-4.189,0.427,False
+gldas20,et_real,UF maranhao,1961-1970,-11.597,0.614,False
+gldas20,et_real,UF maranhao,1971-1980,1.466,0.554,False
+gldas20,et_real,UF mato grosso,1961-1970,-13.432,0.233,False
+gldas20,et_real,UF mato grosso,1971-1980,-5.528,0.273,False
+gldas20,et_real,UF mato grosso do sul,1961-1970,-7.181,0.422,False
+gldas20,et_real,UF mato grosso do sul,1971-1980,-2.903,0.202,False
+gldas20,et_real,UF minas gerais,1961-1970,-2.608,0.509,False
+gldas20,et_real,UF minas gerais,1971-1980,-0.881,0.507,False
+gldas20,et_real,UF para,1961-1970,-17.832,0.477,False
+gldas20,et_real,UF para,1971-1980,-3.15,0.553,False
+gldas20,et_real,UF paraiba,1961-1970,-29.44,0.593,False
+gldas20,et_real,UF paraiba,1971-1980,-21.111,0.471,False
+gldas20,et_real,UF parana,1961-1970,-9.156,0.105,False
+gldas20,et_real,UF parana,1971-1980,-4.099,0.188,False
+gldas20,et_real,UF pernambuco,1961-1970,-24.53,0.638,False
+gldas20,et_real,UF pernambuco,1971-1980,-10.908,0.607,False
+gldas20,et_real,UF piaui,1961-1970,-4.952,0.558,False
+gldas20,et_real,UF piaui,1971-1980,7.999,0.552,False
+gldas20,et_real,UF rio de janeiro,1961-1970,-0.497,0.457,False
+gldas20,et_real,UF rio de janeiro,1971-1980,2.427,0.385,False
+gldas20,et_real,UF rio grande do norte,1961-1970,-14.953,0.709,False
+gldas20,et_real,UF rio grande do norte,1971-1980,-9.908,0.668,False
+gldas20,et_real,UF rio grande do sul,1961-1970,-4.146,0.223,False
+gldas20,et_real,UF rio grande do sul,1971-1980,-0.049,0.414,False
+gldas20,et_real,UF rondonia,1961-1970,-9.8,0.284,False
+gldas20,et_real,UF rondonia,1971-1980,-8.695,0.096,False
+gldas20,et_real,UF roraima,1961-1970,-7.088,-0.077,False
+gldas20,et_real,UF roraima,1971-1980,0.399,-0.087,False
+gldas20,et_real,UF santa catarina,1961-1970,-4.083,0.237,False
+gldas20,et_real,UF santa catarina,1971-1980,-1.51,0.478,False
+gldas20,et_real,UF sao paulo,1961-1970,-2.717,0.313,False
+gldas20,et_real,UF sao paulo,1971-1980,2.692,0.186,False
+gldas20,et_real,UF sergipe,1961-1970,-25.417,0.744,False
+gldas20,et_real,UF sergipe,1971-1980,-17.136,0.562,False
+gldas20,et_real,UF tocantins,1961-1970,-4.767,0.247,False
+gldas20,et_real,UF tocantins,1971-1980,6.325,0.522,False
+gldas20,pr_mm,Brasil,1961-1970,0.167,0.832,False
+gldas20,pr_mm,Brasil,1971-1980,-0.731,0.922,False
+gldas20,pr_mm,Centro-Oeste,1961-1970,-8.333,0.894,False
+gldas20,pr_mm,Centro-Oeste,1971-1980,-2.166,0.86,False
+gldas20,pr_mm,Nordeste,1961-1970,-4.486,0.991,False
+gldas20,pr_mm,Nordeste,1971-1980,-6.308,0.996,False
+gldas20,pr_mm,Norte,1961-1970,4.938,0.719,False
+gldas20,pr_mm,Norte,1971-1980,1.176,0.769,False
+gldas20,pr_mm,Sudeste,1961-1970,-4.647,0.911,False
+gldas20,pr_mm,Sudeste,1971-1980,-1.205,0.94,False
+gldas20,pr_mm,Sul,1961-1970,-2.805,0.974,False
+gldas20,pr_mm,Sul,1971-1980,-2.525,0.957,False
+gldas20,pr_mm,UF acre,1961-1970,8.118,0.135,False
+gldas20,pr_mm,UF acre,1971-1980,-7.969,0.207,False
+gldas20,pr_mm,UF alagoas,1961-1970,2.428,0.971,False
+gldas20,pr_mm,UF alagoas,1971-1980,-2.85,0.972,False
+gldas20,pr_mm,UF amapa,1961-1970,-5.245,0.168,False
+gldas20,pr_mm,UF amapa,1971-1980,-4.079,0.628,False
+gldas20,pr_mm,UF amazonas,1961-1970,4.438,0.801,False
+gldas20,pr_mm,UF amazonas,1971-1980,3.459,0.755,False
+gldas20,pr_mm,UF bahia,1961-1970,-5.698,0.994,False
+gldas20,pr_mm,UF bahia,1971-1980,-6.443,0.993,False
+gldas20,pr_mm,UF ceara,1961-1970,-1.257,0.995,False
+gldas20,pr_mm,UF ceara,1971-1980,-3.809,0.995,False
+gldas20,pr_mm,UF distrito federal,1961-1970,-9.361,0.88,False
+gldas20,pr_mm,UF distrito federal,1971-1980,-7.153,0.896,False
+gldas20,pr_mm,UF espirito santo,1961-1970,12.81,0.773,False
+gldas20,pr_mm,UF espirito santo,1971-1980,5.971,0.864,False
+gldas20,pr_mm,UF goias,1961-1970,-9.571,0.912,False
+gldas20,pr_mm,UF goias,1971-1980,-2.514,0.903,False
+gldas20,pr_mm,UF maranhao,1961-1970,-3.05,0.922,False
+gldas20,pr_mm,UF maranhao,1971-1980,-6.088,0.976,False
+gldas20,pr_mm,UF mato grosso,1961-1970,-7.86,0.834,False
+gldas20,pr_mm,UF mato grosso,1971-1980,-1.866,0.745,False
+gldas20,pr_mm,UF mato grosso do sul,1961-1970,-8.455,0.84,False
+gldas20,pr_mm,UF mato grosso do sul,1971-1980,-2.672,0.808,False
+gldas20,pr_mm,UF minas gerais,1961-1970,-4.212,0.914,False
+gldas20,pr_mm,UF minas gerais,1971-1980,-2.746,0.956,False
+gldas20,pr_mm,UF para,1961-1970,6.357,0.771,False
+gldas20,pr_mm,UF para,1971-1980,0.484,0.806,False
+gldas20,pr_mm,UF paraiba,1961-1970,-7.337,0.987,False
+gldas20,pr_mm,UF paraiba,1971-1980,-10.027,0.977,False
+gldas20,pr_mm,UF parana,1961-1970,-0.412,0.951,False
+gldas20,pr_mm,UF parana,1971-1980,-0.494,0.928,False
+gldas20,pr_mm,UF pernambuco,1961-1970,-5.475,0.972,False
+gldas20,pr_mm,UF pernambuco,1971-1980,-11.494,0.988,False
+gldas20,pr_mm,UF piaui,1961-1970,-6.271,0.993,False
+gldas20,pr_mm,UF piaui,1971-1980,-6.204,0.994,False
+gldas20,pr_mm,UF rio de janeiro,1961-1970,17.31,0.847,False
+gldas20,pr_mm,UF rio de janeiro,1971-1980,17.239,0.808,False
+gldas20,pr_mm,UF rio grande do norte,1961-1970,-8.269,0.989,False
+gldas20,pr_mm,UF rio grande do norte,1971-1980,-8.386,0.993,False
+gldas20,pr_mm,UF rio grande do sul,1961-1970,-5.049,0.952,False
+gldas20,pr_mm,UF rio grande do sul,1971-1980,-2.966,0.952,False
+gldas20,pr_mm,UF rondonia,1961-1970,16.09,0.622,False
+gldas20,pr_mm,UF rondonia,1971-1980,9.905,0.53,False
+gldas20,pr_mm,UF roraima,1961-1970,13.895,0.391,False
+gldas20,pr_mm,UF roraima,1971-1980,-7.631,0.52,False
+gldas20,pr_mm,UF santa catarina,1961-1970,-1.167,0.908,False
+gldas20,pr_mm,UF santa catarina,1971-1980,-5.251,0.887,False
+gldas20,pr_mm,UF sao paulo,1961-1970,-10.961,0.926,False
+gldas20,pr_mm,UF sao paulo,1971-1980,-1.644,0.869,False
+gldas20,pr_mm,UF sergipe,1961-1970,-1.51,0.978,False
+gldas20,pr_mm,UF sergipe,1971-1980,0.43,0.977,False
+gldas20,pr_mm,UF tocantins,1961-1970,-12.157,0.958,False
+gldas20,pr_mm,UF tocantins,1971-1980,-2.771,0.921,False
+gldas20,rs,Brasil,1961-1970,-0.074,0.383,False
+gldas20,rs,Brasil,1971-1980,-0.016,0.515,False
+gldas20,rs,Centro-Oeste,1961-1970,-0.31,0.305,False
+gldas20,rs,Centro-Oeste,1971-1980,-0.143,0.413,False
+gldas20,rs,Nordeste,1961-1970,0.033,0.595,False
+gldas20,rs,Nordeste,1971-1980,0.19,0.602,False
+gldas20,rs,Norte,1961-1970,0.037,0.252,False
+gldas20,rs,Norte,1971-1980,0.033,0.354,False
+gldas20,rs,Sudeste,1961-1970,-0.459,0.502,False
+gldas20,rs,Sudeste,1971-1980,-0.49,0.593,False
+gldas20,rs,Sul,1961-1970,0.211,0.782,False
+gldas20,rs,Sul,1971-1980,0.247,0.804,False
+gldas20,rs,UF acre,1961-1970,0.343,0.185,False
+gldas20,rs,UF acre,1971-1980,-1.202,-0.021,False
+gldas20,rs,UF alagoas,1961-1970,0.731,0.501,False
+gldas20,rs,UF alagoas,1971-1980,0.781,0.28,False
+gldas20,rs,UF amapa,1961-1970,0.501,0.104,False
+gldas20,rs,UF amapa,1971-1980,0.21,0.291,False
+gldas20,rs,UF amazonas,1961-1970,0.407,0.22,False
+gldas20,rs,UF amazonas,1971-1980,-0.022,0.05,False
+gldas20,rs,UF bahia,1961-1970,-0.148,0.571,False
+gldas20,rs,UF bahia,1971-1980,-0.386,0.643,False
+gldas20,rs,UF ceara,1961-1970,0.408,0.5,False
+gldas20,rs,UF ceara,1971-1980,0.338,0.456,False
+gldas20,rs,UF distrito federal,1961-1970,-1.149,0.416,False
+gldas20,rs,UF distrito federal,1971-1980,-1.226,0.674,False
+gldas20,rs,UF espirito santo,1961-1970,0.442,0.647,False
+gldas20,rs,UF espirito santo,1971-1980,0.5,0.71,False
+gldas20,rs,UF goias,1961-1970,-0.874,0.328,False
+gldas20,rs,UF goias,1971-1980,-0.708,0.533,False
+gldas20,rs,UF maranhao,1961-1970,0.085,0.187,False
+gldas20,rs,UF maranhao,1971-1980,0.68,0.537,False
+gldas20,rs,UF mato grosso,1961-1970,-0.171,0.312,False
+gldas20,rs,UF mato grosso,1971-1980,-0.052,0.379,False
+gldas20,rs,UF mato grosso do sul,1961-1970,-0.111,0.408,False
+gldas20,rs,UF mato grosso do sul,1971-1980,0.178,0.38,False
+gldas20,rs,UF minas gerais,1961-1970,-0.743,0.576,False
+gldas20,rs,UF minas gerais,1971-1980,-0.657,0.664,False
+gldas20,rs,UF para,1961-1970,-0.312,0.06,False
+gldas20,rs,UF para,1971-1980,0.403,0.381,False
+gldas20,rs,UF paraiba,1961-1970,0.575,0.511,False
+gldas20,rs,UF paraiba,1971-1980,0.518,0.263,False
+gldas20,rs,UF parana,1961-1970,-0.033,0.678,False
+gldas20,rs,UF parana,1971-1980,-0.099,0.631,False
+gldas20,rs,UF pernambuco,1961-1970,0.662,0.466,False
+gldas20,rs,UF pernambuco,1971-1980,0.492,0.352,False
+gldas20,rs,UF piaui,1961-1970,-0.488,0.607,False
+gldas20,rs,UF piaui,1971-1980,0.422,0.459,False
+gldas20,rs,UF rio de janeiro,1961-1970,-0.501,0.607,False
+gldas20,rs,UF rio de janeiro,1971-1980,-0.711,0.791,False
+gldas20,rs,UF rio grande do norte,1961-1970,0.644,0.501,False
+gldas20,rs,UF rio grande do norte,1971-1980,0.451,0.227,False
+gldas20,rs,UF rio grande do sul,1961-1970,0.379,0.786,False
+gldas20,rs,UF rio grande do sul,1971-1980,0.529,0.82,False
+gldas20,rs,UF rondonia,1961-1970,0.012,0.217,False
+gldas20,rs,UF rondonia,1971-1980,-0.466,0.227,False
+gldas20,rs,UF roraima,1961-1970,-0.187,0.25,False
+gldas20,rs,UF roraima,1971-1980,-0.213,0.165,False
+gldas20,rs,UF santa catarina,1961-1970,0.23,0.754,False
+gldas20,rs,UF santa catarina,1971-1980,0.139,0.73,False
+gldas20,rs,UF sao paulo,1961-1970,0.046,0.307,False
+gldas20,rs,UF sao paulo,1971-1980,-0.242,0.314,False
+gldas20,rs,UF sergipe,1961-1970,0.964,0.505,False
+gldas20,rs,UF sergipe,1971-1980,0.778,0.388,False
+gldas20,rs,UF tocantins,1961-1970,-0.701,0.442,False
+gldas20,rs,UF tocantins,1971-1980,-0.094,0.559,False
+gldas20,runoff,Brasil,1961-1970,-33.101,0.132,False
+gldas20,runoff,Brasil,1971-1980,-35.815,0.517,False
+gldas20,runoff,Centro-Oeste,1961-1970,-16.041,0.296,False
+gldas20,runoff,Centro-Oeste,1971-1980,-55.103,0.408,False
+gldas20,runoff,Nordeste,1961-1970,-38.805,0.681,False
+gldas20,runoff,Nordeste,1971-1980,-24.083,0.854,False
+gldas20,runoff,Norte,1961-1970,-40.373,0.235,False
+gldas20,runoff,Norte,1971-1980,-35.756,0.408,False
+gldas20,runoff,Sudeste,1961-1970,-23.759,0.277,False
+gldas20,runoff,Sudeste,1971-1980,-29.981,0.822,False
+gldas20,runoff,Sul,1961-1970,2.145,0.702,False
+gldas20,runoff,Sul,1971-1980,-6.255,0.783,False
+gldas20,runoff,UF acre,1961-1970,-67.693,0.085,False
+gldas20,runoff,UF acre,1971-1980,-63.186,0.196,False
+gldas20,runoff,UF alagoas,1961-1970,-72.082,0.286,False
+gldas20,runoff,UF alagoas,1971-1980,-68.164,0.312,False
+gldas20,runoff,UF amapa,1961-1970,-49.241,0.286,False
+gldas20,runoff,UF amapa,1971-1980,-52.058,0.635,False
+gldas20,runoff,UF amazonas,1961-1970,-42.739,0.239,False
+gldas20,runoff,UF amazonas,1971-1980,-27.585,0.439,False
+gldas20,runoff,UF bahia,1961-1970,-17.894,0.648,False
+gldas20,runoff,UF bahia,1971-1980,-11.703,0.837,False
+gldas20,runoff,UF ceara,1961-1970,-15.512,0.705,False
+gldas20,runoff,UF ceara,1971-1980,40.172,0.837,False
+gldas20,runoff,UF distrito federal,1961-1970,-59.195,0.461,False
+gldas20,runoff,UF distrito federal,1971-1980,-52.481,0.701,False
+gldas20,runoff,UF espirito santo,1961-1970,79.864,0.196,False
+gldas20,runoff,UF espirito santo,1971-1980,-1.246,0.615,False
+gldas20,runoff,UF goias,1961-1970,-55.676,0.429,False
+gldas20,runoff,UF goias,1971-1980,-62.186,0.689,False
+gldas20,runoff,UF maranhao,1961-1970,-41.284,0.573,False
+gldas20,runoff,UF maranhao,1971-1980,-33.377,0.794,False
+gldas20,runoff,UF mato grosso,1961-1970,-8.285,0.197,False
+gldas20,runoff,UF mato grosso,1971-1980,-58.755,0.14,False
+gldas20,runoff,UF mato grosso do sul,1961-1970,37.4,0.239,False
+gldas20,runoff,UF mato grosso do sul,1971-1980,-23.265,0.504,False
+gldas20,runoff,UF minas gerais,1961-1970,-17.182,0.25,False
+gldas20,runoff,UF minas gerais,1971-1980,-25.79,0.868,False
+gldas20,runoff,UF para,1961-1970,-23.957,0.088,False
+gldas20,runoff,UF para,1971-1980,-37.243,0.597,False
+gldas20,runoff,UF paraiba,1961-1970,-32.165,0.528,False
+gldas20,runoff,UF paraiba,1971-1980,-12.391,0.759,False
+gldas20,runoff,UF parana,1961-1970,-10.102,0.578,False
+gldas20,runoff,UF parana,1971-1980,-14.503,0.59,False
+gldas20,runoff,UF pernambuco,1961-1970,-45.812,0.27,False
+gldas20,runoff,UF pernambuco,1971-1980,-31.269,0.566,False
+gldas20,runoff,UF piaui,1961-1970,-62.591,0.579,False
+gldas20,runoff,UF piaui,1971-1980,-30.948,0.807,False
+gldas20,runoff,UF rio de janeiro,1961-1970,-15.239,0.621,False
+gldas20,runoff,UF rio de janeiro,1971-1980,35.78,0.468,False
+gldas20,runoff,UF rio grande do norte,1961-1970,-38.954,0.566,False
+gldas20,runoff,UF rio grande do norte,1971-1980,-13.047,0.83,False
+gldas20,runoff,UF rio grande do sul,1961-1970,13.835,0.625,False
+gldas20,runoff,UF rio grande do sul,1971-1980,7.002,0.778,False
+gldas20,runoff,UF rondonia,1961-1970,-39.349,-0.056,False
+gldas20,runoff,UF rondonia,1971-1980,-69.963,-0.113,False
+gldas20,runoff,UF roraima,1961-1970,-57.203,0.288,False
+gldas20,runoff,UF roraima,1971-1980,-28.964,0.31,False
+gldas20,runoff,UF santa catarina,1961-1970,-11.489,0.542,False
+gldas20,runoff,UF santa catarina,1971-1980,-24.973,0.633,False
+gldas20,runoff,UF sao paulo,1961-1970,-41.424,0.417,False
+gldas20,runoff,UF sao paulo,1971-1980,-43.688,0.575,False
+gldas20,runoff,UF sergipe,1961-1970,-66.416,0.07,False
+gldas20,runoff,UF sergipe,1971-1980,-59.021,0.256,False
+gldas20,runoff,UF tocantins,1961-1970,-54.99,0.483,False
+gldas20,runoff,UF tocantins,1971-1980,-52.679,0.688,False
+gldas20,soil_moisture_0_100cm_m3_m3,Brasil,1961-1970,-0.021,0.643,False
+gldas20,soil_moisture_0_100cm_m3_m3,Brasil,1971-1980,-0.022,0.71,False
+gldas20,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1961-1970,-0.039,0.323,False
+gldas20,soil_moisture_0_100cm_m3_m3,Centro-Oeste,1971-1980,-0.052,0.561,False
+gldas20,soil_moisture_0_100cm_m3_m3,Nordeste,1961-1970,-0.042,0.861,False
+gldas20,soil_moisture_0_100cm_m3_m3,Nordeste,1971-1980,-0.047,0.76,False
+gldas20,soil_moisture_0_100cm_m3_m3,Norte,1961-1970,-0.0,0.565,False
+gldas20,soil_moisture_0_100cm_m3_m3,Norte,1971-1980,0.007,0.774,False
+gldas20,soil_moisture_0_100cm_m3_m3,Sudeste,1961-1970,-0.043,0.629,False
+gldas20,soil_moisture_0_100cm_m3_m3,Sudeste,1971-1980,-0.053,0.777,False
+gldas20,soil_moisture_0_100cm_m3_m3,Sul,1961-1970,-0.012,0.77,False
+gldas20,soil_moisture_0_100cm_m3_m3,Sul,1971-1980,-0.009,0.885,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF acre,1961-1970,-0.001,0.291,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF acre,1971-1980,0.009,0.003,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF alagoas,1961-1970,-0.114,0.678,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF alagoas,1971-1980,-0.119,0.624,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF amapa,1961-1970,0.016,0.551,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF amapa,1971-1980,0.015,0.719,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF amazonas,1961-1970,0.035,0.32,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF amazonas,1971-1980,0.05,0.664,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF bahia,1961-1970,-0.043,0.865,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF bahia,1971-1980,-0.048,0.79,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF ceara,1961-1970,-0.041,0.791,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF ceara,1971-1980,-0.038,0.771,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF distrito federal,1961-1970,-0.03,0.547,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF distrito federal,1971-1980,-0.031,0.664,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF espirito santo,1961-1970,-0.015,0.568,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF espirito santo,1971-1980,-0.034,0.799,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF goias,1961-1970,-0.017,0.412,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF goias,1971-1980,-0.028,0.491,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF maranhao,1961-1970,-0.025,0.764,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF maranhao,1971-1980,-0.034,0.635,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF mato grosso,1961-1970,-0.049,0.17,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF mato grosso,1971-1980,-0.063,0.37,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1961-1970,-0.034,0.442,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF mato grosso do sul,1971-1980,-0.049,0.556,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF minas gerais,1961-1970,-0.035,0.63,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF minas gerais,1971-1980,-0.046,0.806,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF para,1961-1970,-0.015,0.624,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF para,1971-1980,-0.016,0.71,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF paraiba,1961-1970,-0.08,0.827,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF paraiba,1971-1980,-0.088,0.754,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF parana,1961-1970,-0.026,0.713,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF parana,1971-1980,-0.019,0.82,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF pernambuco,1961-1970,-0.071,0.84,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF pernambuco,1971-1980,-0.074,0.724,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF piaui,1961-1970,-0.028,0.742,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF piaui,1971-1980,-0.031,0.664,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1961-1970,-0.027,0.679,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio de janeiro,1971-1980,-0.025,0.675,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1961-1970,-0.067,0.827,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio grande do norte,1971-1980,-0.071,0.82,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1961-1970,-0.015,0.751,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rio grande do sul,1971-1980,-0.014,0.849,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rondonia,1961-1970,-0.079,0.169,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF rondonia,1971-1980,-0.094,0.227,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF roraima,1961-1970,-0.057,0.162,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF roraima,1971-1980,-0.033,0.643,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF santa catarina,1961-1970,0.025,0.622,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF santa catarina,1971-1980,0.026,0.817,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF sao paulo,1961-1970,-0.071,0.591,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF sao paulo,1971-1980,-0.079,0.61,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF sergipe,1961-1970,-0.083,0.798,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF sergipe,1971-1980,-0.091,0.643,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF tocantins,1961-1970,-0.024,0.442,False
+gldas20,soil_moisture_0_100cm_m3_m3,UF tocantins,1971-1980,-0.029,0.605,False
+gldas20,soil_moisture_0_5cm_m3_m3,Brasil,1961-1970,-0.043,0.677,False
+gldas20,soil_moisture_0_5cm_m3_m3,Brasil,1971-1980,-0.04,0.684,False
+gldas20,soil_moisture_0_5cm_m3_m3,Centro-Oeste,1961-1970,-0.067,0.453,False
+gldas20,soil_moisture_0_5cm_m3_m3,Centro-Oeste,1971-1980,-0.073,0.614,False
+gldas20,soil_moisture_0_5cm_m3_m3,Nordeste,1961-1970,-0.079,0.815,False
+gldas20,soil_moisture_0_5cm_m3_m3,Nordeste,1971-1980,-0.08,0.782,False
+gldas20,soil_moisture_0_5cm_m3_m3,Norte,1961-1970,-0.012,0.542,False
+gldas20,soil_moisture_0_5cm_m3_m3,Norte,1971-1980,-0.002,0.681,False
+gldas20,soil_moisture_0_5cm_m3_m3,Sudeste,1961-1970,-0.073,0.66,False
+gldas20,soil_moisture_0_5cm_m3_m3,Sudeste,1971-1980,-0.078,0.754,False
+gldas20,soil_moisture_0_5cm_m3_m3,Sul,1961-1970,-0.03,0.699,False
+gldas20,soil_moisture_0_5cm_m3_m3,Sul,1971-1980,-0.028,0.841,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF acre,1961-1970,-0.005,0.332,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF acre,1971-1980,0.004,0.083,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF alagoas,1961-1970,-0.152,0.693,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF alagoas,1971-1980,-0.153,0.681,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF amapa,1961-1970,-0.004,0.541,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF amapa,1971-1980,-0.002,0.702,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF amazonas,1961-1970,0.031,0.313,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF amazonas,1971-1980,0.046,0.547,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF bahia,1961-1970,-0.084,0.799,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF bahia,1971-1980,-0.086,0.806,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF ceara,1961-1970,-0.079,0.75,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF ceara,1971-1980,-0.076,0.739,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF distrito federal,1961-1970,-0.046,0.546,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF distrito federal,1971-1980,-0.045,0.58,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF espirito santo,1961-1970,-0.051,0.632,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF espirito santo,1971-1980,-0.065,0.75,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF goias,1961-1970,-0.055,0.503,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF goias,1971-1980,-0.06,0.649,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF maranhao,1961-1970,-0.053,0.808,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF maranhao,1971-1980,-0.054,0.716,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF mato grosso,1961-1970,-0.071,0.281,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF mato grosso,1971-1980,-0.077,0.43,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF mato grosso do sul,1961-1970,-0.07,0.487,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF mato grosso do sul,1971-1980,-0.076,0.621,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF minas gerais,1961-1970,-0.067,0.643,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF minas gerais,1971-1980,-0.073,0.746,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF para,1961-1970,-0.036,0.626,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF para,1971-1980,-0.028,0.632,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF paraiba,1961-1970,-0.123,0.676,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF paraiba,1971-1980,-0.125,0.612,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF parana,1961-1970,-0.045,0.694,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF parana,1971-1980,-0.039,0.799,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF pernambuco,1961-1970,-0.114,0.723,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF pernambuco,1971-1980,-0.111,0.7,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF piaui,1961-1970,-0.062,0.726,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF piaui,1971-1980,-0.064,0.67,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio de janeiro,1961-1970,-0.057,0.724,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio de janeiro,1971-1980,-0.056,0.736,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio grande do norte,1961-1970,-0.093,0.703,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio grande do norte,1971-1980,-0.097,0.666,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio grande do sul,1961-1970,-0.036,0.692,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rio grande do sul,1971-1980,-0.036,0.804,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rondonia,1961-1970,-0.093,0.312,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF rondonia,1971-1980,-0.1,0.304,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF roraima,1961-1970,-0.05,0.248,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF roraima,1971-1980,-0.027,0.675,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF santa catarina,1961-1970,0.019,0.571,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF santa catarina,1971-1980,0.02,0.754,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF sao paulo,1961-1970,-0.093,0.617,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF sao paulo,1971-1980,-0.095,0.739,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF sergipe,1961-1970,-0.142,0.796,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF sergipe,1971-1980,-0.142,0.735,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF tocantins,1961-1970,-0.054,0.47,False
+gldas20,soil_moisture_0_5cm_m3_m3,UF tocantins,1971-1980,-0.053,0.626,False
+gldas20,tfolha_C,Brasil,1961-1970,-0.735,0.766,False
+gldas20,tfolha_C,Brasil,1971-1980,-0.833,0.872,False
+gldas20,tfolha_C,Centro-Oeste,1961-1970,-0.626,0.62,False
+gldas20,tfolha_C,Centro-Oeste,1971-1980,-0.602,0.791,False
+gldas20,tfolha_C,Nordeste,1961-1970,0.074,0.688,False
+gldas20,tfolha_C,Nordeste,1971-1980,-0.012,0.754,False
+gldas20,tfolha_C,Norte,1961-1970,-1.228,0.657,False
+gldas20,tfolha_C,Norte,1971-1980,-1.329,0.791,False
+gldas20,tfolha_C,Sudeste,1961-1970,-0.381,0.877,False
+gldas20,tfolha_C,Sudeste,1971-1980,-0.696,0.855,False
+gldas20,tfolha_C,Sul,1961-1970,-0.522,0.93,False
+gldas20,tfolha_C,Sul,1971-1980,-0.623,0.935,False
+gldas20,tfolha_C,UF acre,1961-1970,-1.335,0.614,False
+gldas20,tfolha_C,UF acre,1971-1980,-1.339,0.46,False
+gldas20,tfolha_C,UF alagoas,1961-1970,0.888,0.494,False
+gldas20,tfolha_C,UF alagoas,1971-1980,0.694,0.771,False
+gldas20,tfolha_C,UF amapa,1961-1970,-1.581,0.598,False
+gldas20,tfolha_C,UF amapa,1971-1980,-1.171,0.632,False
+gldas20,tfolha_C,UF amazonas,1961-1970,-1.575,0.628,False
+gldas20,tfolha_C,UF amazonas,1971-1980,-1.685,0.659,False
+gldas20,tfolha_C,UF bahia,1961-1970,0.089,0.757,False
+gldas20,tfolha_C,UF bahia,1971-1980,-0.191,0.734,False
+gldas20,tfolha_C,UF ceara,1961-1970,0.387,0.714,False
+gldas20,tfolha_C,UF ceara,1971-1980,0.648,0.801,False
+gldas20,tfolha_C,UF distrito federal,1961-1970,-0.619,0.711,False
+gldas20,tfolha_C,UF distrito federal,1971-1980,-0.974,0.835,False
+gldas20,tfolha_C,UF espirito santo,1961-1970,-0.532,0.842,False
+gldas20,tfolha_C,UF espirito santo,1971-1980,-0.474,0.843,False
+gldas20,tfolha_C,UF goias,1961-1970,-0.352,0.693,False
+gldas20,tfolha_C,UF goias,1971-1980,-0.629,0.819,False
+gldas20,tfolha_C,UF maranhao,1961-1970,-0.507,0.503,False
+gldas20,tfolha_C,UF maranhao,1971-1980,-0.564,0.618,False
+gldas20,tfolha_C,UF mato grosso,1961-1970,-0.87,0.49,False
+gldas20,tfolha_C,UF mato grosso,1971-1980,-0.667,0.703,False
+gldas20,tfolha_C,UF mato grosso do sul,1961-1970,-0.284,0.738,False
+gldas20,tfolha_C,UF mato grosso do sul,1971-1980,-0.412,0.796,False
+gldas20,tfolha_C,UF minas gerais,1961-1970,-0.634,0.852,False
+gldas20,tfolha_C,UF minas gerais,1971-1980,-0.934,0.826,False
+gldas20,tfolha_C,UF para,1961-1970,-0.907,0.523,False
+gldas20,tfolha_C,UF para,1971-1980,-1.152,0.692,False
+gldas20,tfolha_C,UF paraiba,1961-1970,1.427,0.628,False
+gldas20,tfolha_C,UF paraiba,1971-1980,1.544,0.747,False
+gldas20,tfolha_C,UF parana,1961-1970,-0.088,0.859,False
+gldas20,tfolha_C,UF parana,1971-1980,-0.389,0.859,False
+gldas20,tfolha_C,UF pernambuco,1961-1970,0.889,0.565,False
+gldas20,tfolha_C,UF pernambuco,1971-1980,0.886,0.713,False
+gldas20,tfolha_C,UF piaui,1961-1970,-0.332,0.545,False
+gldas20,tfolha_C,UF piaui,1971-1980,-0.288,0.63,False
+gldas20,tfolha_C,UF rio de janeiro,1961-1970,-0.339,0.928,False
+gldas20,tfolha_C,UF rio de janeiro,1971-1980,-0.278,0.893,False
+gldas20,tfolha_C,UF rio grande do norte,1961-1970,0.848,0.738,False
+gldas20,tfolha_C,UF rio grande do norte,1971-1980,0.896,0.79,False
+gldas20,tfolha_C,UF rio grande do sul,1961-1970,-0.712,0.938,False
+gldas20,tfolha_C,UF rio grande do sul,1971-1980,-0.73,0.924,False
+gldas20,tfolha_C,UF rondonia,1961-1970,-1.659,0.605,False
+gldas20,tfolha_C,UF rondonia,1971-1980,-0.873,0.444,False
+gldas20,tfolha_C,UF roraima,1961-1970,-1.103,0.363,False
+gldas20,tfolha_C,UF roraima,1971-1980,-1.601,0.721,False
+gldas20,tfolha_C,UF santa catarina,1961-1970,-0.846,0.911,False
+gldas20,tfolha_C,UF santa catarina,1971-1980,-0.777,0.923,False
+gldas20,tfolha_C,UF sao paulo,1961-1970,0.227,0.848,False
+gldas20,tfolha_C,UF sao paulo,1971-1980,-0.253,0.82,False
+gldas20,tfolha_C,UF sergipe,1961-1970,0.632,0.616,False
+gldas20,tfolha_C,UF sergipe,1971-1980,0.41,0.732,False
+gldas20,tfolha_C,UF tocantins,1961-1970,-0.196,0.54,False
+gldas20,tfolha_C,UF tocantins,1971-1980,-0.361,0.651,False
+gldas20,tmax_C,Brasil,1961-1970,-0.708,0.904,False
+gldas20,tmax_C,Brasil,1971-1980,-0.771,0.669,False
+gldas20,tmax_C,Centro-Oeste,1961-1970,-0.8,0.879,False
+gldas20,tmax_C,Centro-Oeste,1971-1980,-1.049,0.748,False
+gldas20,tmax_C,Nordeste,1961-1970,-0.506,0.617,False
+gldas20,tmax_C,Nordeste,1971-1980,-0.735,0.44,False
+gldas20,tmax_C,Norte,1961-1970,-1.047,0.816,False
+gldas20,tmax_C,Norte,1971-1980,-0.775,0.707,False
+gldas20,tmax_C,Sudeste,1961-1970,0.092,0.906,False
+gldas20,tmax_C,Sudeste,1971-1980,-0.509,0.755,False
+gldas20,tmax_C,Sul,1961-1970,-0.111,0.963,False
+gldas20,tmax_C,Sul,1971-1980,-0.481,0.912,False
+gldas20,tmax_C,UF acre,1961-1970,-2.305,0.438,False
+gldas20,tmax_C,UF acre,1971-1980,-1.286,0.541,False
+gldas20,tmax_C,UF alagoas,1961-1970,0.181,0.326,False
+gldas20,tmax_C,UF alagoas,1971-1980,-0.015,0.308,False
+gldas20,tmax_C,UF amapa,1961-1970,-0.108,0.454,False
+gldas20,tmax_C,UF amapa,1971-1980,0.467,0.377,False
+gldas20,tmax_C,UF amazonas,1961-1970,-0.968,0.765,False
+gldas20,tmax_C,UF amazonas,1971-1980,-0.694,0.643,False
+gldas20,tmax_C,UF bahia,1961-1970,-0.655,0.535,False
+gldas20,tmax_C,UF bahia,1971-1980,-1.044,0.304,False
+gldas20,tmax_C,UF ceara,1961-1970,-0.439,0.813,False
+gldas20,tmax_C,UF ceara,1971-1980,-0.255,0.669,False
+gldas20,tmax_C,UF distrito federal,1961-1970,-0.434,0.833,False
+gldas20,tmax_C,UF distrito federal,1971-1980,-0.968,0.514,False
+gldas20,tmax_C,UF espirito santo,1961-1970,-0.297,0.81,False
+gldas20,tmax_C,UF espirito santo,1971-1980,-0.397,0.638,False
+gldas20,tmax_C,UF goias,1961-1970,-0.272,0.748,False
+gldas20,tmax_C,UF goias,1971-1980,-1.077,0.702,False
+gldas20,tmax_C,UF maranhao,1961-1970,-0.159,0.513,False
+gldas20,tmax_C,UF maranhao,1971-1980,-0.615,0.475,False
+gldas20,tmax_C,UF mato grosso,1961-1970,-0.953,0.819,False
+gldas20,tmax_C,UF mato grosso,1971-1980,-1.075,0.642,False
+gldas20,tmax_C,UF mato grosso do sul,1961-1970,-0.923,0.884,False
+gldas20,tmax_C,UF mato grosso do sul,1971-1980,-0.96,0.82,False
+gldas20,tmax_C,UF minas gerais,1961-1970,-0.284,0.89,False
+gldas20,tmax_C,UF minas gerais,1971-1980,-0.912,0.662,False
+gldas20,tmax_C,UF para,1961-1970,-1.112,0.712,False
+gldas20,tmax_C,UF para,1971-1980,-0.802,0.439,False
+gldas20,tmax_C,UF paraiba,1961-1970,-0.564,0.66,False
+gldas20,tmax_C,UF paraiba,1971-1980,-0.239,0.624,False
+gldas20,tmax_C,UF parana,1961-1970,0.338,0.924,False
+gldas20,tmax_C,UF parana,1971-1980,-0.103,0.807,False
+gldas20,tmax_C,UF pernambuco,1961-1970,-0.511,0.497,False
+gldas20,tmax_C,UF pernambuco,1971-1980,-0.365,0.531,False
+gldas20,tmax_C,UF piaui,1961-1970,-0.825,0.516,False
+gldas20,tmax_C,UF piaui,1971-1980,-0.996,0.495,False
+gldas20,tmax_C,UF rio de janeiro,1961-1970,0.838,0.9,False
+gldas20,tmax_C,UF rio de janeiro,1971-1980,0.714,0.832,False
+gldas20,tmax_C,UF rio grande do norte,1961-1970,-0.075,0.726,False
+gldas20,tmax_C,UF rio grande do norte,1971-1980,0.036,0.672,False
+gldas20,tmax_C,UF rio grande do sul,1961-1970,-0.412,0.963,False
+gldas20,tmax_C,UF rio grande do sul,1971-1980,-0.74,0.922,False
+gldas20,tmax_C,UF rondonia,1961-1970,-1.251,0.773,False
+gldas20,tmax_C,UF rondonia,1971-1980,-0.936,0.581,False
+gldas20,tmax_C,UF roraima,1961-1970,-1.336,0.446,False
+gldas20,tmax_C,UF roraima,1971-1980,-1.085,0.533,False
+gldas20,tmax_C,UF santa catarina,1961-1970,-0.141,0.91,False
+gldas20,tmax_C,UF santa catarina,1971-1980,-0.487,0.801,False
+gldas20,tmax_C,UF sao paulo,1961-1970,0.911,0.867,False
+gldas20,tmax_C,UF sao paulo,1971-1980,0.199,0.811,False
+gldas20,tmax_C,UF sergipe,1961-1970,-0.391,0.429,False
+gldas20,tmax_C,UF sergipe,1971-1980,-0.357,0.188,False
+gldas20,tmax_C,UF tocantins,1961-1970,-0.573,0.736,False
+gldas20,tmax_C,UF tocantins,1971-1980,-1.041,0.489,False
+gldas20,tmin_C,Brasil,1961-1970,-1.271,0.731,False
+gldas20,tmin_C,Brasil,1971-1980,-0.486,0.76,False
+gldas20,tmin_C,Centro-Oeste,1961-1970,-1.337,0.629,False
+gldas20,tmin_C,Centro-Oeste,1971-1980,-0.765,0.742,False
+gldas20,tmin_C,Nordeste,1961-1970,-1.378,0.466,False
+gldas20,tmin_C,Nordeste,1971-1980,-0.37,0.433,False
+gldas20,tmin_C,Norte,1961-1970,-1.307,0.534,False
+gldas20,tmin_C,Norte,1971-1980,-0.371,0.539,False
+gldas20,tmin_C,Sudeste,1961-1970,-0.94,0.805,False
+gldas20,tmin_C,Sudeste,1971-1980,-0.61,0.742,False
+gldas20,tmin_C,Sul,1961-1970,-1.114,0.956,False
+gldas20,tmin_C,Sul,1971-1980,-0.525,0.968,False
+gldas20,tmin_C,UF acre,1961-1970,-1.827,0.223,False
+gldas20,tmin_C,UF acre,1971-1980,-1.501,0.406,False
+gldas20,tmin_C,UF alagoas,1961-1970,-0.488,0.486,False
+gldas20,tmin_C,UF alagoas,1971-1980,0.216,0.461,False
+gldas20,tmin_C,UF amapa,1961-1970,-1.132,0.184,False
+gldas20,tmin_C,UF amapa,1971-1980,-0.327,0.473,False
+gldas20,tmin_C,UF amazonas,1961-1970,-1.055,0.553,False
+gldas20,tmin_C,UF amazonas,1971-1980,-0.629,0.602,False
+gldas20,tmin_C,UF bahia,1961-1970,-1.332,0.5,False
+gldas20,tmin_C,UF bahia,1971-1980,-0.501,0.465,False
+gldas20,tmin_C,UF ceara,1961-1970,-1.018,0.568,False
+gldas20,tmin_C,UF ceara,1971-1980,-0.231,0.565,False
+gldas20,tmin_C,UF distrito federal,1961-1970,-0.669,0.59,False
+gldas20,tmin_C,UF distrito federal,1971-1980,-0.394,0.57,False
+gldas20,tmin_C,UF espirito santo,1961-1970,0.155,0.723,False
+gldas20,tmin_C,UF espirito santo,1971-1980,-0.147,0.7,False
+gldas20,tmin_C,UF goias,1961-1970,-1.122,0.722,False
+gldas20,tmin_C,UF goias,1971-1980,-0.79,0.64,False
+gldas20,tmin_C,UF maranhao,1961-1970,-1.634,0.239,False
+gldas20,tmin_C,UF maranhao,1971-1980,-0.214,0.377,False
+gldas20,tmin_C,UF mato grosso,1961-1970,-1.321,0.272,False
+gldas20,tmin_C,UF mato grosso,1971-1980,-0.54,0.643,False
+gldas20,tmin_C,UF mato grosso do sul,1961-1970,-1.586,0.827,False
+gldas20,tmin_C,UF mato grosso do sul,1971-1980,-1.296,0.746,False
+gldas20,tmin_C,UF minas gerais,1961-1970,-1.165,0.656,False
+gldas20,tmin_C,UF minas gerais,1971-1980,-0.847,0.656,False
+gldas20,tmin_C,UF para,1961-1970,-1.471,0.269,False
+gldas20,tmin_C,UF para,1971-1980,0.02,0.273,False
+gldas20,tmin_C,UF paraiba,1961-1970,-0.905,0.468,False
+gldas20,tmin_C,UF paraiba,1971-1980,-0.038,0.664,False
+gldas20,tmin_C,UF parana,1961-1970,-0.891,0.897,False
+gldas20,tmin_C,UF parana,1971-1980,-0.448,0.878,False
+gldas20,tmin_C,UF pernambuco,1961-1970,-1.077,0.404,False
+gldas20,tmin_C,UF pernambuco,1971-1980,-0.184,0.502,False
+gldas20,tmin_C,UF piaui,1961-1970,-1.856,0.25,False
+gldas20,tmin_C,UF piaui,1971-1980,-0.689,0.093,False
+gldas20,tmin_C,UF rio de janeiro,1961-1970,-0.23,0.852,False
+gldas20,tmin_C,UF rio de janeiro,1971-1980,0.393,0.786,False
+gldas20,tmin_C,UF rio grande do norte,1961-1970,-0.895,0.569,False
+gldas20,tmin_C,UF rio grande do norte,1971-1980,-0.184,0.681,False
+gldas20,tmin_C,UF rio grande do sul,1961-1970,-1.046,0.966,False
+gldas20,tmin_C,UF rio grande do sul,1971-1980,-0.557,0.955,False
+gldas20,tmin_C,UF rondonia,1961-1970,-1.771,0.356,False
+gldas20,tmin_C,UF rondonia,1971-1980,-0.613,0.462,False
+gldas20,tmin_C,UF roraima,1961-1970,-0.795,0.319,False
+gldas20,tmin_C,UF roraima,1971-1980,0.032,0.464,False
+gldas20,tmin_C,UF santa catarina,1961-1970,-1.769,0.913,False
+gldas20,tmin_C,UF santa catarina,1971-1980,-0.59,0.943,False
+gldas20,tmin_C,UF sao paulo,1961-1970,-0.738,0.923,False
+gldas20,tmin_C,UF sao paulo,1971-1980,-0.316,0.786,False
+gldas20,tmin_C,UF sergipe,1961-1970,-0.688,0.391,False
+gldas20,tmin_C,UF sergipe,1971-1980,0.421,0.425,False
+gldas20,tmin_C,UF tocantins,1961-1970,-1.804,0.491,False
+gldas20,tmin_C,UF tocantins,1971-1980,-0.166,0.247,False
+gldas20,transpiracao_mm,Brasil,1961-1970,32.763,0.397,False
+gldas20,transpiracao_mm,Brasil,1971-1980,48.47,0.569,False
+gldas20,transpiracao_mm,Centro-Oeste,1961-1970,27.868,0.364,False
+gldas20,transpiracao_mm,Centro-Oeste,1971-1980,50.417,0.509,False
+gldas20,transpiracao_mm,Nordeste,1961-1970,13.37,0.495,False
+gldas20,transpiracao_mm,Nordeste,1971-1980,26.454,0.453,False
+gldas20,transpiracao_mm,Norte,1961-1970,31.747,0.406,False
+gldas20,transpiracao_mm,Norte,1971-1980,46.824,0.602,False
+gldas20,transpiracao_mm,Sudeste,1961-1970,58.086,0.437,False
+gldas20,transpiracao_mm,Sudeste,1971-1980,66.363,0.661,False
+gldas20,transpiracao_mm,Sul,1961-1970,61.551,0.747,False
+gldas20,transpiracao_mm,Sul,1971-1980,74.316,0.62,False
+gldas20,transpiracao_mm,UF acre,1961-1970,24.423,0.072,False
+gldas20,transpiracao_mm,UF acre,1971-1980,23.4,0.294,False
+gldas20,transpiracao_mm,UF alagoas,1961-1970,-26.793,0.178,False
+gldas20,transpiracao_mm,UF alagoas,1971-1980,-14.036,-0.039,False
+gldas20,transpiracao_mm,UF amapa,1961-1970,19.815,0.087,False
+gldas20,transpiracao_mm,UF amapa,1971-1980,37.796,0.277,False
+gldas20,transpiracao_mm,UF amazonas,1961-1970,53.501,0.406,False
+gldas20,transpiracao_mm,UF amazonas,1971-1980,56.654,0.635,False
+gldas20,transpiracao_mm,UF bahia,1961-1970,19.737,0.566,False
+gldas20,transpiracao_mm,UF bahia,1971-1980,22.917,0.382,False
+gldas20,transpiracao_mm,UF ceara,1961-1970,-5.528,0.451,False
+gldas20,transpiracao_mm,UF ceara,1971-1980,10.568,0.634,False
+gldas20,transpiracao_mm,UF distrito federal,1961-1970,115.383,0.412,False
+gldas20,transpiracao_mm,UF distrito federal,1971-1980,137.039,0.65,False
+gldas20,transpiracao_mm,UF espirito santo,1961-1970,51.802,0.552,False
+gldas20,transpiracao_mm,UF espirito santo,1971-1980,52.365,0.614,False
+gldas20,transpiracao_mm,UF goias,1961-1970,56.939,0.396,False
+gldas20,transpiracao_mm,UF goias,1971-1980,76.705,0.589,False
+gldas20,transpiracao_mm,UF maranhao,1961-1970,18.81,0.568,False
+gldas20,transpiracao_mm,UF maranhao,1971-1980,38.523,0.587,False
+gldas20,transpiracao_mm,UF mato grosso,1961-1970,18.111,0.32,False
+gldas20,transpiracao_mm,UF mato grosso,1971-1980,43.97,0.364,False
+gldas20,transpiracao_mm,UF mato grosso do sul,1961-1970,32.177,0.294,False
+gldas20,transpiracao_mm,UF mato grosso do sul,1971-1980,47.58,0.496,False
+gldas20,transpiracao_mm,UF minas gerais,1961-1970,55.921,0.49,False
+gldas20,transpiracao_mm,UF minas gerais,1971-1980,60.906,0.699,False
+gldas20,transpiracao_mm,UF para,1961-1970,10.158,0.227,False
+gldas20,transpiracao_mm,UF para,1971-1980,39.475,0.427,False
+gldas20,transpiracao_mm,UF paraiba,1961-1970,-31.542,-0.067,False
+gldas20,transpiracao_mm,UF paraiba,1971-1980,-14.769,-0.201,False
+gldas20,transpiracao_mm,UF parana,1961-1970,54.294,0.574,False
+gldas20,transpiracao_mm,UF parana,1971-1980,69.763,0.619,False
+gldas20,transpiracao_mm,UF pernambuco,1961-1970,-30.689,0.109,False
+gldas20,transpiracao_mm,UF pernambuco,1971-1980,-9.701,-0.022,False
+gldas20,transpiracao_mm,UF piaui,1961-1970,33.073,0.503,False
+gldas20,transpiracao_mm,UF piaui,1971-1980,54.343,0.555,False
+gldas20,transpiracao_mm,UF rio de janeiro,1961-1970,55.993,0.614,False
+gldas20,transpiracao_mm,UF rio de janeiro,1971-1980,61.041,0.748,False
+gldas20,transpiracao_mm,UF rio grande do norte,1961-1970,-16.075,0.05,False
+gldas20,transpiracao_mm,UF rio grande do norte,1971-1980,-0.494,0.061,False
+gldas20,transpiracao_mm,UF rio grande do sul,1961-1970,65.718,0.674,False
+gldas20,transpiracao_mm,UF rio grande do sul,1971-1980,76.878,0.564,False
+gldas20,transpiracao_mm,UF rondonia,1961-1970,14.651,0.146,False
+gldas20,transpiracao_mm,UF rondonia,1971-1980,30.168,0.375,False
+gldas20,transpiracao_mm,UF roraima,1961-1970,33.176,0.393,False
+gldas20,transpiracao_mm,UF roraima,1971-1980,35.185,0.556,False
+gldas20,transpiracao_mm,UF santa catarina,1961-1970,65.291,0.753,False
+gldas20,transpiracao_mm,UF santa catarina,1971-1980,76.732,0.591,False
+gldas20,transpiracao_mm,UF sao paulo,1961-1970,64.306,0.235,False
+gldas20,transpiracao_mm,UF sao paulo,1971-1980,82.204,0.504,False
+gldas20,transpiracao_mm,UF sergipe,1961-1970,-21.575,0.338,False
+gldas20,transpiracao_mm,UF sergipe,1971-1980,-12.47,-0.02,False
+gldas20,transpiracao_mm,UF tocantins,1961-1970,61.835,0.442,False
+gldas20,transpiracao_mm,UF tocantins,1971-1980,89.103,0.543,False
+gldas20,tsolo_C,Brasil,1961-1970,-0.312,0.76,False
+gldas20,tsolo_C,Brasil,1971-1980,-0.437,0.874,False
+gldas20,tsolo_C,Centro-Oeste,1961-1970,-0.181,0.615,False
+gldas20,tsolo_C,Centro-Oeste,1971-1980,-0.169,0.787,False
+gldas20,tsolo_C,Nordeste,1961-1970,0.514,0.69,False
+gldas20,tsolo_C,Nordeste,1971-1980,0.399,0.759,False
+gldas20,tsolo_C,Norte,1961-1970,-0.837,0.65,False
+gldas20,tsolo_C,Norte,1971-1980,-0.981,0.797,False
+gldas20,tsolo_C,Sudeste,1961-1970,0.066,0.877,False
+gldas20,tsolo_C,Sudeste,1971-1980,-0.256,0.848,False
+gldas20,tsolo_C,Sul,1961-1970,-0.042,0.925,False
+gldas20,tsolo_C,Sul,1971-1980,-0.142,0.928,False
+gldas20,tsolo_C,UF acre,1961-1970,-1.071,0.624,False
+gldas20,tsolo_C,UF acre,1971-1980,-1.114,0.435,False
+gldas20,tsolo_C,UF alagoas,1961-1970,1.365,0.491,False
+gldas20,tsolo_C,UF alagoas,1971-1980,1.153,0.768,False
+gldas20,tsolo_C,UF amapa,1961-1970,-1.159,0.609,False
+gldas20,tsolo_C,UF amapa,1971-1980,-0.78,0.636,False
+gldas20,tsolo_C,UF amazonas,1961-1970,-1.235,0.622,False
+gldas20,tsolo_C,UF amazonas,1971-1980,-1.382,0.658,False
+gldas20,tsolo_C,UF bahia,1961-1970,0.534,0.767,False
+gldas20,tsolo_C,UF bahia,1971-1980,0.241,0.743,False
+gldas20,tsolo_C,UF ceara,1961-1970,0.82,0.709,False
+gldas20,tsolo_C,UF ceara,1971-1980,1.048,0.802,False
+gldas20,tsolo_C,UF distrito federal,1961-1970,-0.178,0.705,False
+gldas20,tsolo_C,UF distrito federal,1971-1980,-0.538,0.838,False
+gldas20,tsolo_C,UF espirito santo,1961-1970,-0.124,0.852,False
+gldas20,tsolo_C,UF espirito santo,1971-1980,-0.063,0.847,False
+gldas20,tsolo_C,UF goias,1961-1970,0.123,0.692,False
+gldas20,tsolo_C,UF goias,1971-1980,-0.156,0.817,False
+gldas20,tsolo_C,UF maranhao,1961-1970,-0.099,0.51,False
+gldas20,tsolo_C,UF maranhao,1971-1980,-0.212,0.626,False
+gldas20,tsolo_C,UF mato grosso,1961-1970,-0.433,0.481,False
+gldas20,tsolo_C,UF mato grosso,1971-1980,-0.244,0.706,False
+gldas20,tsolo_C,UF mato grosso do sul,1961-1970,0.149,0.734,False
+gldas20,tsolo_C,UF mato grosso do sul,1971-1980,0.007,0.779,False
+gldas20,tsolo_C,UF minas gerais,1961-1970,-0.188,0.853,False
+gldas20,tsolo_C,UF minas gerais,1971-1980,-0.495,0.823,False
+gldas20,tsolo_C,UF para,1961-1970,-0.46,0.516,False
+gldas20,tsolo_C,UF para,1971-1980,-0.758,0.702,False
+gldas20,tsolo_C,UF paraiba,1961-1970,1.874,0.627,False
+gldas20,tsolo_C,UF paraiba,1971-1980,1.97,0.745,False
+gldas20,tsolo_C,UF parana,1961-1970,0.354,0.855,False
+gldas20,tsolo_C,UF parana,1971-1980,0.055,0.839,False
+gldas20,tsolo_C,UF pernambuco,1961-1970,1.328,0.561,False
+gldas20,tsolo_C,UF pernambuco,1971-1980,1.3,0.711,False
+gldas20,tsolo_C,UF piaui,1961-1970,0.126,0.55,False
+gldas20,tsolo_C,UF piaui,1971-1980,0.128,0.645,False
+gldas20,tsolo_C,UF rio de janeiro,1961-1970,0.112,0.93,False
+gldas20,tsolo_C,UF rio de janeiro,1971-1980,0.175,0.887,False
+gldas20,tsolo_C,UF rio grande do norte,1961-1970,1.315,0.736,False
+gldas20,tsolo_C,UF rio grande do norte,1971-1980,1.345,0.791,False
+gldas20,tsolo_C,UF rio grande do sul,1961-1970,-0.189,0.93,False
+gldas20,tsolo_C,UF rio grande do sul,1971-1980,-0.206,0.918,False
+gldas20,tsolo_C,UF rondonia,1961-1970,-1.293,0.594,False
+gldas20,tsolo_C,UF rondonia,1971-1980,-0.555,0.437,False
+gldas20,tsolo_C,UF roraima,1961-1970,-0.674,0.362,False
+gldas20,tsolo_C,UF roraima,1971-1980,-1.209,0.737,False
+gldas20,tsolo_C,UF santa catarina,1961-1970,-0.414,0.907,False
+gldas20,tsolo_C,UF santa catarina,1971-1980,-0.343,0.915,False
+gldas20,tsolo_C,UF sao paulo,1961-1970,0.684,0.848,False
+gldas20,tsolo_C,UF sao paulo,1971-1980,0.193,0.809,False
+gldas20,tsolo_C,UF sergipe,1961-1970,1.164,0.622,False
+gldas20,tsolo_C,UF sergipe,1971-1980,0.923,0.732,False
+gldas20,tsolo_C,UF tocantins,1961-1970,0.287,0.546,False
+gldas20,tsolo_C,UF tocantins,1971-1980,0.085,0.663,False
+gldas20,u2,Brasil,1961-1970,-0.071,0.565,False
+gldas20,u2,Brasil,1971-1980,0.066,0.298,False
+gldas20,u2,Centro-Oeste,1961-1970,0.016,0.493,False
+gldas20,u2,Centro-Oeste,1971-1980,0.026,0.351,False
+gldas20,u2,Nordeste,1961-1970,-0.543,0.646,False
+gldas20,u2,Nordeste,1971-1980,-0.229,0.181,False
+gldas20,u2,Norte,1961-1970,0.259,0.206,False
+gldas20,u2,Norte,1971-1980,0.346,0.429,False
+gldas20,u2,Sudeste,1961-1970,-0.394,0.551,False
+gldas20,u2,Sudeste,1971-1980,-0.246,0.816,False
+gldas20,u2,Sul,1961-1970,-0.655,0.558,False
+gldas20,u2,Sul,1971-1980,-0.331,0.672,False
+gldas20,u2,UF acre,1961-1970,0.201,0.202,False
+gldas20,u2,UF acre,1971-1980,-0.212,0.095,False
+gldas20,u2,UF alagoas,1961-1970,-0.689,0.109,False
+gldas20,u2,UF alagoas,1971-1980,-0.497,0.33,False
+gldas20,u2,UF amapa,1961-1970,-0.166,0.374,False
+gldas20,u2,UF amapa,1971-1980,0.114,0.386,False
+gldas20,u2,UF amazonas,1961-1970,0.353,-0.198,False
+gldas20,u2,UF amazonas,1971-1980,0.36,0.187,False
+gldas20,u2,UF bahia,1961-1970,-0.465,0.734,False
+gldas20,u2,UF bahia,1971-1980,-0.298,0.475,False
+gldas20,u2,UF ceara,1961-1970,-1.057,0.531,False
+gldas20,u2,UF ceara,1971-1980,-0.61,-0.088,False
+gldas20,u2,UF distrito federal,1961-1970,0.074,0.428,False
+gldas20,u2,UF distrito federal,1971-1980,-0.028,0.63,False
+gldas20,u2,UF espirito santo,1961-1970,-1.508,0.174,False
+gldas20,u2,UF espirito santo,1971-1980,-0.92,0.367,False
+gldas20,u2,UF goias,1961-1970,-0.031,0.441,False
+gldas20,u2,UF goias,1971-1980,-0.12,0.536,False
+gldas20,u2,UF maranhao,1961-1970,-0.417,0.335,False
+gldas20,u2,UF maranhao,1971-1980,0.191,-0.311,False
+gldas20,u2,UF mato grosso,1961-1970,0.091,0.475,False
+gldas20,u2,UF mato grosso,1971-1980,0.092,0.254,False
+gldas20,u2,UF mato grosso do sul,1961-1970,-0.122,0.076,False
+gldas20,u2,UF mato grosso do sul,1971-1980,0.002,0.399,False
+gldas20,u2,UF minas gerais,1961-1970,-0.306,0.54,False
+gldas20,u2,UF minas gerais,1971-1980,-0.192,0.78,False
+gldas20,u2,UF para,1961-1970,0.298,0.283,False
+gldas20,u2,UF para,1971-1980,0.494,0.443,False
+gldas20,u2,UF paraiba,1961-1970,-0.524,0.385,False
+gldas20,u2,UF paraiba,1971-1980,-0.372,0.487,False
+gldas20,u2,UF parana,1961-1970,-0.169,0.495,False
+gldas20,u2,UF parana,1971-1980,-0.185,0.548,False
+gldas20,u2,UF pernambuco,1961-1970,-0.51,0.388,False
+gldas20,u2,UF pernambuco,1971-1980,-0.27,0.405,False
+gldas20,u2,UF piaui,1961-1970,-0.615,0.25,False
+gldas20,u2,UF piaui,1971-1980,-0.22,0.043,False
+gldas20,u2,UF rio de janeiro,1961-1970,-2.025,0.394,False
+gldas20,u2,UF rio de janeiro,1971-1980,-1.592,0.613,False
+gldas20,u2,UF rio grande do norte,1961-1970,-0.244,0.272,False
+gldas20,u2,UF rio grande do norte,1971-1980,-0.556,0.272,False
+gldas20,u2,UF rio grande do sul,1961-1970,-0.966,0.49,False
+gldas20,u2,UF rio grande do sul,1971-1980,-0.411,0.565,False
+gldas20,u2,UF rondonia,1961-1970,0.305,0.141,False
+gldas20,u2,UF rondonia,1971-1980,0.107,0.187,False
+gldas20,u2,UF roraima,1961-1970,0.222,0.198,False
+gldas20,u2,UF roraima,1971-1980,0.619,0.35,False
+gldas20,u2,UF santa catarina,1961-1970,-0.748,0.437,False
+gldas20,u2,UF santa catarina,1971-1980,-0.409,0.512,False
+gldas20,u2,UF sao paulo,1961-1970,-0.123,0.647,False
+gldas20,u2,UF sao paulo,1971-1980,-0.021,0.638,False
+gldas20,u2,UF sergipe,1961-1970,-0.902,0.021,False
+gldas20,u2,UF sergipe,1971-1980,-0.609,0.395,False
+gldas20,u2,UF tocantins,1961-1970,-0.204,0.488,False
+gldas20,u2,UF tocantins,1971-1980,0.021,0.381,False
+gldas20,vpd,Brasil,1961-1970,0.124,0.677,False
+gldas20,vpd,Brasil,1971-1980,0.2,0.553,False
+gldas20,vpd,Centro-Oeste,1961-1970,0.04,0.643,False
+gldas20,vpd,Centro-Oeste,1971-1980,0.108,0.619,False
+gldas20,vpd,Nordeste,1961-1970,0.105,0.516,False
+gldas20,vpd,Nordeste,1971-1980,0.255,0.341,False
+gldas20,vpd,Norte,1961-1970,0.119,0.49,False
+gldas20,vpd,Norte,1971-1980,0.194,0.639,False
+gldas20,vpd,Sudeste,1961-1970,0.241,0.712,False
+gldas20,vpd,Sudeste,1971-1980,0.239,0.609,False
+gldas20,vpd,Sul,1961-1970,0.241,0.637,False
+gldas20,vpd,Sul,1971-1980,0.274,0.723,False
+gldas20,vpd,UF acre,1961-1970,-0.041,0.422,False
+gldas20,vpd,UF acre,1971-1980,0.004,0.543,False
+gldas20,vpd,UF alagoas,1961-1970,0.11,0.42,False
+gldas20,vpd,UF alagoas,1971-1980,0.268,0.454,False
+gldas20,vpd,UF amapa,1961-1970,0.147,0.257,False
+gldas20,vpd,UF amapa,1971-1980,0.235,0.312,False
+gldas20,vpd,UF amazonas,1961-1970,0.168,0.441,False
+gldas20,vpd,UF amazonas,1971-1980,0.211,0.58,False
+gldas20,vpd,UF bahia,1961-1970,0.1,0.469,False
+gldas20,vpd,UF bahia,1971-1980,0.235,0.485,False
+gldas20,vpd,UF ceara,1961-1970,0.105,0.584,False
+gldas20,vpd,UF ceara,1971-1980,0.192,0.365,False
+gldas20,vpd,UF distrito federal,1961-1970,0.155,0.676,False
+gldas20,vpd,UF distrito federal,1971-1980,0.202,0.596,False
+gldas20,vpd,UF espirito santo,1961-1970,0.254,0.563,False
+gldas20,vpd,UF espirito santo,1971-1980,0.22,0.447,False
+gldas20,vpd,UF goias,1961-1970,0.137,0.652,False
+gldas20,vpd,UF goias,1971-1980,0.193,0.668,False
+gldas20,vpd,UF maranhao,1961-1970,0.07,0.437,False
+gldas20,vpd,UF maranhao,1971-1980,0.237,0.149,False
+gldas20,vpd,UF mato grosso,1961-1970,-0.011,0.569,False
+gldas20,vpd,UF mato grosso,1971-1980,0.068,0.581,False
+gldas20,vpd,UF mato grosso do sul,1961-1970,0.073,0.663,False
+gldas20,vpd,UF mato grosso do sul,1971-1980,0.125,0.552,False
+gldas20,vpd,UF minas gerais,1961-1970,0.212,0.685,False
+gldas20,vpd,UF minas gerais,1971-1980,0.214,0.51,False
+gldas20,vpd,UF para,1961-1970,0.133,0.386,False
+gldas20,vpd,UF para,1971-1980,0.236,0.579,False
+gldas20,vpd,UF paraiba,1961-1970,0.111,0.503,False
+gldas20,vpd,UF paraiba,1971-1980,0.301,0.394,False
+gldas20,vpd,UF parana,1961-1970,0.22,0.585,False
+gldas20,vpd,UF parana,1971-1980,0.273,0.579,False
+gldas20,vpd,UF pernambuco,1961-1970,0.156,0.475,False
+gldas20,vpd,UF pernambuco,1971-1980,0.292,0.481,False
+gldas20,vpd,UF piaui,1961-1970,0.119,0.459,False
+gldas20,vpd,UF piaui,1971-1980,0.312,0.126,False
+gldas20,vpd,UF rio de janeiro,1961-1970,0.225,0.735,False
+gldas20,vpd,UF rio de janeiro,1971-1980,0.266,0.646,False
+gldas20,vpd,UF rio grande do norte,1961-1970,0.204,0.562,False
+gldas20,vpd,UF rio grande do norte,1971-1980,0.341,0.349,False
+gldas20,vpd,UF rio grande do sul,1961-1970,0.275,0.732,False
+gldas20,vpd,UF rio grande do sul,1971-1980,0.289,0.811,False
+gldas20,vpd,UF rondonia,1961-1970,-0.057,0.485,False
+gldas20,vpd,UF rondonia,1971-1980,-0.06,0.65,False
+gldas20,vpd,UF roraima,1961-1970,0.118,0.304,False
+gldas20,vpd,UF roraima,1971-1980,0.256,0.212,False
+gldas20,vpd,UF santa catarina,1961-1970,0.184,0.515,False
+gldas20,vpd,UF santa catarina,1971-1980,0.233,0.68,False
+gldas20,vpd,UF sao paulo,1961-1970,0.31,0.681,False
+gldas20,vpd,UF sao paulo,1971-1980,0.298,0.654,False
+gldas20,vpd,UF sergipe,1961-1970,0.093,0.37,False
+gldas20,vpd,UF sergipe,1971-1980,0.325,0.426,False
+gldas20,vpd,UF tocantins,1961-1970,0.007,0.509,False
+gldas20,vpd,UF tocantins,1971-1980,0.168,0.391,False
 gldas21,RH,Brasil,2001-2010,-3.093,0.714,False
 gldas21,RH,Brasil,2011-2020,-0.506,0.715,False
 gldas21,RH,Brasil,2021-2025,3.867,0.912,True
@@ -1682,6 +3365,204 @@ imerg,pr_mm,UF santa catarina,2001-2010,-7.917,0.954,False
 imerg,pr_mm,UF sao paulo,2001-2010,-6.722,0.992,False
 imerg,pr_mm,UF sergipe,2001-2010,-3.406,0.974,False
 imerg,pr_mm,UF tocantins,2001-2010,-1.428,0.995,False
+mod16,et_potencial,Brasil,2001-2010,-32.757,0.302,False
+mod16,et_potencial,Brasil,2011-2020,-29.567,0.343,False
+mod16,et_potencial,Brasil,2021-2025,-32.662,0.498,False
+mod16,et_potencial,Centro-Oeste,2001-2010,-35.559,0.36,False
+mod16,et_potencial,Centro-Oeste,2011-2020,-30.261,0.515,False
+mod16,et_potencial,Centro-Oeste,2021-2025,-33.5,0.749,False
+mod16,et_potencial,Nordeste,2001-2010,-30.629,0.5,False
+mod16,et_potencial,Nordeste,2011-2020,-29.708,0.484,False
+mod16,et_potencial,Nordeste,2021-2025,-34.177,0.34,False
+mod16,et_potencial,Norte,2001-2010,-31.513,0.35,False
+mod16,et_potencial,Norte,2011-2020,-28.437,0.316,False
+mod16,et_potencial,Norte,2021-2025,-31.005,0.51,False
+mod16,et_potencial,Sudeste,2001-2010,-35.092,0.447,False
+mod16,et_potencial,Sudeste,2011-2020,-31.49,0.542,False
+mod16,et_potencial,Sudeste,2021-2025,-34.898,0.683,False
+mod16,et_potencial,Sul,2001-2010,-34.814,0.453,False
+mod16,et_potencial,Sul,2011-2020,-30.835,0.5,False
+mod16,et_potencial,Sul,2021-2025,-31.424,0.723,False
+mod16,et_potencial,UF acre,2001-2010,-37.832,0.166,False
+mod16,et_potencial,UF acre,2011-2020,-30.498,0.264,True
+mod16,et_potencial,UF acre,2021-2025,-35.723,0.452,False
+mod16,et_potencial,UF alagoas,2001-2010,-32.344,0.334,False
+mod16,et_potencial,UF alagoas,2011-2020,-33.314,0.297,False
+mod16,et_potencial,UF alagoas,2021-2025,-37.298,0.329,False
+mod16,et_potencial,UF amapa,2001-2010,-28.847,0.439,False
+mod16,et_potencial,UF amapa,2011-2020,-33.501,0.514,False
+mod16,et_potencial,UF amapa,2021-2025,-33.472,0.241,False
+mod16,et_potencial,UF amazonas,2001-2010,-31.492,0.244,False
+mod16,et_potencial,UF amazonas,2011-2020,-26.878,0.15,False
+mod16,et_potencial,UF amazonas,2021-2025,-29.613,0.425,False
+mod16,et_potencial,UF bahia,2001-2010,-32.225,0.513,False
+mod16,et_potencial,UF bahia,2011-2020,-30.634,0.642,False
+mod16,et_potencial,UF bahia,2021-2025,-34.778,0.568,False
+mod16,et_potencial,UF ceara,2001-2010,-28.09,0.486,False
+mod16,et_potencial,UF ceara,2011-2020,-29.141,0.382,False
+mod16,et_potencial,UF ceara,2021-2025,-31.287,0.1,False
+mod16,et_potencial,UF distrito federal,2001-2010,-34.933,0.544,False
+mod16,et_potencial,UF distrito federal,2011-2020,-30.365,0.624,False
+mod16,et_potencial,UF distrito federal,2021-2025,-32.327,0.689,False
+mod16,et_potencial,UF espirito santo,2001-2010,-36.373,0.578,False
+mod16,et_potencial,UF espirito santo,2011-2020,-34.742,0.593,False
+mod16,et_potencial,UF espirito santo,2021-2025,-35.661,0.65,False
+mod16,et_potencial,UF goias,2001-2010,-35.284,0.467,False
+mod16,et_potencial,UF goias,2011-2020,-30.838,0.542,False
+mod16,et_potencial,UF goias,2021-2025,-36.133,0.689,False
+mod16,et_potencial,UF maranhao,2001-2010,-32.207,0.513,False
+mod16,et_potencial,UF maranhao,2011-2020,-31.872,0.351,False
+mod16,et_potencial,UF maranhao,2021-2025,-36.024,0.374,False
+mod16,et_potencial,UF mato grosso,2001-2010,-36.043,0.338,False
+mod16,et_potencial,UF mato grosso,2011-2020,-30.226,0.521,False
+mod16,et_potencial,UF mato grosso,2021-2025,-32.441,0.759,False
+mod16,et_potencial,UF mato grosso do sul,2001-2010,-34.698,0.521,False
+mod16,et_potencial,UF mato grosso do sul,2011-2020,-29.784,0.501,False
+mod16,et_potencial,UF mato grosso do sul,2021-2025,-33.459,0.718,False
+mod16,et_potencial,UF minas gerais,2001-2010,-35.214,0.491,False
+mod16,et_potencial,UF minas gerais,2011-2020,-31.503,0.597,False
+mod16,et_potencial,UF minas gerais,2021-2025,-34.484,0.667,False
+mod16,et_potencial,UF para,2001-2010,-29.09,0.463,False
+mod16,et_potencial,UF para,2011-2020,-28.826,0.404,False
+mod16,et_potencial,UF para,2021-2025,-30.97,0.504,False
+mod16,et_potencial,UF paraiba,2001-2010,-26.856,0.356,False
+mod16,et_potencial,UF paraiba,2011-2020,-26.113,0.387,False
+mod16,et_potencial,UF paraiba,2021-2025,-32.326,0.036,True
+mod16,et_potencial,UF parana,2001-2010,-36.522,0.497,False
+mod16,et_potencial,UF parana,2011-2020,-31.169,0.567,False
+mod16,et_potencial,UF parana,2021-2025,-32.535,0.762,False
+mod16,et_potencial,UF pernambuco,2001-2010,-28.068,0.423,False
+mod16,et_potencial,UF pernambuco,2011-2020,-26.563,0.452,False
+mod16,et_potencial,UF pernambuco,2021-2025,-32.876,0.279,False
+mod16,et_potencial,UF piaui,2001-2010,-29.529,0.603,False
+mod16,et_potencial,UF piaui,2011-2020,-27.858,0.48,False
+mod16,et_potencial,UF piaui,2021-2025,-33.515,0.329,False
+mod16,et_potencial,UF rio de janeiro,2001-2010,-36.441,0.502,False
+mod16,et_potencial,UF rio de janeiro,2011-2020,-35.688,0.58,False
+mod16,et_potencial,UF rio de janeiro,2021-2025,-37.95,0.686,False
+mod16,et_potencial,UF rio grande do norte,2001-2010,-24.663,0.477,False
+mod16,et_potencial,UF rio grande do norte,2011-2020,-24.848,0.427,False
+mod16,et_potencial,UF rio grande do norte,2021-2025,-30.989,0.13,True
+mod16,et_potencial,UF rio grande do sul,2001-2010,-32.252,0.431,False
+mod16,et_potencial,UF rio grande do sul,2011-2020,-28.579,0.456,False
+mod16,et_potencial,UF rio grande do sul,2021-2025,-28.853,0.692,False
+mod16,et_potencial,UF rondonia,2001-2010,-35.852,0.135,True
+mod16,et_potencial,UF rondonia,2011-2020,-26.229,0.406,False
+mod16,et_potencial,UF rondonia,2021-2025,-27.455,0.596,False
+mod16,et_potencial,UF roraima,2001-2010,-32.13,0.536,False
+mod16,et_potencial,UF roraima,2011-2020,-28.774,0.506,False
+mod16,et_potencial,UF roraima,2021-2025,-31.995,0.563,False
+mod16,et_potencial,UF santa catarina,2001-2010,-38.295,0.562,False
+mod16,et_potencial,UF santa catarina,2011-2020,-36.593,0.532,False
+mod16,et_potencial,UF santa catarina,2021-2025,-36.322,0.722,False
+mod16,et_potencial,UF sao paulo,2001-2010,-34.316,0.463,False
+mod16,et_potencial,UF sao paulo,2011-2020,-30.063,0.531,False
+mod16,et_potencial,UF sao paulo,2021-2025,-35.261,0.779,False
+mod16,et_potencial,UF sergipe,2001-2010,-33.069,0.318,False
+mod16,et_potencial,UF sergipe,2011-2020,-33.755,0.302,False
+mod16,et_potencial,UF sergipe,2021-2025,-36.12,0.37,False
+mod16,et_potencial,UF tocantins,2001-2010,-35.512,0.48,False
+mod16,et_potencial,UF tocantins,2011-2020,-31.667,0.528,False
+mod16,et_potencial,UF tocantins,2021-2025,-35.65,0.513,False
+mod16,et_real,Brasil,2001-2010,-8.781,0.402,False
+mod16,et_real,Brasil,2011-2020,-11.63,0.239,False
+mod16,et_real,Brasil,2021-2025,-13.007,0.474,False
+mod16,et_real,Centro-Oeste,2001-2010,13.245,0.16,True
+mod16,et_real,Centro-Oeste,2011-2020,-1.201,0.472,False
+mod16,et_real,Centro-Oeste,2021-2025,1.113,0.564,False
+mod16,et_real,Nordeste,2001-2010,-18.286,0.779,False
+mod16,et_real,Nordeste,2011-2020,-21.747,0.765,False
+mod16,et_real,Nordeste,2021-2025,-21.149,0.834,False
+mod16,et_real,Norte,2001-2010,-16.943,0.336,False
+mod16,et_real,Norte,2011-2020,-16.149,0.057,False
+mod16,et_real,Norte,2021-2025,-19.332,0.217,False
+mod16,et_real,Sudeste,2001-2010,3.483,0.411,True
+mod16,et_real,Sudeste,2011-2020,-3.891,0.401,False
+mod16,et_real,Sudeste,2021-2025,-2.494,0.643,False
+mod16,et_real,Sul,2001-2010,15.277,0.201,True
+mod16,et_real,Sul,2011-2020,9.651,0.161,False
+mod16,et_real,Sul,2021-2025,10.204,0.572,False
+mod16,et_real,UF acre,2001-2010,-20.944,0.142,False
+mod16,et_real,UF acre,2011-2020,-16.717,0.201,False
+mod16,et_real,UF acre,2021-2025,-22.53,0.404,False
+mod16,et_real,UF alagoas,2001-2010,-7.806,0.806,False
+mod16,et_real,UF alagoas,2011-2020,-10.648,0.774,False
+mod16,et_real,UF alagoas,2021-2025,-9.587,0.708,False
+mod16,et_real,UF amapa,2001-2010,-23.688,0.159,False
+mod16,et_real,UF amapa,2011-2020,-25.021,-0.04,False
+mod16,et_real,UF amapa,2021-2025,-22.541,0.143,False
+mod16,et_real,UF amazonas,2001-2010,-16.338,0.322,False
+mod16,et_real,UF amazonas,2011-2020,-13.595,0.116,False
+mod16,et_real,UF amazonas,2021-2025,-17.86,0.214,False
+mod16,et_real,UF bahia,2001-2010,-12.692,0.875,False
+mod16,et_real,UF bahia,2011-2020,-18.93,0.846,True
+mod16,et_real,UF bahia,2021-2025,-12.87,0.878,False
+mod16,et_real,UF ceara,2001-2010,-25.009,0.786,False
+mod16,et_real,UF ceara,2011-2020,-24.863,0.816,False
+mod16,et_real,UF ceara,2021-2025,-30.866,0.747,True
+mod16,et_real,UF distrito federal,2001-2010,18.708,0.288,True
+mod16,et_real,UF distrito federal,2011-2020,6.64,0.348,False
+mod16,et_real,UF distrito federal,2021-2025,8.569,0.307,False
+mod16,et_real,UF espirito santo,2001-2010,-12.175,0.573,False
+mod16,et_real,UF espirito santo,2011-2020,-17.077,0.593,False
+mod16,et_real,UF espirito santo,2021-2025,-17.768,0.58,False
+mod16,et_real,UF goias,2001-2010,20.103,0.307,True
+mod16,et_real,UF goias,2011-2020,4.894,0.425,True
+mod16,et_real,UF goias,2021-2025,10.826,0.503,False
+mod16,et_real,UF maranhao,2001-2010,-24.46,0.492,False
+mod16,et_real,UF maranhao,2011-2020,-25.627,0.442,False
+mod16,et_real,UF maranhao,2021-2025,-25.803,0.721,False
+mod16,et_real,UF mato grosso,2001-2010,-1.757,0.157,True
+mod16,et_real,UF mato grosso,2011-2020,-10.508,0.487,False
+mod16,et_real,UF mato grosso,2021-2025,-9.138,0.496,False
+mod16,et_real,UF mato grosso do sul,2001-2010,65.303,0.049,True
+mod16,et_real,UF mato grosso do sul,2011-2020,23.186,0.44,True
+mod16,et_real,UF mato grosso do sul,2021-2025,29.646,0.691,False
+mod16,et_real,UF minas gerais,2001-2010,-0.661,0.512,True
+mod16,et_real,UF minas gerais,2011-2020,-8.12,0.507,False
+mod16,et_real,UF minas gerais,2021-2025,-6.038,0.665,False
+mod16,et_real,UF para,2001-2010,-21.134,0.248,False
+mod16,et_real,UF para,2011-2020,-21.753,-0.012,False
+mod16,et_real,UF para,2021-2025,-24.377,0.191,False
+mod16,et_real,UF paraiba,2001-2010,-25.361,0.804,False
+mod16,et_real,UF paraiba,2011-2020,-24.259,0.847,False
+mod16,et_real,UF paraiba,2021-2025,-30.353,0.73,False
+mod16,et_real,UF parana,2001-2010,14.095,0.0,False
+mod16,et_real,UF parana,2011-2020,6.516,0.125,False
+mod16,et_real,UF parana,2021-2025,9.339,0.42,False
+mod16,et_real,UF pernambuco,2001-2010,-18.959,0.828,False
+mod16,et_real,UF pernambuco,2011-2020,-20.846,0.855,False
+mod16,et_real,UF pernambuco,2021-2025,-25.622,0.826,False
+mod16,et_real,UF piaui,2001-2010,-14.552,0.627,True
+mod16,et_real,UF piaui,2011-2020,-21.267,0.73,False
+mod16,et_real,UF piaui,2021-2025,-22.921,0.823,False
+mod16,et_real,UF rio de janeiro,2001-2010,-9.301,0.231,False
+mod16,et_real,UF rio de janeiro,2011-2020,-10.714,0.358,False
+mod16,et_real,UF rio de janeiro,2021-2025,-11.654,0.392,False
+mod16,et_real,UF rio grande do norte,2001-2010,-20.16,0.828,False
+mod16,et_real,UF rio grande do norte,2011-2020,-11.046,0.811,True
+mod16,et_real,UF rio grande do norte,2021-2025,-18.425,0.831,False
+mod16,et_real,UF rio grande do sul,2001-2010,26.037,0.312,True
+mod16,et_real,UF rio grande do sul,2011-2020,20.48,0.202,False
+mod16,et_real,UF rio grande do sul,2021-2025,18.453,0.691,False
+mod16,et_real,UF rondonia,2001-2010,-17.988,-0.068,False
+mod16,et_real,UF rondonia,2011-2020,-15.857,0.297,False
+mod16,et_real,UF rondonia,2021-2025,-19.045,0.47,False
+mod16,et_real,UF roraima,2001-2010,-9.695,0.217,False
+mod16,et_real,UF roraima,2011-2020,-6.779,0.129,False
+mod16,et_real,UF roraima,2021-2025,-12.999,0.126,False
+mod16,et_real,UF santa catarina,2001-2010,-6.272,0.302,False
+mod16,et_real,UF santa catarina,2011-2020,-9.221,0.335,False
+mod16,et_real,UF santa catarina,2021-2025,-6.965,0.589,False
+mod16,et_real,UF sao paulo,2001-2010,19.665,0.206,True
+mod16,et_real,UF sao paulo,2011-2020,9.87,0.368,False
+mod16,et_real,UF sao paulo,2021-2025,11.694,0.611,False
+mod16,et_real,UF sergipe,2001-2010,-10.517,0.79,False
+mod16,et_real,UF sergipe,2011-2020,-14.115,0.768,False
+mod16,et_real,UF sergipe,2021-2025,-10.951,0.771,False
+mod16,et_real,UF tocantins,2001-2010,8.949,0.282,True
+mod16,et_real,UF tocantins,2011-2020,-3.825,0.345,False
+mod16,et_real,UF tocantins,2021-2025,-0.186,0.362,False
 persiann,pr_mm,Brasil,1981-1990,-3.928,0.926,False
 persiann,pr_mm,Brasil,1991-2000,-5.492,0.916,False
 persiann,pr_mm,Brasil,2001-2010,-5.786,0.939,False
