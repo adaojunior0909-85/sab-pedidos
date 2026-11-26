@@ -47,6 +47,10 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- 🔎 **26/11, ~09h40: `brdwgd` PRONTO.** Banco = BR-DWGD bruto (SAB/BR = 1,000 em todos os anos); metadados iguais em
+  todos os anos; **o asset não tem os controles da rede** (A4 só com os NetCDF `pr_Control`). **Contra o ERA5-Land
+  (sem pluviômetro): −5 a +2% até 2018; +7,5% em 2020, +9% em 2021–22, +16% em 2023–24** → 4ª família com o degrau.
+  Seção 5 de `pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md`.
 - 🔎 **26/11, ~09h40 (Brasília): NASA POWER pronto e conferido** (extração = API de ponto no DF, dif. 4e-16; radiação
   na grade de 1°, corrigido). A1/A2 refeitos: **chuva = degrau dos dados** (persistente, El Niño/La Niña não explica)
   em Brasil, N, NE, CO (falta só o A3); Sul inconclusivo. **Novos degraus confirmados** (POWER + GLDAS e/ou

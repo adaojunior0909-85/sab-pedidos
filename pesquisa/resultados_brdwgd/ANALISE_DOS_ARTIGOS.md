@@ -91,3 +91,16 @@ própria) também mostram o salto: são **3 famílias de pluviômetros diferente
 rala (exceto no fim de 2025). A hipótese principal passa a ser **a composição da rede** (pluviômetros que entraram nas
 versões 3.1–3.2.4, sobretudo no Norte e Nordeste). Para a V1.8, a recomendação fica: razões do C3 de anos estáveis
 (2010–2019) e **nunca do fim de 2025**.
+
+## 5. O que o BR-DWGD bruto mostrou (`investigar_brdwgd.py`, 26/11/2026, ~09h30)
+- **O banco é o BR-DWGD bruto:** SAB/BR = 1,000 em todos os anos de 1961 a 2025 (Brasil e regiões).
+- **Metadados iguais em todos os anos:** 7 bandas (pr, Tmax, Tmin, Rs, RH, u2, ET) com as mesmas escalas; **o asset
+  não traz os controles da rede** (número de estações e distância à mais próxima): o A4 só pode ser feito com os
+  arquivos `pr_Control` (NetCDF) da v_3.2.4.
+- **Contra o ERA5-Land, que não usa pluviômetro nenhum** (Brasil, total anual, relativo a 2001–2015): de −5% a +2% em
+  1981–2018; **+5,6% (2019), +7,5% (2020), +8,8% (2021), +9,5% (2022), +16,0% (2023), +16,1% (2024), +8,3% (2025)**.
+  É a 4ª família independente (F5) com o mesmo degrau.
+- **Como o excesso se forma:** contra o CHIRPS, o BR-DWGD passa a ter **chuva mais forte por dia chuvoso** (+3 a
+  +14%), com dias de chuva até um pouco menos frequentes; contra o ERA5-Land, mais dias ≥ 1 mm (+8 a +15%). Os dois
+  apontam para mais chuva por dia na grade nova, compatível com mudança na rede ou no tratamento dos dados, não com o
+  clima (que mudaria as testemunhas também).
