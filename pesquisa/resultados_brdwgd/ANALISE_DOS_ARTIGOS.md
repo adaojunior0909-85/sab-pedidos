@@ -55,3 +55,39 @@ compartilhar parte do mesmo viés.
   (ex.: 2010–2018), repetir o teste fora da amostra da fase 1 com essa janela (protocolo novo congelado antes) e só
   então decidir a V1.8. O histórico 1961–2019 não é afetado; 2020–2025 do banco passa a ter um aviso (e, no M5, é
   candidato a ajuste na leitura, se confirmado por 2 referências — já está: 4).
+
+## 4. Correção depois do site oficial (26/11/2026, ~11h15)
+Fonte: https://sites.google.com/site/alexandrecandidoxavierufes/brazilian-daily-weather-gridded-data (texto salvo em
+`fontes/site_brdwgd_26-11-2026.txt`) e o relatório da versão v_3.2.4 (rascunho de 17/04/2026, Google Drive
+1BXtsNRcq3JYmO-RAIMOOIyqJI-mOpU7S; figura dos pluviômetros em `fontes/relatorio_v3_2_4_pluviometros.png`).
+
+**Notas de versão:** v_3.1 (mar/2023: chuva de 2001–2022 com mais pluviômetros); v_3.2.1 e v_3.2.2 (2023: arquivos e
+contorno); v_3.2.3 (dez/2024: até 20/03/2024, projeto Climaterna); **v_3.2.4 (abr/2026: 1961–2025; no Earth Engine em
+mai/2026)**. Relatório da v_3.2.4: 15.116 pluviômetros (11.632 manuais; 3.484 automáticos: 2.876 da ANA e 608 do INMET);
+ADW na chuva; validação cruzada com R 0,648 e viés 0,001 mm/dia.
+
+**O que muda na seção 1:** a extensão depois de 2020 **está documentada** (versões e relatório). E, na v_3.2.4, a rede de
+2020–2024 **não é rala**: ~5.700 pluviômetros, perto do máximo histórico (o "muito poucos dados em 2019–2020" do artigo
+de 2022 valia para a versão antiga). Portanto **a explicação "rede rala" não vale para 2020–2024**. Ela vale para o
+**fim de 2025**: a figura mostra a rede despencando para ~1.000–2.000 nos últimos meses (de novo, dados ainda não
+liberados).
+
+**O que o site e o relatório não respondem:** (1) o relatório é rascunho, sem texto sobre quais pluviômetros entraram
+em cada versão; (2) a validação cruzada compara a grade com os próprios pluviômetros: viés ≈ 0 mostra que a
+interpolação é fiel à rede, **não** que a rede está certa; um viés da própria rede (composição, sensores) não aparece
+nessa conta; (3) não há comparação com fontes independentes.
+
+**Mudança na rede que coincide com o salto:** a figura mostra a parte manual subindo de ~4.400 (2016) para ~5.000
+(2020–2024) e as automáticas/mescladas mudando em 2015–2024. O salto da chuva é maior no **Norte e Nordeste** (+20%
+contra GLDAS-2.1, IMERG, PERSIANN; +7 a +10% até contra o CHIRPS) e menor no Sudeste, onde a rede é densa há décadas.
+
+**Ressalva sobre as referências:** IMERG, PERSIANN-CDR (via GPCP) e GLDAS-2.1 (via GPCP) são todos ajustados ao GPCC,
+cuja versão mais completa (Full Data) termina em 2020; depois entra a de monitoramento, com menos estações. Elas podem
+mudar juntas, então valem como **uma** família, não três. Ainda assim, o TerraClimate (CRU, sem GPCC) e o CHIRPS (rede
+própria) também mostram o salto: são **3 famílias de pluviômetros diferentes** apontando para o mesmo lado. O ERA5-Land
+(sem pluviômetro nenhum) será a 4ª, no `investigar_brdwgd.py` (BR/ERA5 ano a ano).
+
+**Conclusão revista:** o BR-DWGD continua sendo o suspeito mais provável, **mas não está provado**, e a causa não é a rede
+rala (exceto no fim de 2025). A hipótese principal passa a ser **a composição da rede** (pluviômetros que entraram nas
+versões 3.1–3.2.4, sobretudo no Norte e Nordeste). Para a V1.8, a recomendação fica: razões do C3 de anos estáveis
+(2010–2019) e **nunca do fim de 2025**.
