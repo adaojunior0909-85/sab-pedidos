@@ -1,40 +1,40 @@
 variavel,regiao,A1_persistente,A1_anos,A2,A3,decisao
 RH,Brasil,False,2,não explica,(não se aplica),sem degrau persistente
-et_potencial,Brasil,False,1,não explica,(não se aplica),sem degrau persistente
+et_potencial,Brasil,True,5,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 pr_mm,Brasil,True,5,não explica,"GRACE: neutra, SMAP: neutra",inconclusivo → aviso no dicionário
-rs,Brasil,False,2,inconclusivo,(não se aplica),sem degrau persistente
-tmax_C,Brasil,False,0,não explica,(não se aplica),sem degrau persistente
+rs,Brasil,True,5,inconclusivo,(não se aplica),inconclusivo → aviso no dicionário
+tmax_C,Brasil,False,2,não explica,(não se aplica),sem degrau persistente
 tmin_C,Brasil,False,0,explica,(não se aplica),clima (nenhuma correção)
 u2,Brasil,False,0,inconclusivo,(não se aplica),sem degrau persistente
-vpd,Brasil,False,2,não explica,(não se aplica),sem degrau persistente
+vpd,Brasil,True,5,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 RH,Centro-Oeste,False,1,não explica,(não se aplica),sem degrau persistente
-et_potencial,Centro-Oeste,False,0,não explica,(não se aplica),sem degrau persistente
+et_potencial,Centro-Oeste,False,1,não explica,(não se aplica),sem degrau persistente
 pr_mm,Centro-Oeste,True,5,não explica,"GRACE: neutra, SMAP: neutra",inconclusivo → aviso no dicionário
 rs,Centro-Oeste,False,1,inconclusivo,(não se aplica),sem degrau persistente
-tmax_C,Centro-Oeste,False,0,não explica,(não se aplica),sem degrau persistente
+tmax_C,Centro-Oeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 tmin_C,Centro-Oeste,False,0,inconclusivo,(não se aplica),sem degrau persistente
 u2,Centro-Oeste,False,0,explica,(não se aplica),clima (nenhuma correção)
 vpd,Centro-Oeste,True,4,inconclusivo,(não se aplica),inconclusivo → aviso no dicionário
-RH,Nordeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
-et_potencial,Nordeste,False,0,não explica,(não se aplica),sem degrau persistente
+RH,Nordeste,True,4,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
+et_potencial,Nordeste,False,1,não explica,(não se aplica),sem degrau persistente
 pr_mm,Nordeste,True,5,não explica,"GRACE: neutra, SMAP: com o SAB",clima (nenhuma correção)
-rs,Nordeste,False,0,inconclusivo,(não se aplica),sem degrau persistente
-tmax_C,Nordeste,False,2,inconclusivo,(não se aplica),sem degrau persistente
-tmin_C,Nordeste,False,0,inconclusivo,(não se aplica),sem degrau persistente
+rs,Nordeste,True,4,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
+tmax_C,Nordeste,False,1,inconclusivo,(não se aplica),sem degrau persistente
+tmin_C,Nordeste,False,0,explica,(não se aplica),clima (nenhuma correção)
 u2,Nordeste,False,0,não explica,(não se aplica),sem degrau persistente
 vpd,Nordeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
-RH,Norte,False,1,inconclusivo,(não se aplica),sem degrau persistente
+RH,Norte,False,2,inconclusivo,(não se aplica),sem degrau persistente
 et_potencial,Norte,False,1,inconclusivo,(não se aplica),sem degrau persistente
-pr_mm,Norte,True,4,não explica,"GRACE: neutra, SMAP: neutra",inconclusivo → aviso no dicionário
+pr_mm,Norte,True,5,não explica,"GRACE: neutra, SMAP: neutra",inconclusivo → aviso no dicionário
 rs,Norte,True,5,inconclusivo,(não se aplica),inconclusivo → aviso no dicionário
-tmax_C,Norte,False,0,inconclusivo,(não se aplica),sem degrau persistente
-tmin_C,Norte,False,0,inconclusivo,(não se aplica),sem degrau persistente
-u2,Norte,False,1,inconclusivo,(não se aplica),sem degrau persistente
-vpd,Norte,False,2,não explica,(não se aplica),sem degrau persistente
-RH,Sudeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
+tmax_C,Norte,False,2,inconclusivo,(não se aplica),sem degrau persistente
+tmin_C,Norte,False,2,inconclusivo,(não se aplica),sem degrau persistente
+u2,Norte,False,2,inconclusivo,(não se aplica),sem degrau persistente
+vpd,Norte,True,5,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
+RH,Sudeste,True,4,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 et_potencial,Sudeste,False,0,inconclusivo,(não se aplica),sem degrau persistente
 pr_mm,Sudeste,False,1,não explica,"GRACE: neutra, SMAP: neutra",sem degrau persistente
-rs,Sudeste,False,0,explica,(não se aplica),clima (nenhuma correção)
+rs,Sudeste,False,1,explica,(não se aplica),clima (nenhuma correção)
 tmax_C,Sudeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 tmin_C,Sudeste,False,0,inconclusivo,(não se aplica),sem degrau persistente
 u2,Sudeste,False,0,explica,(não se aplica),clima (nenhuma correção)
@@ -42,8 +42,8 @@ vpd,Sudeste,True,3,não explica,(não se aplica),**DEGRAU DOS DADOS CONFIRMADO**
 RH,Sul,False,0,não explica,(não se aplica),sem degrau persistente
 et_potencial,Sul,False,0,inconclusivo,(não se aplica),sem degrau persistente
 pr_mm,Sul,True,5,inconclusivo,"GRACE: neutra, SMAP: neutra",inconclusivo → aviso no dicionário
-rs,Sul,False,0,explica,(não se aplica),clima (nenhuma correção)
-tmax_C,Sul,False,0,não explica,(não se aplica),sem degrau persistente
+rs,Sul,False,1,explica,(não se aplica),clima (nenhuma correção)
+tmax_C,Sul,False,0,inconclusivo,(não se aplica),sem degrau persistente
 tmin_C,Sul,False,0,explica,(não se aplica),clima (nenhuma correção)
-u2,Sul,False,0,explica,(não se aplica),clima (nenhuma correção)
-vpd,Sul,False,0,inconclusivo,(não se aplica),sem degrau persistente
+u2,Sul,False,0,inconclusivo,(não se aplica),sem degrau persistente
+vpd,Sul,True,5,inconclusivo,(não se aplica),inconclusivo → aviso no dicionário

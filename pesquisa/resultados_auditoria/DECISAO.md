@@ -4,23 +4,30 @@ Regras fixadas antes de rodar (`pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`, seç�
 
 | Variável | Região | A1 (anos 2020–24) | A2 | A3 (água) | Decisão |
 |---|---|---|---|---|---|
-| Umidade relativa | Nordeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
-| Umidade relativa | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| Umidade relativa | Nordeste | 4 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| Umidade relativa | Sudeste | 4 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| ETo | Brasil | 5 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | Chuva | Brasil | 5 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
 | Chuva | Centro-Oeste | 5 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
 | Chuva | Nordeste | 5 (persistente) | não explica | GRACE: neutra, SMAP: com o SAB | clima (nenhuma correção) |
-| Chuva | Norte | 4 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Chuva | Norte | 5 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
 | Chuva | Sul | 5 (persistente) | inconclusivo | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Radiação | Brasil | 5 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
+| Radiação | Nordeste | 4 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | Radiação | Norte | 5 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
-| Radiação | Sudeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
-| Radiação | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Radiação | Sudeste | 1 | explica | (não se aplica) | clima (nenhuma correção) |
+| Radiação | Sul | 1 | explica | (não se aplica) | clima (nenhuma correção) |
+| Tmax | Centro-Oeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | Tmax | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | Tmin | Brasil | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Tmin | Nordeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
 | Tmin | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
 | Vento | Centro-Oeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
 | Vento | Sudeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
-| Vento | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| VPD | Brasil | 5 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | VPD | Centro-Oeste | 4 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
 | VPD | Nordeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| VPD | Norte | 5 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
 | VPD | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| VPD | Sul | 5 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
 
