@@ -141,7 +141,7 @@ def a1_numpy(d):
     chaves = {}
     for i, (reg, var, base, fam, ano, mes, sab, ref) in enumerate(zip(d.regiao, d.variavel, d.base, d.familia, d.ano,
                                                                        d.mes, d.sab.to_numpy(), d.referencia.to_numpy())):
-        if fam is None:
+        if fam is None or fam != fam:          # só relato (None ou NaN)
             continue
         k = (reg, var, base, fam, int(ano))
         e = chaves.setdefault(k, [set(), 0.0, 0.0, []])

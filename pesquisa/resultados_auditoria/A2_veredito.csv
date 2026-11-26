@@ -1,0 +1,49 @@
+regiao,variavel,nao_explica,explica,veredito_A2
+Brasil,RH,1,0,inconclusivo
+Brasil,et_potencial,2,0,não explica
+Brasil,pr_mm,2,0,não explica
+Brasil,rs,1,0,inconclusivo
+Brasil,tmax_C,1,0,inconclusivo
+Brasil,tmin_C,0,1,inconclusivo
+Brasil,u2,1,1,inconclusivo
+Brasil,vpd,1,0,inconclusivo
+Centro-Oeste,RH,1,0,inconclusivo
+Centro-Oeste,et_potencial,2,0,não explica
+Centro-Oeste,pr_mm,3,0,não explica
+Centro-Oeste,rs,0,0,inconclusivo
+Centro-Oeste,tmax_C,2,0,não explica
+Centro-Oeste,tmin_C,0,2,explica
+Centro-Oeste,u2,0,1,inconclusivo
+Centro-Oeste,vpd,1,1,inconclusivo
+Nordeste,RH,1,0,inconclusivo
+Nordeste,et_potencial,2,0,não explica
+Nordeste,pr_mm,3,0,não explica
+Nordeste,rs,1,0,inconclusivo
+Nordeste,tmax_C,2,0,não explica
+Nordeste,tmin_C,1,1,inconclusivo
+Nordeste,u2,1,0,inconclusivo
+Nordeste,vpd,1,0,inconclusivo
+Norte,RH,1,0,inconclusivo
+Norte,et_potencial,1,0,inconclusivo
+Norte,pr_mm,2,0,não explica
+Norte,rs,1,0,inconclusivo
+Norte,tmax_C,0,1,inconclusivo
+Norte,tmin_C,1,1,inconclusivo
+Norte,u2,1,1,inconclusivo
+Norte,vpd,1,0,inconclusivo
+Sudeste,RH,1,0,inconclusivo
+Sudeste,et_potencial,1,1,inconclusivo
+Sudeste,pr_mm,3,0,não explica
+Sudeste,rs,0,2,explica
+Sudeste,tmax_C,2,0,não explica
+Sudeste,tmin_C,0,1,inconclusivo
+Sudeste,u2,0,2,explica
+Sudeste,vpd,1,0,inconclusivo
+Sul,RH,1,0,inconclusivo
+Sul,et_potencial,1,1,inconclusivo
+Sul,pr_mm,2,1,inconclusivo
+Sul,rs,0,1,inconclusivo
+Sul,tmax_C,1,0,inconclusivo
+Sul,tmin_C,0,1,inconclusivo
+Sul,u2,0,1,inconclusivo
+Sul,vpd,1,1,inconclusivo
