@@ -124,3 +124,38 @@ Traceback (most recent call last):
     raise _translate_cloud_exception(e)  # pylint: disable=raise-missing-from
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ee.ee_exception.EEException: Image.select: Band pattern 'et_potencial' was applied to an Image with no bands. See https://developers.google.com/earth-engine/guides/debugging#no-bands
+
+===== 25/11/2026 20:40 (Brasília), tentativa 1 =====
+código: commit 7cb85776de5c814e90f5d4e99b97520468fe84da | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   mod16 2001 pronto em 734 s
+   mod16 2002 pronto em 728 s
+   mod16 2003 pronto em 780 s
+   mod16 2004 pronto em 826 s
+   mod16 2005 pronto em 743 s
+   mod16 2006 pronto em 716 s
+   mod16 2007 pronto em 728 s
+   mod16 2008 pronto em 811 s
+   mod16 2009 pronto em 784 s
+   mod16 2010 pronto em 771 s
+   mod16 2011 pronto em 838 s
+   mod16 2012 pronto em 882 s
+   mod16 2013 pronto em 860 s
+   mod16 2014 pronto em 813 s
+   mod16 2015 pronto em 931 s
+   mod16 2016 pronto em 809 s
+   mod16 2017 pronto em 863 s
+   mod16 2018 pronto em 734 s
+   mod16 2019 pronto em 736 s
+   mod16 2020 pronto em 1007 s
+   mod16 2021 pronto em 665 s
+   mod16 2022 pronto em 735 s
+   mod16 2023 pronto em 691 s
