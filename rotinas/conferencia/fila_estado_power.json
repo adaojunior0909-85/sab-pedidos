@@ -76,7 +76,10 @@
  },
  "power": {
   "tentativas": 3,
-  "situacao": "rodando",
-  "inicio": "26/11 09:17"
+  "situacao": "falhou",
+  "inicio": "26/11 09:17",
+  "fim": "26/11 09:17",
+  "minutos": 0,
+  "codigo": 1
  }
 }
