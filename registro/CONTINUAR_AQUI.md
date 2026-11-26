@@ -43,6 +43,16 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
+- 🔎 **26/11, ~14h–15h: AUDITORIA PROFUNDA EM ANDAMENTO** (emendas 1–3, todas antes de rodar). Prontos: teste
+  sintético (passa), conta em dobro (OK), **A1/A2**: chuva com degrau persistente 2020–24 em Brasil, N, NE, CO e Sul
+  (Sudeste não); o El Niño/La Niña **não explica** (r do RONI com a razão ≤ 0,14; resíduo = o degrau; análogos
+  1997–98, 2010–12, 2015–16 a ±3%) em Brasil, N, NE, CO; Sul inconclusivo. Outras variáveis: sem degrau confirmado
+  (radiação −3,5 a −5,5% e ETo −4 a −6,5% desde 2020 só contra o TerraClimate; o GLDAS-2.1 tem deriva própria
+  desde ~2015); POWER e ERA5 até 2025 vão decidir. **A7**: a matriz do GFS V2.1 (previsão) e as razões da V1.8 foram
+  calibradas SÓ com 2021–2025 → na chuva a previsão herda o degrau (+10 a +16% em 4 regiões); o fator de clima
+  1986–2025 tem 6 de 40 anos no trecho (aguarda ERA5). Na fila (validacoes-2): `power` (NASA POWER) e `agua`
+  (GRACE/SMAP, A3); depois: rodar de novo `python pesquisa/auditoria_a1_a2.py` e `auditoria_a7_cadeia.py`, A4
+  (rede, quando o `brdwgd` mostrar as bandas) e a decisão da seção 4 do protocolo.
 - 🔒 **26/11, ~12h40: PROTOCOLO DA AUDITORIA PROFUNDA ESCRITO E CONGELADO** (pedido do responsável: "escreva o
   protocolo, atualize e vamos auditar isso tudo de forma minuciosa"): `pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`
   (A1 degrau ano a ano; A2 El Niño/La Niña com RONI e análogos; A3 GRACE/SMAP/rios; A4 rede do BR-DWGD; A5

@@ -140,3 +140,39 @@ com as mesmas regras, para separar clima de dado também neles.
    **controles da rede** (A4); A5 já está rodando (`brdwgd`).
 3. A7 (leitura do código e 05a sem 2020–2025).
 4. Decisão (seção 4) → aviso no celular → o responsável decide.
+
+## Emenda 1 (26/11/2026, ~13h, ANTES de rodar qualquer teste; detalhes de implementação que o texto não fixava)
+1. **Valor de uma família com mais de uma base** (F1: IMERG, PERSIANN, GLDAS-2.1; F6: GLDAS-2.0 e 2.1): a mediana das
+   bases da família naquele ano (A1) ou mês (A2). MAD = mediana de |x − mediana|, sem fator de escala.
+2. **Bases só de relato** (não entram na decisão): GLDAS-2.0 na chuva (forçante de Princeton, mistura CRU e GPCP),
+   MOD16 (outra definição de ET), e o ERA5-Land nas variáveis do modelo.
+3. **Ano válido:** 12 meses com dado. **Base válida:** ≥ 8 anos em 2001–2015 (senão a série não entra no A1 nem no A2).
+4. **A2 na chuva:** meses com a testemunha < 5 mm ficam fora (a razão explode na seca). As anomalias mensais usam o
+   ciclo do ano: mediana da razão (ou diferença) de cada mês do calendário em 2001–2015.
+5. **Erro-padrão do A2:** desvio do resíduo em 1981–2019 ÷ √n_ef, n_ef = n × (1 − ρ₁)/(1 + ρ₁), n = meses de 2020–2024
+   com dado e ρ₁ a autocorrelação de 1 mês do resíduo em 1981–2019 (ρ₁ < 0 conta como 0).
+6. **Análogos sem dado:** uma fase (La Niña ou El Niño) sem meses no passado ou no presente não é avaliada; se nenhuma
+   fase puder ser avaliada, a condição (b) é "sem dado" e o A2 daquela família fica **inconclusivo**.
+7. **Veredito do A2 por variável × região** (o que a seção 4 usa): "não explica" se ≥ 2 famílias disserem "não explica"
+   e nenhuma disser "explica"; "explica" se ≥ 2 famílias disserem "explica" e nenhuma "não explica"; senão inconclusivo.
+8. **Sinal:** rel e dif positivos = o SAB acima da testemunha (em relação à base).
+
+## Emenda 2 (26/11/2026, ~13h20, ANTES de olhar os dados reais; o teste sintético falhou por causa disto)
+O índice do A2 passa a vir de `rotinas/resultados/roni/<data>/RONI_CPC_v6.csv` (a série oficial completa do CPC, 1950 →
+set/2026, coluna RONI, salva pela rotina), e não da `auditoria_RONI_SAB_x_CPC.csv`, que só guarda os meses auditados e
+tem buracos em 2020–2025 (o teste sintético saiu "inconclusivo" nos dois casos por falta de meses). Os valores do RONI
+são os mesmos; nada mais muda.
+
+## Emenda 3 (26/11/2026, ~14h, ANTES de rodar o A3 e o NASA POWER; detalhes que o texto não fixava)
+1. **NASA POWER:** Tmax e Tmin = `T2M_MAX_AVG` e `T2M_MIN_AVG` (média das máximas e mínimas diárias; o `T2M_MAX` mensal é
+   a máxima absoluta do mês, conferido contra a API diária); chuva = `PRECTOTCORR` × dias do mês; VPD = média de
+   es(Tmax) e es(Tmin) − es(T2MDEW); sem ETo. Média regional ponderada pelos pixels entregues do SAB em cada célula.
+   **A chuva do POWER entra na F1**: a documentação oficial diz só "observationally corrected" (Reichle et al. 2017),
+   sem nomear a rede, então não há confirmação de rede distinta do GPCC (regra da seção 2).
+2. **A3, erro:** RMSE da regressão linear testemunha ~ anomalia da chuva; no treino por deixar-um-de-fora, no teste fora
+   da amostra. REF = mediana das anomalias (%) das bases F1, F2 e F3 (cada uma relativa à sua média do treino).
+3. **GRACE:** ΔS = armazenamento de abril do ano seguinte − abril do ano (ano hidrológico maio→abril); chuva do mesmo ano
+   hidrológico (12 meses completos). Treino 2003–2019 (anos hidrológicos), teste 2020–2024.
+4. **SMAP:** só o L3 (o L4 assimila chuva observada); anomalia mensal (clima de cada mês em 2015–2019) contra a média
+   das anomalias de chuva do mês e do anterior (limitada a −100% e +300%). Treino 2015–2019, teste 2020–2025.
+5. A3 avaliado nas 5 regiões e no Brasil.

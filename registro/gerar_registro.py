@@ -26,6 +26,10 @@ RESULTADOS = [
     ('Várias referências (multifonte)', 'pesquisa/resultados_multifonte/RESULTADOS.md'),
     ('BR-DWGD: artigos, site e relatório', 'pesquisa/resultados_brdwgd/ANALISE_DOS_ARTIGOS.md'),
     ('BR-DWGD bruto ano a ano', 'pesquisa/resultados_brdwgd/RESULTADOS.md'),
+    ('Auditoria profunda A1/A2/A6 (degrau ano a ano; El Niño/La Niña)', 'pesquisa/resultados_auditoria/RESULTADOS_A1_A2.md'),
+    ('Auditoria profunda A3 (GRACE e SMAP)', 'pesquisa/resultados_agua/RESULTADOS_A3.md'),
+    ('Auditoria profunda A7 (cadeia: 2026 e previsão)', 'pesquisa/resultados_auditoria/RESULTADOS_A7.md'),
+    ('NASA POWER (fonte)', 'pesquisa/resultados_power/FONTE.md'),
     ('Previsão estendida (pesquisa)', 'pesquisa/resultados/RESULTADOS.md'),
     ('Acerto da previsão GFS', 'rotinas/resultados/previsao/ACERTO.md'),
 ]
