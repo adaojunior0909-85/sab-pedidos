@@ -143,3 +143,27 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    ⚠️ chirps 2019-02: Computation timed out.
    chirps 2019 pronto em 1688 s
 Tempo desta vez acabou; a próxima retoma daqui.
+
+===== 25/11/2026 20:01 (Brasília), tentativa 1 =====
+código: commit 70ed3993b2a4a47fa94da8eb5f9ca999adb7417e | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   chirps 2020 pronto em 1170 s
+   chirps 2021 pronto em 1155 s
+   chirps 2022 pronto em 1352 s
+   chirps 2023 pronto em 1327 s
+   chirps 2024 pronto em 1096 s
+   chirps 2025 pronto em 1288 s
+   chirps 2026 pronto em 933 s
+   terraclimate 1961 pronto em 1665 s
+   terraclimate 1962 pronto em 2013 s
+   terraclimate 1963 pronto em 2123 s
+   terraclimate 1964 pronto em 1889 s
+   terraclimate 1965 pronto em 1918 s

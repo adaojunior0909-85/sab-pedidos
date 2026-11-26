@@ -38,7 +38,9 @@
  },
  "resolucao": {
   "tentativas": 1,
-  "situacao": "rodando",
-  "inicio": "25/11 20:01"
+  "situacao": "pendente",
+  "inicio": "25/11 20:01",
+  "fim": "26/11 01:16",
+  "codigo": "tempo"
  }
 }
