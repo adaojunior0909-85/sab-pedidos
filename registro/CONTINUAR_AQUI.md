@@ -1,4 +1,4 @@
-# Para continuar numa conversa nova (estado em 25/11/2026, ~20h40 de Brasília)
+# Para continuar numa conversa nova (estado em 26/11/2026, ~11h30 de Brasília)
 
 ## Cole isto na conversa nova
 > Continue o trabalho do SAB a partir do ponto salvo. Primeiro, só leia (não mude nem dispare nada): no repositório
@@ -40,6 +40,9 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
+  refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
+  protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).
 - ✅ **Protocolo da correção APROVADO** (25/11, ~07h), com 2026 × CHIRPS só como relato; congelado antes de rodar
   (commit `1de7696` do `validacoes-2`). ✅ **Emenda 1** (25/11, ~08h, pedida pelo responsável, antes de rodar; commit
   `91cd9b3`): a condição 4 usa TODOS os pixels entregues (dias de chuva e Rx1day, em cada uma das 5 regiões) e o p99
@@ -82,8 +85,9 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   (composição da rede, salto maior no Norte/Nordeste), não provado; seção 4 do mesmo arquivo.
 - ⚠️ **26/11, 07h15: MERGE DA V1.8 SUSPENSO, decisão volta ao responsável.** As várias referências (chuva por
   satélite completa) mostram a chuva do banco em **2021–2025 ~9% acima** da relação das décadas anteriores segundo
-  **4 fontes independentes** (GLDAS-2.1 +8,0%, IMERG +8,7%, PERSIANN +9,0%, TerraClimate +11,2%); só o CHIRPS não
-  (+0,0%). As razões do C3 (V1.8) saem justamente do BR-DWGD de 2021–2025: se ele estiver alto, a V1.8 corrige demais
+  4 fontes (GLDAS-2.1 +8,0%, IMERG +8,7%, PERSIANN +9,0%, TerraClimate +11,2%; as três primeiras dependem do GPCC e
+  contam como uma família: ver a revisão de 11h15 acima); o CHIRPS na média do Brasil não (+0,0%), mas no Norte e
+  Nordeste sim (+7 a +10%). As razões do C3 (V1.8) saem justamente do BR-DWGD de 2021–2025: se ele estiver alto, a V1.8 corrige demais
   (coerente com o Sul +15,5% × CHIRPS). A prévia de 26/11 10h30 roda (só leitura) e NÃO junta o PR sab-motor#4.
 - ✅ **V1.8 APROVADA pelo responsável (25/11, ~19h20: "Junte e aprove o V1.8").** Etapa B pronta no PR
   adaojunior0909-85/sab-motor#4 (`ARQUIVOS['gravar']` = 05b v1_8; head `0b13fda`). Combinado: o merge vem DEPOIS da

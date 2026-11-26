@@ -1,0 +1,63 @@
+Índice - Brazilian Daily Weather Gridded Data
+Search this site
+Embedded Files
+Skip to main content
+Skip to navigation
+Índice Início
+Brazilian Daily Weather Gridded Data
+Brazilian hourly weather gridded data
+Geomática I (Livro)
+Índice
+Brazilian Daily  Weather  Gridded  Data (BR-DWGD)
+Description
+This page presents basic information about the daily  meteorological gridded data set from Brazil
+Variables
+Precipitation (pr, mm); maximum and minimum temperature (Tmax, Tmin, °C);  solar radiation (Rs, MJ/m 2 ); relative humidity (RH, %); wind speed at 2 meters (u2, m/s) and evapotranspiration (ETo, mm).
+Temporal resolution
+Daily
+Temporal coverage
+1961/01/01-2025/12/31
+Spatial resolution
+0.1 ° x 0.1 °
+Spatial coverage
+Just Brazil territory
+Latitude: 33.85 ° S - 5.35 ° N
+Longitude: 73.85 ° W - 34 . 85° W
+Methods
+See paper
+Citation
+If you use the data, we appreciate cite it:
+Xavier, A. C., Scanlon, B. R., King, C. W., & Alves, A. I. (2022). New improved Brazilian daily weather gridded data (1961–2020). International Journal of Climatology, 42(16), 8390– 8404. https://doi.org/10.1002/joc.7731
+Download gridded data (NetCDF files)
+NetCDF files compressed (ZIP), here ;
+NetCDF files, here ;
+Codes i n Python, check GitHub BR-DWGD .
+Google Earth Engine
+Google Earth Engine Asset: here the daily imageCollection and here the monthly imageCollection
+Earth Engine Snippet for daily grid:
+ee.ImageCollection('projects/ee-alexandrexavier/assets/BR-DWGD')
+Earth Engine Snippet for monthly grid:
+ee.ImageCollection('projects/ee-alexandrexavier/assets/BR-DWGD_Monthly')
+Simple c odes:
+Code Editor (JavaScript): daily here , here or here ; monthly here
+Colab (Notebook): daily here ; monthly here
+Download municipal-level weather data ( DataClimaBR ).
+Realease notes
+November 2026: Hourly Tmax , Tmin , Rs , RH and u2 grids are available for the period from 2007/01/01 to 2025/12/31 ( beta version available here ). The grids were generated using data exclusively from INMET automatic weather stations. For more information, here .
+May 202 6 : update daily and monthly grid  "v_3.2.4" in Google Earth Engine, respectively here   and here .
+April 2026: update grid (from 1961/01/01 to 2025/12/31, version "v_3.2.4" ). The report for this version is currently under construction and it is available here .
+December 2024: update grid (from 1961 / 01 / 01 to 2024 / 03 / 20, version "v _ 3 . 2 . 3" ), with support from Climaterna project.
+June 2023: we adopt a new boundary for the grid, with a better fit to the coast of North East;  corrections in the gain and offset of NetCDF data to open properly in the software QGIS (version "v_3.2. 2 ");
+April 2023: all ncfiles were created with smaller size (version "v_3.2.1");
+March 2023: update precipitation grid adding more rain gauges. Just for the  period 2001/01/01-2022/12/31 (version "v_3.1")
+Questions
+If you have problems with the gridded dataset, contact: alexandre.xavier@ufes.br
+Gallery
+Brazil monthly temperature (Jan/1961 - Dez/2025)
+Stations
+Brazil daily mean (left) and annual  temperature (right).
+BRDWGD.mp4
+Google Sites
+Report abuse
+Google Sites
+Report abuse
