@@ -40,6 +40,10 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- ⚠️ **26/11, 07h46: MOTOR DA NOITE FALHOU** (sab-motor, run 39, V1.7 gravar): `finalizar_trocas_pendentes` →
+  `renameAsset(SAB_V1_TMP/SAB_2026_04_27)` deu 404 (o temporário existia na leitura das propriedades e sumiu na
+  troca; provável corrida/consistência do Earth Engine). O dia de hoje não foi gravado. A vigia NÃO roda o motor em
+  modo gravar: espera o responsável (rodar de novo à mão ou esperar a rodada de amanhã, que pula o temporário ausente).
 - ⏳ **ESPERA O RESPONSÁVEL (26/11):** o que fazer com a V1.8 (PR sab-motor#4, merge suspenso). Recomendação:
   refazer as razões do C3 com anos estáveis (2010–2019, nunca o fim de 2025, que tem poucos pluviômetros), com
   protocolo novo congelado antes, e decidir depois do `investigar_brdwgd.py` (BR-DWGD × ERA5-Land, sem pluviômetros).

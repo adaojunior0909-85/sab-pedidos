@@ -111,7 +111,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 09:05, Brasília)
+# Apêndice automático (refeito em 26/11/2026 09:14, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -2357,6 +2357,7 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 12:05 | Registro: auditoria profunda em andamento (A1/A2 e A7 prontos; POWER e A3 na fila) |
 | 26/11/2026 12:05 | Auditoria profunda A7 (cadeia): a matriz do GFS V2.1 e as razões da V1.8 foram calibradas só com 2021–2025; na chuva a previsão herda o degrau (4 regiões); fator de clima aguarda o ERA5-Land até 2025 |
 | 26/11/2026 12:04 | Conferência: começou power  |
 | 26/11/2026 12:03 | Conferência: começou agua  |
