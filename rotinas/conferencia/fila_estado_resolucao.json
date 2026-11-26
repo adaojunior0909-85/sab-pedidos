@@ -37,11 +37,9 @@
   "inicio": "25/11 04:15"
  },
  "resolucao": {
-  "tentativas": 0,
-  "situacao": "pendente",
-  "inicio": "26/11 11:48",
-  "fim": "26/11 17:03",
-  "codigo": "tempo"
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 17:03"
  },
  "multifonte_gldas21": {
   "tentativas": 1,
@@ -88,5 +86,18 @@
   "fim": "26/11 09:31",
   "minutos": 12,
   "codigo": 0
+ },
+ "decisiva_d1": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "26/11 14:40"
+ },
+ "decisiva_d3": {
+  "tentativas": 3,
+  "situacao": "falhou",
+  "inicio": "26/11 14:41",
+  "fim": "26/11 14:41",
+  "minutos": 0,
+  "codigo": 1
  }
 }
