@@ -37,10 +37,33 @@
   "inicio": "25/11 04:15"
  },
  "resolucao": {
+  "tentativas": 2,
+  "situacao": "rodando",
+  "inicio": "26/11 01:16"
+ },
+ "multifonte_gldas21": {
   "tentativas": 1,
-  "situacao": "pendente",
-  "inicio": "25/11 20:01",
-  "fim": "26/11 01:16",
-  "codigo": "tempo"
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_chuva": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_gldas20": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_era5": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:22"
+ },
+ "multifonte_mod16": {
+  "tentativas": 1,
+  "situacao": "rodando",
+  "inicio": "25/11 20:40"
  }
 }
