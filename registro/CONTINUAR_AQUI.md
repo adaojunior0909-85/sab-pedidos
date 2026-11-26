@@ -40,6 +40,13 @@ Horários: os commits do GitHub estão em UTC; a fila e os LOG, em Brasília (UT
   nova começa.
 
 ## Decisões (o que já foi decidido e o que espera o responsável)
+- 🔬 **26/11, ~14h: ANÁLISE DECISIVA (fase 4) pedida pelo responsável** ("terceira análise mais profunda e detalhada
+  para realmente decidir"). Protocolo congelado: `pesquisa/PROTOCOLO_ANALISE_DECISIVA.md` (d2d7dc1). Teste central
+  **D1**: pluviômetros ESTÁVEIS da ANA (os mesmos 2010–2024, serviço público telemetriaws1.ana.gov.br, liberado no
+  ambiente) contra a grade e as referências → DADOS / CLIMA / inconclusivo. **D2 pronto:** F1, F2 e F5 coerentes entre
+  si (±0,4% no Brasil); o CHIRPS subiu ~6% contra as outras desde 2020 (Brasil, Norte) e sai das conclusões ali.
+  **D3** (rede, controles da v_3.2.4 baixados da pasta pública do autor no Drive) e D1 na fila (validacoes-2).
+  A decisão sobre C3G, M5 e V1.8 espera o D1.
 - ⏳ **26/11, ~13h40: DOIS MÉTODOS PASSARAM, ESPERAM AUTORIZAÇÃO (nada gravado).**
   (1) **Fase 2, leva 1 (M1): C3G passa nas 4 condições** (garoa: dias de chuva −34,5% de afastamento; mediana do
   |viés| +0,03 p.p.; p99 12,3% × 13,8% do C3) → seria a V1.8 com limiar de garoa. Ressalva: herda as razões do
