@@ -1,0 +1,34 @@
+
+===== 25/11/2026 20:22 (Brasília), tentativa 1 =====
+código: commit 510bba2c2578773a97b7ff38f5b0c8e73698af18 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   gldas21 2000 pronto em 869 s
+   gldas21 2001 pronto em 786 s
+   gldas21 2002 pronto em 829 s
+   gldas21 2003 pronto em 893 s
+   gldas21 2004 pronto em 813 s
+   gldas21 2005 pronto em 783 s
+   gldas21 2006 pronto em 899 s
+   gldas21 2007 pronto em 873 s
+   gldas21 2008 pronto em 891 s
+   gldas21 2009 pronto em 825 s
+   gldas21 2010 pronto em 892 s
+   gldas21 2011 pronto em 923 s
+   gldas21 2012 pronto em 1054 s
+   gldas21 2013 pronto em 1048 s
+   gldas21 2014 pronto em 978 s
+   gldas21 2015 pronto em 926 s
+   gldas21 2016 pronto em 959 s
+   gldas21 2017 pronto em 944 s
+   gldas21 2018 pronto em 975 s
+   gldas21 2019 pronto em 817 s
+   gldas21 2020 pronto em 805 s
+Tempo desta vez acabou; a próxima retoma daqui.
