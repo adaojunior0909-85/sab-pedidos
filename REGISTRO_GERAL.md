@@ -111,7 +111,7 @@ todas as mudanças do repositório) é refeito sozinho pela fila da conferência
 
 ---
 
-# Apêndice automático (refeito em 26/11/2026 09:39, Brasília)
+# Apêndice automático (refeito em 26/11/2026 09:45, Brasília)
 
 ## A. Situação das rotinas automáticas (de `rotinas/PAINEL.md`)
 
@@ -1989,6 +1989,36 @@ Médias regionais nos pixels entregues. total = chuva do ano (mm); dias = dias c
 | 2024 | 1677 | 1.000 | +5.8% | -4.0% | +9.6% | +16.1% | +14.1% | 366 |
 | 2025 | 1693 | 1.000 | +3.7% | -9.1% | +13.6% | +8.3% | +9.3% | 365 |
 
+### Auditoria profunda: DECISÃO (seção 4)
+
+Arquivo: `pesquisa/resultados_auditoria/DECISAO.md`
+
+#### Auditoria profunda: decisão (seção 4 do protocolo)
+
+Regras fixadas antes de rodar (`pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`, seção 4): **degrau dos dados confirmado** = A1 persistente + A2 "não explica" + (na chuva) A3 com ≥ 1 testemunha física com as referências e nenhuma com o SAB; **clima** = A2 "explica" ou (na chuva) testemunha física com o SAB; senão **inconclusivo** (aviso no dicionário, nenhuma correção). Só as linhas com degrau persistente ou decisão diferente de "sem degrau" aparecem abaixo; a tabela inteira está em `DECISAO.csv`.
+
+| Variável | Região | A1 (anos 2020–24) | A2 | A3 (água) | Decisão |
+|---|---|---|---|---|---|
+| Umidade relativa | Nordeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| Umidade relativa | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| Chuva | Brasil | 5 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Chuva | Centro-Oeste | 5 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Chuva | Nordeste | 5 (persistente) | não explica | GRACE: neutra, SMAP: com o SAB | clima (nenhuma correção) |
+| Chuva | Norte | 4 (persistente) | não explica | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Chuva | Sul | 5 (persistente) | inconclusivo | GRACE: neutra, SMAP: neutra | inconclusivo → aviso no dicionário |
+| Radiação | Norte | 5 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
+| Radiação | Sudeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Radiação | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Tmax | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| Tmin | Brasil | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Tmin | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Vento | Centro-Oeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Vento | Sudeste | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| Vento | Sul | 0 | explica | (não se aplica) | clima (nenhuma correção) |
+| VPD | Centro-Oeste | 4 (persistente) | inconclusivo | (não se aplica) | inconclusivo → aviso no dicionário |
+| VPD | Nordeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+| VPD | Sudeste | 3 (persistente) | não explica | (não se aplica) | **DEGRAU DOS DADOS CONFIRMADO** |
+
 ### Auditoria profunda A1/A2/A6 (degrau ano a ano; El Niño/La Niña)
 
 Arquivo: `pesquisa/resultados_auditoria/RESULTADOS_A1_A2.md`
@@ -2714,7 +2744,35 @@ Nota: 2001–2010 fica dentro da base 2001–2015; um degrau nessa década tende
 
 Arquivo: `pesquisa/resultados_agua/RESULTADOS_A3.md`
 
-(ainda não rodou)
+#### A3. Testemunhas físicas da água (GRACE e SMAP)
+
+Protocolo `pesquisa/PROTOCOLO_AUDITORIA_PROFUNDA.md`, A3. Erro = RMSE da previsão da testemunha pela chuva de cada base (regressão linear; no período de treino, deixar-um-de-fora; no teste, fora da amostra). REF = mediana, ano a ano (ou mês a mês), das anomalias das referências F1, F2 e F3. A testemunha fica **com as referências** se o erro com o SAB crescer > 25% do treino ao teste e o da REF ≤ 10%; **com o SAB** no caso inverso; senão neutra.
+
+- GRACE: `NASA/GRACE/MASS_GRIDS_V04/MASCON_CRI`, 238 imagens, de 2002-04 a 2024-09
+- SMAP: `NASA/SMAP/SPL3SMP_E/006` (soil_moisture_am), de 2015-03-31 a 2026-11-24
+- acesso em 26/11/2026
+
+##### GRACE: variação anual do armazenamento × chuva do ano hidrológico
+
+| Região | erro SAB treino → teste | erro REF treino → teste | testemunha |
+|---|---|---|---|
+| Norte | 9.3 → 8.9 cm | 9.5 → 5.0 cm | neutra |
+| Nordeste | 8.6 → 6.0 cm | 9.5 → 2.0 cm | neutra |
+| Centro-Oeste | 5.4 → 7.0 cm | 5.4 → 11.0 cm | neutra |
+| Sudeste | 8.1 → 8.1 cm | 8.2 → 9.7 cm | neutra |
+| Sul | 8.8 → 10.1 cm | 8.4 → 11.6 cm | neutra |
+| Brasil | 5.9 → 4.4 cm | 6.1 → 4.3 cm | neutra |
+
+##### SMAP: anomalia mensal da umidade do solo 0–5 cm × chuva do mês e do anterior
+
+| Região | erro SAB treino → teste | erro REF treino → teste | testemunha |
+|---|---|---|---|
+| Norte | 0.0138 → 0.0252 | 0.0140 → 0.0241 | neutra |
+| Nordeste | 0.0140 → 0.0150 | 0.0143 → 0.0198 | com o SAB |
+| Centro-Oeste | 0.0150 → 0.0266 | 0.0151 → 0.0264 | neutra |
+| Sudeste | 0.0142 → 0.0196 | 0.0142 → 0.0210 | neutra |
+| Sul | 0.0204 → 0.0220 | 0.0203 → 0.0222 | neutra |
+| Brasil | 0.0093 → 0.0122 | 0.0097 → 0.0111 | neutra |
 
 ### Auditoria profunda A7 (cadeia: 2026 e previsão)
 
@@ -2945,6 +3003,12 @@ As do `sab-motor` ficam no GitHub dele (Commits); as anteriores ao GitHub, nos c
 
 | Quando | Mudança |
 |---|---|
+| 26/11/2026 12:43 | Conferência: agua (falhou)  |
+| 26/11/2026 12:43 | Conferência: começou agua  |
+| 26/11/2026 12:43 | Conferência: agua (pendente)  |
+| 26/11/2026 12:43 | Conferência: começou agua  |
+| 26/11/2026 12:43 | Conferência: agua (pendente)  |
+| 26/11/2026 12:39 | BR-DWGD bruto: banco = bruto; sem controles da rede no asset; contra o ERA5-Land (sem pluviômetro) o degrau de 2020 aparece (+7,5 a +16%) |
 | 26/11/2026 12:38 | Conferência: brdwgd (ok)  |
 | 26/11/2026 12:34 | Registro: auditoria profunda com o NASA POWER |
 | 26/11/2026 12:33 | Auditoria profunda: A1/A2 e A7 refeitos com o NASA POWER (receita conferida: extração = API de ponto, dif. 4e-16). Chuva: degrau dos dados em Brasil, N, NE, CO; novos degraus confirmados: UR+/VPD− no NE e SE, Tmax− no SE, radiação− no Norte |
