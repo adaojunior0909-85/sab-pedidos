@@ -1,6 +1,6 @@
 # Painel de controle das rotinas automáticas do SAB
 
-Atualizado em 27/11/2026 03:26 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
+Atualizado em 27/11/2026 03:27 (Brasília). Cada rotina roda sozinha no GitHub Actions deste repositório e escreve aqui o último resultado. ✅ tudo certo · 👀 conferir os números · ⚠️ atenção · ❌ falhou · ⏳ ainda não rodou.
 
 | Rotina | Quando roda | Última execução | Situação | Resumo |
 |---|---|---|---|---|
