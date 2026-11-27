@@ -1,6 +1,6 @@
 # Conferência final do SAB (1961 até a previsão)
 
-Atualizado em 26/11/2026 20:02 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
+Atualizado em 27/11/2026 02:04 (Brasília) pela fila automática (`rotinas/conferencia/fila.py`). Ainda há tarefas na fila.
 
 | Tarefa | Situação | Tentativas | Quando | Resultado |
 |---|---|---|---|---|
@@ -12,7 +12,7 @@ Atualizado em 26/11/2026 20:02 (Brasília) pela fila automática (`rotinas/confe
 | As 16 variáveis de 2026 contra o GLDAS-2.1 (NASA), régua 2022-2024 | ✅ pronta | 1 | 25/11 06:47 | pesquisa/resultados_metodo_2026/RESULTADOS_B.md |
 | K26 rodada 7 (1981-1990) | ✅ pronta | 1 | 25/11 18:25 | pasta rotinas/resultados/k26_rodada7/2026-11-25/; itens: A1 OK, A2 INFO, A3 ATENCAO, B ATENCAO, B_borda INFO, C FALHA, C_borda INFO, H OK |
 | K26 rodada 1 (2026 inteiro (inclui os dias de previsão GFS)) | ✅ pronta | 1 | 26/11 20:02 | pasta rotinas/resultados/k26_rodada1/2026-11-26/; itens: P INFO, A1 OK, A2 INFO, A3 ATENCAO, B ATENCAO, B_borda INFO, C FALHA, C_borda INFO, G FALHA, H OK |
-| K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada2/ |
+| K26 rodada 2 (2026: Rs = 0 cru do ERA5 e escoamento) | 🔄 rodando | 1 |  | rotinas/resultados/k26_rodada2/ |
 | K26 rodada 3 (2026: vento) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada3/ |
 | K26 rodada 4 (2026: umidade do solo) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada4/ |
 | K26 rodada 5 (1961-1970) | ⏳ na fila | 0 |  | rotinas/resultados/k26_rodada5/ |
