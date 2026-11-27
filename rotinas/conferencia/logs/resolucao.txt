@@ -309,3 +309,25 @@ Traceback (most recent call last):
   File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/sensibilidade_resolucao.py", line 143, in main
     raise RuntimeError(f'{nome} {ano}-{mes:02d}: não deu depois de 4 tentativas')
 RuntimeError: modis_terra_lst 2003-09: não deu depois de 4 tentativas
+
+===== 27/11/2026 06:23 (Brasília), tentativa 2 =====
+código: commit 561a143c17d4c173e25bc1994fb4de6fc94550b2 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   ⚠️ modis_terra_lst 2003-09: Computation timed out.
+   ⚠️ modis_terra_lst 2003-09: Computation timed out.
+   ⚠️ modis_terra_lst 2003-09: Computation timed out.
+   ⚠️ modis_terra_lst 2003-09: Computation timed out.
+Traceback (most recent call last):
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/sensibilidade_resolucao.py", line 192, in <module>
+    main()
+  File "/home/runner/work/sab-pedidos/sab-pedidos/pesquisa/sensibilidade_resolucao.py", line 143, in main
+    raise RuntimeError(f'{nome} {ano}-{mes:02d}: não deu depois de 4 tentativas')
+RuntimeError: modis_terra_lst 2003-09: não deu depois de 4 tentativas
