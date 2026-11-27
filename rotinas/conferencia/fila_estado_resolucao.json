@@ -37,12 +37,9 @@
   "inicio": "25/11 04:15"
  },
  "resolucao": {
-  "tentativas": 1,
-  "situacao": "pendente",
-  "inicio": "27/11 03:27",
-  "fim": "27/11 06:23",
-  "minutos": 176,
-  "codigo": 1
+  "tentativas": 2,
+  "situacao": "rodando",
+  "inicio": "27/11 06:23"
  },
  "multifonte_gldas21": {
   "tentativas": 1,
