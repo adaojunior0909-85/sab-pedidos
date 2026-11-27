@@ -234,3 +234,28 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL
    terraclimate 1994 pronto em 1522 s
    terraclimate 1995 pronto em 1503 s
    terraclimate 1996 pronto em 1613 s
+
+===== 26/11/2026 17:03 (Brasília), tentativa 1 =====
+código: commit 28ba3d928a96b5f196c7f77ff80d08c038ad13b7 | earthengine-api 1.7.51 | Python 3.12.16
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/ee/deprecation.py:215: DeprecationWarning: 
+
+Attention required for FAO/GAUL/2015/level1! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+This dataset has been superseded by FAO/GAUL/2025/level1
+
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/FAO_GAUL_2015_level1
+
+  warnings.warn(warning, category=DeprecationWarning)
+   terraclimate 1997 pronto em 419 s
+   terraclimate 1998 pronto em 1628 s
+   terraclimate 1999 pronto em 1631 s
+   terraclimate 2000 pronto em 1737 s
+   terraclimate 2001 pronto em 1812 s
+   terraclimate 2002 pronto em 1716 s
+   terraclimate 2003 pronto em 1345 s
+   terraclimate 2004 pronto em 1578 s
+   terraclimate 2005 pronto em 1302 s
+   terraclimate 2006 pronto em 1461 s
+   terraclimate 2007 pronto em 1776 s
+   terraclimate 2008 pronto em 1995 s
+Tempo desta vez acabou; a próxima retoma daqui.
