@@ -1,10 +1,10 @@
 {
  "rotina": "previsao",
- "quando": "26/11/2026 23:09",
+ "quando": "27/11/2026 22:57",
  "situacao": "ok",
  "resumo": [
-  "fotografia de 2026-11-26 já existe",
-  "0 dia(s) previsto(s) conferido(s) nesta execução",
+  "fotografia de 2026-11-27: 23 dias GFS (2026-11-20 a 2026-12-12) e a persistência (2026-11-19)",
+  "3 dia(s) previsto(s) conferido(s) nesta execução",
   "ainda nenhum dia previsto virou ERA5 (o primeiro resultado sai em cerca de uma semana)"
  ],
  "pasta": "rotinas/resultados/previsao/",
